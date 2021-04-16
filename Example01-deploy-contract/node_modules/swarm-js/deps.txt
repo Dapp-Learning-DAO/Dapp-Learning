@@ -1,0 +1,887 @@
+swarm-js@0.1.39 /Users/evertonfraga/Projects/Ethereum/swarm-js
+├─┬ @babel/cli@7.0.0
+│ ├─┬ chokidar@2.0.4
+│ │ ├─┬ anymatch@2.0.0
+│ │ │ ├─┬ micromatch@3.1.10
+│ │ │ │ ├── arr-diff@4.0.0
+│ │ │ │ ├── array-unique@0.3.2 deduped
+│ │ │ │ ├── braces@2.3.2 deduped
+│ │ │ │ ├─┬ define-property@2.0.2
+│ │ │ │ │ ├─┬ is-descriptor@1.0.2
+│ │ │ │ │ │ ├─┬ is-accessor-descriptor@1.0.0
+│ │ │ │ │ │ │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │ ├─┬ is-data-descriptor@1.0.0
+│ │ │ │ │ │ │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │ └── kind-of@6.0.2
+│ │ │ │ │ └── isobject@3.0.1
+│ │ │ │ ├─┬ extend-shallow@3.0.2
+│ │ │ │ │ ├── assign-symbols@1.0.0
+│ │ │ │ │ └─┬ is-extendable@1.0.1
+│ │ │ │ │   └─┬ is-plain-object@2.0.4
+│ │ │ │ │     └── isobject@3.0.1
+│ │ │ │ ├─┬ extglob@2.0.4
+│ │ │ │ │ ├── array-unique@0.3.2 deduped
+│ │ │ │ │ ├─┬ define-property@1.0.0
+│ │ │ │ │ │ └─┬ is-descriptor@1.0.2
+│ │ │ │ │ │   ├─┬ is-accessor-descriptor@1.0.0
+│ │ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │   ├─┬ is-data-descriptor@1.0.0
+│ │ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │   └── kind-of@6.0.2 deduped
+│ │ │ │ │ ├─┬ expand-brackets@2.1.4
+│ │ │ │ │ │ ├── debug@2.6.9 deduped
+│ │ │ │ │ │ ├─┬ define-property@0.2.5
+│ │ │ │ │ │ │ └─┬ is-descriptor@0.1.6
+│ │ │ │ │ │ │   ├─┬ is-accessor-descriptor@0.1.6
+│ │ │ │ │ │ │   │ └─┬ kind-of@3.2.2
+│ │ │ │ │ │ │   │   └── is-buffer@1.1.6 deduped
+│ │ │ │ │ │ │   ├─┬ is-data-descriptor@0.1.4
+│ │ │ │ │ │ │   │ └─┬ kind-of@3.2.2
+│ │ │ │ │ │ │   │   └── is-buffer@1.1.6 deduped
+│ │ │ │ │ │ │   └── kind-of@5.1.0
+│ │ │ │ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ │ │ └── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ ├── posix-character-classes@0.1.1
+│ │ │ │ │ │ ├── regex-not@1.0.2 deduped
+│ │ │ │ │ │ ├── snapdragon@0.8.2 deduped
+│ │ │ │ │ │ └── to-regex@3.0.2 deduped
+│ │ │ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ │ └── is-extendable@0.1.1 deduped
+│ │ │ │ │ ├── fragment-cache@0.2.1 deduped
+│ │ │ │ │ ├── regex-not@1.0.2 deduped
+│ │ │ │ │ ├── snapdragon@0.8.2 deduped
+│ │ │ │ │ └── to-regex@3.0.2 deduped
+│ │ │ │ ├─┬ fragment-cache@0.2.1
+│ │ │ │ │ └── map-cache@0.2.2 deduped
+│ │ │ │ ├── kind-of@6.0.2
+│ │ │ │ ├─┬ nanomatch@1.2.13
+│ │ │ │ │ ├── arr-diff@4.0.0
+│ │ │ │ │ ├── array-unique@0.3.2
+│ │ │ │ │ ├── define-property@2.0.2 deduped
+│ │ │ │ │ ├── extend-shallow@3.0.2 deduped
+│ │ │ │ │ ├── fragment-cache@0.2.1 deduped
+│ │ │ │ │ ├── is-windows@1.0.2
+│ │ │ │ │ ├── kind-of@6.0.2
+│ │ │ │ │ ├── object.pick@1.3.0 deduped
+│ │ │ │ │ ├── regex-not@1.0.2 deduped
+│ │ │ │ │ ├── snapdragon@0.8.2 deduped
+│ │ │ │ │ └── to-regex@3.0.2 deduped
+│ │ │ │ ├─┬ object.pick@1.3.0
+│ │ │ │ │ └── isobject@3.0.1
+│ │ │ │ ├─┬ regex-not@1.0.2
+│ │ │ │ │ ├── extend-shallow@3.0.2 deduped
+│ │ │ │ │ └── safe-regex@1.1.0 deduped
+│ │ │ │ ├── snapdragon@0.8.2 deduped
+│ │ │ │ └── to-regex@3.0.2 deduped
+│ │ │ └── normalize-path@2.1.1 deduped
+│ │ ├── async-each@1.0.1
+│ │ ├─┬ braces@2.3.2
+│ │ │ ├── arr-flatten@1.1.0
+│ │ │ ├── array-unique@0.3.2
+│ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ └── is-extendable@0.1.1
+│ │ │ ├─┬ fill-range@4.0.0
+│ │ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ └── is-extendable@0.1.1 deduped
+│ │ │ │ ├─┬ is-number@3.0.0
+│ │ │ │ │ └─┬ kind-of@3.2.2
+│ │ │ │ │   └── is-buffer@1.1.6
+│ │ │ │ ├── repeat-string@1.6.1
+│ │ │ │ └─┬ to-regex-range@2.1.1
+│ │ │ │   ├─┬ is-number@3.0.0
+│ │ │ │   │ └── kind-of@3.2.2 deduped
+│ │ │ │   └── repeat-string@1.6.1 deduped
+│ │ │ ├── isobject@3.0.1
+│ │ │ ├── repeat-element@1.1.2
+│ │ │ ├─┬ snapdragon@0.8.2
+│ │ │ │ ├─┬ base@0.11.2
+│ │ │ │ │ ├─┬ cache-base@1.0.1
+│ │ │ │ │ │ ├─┬ collection-visit@1.0.0
+│ │ │ │ │ │ │ ├─┬ map-visit@1.0.0
+│ │ │ │ │ │ │ │ └── object-visit@1.0.1 deduped
+│ │ │ │ │ │ │ └─┬ object-visit@1.0.1
+│ │ │ │ │ │ │   └── isobject@3.0.1
+│ │ │ │ │ │ ├── component-emitter@1.2.1 deduped
+│ │ │ │ │ │ ├── get-value@2.0.6
+│ │ │ │ │ │ ├─┬ has-value@1.0.0
+│ │ │ │ │ │ │ ├── get-value@2.0.6 deduped
+│ │ │ │ │ │ │ ├─┬ has-values@1.0.0
+│ │ │ │ │ │ │ │ ├─┬ is-number@3.0.0
+│ │ │ │ │ │ │ │ │ └─┬ kind-of@3.2.2
+│ │ │ │ │ │ │ │ │   └── is-buffer@1.1.6 deduped
+│ │ │ │ │ │ │ │ └─┬ kind-of@4.0.0
+│ │ │ │ │ │ │ │   └── is-buffer@1.1.6 deduped
+│ │ │ │ │ │ │ └── isobject@3.0.1
+│ │ │ │ │ │ ├── isobject@3.0.1
+│ │ │ │ │ │ ├─┬ set-value@2.0.0
+│ │ │ │ │ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ │ │ │ └── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ │ ├── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ │ ├── is-plain-object@2.0.4 deduped
+│ │ │ │ │ │ │ └── split-string@3.1.0 deduped
+│ │ │ │ │ │ ├─┬ to-object-path@0.3.0
+│ │ │ │ │ │ │ └── kind-of@3.2.2 deduped
+│ │ │ │ │ │ ├─┬ union-value@1.0.0
+│ │ │ │ │ │ │ ├── arr-union@3.1.0 deduped
+│ │ │ │ │ │ │ ├── get-value@2.0.6 deduped
+│ │ │ │ │ │ │ ├── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ │ └─┬ set-value@0.4.3
+│ │ │ │ │ │ │   ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ │ │   │ └── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ │   ├── is-extendable@0.1.1 deduped
+│ │ │ │ │ │ │   ├── is-plain-object@2.0.4 deduped
+│ │ │ │ │ │ │   └── to-object-path@0.3.0 deduped
+│ │ │ │ │ │ └─┬ unset-value@1.0.0
+│ │ │ │ │ │   ├─┬ has-value@0.3.1
+│ │ │ │ │ │   │ ├── get-value@2.0.6 deduped
+│ │ │ │ │ │   │ ├── has-values@0.1.4
+│ │ │ │ │ │   │ └─┬ isobject@2.1.0
+│ │ │ │ │ │   │   └── isarray@1.0.0 deduped
+│ │ │ │ │ │   └── isobject@3.0.1
+│ │ │ │ │ ├─┬ class-utils@0.3.6
+│ │ │ │ │ │ ├── arr-union@3.1.0
+│ │ │ │ │ │ ├─┬ define-property@0.2.5
+│ │ │ │ │ │ │ └── is-descriptor@0.1.6 deduped
+│ │ │ │ │ │ ├── isobject@3.0.1
+│ │ │ │ │ │ └─┬ static-extend@0.1.2
+│ │ │ │ │ │   ├─┬ define-property@0.2.5
+│ │ │ │ │ │   │ └── is-descriptor@0.1.6 deduped
+│ │ │ │ │ │   └─┬ object-copy@0.1.0
+│ │ │ │ │ │     ├── copy-descriptor@0.1.1
+│ │ │ │ │ │     ├─┬ define-property@0.2.5
+│ │ │ │ │ │     │ └── is-descriptor@0.1.6 deduped
+│ │ │ │ │ │     └── kind-of@3.2.2 deduped
+│ │ │ │ │ ├── component-emitter@1.2.1
+│ │ │ │ │ ├─┬ define-property@1.0.0
+│ │ │ │ │ │ └─┬ is-descriptor@1.0.2
+│ │ │ │ │ │   ├─┬ is-accessor-descriptor@1.0.0
+│ │ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │   ├─┬ is-data-descriptor@1.0.0
+│ │ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │ │   └── kind-of@6.0.2
+│ │ │ │ │ ├── isobject@3.0.1
+│ │ │ │ │ ├─┬ mixin-deep@1.3.1
+│ │ │ │ │ │ ├── for-in@1.0.2
+│ │ │ │ │ │ └─┬ is-extendable@1.0.1
+│ │ │ │ │ │   └── is-plain-object@2.0.4 deduped
+│ │ │ │ │ └── pascalcase@0.1.1
+│ │ │ │ ├── debug@2.6.9 deduped
+│ │ │ │ ├─┬ define-property@0.2.5
+│ │ │ │ │ └─┬ is-descriptor@0.1.6
+│ │ │ │ │   ├─┬ is-accessor-descriptor@0.1.6
+│ │ │ │ │   │ └── kind-of@3.2.2 deduped
+│ │ │ │ │   ├─┬ is-data-descriptor@0.1.4
+│ │ │ │ │   │ └── kind-of@3.2.2 deduped
+│ │ │ │ │   └── kind-of@5.1.0
+│ │ │ │ ├─┬ extend-shallow@2.0.1
+│ │ │ │ │ └── is-extendable@0.1.1 deduped
+│ │ │ │ ├── map-cache@0.2.2
+│ │ │ │ ├── source-map@0.5.7 deduped
+│ │ │ │ ├─┬ source-map-resolve@0.5.2
+│ │ │ │ │ ├── atob@2.1.2
+│ │ │ │ │ ├── decode-uri-component@0.2.0
+│ │ │ │ │ ├── resolve-url@0.2.1
+│ │ │ │ │ ├── source-map-url@0.4.0
+│ │ │ │ │ └── urix@0.1.0
+│ │ │ │ └── use@3.1.1
+│ │ │ ├─┬ snapdragon-node@2.1.1
+│ │ │ │ ├─┬ define-property@1.0.0
+│ │ │ │ │ └─┬ is-descriptor@1.0.2
+│ │ │ │ │   ├─┬ is-accessor-descriptor@1.0.0
+│ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │   ├─┬ is-data-descriptor@1.0.0
+│ │ │ │ │   │ └── kind-of@6.0.2 deduped
+│ │ │ │ │   └── kind-of@6.0.2
+│ │ │ │ ├── isobject@3.0.1
+│ │ │ │ └─┬ snapdragon-util@3.0.1
+│ │ │ │   └─┬ kind-of@3.2.2
+│ │ │ │     └── is-buffer@1.1.6 deduped
+│ │ │ ├─┬ split-string@3.1.0
+│ │ │ │ └── extend-shallow@3.0.2 deduped
+│ │ │ └─┬ to-regex@3.0.2
+│ │ │   ├── define-property@2.0.2 deduped
+│ │ │   ├── extend-shallow@3.0.2 deduped
+│ │ │   ├── regex-not@1.0.2 deduped
+│ │ │   └─┬ safe-regex@1.1.0
+│ │ │     └── ret@0.1.15
+│ │ ├─┬ fsevents@1.2.4
+│ │ │ ├── nan@2.11.0
+│ │ │ └─┬ node-pre-gyp@0.10.0
+│ │ │   ├── detect-libc@1.0.3
+│ │ │   ├─┬ mkdirp@0.5.1
+│ │ │   │ └── minimist@0.0.8
+│ │ │   ├─┬ needle@2.2.0
+│ │ │   │ ├─┬ debug@2.6.9
+│ │ │   │ │ └── ms@2.0.0
+│ │ │   │ ├─┬ iconv-lite@0.4.21
+│ │ │   │ │ └── safer-buffer@2.1.2
+│ │ │   │ └── sax@1.2.4
+│ │ │   ├─┬ nopt@4.0.1
+│ │ │   │ ├── abbrev@1.1.1
+│ │ │   │ └─┬ osenv@0.1.5
+│ │ │   │   ├── os-homedir@1.0.2
+│ │ │   │   └── os-tmpdir@1.0.2
+│ │ │   ├─┬ npm-packlist@1.1.10
+│ │ │   │ ├─┬ ignore-walk@3.0.1
+│ │ │   │ │ └─┬ minimatch@3.0.4
+│ │ │   │ │   └─┬ brace-expansion@1.1.11
+│ │ │   │ │     ├── balanced-match@1.0.0
+│ │ │   │ │     └── concat-map@0.0.1
+│ │ │   │ └── npm-bundled@1.0.3
+│ │ │   ├─┬ npmlog@4.1.2
+│ │ │   │ ├─┬ are-we-there-yet@1.1.4
+│ │ │   │ │ ├── delegates@1.0.0
+│ │ │   │ │ └─┬ readable-stream@2.3.6
+│ │ │   │ │   ├── core-util-is@1.0.2
+│ │ │   │ │   ├── inherits@2.0.3 deduped
+│ │ │   │ │   ├── isarray@1.0.0
+│ │ │   │ │   ├── process-nextick-args@2.0.0
+│ │ │   │ │   ├── safe-buffer@5.1.1 deduped
+│ │ │   │ │   ├─┬ string_decoder@1.1.1
+│ │ │   │ │   │ └── safe-buffer@5.1.1 deduped
+│ │ │   │ │   └── util-deprecate@1.0.2
+│ │ │   │ ├── console-control-strings@1.1.0
+│ │ │   │ ├─┬ gauge@2.7.4
+│ │ │   │ │ ├── aproba@1.2.0
+│ │ │   │ │ ├── console-control-strings@1.1.0 deduped
+│ │ │   │ │ ├── has-unicode@2.0.1
+│ │ │   │ │ ├── object-assign@4.1.1
+│ │ │   │ │ ├── signal-exit@3.0.2
+│ │ │   │ │ ├─┬ string-width@1.0.2
+│ │ │   │ │ │ ├── code-point-at@1.1.0
+│ │ │   │ │ │ ├─┬ is-fullwidth-code-point@1.0.0
+│ │ │   │ │ │ │ └── number-is-nan@1.0.1
+│ │ │   │ │ │ └── strip-ansi@3.0.1 deduped
+│ │ │   │ │ ├─┬ strip-ansi@3.0.1
+│ │ │   │ │ │ └── ansi-regex@2.1.1
+│ │ │   │ │ └─┬ wide-align@1.1.2
+│ │ │   │ │   └── string-width@1.0.2 deduped
+│ │ │   │ └── set-blocking@2.0.0
+│ │ │   ├─┬ rc@1.2.7
+│ │ │   │ ├── deep-extend@0.5.1
+│ │ │   │ ├── ini@1.3.5
+│ │ │   │ ├── minimist@1.2.0
+│ │ │   │ └── strip-json-comments@2.0.1
+│ │ │   ├─┬ rimraf@2.6.2
+│ │ │   │ └─┬ glob@7.1.2
+│ │ │   │   ├── fs.realpath@1.0.0
+│ │ │   │   ├─┬ inflight@1.0.6
+│ │ │   │   │ ├── once@1.4.0 deduped
+│ │ │   │   │ └── wrappy@1.0.2
+│ │ │   │   ├── inherits@2.0.3
+│ │ │   │   ├── minimatch@3.0.4 deduped
+│ │ │   │   ├─┬ once@1.4.0
+│ │ │   │   │ └── wrappy@1.0.2 deduped
+│ │ │   │   └── path-is-absolute@1.0.1
+│ │ │   ├── semver@5.5.0
+│ │ │   └─┬ tar@4.4.1
+│ │ │     ├── chownr@1.0.1
+│ │ │     ├─┬ fs-minipass@1.2.5
+│ │ │     │ └── minipass@2.2.4 deduped
+│ │ │     ├─┬ minipass@2.2.4
+│ │ │     │ ├── safe-buffer@5.1.1 deduped
+│ │ │     │ └── yallist@3.0.2 deduped
+│ │ │     ├─┬ minizlib@1.1.0
+│ │ │     │ └── minipass@2.2.4 deduped
+│ │ │     ├── mkdirp@0.5.1 deduped
+│ │ │     ├── safe-buffer@5.1.1
+│ │ │     └── yallist@3.0.2
+│ │ ├─┬ glob-parent@3.1.0
+│ │ │ ├─┬ is-glob@3.1.0
+│ │ │ │ └── is-extglob@2.1.1 deduped
+│ │ │ └── path-dirname@1.0.2
+│ │ ├── inherits@2.0.3
+│ │ ├─┬ is-binary-path@1.0.1
+│ │ │ └── binary-extensions@1.11.0
+│ │ ├─┬ is-glob@4.0.0
+│ │ │ └── is-extglob@2.1.1
+│ │ ├── lodash.debounce@4.0.8
+│ │ ├─┬ normalize-path@2.1.1
+│ │ │ └── remove-trailing-separator@1.1.0
+│ │ ├── path-is-absolute@1.0.1
+│ │ ├─┬ readdirp@2.1.0
+│ │ │ ├── graceful-fs@4.1.11 deduped
+│ │ │ ├─┬ minimatch@3.0.4
+│ │ │ │ └── brace-expansion@1.1.8 deduped
+│ │ │ ├─┬ readable-stream@2.3.3
+│ │ │ │ ├── core-util-is@1.0.2
+│ │ │ │ ├── inherits@2.0.3 deduped
+│ │ │ │ ├── isarray@1.0.0
+│ │ │ │ ├── process-nextick-args@1.0.7
+│ │ │ │ ├── safe-buffer@5.1.1 deduped
+│ │ │ │ ├─┬ string_decoder@1.0.3
+│ │ │ │ │ └── safe-buffer@5.1.1 deduped
+│ │ │ │ └── util-deprecate@1.0.2
+│ │ │ └── set-immediate-shim@1.0.1
+│ │ └── upath@1.1.0
+│ ├─┬ commander@2.8.1
+│ │ └── graceful-readlink@1.0.1
+│ ├── convert-source-map@1.5.0
+│ ├── fs-readdir-recursive@1.1.0
+│ ├─┬ glob@7.1.3
+│ │ ├── fs.realpath@1.0.0
+│ │ ├─┬ inflight@1.0.6
+│ │ │ ├── once@1.4.0 deduped
+│ │ │ └── wrappy@1.0.2
+│ │ ├── inherits@2.0.3 deduped
+│ │ ├─┬ minimatch@3.0.4
+│ │ │ └─┬ brace-expansion@1.1.8
+│ │ │   ├── balanced-match@1.0.0
+│ │ │   └── concat-map@0.0.1
+│ │ ├─┬ once@1.4.0
+│ │ │ └── wrappy@1.0.2 deduped
+│ │ └── path-is-absolute@1.0.1 deduped
+│ ├── lodash@4.17.10
+│ ├─┬ mkdirp@0.5.1
+│ │ └── minimist@0.0.8
+│ ├─┬ output-file-sync@2.0.1
+│ │ ├── graceful-fs@4.1.11 deduped
+│ │ ├── is-plain-obj@1.1.0 deduped
+│ │ └── mkdirp@0.5.1 deduped
+│ ├── slash@2.0.0
+│ └── source-map@0.5.7
+├─┬ @babel/core@7.0.0
+│ ├─┬ @babel/code-frame@7.0.0
+│ │ └─┬ @babel/highlight@7.0.0
+│ │   ├─┬ chalk@2.4.1
+│ │   │ ├─┬ ansi-styles@3.2.1
+│ │   │ │ └─┬ color-convert@1.9.3
+│ │   │ │   └── color-name@1.1.3
+│ │   │ ├── escape-string-regexp@1.0.5
+│ │   │ └─┬ supports-color@5.5.0
+│ │   │   └── has-flag@3.0.0
+│ │   ├── esutils@2.0.2 deduped
+│ │   └── js-tokens@4.0.0
+│ ├─┬ @babel/generator@7.0.0
+│ │ ├── @babel/types@7.0.0 deduped
+│ │ ├── jsesc@2.5.1
+│ │ ├── lodash@4.17.10
+│ │ ├── source-map@0.5.7 deduped
+│ │ └── trim-right@1.0.1
+│ ├─┬ @babel/helpers@7.0.0
+│ │ ├── @babel/template@7.0.0 deduped
+│ │ ├── @babel/traverse@7.0.0 deduped
+│ │ └── @babel/types@7.0.0 deduped
+│ ├── @babel/parser@7.0.0
+│ ├─┬ @babel/template@7.0.0
+│ │ ├── @babel/code-frame@7.0.0 deduped
+│ │ ├── @babel/parser@7.0.0 deduped
+│ │ └── @babel/types@7.0.0 deduped
+│ ├─┬ @babel/traverse@7.0.0
+│ │ ├── @babel/code-frame@7.0.0 deduped
+│ │ ├── @babel/generator@7.0.0 deduped
+│ │ ├─┬ @babel/helper-function-name@7.0.0
+│ │ │ ├── @babel/helper-get-function-arity@7.0.0 deduped
+│ │ │ ├── @babel/template@7.0.0 deduped
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├─┬ @babel/helper-split-export-declaration@7.0.0
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├── @babel/parser@7.0.0 deduped
+│ │ ├── @babel/types@7.0.0 deduped
+│ │ ├─┬ debug@3.1.0
+│ │ │ └── ms@2.0.0 deduped
+│ │ ├── globals@11.7.0
+│ │ └── lodash@4.17.10
+│ ├─┬ @babel/types@7.0.0
+│ │ ├── esutils@2.0.2
+│ │ ├── lodash@4.17.10
+│ │ └── to-fast-properties@2.0.0
+│ ├── convert-source-map@1.5.0 deduped
+│ ├─┬ debug@3.1.0
+│ │ └── ms@2.0.0
+│ ├── json5@0.5.1
+│ ├── lodash@4.17.10
+│ ├─┬ resolve@1.8.1
+│ │ └── path-parse@1.0.6
+│ ├── semver@5.5.1
+│ └── source-map@0.5.7 deduped
+├─┬ @babel/preset-env@7.0.0
+│ ├─┬ @babel/helper-module-imports@7.0.0
+│ │ └── @babel/types@7.0.0 deduped
+│ ├── @babel/helper-plugin-utils@7.0.0
+│ ├─┬ @babel/plugin-proposal-async-generator-functions@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ ├─┬ @babel/helper-remap-async-to-generator@7.0.0
+│ │ │ ├── @babel/helper-annotate-as-pure@7.0.0 deduped
+│ │ │ ├─┬ @babel/helper-wrap-function@7.0.0
+│ │ │ │ ├── @babel/helper-function-name@7.0.0 deduped
+│ │ │ │ ├── @babel/template@7.0.0 deduped
+│ │ │ │ ├── @babel/traverse@7.0.0 deduped
+│ │ │ │ └── @babel/types@7.0.0 deduped
+│ │ │ ├── @babel/template@7.0.0 deduped
+│ │ │ ├── @babel/traverse@7.0.0 deduped
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ └── @babel/plugin-syntax-async-generators@7.0.0 deduped
+│ ├─┬ @babel/plugin-proposal-json-strings@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └─┬ @babel/plugin-syntax-json-strings@7.0.0
+│ │   └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-proposal-object-rest-spread@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── @babel/plugin-syntax-object-rest-spread@7.0.0 deduped
+│ ├─┬ @babel/plugin-proposal-optional-catch-binding@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── @babel/plugin-syntax-optional-catch-binding@7.0.0 deduped
+│ ├─┬ @babel/plugin-proposal-unicode-property-regex@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ ├─┬ @babel/helper-regex@7.0.0
+│ │ │ └── lodash@4.17.10
+│ │ └─┬ regexpu-core@4.2.0
+│ │   ├── regenerate@1.4.0
+│ │   ├─┬ regenerate-unicode-properties@7.0.0
+│ │   │ └── regenerate@1.4.0
+│ │   ├── regjsgen@0.4.0
+│ │   ├─┬ regjsparser@0.3.0
+│ │   │ └── jsesc@0.5.0
+│ │   ├─┬ unicode-match-property-ecmascript@1.0.4
+│ │   │ ├── unicode-canonical-property-names-ecmascript@1.0.4
+│ │   │ └── unicode-property-aliases-ecmascript@1.0.4
+│ │   └── unicode-match-property-value-ecmascript@1.0.2
+│ ├─┬ @babel/plugin-syntax-async-generators@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-syntax-object-rest-spread@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-syntax-optional-catch-binding@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-arrow-functions@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-async-to-generator@7.0.0
+│ │ ├── @babel/helper-module-imports@7.0.0 deduped
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── @babel/helper-remap-async-to-generator@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-block-scoped-functions@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-block-scoping@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── lodash@4.17.10
+│ ├─┬ @babel/plugin-transform-classes@7.0.0
+│ │ ├─┬ @babel/helper-annotate-as-pure@7.0.0
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├─┬ @babel/helper-define-map@7.0.0
+│ │ │ ├── @babel/helper-function-name@7.0.0 deduped
+│ │ │ ├── @babel/types@7.0.0 deduped
+│ │ │ └── lodash@4.17.10
+│ │ ├── @babel/helper-function-name@7.0.0 deduped
+│ │ ├─┬ @babel/helper-optimise-call-expression@7.0.0
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ ├─┬ @babel/helper-replace-supers@7.0.0
+│ │ │ ├─┬ @babel/helper-member-expression-to-functions@7.0.0
+│ │ │ │ └── @babel/types@7.0.0 deduped
+│ │ │ ├── @babel/helper-optimise-call-expression@7.0.0 deduped
+│ │ │ ├── @babel/traverse@7.0.0 deduped
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├── @babel/helper-split-export-declaration@7.0.0 deduped
+│ │ └── globals@11.7.0
+│ ├─┬ @babel/plugin-transform-computed-properties@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-destructuring@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-dotall-regex@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ ├── @babel/helper-regex@7.0.0 deduped
+│ │ └─┬ regexpu-core@4.2.0
+│ │   ├── regenerate@1.4.0
+│ │   ├── regenerate-unicode-properties@7.0.0 deduped
+│ │   ├── regjsgen@0.4.0
+│ │   ├─┬ regjsparser@0.3.0
+│ │   │ └── jsesc@0.5.0
+│ │   ├── unicode-match-property-ecmascript@1.0.4 deduped
+│ │   └── unicode-match-property-value-ecmascript@1.0.2 deduped
+│ ├─┬ @babel/plugin-transform-duplicate-keys@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-exponentiation-operator@7.0.0
+│ │ ├─┬ @babel/helper-builder-binary-assignment-operator-visitor@7.0.0
+│ │ │ ├─┬ @babel/helper-explode-assignable-expression@7.0.0
+│ │ │ │ ├── @babel/traverse@7.0.0 deduped
+│ │ │ │ └── @babel/types@7.0.0 deduped
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-for-of@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-function-name@7.0.0
+│ │ ├── @babel/helper-function-name@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-literals@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-modules-amd@7.0.0
+│ │ ├─┬ @babel/helper-module-transforms@7.0.0
+│ │ │ ├── @babel/helper-module-imports@7.0.0 deduped
+│ │ │ ├── @babel/helper-simple-access@7.0.0 deduped
+│ │ │ ├── @babel/helper-split-export-declaration@7.0.0 deduped
+│ │ │ ├── @babel/template@7.0.0 deduped
+│ │ │ ├── @babel/types@7.0.0 deduped
+│ │ │ └── lodash@4.17.10
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-modules-commonjs@7.0.0
+│ │ ├── @babel/helper-module-transforms@7.0.0 deduped
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └─┬ @babel/helper-simple-access@7.0.0
+│ │   ├── @babel/template@7.0.0 deduped
+│ │   └── @babel/types@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-modules-systemjs@7.0.0
+│ │ ├─┬ @babel/helper-hoist-variables@7.0.0
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-modules-umd@7.0.0
+│ │ ├── @babel/helper-module-transforms@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-new-target@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-object-super@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── @babel/helper-replace-supers@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-parameters@7.0.0
+│ │ ├─┬ @babel/helper-call-delegate@7.0.0
+│ │ │ ├── @babel/helper-hoist-variables@7.0.0 deduped
+│ │ │ ├── @babel/traverse@7.0.0 deduped
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ ├─┬ @babel/helper-get-function-arity@7.0.0
+│ │ │ └── @babel/types@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-regenerator@7.0.0
+│ │ └─┬ regenerator-transform@0.13.3
+│ │   └── private@0.1.8
+│ ├─┬ @babel/plugin-transform-shorthand-properties@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-spread@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-sticky-regex@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ └── @babel/helper-regex@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-template-literals@7.0.0
+│ │ ├── @babel/helper-annotate-as-pure@7.0.0 deduped
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-typeof-symbol@7.0.0
+│ │ └── @babel/helper-plugin-utils@7.0.0 deduped
+│ ├─┬ @babel/plugin-transform-unicode-regex@7.0.0
+│ │ ├── @babel/helper-plugin-utils@7.0.0 deduped
+│ │ ├── @babel/helper-regex@7.0.0 deduped
+│ │ └─┬ regexpu-core@4.2.0
+│ │   ├── regenerate@1.4.0
+│ │   ├── regenerate-unicode-properties@7.0.0 deduped
+│ │   ├── regjsgen@0.4.0
+│ │   ├─┬ regjsparser@0.3.0
+│ │   │ └── jsesc@0.5.0
+│ │   ├── unicode-match-property-ecmascript@1.0.4 deduped
+│ │   └── unicode-match-property-value-ecmascript@1.0.2 deduped
+│ ├─┬ browserslist@4.1.0
+│ │ ├── caniuse-lite@1.0.30000883
+│ │ ├── electron-to-chromium@1.3.62
+│ │ └─┬ node-releases@1.0.0-alpha.11
+│ │   └── semver@5.5.1 deduped
+│ ├─┬ invariant@2.2.2
+│ │ └─┬ loose-envify@1.3.1
+│ │   └── js-tokens@3.0.2
+│ ├── js-levenshtein@1.1.3
+│ └── semver@5.5.1 deduped
+├── bluebird@3.5.1
+├─┬ buffer@5.0.8
+│ ├── base64-js@1.2.1
+│ └── ieee754@1.1.8
+├─┬ decompress@4.2.0
+│ ├─┬ decompress-tar@4.1.1
+│ │ ├── file-type@5.2.0
+│ │ ├── is-stream@1.1.0 deduped
+│ │ └─┬ tar-stream@1.5.5
+│ │   ├─┬ bl@1.2.1
+│ │   │ └── readable-stream@2.3.3 deduped
+│ │   ├─┬ end-of-stream@1.4.0
+│ │   │ └── once@1.4.0 deduped
+│ │   ├── readable-stream@2.3.3 deduped
+│ │   └── xtend@4.0.1 deduped
+│ ├─┬ decompress-tarbz2@4.1.1
+│ │ ├── decompress-tar@4.1.1 deduped
+│ │ ├── file-type@6.2.0
+│ │ ├── is-stream@1.1.0 deduped
+│ │ ├─┬ seek-bzip@1.0.5
+│ │ │ └── commander@2.8.1 deduped
+│ │ └─┬ unbzip2-stream@1.2.5
+│ │   ├─┬ buffer@3.6.0
+│ │   │ ├── base64-js@0.0.8
+│ │   │ ├── ieee754@1.1.8 deduped
+│ │   │ └── isarray@1.0.0 deduped
+│ │   └── through@2.3.8
+│ ├─┬ decompress-targz@4.1.1
+│ │ ├── decompress-tar@4.1.1 deduped
+│ │ ├── file-type@5.2.0 deduped
+│ │ └── is-stream@1.1.0 deduped
+│ ├─┬ decompress-unzip@4.0.1
+│ │ ├── file-type@3.9.0
+│ │ ├─┬ get-stream@2.3.1
+│ │ │ ├── object-assign@4.1.1
+│ │ │ └─┬ pinkie-promise@2.0.1
+│ │ │   └── pinkie@2.0.4
+│ │ ├── pify@2.3.0 deduped
+│ │ └─┬ yauzl@2.9.1
+│ │   ├── buffer-crc32@0.2.13
+│ │   └─┬ fd-slicer@1.0.1
+│ │     └── pend@1.2.0
+│ ├── graceful-fs@4.1.11
+│ ├─┬ make-dir@1.1.0
+│ │ └── pify@3.0.0
+│ ├── pify@2.3.0
+│ └─┬ strip-dirs@2.1.0
+│   └── is-natural-number@4.0.1
+├─┬ eth-lib@0.1.27
+│ ├── bn.js@4.11.8
+│ ├─┬ elliptic@6.4.0
+│ │ ├── bn.js@4.11.8 deduped
+│ │ ├── brorand@1.1.0
+│ │ ├─┬ hash.js@1.1.3
+│ │ │ ├── inherits@2.0.3 deduped
+│ │ │ └── minimalistic-assert@1.0.0 deduped
+│ │ ├─┬ hmac-drbg@1.0.1
+│ │ │ ├── hash.js@1.1.3 deduped
+│ │ │ ├── minimalistic-assert@1.0.0 deduped
+│ │ │ └── minimalistic-crypto-utils@1.0.1 deduped
+│ │ ├── inherits@2.0.3 deduped
+│ │ ├── minimalistic-assert@1.0.0
+│ │ └── minimalistic-crypto-utils@1.0.1
+│ ├─┬ keccakjs@0.2.1
+│ │ ├─┬ browserify-sha3@0.0.1
+│ │ │ └── js-sha3@0.3.1
+│ │ └─┬ sha3@1.2.0
+│ │   └── nan@2.8.0
+│ ├── nano-json-stream-parser@0.1.2
+│ ├─┬ servify@0.1.12
+│ │ ├─┬ body-parser@1.18.2
+│ │ │ ├── bytes@3.0.0
+│ │ │ ├── content-type@1.0.4
+│ │ │ ├─┬ debug@2.6.9
+│ │ │ │ └── ms@2.0.0 deduped
+│ │ │ ├── depd@1.1.1
+│ │ │ ├─┬ http-errors@1.6.2
+│ │ │ │ ├── depd@1.1.1 deduped
+│ │ │ │ ├── inherits@2.0.3 deduped
+│ │ │ │ ├── setprototypeof@1.0.3
+│ │ │ │ └── statuses@1.4.0
+│ │ │ ├── iconv-lite@0.4.19
+│ │ │ ├─┬ on-finished@2.3.0
+│ │ │ │ └── ee-first@1.1.1
+│ │ │ ├── qs@6.5.1
+│ │ │ ├─┬ raw-body@2.3.2
+│ │ │ │ ├── bytes@3.0.0 deduped
+│ │ │ │ ├── http-errors@1.6.2 deduped
+│ │ │ │ ├── iconv-lite@0.4.19 deduped
+│ │ │ │ └── unpipe@1.0.0
+│ │ │ └─┬ type-is@1.6.15
+│ │ │   ├── media-typer@0.3.0
+│ │ │   └── mime-types@2.1.17 deduped
+│ │ ├─┬ cors@2.8.4
+│ │ │ ├── object-assign@4.1.1 deduped
+│ │ │ └── vary@1.1.2
+│ │ ├─┬ express@4.16.2
+│ │ │ ├─┬ accepts@1.3.4
+│ │ │ │ ├── mime-types@2.1.17 deduped
+│ │ │ │ └── negotiator@0.6.1
+│ │ │ ├── array-flatten@1.1.1
+│ │ │ ├── body-parser@1.18.2 deduped
+│ │ │ ├── content-disposition@0.5.2
+│ │ │ ├── content-type@1.0.4 deduped
+│ │ │ ├── cookie@0.3.1
+│ │ │ ├── cookie-signature@1.0.6
+│ │ │ ├── debug@2.6.9 deduped
+│ │ │ ├── depd@1.1.1 deduped
+│ │ │ ├── encodeurl@1.0.1
+│ │ │ ├── escape-html@1.0.3
+│ │ │ ├── etag@1.8.1
+│ │ │ ├─┬ finalhandler@1.1.0
+│ │ │ │ ├── debug@2.6.9 deduped
+│ │ │ │ ├── encodeurl@1.0.1 deduped
+│ │ │ │ ├── escape-html@1.0.3 deduped
+│ │ │ │ ├── on-finished@2.3.0 deduped
+│ │ │ │ ├── parseurl@1.3.2 deduped
+│ │ │ │ ├── statuses@1.3.1
+│ │ │ │ └── unpipe@1.0.0 deduped
+│ │ │ ├── fresh@0.5.2
+│ │ │ ├── merge-descriptors@1.0.1
+│ │ │ ├── methods@1.1.2
+│ │ │ ├── on-finished@2.3.0 deduped
+│ │ │ ├── parseurl@1.3.2
+│ │ │ ├── path-to-regexp@0.1.7
+│ │ │ ├─┬ proxy-addr@2.0.2
+│ │ │ │ ├── forwarded@0.1.2
+│ │ │ │ └── ipaddr.js@1.5.2
+│ │ │ ├── qs@6.5.1 deduped
+│ │ │ ├── range-parser@1.2.0
+│ │ │ ├── safe-buffer@5.1.1 deduped
+│ │ │ ├─┬ send@0.16.1
+│ │ │ │ ├── debug@2.6.9 deduped
+│ │ │ │ ├── depd@1.1.1 deduped
+│ │ │ │ ├── destroy@1.0.4
+│ │ │ │ ├── encodeurl@1.0.1 deduped
+│ │ │ │ ├── escape-html@1.0.3 deduped
+│ │ │ │ ├── etag@1.8.1 deduped
+│ │ │ │ ├── fresh@0.5.2 deduped
+│ │ │ │ ├── http-errors@1.6.2 deduped
+│ │ │ │ ├── mime@1.4.1
+│ │ │ │ ├── ms@2.0.0 deduped
+│ │ │ │ ├── on-finished@2.3.0 deduped
+│ │ │ │ ├── range-parser@1.2.0 deduped
+│ │ │ │ └── statuses@1.3.1
+│ │ │ ├─┬ serve-static@1.13.1
+│ │ │ │ ├── encodeurl@1.0.1 deduped
+│ │ │ │ ├── escape-html@1.0.3 deduped
+│ │ │ │ ├── parseurl@1.3.2 deduped
+│ │ │ │ └── send@0.16.1 deduped
+│ │ │ ├── setprototypeof@1.1.0
+│ │ │ ├── statuses@1.3.1
+│ │ │ ├── type-is@1.6.15 deduped
+│ │ │ ├── utils-merge@1.0.1
+│ │ │ └── vary@1.1.2 deduped
+│ │ ├─┬ request@2.83.0
+│ │ │ ├── aws-sign2@0.7.0
+│ │ │ ├── aws4@1.6.0
+│ │ │ ├── caseless@0.12.0
+│ │ │ ├─┬ combined-stream@1.0.5
+│ │ │ │ └── delayed-stream@1.0.0
+│ │ │ ├── extend@3.0.1
+│ │ │ ├── forever-agent@0.6.1
+│ │ │ ├─┬ form-data@2.3.1
+│ │ │ │ ├── asynckit@0.4.0
+│ │ │ │ ├── combined-stream@1.0.5 deduped
+│ │ │ │ └── mime-types@2.1.17 deduped
+│ │ │ ├─┬ har-validator@5.0.3
+│ │ │ │ ├─┬ ajv@5.3.0
+│ │ │ │ │ ├── co@4.6.0
+│ │ │ │ │ ├── fast-deep-equal@1.0.0
+│ │ │ │ │ ├── fast-json-stable-stringify@2.0.0
+│ │ │ │ │ └── json-schema-traverse@0.3.1
+│ │ │ │ └── har-schema@2.0.0
+│ │ │ ├─┬ hawk@6.0.2
+│ │ │ │ ├─┬ boom@4.3.1
+│ │ │ │ │ └── hoek@4.2.0 deduped
+│ │ │ │ ├─┬ cryptiles@3.1.2
+│ │ │ │ │ └─┬ boom@5.2.0
+│ │ │ │ │   └── hoek@4.2.0 deduped
+│ │ │ │ ├── hoek@4.2.0
+│ │ │ │ └─┬ sntp@2.1.0
+│ │ │ │   └── hoek@4.2.0 deduped
+│ │ │ ├─┬ http-signature@1.2.0
+│ │ │ │ ├── assert-plus@1.0.0
+│ │ │ │ ├─┬ jsprim@1.4.1
+│ │ │ │ │ ├── assert-plus@1.0.0 deduped
+│ │ │ │ │ ├── extsprintf@1.3.0
+│ │ │ │ │ ├── json-schema@0.2.3
+│ │ │ │ │ └─┬ verror@1.10.0
+│ │ │ │ │   ├── assert-plus@1.0.0 deduped
+│ │ │ │ │   ├── core-util-is@1.0.2 deduped
+│ │ │ │ │   └── extsprintf@1.3.0 deduped
+│ │ │ │ └─┬ sshpk@1.13.1
+│ │ │ │   ├── asn1@0.2.3
+│ │ │ │   ├── assert-plus@1.0.0 deduped
+│ │ │ │   ├─┬ bcrypt-pbkdf@1.0.1
+│ │ │ │   │ └── tweetnacl@0.14.5 deduped
+│ │ │ │   ├─┬ dashdash@1.14.1
+│ │ │ │   │ └── assert-plus@1.0.0 deduped
+│ │ │ │   ├─┬ ecc-jsbn@0.1.1
+│ │ │ │   │ └── jsbn@0.1.1 deduped
+│ │ │ │   ├─┬ getpass@0.1.7
+│ │ │ │   │ └── assert-plus@1.0.0 deduped
+│ │ │ │   ├── jsbn@0.1.1
+│ │ │ │   └── tweetnacl@0.14.5
+│ │ │ ├── is-typedarray@1.0.0
+│ │ │ ├── isstream@0.1.2
+│ │ │ ├── json-stringify-safe@5.0.1
+│ │ │ ├── mime-types@2.1.17 deduped
+│ │ │ ├── oauth-sign@0.8.2
+│ │ │ ├── performance-now@2.1.0
+│ │ │ ├── qs@6.5.1 deduped
+│ │ │ ├── safe-buffer@5.1.1 deduped
+│ │ │ ├── stringstream@0.0.5
+│ │ │ ├─┬ tough-cookie@2.3.3
+│ │ │ │ └── punycode@1.4.1
+│ │ │ ├─┬ tunnel-agent@0.6.0
+│ │ │ │ └── safe-buffer@5.1.1 deduped
+│ │ │ └── uuid@3.1.0
+│ │ └── xhr@2.4.0 deduped
+│ ├─┬ ws@3.3.1
+│ │ ├── async-limiter@1.0.0
+│ │ ├── safe-buffer@5.1.1 deduped
+│ │ └── ultron@1.1.0
+│ └─┬ xhr-request-promise@0.1.2
+│   └── xhr-request@1.0.1 deduped
+├─┬ fs-extra@4.0.2
+│ ├── graceful-fs@4.1.11 deduped
+│ ├─┬ jsonfile@4.0.0
+│ │ └── graceful-fs@4.1.11 deduped
+│ └── universalify@0.1.1
+├─┬ got@7.1.0
+│ ├─┬ decompress-response@3.3.0
+│ │ └── mimic-response@1.0.0
+│ ├── duplexer3@0.1.4
+│ ├── get-stream@3.0.0
+│ ├── is-plain-obj@1.1.0
+│ ├── is-retry-allowed@1.1.0
+│ ├── is-stream@1.1.0
+│ ├─┬ isurl@1.0.0
+│ │ ├─┬ has-to-string-tag-x@1.4.1
+│ │ │ └── has-symbol-support-x@1.4.1
+│ │ └── is-object@1.0.1
+│ ├── lowercase-keys@1.0.0
+│ ├── p-cancelable@0.3.0
+│ ├─┬ p-timeout@1.2.0
+│ │ └── p-finally@1.0.0
+│ ├── safe-buffer@5.1.1
+│ ├── timed-out@4.0.1
+│ ├─┬ url-parse-lax@1.0.0
+│ │ └── prepend-http@1.0.4
+│ └── url-to-options@1.0.1
+├─┬ mime-types@2.1.17
+│ └── mime-db@1.30.0
+├─┬ mkdirp-promise@5.0.1
+│ └── mkdirp@0.5.1 deduped
+├── mock-fs@4.4.2
+├── setimmediate@1.0.5
+├─┬ tar@4.4.6
+│ ├── chownr@1.0.1
+│ ├─┬ fs-minipass@1.2.5
+│ │ └── minipass@2.3.4 deduped
+│ ├─┬ minipass@2.3.4
+│ │ ├── safe-buffer@5.1.2
+│ │ └── yallist@3.0.2 deduped
+│ ├─┬ minizlib@1.1.0
+│ │ └── minipass@2.3.4 deduped
+│ ├── mkdirp@0.5.1 deduped
+│ ├── safe-buffer@5.1.2
+│ └── yallist@3.0.2
+├─┬ xhr-request@1.0.1
+│ ├─┬ buffer-to-arraybuffer@0.0.2
+│ │ └─┬ tape@3.6.1
+│ │   ├── deep-equal@0.2.2
+│ │   ├── defined@0.0.0
+│ │   ├─┬ glob@3.2.11
+│ │   │ ├── inherits@2.0.3 deduped
+│ │   │ └─┬ minimatch@0.3.0
+│ │   │   ├── lru-cache@2.7.3
+│ │   │   └── sigmund@1.0.1
+│ │   ├── inherits@2.0.3 deduped
+│ │   ├── object-inspect@0.4.0
+│ │   ├─┬ resumer@0.0.0
+│ │   │ └── through@2.3.8 deduped
+│ │   └── through@2.3.8 deduped
+│ ├── object-assign@3.0.0
+│ ├─┬ query-string@2.4.2
+│ │ └── strict-uri-encode@1.1.0
+│ ├─┬ simple-get@1.4.3
+│ │ ├── once@1.4.0 deduped
+│ │ ├── unzip-response@1.0.2
+│ │ └── xtend@4.0.1
+│ ├── timed-out@2.0.0
+│ ├── url-set-query@1.0.0
+│ └─┬ xhr@2.4.0
+│   ├─┬ global@4.3.2
+│   │ ├─┬ min-document@2.19.0
+│   │ │ └── dom-walk@0.1.1
+│   │ └── process@0.5.2
+│   ├── is-function@1.0.1
+│   ├─┬ parse-headers@2.0.1
+│   │ ├─┬ for-each@0.3.2
+│   │ │ └── is-function@1.0.1 deduped
+│   │ └── trim@0.0.1
+│   └── xtend@4.0.1 deduped
+└─┬ xml2js@0.4.19
+  ├── sax@1.2.4
+  └── xmlbuilder@9.0.7
+
