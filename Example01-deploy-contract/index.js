@@ -1,6 +1,7 @@
 let Web3 = require('web3');
 let solc = require("solc");
 let fs   = require('fs');
+let Tx = require('ethereumjs-tx').Transaction
 if(typeof web3 != 'undefined'){
 	web3=new Web3(web3.currentProvider);
 }else{
@@ -10,7 +11,6 @@ let source=fs.readFileSync("./demo.sol","utf8");
 let cacl=solc.compile(source,1);
 let abi= JSON.parse(cacl.contracts[':Calc'].interface);
 let bytecode=cacl.contracts[':Calc'].bytecode;
-console.log(web3.eth.getAccounts());
 web3.eth.getAccounts().then(data=>{
 	web3.eth.personal.unlockAccount(data[0]).then(openAccountState=>{
 		if(openAccountState){
