@@ -1,7 +1,7 @@
 ./Example03-erc20/sk.txt
 */node_modules
 */sk.txt
-
+*/package-lock.json
 # dependencies
 /node_modules
 /.pnp

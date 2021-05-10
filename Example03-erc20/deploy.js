@@ -1,29 +1,28 @@
 const Web3 = require('web3');
+const fs = require("fs");
 const contractFile = require('./compile');
-var arguments = process.argv.splice(2);
 
-if(arguments.length < 2 ){
-   console.log("usage: node deploy.js --privateKey=xxxx --accountaddress=xxx");
-   console.log("note: privateKey should be without prefix 0x");
-   process.exit(1);
-}
+const defaultNetwork = "kovan";
 
-var args = require('minimist')(arguments);
-
+const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 /*
    -- Define Provider & Variables --
 */
 // Provider
 const providerRPC = {
-   development: 'http://localhost:8545',
+   development: 'https://rinkeby.infura.io/v3/4bf032f2d38a4ed6bb975b80d6340847',
    moonbase: 'https://rpc.testnet.moonbeam.network',
 };
-const web3 = new Web3(providerRPC.development); //Change to correct network
+//const web3 = new Web3(providerRPC.development); //Change to correct network
+
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad'));
 
 // Variables
+
+const  account = web3.eth.accounts.privateKeyToAccount(privatekey);
 const account_from = {
-   privateKey: args.privateKey,
-   accountaddress: args.accountaddress,
+   privateKey: account.privateKey,
+   accountaddress: account.address,
 };
 
 const abi = JSON.parse(contractFile.contracts[':BAC001'].interface);
@@ -35,21 +34,24 @@ const bytecode=contractFile.contracts[':BAC001'].bytecode;
 */
 const deploy = async () => {
    console.log(`Attempting to deploy from account ${account_from.accountaddress}`);
-
+   web3.eth.getBlockNumber(function (error, result) {
+      console.log(result)
+   })
    // Create Contract Instance
-   const incrementer = new web3.eth.Contract(abi);
+   const bac = new web3.eth.Contract(abi);
+
 
    // Create Constructor Tx
-   const incrementerTx = incrementer.deploy({
+   const incrementerTx = bac.deploy({
       data: bytecode,
       arguments: ["hello","Dapp",1,100000000],
    });
-
+   console.log("&&&&&&&7")
    // Sign Transacation and Send
    const createTransaction = await web3.eth.accounts.signTransaction(
       {
          data: incrementerTx.encodeABI(),
-         gas: await incrementerTx.estimateGas(),
+         gas: "8000000",
       },
       account_from.privateKey
    );
