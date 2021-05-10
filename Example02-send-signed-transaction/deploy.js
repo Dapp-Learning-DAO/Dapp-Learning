@@ -1,5 +1,14 @@
 const Web3 = require('web3');
 const contractFile = require('./compile');
+var arguments = process.argv.splice(2);
+
+if(arguments.length < 2 ){
+   console.log("usage: node deploy.js --privateKey=xxxx --accountAddress=xxxx");
+   console.log("note: all the value should not be with prefix 0x");
+   process.exit(1);
+}
+
+var args = require('minimist')(arguments);
 
 /*
    -- Define Provider & Variables --
@@ -13,8 +22,8 @@ const web3 = new Web3(providerRPC.development); //Change to correct network
 
 // Variables
 const account_from = {
-   privateKey: '0f6c9eceee317d3e24b22c6bafef6554e5c60adb0a5db2de685a07a8167e03e3',
-   address: '0x1587C2A47a9C97a78788072121bC6c1C2c4e9115',
+   privateKey: args.privateKey,
+   accountAddress: '0x' + args.accountAddress,
 };
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
@@ -23,7 +32,7 @@ const abi = contractFile.abi;
    -- Deploy Contract --
 */
 const deploy = async () => {
-   console.log(`Attempting to deploy from account ${account_from.address}`);
+   console.log(`Attempting to deploy from account ${account_from.accountAddress}`);
 
    // Create Contract Instance
    const incrementer = new web3.eth.Contract(abi);
