@@ -15,7 +15,7 @@ const providerRPC = {
 };
 //const web3 = new Web3(providerRPC.development); //Change to correct network
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad'));
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'));
 
 // Variables
 

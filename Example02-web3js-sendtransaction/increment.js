@@ -1,6 +1,8 @@
 const Web3 = require('web3');
+const fs = require("fs");
 const { abi } = require('./compile');
 
+const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 /*
    -- Define Provider & Variables --
 */
@@ -13,9 +15,10 @@ const web3 = new Web3(providerRPC.development); //Change to correct network
 
 // Variables
 const account_from = {
-   privateKey: '0f6c9eceee317d3e24b22c6bafef6554e5c60adb0a5db2de685a07a8167e03e3',
+   privateKey: privatekey,
 };
-const contractAddress = '0x9A6233B4D614C8C056C62342097B8383284beB7f';
+
+const contractAddress = '0x668Fd29B310EC28fC373287189DBaE74D347030A';
 const _value = 3;
 
 /*

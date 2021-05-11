@@ -1,33 +1,29 @@
 const Web3 = require('web3');
+const fs = require("fs");
 const contractFile = require('./compile');
-var arguments = process.argv.splice(2);
 
-if(arguments.length < 3 ){
-   console.log("usage: node deploy.js --privateKey=xxxx --accountaddress=xxx --contractAddress=xxx");
-   console.log("note: all of the value should not be with prefix 0x");
-   process.exit(1);
-}
-
-var args = require('minimist')(arguments);
+const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 
 /*
    -- Define Provider & Variables --
 */
 // Provider
 const providerRPC = {
-   development: 'http://localhost:8545',
+   development: 'https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07',
    moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
 
+const  account = web3.eth.accounts.privateKeyToAccount(privatekey);
+
 // Variables
 const account_from = {
-   privateKey: args.privateKey,
-   accountaddress: '0x' + args.accountaddress,
+   privateKey: account.privatekey,
+   accountaddress: account.address,
 };
 
 const abi = JSON.parse(contractFile.contracts[':BAC001'].interface);
-const contractAddress = '0x' + args.contractAddress;
+const contractAddress = '0x02233e07d9Ce57b64E9ceD594beB44fb7652d3B6';
 
 /*
    -- Send Function --
@@ -35,9 +31,10 @@ const contractAddress = '0x' + args.contractAddress;
 // Create Contract Instance
 const erc20 = new web3.eth.Contract(abi, contractAddress);
 
-const shortname = erc20.methods.shortName().call().then(console.log);
+const shortname = erc20.methods.shortName().call().then( (result) => {
+   console.log('The shortname of erc20 is ' + result);
+});
 
-console.log("the erc20 name is " + shortname);
 
 const issueValue = async () => {
    console.log(
@@ -45,14 +42,14 @@ const issueValue = async () => {
    );
 
    //build the Tx
-   const issueTx = erc20.methods.issue(account_from.accountaddress,100,"Test");
+   const issueTx = erc20.methods.issue('0xF38fD1cc5DfCdEaF1564a49be142450aD357889D',100,"Test");
 
    // Sign Tx with PK
    const createTransaction = await web3.eth.accounts.signTransaction(
       {
          to: contractAddress,
          data: issueTx.encodeABI(),
-         gas: await issueTx.estimateGas(),
+         gas: "8000000",
       },
       account_from.privateKey
    );

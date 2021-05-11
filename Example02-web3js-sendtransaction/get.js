@@ -1,6 +1,9 @@
 const Web3 = require('web3');
+const fs = require("fs");
 const { abi } = require('./compile');
 
+
+const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 /*
    -- Define Provider & Variables --
 */
@@ -12,7 +15,7 @@ const providerRPC = {
 const web3 = new Web3(providerRPC.development); //Change to correct network
 
 // Variables
-const contractAddress = '0x9A6233B4D614C8C056C62342097B8383284beB7f';
+const contractAddress = '0x668Fd29B310EC28fC373287189DBaE74D347030A';
 
 /*
    -- Call Function --
@@ -24,9 +27,9 @@ const get = async () => {
    console.log(`Making a call to contract at address: ${contractAddress}`);
 
    // Call Contract
-   const data = await incrementer.methods.number().call();
-
-   console.log(`The current number stored is: ${data}`);
+   const data = await incrementer.methods.getNumber().call().then((result)=>{
+      console.log(`The current number stored is: ${result}`);
+   });
 };
 
 get();
