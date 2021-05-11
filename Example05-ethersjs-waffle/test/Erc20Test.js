@@ -30,16 +30,27 @@ describe('SimpleToken', () => {
         console.log("Balance: " + etherString);
     });
 
-    // const simpletoken = new ethers.ContractFactory(SimpleToken, bytecode, wallet);
-    // const token =  simpletoken.deploy( ["HEHE", "HH", 1, 100000000]);
-    // token.deployed();
-    // type 1
     let token;
 
-    token =   deployContract(wallet, SimpleToken, [1000]);
+    (async function() {
+
+        // 常见合约工厂实例
+        const simpletoken = new ethers.ContractFactory(SimpleToken.abi, SimpleToken.bytecode, wallet);
+        token =  await simpletoken.deploy( "HEHE", "HH", 1, 100000000);
+
+        // 部署交易有一旦挖出，合约地址就可用
+        console.log(token.address);
+
+       // console.log(token.deployTransaction.hash);
+
+        await token.deployed()
+        console.log( token.balanceOf(wallet.address));
+
+    })();
+
 
     // token =  deployContract(wallet, SimpleToken, ["HEHE", "HH", 1, 100000000]);
-    console.log( token.balanceOf(wallet.address));
+
 
 
 

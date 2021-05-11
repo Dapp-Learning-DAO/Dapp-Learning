@@ -12,3 +12,6 @@ ehterjs 官方文档：https://docs.ethers.io/v4/api-providers.html
 npm run build
 ```
 
+- 2 跑测试
+ yarn test
+
