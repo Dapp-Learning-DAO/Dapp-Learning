@@ -1,7 +1,4 @@
-//  2019/10/15  //0xd2b7915d17e90771afd042ad403999167bf9abf8
-
-// 用0。5。6编译器
-pragma solidity ^0.5.4;
+pragma solidity ^0.4.25;
 
 
 interface IERC20 {

@@ -12,3 +12,7 @@
 
 # 调用合约接口  
 在 increment.js 中，调用 Incrementer.sol 合约中的 increment 接口，给公共变量 number 的值增加 3
+
+# 参考文章
+代码参考文章如下
+https://docs.moonbeam.network/getting-started/local-node/deploy-contract/

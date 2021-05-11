@@ -26,7 +26,7 @@ const bytecode=contractFile.contracts[':BAC001'].bytecode;
 /*
    -- Deploy Contract --
 */
-const deploy = async () => {
+const Trans = async () => {
    console.log(`Attempting to deploy from account ${account_from.accountaddress}`);
    web3.eth.getBlockNumber(function (error, result) {
       console.log(result)
@@ -61,8 +61,6 @@ const deploy = async () => {
 
    const newbac = new web3.eth.Contract(abi, createReceipt.contractAddress);
 
-   const shortname = newbac.methods.shortName().call().then(console.log);
-
   // newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000, "fee").send({from: '0x54A65DB20D7653CE509d3ee42656a8F138037d51'}).then(console.log);
 
    //build the Tx
@@ -83,7 +81,9 @@ const deploy = async () => {
        createTransaction1.rawTransaction
    );
 
-   newbac.methods.balance("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266").call().then(console.log)
+   newbac.methods.balance("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266").call().then((result)=>{
+      console.log(`The balance of 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 is ${result}`);
+   })
 };
 
-deploy();
+Trans();

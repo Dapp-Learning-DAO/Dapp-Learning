@@ -8,7 +8,7 @@ const source = fs.readFileSync('erc20.sol','utf8');
 const input = {
    language: 'Solidity',
    sources: {
-      'erc20.sol': {
+      'SimpleToken.sol': {
          content: source,
       },
    },
