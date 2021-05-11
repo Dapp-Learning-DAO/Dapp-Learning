@@ -10,7 +10,6 @@ use(solidity);
 
 describe('SimpleToken', () => {
     const privateKey = fs.readFileSync("./sk.txt").toString().trim()
-    let wallet = new ethers.Wallet(privateKey);
 
     const web3 = new Web3.providers.HttpProvider('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07');
 
@@ -18,44 +17,43 @@ describe('SimpleToken', () => {
 
  //   provider = new ethers.providers.InfuraProvider(  "kovan","0aae8358bfe04803b8e75bb4755eaf07"  )
 
+    let wallet = new ethers.Wallet(privateKey,web3Provider);
+
     let address = "0x54A65DB20D7653CE509d3ee42656a8F138037d51";
 
     let walletTo = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
-    web3Provider.getBalance(address).then((balance) => {
-
-        // balance is a BigNumber (in wei); format is as a sting (in ether)
-        let etherString = ethers.utils.formatEther(balance);
-
-        console.log("Balance: " + etherString);
-    });
-
     let token;
 
-    (async function() {
+    // (async function() {
+    //
+    //     // 常见合约工厂实例
+    //     const simpletoken = new ethers.ContractFactory(SimpleToken.abi, SimpleToken.bytecode, wallet);
+    //     token =  await simpletoken.deploy( "HEHE", "HH", 1, 100000000);
+    //
+    //     console.log(token.address);
+    //
+    //     await token.deployed()
+    //     console.log( token.balanceOf(wallet.address));
+    //
+    // })();
 
-        // 常见合约工厂实例
+
+
+
+     //token =  deployContract(wallet, SimpleToken, ["HEHE", "HH", 1, 100000000]);
+
+
+    beforeEach(async () => {
+        //token = await deployContract(wallet, SimpleToken, ["HEHE", "HH", 1, 100000000]);
         const simpletoken = new ethers.ContractFactory(SimpleToken.abi, SimpleToken.bytecode, wallet);
         token =  await simpletoken.deploy( "HEHE", "HH", 1, 100000000);
-
-        // 部署交易有一旦挖出，合约地址就可用
-        console.log(token.address);
-
-       // console.log(token.deployTransaction.hash);
-
-        await token.deployed()
-        console.log( token.balanceOf(wallet.address));
-
-    })();
-
-
-    // token =  deployContract(wallet, SimpleToken, ["HEHE", "HH", 1, 100000000]);
-
-
-
+    });
 
     it('Assigns initial balance', async () => {
+        console.log("*****2");
         expect(await token.balanceOf(wallet.address)).to.equal(100000000);
+
     });
 
     it('Transfer adds amount to destination account', async () => {
