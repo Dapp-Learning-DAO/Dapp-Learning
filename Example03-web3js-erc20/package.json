@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,8 @@
     "ethereumjs-tx": "^2.1.2",
     "solc": "^0.4.25",
     "web3": "^1.3.5",
-    "ethers": "^5.0.17"
+    "ethers": "^5.0.17",
+    "chai": "^4.2.0",
+    "mocha": "^4.1.0"
   }
 }

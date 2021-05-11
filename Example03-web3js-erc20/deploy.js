@@ -9,12 +9,6 @@ const privatekey = fs.readFileSync("./sk.txt").toString().trim()
    -- Define Provider & Variables --
 */
 // Provider
-const providerRPC = {
-   development: 'https://rinkeby.infura.io/v3/4bf032f2d38a4ed6bb975b80d6340847',
-   moonbase: 'https://rpc.testnet.moonbeam.network',
-};
-//const web3 = new Web3(providerRPC.development); //Change to correct network
-
 const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'));
 
 // Variables
