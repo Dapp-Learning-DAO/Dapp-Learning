@@ -1,6 +1,5 @@
 const Web3 = require('web3');
 const fs = require("fs");
-const contractFile = require('./compile');
 const { expect } = require('chai');
 
 const privatekey = fs.readFileSync("./sk.txt").toString().trim()
