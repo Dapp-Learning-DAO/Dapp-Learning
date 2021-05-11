@@ -3,3 +3,28 @@
 
 # ERC20 合约部署
 通过 deploy.js 进行部署，样例中链接的测试网为 Kovan, 对应需要使用有 Ether 的账户进行发送
+
+
+# 发交易方式
+ 1 拼装交易
+ ```
+const tx = newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000, "fee").encodeABI();
+
+   // Sign Tx with PK
+   const createTransaction1 = await web3.eth.accounts.signTransaction(
+       {
+          to: createReceipt.contractAddress,
+          data: tx,
+          gas: 8000000,
+       },
+       account_from.privateKey
+   );
+
+   // Send Tx and Wait for Receipt
+   const createReceipt1 = await web3.eth.sendSignedTransaction(
+       createTransaction1.rawTransaction
+   );
+```
+  
+2 合约接口调用
+  todo
