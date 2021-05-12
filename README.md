@@ -14,7 +14,7 @@
      https://hardhat.org/guides/project-setup.html
   - day-7 graph      
          https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
-  - day-8 react（metamask） 
+  - day-8 react（metamask）   
      https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005
   - day-9  ERC721+ ipfs  
     https://docs.ipfs.io/   
