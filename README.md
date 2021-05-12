@@ -16,5 +16,19 @@
          https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
   - day-8 react（metamask）   
      https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005
-  - day-9  ERC721+ ipfs  
-    https://docs.ipfs.io/   
+  - day-9  ERC721+ ipfs    
+    https://docs.ipfs.io/    
+  - day-10 0x-sdk exchange  
+   https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
+  - day-11 chainlink
+  https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+  
+ 
+ ##  defi进阶
+     
+  1 uniswap
+  2 compound
+  3 aave
+  4 snx 
+  
+    
