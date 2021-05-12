@@ -17,21 +17,23 @@
   - day-8 react（metamask）   
      https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005
   - day-9  ERC721+ ipfs    
-    https://docs.ipfs.io/    
-  - day-10 0x-sdk exchange  
+    https://docs.ipfs.io/ 
+  - day-10 simple Exchange 
+    https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol       
+  - day-11 0x-sdk exchange  
    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
-  - day-11 chainlink
+  - day-12 chainlink
   https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
   
  
  ##  defi进阶
      
-  1 uniswap  
+  P1 uniswap  
   
-  2 compound  
+  P2 compound  
   
-  3 aave  
+  P3 aave  
   
-  4 snx   
+  P4 snx   
   
     
