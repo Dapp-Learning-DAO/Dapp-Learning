@@ -8,7 +8,9 @@
   - infura: https://infura.io/login   
   - 测试均连接kovan测试网， kovan测试ETH申请：   
   https://faucet.kovan.network/redirect?code=aa76295bc9a1897689a9&state=pUztFMqfmrwFW6TMqWDTk5DiPwTvK8V2
-
+  - etherscan: 查询交易
+  https://kovan.etherscan.io
+   
  ##  任务列表：
   - day-6 hardhat         
      https://hardhat.org/guides/project-setup.html
