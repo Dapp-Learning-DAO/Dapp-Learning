@@ -19,9 +19,8 @@ const account_from = {
    accountaddress: account.address,
 };
 
-const abi = JSON.parse(contractFile.contracts[':BAC001'].interface);
-const bytecode=contractFile.contracts[':BAC001'].bytecode;
-
+const bytecode = contractFile.evm.bytecode.object;
+const abi = contractFile.abi;
 
 /*
    -- Deploy Contract --
@@ -31,57 +30,57 @@ const Trans = async () => {
    web3.eth.getBlockNumber(function (error, result) {
       console.log(result)
    })
-   // Create Contract Instance
-   const bac = new web3.eth.Contract(abi);
+   // Create deploy Contract Instance
+   const deployContract = new web3.eth.Contract(abi);
 
 
    // Create Constructor Tx
-   const incrementerTx = bac.deploy({
+   const deployTx = deployContract.deploy({
       data: bytecode,
       arguments: ["hello","Dapp",1,100000000],
    });
    console.log("&&&&&&&7")
    // Sign Transacation and Send
-   const createTransaction = await web3.eth.accounts.signTransaction(
+   const deployTransaction = await web3.eth.accounts.signTransaction(
       {
-         data: incrementerTx.encodeABI(),
+         data: deployTx.encodeABI(),
          gas: "8000000",
       },
       account_from.privateKey
    );
 
    // Send Tx and Wait for Receipt
-   const createReceipt = await web3.eth.sendSignedTransaction(
-      createTransaction.rawTransaction
+   const deployReceipt = await web3.eth.sendSignedTransaction(
+      deployTransaction.rawTransaction
    );
    console.log(
-      `Contract deployed at address: ${createReceipt.contractAddress}`
+      `Contract deployed at address: ${deployReceipt.contractAddress}`
    );
 
 
-   const newbac = new web3.eth.Contract(abi, createReceipt.contractAddress);
+   const transferContract = new web3.eth.Contract(abi, deployReceipt.contractAddress);
 
   // newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000, "fee").send({from: '0x54A65DB20D7653CE509d3ee42656a8F138037d51'}).then(console.log);
 
    //build the Tx
-   const tx = newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000, "fee").encodeABI();
+   const transferTx = transferContract.methods.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000).encodeABI();
 
    // Sign Tx with PK
-   const createTransaction1 = await web3.eth.accounts.signTransaction(
+   const transferTransaction = await web3.eth.accounts.signTransaction(
        {
-          to: createReceipt.contractAddress,
-          data: tx,
+          to: deployReceipt.contractAddress,
+          data: transferTx,
           gas: 8000000,
        },
        account_from.privateKey
    );
 
    // Send Tx and Wait for Receipt
-   const createReceipt1 = await web3.eth.sendSignedTransaction(
-       createTransaction1.rawTransaction
+   const transferReceipt = await web3.eth.sendSignedTransaction(
+      transferTransaction.rawTransaction
    );
 
-   newbac.methods.balance("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266").call().then((result)=>{
+   transferContract.methods.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266").call().then((result)=>{
       console.log(`The balance of 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 is ${result}`);
    })
 };
