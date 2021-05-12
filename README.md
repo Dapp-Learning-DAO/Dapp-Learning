@@ -12,10 +12,12 @@
  ##  任务列表：
   - day-6 hardhat         
      https://hardhat.org/guides/project-setup.html
-  - day-7 graph      
-         https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
-  - day-8 react（metamask）   
-     https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005
+  - day-7 react（metamask）   
+     https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005 
+     https://create-react-app.dev/docs/getting-started/  
+     https://github.com/nomiclabs/hardhat-hackathon-boilerplate  
+  - day-8 graph      
+     https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
   - day-9  ERC721+ ipfs    
     https://docs.ipfs.io/ 
   - day-10 simple Exchange 
@@ -23,7 +25,7 @@
   - day-11 0x-sdk exchange  
    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
   - day-12 chainlink
-  https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+   https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
   
  
  ##  defi进阶

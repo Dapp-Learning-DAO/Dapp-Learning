@@ -21,15 +21,16 @@ const Web3 = require('web3');
     let walletTo = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
     let bal;
-
-    web3Provider.getBalance(address).then((balance) => {
+async function checkBalance() {
+    bal = await web3Provider.getBalance(address).then((balance) => {
 
         // balance is a BigNumber (in wei); format is as a sting (in ether)
         let etherString = ethers.utils.formatEther(balance);
-        bal = balance;
-        console.log("Balance: " + etherString);
+        return etherString;
     });
-
+}
+checkBalance()
+     console.log("balance: ", bal);
    //  todo
     // async function balance(address) {
    //     await  web3Provider.getBalance(address).then((balance) => {
@@ -42,6 +43,8 @@ const Web3 = require('web3');
    // let ethBalance   =   balance(address);
    //  console.log("Balance: " + ethBalance);
     let token;
+
+
 
     async function deploy() {
 
