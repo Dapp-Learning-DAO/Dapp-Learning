@@ -1,59 +1,79 @@
 let Web3 = require('web3');
 let solc = require("solc");
 let fs   = require('fs');
-let Tx = require('ethereumjs-tx').Transaction
-if(typeof web3 != 'undefined'){
-	web3=new Web3(web3.currentProvider);
-}else{
-	web3 = new Web3('http://localhost:8545');
-}
-let source=fs.readFileSync("./demo.sol","utf8");
-let cacl=solc.compile(source,1);
 
-let abi= JSON.parse(cacl.contracts[':Calc'].interface);
-let bytecode=cacl.contracts[':Calc'].bytecode;
+// Get the PrivateKey
+const privatekey = fs.readFileSync("./sk.txt").toString().trim()
+
+// Get Path and Load Contract
+const source = fs.readFileSync('Incrementer.sol','utf8');
+
+// Compile Contract
+const input = {
+   language: 'Solidity',
+   sources: {
+      'Incrementer.sol': {
+         content: source,
+      },
+   },
+   settings: {
+      outputSelection: {
+         '*': {
+            '*': ['*'],
+         },
+      },
+   },
+};
+
+const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
+const contractFile = tempFile.contracts['Incrementer.sol']['Incrementer'];
 
 
-web3.eth.getAccounts().then(data=>{
-	web3.eth.personal.unlockAccount(data[0]).then(openAccountState=>{
-		if(openAccountState){
-			console.log("开户状态:"+openAccountState);
-			var rsContract=new web3.eth.Contract(abi).deploy({
-				data:'0x'+bytecode,
-				arguments:[],	//传递构造函数的参数
-			}).send({
-				from:data[0],
-				gas:1500000,
-				gasPrice:'30000000000000'
-			},function(error,transactionHash){
-				console.log("send回调");
-				console.log("error:"+error);
-				console.log("send transactionHash:"+transactionHash);
-			})
-			.on('error', function(error){ console.error(error) })
-			// .on('transactionHash', function(transactionHash){ console.log("hash:",transactionHash)})
-			// .on('receipt', function(receipt){
-			//    console.log(receipt.contractAddress) // contains the new contract address
-			// })
-			//.on('confirmation', function(confirmationNumber, receipt){console.log("receipt,",receipt)})
-			.then(function(newContractInstance){
-				var newContractAddress=newContractInstance.options.address
-				console.log("新合约地址:"+newContractAddress);
+//abi & bin
+const bytecode = contractFile.evm.bytecode.object;
+const abi = contractFile.abi;
 
-				// jsonrpc
-				//delloy
-				web3.eth.getBlockNumber().then(blockNum=>{
-					console.log("当前块号："+blockNum);
-					web3.eth.getBlock(blockNum).then(data=>{
-						console.log("当前块信息：");
-						console.log(data);
-					})
-				});
-				var MyContract = new web3.eth.Contract(abi,newContractAddress);
-					MyContract.methods.add(1,3).call().then(console.log);
- 
-			});
-			
-		}
+// Create web3 Instance with Provider
+const web3 = new Web3('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'); 
+
+// Create account with PK
+const account = web3.eth.accounts.privateKeyToAccount(privatekey);
+const account_from = {
+	privateKey: privatekey,
+	accountAddress: account.address,
+ };
+
+/*
+   -- Deploy Contract --
+*/
+// Create Contract Instance
+const Deploy = async () => {
+
+	// Create Contract Instance
+	const deployContract = new web3.eth.Contract(abi);
+
+	// Create Constructor Tx
+	const deployTx = deployContract.deploy({
+	data: bytecode,
+	arguments: [5],
 	});
-});
+
+	// Sign Transacation and Send
+	const deployTransaction = await web3.eth.accounts.signTransaction(
+	{
+		data: deployTx.encodeABI(),
+		gas: await deployTx.estimateGas(),
+	},
+	account_from.privateKey
+	);
+
+	// Send Tx and Wait for Receipt
+	const deployReceipt = await web3.eth.sendSignedTransaction(
+		deployTransaction.rawTransaction
+	);
+	console.log(
+	`Contract deployed at address: ${deployReceipt.contractAddress}`
+	);
+}
+
+Deploy();

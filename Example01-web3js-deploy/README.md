@@ -1,11 +1,9 @@
 # 参考文档
-样例代码使用的是 web3js 官方文档中的代码，具体可以参考链接 https://web3js.readthedocs.io/en/v1.3.4/web3-eth-contract.html?highlight=deploy#deploy
+样例代码参考如下链接 
+https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 
-# 调试工具:
- - nvm: https://segmentfault.com/a/1190000020807954
- - ganache-cli: https://www.jianshu.com/p/e767fa38eacf
-
-本样例使用 ganache-cli 模拟节点，通过样例代码了解和节点的基本交互。
+本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建
+https://ithelp.ithome.com.tw/articles/10202794
 
 # 测试流程:
 ## 安装依赖
@@ -13,17 +11,7 @@
 npm install
 ```
 
-## 启动 ganache-cli
-```
-ganache-cli
-```
-
 ## 执行测试
 ```
 node index.js
 ```
-
-
-// jsonrpc	
-//delloy 
-//add abi bin描述
