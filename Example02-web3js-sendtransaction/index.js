@@ -14,12 +14,14 @@ const providerRPC = {
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
 
+// account
 const  account = web3.eth.accounts.privateKeyToAccount(privatekey);
-// Variables
 const account_from = {
    privateKey: privatekey,
    accountAddress: account.address,
 };
+
+//abi & bin
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 

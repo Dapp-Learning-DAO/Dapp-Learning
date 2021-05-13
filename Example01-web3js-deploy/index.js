@@ -9,8 +9,11 @@ if(typeof web3 != 'undefined'){
 }
 let source=fs.readFileSync("./demo.sol","utf8");
 let cacl=solc.compile(source,1);
+
 let abi= JSON.parse(cacl.contracts[':Calc'].interface);
 let bytecode=cacl.contracts[':Calc'].bytecode;
+
+
 web3.eth.getAccounts().then(data=>{
 	web3.eth.personal.unlockAccount(data[0]).then(openAccountState=>{
 		if(openAccountState){
@@ -36,7 +39,9 @@ web3.eth.getAccounts().then(data=>{
 			.then(function(newContractInstance){
 				var newContractAddress=newContractInstance.options.address
 				console.log("新合约地址:"+newContractAddress);
- 
+
+				// jsonrpc
+				//delloy
 				web3.eth.getBlockNumber().then(blockNum=>{
 					console.log("当前块号："+blockNum);
 					web3.eth.getBlock(blockNum).then(data=>{

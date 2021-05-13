@@ -22,3 +22,8 @@ ganache-cli
 ```
 node index.js
 ```
+
+
+// jsonrpc	
+//delloy 
+//add abi bin描述

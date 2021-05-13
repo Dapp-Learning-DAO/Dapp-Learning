@@ -19,7 +19,8 @@
      https://create-react-app.dev/docs/getting-started/  
      https://github.com/nomiclabs/hardhat-hackathon-boilerplate  
   - day-8 graph      
-     https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
+     https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
+     https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA    
   - day-9  ERC721+ ipfs    
     https://docs.ipfs.io/ 
   - day-10 simple Exchange 

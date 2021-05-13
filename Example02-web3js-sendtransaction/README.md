@@ -10,8 +10,9 @@ https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 编译合约的主逻辑在 compile.js 中。需要注意的是，这里使用的 solc 版本为 0.8.0 ，如果使用其他的 solc 版本，需要修改对应的代码
 
 ## 部署合约  
-调用 deployContract.deploy 方法构造 deploy 交易, 然后调用 signTransaction 方法进行签名, 之后发送交易
+调用 deployContract.deploy 方法构造 deploy 交易, 然后调用 signTransaction 方法进行签名, 之后发送交易。 
 
+  合约调用分两种，一种不改变区块链状态call, 一种改变世界状态 transaction. 
 ## 调用合约查询接口  
 调用 incrementer.methods.getNumber() 接口查询合约的 number 变量值
 

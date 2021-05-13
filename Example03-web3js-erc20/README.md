@@ -33,3 +33,8 @@ const tx = newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",1000
   3 mocha测试框架：
   http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
   https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95
+  
+  4 注意:
+  Infura has not activated the method eth_sendTransaction because this method needs unlocked accounts on the ethereum node. With the example I've provided above will it also work with infura :)
+  
+  https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura  
