@@ -1,5 +1,7 @@
 # DappLearn
   ## Dapp 学习项目
+  本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
+  
  以太坊开发工具：  https://learnblockchain.cn/article/2006  
  
  ## 基本工具：   
@@ -10,6 +12,8 @@
   https://faucet.kovan.network/redirect?code=aa76295bc9a1897689a9&state=pUztFMqfmrwFW6TMqWDTk5DiPwTvK8V2
   - etherscan: 查询交易
   https://kovan.etherscan.io
+  - 以太坊的jsonPRC接口
+  https://eth.wiki/json-rpc/API  
    
  ##  任务列表：
   - day-6 hardhat         
