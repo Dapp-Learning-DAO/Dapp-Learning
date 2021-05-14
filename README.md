@@ -1,5 +1,7 @@
 # DappLearn
   ## Dapp 学习项目
+  本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
+  
  以太坊开发工具：  https://learnblockchain.cn/article/2006  
  
  ## 基本工具：   
@@ -10,6 +12,8 @@
   https://faucet.kovan.network/redirect?code=aa76295bc9a1897689a9&state=pUztFMqfmrwFW6TMqWDTk5DiPwTvK8V2
   - etherscan: 查询交易
   https://kovan.etherscan.io
+  - 以太坊的jsonPRC接口
+  https://eth.wiki/json-rpc/API  
    
  ##  任务列表：
   - day-6 hardhat         
@@ -21,8 +25,9 @@
   - day-8 graph      
      https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
      https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA    
-  - day-9  ERC721+ ipfs    
+  - day-9  ERC721+ ERC1155 + ipfs    
     https://docs.ipfs.io/ 
+    https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd
   - day-10 simple Exchange 
     https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol       
   - day-11 0x-sdk exchange  

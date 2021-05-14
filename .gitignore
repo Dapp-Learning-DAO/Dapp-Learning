@@ -7,6 +7,7 @@
 /.pnp
 .pnp.js
 */cache
+*/*/node_modules
 
 # testing
 coverage
