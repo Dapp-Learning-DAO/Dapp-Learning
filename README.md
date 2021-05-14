@@ -26,13 +26,16 @@
      https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
      https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA    
   - day-9  ERC721+ ERC1155 + ipfs    
-    https://docs.ipfs.io/ 
+    https://docs.ipfs.io/   
+    
     https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd
-  - day-10 simple Exchange 
+  - day-10 simple Exchange   
+  
     https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol       
-  - day-11 0x-sdk exchange  
+  - day-11 0x-sdk exchange    
    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
-  - day-12 chainlink
+  - day-12 chainlink  
+  
    https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
   
  
