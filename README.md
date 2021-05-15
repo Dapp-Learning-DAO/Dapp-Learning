@@ -1,8 +1,8 @@
 # DappLearn
   ## Dapp 学习项目
   本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
-  
- 以太坊开发工具：  https://learnblockchain.cn/article/2006  
+  主要工具是web3.js（hardhat）, web3.py(Brownie) 
+ 以太坊开发工具：https://learnblockchain.cn/article/2006  
  
  ## 基本工具：   
   - metamask: https://www.jianshu.com/p/b5b2c05e9090  
@@ -37,6 +37,10 @@
   - day-12 chainlink  
   
      https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+     
+  - day-13 web3.py   
+  
+  - day-14 brownie
   
  
  ##  defi进阶
