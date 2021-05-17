@@ -38,21 +38,35 @@
   
      https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
      
-  - day-13 web3.py   
+  - day-13 multi-sig-wallet
+   
+     
+  - day-14 web3.py   
+     https://web3py.readthedocs.io/en/stable/quickstart.html
+     
+  - day-15 brownie
   
-  - day-14 brownie
+  
   
  
  ##  defi进阶
      
-  - P1 uniswap  
+  - P1 uniswap 
+    
   
   - P2 compound  
   
   - P3 aave  
+     https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade
+     
+     https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol
   
   - P4 snx   
   
   - P5 YFI
+  
+ ##  nft进阶
+ - opensea
+  
   
     
