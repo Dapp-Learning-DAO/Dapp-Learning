@@ -12,12 +12,13 @@ contract('SimpleToken', (accounts) => {
     it('Transfer 100 to other account', async () => {
         const simpleTokenIns = await SimpleToken.deployed();
 
+        const target = accounts[1];
         // transfer 100 to other account
-        await simpleTokenIns.transfer(accounts[1],1000);
+        await simpleTokenIns.transfer(target,1000);
 
-        // check the balance of 0xFE63eDdC467E3E7bB6804ab21eAA18289355d02a
-        const balance = (await simpleTokenIns.balanceOf.call(accounts[1])).toNumber();
-        assert.equal(balance, 1000, `the balance of ${accounts[1]} wasn't 1000`);
+        // check the balance of target
+        const balance = (await simpleTokenIns.balanceOf.call(target)).toNumber();
+        assert.equal(balance, 1000, `the balance of ${target} wasn't 1000`);
     });
 
 });

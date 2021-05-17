@@ -14,6 +14,21 @@ truffle开发框架提供了很多功能，简化了我们的开发、编译、�
 
 [Truffle 官网](https://www.trufflesuite.com/docs/truffle/quickstart)
 
+# 文件说明
+## 目录结构
+ - contracts/: Solidity合约目录
+
+ - migrations/: 部署脚本文件目录
+
+ - test/: 测试脚本目录，参考 如何测试应用？
+
+ - truffle-config.js: Truffle 配置文件
+
+## 各文件作用
+1. contracts/SimpleToken.sol： 这是一个用 Solidity 编写的 erc20 代币 智能合约.
+2. migrations/1_initial_migration.js： 这是一个部署脚本，用来部署 Migrations 合约，对应 Migrations.sol 文件。
+3. truffle-config.js （之前是 truffle.js）： Truffle 配置文件, 用来设置网络信息，和其他项目相关的设置。当我们使用内建的默认的Truffle命令时，这个文件留空也是可以的。
+
 # 测试流程
 ## 安装 truffle
 ```
@@ -22,10 +37,11 @@ npm install -g truffle
 
 ## 测试合约
 ```
-truffle test ./test/metacoin.js
+truffle test
 ```
 
-这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 metacoin.js 这个测试脚本。如果想测试 test 目录下的所有脚本，可直接执行 truffle test
+这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
+执行 "truffle test ./test/simpletoken.js"
 
 ## 编译合约
 ```
@@ -34,9 +50,7 @@ truffle compile
 
 执行成功后，会输出类似如下信息。从输出信息可以看到， truffle 会把 contracts 目录下的所有合约进行编译
 ```
-Compiling .\contracts\ConvertLib.sol...
-Compiling .\contracts\MetaCoin.sol...
-Compiling .\contracts\Migrations.sol...
+Compiling .\contracts\SimpleToken.sol...
 
 Writing artifacts to .\build\contracts
 ```
@@ -53,4 +67,13 @@ truffle migrate --network kovan
 truffle migrate --network kovan --reset
 ```
 
+## 在 infura 测试合约
+在 test 目录下存在 sol 和 js 类型的文件，truffle 支持这两种类型的测试文件。但目前测试发现，如果连接的测试网络为 infura ，则执行
+sol 的测试文件会报失败。所以，这里我们连接到 infura 进行测试时，只能使用 js 的测试文件。
 
+### 修改 simpletoke.js 
+修改 simpletoken.js 文件，把其中的 accounts[1] 修改为 "0x5DF22be367b95788Cd51C7dbdf7c7aB70fE856EE" ( 为例 ), 然后执行
+如下命令。执行过程可能比较慢，需要耐心等待一下。
+```
+truffle test ./test/simpletoken.js --network kovan
+```
