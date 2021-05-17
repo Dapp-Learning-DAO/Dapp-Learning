@@ -1,14 +1,14 @@
 # DappLearn
   ## Dapp 学习项目
   本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
-  主要工具是web3.js（hardhat）, web3.py(Brownie) 
- 以太坊开发工具：https://learnblockchain.cn/article/2006  
+  主要工具是web3.js（hardhat）, web3.py(Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
+  以太坊开发工具：https://learnblockchain.cn/article/2006 
  
  ## 基本工具：   
   - metamask: https://www.jianshu.com/p/b5b2c05e9090  
   导出私钥放到各项目的sk.txt文件里  
   - infura: https://infura.io/login   
-  - 测试均连接kovan测试网， kovan测试ETH申请：   
+  - 测试均连接kovan测试网，kovan测试ETH申请：   
   https://faucet.kovan.network/redirect?code=aa76295bc9a1897689a9&state=pUztFMqfmrwFW6TMqWDTk5DiPwTvK8V2
   - etherscan: 查询交易
   https://kovan.etherscan.io
