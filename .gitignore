@@ -1,4 +1,3 @@
-./Example03-erc20/sk.txt
 */node_modules
 */sk.txt
 */package-lock.json
@@ -8,6 +7,7 @@
 .pnp.js
 */cache
 */*/node_modules
+*/yarn.lock
 
 # testing
 coverage
