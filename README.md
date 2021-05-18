@@ -55,8 +55,10 @@
   - day-17 brownie
   
   - day-18 scaffold-flash-loan
+ 
+  - day-19 scaffold-Lender
   
-   - day-20 scaffold-zk
+  - day-20 scaffold-zk
   
   
  
