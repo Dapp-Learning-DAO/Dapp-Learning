@@ -14,6 +14,10 @@
   https://kovan.etherscan.io
   - 以太坊的jsonPRC接口
   https://eth.wiki/json-rpc/API  
+ 
+ ## 合约库：
+ https://github.com/HQ20/contracts    
+ https://github.com/OpenZeppelin/openzeppelin-contracts 
    
  ##  任务列表：
   - day-6 hardhat         
