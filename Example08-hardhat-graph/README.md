@@ -42,9 +42,9 @@ Account balance of receiver is:  50
 ## 4. TheGraph 创建一个 Subgraph 空间
 因为需要借助 TheGraph 的节点来完成数据的索引，因此我们需要在[TheGraph 网站](https://thegraph.com/)上创建一个 Subgraph。
 
-如果没有The Graph [3]的账户，可以用 GitHub 注册。
+如果没有The Graph 的账户，可以用 GitHub 注册。
 创建账户之后，点击右上角账户的图标，会出现 "Dashboard" 和 "Sign out" 两个选项，选择 "Dashboard" 进入仪表盘，然后点击右侧的“Add Subgraph" 就可以开始通过界面创建 subgraph.
-进入 "Create a subgraph" 界面，输入 "SUBgrAPH NAME", 这里假设输入的 "subgraph name" 为 "graphtest", 后续说明均以这个 subgraph name 为例进行说明. 同时，输入 "SUBTITLE" 为 ”graphtest“, 然后点击 "Create subgraph"
+进入 "Create a subgraph" 界面，输入 "Subgraph NAME", 这里假设输入的 "subgraph name" 为 "graphtest", 后续说明均以这个 subgraph name 为例进行说明. 同时，输入 "SUBTITLE" 为 ”graphtest“, 然后点击 "Create subgraph"
 
 
 ## 5. 开发和部署 subgraph
