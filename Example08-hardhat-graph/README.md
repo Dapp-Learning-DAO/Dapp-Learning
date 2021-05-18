@@ -34,14 +34,16 @@
 ```
 
 输出信息类似如下：
+```
 Deploying contracts with the account: xxxxxxxxxxxxxx
 Account balance: 10000000000000000000000
 Token address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 Transfer 50 to receiver  0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 Account balance of receiver is:  50
+```
 
 ## 4. TheGraph 创建一个 Subgraph 空间
-因为需要借助 TheGraph 的节点来完成数据的索引，因此我们需要在[TheGraph 网站](https://thegraph.com/)上创建一个 Subgraph。
+因为需要借助 TheGraph 的节点来完成数据的索引，因此我们需要在 [TheGraph网站](https://thegraph.com/) 上创建一个 Subgraph。
 
 如果没有The Graph 的账户，可以用 GitHub 注册。
 创建账户之后，点击右上角账户的图标，会出现 "Dashboard" 和 "Sign out" 两个选项，选择 "Dashboard" 进入仪表盘，然后点击右侧的“Add Subgraph" 就可以开始通过界面创建 subgraph.
@@ -69,6 +71,7 @@ Account balance of receiver is:  50
 ```
 
 输入信息如下:
+```
 ✔ Subgraph name · longdacao/graphtest
 ✔ Directory to create the subgraph in · Gameplayer
 ✔ Ethereum network · kovan
@@ -77,25 +80,25 @@ Account balance of receiver is:  50
 ✔ ABI file (path) · /Users/app/temp/DappLearn/Example08-hardhat-graph/abis/SimpleToken.json
 ✔ Contract Name · SimpleToken
 
-- 输出说明
+ 输出说明
 1. 在 "Subgraph name" 和 "Directory to create the subgraph"  这里，直接回车即可
 2. Ethereum network 这里选择 kovan
 3. "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
 4. 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可
- 
+``` 
 
 ## 7. 定义模式
 这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, schema.ts, 所以我们使用调整后的这三个文件。
 
 - 复制文件
 ```
-  ## 复制 schema.graphql 文件
+  >> 复制 schema.graphql 文件
   cp ./scripts/schema.graphql graphtest/   
 
-  ## 复制 mapping.ts 文件
+  >> 复制 mapping.ts 文件
   cp ./scripts/mapping.ts graphtest/src
 
-  ## 复制 schema.ts 文件
+  >> 复制 schema.ts 文件
   cp ./scripts/schema.ts graphtest/generated
 ```
    
