@@ -1,0 +1,14 @@
+type TransferEntity @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! 
+}
+
+
+type ApprovalEntity @entity {
+  id: ID!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! 
+}

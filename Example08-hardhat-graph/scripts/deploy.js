@@ -19,7 +19,14 @@ async function main() {
     const Token = await ethers.getContractFactory("SimpleToken");
     const token = await Token.deploy("HEHE", "HH", 1, 100000000);
 
-    console.log("Token address:", token.address);
+    console.log("Contract address:", token.address);
+    
+    const receiver = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+    console.log("Transfer 50 to receiver ",receiver);
+    await token.transfer(receiver, 50);
+
+    // Check the balance of receiver
+    console.log("Account balance of receiver is: ", (await token.balanceOf(receiver)).toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
