@@ -1,8 +1,6 @@
 //https://etherscan.io/address/0x3f18b2e57acd6f6c111936577529ac0dce7148b8#code
 
-/**
- *Submitted for verification at Etherscan.io on 2018-08-15
-*/
+
 
 // for fixed price sell
 pragma solidity ^0.4.23;
