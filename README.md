@@ -54,7 +54,7 @@
      
   - day-17 brownie
   
-
+  - day-18 scaffold-flash-loan
   
   
  
