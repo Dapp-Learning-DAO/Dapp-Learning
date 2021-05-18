@@ -17,6 +17,8 @@
    - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
    - Mapping 映射(mapping.ts) - 定义事件到数据的转换 
    
+
+   
 # 使用流程
 ## 1. 安装相关依赖
 ```
