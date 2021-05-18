@@ -43,9 +43,9 @@
   - day-14 scaffold-ETH
     
   - day-15 optimism layer2
-    https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts
-     
-     
+    https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts  
+    
+     https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
   - day-16 web3.py   
      https://web3py.readthedocs.io/en/stable/quickstart.html
      
