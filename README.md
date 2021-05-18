@@ -40,13 +40,18 @@
      
   - day-13 multi-sig-wallet
    
+  - day-14 scaffold-ETH
+    
+  - day-15 optimism layer2
+    https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts
      
-  - day-14 web3.py   
+     
+  - day-16 web3.py   
      https://web3py.readthedocs.io/en/stable/quickstart.html
      
-  - day-15 brownie
+  - day-17 brownie
   
-  
+
   
   
  
