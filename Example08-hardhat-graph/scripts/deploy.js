@@ -27,6 +27,11 @@ async function main() {
 
     // Check the balance of receiver
     console.log("Account balance of receiver is: ", (await token.balanceOf(receiver)).toString());
+
+
+    // approve transfer to receiver
+    await token.approve(receiver, 1000);
+    console.log(`allowance of ${deployer.address} to ${receiver} is `, (await token.allowance(deployer.address,receiver)).toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
