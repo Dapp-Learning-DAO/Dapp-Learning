@@ -3,7 +3,8 @@
    编写智能合约时，通常状态的变化是通过触发一个事件来表达，The Graph 则是捕捉区块链事件并提供一个查询事件的 GraphQL 接口，让我们可以方便的跟踪数据的变化。实际上很多defi协议及都是 The Graph 来基于查询数据。
    官方文档： https://thegraph.com/docs/introduction
    
-   本项目参考文档： https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA
+   本项目参考文档： https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  和此链接
+   https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa  
    
     - 在 Ropsten 部署一个合约，并调用触发事件。
     - 创建定义数据索引的 Subgraph。
