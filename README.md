@@ -2,20 +2,21 @@
   ## Dapp 学习项目
   本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
   主要工具是web3.js（hardhat）, web3.py(Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
-  以太坊开发工具：https://learnblockchain.cn/article/2006 
+  以太坊开发工具汇总：https://learnblockchain.cn/article/2006 
  
- ## 基本工具：   
-  - metamask: https://www.jianshu.com/p/b5b2c05e9090  
+ ## 基本工具：
+ 开发前请安装安装和了解一下工具：     
+  - metamask（浏览器钱包插件）: https://www.jianshu.com/p/b5b2c05e9090  
   导出私钥放到各项目的sk.txt文件里  
-  - infura: https://infura.io/login   
+  - infura（以太坊远程节点）: https://infura.io/login   
   - 测试均连接kovan测试网，kovan测试ETH申请：   
   https://faucet.kovan.network/redirect?code=aa76295bc9a1897689a9&state=pUztFMqfmrwFW6TMqWDTk5DiPwTvK8V2
-  - etherscan: 查询交易
+  - etherscan: 以太坊区块链浏览器，查询交易
   https://kovan.etherscan.io
   - 以太坊的jsonPRC接口
   https://eth.wiki/json-rpc/API  
  
- ## 合约库：
+ ## 合约参考库：
  https://github.com/HQ20/contracts    
  https://github.com/OpenZeppelin/openzeppelin-contracts 
    
@@ -31,27 +32,23 @@
      https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA    
   - day-9  ERC721+ ERC1155 + ipfs    
     https://docs.ipfs.io/   
-    
     https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd
  
   - day-10 scaffold-ETH
-  
-  - day-11 simple Exchange   
-  
+    https://github.com/austintgriffith/scaffold-eth  
+  - day-11 simple Exchange    
     https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol       
   - day-12 0x-sdk exchange    
-   https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
-  - day-13 nft-blindbox-chainlink-vrf  
-  
+    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
+  - day-13 nft-blindbox-chainlink-vrf    
      https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
      
   - day-14 multi-sig-wallet
    
     
-  - day-15 optimism layer2
-    https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts  
-    
-     https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
+  - day-15 optimism layer2  
+      https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
+      https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
   - day-16 web3.py   
      https://web3py.readthedocs.io/en/stable/quickstart.html
      
