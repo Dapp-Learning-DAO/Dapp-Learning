@@ -21,51 +21,54 @@
  https://github.com/OpenZeppelin/openzeppelin-contracts 
    
  ##  任务列表：
-  - day-6 hardhat         
+  - day-7 hardhat         
      https://hardhat.org/guides/project-setup.html
-  - day-7 react（metamask）   
-     https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005 
-     https://create-react-app.dev/docs/getting-started/  
-     https://github.com/nomiclabs/hardhat-hackathon-boilerplate  
   - day-8 graph      
      https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
-     https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA    
-  - day-9  ERC721+ ERC1155 + ipfs    
+     https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA      
+  - day-9 react（metamask）   
+       https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005 
+       https://create-react-app.dev/docs/getting-started/  
+       https://github.com/nomiclabs/hardhat-hackathon-boilerplate      
+  - day-10  ERC721+ ERC1155 + ipfs    
     https://docs.ipfs.io/   
     https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd
      
-  - day-10 react + express + hardhat  
+  - day-11 react + express + hardhat  
      
-  - day-11 scaffold-ETH
+  - day-12 scaffold-ETH
     https://github.com/austintgriffith/scaffold-eth  
-  - day-12 simple Exchange    
+  
+  - day-13 simple Exchange & auction    
     https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol       
-  - day-13 0x-sdk exchange    
-    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
-  - day-14 nft-blindbox-chainlink-vrf    
+ 
+  - day-14 nft-blindbox-chainlink-api    
      https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
-     
-  - day-15 multi-sig-wallet
+  
+  - day-15 nft-blindbox-chainlink-vrf    
+       https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+          
+  - day-16 multi-sig-wallet
    
-    
-  - day-16 optimism layer2  
+  - day-17 optimism layer2  
       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
       https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
-  - day-17 web3.py   
+  
+  - day-18 web3.py   
      https://web3py.readthedocs.io/en/stable/quickstart.html
      
-  - day-18 brownie
+  - day-19 brownie
   
-  - day-19 scaffold-flash-loan
+  - day-20 scaffold-flash-loan
  
-  - day-20 scaffold-Lender
+  - day-21 scaffold-Lender
   
-  - day-21 scaffold-zk
+  - day-22 scaffold-zk
   
   
  
  ##  defi进阶
-     
+  ### Learn-DEFI-XXX   
   - P1 uniswap 
     
   
@@ -80,7 +83,11 @@
   
   - P5 YFI
   
+  - P6 0x-protocol     
+    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
  ##  nft进阶
+ 
+ ### Learn-NFT-XXX   
  - opensea
   
   
