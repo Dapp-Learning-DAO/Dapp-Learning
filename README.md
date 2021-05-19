@@ -62,9 +62,14 @@
   - day-20 scaffold-flash-loan
  
   - day-21 scaffold-Lender
-  
+  https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens
+  https://github.com/austintgriffith/scaffold-eth/tree/unifactory
+  https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
   - day-22 scaffold-zk
   
+  - day-23 snapshot
+  
+ 
   
  
  ##  defi进阶
@@ -91,4 +96,4 @@
  - opensea
   
   
-    
+ ## dao进阶  
