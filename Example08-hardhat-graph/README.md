@@ -90,7 +90,7 @@ Account balance of receiver is:  50
 ``` 
 
 ## 7. 定义模式
-这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, schema.ts, 所以我们使用调整后的这三个文件。
+这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
 
 - 复制文件
 ```
@@ -99,9 +99,6 @@ Account balance of receiver is:  50
 
   >> 复制 mapping.ts 文件
   cp ./scripts/mapping.ts graphtest/src
-
-  >> 复制 schema.ts 文件
-  cp ./scripts/schema.ts graphtest/generated
 ```
    
 
