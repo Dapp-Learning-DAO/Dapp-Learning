@@ -125,3 +125,7 @@ Account balance of receiver is:  50
 
 ## 9. 在 TheGraph 查看
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
+
+
+# to do
+在 thegraph 网站上支持字段过滤
