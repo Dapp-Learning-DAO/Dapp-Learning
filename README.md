@@ -2,6 +2,7 @@
   ## Dapp 学习项目
   本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
   主要工具是web3.js（hardhat）, web3.py(Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
+  以太坊原理书：https://ethbook.abyteahead.com/howto.html
   以太坊开发工具汇总：https://learnblockchain.cn/article/2006 
  
  ## 基本工具：
@@ -69,6 +70,7 @@
   
   - day-23 snapshot
   
+  - day-24 vyper
  
   
  
