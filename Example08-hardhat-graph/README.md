@@ -18,6 +18,8 @@
    - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
    - Mapping 映射(mapping.ts) - 定义事件到数据的转换 
    
+
+   
 # 使用流程
 ## 1. 安装相关依赖
 ```
@@ -88,7 +90,7 @@ Account balance of receiver is:  50
 ``` 
 
 ## 7. 定义模式
-这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, schema.ts, 所以我们使用调整后的这三个文件。
+这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
 
 - 复制文件
 ```
@@ -97,9 +99,6 @@ Account balance of receiver is:  50
 
   >> 复制 mapping.ts 文件
   cp ./scripts/mapping.ts graphtest/src
-
-  >> 复制 schema.ts 文件
-  cp ./scripts/schema.ts graphtest/generated
 ```
    
 
@@ -123,3 +122,8 @@ Account balance of receiver is:  50
 
 ## 9. 在 TheGraph 查看
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
+
+
+# to do
+在 thegraph 网站上支持字段过滤
+https://thegraph.com/
