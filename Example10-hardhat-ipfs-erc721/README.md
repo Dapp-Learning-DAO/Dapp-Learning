@@ -81,3 +81,11 @@ ipfs daemon
 ```angular2html
 npx hardhat run scripts/deploy.js --network kovan
 ```
+
+### 对比文件
+在当前目录下执行如下命令
+```angular2html
+ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
+```
+
+之后，可以对比下 art.jpg 和 art2.jpg 文件显示的内容是否一致
