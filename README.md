@@ -1,6 +1,6 @@
 # DappLearn
   ## Dapp 学习项目
-  本项目适合零基础开发者入门区块链DAPP开发，并了解和开发DEFI项目。
+  本项目适合零基础开发者入门区块链DAPP开发，了解和开发DEFI项目。
   主要工具是web3.js（hardhat）, web3.py(Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
   以太坊原理书：https://ethbook.abyteahead.com/howto.html
   以太坊开发工具汇总：https://learnblockchain.cn/article/2006 
@@ -49,7 +49,7 @@
   - day-15 nft-blindbox-chainlink-vrf    
        https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
           
-  - day-16 multi-sig-wallet
+  - day-16 pooltogether
    
   - day-17 optimism layer2  
       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
@@ -71,7 +71,8 @@
   - day-23 snapshot
   
   - day-24 vyper
- 
+  
+  - day-25 multi-sig-wallet
   
  
  ##  defi进阶
