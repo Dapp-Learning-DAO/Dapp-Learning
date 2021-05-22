@@ -17,6 +17,9 @@
   - 以太坊的jsonPRC接口
   https://eth.wiki/json-rpc/API  
  
+  ## 开发要求：
+  readme不完善地方互相帮忙完善，且每个开发两周至少一次PR。
+ 
  ## 合约参考库：
  https://github.com/HQ20/contracts    
  https://github.com/OpenZeppelin/openzeppelin-contracts 
