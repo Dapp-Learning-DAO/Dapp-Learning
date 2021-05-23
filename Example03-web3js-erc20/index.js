@@ -38,7 +38,7 @@ const Trans = async () => {
    // Create Constructor Tx
    const deployTx = deployContract.deploy({
       data: bytecode,
-      arguments: ["hello","Dapp",1,100000000],
+      arguments: ["DAPPLEARNING","DAPP",0,10000000],
    });
 
    // Sign Transacation and Send
@@ -70,11 +70,11 @@ const Trans = async () => {
 //       console.log(newContractInstance.options.address) // instance with the new contract address
 //    });
 
-   const transferContract = new web3.eth.Contract(abi, deployReceipt.contractAddress);
+   const erc20Contract = new web3.eth.Contract(abi, deployReceipt.contractAddress);
 
 
    //build the Tx
-   const transferTx = transferContract.methods.transfer(receiver,100000).encodeABI();
+   const transferTx = erc20Contract.methods.transfer(receiver,100000).encodeABI();
 
    // Sign Tx with PK
    const transferTransaction = await web3.eth.accounts.signTransaction(
@@ -91,7 +91,7 @@ const Trans = async () => {
       transferTransaction.rawTransaction
    );
 
-   transferContract.methods.balanceOf(receiver).call().then((result)=>{
+   erc20Contract.methods.balanceOf(receiver).call().then((result)=>{
       console.log(`The balance of receiver is ${result}`);
    })
 };
