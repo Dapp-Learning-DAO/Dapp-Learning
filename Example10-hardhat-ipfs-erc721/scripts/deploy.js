@@ -30,9 +30,10 @@ async function main() {
 
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {
-      const tokenId = parseInt(token);
-      console.log("Mint token successfully, and the token id is ", tokenId);
+      tokenId = token
+      console.log("Mint token successfully, and the tokenid is ", tokenId);
 
+      tokenId = token
       return myerc721Ins.tokenURI(token)
     }).then((URL) => {
       console.log(`The URl of token ${tokenId} is ${URL}`)
