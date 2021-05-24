@@ -4,7 +4,7 @@ https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 
 # 代码逻辑
 ## 私钥获取
-为方便获取，在 sk.txt 中放入 ganache-cli 的私钥，然后代码自动从中读取
+新建sk.txt文件， 并填入私钥（metamask自行导出），然后代码自动从中读取
 
 ## 编译合约  
 编译合约的主逻辑在 compile.js 中。需要注意的是，这里使用的 solc 版本为 0.8.0 ，如果使用其他的 solc 版本，需要修改对应的代码
