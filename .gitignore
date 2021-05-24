@@ -8,6 +8,8 @@
 */cache
 */*/node_modules
 */yarn.lock
+*/artifacts
+*/cache
 
 # testing
 coverage
