@@ -6,20 +6,39 @@
 const hre = require("hardhat");
 const ipfsAPI = require('ipfs-api')
 const fs = require("fs");
+const { ethers, network } = require("hardhat");
+const { checkServerIdentity } = require("tls");
+const { resolve } = require("path");
+
 
 async function main() {
 
     const [deployer] = await ethers.getSigners();
+
 
     console.log(
         "Deploying contracts with the account:",
         deployer.address
     );
 
-    const contractfactory = await ethers.getContractFactory("ERC721");
-    const erc721Ins = await contractfactory.deploy("ERC721","Token");
+    const contractfactory = await ethers.getContractFactory("MYERC721");
+    const myerc721Ins = await contractfactory.deploy("MYERC721","TEST");
 
-    console.log("ERC721 address:", erc721Ins.address);
+    console.log("ERC721 address:", myerc721Ins.address);
+
+    // 获取当前的 provider
+    const  provider = ethers.provider;
+
+    // 监听 Transfer 事件
+    myerc721Ins.on("Transfer", (from, to , token) => {
+      const tokenId = parseInt(token);
+      console.log("Mint token successfully, and the token id is ", tokenId);
+
+      return myerc721Ins.tokenURI(token)
+    }).then((URL) => {
+      console.log("THe URl ")
+    }
+    )
 
     // 调用 ipfs add 上传文件
     console.log("Going to add art.jpg to ipfs")
@@ -30,21 +49,16 @@ async function main() {
     console.log(`IPFS URL of art.jpg is : /ipfs/${filesHash}`)
 
     // 文件 hash 上链
-    console.log("Going to create asset 999 with ipfs url")
+    console.log("Going to create a token with ipfs url")
     const ipfsurl = "/ipfs/" + filesHash
-    await erc721Ins.issueWithAssetURI(deployer.address, 999, ipfsurl,0)
-
-    // 获取资产 99 的 url
-    console.log("Going to get ipfs url of asset 999")
-    console.log("The URl of asset 999 is: ", (await erc721Ins.assetURI(999)))
-
+    myerc721Ins.mintWithTokenURI(deployer.address, ipfsurl)
 
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main()
-  .then(() => process.exit(0))
+  .then(() => {})
   .catch(error => {
     console.error(error);
     process.exit(1);
