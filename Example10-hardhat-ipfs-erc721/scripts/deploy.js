@@ -26,8 +26,7 @@ async function main() {
 
     console.log("ERC721 address:", myerc721Ins.address);
 
-    // 获取当前的 provider
-    const  provider = ethers.provider;
+    const tokenId;
 
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {
@@ -36,7 +35,8 @@ async function main() {
 
       return myerc721Ins.tokenURI(token)
     }).then((URL) => {
-      console.log("THe URl ")
+      console.log(`The URl of token ${tokenId} is ${URL}`)
+      process.exit(0)
     }
     )
 
