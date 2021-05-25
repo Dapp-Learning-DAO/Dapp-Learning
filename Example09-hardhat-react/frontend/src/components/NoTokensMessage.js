@@ -5,10 +5,10 @@ export function NoTokensMessage({ selectedAddress }) {
     <>
       <p>You don't have tokens to transfer</p>
       <p>
-        To get some tokens, open a terminal in the root of the repository and run: 
+        To get some tokens, please refer to the following Website  
+        https://www.chainnews.com/articles/040361396094.htm 
         <br />
         <br />
-        <code>npx hardhat --network localhost faucet {selectedAddress}</code>
       </p>
     </>
   );
