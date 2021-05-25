@@ -26,20 +26,18 @@ async function main() {
 
     console.log("ERC721 address:", myerc721Ins.address);
 
-    const tokenId;
-
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {
-      tokenId = token
-      console.log("Mint token successfully, and the tokenid is ", tokenId);
+      console.log("Mint token successfully, and the token id is ", String(token));
 
-      tokenId = token
-      return myerc721Ins.tokenURI(token)
-    }).then((URL) => {
-      console.log(`The URl of token ${tokenId} is ${URL}`)
-      process.exit(0)
-    }
-    )
+      myerc721Ins.tokenURI(token).then((URL)=>{
+        console.log(`The URL of token ${token} is ${URL}`)
+        process.exit(0)
+      }).catch(error => {
+        console.error(error);
+        process.exit(1);
+      })
+    })
 
     // 调用 ipfs add 上传文件
     console.log("Going to add art.jpg to ipfs")
@@ -64,3 +62,4 @@ main()
     console.error(error);
     process.exit(1);
   });
+
