@@ -26,19 +26,18 @@ async function main() {
 
     console.log("ERC721 address:", myerc721Ins.address);
 
-    // 获取当前的 provider
-    const  provider = ethers.provider;
-
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {
-      const tokenId = parseInt(token);
-      console.log("Mint token successfully, and the token id is ", tokenId);
+      console.log("Mint token successfully, and the token id is ", String(token));
 
-      return myerc721Ins.tokenURI(token)
-    }).then((URL) => {
-      console.log("THe URl ")
-    }
-    )
+      myerc721Ins.tokenURI(token).then((URL)=>{
+        console.log(`The URL of token ${token} is ${URL}`)
+        process.exit(0)
+      }).catch(error => {
+        console.error(error);
+        process.exit(1);
+      })
+    })
 
     // 调用 ipfs add 上传文件
     console.log("Going to add art.jpg to ipfs")
