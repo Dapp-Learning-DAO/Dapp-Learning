@@ -8,7 +8,9 @@
  - 支持拍卖
  
  matic exchange  
- https://docs.matic.network/docs/develop/advanced/swap-assets
+ https://docs.matic.network/docs/develop/advanced/swap-assets  
+ //https://github.com/ethers-io/ethers.js/issues/368  
+ todo promise
  
  ## 操作步骤：
   1. 新建sk-alice.txt, sk-bob.txt文件；
