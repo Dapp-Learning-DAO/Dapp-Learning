@@ -14,6 +14,7 @@ async function main() {
   console.log("Alice:" , Alice.address);
   console.log("Bob:" , Bob.address);
 
+  //todo deploy erc721 & erc20
    const erc20 = "0x7B698903d4A52f0A00a4288C0f1b9bC07B161748";
    const erc721 = "0xBf2efA0AdB1DaFBF051B302F881bAC56c2a35db7";
    const auction = "0x09d09A4E7b8eE3c21aB91b2404a5c7Cfec4cf90e";
