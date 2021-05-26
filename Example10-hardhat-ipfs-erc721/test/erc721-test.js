@@ -9,12 +9,12 @@ describe("ERC721 contract", function() {
     console.log(owner.address)
     console.log(addr1.address)
 
-    const Token = await ethers.getContractFactory("ERC721");
+    const contractfactory = await ethers.getContractFactory("MYERC721");
+    const myerc721 = await contractfactory.deploy("MYERC721","TEST");
 
-    const hardhatToken = await Token.deploy("ERC721","Token");
-    console.log(hardhatToken.address);
+    console.log(myerc721.address);
 
-    const ownerBalance = await hardhatToken.balance(owner.address);
+    const ownerBalance = await myerc721.balanceOf(owner.address);
     expect("0").to.equal(ownerBalance);
   });
 

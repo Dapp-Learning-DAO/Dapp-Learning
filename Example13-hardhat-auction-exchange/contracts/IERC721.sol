@@ -35,4 +35,6 @@ contract IERC721 is IERC165 {
     function safeTransferFrom(address from, address to, uint256 tokenId) public;
 
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public;
+
+    function mintWithTokenURI(address to, string memory tokenURI) public  returns (bool) ;
 }
