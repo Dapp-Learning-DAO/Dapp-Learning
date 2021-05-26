@@ -15,6 +15,18 @@ function mnemonic() {
   return fs.readFileSync("./sk.txt").toString().trim();
 
 }
+
+function mnemonicAlice() {
+
+  return fs.readFileSync("./sk-alice.txt").toString().trim();
+
+}
+
+function mnemonicBob() {
+
+  return fs.readFileSync("./sk-bob.txt").toString().trim();
+
+}
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -33,25 +45,27 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://rinkeby.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        mnemonic(),
+        mnemonicAlice(),
+        mnemonicBob()
       ],
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
