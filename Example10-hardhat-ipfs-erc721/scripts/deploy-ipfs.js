@@ -3,9 +3,12 @@
 //
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-
+const hre = require("hardhat");
+const ipfsAPI = require('ipfs-api')
+const fs = require("fs");
 const { ethers, network } = require("hardhat");
-
+const { checkServerIdentity } = require("tls");
+const { resolve } = require("path");
 
 
 async function main() {
@@ -36,9 +39,18 @@ async function main() {
       })
     })
 
+    // 调用 ipfs add 上传文件
+    console.log("Going to add art.jpg to ipfs")
+    const ipfs = ipfsAPI('localhost', '5001', {protocol: 'http'})
+    const filecontent = fs.readFileSync('./art.jpg')
+    const filesHash= (await ipfs.add(filecontent))[0].hash
 
+    console.log(`IPFS URL of art.jpg is : /ipfs/${filesHash}`)
 
-    myerc721Ins.mintWithTokenURI(deployer.address, "www.baidu.com");
+    // 文件 hash 上链
+    console.log("Going to create a token with ipfs url")
+    const ipfsurl = "/ipfs/" + filesHash
+    myerc721Ins.mintWithTokenURI(deployer.address, ipfsurl)
 
 }
 
@@ -50,3 +62,4 @@ main()
     console.error(error);
     process.exit(1);
   });
+

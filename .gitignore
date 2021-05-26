@@ -1,12 +1,13 @@
 */node_modules
 */sk.txt
+*/sk*.txt
 */package-lock.json
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
 */cache
-*/*/node_modules
+**/node_modules
 */yarn.lock
 */artifacts
 */cache
