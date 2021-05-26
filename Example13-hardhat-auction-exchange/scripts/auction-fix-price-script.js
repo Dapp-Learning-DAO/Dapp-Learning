@@ -13,8 +13,6 @@ async function main() {
   console.log("owner:" , owner.address);
   console.log("Alice:" , Alice.address);
   console.log("Bob:" , Bob.address);
-  const alice = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
-  const bob = "0x70997970c51812dc3a010c7d01b50e0d17dc79c8";
 
    const erc20 = "0x7B698903d4A52f0A00a4288C0f1b9bC07B161748";
    const erc721 = "0xBf2efA0AdB1DaFBF051B302F881bAC56c2a35db7";
@@ -22,9 +20,9 @@ async function main() {
 
     const token = await hre.ethers.getContractAt("IERC20",erc20);
 
-    await token.transfer(alice,1000);
+    await token.transfer(Alice.address,1000);
 
-    const bal =  await token.balanceOf(alice);
+    const bal =  await token.balanceOf(Alice.address);
     console.log("alice erc20 balance: ", bal.toNumber())
 
     const nfttoken = await hre.ethers.getContractAt("IMyERC721",erc721);

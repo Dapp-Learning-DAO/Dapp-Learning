@@ -1,3 +1,5 @@
+
+
 ## auction-exchange
  - 支持定价出售
  
@@ -7,3 +9,7 @@
  
  matic exchange  
  https://docs.matic.network/docs/develop/advanced/swap-assets
+ 
+ ## 操作步骤：
+  1. 新建sk-alice.txt, sk-bob.txt文件；
+  
