@@ -53,6 +53,7 @@
        https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
           
   - day-16 pooltogether
+      去中心化彩票
    
   - day-17 optimism layer2  
       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
