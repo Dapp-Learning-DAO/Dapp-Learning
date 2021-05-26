@@ -75,7 +75,8 @@
   
   - day-24 vyper
   
-  - day-25 multi-sig-wallet
+  - day-25 multi-sig-wallet  
+  https://zhuanlan.zhihu.com/p/337823524  
   
  
  ##  defi进阶

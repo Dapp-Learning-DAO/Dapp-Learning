@@ -9,11 +9,14 @@ async function main() {
     // await hre.run('compile');
 
   // We get the contract to deploy
-  const AuctionFixedPrice = await hre.ethers.getContractFactory("AuctionFixedPrice");
-  const auctionFixedPrice = await AuctionFixedPrice.deploy();
+//  const AuctionFixedPrice = await hre.ethers.getContractFactory("AuctionFixedPrice");
+  const AuctionUnFixedPrice = await hre.ethers.getContractFactory("AuctionUnfixedPrice");
+ // const auctionFixedPrice = await AuctionFixedPrice.deploy();
+  const auctionUnFixedPrice = await AuctionUnFixedPrice.deploy();
 
 
-    console.log("auctionFixedPrice deployed to:", auctionFixedPrice.address);
+  //  console.log("auctionFixedPrice deployed to:", auctionFixedPrice.address);
+    console.log("auctionUnfixedPrice deployed to:", auctionUnFixedPrice.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
