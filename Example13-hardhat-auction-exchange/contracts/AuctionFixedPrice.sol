@@ -49,7 +49,7 @@ contract AuctionFixedPrice is IERC721Receiver {
     */
     function purchaseNFTToken(address _nft, uint256 _tokenId) external {
         auctionDetails storage auction = tokenToAuction[_nft][_tokenId];
-        require(auction.duration > block.timestamp, "Auction is over");
+        require(auction.duration > block.timestamp, "Deadline already passed");
      //   require(auction.seller == msg.sender);
         require(auction.isActive);
         auction.isActive = false;
