@@ -45,11 +45,11 @@ contract AuctionFixedPrice is IERC721Receiver {
     }
 
     /**
-       Called by the seller when the auction duration is over the hightest bid user get's the nft and other bidders get eth back
+       Purchaser buy the NFT Token when the auction duration is not over the limit
     */
     function purchaseNFTToken(address _nft, uint256 _tokenId) external {
         auctionDetails storage auction = tokenToAuction[_nft][_tokenId];
-        require(auction.duration > block.timestamp, "Deadline did not pass yet");
+        require(auction.duration > block.timestamp, "Auction is over");
      //   require(auction.seller == msg.sender);
         require(auction.isActive);
         auction.isActive = false;
