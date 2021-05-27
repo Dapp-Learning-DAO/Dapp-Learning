@@ -11,6 +11,7 @@ contract Incrementer {
     }
 
     function increment(uint256 _value) public {
+        require(_value > 0, "increment value should be positive number");
         number = number + _value;
         emit Increment(_value);
     }
