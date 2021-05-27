@@ -17,6 +17,8 @@
   https://kovan.etherscan.io
   - 以太坊的jsonPRC接口
   https://eth.wiki/json-rpc/API  
+  - tenderly合约验证
+  https://dashboard.tenderly.co/explorer
  
   ## 开发要求：
   每个开发两周至少一次PR。
@@ -97,7 +99,7 @@
      https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol
   
   - P4 snx   
-  
+    https://github.com/Synthetixio  
   - P5 YFI
   
   - P6 0x-protocol     
