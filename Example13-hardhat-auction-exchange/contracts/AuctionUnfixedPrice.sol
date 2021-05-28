@@ -65,7 +65,7 @@ contract AuctionUnfixedPrice is IERC721Receiver {
          bool success= IERC20(auction.tokenAddress).transfer(msg.sender,bids[_nft][_tokenId][msg.sender]);
             require(success);
         }
-       // bids[_nft][_tokenId][msg.sender] = msg.value;
+        bids[_nft][_tokenId][msg.sender] = _amount;
         IERC20(auction.tokenAddress).transferFrom(msg.sender, this, _amount);
 
 
