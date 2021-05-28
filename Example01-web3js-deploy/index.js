@@ -61,7 +61,7 @@ const Deploy = async () => {
 	const deployTransaction = await web3.eth.accounts.signTransaction(
 	{
 		data: deployTx.encodeABI(),
-		gas: await deployTx.estimateGas(),
+		gas: 8000000,
 	},
 	account_from.privateKey
 	);

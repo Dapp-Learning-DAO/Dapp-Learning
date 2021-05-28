@@ -49,7 +49,7 @@ const Trans = async () => {
    const createTransaction = await web3.eth.accounts.signTransaction(
       {
          data: deployTx.encodeABI(),
-         gas: await deployTx.estimateGas(),
+         gas: 8000000,
       },
       account_from.privateKey
    );
@@ -61,6 +61,8 @@ const Trans = async () => {
    console.log(
       `Contract deployed at address: ${createReceipt.contractAddress}`
    );
+
+   const deployedBlockNumber = createReceipt.blockNumber
 
 
    /*
@@ -85,14 +87,14 @@ const Trans = async () => {
    console.log()
    console.log("============================ 3. Call Contract Interface increment");
    const _value = 3;
-   const incrementTx = incrementer.methods.increment(_value);
+   let incrementTx = incrementer.methods.increment(_value);
 
    // Sign with Pk
    let incrementTransaction = await web3.eth.accounts.signTransaction(
       {
          to: createReceipt.contractAddress,
          data: incrementTx.encodeABI(),
-         gas: await incrementTx.estimateGas(),
+         gas: 8000000,
       },
       account_from.privateKey
    );
@@ -123,7 +125,7 @@ const Trans = async () => {
    {
       to: createReceipt.contractAddress,
       data: resetTx.encodeABI(),
-      gas: await resetTx.estimateGas(),
+      gas: 8000000,
    },
    account_from.privateKey
    );
@@ -144,34 +146,97 @@ const Trans = async () => {
    * 
    * 
    */
-   console.log()
-   console.log("============================ 5. Call Contract Interface reset");
-   console.log("Mode 1: listen to event once")
+  console.log()
+  console.log("============================ 5. Listen to Events");
+  console.log(" Listen to Increment Event only once && continuouslly")
 
-   // kovan don't support http protocol to event listen, need to use websocket
-   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
-   const web3Socket = new Web3(new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"));
-   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
+  // kovan don't support http protocol to event listen, need to use websocket
+  // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
+  const web3Socket = new Web3(new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"));
+  incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
 
-   // listen to  Increment event only once
-   incrementer.once('Increment', (error,event) => {
-      console.log('Get event Increment, and the increment value is ', event.returnValues.value)
-      process.exit(0)
+  // listen to  Increment event only once
+  incrementer.once('Increment', (error,event) => {
+     console.log('I am a onetime event listner, I am going to die now')
+  })
+
+  // listen to Increment event continuouslly
+  incrementer.events.Increment(()=>{
+     console.log('I am a longlive event listner, I get a event now')
+  })
+
+  for(let step = 0; step < 3; step++){
+     incrementTransaction = await web3.eth.accounts.signTransaction(
+        {
+           to: createReceipt.contractAddress,
+           data: incrementTx.encodeABI(),
+           gas: 8000000,
+        },
+        account_from.privateKey
+        );
+     
+        await web3.eth.sendSignedTransaction(
+           incrementTransaction.rawTransaction
+        );
+     
+     if(step == 2){
+        // clear all the listeners
+        web3Socket.eth.clearSubscriptions()
+        console.log("Clearing all the events listeners !!!!")
+     }
+
+  }
+
+   /*
+   *
+   *
+   * 
+   * -- Get past events --
+   * 
+   * 
+   */
+  console.log()
+   console.log("============================ 6. Going to get past events")
+   const pastEvents = await incrementer.getPastEvents('Increment',{
+      fromBlock: deployedBlockNumber,
+      toBlock: 'latest'
    })
 
-   incrementTransaction = await web3.eth.accounts.signTransaction(
+   pastEvents.map((event) =>{ 
+      console.log(event)
+   })
+
+
+   /*
+   *
+   *
+   * 
+   * -- Check Transaction Error --
+   * 
+   * 
+   */ 
+  console.log()
+  console.log("============================ 7. Check the transaction error")
+  incrementTx = incrementer.methods.increment(0);
+  incrementTransaction = await web3.eth.accounts.signTransaction(
    {
       to: createReceipt.contractAddress,
       data: incrementTx.encodeABI(),
-      gas: await incrementTx.estimateGas(),
+      gas: 8000000,
    },
    account_from.privateKey
    );
 
-   await web3.eth.sendSignedTransaction(
+   const receipt = null
+   receipt = await web3.eth.sendSignedTransaction(
       incrementTransaction.rawTransaction
-   );
-   
+   ).on('error',console.error)
+
 };
 
-Trans();
+Trans()
+  .then(() => process.exit(0))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
