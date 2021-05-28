@@ -65,7 +65,7 @@ contract AuctionUnfixedPrice is IERC721Receiver {
          bool success= IERC20(auction.tokenAddress).transfer(msg.sender,bids[_nft][_tokenId][msg.sender]);
             require(success);
         }
-       // bids[_nft][_tokenId][msg.sender] = msg.value;
+        bids[_nft][_tokenId][msg.sender] = _amount;
         IERC20(auction.tokenAddress).transferFrom(msg.sender, this, _amount);
 
 
@@ -75,7 +75,7 @@ contract AuctionUnfixedPrice is IERC721Receiver {
         } else {
             uint256 lastIndex = auction.bidAmounts.length - 1;
             require(auction.bidAmounts[lastIndex] < _amount, "Current max bid is higher than your bid");
-            auction.maxBid = msg.value;
+            auction.maxBid = _amount;
             auction.maxBidUser = msg.sender;
         }
         auction.users.push(msg.sender);
