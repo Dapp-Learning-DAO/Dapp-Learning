@@ -56,11 +56,9 @@
           
   - day-16 pooltogether
       decentralized lottery
+      
+  - day-17 Crowdfund    
    
-  - day-17 optimism layer2  
-      https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
-      https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
-  
   - day-18 web3.py   
      https://web3py.readthedocs.io/en/stable/quickstart.html
      
@@ -85,8 +83,17 @@
   -day-26 wallet develop
   https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
   
+
   
  -day-27 Quadratic vote
+ 
+ 
+ - day-28 optimism layer2  
+       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
+       https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
+   
+ 
+ 
  
  ##  defi进阶
   ### Learn-DEFI-XXX   
