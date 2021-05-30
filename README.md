@@ -110,13 +110,15 @@
   
   - P4 snx   
     https://github.com/Synthetixio  
-  - P5 YFI
+  - P5 Curve
   
   - P6 0x-protocol     
     https://blog.0xproje 
     
     
-  - P7 bancor     
+  - P7 bancor  
+  
+  - P8 YFI    
  ##  nft进阶
  
  ### Learn-NFT-XXX   
