@@ -55,7 +55,7 @@
        https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
           
   - day-16 pooltogether
-      去中心化彩票
+      decentralized lottery
    
   - day-17 optimism layer2  
       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
@@ -85,6 +85,8 @@
   -day-26 wallet develop
   https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
   
+  
+ -day-27 Quadratic vote
  
  ##  defi进阶
   ### Learn-DEFI-XXX   
@@ -104,7 +106,10 @@
   - P5 YFI
   
   - P6 0x-protocol     
-    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
+    https://blog.0xproje 
+    
+    
+  - P7 bancor     
  ##  nft进阶
  
  ### Learn-NFT-XXX   
