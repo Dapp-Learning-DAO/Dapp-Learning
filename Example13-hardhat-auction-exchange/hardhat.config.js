@@ -27,6 +27,12 @@ function mnemonicBob() {
   return fs.readFileSync("./sk-bob.txt").toString().trim();
 
 }
+
+function mnemonicTest() {
+
+  return fs.readFileSync("./sk-test.txt").toString().trim();
+
+}
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -55,7 +61,8 @@ module.exports = {
       accounts: [
         mnemonic(),
         mnemonicAlice(),
-        mnemonicBob()
+        mnemonicBob(),
+        mnemonicTest()
       ],
     },
     mainnet: {
