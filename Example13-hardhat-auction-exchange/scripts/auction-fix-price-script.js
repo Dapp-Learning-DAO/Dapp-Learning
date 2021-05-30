@@ -24,56 +24,49 @@ async function main() {
     await token.transfer(Alice.address,1000);
 
     const bal =  await token.balanceOf(Alice.address);
-    console.log("alice erc20 balance: ", bal.toNumber())
+    console.log("alice erc20 balance after: ", bal.toNumber())
 
     const nfttoken = await hre.ethers.getContractAt("IMyERC721",erc721);
 
-   // var options = { gasPrice: 5, gasLimit: 8500000 };
-
-    let tx = await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
-    console.log("transhash: ", tx.hash);
-
+    await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
 
     let nftbalBigNumber  =   await nfttoken.balanceOf(owner.address) ;
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
 
     const auctionFixedPrice = await hre.ethers.getContractAt("AuctionFixedPrice", auction);
-
+    let auctionFixedPriceAlice = auctionFixedPrice.connect(Alice);
     console.log("auctionFixedPrice deployed to:", auctionFixedPrice.address);
-    let approveTx = await nfttoken.approve(auction, erc721Id);
+     await nfttoken.approve(auction, erc721Id);
 
  //   console.log("approveTx: ", approveTx)
-    console.log(erc721Id, "approve success");
+    console.log(erc721Id, "owner approve auction erc721 transfer successfully");
 
     var timestamp=new Date().getTime();
     const endTime = timestamp + 3600*1000;
     console.log("endtime: ", endTime);
 
-    let tx1 =  await auctionFixedPrice.createTokenAuction(erc721, erc721Id,erc20,100,endTime);
-    console.log("transhash1: ", tx1.hash);
-    await tx1.wait();
-
+    await auctionFixedPrice.createTokenAuction(erc721, erc721Id,erc20,100,endTime);
+  console.log("owner create token  {} auction successfully:  ", erc721Id);
     const auctionDetail =  await  auctionFixedPrice.getTokenAuctionDetails(erc721,erc721Id);
 
-    console.log("auctionDetail before sale:  ", auctionDetail);
+    let tokenAlice = token.connect(Alice);
 
-    token.connect(Alice);
-    await token.approve(auction, 1000);
-    console.log("alice approve auction contract successfully ");
+    await tokenAlice.approve(auction, 1000);
 
     let allow = await  token.allowance(Alice.address,auction);
     console.log("alice allowans ", allow.toNumber());
 
-    auctionFixedPrice.connect(Alice);
-    let tx2 =  await auctionFixedPrice.purchaseNFTToken(erc721,erc721Id);
+    await auctionFixedPriceAlice.purchaseNFTToken(erc721,erc721Id);
 
     console.log("alice purchase successfully: ");
 
     const auctionDetail1 =  await  auctionFixedPrice.getTokenAuctionDetails(erc721,erc721Id);
 
+    let erc721IdOwner = await  nfttoken.ownerOf(erc721Id);
 
     console.log(auctionDetail1);
+    console.log(erc721Id, "nft owner: ", erc721IdOwner);
 
 
 

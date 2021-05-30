@@ -21,18 +21,23 @@ async function main() {
 
     const token = await hre.ethers.getContractAt("IERC20",erc20);
 
-    await token.transfer(Alice.address,1000);
+    // transfer some token to Alice
+   const tokenTransfertx =  await token.transfer(Alice.address,1000);
+
+    await tokenTransfertx.wait();
 
     const bal =  await token.balanceOf(Alice.address);
     console.log("alice erc20 balance: ", bal.toNumber())
 
     const nfttoken = await hre.ethers.getContractAt("IMyERC721",erc721);
 
-   // var options = { gasPrice: 5, gasLimit: 8500000 };
-
+    // mint nft  to owner
     await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
 
+
     let nftbalBigNumber  =   await nfttoken.balanceOf(owner.address) ;
+
+    // id from 0
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
 
@@ -42,12 +47,8 @@ async function main() {
 
     console.log("erc721 id is: ", erc721Id );
 
-   await nfttoken.approve(auction, erc721Id).then((result) => {
-    }, (error) => {
-        console.log(error);
-    });
+   await nfttoken.approve(auction, erc721Id);
 
- //   console.log("approveTx: ", approveTx)
     console.log(erc721Id, "approve success");
 
     var timestamp=new Date().getTime();
@@ -62,9 +63,10 @@ async function main() {
 
     const auctionDetail =  await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
 
-  //  console.log("auctionDetail before sale:  ", auctionDetail);
+
 
     token.connect(Alice);
+
     await token.approve(auction, 1000);
     console.log("alice approve auction contract successfully ");
 
@@ -86,21 +88,9 @@ async function main() {
 
     await sleep(15000);
 
-     auctionUnfixedPrice.executeSale(erc721, erc721Id).then((result) => {
-     }, (error) => {
-         console.log(error);
-         // error.reason - The Revert reason; this is what you probably care about. :)
-         // Additionally:
-         // - error.address - the contract address
-         // - error.args - [ BigNumber(1), BigNumber(2), BigNumber(3) ] in this case
-         // - error.method - "someMethod()" in this case
-         // - error.errorSignature - "Error(string)" (the EIP 838 sighash; supports future custom errors)
-         // - error.errorArgs - The arguments passed into the error (more relevant post EIP 838 custom errors)
-         // - error.transaction - The call transaction used
-     });;
+     auctionUnfixedPrice.executeSale(erc721, erc721Id);
 
     const auctionDetail1 =  await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
-
 
     console.log(auctionDetail1);
 
@@ -116,3 +106,19 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+
+
+
+// auctionUnfixedPrice.executeSale(erc721, erc721Id).then((result) => {
+//   }, (error) => {
+//     console.log(error);
+    // error.reason - The Revert reason; this is what you probably care about. :)
+    // Additionally:
+    // - error.address - the contract address
+    // - error.args - [ BigNumber(1), BigNumber(2), BigNumber(3) ] in this case
+    // - error.method - "someMethod()" in this case
+    // - error.errorSignature - "Error(string)" (the EIP 838 sighash; supports future custom errors)
+    // - error.errorArgs - The arguments passed into the error (more relevant post EIP 838 custom errors)
+    // - error.transaction - The call transaction used
+//});
