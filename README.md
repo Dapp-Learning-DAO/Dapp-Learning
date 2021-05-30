@@ -17,6 +17,8 @@
   https://kovan.etherscan.io
   - 以太坊的jsonPRC接口
   https://eth.wiki/json-rpc/API  
+  - tenderly合约验证
+  https://dashboard.tenderly.co/explorer
  
   ## 开发要求：
   每个开发两周至少一次PR。
@@ -53,6 +55,7 @@
        https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
           
   - day-16 pooltogether
+      decentralized lottery
    
   - day-17 optimism layer2  
       https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts    
@@ -66,9 +69,10 @@
   - day-20 scaffold-flash-loan
  
   - day-21 scaffold-Lender
-  https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens
-  https://github.com/austintgriffith/scaffold-eth/tree/unifactory
-  https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
+      https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens
+      https://github.com/austintgriffith/scaffold-eth/tree/unifactory
+      https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
+      https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da
   - day-22 scaffold-zk
   
   - day-23 snapshot
@@ -78,10 +82,16 @@
   - day-25 multi-sig-wallet  
   https://zhuanlan.zhihu.com/p/337823524  
   
+  -day-26 wallet develop
+  https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
+  
+  
+ -day-27 Quadratic vote
  
  ##  defi进阶
   ### Learn-DEFI-XXX   
   - P1 uniswap 
+    https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90
     
   
   - P2 compound  
@@ -92,11 +102,14 @@
      https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol
   
   - P4 snx   
-  
+    https://github.com/Synthetixio  
   - P5 YFI
   
   - P6 0x-protocol     
-    https://blog.0xproject.com/0x-extensions-enabling-new-types-of-exchange-1db0bf6125b6 
+    https://blog.0xproje 
+    
+    
+  - P7 bancor     
  ##  nft进阶
  
  ### Learn-NFT-XXX   
