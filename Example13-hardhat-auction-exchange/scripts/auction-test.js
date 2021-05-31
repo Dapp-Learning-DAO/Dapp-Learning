@@ -55,57 +55,7 @@ async function main() {
  }
 
 
-
-
- const auctionUnfixedPrice = await hre.ethers.getContractAt("AuctionUnfixedPrice", auction);
-
-
-
- var timestamp=new Date().getTime();
- const endTime = timestamp + 15*1000;
- console.log("endtime: ", endTime);
-
- await auctionUnfixedPrice.createTokenAuction(erc721, erc721Id,erc20,100, endTime);
-
- await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
-
-
- const tokenBob = token.connect(Bob);
-
- await tokenBob.approve(auction, 1000);
- console.log("Bob approve auction contract successfully ");
-
- let allow = await  token.allowance(Bob.address,auction);
- console.log("Bob allowans: ", allow.toNumber());
-
- const auctionUnfixedPriceBob  = auctionUnfixedPrice.connect(Bob);
- await auctionUnfixedPriceBob.bid(erc721,erc721Id, 200);
-
- console.log("Bob bid successfully: ");
-
- function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
- }
-
- await sleep(15000);
-
- // try
- try {
-  await auctionUnfixedPrice.executeSale(erc721, erc721Id);
- } catch (error) {
-  console.log("excute sale  ********");
-  console.error(error);
- }
-
- const auctionDetail1 =  await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
-
- console.log(auctionDetail1);
- let erc721IdOwner = await  nfttoken.ownerOf(erc721Id);
-
- console.log(erc721Id, "nft owner: ", erc721IdOwner);
-
-
-
+ console.log("success!!!");
 
 }
 

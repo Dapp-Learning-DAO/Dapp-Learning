@@ -1,5 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
+//todo import typechain
+//require("hardhat-typechain");
 const fs = require("fs");
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async () => {
