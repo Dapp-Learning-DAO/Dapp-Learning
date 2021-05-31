@@ -19,14 +19,14 @@ async function main() {
    const erc721 = "0xBf2efA0AdB1DaFBF051B302F881bAC56c2a35db7";
    const auction = "0xCA6Fa6ed9c5808767632E718427e3A6D5278f19b";
 
-    const token = await hre.ethers.getContractAt("IERC20",erc20);
+    const token = await hre.ethers.getContractAt("contracts/IERC20:IERC20",erc20);
 
     await token.transfer(Alice.address,1000);
 
     const bal =  await token.balanceOf(Alice.address);
     console.log("alice erc20 balance: ", bal.toNumber())
 
-    const nfttoken = await hre.ethers.getContractAt("IMyERC721",erc721);
+    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721:IMyERC721",erc721);
 
    // var options = { gasPrice: 5, gasLimit: 8500000 };
 
@@ -36,7 +36,7 @@ async function main() {
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
 
-    const auctionUnfixedPrice = await hre.ethers.getContractAt("AuctionUnfixedPrice", auction);
+    const auctionUnfixedPrice = await hre.ethers.getContractAt("contracts/AuctionUnfixedPrice:AuctionUnfixedPrice", auction);
 
     console.log("auctionUnfixedPrice deployed to:", auctionUnfixedPrice.address);
 
