@@ -16,3 +16,8 @@ npm install
 ```
 npx hardhat run scripts/deploy.js --network kovan
 ```
+//todo
+ 增加聚合方式获取。
+ 
+ 
+ https://learnblockchain.cn/article/2237

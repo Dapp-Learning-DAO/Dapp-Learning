@@ -1,5 +1,4 @@
 
-
 ## auction-exchange
  - 支持定价出售
  
@@ -10,8 +9,14 @@
  matic exchange  
  https://docs.matic.network/docs/develop/advanced/swap-assets  
  //https://github.com/ethers-io/ethers.js/issues/368  
- todo promise
+
  
  ## 操作步骤：
-  1. 新建sk-alice.txt, sk-bob.txt文件；
+ 
+  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
+  
+  2 AuctionFixedPrice.sol 定价拍卖   AuctionUnfixedPrice.sol 不定价拍卖  
+  
+  3 script下有相应合约测试代码。  
+    npx hardhat run scripts/deploy.js --network kovan
   

@@ -4,6 +4,8 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+import { Counter } from "../typechain/Counter";
+
 
 async function main() {
     // await hre.run('compile');
@@ -21,6 +23,7 @@ async function main() {
    const erc721 = "0xBf2efA0AdB1DaFBF051B302F881bAC56c2a35db7";
    const auction = "0xCA6Fa6ed9c5808767632E718427e3A6D5278f19b";
 
+
     const token = await hre.ethers.getContractAt("contracts/IERC20:IERC20",erc20);
 
     // transfer some token to Alice
@@ -28,6 +31,7 @@ async function main() {
 
     const bal =  await token.balanceOf(Bob.address);
     console.log("Bob erc20 balance: ", bal.toNumber())
+
 
     const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721:IMyERC721",erc721);
 
