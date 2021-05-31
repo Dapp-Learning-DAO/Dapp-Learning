@@ -40,6 +40,7 @@ let wallet = new ethers.Wallet(account_from.privateKey, provider);
 const deployContractIns = new ethers.ContractFactory(abi, bytecode, wallet);
 
 const Trans = async () => {
+   console.log("===============================1. Deploy Contract");
    console.log(`Attempting to deploy from account: ${wallet.address}`);
 
    // Send Tx (Initial Value set to 5) and Wait for Receipt
@@ -52,14 +53,16 @@ const Trans = async () => {
    -- Send Function --
    */
    // Create Contract Instance
-   const transferContractIns = new ethers.Contract(deployedContract.address, abi, wallet);
+   console.log()
+   console.log("===============================2. Call Transaction Interface Of Contract");
+   const transactionContract = new ethers.Contract(deployedContract.address, abi, wallet);
 
    console.log(
       `Transfer 100000 to address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`
    );
 
    // Call Contract
-   const transferReceipt = await transferContractIns.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000);
+   const transferReceipt = await transactionContract.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000);
    await transferReceipt.wait();
 
    console.log(`Tx successful with hash: ${transferReceipt.hash}`);
@@ -68,12 +71,56 @@ const Trans = async () => {
    -- Call Function --
    */
    // Create Contract Instance
-   const balanceContractIns = new ethers.Contract(deployedContract.address, abi, provider);
+   console.log()
+   console.log("===============================3. Call Read Interface Of Contract");
+   const providerContract = new ethers.Contract(deployedContract.address, abi, provider);
 
    // Call Contract
-   const balanceVal = await balanceContractIns.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+   const balanceVal = await providerContract.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
 
    console.log(`balance of 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 is : ${balanceVal}`);
+
+
+   /*
+   -- Listen to Events --
+   */
+   console.log()
+   console.log("===============================4. Listen To Events");
+
+   // Listen to event once
+   providerContract.once("Transfer",(from, to, value) => {
+      console.log(`I am a once Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`)
+   })
+
+   
+   // Listen to events continuouslly
+   providerContract.on("Transfer",(from, to, value) => {
+      console.log(`I am a longlive Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`)
+   })
+
+   // Listen to events with filter
+   let topic = ethers.utils.id("Transfer(address,address,uint256)");
+   let filter = {
+      address: deployedContract.address,
+      topics: [topic],
+      fromBlock: await provider.getBlockNumber()
+   }
+
+   providerContract.on(filter,(from, to, value) => {
+      console.log(`I am a filter Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`)
+   })
+
+   for(let step = 0; step < 3; step++){
+      await transactionContract.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",10);
+      await transferReceipt.wait();
+
+      if(step == 2){
+         console.log("Going to remove all Listeners")
+         providerContract.removeAllListeners()
+      }
+   }
+
+
 };
 
 Trans();
