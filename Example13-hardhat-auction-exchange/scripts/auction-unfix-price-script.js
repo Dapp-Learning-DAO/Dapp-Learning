@@ -21,7 +21,7 @@ async function main() {
    const erc721 = "0xBf2efA0AdB1DaFBF051B302F881bAC56c2a35db7";
    const auction = "0xCA6Fa6ed9c5808767632E718427e3A6D5278f19b";
 
-    const token = await hre.ethers.getContractAt("IERC20",erc20);
+    const token = await hre.ethers.getContractAt("contracts/IERC20:IERC20",erc20);
 
     // transfer some token to Alice
     await token.transfer(Bob.address,1000);
@@ -29,7 +29,7 @@ async function main() {
     const bal =  await token.balanceOf(Bob.address);
     console.log("Bob erc20 balance: ", bal.toNumber())
 
-    const nfttoken = await hre.ethers.getContractAt("IMyERC721",erc721);
+    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721:IMyERC721",erc721);
 
     // mint nft  to owner
     let mintTx = await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
@@ -41,14 +41,13 @@ async function main() {
     // id from 0
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
-
    console.log("erc721 id is: ", erc721Id );
 
     await nfttoken.approve(auction, erc721Id);
 
 
     console.log(erc721Id, "approve success");
-    const auctionUnfixedPrice = await hre.ethers.getContractAt("AuctionUnfixedPrice", auction);
+    const auctionUnfixedPrice = await hre.ethers.getContractAt("contracts/AuctionUnfixedPrice:AuctionUnfixedPrice", auction);
 
 
 
