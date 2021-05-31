@@ -3,8 +3,9 @@
   本项目适合零基础开发者入门区块链DAPP开发，了解和开发DEFI项目。建议开发者先阅读《精通以太坊》
   主要工具是web3.js（hardhat）, web3.py(Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
   项目分基础组件任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成，项目任务卡是主流defi，nft,dao的典型项目。  
-  以太坊原理书：https://ethbook.abyteahead.com/howto.html
-  以太坊开发工具汇总：https://learnblockchain.cn/article/2006 
+  以太坊原理书：https://ethbook.abyteahead.com/howto.html  
+   
+   以太坊开发工具汇总：https://learnblockchain.cn/article/2006 
  
  ## 基本工具：
  开发前请安装安装和了解一下工具：     
