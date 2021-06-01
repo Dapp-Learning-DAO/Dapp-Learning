@@ -10,7 +10,8 @@ ehterjs 官方文档：https://docs.ethers.io/v4/api-providers.html
 ## 操作步骤
 - 1 编译合约：
 ```
-npm run build
+yarn install
+yarn build
 ```
 
 - 2 跑测试
