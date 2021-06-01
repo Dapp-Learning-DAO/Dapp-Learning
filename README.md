@@ -23,9 +23,6 @@
 - tenderly合约验证 https://dashboard.tenderly.co/explorer  
 
 
-## 开发者参与方式
-每个开发两周至少一次PR。  
-
 ## 合约参考库
 https://github.com/HQ20/contracts  
 https://github.com/OpenZeppelin/openzeppelin-contracts  
@@ -125,6 +122,7 @@ https://blog.0xproject.com/
 
 - P8 YFI  
 
+
 ## NFT 进阶
 
 ### Learn-NFT-XXX   
@@ -133,3 +131,9 @@ https://blog.0xproject.com/
 
 ## DAO 进阶  
 - Aragon
+
+
+## 如何参与
+
+- 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
+- 参与项目的开发者务必保证能够至少每两周提交一个PR
