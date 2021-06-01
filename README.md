@@ -42,7 +42,8 @@
      
   - day-11 react + express + hardhat  
      
-  - day-12 scaffold-ETH
+  - day-12 scaffold-ETH  
+  
     https://github.com/austintgriffith/scaffold-eth  
   
   - day-13 simple Exchange & auction    
@@ -66,29 +67,33 @@
   
   - day-20 scaffold-flash-loan
  
-  - day-21 scaffold-Lender
+  - day-21 scaffold-Lender  
+  
       https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens
       https://github.com/austintgriffith/scaffold-eth/tree/unifactory
       https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
       https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da
   - day-22 scaffold-zk
   
-  - day-23 snapshot
-  https://www.chainnews.com/articles/038258049958.htm  
-  https://snapshot.org/#/
+  - day-23 snapshot  
+  
+    https://www.chainnews.com/articles/038258049958.htm  
+    https://snapshot.org/#/
   
   - day-24 vyper
   
   - day-25 multi-sig-wallet  
   https://zhuanlan.zhihu.com/p/337823524  
   
-  - day-26 wallet develop
-  https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
   
-
+  - day-26 wallet develop  
   
-  - day-27 Quadratic vote
-   https://www.chainnews.com/zh-hant/articles/460460084917.htm
+    https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
+  
+  
+  - day-27 Quadratic vote  
+  
+     https://www.chainnews.com/zh-hant/articles/460460084917.htm
  
  
  - day-28 optimism layer2  
