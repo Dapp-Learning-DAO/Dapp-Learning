@@ -18,5 +18,5 @@
   2 AuctionFixedPrice.sol 定价拍卖   AuctionUnfixedPrice.sol 不定价拍卖  
   
   3 script下有相应合约测试代码。  
-    npx hardhat run scripts/deploy.js --network kovan
+    npx hardhat run scripts/auction-fix-price-script.js --network kovan
   
