@@ -74,6 +74,8 @@
   - day-22 scaffold-zk
   
   - day-23 snapshot
+  https://www.chainnews.com/articles/038258049958.htm  
+  https://snapshot.org/#/
   
   - day-24 vyper
   
