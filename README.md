@@ -82,12 +82,12 @@
   - day-25 multi-sig-wallet  
   https://zhuanlan.zhihu.com/p/337823524  
   
-  -day-26 wallet develop
+  - day-26 wallet develop
   https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
   
 
   
- -day-27 Quadratic vote
+  - day-27 Quadratic vote
    https://www.chainnews.com/zh-hant/articles/460460084917.htm
  
  
