@@ -24,12 +24,12 @@ async function main() {
   saveAuctionFiles("MYERC721",erc721Contract.address)
 
   //Deploy AuctionFixedPrice
-  const erc721ContractFactory = await ethers.getContractFactory("AuctionFixedPrice");
-  const erc721Contract = await erc721ContractFactory.deploy("ERC721","ERC721");
-  await erc721Contract.deployed();
+  const auctionContractFactory = await ethers.getContractFactory("AuctionFixedPrice");
+  const auctionContract = await auctionContractFactory.deploy();
+  await auctionContract.deployed();
 
-  console.log("ERC721 Contract deployed at :", erc721Contract.address)
-  saveAuctionFiles("MYERC721",erc721Contract.address)
+  console.log("auction Contract deployed at :", auctionContract.address)
+  saveAuctionFiles("AuctionFixedPrice",auctionContract.address)
 
 }
 

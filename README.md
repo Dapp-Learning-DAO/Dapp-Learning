@@ -31,9 +31,7 @@
  ##  任务列表：
   - day-7 hardhat         
   - day-8 graph      
-     https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
-     https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA
-     https://learnblockchain.cn/article/2566        
+   
   - day-9 react（metamask）   
        https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005 
        https://create-react-app.dev/docs/getting-started/  
@@ -54,7 +52,7 @@
      https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
   
   - day-15 nft-blindbox-chainlink-vrf    
-       https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+       https://learnblockchain.cn/article/1776
           
   - day-16 pooltogether
       decentralized lottery
@@ -76,6 +74,8 @@
   - day-22 scaffold-zk
   
   - day-23 snapshot
+  https://www.chainnews.com/articles/038258049958.htm  
+  https://snapshot.org/#/
   
   - day-24 vyper
   
@@ -88,6 +88,7 @@
 
   
  -day-27 Quadratic vote
+   https://www.chainnews.com/zh-hant/articles/460460084917.htm
  
  
  - day-28 optimism layer2  

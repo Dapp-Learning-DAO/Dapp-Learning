@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+./auction-sample/src/contracts
 # production
 /build
 
