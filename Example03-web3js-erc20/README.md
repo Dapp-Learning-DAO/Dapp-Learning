@@ -16,30 +16,15 @@ https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransactio
 1) 私钥获取
 为方便获取，在 sk.txt 中放入的私钥，然后代码自动从中读取
 
-2) ERC20 合约部署
-通过 deploy.js 进行部署，样例中链接的测试网为 Kovan, 对应需要使用有 Ether 的账户进行发送
+2) 编译合约  
+编译合约的主逻辑在 compile.js 中。需要注意的是，这里使用的 solc 版本为 0.5.4 ，如果使用其他的 solc 版本，需要修改对应的代码
 
+3) 部署合约  
+调用 deployContract.deploy 方法构造 deploy 交易, 然后调用 signTransaction 方法进行签名, 之后发送交易。 
+合约调用分两种，一种不改变区块链状态call, 一种改变世界状态 transaction. 
 
-3) 发交易方式
- 1 拼装交易
- ```
-const tx = newbac.methods.send("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",100000, "fee").encodeABI();
-
-   // Sign Tx with PK
-   const createTransaction1 = await web3.eth.accounts.signTransaction(
-       {
-          to: createReceipt.contractAddress,
-          data: tx,
-          gas: 8000000,
-       },
-       account_from.privateKey
-   );
-
-   // Send Tx and Wait for Receipt
-   const createReceipt1 = await web3.eth.sendSignedTransaction(
-       createTransaction1.rawTransaction
-   );
-```
+4) 调用合约
+调用 erc20Contract.methods.transfer 接口执行 erc20 合约的转账
 
 ## 测试流程
 1) 安装依赖

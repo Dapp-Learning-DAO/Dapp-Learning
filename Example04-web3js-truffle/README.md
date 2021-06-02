@@ -62,7 +62,7 @@ Writing artifacts to .\build\contracts
 truffle migrate --network kovan
 ```
 
-当多次执行 truffle migrate 的时候，会出 "Network update to date", 然后不执行合约部署的情况，这个时候需要执行如下的 truffle 命令
+当多次执行 truffle migrate 的时候，可能会出 "Network update to date", 然后不执行合约部署的情况，这个时候需要执行如下的 truffle 命令
 ```
 truffle migrate --network kovan --reset
 ```

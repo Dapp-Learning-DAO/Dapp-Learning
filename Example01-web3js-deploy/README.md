@@ -11,6 +11,8 @@ https://ithelp.ithome.com.tw/articles/10202794
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
 - Web3js使用参考文档:  
   https://www.dappuniversity.com/articles/web3-js-intro
+- 代码参考文档：
+  https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 
 
 ## 代码逻辑
@@ -18,7 +20,7 @@ https://ithelp.ithome.com.tw/articles/10202794
 新建sk.txt文件， 并填入私钥（metamask自行导出），然后代码自动从中读取
 
 2)  编译合约  
-编译合约的主逻辑在 compile.js 中。需要注意的是，这里使用的 solc 版本为 0.8.0 ，如果使用其他的 solc 版本，需要修改对应的代码
+使用 solc.compile 对合约进行编译
 
 3) 部署合约  
 调用 deployContract.deploy 方法构造 deploy 交易, 然后调用 signTransaction 方法进行签名, 之后发送交易。 
