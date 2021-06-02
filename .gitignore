@@ -1,6 +1,7 @@
 */node_modules
 */sk.txt
 */sk*.txt
+*/sk*.json
 */package-lock.json
 # dependencies
 /node_modules
