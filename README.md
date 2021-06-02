@@ -23,9 +23,12 @@
 - tenderly合约验证 https://dashboard.tenderly.co/explorer  
 
 
-## 合约参考库
-https://github.com/HQ20/contracts  
-https://github.com/OpenZeppelin/openzeppelin-contracts  
+## 合约参考库及相关项目
+- **https://github.com/HQ20/contracts**
+  
+- **https://github.com/OpenZeppelin/openzeppelin-contracts** 
+
+- **https://github.com/austintgriffith/scaffold-eth**    
 
 
 ## 基础课程列表(可自由添加任务卡)
@@ -133,6 +136,8 @@ https://blog.0xproject.com/
 ## DAO 进阶 
 ### Learn-DAO-XXX  
 - Aragon
+   https://www.subdao.network/  
+
 
 ## 如何参与
 
