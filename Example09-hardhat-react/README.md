@@ -81,3 +81,10 @@ this repository or [our Discord server](https://invite.gg/HardhatSupport).
 Also you can [follow us on Twitter](https://twitter.com/HardhatHQ).
 
 **Happy _buidling_!**
+
+## 参考链接
+https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005  
+ 
+https://create-react-app.dev/docs/getting-started/   
+
+https://github.com/nomiclabs/hardhat-hackathon-boilerplate  
