@@ -96,6 +96,8 @@ https://www.chainnews.com/zh-hant/articles/460460084917.htm
 https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts   
 https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 
+- Day-29 matic layer2  
+  https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
