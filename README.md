@@ -141,3 +141,4 @@
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
+- script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功 
