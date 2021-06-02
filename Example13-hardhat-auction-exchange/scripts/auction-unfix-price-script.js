@@ -4,7 +4,6 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
-import { Counter } from "../typechain/Counter";
 
 
 async function main() {
@@ -24,7 +23,7 @@ async function main() {
    const auction = "0xCA6Fa6ed9c5808767632E718427e3A6D5278f19b";
 
 
-    const token = await hre.ethers.getContractAt("contracts/IERC20:IERC20",erc20);
+    const token = await hre.ethers.getContractAt("contracts/IERC20.sol:IERC20",erc20);
 
     // transfer some token to Alice
     await token.transfer(Bob.address,1000);
@@ -33,30 +32,27 @@ async function main() {
     console.log("Bob erc20 balance: ", bal.toNumber())
 
 
-    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721:IMyERC721",erc721);
+    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721.sol:IMyERC721",erc721);
 
     // mint nft  to owner
     let mintTx = await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
-    let txreceipt  =  await mintTx.wait();
-    console.log(txreceipt);
-
+    await mintTx.wait();
+    
     let nftbalBigNumber  =   await nfttoken.balanceOf(owner.address) ;
 
     // id from 0
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
-   console.log("erc721 id is: ", erc721Id );
+    console.log("erc721 id is: ", erc721Id );
 
     await nfttoken.approve(auction, erc721Id);
-
-
+    
     console.log(erc721Id, "approve success");
-    const auctionUnfixedPrice = await hre.ethers.getContractAt("contracts/AuctionUnfixedPrice:AuctionUnfixedPrice", auction);
-
-
+    const auctionUnfixedPrice = await hre.ethers.getContractAt("contracts/AuctionUnfixedPrice.sol:AuctionUnfixedPrice", auction);
+    
 
     var timestamp=new Date().getTime();
-    const endTime = timestamp + 15*1000;
+    const endTime = timestamp + 10*1000;
     console.log("endtime: ", endTime);
 
     await auctionUnfixedPrice.createTokenAuction(erc721, erc721Id,erc20,100, endTime);
@@ -82,13 +78,14 @@ async function main() {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
-    await sleep(15000);
+    await sleep(10000);
 
     await auctionUnfixedPrice.executeSale(erc721, erc721Id);
+ 
+   console.log("trade successfully: ");
+   await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
 
-    const auctionDetail1 =  await  auctionUnfixedPrice.getTokenAuctionDetails(erc721,erc721Id);
-
-    console.log(auctionDetail1);
+  //  console.log(auctionDetail1);
      let erc721IdOwner = await  nfttoken.ownerOf(erc721Id);
 
      console.log(erc721Id, "nft owner: ", erc721IdOwner);

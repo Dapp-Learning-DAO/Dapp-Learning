@@ -26,7 +26,7 @@ async function main() {
     const bal =  await token.balanceOf(Alice.address);
     console.log("alice erc20 balance after: ", bal.toNumber())
 
-    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721:IMyERC721",erc721);
+    const nfttoken = await hre.ethers.getContractAt("contracts/IMyERC721.sol:IMyERC721",erc721);
 
     await nfttoken.mintWithTokenURI(owner.address, "www.baidu.com");
 
@@ -34,7 +34,7 @@ async function main() {
     let erc721Id =  nftbalBigNumber.toNumber() -1 ;
     console.log("owner nft balance", nftbalBigNumber.toNumber());
 
-    const auctionFixedPrice = await hre.ethers.getContractAt("contracts/AuctionFixedPrice:AuctionFixedPrice", auction);
+    const auctionFixedPrice = await hre.ethers.getContractAt("contracts/AuctionFixedPrice.sol:AuctionFixedPrice", auction);
     let auctionFixedPriceAlice = auctionFixedPrice.connect(Alice);
     console.log("auctionFixedPrice deployed to:", auctionFixedPrice.address);
      await nfttoken.approve(auction, erc721Id);
@@ -47,7 +47,7 @@ async function main() {
     console.log("endtime: ", endTime);
 
     await auctionFixedPrice.createTokenAuction(erc721, erc721Id,erc20,100,endTime);
-  console.log("owner create token  {} auction successfully:  ", erc721Id);
+    console.log("owner create token  {} auction successfully:  ", erc721Id);
     const auctionDetail =  await  auctionFixedPrice.getTokenAuctionDetails(erc721,erc721Id);
 
     let tokenAlice = token.connect(Alice);

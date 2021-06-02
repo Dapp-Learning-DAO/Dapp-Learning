@@ -23,12 +23,16 @@
 - tenderly合约验证 https://dashboard.tenderly.co/explorer  
 
 
-## 合约参考库
-https://github.com/HQ20/contracts  
-https://github.com/OpenZeppelin/openzeppelin-contracts  
+## 合约参考库及相关项目
+- **https://github.com/HQ20/contracts**
+  
+- **https://github.com/OpenZeppelin/openzeppelin-contracts** 
+
+- **https://github.com/austintgriffith/scaffold-eth**    
 
 
 ## 基础课程列表(可自由添加任务卡)
+**添加任务卡时请附上相关参考链接**
 - Day-1 web3j-deploy 
 - Day-2 web3j-transaction 
 - Day-3 web3j-erc20
@@ -92,6 +96,8 @@ https://www.chainnews.com/zh-hant/articles/460460084917.htm
 https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts   
 https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 
+- Day-29 matic layer2  
+  https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
@@ -132,9 +138,12 @@ https://blog.0xproject.com/
 ## DAO 进阶 
 ### Learn-DAO-XXX  
 - Aragon
+   https://www.subdao.network/  
+
 
 ## 如何参与
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
+- 原则上每周一次开发者沟通会议
 - script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功 

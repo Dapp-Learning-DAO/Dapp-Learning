@@ -19,3 +19,5 @@ npx hardhat run scripts/deploy.js --network kovan
  
 
  https://learnblockchain.cn/article/2237
+ https://learnblockchain.cn/article/2558
+ https://learnblockchain.cn/article/1056

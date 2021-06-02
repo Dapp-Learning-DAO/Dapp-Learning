@@ -8,13 +8,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 
-//American Shorthair 美短
-//British Shorthair  英短
-//Japanese Bobtail 日本短尾猫
-//Persian 波斯猫
-//Ragdoll  布偶猫
-//Russian Blue  俄罗斯蓝猫
-//Chinese Orange  中华橘猫
 contract DungeonsAndDragonsCharacter is ERC721, VRFConsumerBase, Ownable {
     using SafeMath for uint256;
     using Strings for string;
