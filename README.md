@@ -1,6 +1,6 @@
 # Rebase Courses
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 DeFi 项目。  
+本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 DeFi, Dao项目。  
 
 主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。项目分基础组件任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
 
@@ -13,7 +13,7 @@
 - 以太坊开发工具汇总：https://learnblockchain.cn/article/2006  
 
 ## 必备工具清单  
-开发前请安装安装和了解一下工具：  
+开发前请安装和了解以下工具：  
 - metamask（浏览器钱包插件）: https://www.jianshu.com/p/b5b2c05e9090  
 导出私钥放到各项目的sk.txt文件里  
 - infura（节点服务）: https://infura.io/  
@@ -28,29 +28,26 @@ https://github.com/HQ20/contracts
 https://github.com/OpenZeppelin/openzeppelin-contracts  
 
 
-## 基础课程列表
+## 基础课程列表(可自由添加任务卡)
+- Day-1 web3j-deploy 
+- Day-2 web3j-transaction 
+- Day-3 web3j-erc20
+- Day-4 web3j-truffle
+- Day-5 ethersjs-erc20
+- Day-6 ethersjs-waffle
 - Day-7 hardhat  
-
 - Day-8 graph  
-
 - Day-9 react（metamask)  
-https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005  
-https://create-react-app.dev/docs/getting-started/  
-https://github.com/nomiclabs/hardhat-hackathon-boilerplate  
-
 - Day-10  ERC721+ ERC1155 + ipfs  
-https://docs.ipfs.io/  
-https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd  
-
 - Day-11 react + express + hardhat  
 
 - Day-12 scaffold-ETH  
-https://github.com/austintgriffith/scaffold-eth  
+  https://github.com/austintgriffith/scaffold-eth  
 
 - Day-13 simple Exchange & auction  
 https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol  
 
-- Day-14 nft-blindbox-chainlink-api  
+- Day-14 chainlink-api  
 https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
 
 - Day-15 nft-blindbox-chainlink-vrf  
@@ -96,6 +93,9 @@ https://community.optimism.io/docs/developers/integration.html#step-1-compiling-
 https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 
 
+## 进阶课程(可自由添加项目卡)
+ 此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
+ 
 ## DeFi 进阶
 ### Learn-DEFI-XXX   
 
@@ -129,11 +129,12 @@ https://blog.0xproject.com/
 - OpenSea
 
 
-## DAO 进阶  
+## DAO 进阶 
+### Learn-DAO-XXX  
 - Aragon
-
 
 ## 如何参与
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
+- script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功 

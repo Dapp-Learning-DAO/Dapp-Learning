@@ -89,3 +89,8 @@ ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
 ```
 
 之后，可以对比下 art.jpg 和 art2.jpg 文件显示的内容是否一致
+
+## 参考链接
+https://docs.ipfs.io/  
+https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd  
+
