@@ -58,14 +58,15 @@ https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
 https://learnblockchain.cn/article/1776  
 
 - Day-16 pooltogether  
-decentralized lottery  
+ https://pooltogether.com/ 
 
 - Day-17 Crowdfund  
 
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
-- Day-19 brownie  
+- Day-19 brownie 
+https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
 
@@ -99,9 +100,12 @@ https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup
 - Day-29 matic layer2  
   https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
 
+- Day-30 nft Filecoin     
+  https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
+
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
- 
+ 此部分建议以submoudle方式引入。
 ## DeFi 进阶
 ### Learn-DEFI-XXX   
 
@@ -147,3 +151,6 @@ https://blog.0xproject.com/
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
 - 原则上每周一次开发者沟通会议
 - script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功 
+- 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
+- solidity 建议0.6以上版本  
+
