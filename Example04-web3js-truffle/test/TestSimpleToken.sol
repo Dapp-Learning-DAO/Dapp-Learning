@@ -11,7 +11,7 @@ contract TestSimpleToken {
 
     uint expected = 100000;
 
-    Assert.equal(simpletoken.balanceOf(tx.origin), expected, "Owner should have 100000 initially");
+    Assert.equal(simpletoken.balanceOf(address(this)), expected, "Owner should have 100000 initially");
   }
 
   function testTransfer() public {
@@ -21,7 +21,7 @@ contract TestSimpleToken {
     address target = 0xFE63eDdC467E3E7bB6804ab21eAA18289355d02b;
     simpletoken.transfer(target,expected);
 
-    Assert.equal(expected, simpletoken.balanceOf(target), "Owner should have 100000 initially");
+    Assert.equal(expected, simpletoken.balanceOf(target), "Owner should have 100 initially");
   }
 
 }
