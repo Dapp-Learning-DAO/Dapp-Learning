@@ -1,11 +1,6 @@
 ## 前言
 本样例演示了使用 ethers.js 调用 ERC20 合约的开发流程
 
-## 参考文档   
-官方文档: https://docs.ethers.io/v4/api-providers.html
-                https://docs.ethers.io/v5/getting-started/#getting-started--contracts    
-        中文文档: https://learnblockchain.cn/docs/ethers.js/api-providers.html
-
 ## 代码逻辑
 1) 私钥获取  
 为方便获取，在 sk.txt 中放入的私钥，然后代码自动从中读取
@@ -30,3 +25,8 @@ npm install
 ```
 node index.js
 ```
+
+## 参考文档   
+官方文档: https://docs.ethers.io/v4/api-providers.html
+                https://docs.ethers.io/v5/getting-started/#getting-started--contracts    
+        中文文档: https://learnblockchain.cn/docs/ethers.js/api-providers.html

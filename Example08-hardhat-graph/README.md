@@ -1,13 +1,5 @@
 ## Graph 介绍
 编写智能合约时，通常状态的变化是通过触发一个事件来表达，The Graph 则是捕捉区块链事件并提供一个查询事件的 GraphQL 接口，让我们可以方便的跟踪数据的变化。实际上很多defi协议及都是 The Graph 来基于查询数据。  
-
-## 参考文档  
-官方文档：   
-https://thegraph.com/docs/introduction
-   
-本项目参考文档：  
-https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  
-https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa  
    
 ## 流程概述   
   - 在 Ropsten 部署一个合约，并调用触发事件。
@@ -21,8 +13,6 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 - Manifest 清单(subgraph.yaml) - 定义配置项  
 - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
 - Mapping 映射(mapping.ts) - 定义事件到数据的转换 
-   
-
    
 ## 操作步骤   
 1)  安装相关依赖
@@ -126,6 +116,13 @@ Account balance of receiver is:  50
 10) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
+## 参考文档  
+官方文档：   
+https://thegraph.com/docs/introduction
+   
+本项目参考文档：  
+https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  
+https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa  
 
 ## to do
 在 thegraph 网站上支持字段过滤  
