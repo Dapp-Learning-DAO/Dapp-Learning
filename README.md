@@ -25,11 +25,14 @@
 
 
 ## 合约参考库及相关项目
-- **https://github.com/HQ20/contracts**
+- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**  
+（shooter大佬的项目，适合入门solidity）
   
 - **https://github.com/OpenZeppelin/openzeppelin-contracts** 
-
-- **https://github.com/austintgriffith/scaffold-eth**    
+(经典合约库)
+- **https://github.com/austintgriffith/scaffold-eth**  
+(向此神级项目致敬)
+- **https://github.com/HQ20/contracts**  
 
 
 ## 基础课程列表(可自由添加任务卡)
