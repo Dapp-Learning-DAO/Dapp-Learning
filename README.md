@@ -58,14 +58,15 @@ https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
 https://learnblockchain.cn/article/1776  
 
 - Day-16 pooltogether  
-decentralized lottery  
+ https://pooltogether.com/ 
 
 - Day-17 Crowdfund  
 
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
-- Day-19 brownie  
+- Day-19 brownie 
+https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
 
