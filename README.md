@@ -140,7 +140,7 @@ https://blog.0xproject.com/
 
 ## DAO 进阶 
 ### Learn-DAO-XXX  
-- Aragon
+- Aragon  
    https://www.subdao.network/  
 
 
