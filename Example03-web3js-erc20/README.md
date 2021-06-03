@@ -1,17 +1,6 @@
 ## 前言
 本样例演示了 ERC20 合约的基本调用, 让开发者了解 ERC20 合约的基本接口
 
-## 参考文档
- mocha测试框架：
-  http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
-  https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95
-
-infura不支持sendTransaciton,只支持sendRawTransaction:
-  
-Infura has not activated the method eth_sendTransaction because this method needs unlocked accounts on the ethereum node. With the example I've provided above will it also work with infura :)
-  
-https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura 
-
 ## 代码逻辑
 1) 私钥获取
 为方便获取，在 sk.txt 中放入的私钥，然后代码自动从中读取
@@ -36,3 +25,14 @@ npm install
 ```
 node index.js
 ```
+
+## 参考文档
+ mocha测试框架：
+  http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
+  https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95
+
+infura不支持sendTransaciton,只支持sendRawTransaction:
+  
+Infura has not activated the method eth_sendTransaction because this method needs unlocked accounts on the ethereum node. With the example I've provided above will it also work with infura :)
+  
+https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura 
