@@ -1,13 +1,6 @@
 ## 前言
 通过本样例代码，开发者了解到如何对交易进行签名，发送，接收交易回执，验证交易执行结果。同时，样例也提供了事件监听的逻辑代码，开发者可以了解如何对一个事件进行一次或多次监听
 
-## 参考文章
-代码参考文章如下   
-https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
-
-Kovan 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
-https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
-
 ## 代码逻辑
 1) 私钥获取
 新建sk.txt文件， 并填入私钥（metamask自行导出），然后代码自动从中读取
@@ -35,3 +28,10 @@ npm install
 ```
 node index.js
 ```
+
+## 参考文章
+代码参考文章如下   
+https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
+
+Kovan 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
+https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a

@@ -9,9 +9,6 @@ IPFS结合了分布式散列表、鼓励块交换和一个自我认证的名字�
 该文件系统可以通过多种方式访问，包括FUSE与HTTP。将本地文件添加到IPFS文件系统可使其面向全世界可用。文件表示基于其哈希，因此有利于缓存。文件的分发采用一个基于BitTorrent的协议。其他查看内容的用户也有助于将内容提供给网络上的其他人。   
 IPFS有一个称为IPNS的名称服务，它是一个基于PKI的全局名字空间，用于构筑信任链，这与其他NS兼容，并可以映射DNS、.onion、.bit等到IPNS。  
 
-## 参考文档  
-https://docs.ipfs.io/install/command-line/#official-distributions  
-https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&   chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd   
 
 ## IPFS 安装   
 IPFS 有多种方式:  
@@ -89,3 +86,8 @@ ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
 ```
 
 之后，可以对比下 art.jpg 和 art2.jpg 文件显示的内容是否一致
+
+
+## 参考文档  
+https://docs.ipfs.io/install/command-line/#official-distributions  
+https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&   chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd  

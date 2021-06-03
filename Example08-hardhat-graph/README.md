@@ -14,8 +14,6 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
 - Mapping 映射(mapping.ts) - 定义事件到数据的转换 
    
-
-   
 ## 操作步骤   
 1)  安装相关依赖
 ```
@@ -118,12 +116,6 @@ Account balance of receiver is:  50
 10) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
-
-## to do
-在 thegraph 网站上支持字段过滤  
-https://thegraph.com/   
-
-
 ## 参考链接  
 官方文档：   
 https://thegraph.com/docs/introduction
@@ -134,3 +126,6 @@ https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
 https://learnblockchain.cn/article/2566  
  
    
+## to do
+在 thegraph 网站上支持字段过滤  
+https://thegraph.com/   
