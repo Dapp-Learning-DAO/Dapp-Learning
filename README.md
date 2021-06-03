@@ -49,8 +49,8 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 
-- Day-12 scaffold-ETH  
-  https://github.com/austintgriffith/scaffold-eth  
+- Day-12  Crowdfund   
+  https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd
 
 - Day-13 simple Exchange & auction  
 
@@ -63,12 +63,13 @@ https://learnblockchain.cn/article/1776
 - Day-16 pooltogether  
  https://pooltogether.com/ 
 
-- Day-17 Crowdfund  
+- Day-17 scaffold-ETH
+  https://github.com/austintgriffith/scaffold-eth
 
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
-- Day-19 brownie 
+- Day-19 brownie   
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
