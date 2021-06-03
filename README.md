@@ -1,8 +1,9 @@
 # Rebase Courses
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 DeFi, Dao项目。  
+本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, Dao** 项目。  
 
-主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。项目分基础组件任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
+  主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
+  项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
 
 
 ## 基础知识
@@ -116,9 +117,8 @@ V3 https://learnblockchain.cn/article/2357
 - P2 Compound  
 
 - P3 Aave  
-https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade  
-
-https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol  
+  https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade    
+  https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol  
 
 - P4 SNX  
 https://github.com/Synthetixio  
@@ -141,7 +141,7 @@ https://blog.0xproject.com/
 
 ## DAO 进阶 
 ### Learn-DAO-XXX  
-- Aragon
+- Aragon  
    https://www.subdao.network/  
 
 
