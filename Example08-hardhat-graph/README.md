@@ -1,41 +1,44 @@
-# graph
+## Graph 介绍
+编写智能合约时，通常状态的变化是通过触发一个事件来表达，The Graph 则是捕捉区块链事件并提供一个查询事件的 GraphQL 接口，让我们可以方便的跟踪数据的变化。实际上很多defi协议及都是 The Graph 来基于查询数据。  
 
-   编写智能合约时，通常状态的变化是通过触发一个事件来表达，The Graph 则是捕捉区块链事件并提供一个查询事件的 GraphQL 接口，让我们可以方便的跟踪数据的变化。实际上很多defi协议及都是 The Graph 来基于查询数据。
-   官方文档： https://thegraph.com/docs/introduction
+## 参考文档  
+官方文档：   
+https://thegraph.com/docs/introduction
    
-   本项目参考文档： https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  和此链接
-   https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa  
+本项目参考文档：  
+https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  
+https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa  
    
-    - 在 Ropsten 部署一个合约，并调用触发事件。
-    - 创建定义数据索引的 Subgraph。
-    - 部署 Subgraph 到 TheGraph，实现数据索引。
-    - 在前端 DApp 中查询索引数据。
+## 流程概述   
+  - 在 Ropsten 部署一个合约，并调用触发事件。
+  - 创建定义数据索引的 Subgraph。
+  - 部署 Subgraph 到 TheGraph，实现数据索引。
+  - 在前端 DApp 中查询索引数据。
   
- 如果你有自己的私有链，这可以克隆 Graph 节点代码（https://github.com/graphprotocol/graph-node/），自己运行Graph节点来完成数据的索引。
+如果你有自己的私有链，这可以克隆 Graph 节点代码 https://github.com/graphprotocol/graph-node/  自己运行Graph节点来完成数据的索引。  
 
-   - TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三个组件：  
-   - Manifest 清单(subgraph.yaml) - 定义配置项  
-   - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
-   - Mapping 映射(mapping.ts) - 定义事件到数据的转换 
+TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三个组件：  
+- Manifest 清单(subgraph.yaml) - 定义配置项  
+- Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
+- Mapping 映射(mapping.ts) - 定义事件到数据的转换 
    
 
    
-# 使用流程
-## 1. 安装相关依赖
+## 操作步骤   
+1)  安装相关依赖
 ```
   npm install
 ```
 
-## 2. 配置私钥
-在 sk.txt 中，配置账户私钥
+2) 配置私钥  
+在 sk.txt 中，配置账户私钥    
 
-## 3. 部署合约
-
+3) 部署合约  
 ```
   npx hardhat run ./scripts/deploy.js --network kovan
 ```
 
-输出信息类似如下：
+输出信息类似如下:  
 ```
 Deploying contracts with the account: xxxxxxxxxxxxxx
 Account balance: 10000000000000000000000
@@ -44,7 +47,7 @@ Transfer 50 to receiver  0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 Account balance of receiver is:  50
 ```
 
-## 4. TheGraph 创建一个 Subgraph 空间
+4) TheGraph 创建一个 Subgraph 空间  
 因为需要借助 TheGraph 的节点来完成数据的索引，因此我们需要在 [TheGraph网站](https://thegraph.com/) 上创建一个 Subgraph。
 
 如果没有The Graph 的账户，可以用 GitHub 注册。
@@ -52,14 +55,14 @@ Account balance of receiver is:  50
 进入 "Create a subgraph" 界面，输入 "Subgraph NAME", 这里假设输入的 "subgraph name" 为 "graphtest", 后续说明均以这个 subgraph name 为例进行说明. 同时，输入 "SUBTITLE" 为 ”graphtest“, 然后点击 "Create subgraph"
 
 
-## 5. 开发和部署 subgraph
-先使用 NPM 在全局安装 Graph CLI：
+5) 开发和部署 subgraph  
+先使用 NPM 在全局安装 Graph CLI  
 ```
  npm install -g @graphprotocol/graph-cli
 ```
 
 
-## 6. 初始化配置：
+6) 初始化配置: 
 ```
   graph init <GITHUB_USERNAME>/<SUBGRAPH_NAME>
 ```
@@ -67,12 +70,12 @@ Account balance of receiver is:  50
  - GITHUB_USERNAME:  thegraph 的账户，可以登录 [TheGraph 网站](https://thegraph.com/) ，然后进入 Dashboard 查看
  - SUBGRAPH_NAME： 上面在 Thegraph 创建的 subgraph 空间名字 ( 这里以 graphtest 为例 )
 
-最终命令样式如下：
+最终命令样式如下:  
 ```
   graph init longdacao/graphtest
 ```
 
-输入信息如下:
+7) 输入信息如下:
 ```
 ✔ Subgraph name · longdacao/graphtest
 ✔ Directory to create the subgraph in · Gameplayer
@@ -89,7 +92,7 @@ Account balance of receiver is:  50
 4. 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可
 ``` 
 
-## 7. 定义模式
+8) 定义模式  
 这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
 
 - 复制文件
@@ -102,8 +105,8 @@ Account balance of receiver is:  50
 ```
    
 
-## 8. 部署 Subgraph
-在控制台先用 graph auth 进行授权：
+9) 部署 Subgraph
+在控制台先用 graph auth 进行授权:  
 ```
   graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 ```
@@ -120,15 +123,15 @@ Account balance of receiver is:  50
 <SUBGRAPH_NAME> 使用完成的 Subgraph 名称，我们这里是：longdacao/graphtest 。
 
 
-## 9. 在 TheGraph 查看
+10) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
 
-# to do
-在 thegraph 网站上支持字段过滤
-https://thegraph.com/
+## to do
+在 thegraph 网站上支持字段过滤  
+https://thegraph.com/   
 
-参考链接：
-  https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa 
-     https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA
-     https://learnblockchain.cn/article/2566        
+参考链接：  
+https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
+https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA   
+https://learnblockchain.cn/article/2566           
