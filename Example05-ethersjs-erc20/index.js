@@ -112,10 +112,8 @@ const Trans = async () => {
    })
 
    for(let step = 0; step < 3; step++){
-      await transactionContract.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",10);
-      await transferReceipt.wait();
-
-      sleep.sleep(3);
+      let transferTransaction = await transactionContract.transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",10);
+      await transferTransaction.wait();
 
       if(step == 2){
          console.log("Going to remove all Listeners")
