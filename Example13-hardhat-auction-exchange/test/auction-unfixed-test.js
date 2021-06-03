@@ -4,14 +4,14 @@ const { exec } = require('child_process');
 async function auction_init() {
     const Token = await ethers.getContractFactory("SimpleToken");
     const hardhatToken = await Token.deploy("HEHE", "HH", 1, 100000000);
-
+    console.log("erc20 : ", hardhatToken.address);
     const contractfactory = await ethers.getContractFactory("MYERC721");
     const myerc721 = await contractfactory.deploy("MYERC721", "TEST");
-
+    console.log("erc721 : ", myerc721.address);
     const auctionContractFactory = await ethers.getContractFactory("AuctionUnfixedPrice");
     const auctionContract = await auctionContractFactory.deploy();
     await auctionContract.deployed();
-
+    console.log("auction : ", auctionContract.address);
     return [hardhatToken, myerc721, auctionContract]
 }
 
@@ -62,8 +62,11 @@ describe("AuctionUnfixedPrice contract", function() {
     });
 
     it("Alice and Bob bid", async function() {
-        const [owner, Alice, Test, Bob] = await hre.ethers.getSigners();
-
+        const [owner, Alice, Bob] = await hre.ethers.getSigners();
+        console.log("owner:",owner.address);
+        console.log("alice:",Alice.address);
+        console.log("bob:",Bob.address);
+    
         const [hardhatToken, myerc721, auctionContract] = await auction_init()
 
         await hardhatToken.transfer(Alice.address, 1000);
@@ -79,7 +82,7 @@ describe("AuctionUnfixedPrice contract", function() {
         await myerc721.approve(auctionContract.address, erc721Id);
 
         var timestamp = new Date().getTime();
-        const endTime = timestamp;
+        const endTime = timestamp + 2 * 1000;
         await auctionContract.createTokenAuction(myerc721.address, erc721Id, hardhatToken.address, 100, endTime);
 
         // Alice
@@ -99,15 +102,14 @@ describe("AuctionUnfixedPrice contract", function() {
         let auctionUnFixedPriceBob = auctionContract.connect(Bob);
         await auctionUnFixedPriceBob.bid(myerc721.address, erc721Id, 300);
         console.log('Bob bid 300')
-
-        //wait 10s
-        let sleepFun = (time) => new Promise((resolve) => setTimeout(resolve, time));
-        await sleepFun(10000);
-        console.log('done')
-
+        
+        var timestamp1 = new Date().getTime();
+        const time = timestamp1 + 5 * 1000
+        await ethers.provider.send('evm_setNextBlockTimestamp', [time]);
+        
+        
         await auctionContract.executeSale(myerc721.address, erc721Id)
         let erc721IdOwner = await myerc721.ownerOf(erc721Id);
-        console.log(erc721IdOwner)
-        expect(erc721IdOwner).to.equal(Alice.address);
+        expect(erc721IdOwner).to.equal(Bob.address);
     });
 });

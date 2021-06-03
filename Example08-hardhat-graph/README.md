@@ -131,7 +131,3 @@ Account balance of receiver is:  50
 在 thegraph 网站上支持字段过滤  
 https://thegraph.com/   
 
-参考链接：  
-https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
-https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA   
-https://learnblockchain.cn/article/2566           
