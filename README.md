@@ -101,7 +101,7 @@ https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup
 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
- 
+ 此部分建议以submoudle方式引入。
 ## DeFi 进阶
 ### Learn-DEFI-XXX   
 
