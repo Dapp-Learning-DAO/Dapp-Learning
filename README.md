@@ -28,8 +28,8 @@
 - **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**  
 （shooter大佬的项目，适合入门solidity）
   
-- **https://github.com/OpenZeppelin/openzeppelin-contracts** 
-(经典合约库)
+- **https://github.com/OpenZeppelin/openzeppelin-contracts**   
+  (经典合约库)
 - **https://github.com/austintgriffith/scaffold-eth**  
 (向此神级项目致敬)
 - **https://github.com/HQ20/contracts**  
@@ -53,7 +53,6 @@
   https://github.com/austintgriffith/scaffold-eth  
 
 - Day-13 simple Exchange & auction  
-https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol  
 
 - Day-14 chainlink-api  
 https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
@@ -81,6 +80,7 @@ https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
 https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da  
 
 - Day-22 scaffold-zk  
+  https://blog.iden3.io/circom-snarkjs-plonk.html
 
 - Day-23 snapshot  
 https://www.chainnews.com/articles/038258049958.htm    
@@ -147,7 +147,10 @@ https://blog.0xproject.com/
 - Aragon  
    https://www.subdao.network/  
 
-
+## Crypto 进阶
+### Learn-Crypto-XXX 
+  
+  
 ## 如何参与
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
