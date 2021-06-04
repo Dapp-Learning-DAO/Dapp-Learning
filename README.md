@@ -149,7 +149,8 @@ https://blog.0xproject.com/
 ## DAO 进阶 
 ### Learn-DAO-XXX  
 - Aragon  
-   https://www.subdao.network/  
+- https://github.com/MolochVentures
+- https://www.subdao.network/  
 
 ## Crypto 进阶
 ### Learn-Crypto-XXX 
