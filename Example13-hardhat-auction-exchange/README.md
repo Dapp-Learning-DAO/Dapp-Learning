@@ -14,9 +14,10 @@
     npx hardhat run scripts/auction-fix-price-script.js --network kovan
 
 ## 参考链接
- https://medium.com/coinmonks/how-to-implement-an-erc721-market-f805959ddcf
- https://docs.matic.network/docs/develop/advanced/swap-assets  
- https://github.com/ethers-io/ethers.js/issues/368  
+ https://medium.com/coinmonks/how-to-implement-an-erc721-market-f805959ddcf  
+ https://docs.matic.network/docs/develop/advanced/swap-assets    
+ https://github.com/ethers-io/ethers.js/issues/368    
  虚拟机节点时间戳问题：
- https://ethereum.stackexchange.com/questions/86633/time-dependent-tests-with-hardhat
-  
+ https://ethereum.stackexchange.com/questions/86633/time-dependent-tests-with-hardhat  
+ https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol    
+ https://explorer-mainnet.maticvigil.com/address/0x8d1566569d5b695d44a9a234540f68D393cDC40D/contracts

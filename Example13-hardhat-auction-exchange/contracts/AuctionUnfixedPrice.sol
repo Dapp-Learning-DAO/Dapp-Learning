@@ -61,13 +61,17 @@ contract AuctionUnfixedPrice is IERC721Receiver {
         require(_amount >= auction.price);
         require(auction.isActive);
         require(auction.duration > block.timestamp, "Deadline already passed");
+
+        bool exist = false;
+        // check wheather bid
         if (bids[_nft][_tokenId][msg.sender] > 0) {
-         bool success= IERC20(auction.tokenAddress).transfer(msg.sender,bids[_nft][_tokenId][msg.sender]);
-            require(success);
+        bool success= IERC20(auction.tokenAddress).transfer(msg.sender,bids[_nft][_tokenId][msg.sender]);
+        require(success);
+        exist = true ;
         }
+
         bids[_nft][_tokenId][msg.sender] = _amount;
         IERC20(auction.tokenAddress).transferFrom(msg.sender, this, _amount);
-
 
         if (auction.bidAmounts.length == 0) {
             auction.maxBid = _amount;
@@ -78,8 +82,12 @@ contract AuctionUnfixedPrice is IERC721Receiver {
             auction.maxBid = _amount;
             auction.maxBidUser = msg.sender;
         }
-        auction.users.push(msg.sender);
-        auction.bidAmounts.push(_amount);
+
+        if (!exist) {
+            auction.users.push(msg.sender);
+            auction.bidAmounts.push(_amount);
+        }
+
     }
     /**
        Called by the seller when the auction duration is over the hightest bid user get's the nft and other bidders get eth back

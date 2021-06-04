@@ -102,14 +102,21 @@ describe("AuctionUnfixedPrice contract", function() {
         let auctionUnFixedPriceBob = auctionContract.connect(Bob);
         await auctionUnFixedPriceBob.bid(myerc721.address, erc721Id, 300);
         console.log('Bob bid 300')
-        
+    
+       
+        await auctionUnFixedPriceAlice.bid(myerc721.address, erc721Id, 400);
+        console.log('Alice bid again 400')
+    
+    
         var timestamp1 = new Date().getTime();
         const time = timestamp1 + 5 * 1000
         await ethers.provider.send('evm_setNextBlockTimestamp', [time]);
         
         
-        await auctionContract.executeSale(myerc721.address, erc721Id)
-        let erc721IdOwner = await myerc721.ownerOf(erc721Id);
-        expect(erc721IdOwner).to.equal(Bob.address);
+        // await auctionContract.executeSale(myerc721.address, erc721Id)
+        // let erc721IdOwner = await myerc721.ownerOf(erc721Id);
+        // expect(erc721IdOwner).to.equal(Bob.address);
+         await auctionContract.cancelAution(myerc721.address, erc721Id)
+        
     });
 });

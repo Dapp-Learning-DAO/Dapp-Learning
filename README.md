@@ -28,8 +28,8 @@
 - **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**  
 （shooter大佬的项目，适合入门solidity）
   
-- **https://github.com/OpenZeppelin/openzeppelin-contracts** 
-(经典合约库)
+- **https://github.com/OpenZeppelin/openzeppelin-contracts**   
+  (经典合约库)
 - **https://github.com/austintgriffith/scaffold-eth**  
 (向此神级项目致敬)
 - **https://github.com/HQ20/contracts**  
@@ -49,11 +49,10 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 
-- Day-12 scaffold-ETH  
-  https://github.com/austintgriffith/scaffold-eth  
+- Day-12  Crowdfund   
+  https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd
 
 - Day-13 simple Exchange & auction  
-https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol  
 
 - Day-14 chainlink-api  
 https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
@@ -64,23 +63,25 @@ https://learnblockchain.cn/article/1776
 - Day-16 pooltogether  
  https://pooltogether.com/ 
 
-- Day-17 Crowdfund  
+- Day-17 scaffold-ETH
+  https://github.com/austintgriffith/scaffold-eth
 
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
-- Day-19 brownie 
+- Day-19 brownie   
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
 
 - Day-21 scaffold-Lender  
-https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
-https://github.com/austintgriffith/scaffold-eth/tree/unifactory  
-https://github.com/austintgriffith/scaffold-eth/tree/clr-dev  
-https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da  
+    https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
+    https://github.com/austintgriffith/scaffold-eth/tree/unifactory  
+    https://github.com/austintgriffith/scaffold-eth/tree/clr-dev  
+    https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da  
 
 - Day-22 scaffold-zk  
+  https://blog.iden3.io/circom-snarkjs-plonk.html
 
 - Day-23 snapshot  
 https://www.chainnews.com/articles/038258049958.htm    
@@ -100,6 +101,7 @@ https://www.chainnews.com/zh-hant/articles/460460084917.htm
 - Day-28 optimism layer2  
 https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts   
 https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
+https://zhuanlan.zhihu.com/p/350541979
 
 - Day-29 matic layer2  
   https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
@@ -148,7 +150,10 @@ https://blog.0xproject.com/
 - https://github.com/MolochVentures
 - https://www.subdao.network/  
 
-
+## Crypto 进阶
+### Learn-Crypto-XXX 
+  
+  
 ## 如何参与
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @yanyanho 联系方式
