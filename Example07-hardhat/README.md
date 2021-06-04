@@ -44,4 +44,5 @@ npx hardhat run scripts/deploy.js --network <network-name>
 ## 参考文档  
 hardhat官方文档: https://hardhat.org/guides/project-setup.html   
 hardhat中文文档: https://learnblockchain.cn/docs/hardhat/getting-started/ 
+https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae  
 
