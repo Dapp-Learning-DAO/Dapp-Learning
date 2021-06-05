@@ -1,10 +1,14 @@
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.4.25;
 
-import "./ERC721PresetMinterPauserAutoId.sol";
+import "./ERC721Enumerable.sol";
+import "./ERC721Pausable.sol";
+import "./ERC721Burnable.sol";
+import "./ERC721MetadataMintable.sol";
+import "./ERC721Holder.sol";
 
-contract MYERC721 is ERC721PresetMinterPauserAutoId {
-    constructor(string memory _name, string memory _symbol, string memory _baseTokenURI) public ERC721PresetMinterPauserAutoId(_name, _symbol,_baseTokenURI)
+contract MYERC721 is ERC721MetadataMintable,ERC721Enumerable, ERC721Burnable,ERC721Pausable,ERC721Holder {
+    constructor(string _name, string _symbol) public ERC721Metadata(_name, _symbol)
     {
     }
     
