@@ -6,6 +6,7 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.2.0",
-    "hardhat": "^2.3.0"
+    "hardhat": "^2.3.0",
+    "@chainlink/contracts": "0.1.7"
   }
 }

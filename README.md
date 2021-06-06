@@ -32,7 +32,9 @@
   (经典合约库)
 - **https://github.com/austintgriffith/scaffold-eth**  
 (向此神级项目致敬)
-- **https://github.com/HQ20/contracts**  
+- **https://github.com/HQ20/contracts**    
+https://learnblockchain.cn/  
+（很多很棒的教程）
 
 
 ## 基础课程列表(可自由添加任务卡)
@@ -60,11 +62,11 @@ https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
 - Day-15 nft-blindbox-chainlink-vrf  
 https://learnblockchain.cn/article/1776  
 
-- Day-16 pooltogether  
- https://pooltogether.com/ 
-
-- Day-17 scaffold-ETH
+- Day-16 scaffold-ETH  
   https://github.com/austintgriffith/scaffold-eth
+  
+- Day-17 pooltogether  
+ https://pooltogether.com/   
 
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
