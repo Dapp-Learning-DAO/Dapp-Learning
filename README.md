@@ -33,7 +33,7 @@
 - **https://github.com/austintgriffith/scaffold-eth**  
 (向此神级项目致敬)
 - **https://github.com/HQ20/contracts**    
-https://learnblockchain.cn/  
+- **https://learnblockchain.cn/**  
 （很多很棒的教程）
 
 
