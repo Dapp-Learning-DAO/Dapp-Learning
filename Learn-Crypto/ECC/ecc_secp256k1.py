@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-
 #coding:utf-8
+
+#!/usr/bin/env python
 
 import sys
 
@@ -76,36 +76,37 @@ class ECC256k1:
 
         return (Q)
 
-    def getPublicKey(self, privKey):
+    def publicKey(self, privKey):
         return self.EccMultiply(GPoint, privKey)
 
-def main():
-    path = "./priv.txt"
-    _file = open(path,'r')
-    content = _file.read()
+    def compressedPubkey(self, pubKey):
+        fill = str(hex(pubKey[0])[2:]).zfill(64)
+        if pubKey[1] % 2 == 1: # If the Y value for the Public Key is odd.
+            return ("03" + fill)
+        else: # Or else, if the Y value is even.
+            return ("02" + fill)
 
-    _privKey = int(content, 16)
+    def uncompressedPubkey(self, pubKey):
+        return ("04" + "%064x" % pubKey[0] + "%064x" % pubKey[1])
+
+
+def main():
+    priv_key = 0x1111111111111111111111111111111111111111111111111111111111111111
 
     ecc = ECC256k1()
 
-    PublicKey = ecc.getPublicKey(_privKey)
+    PublicKey = ecc.publicKey(priv_key)
     print("私钥:")
-    print(_privKey)
+    print(priv_key)
 
     print("未压缩公钥 (坐标):")
     print(PublicKey)
 
     print("未压缩公钥 (十六进制):")
-    print("04" + "%064x" % PublicKey[0] + "%064x" % PublicKey[1])
+    print(ecc.uncompressedPubkey(PublicKey))
 
     print("压缩公钥:")
-
-    fill = str(hex(PublicKey[0])[2:]).zfill(64)
-    if PublicKey[1] % 2 == 1: # If the Y value for the Public Key is odd.
-        print("03" + fill)
-    else: # Or else, if the Y value is even.
-        print("02" + fill)
-
+    print(ecc.compressedPubkey(PublicKey))
 
 if __name__ == "__main__":
     main()
