@@ -1,14 +1,16 @@
+#!/usr/bin/env python
+
 #coding:utf-8
+
 import sys
 
 if sys.version_info < (3,0):
-    print('Please use python3 version to run the code')
-    print('请使用 python3 运行代码')
+    print("Please use python3 version to run the code")
+    print("请使用 python3 运行代码")
     sys.exit()
 
 # Super simple Elliptic Curve Presentation. No imported libraries, wrappers, nothing.
-# For educational purposes only. Remember to use Python 2.7.6 or lower.
-# You'll need to make changes for Python 3.
+# For educational purposes only.
 
 # Below are the public specs for Bitcoin's curve - the secp256k1
 
@@ -25,67 +27,85 @@ Gy = 326705100207588169780830851305070431844712733806592432759389043357573374824
 # 0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
 
 GPoint = (Gx, Gy) # 椭圆曲线生成点, Base point.
+
 #(Gx**3+7) % Pcurve == (Gy**2) % Pcurve, GPoint在椭圆曲线上, x/y坐标符合椭圆曲线方程
 
 h = 1 # Subgroup cofactor, 子群辅因子为1, 就不参与运算了
 
-# Pcurve, N, GPoint, secp256k1的函数式, 都是严格规定的, 严禁修改!!!
+# Pcurve, N, GPoint, secp256k1的函数式, 都是严格规定的, 严禁修改 !!!
 
-# 私钥
-privKey = 0x1111111111111111111111111111111111111111111111111111111111111111 # 取值小于群的阶,即 {0,N}
+class ECC256k1:
 
-def inverse_mod(a, n=Pcurve): # Extended Euclidean Algorithm/'division' in elliptic curves
     # 扩展欧几里得算法, https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
-    lm, hm = 1,0
-    low, high = a%n,n
-    while low > 1:
-        ratio = high//low
-        nm, new = hm-lm*ratio, high-low*ratio
-        lm, low, hm, high = nm, new, lm, low
-    return lm % n
+    # Extended Euclidean Algorithm/'division' in elliptic curves
+    def inverse_mod(self, a, n=Pcurve):
+        lm, hm = 1, 0
+        low, high = a % n, n
+        while low > 1:
+            ratio = high //low
+            nm, new = hm - lm * ratio, high - low * ratio
+            lm, low, hm, high = nm, new, lm, low
+        return lm % n
 
-def ECadd(a, b): # 椭圆曲线加法
-    LamAdd = ((b[1]-a[1]) * inverse_mod(b[0]-a[0],Pcurve) ) % Pcurve
+    def ECadd(self, a, b): # 椭圆曲线加法
+        LamAdd = ((b[1] - a[1]) * self.inverse_mod(b[0] - a[0], Pcurve)) % Pcurve
 
-    x = (LamAdd*LamAdd-a[0]-b[0]) % Pcurve
-    y = (LamAdd*(a[0]-x)-a[1]) % Pcurve
+        x = (LamAdd * LamAdd - a[0] - b[0]) % Pcurve
+        y = (LamAdd * (a[0] - x) - a[1]) % Pcurve
+        return (x,y)
 
-    return (x,y)
+    def ECdouble(self, a): # 椭圆曲线倍乘
+        Lam = ((3 * a[0] * a[0] + Acurve) * self.inverse_mod((2 * a[1]), Pcurve)) % Pcurve
 
-def ECdouble(a): # 椭圆曲线倍乘
-    Lam = ((3*a[0]*a[0]+Acurve) * inverse_mod((2*a[1]) ,Pcurve) ) % Pcurve
+        x = (Lam * Lam - 2 * a[0]) % Pcurve
+        y = (Lam * (a[0] - x) - a[1]) % Pcurve
 
-    x = (Lam*Lam-2*a[0]) % Pcurve
-    y = (Lam*(a[0]-x)-a[1]) % Pcurve
+        return (x,y)
 
-    return (x,y)
+    def EccMultiply(self, GenPoint, ScalarHex): # Double & Add. Not true multiplication
+        if ScalarHex == 0 or ScalarHex >= N: raise Exception("Invalid Scalar/Private Key")
 
-def EccMultiply(GenPoint, ScalarHex): # Double & Add. Not true multiplication
-    if ScalarHex == 0 or ScalarHex >= N: raise Exception("Invalid Scalar/Private Key")
+        ScalarBin = str(bin(ScalarHex))[2:]
 
-    ScalarBin = str(bin(ScalarHex))[2:]
+        Q = GenPoint
+        for i in range (1, len(ScalarBin)): # EC乘法转为标量乘法进行计算 减少运算量
+            Q = self.ECdouble(Q)
 
-    Q=GenPoint
-    for i in range (1, len(ScalarBin)): # EC乘法转为标量乘法进行计算 减少运算量
-        Q=ECdouble(Q)
+            if ScalarBin[i] == "1":
+                Q = self.ECadd(Q, GenPoint); # print "ADD", Q[0]; print
 
-        if ScalarBin[i] == "1":
-            Q=ECadd(Q, GenPoint); # print "ADD", Q[0]; print
+        return (Q)
 
-    return (Q)
+    def getPublicKey(self, privKey):
+        return self.EccMultiply(GPoint, privKey)
 
-PublicKey = EccMultiply(GPoint, privKey)
-print("私钥:")
-print(privKey)
-print("未压缩公钥:")
-print(PublicKey)
-print("未压缩公钥 (十六进制):")
+def main():
+    path = "./priv.txt"
+    _file = open(path,'r')
+    content = _file.read()
 
-print("04" + "%064x" % PublicKey[0] + "%064x" % PublicKey[1])
-print("压缩公钥:")
+    _privKey = int(content, 16)
 
-fill = str(hex(PublicKey[0])[2:]).zfill(64)
-if PublicKey[1] % 2 == 1: # If the Y value for the Public Key is odd.
-    print("03" + fill)
-else: # Or else, if the Y value is even.
-    print("02" + fill)
+    ecc = ECC256k1()
+
+    PublicKey = ecc.getPublicKey(_privKey)
+    print("私钥:")
+    print(_privKey)
+
+    print("未压缩公钥 (坐标):")
+    print(PublicKey)
+
+    print("未压缩公钥 (十六进制):")
+    print("04" + "%064x" % PublicKey[0] + "%064x" % PublicKey[1])
+
+    print("压缩公钥:")
+
+    fill = str(hex(PublicKey[0])[2:]).zfill(64)
+    if PublicKey[1] % 2 == 1: # If the Y value for the Public Key is odd.
+        print("03" + fill)
+    else: # Or else, if the Y value is even.
+        print("02" + fill)
+
+
+if __name__ == "__main__":
+    main()
