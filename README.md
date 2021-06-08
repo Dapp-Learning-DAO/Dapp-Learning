@@ -74,6 +74,7 @@ https://web3py.readthedocs.io/en/stable/quickstart.html
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
+https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
