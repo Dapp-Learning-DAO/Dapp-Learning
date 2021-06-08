@@ -21,7 +21,8 @@
 - 测试均连接kovan测试网，kovan测试ETH申请: https://faucet.kovan.network  
 - etherscan: 以太坊区块链浏览器: https://kovan.etherscan.io  
 - JSON-PRC接口: https://eth.wiki/json-rpc/API  
-- tenderly合约验证 https://dashboard.tenderly.co/explorer  
+- tenderly合约验证 https://dashboard.tenderly.co/explorer
+- remix本地环境 https://zhuanlan.zhihu.com/p/38309494   
 
 
 ## 合约参考库及相关项目
@@ -50,10 +51,7 @@
 - Day-9 react（metamask)  
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
-
 - Day-12  Crowdfund   
-  https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd
-
 - Day-13 simple Exchange & auction  
 
 - Day-14 chainlink-api  
@@ -64,7 +62,8 @@ https://learnblockchain.cn/article/1776
 
 - Day-16 scaffold-ETH  
   https://github.com/austintgriffith/scaffold-eth
-  
+
+//todo!!!  
 - Day-17 pooltogether  
  https://pooltogether.com/   
 
@@ -92,7 +91,8 @@ https://snapshot.org/#/
 - Day-24 vyper  
 
 - Day-25 multi-sig-wallet  
-https://zhuanlan.zhihu.com/p/337823524  
+https://zhuanlan.zhihu.com/p/337823524
+https://github.com/gnosis/MultiSigWallet/tree/master/contracts
 
 - Day-26 wallet develop  
 https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
