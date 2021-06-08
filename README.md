@@ -50,10 +50,7 @@
 - Day-9 react（metamask)  
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
-
 - Day-12  Crowdfund   
-  https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd
-
 - Day-13 simple Exchange & auction  
 
 - Day-14 chainlink-api  
@@ -64,7 +61,8 @@ https://learnblockchain.cn/article/1776
 
 - Day-16 scaffold-ETH  
   https://github.com/austintgriffith/scaffold-eth
-  
+
+//todo!!!  
 - Day-17 pooltogether  
  https://pooltogether.com/   
 
