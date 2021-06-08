@@ -21,7 +21,8 @@
 - 测试均连接kovan测试网，kovan测试ETH申请: https://faucet.kovan.network  
 - etherscan: 以太坊区块链浏览器: https://kovan.etherscan.io  
 - JSON-PRC接口: https://eth.wiki/json-rpc/API  
-- tenderly合约验证 https://dashboard.tenderly.co/explorer  
+- tenderly合约验证 https://dashboard.tenderly.co/explorer
+- remix本地环境 https://zhuanlan.zhihu.com/p/38309494   
 
 
 ## 合约参考库及相关项目

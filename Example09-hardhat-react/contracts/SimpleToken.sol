@@ -14,6 +14,8 @@ contract SimpleToken is ERC20PresetMinterPauser {
      */
 
     uint8 private _decimals;
+    uint256 public  INITIAL_SUPPLY = 10000 * (10 ** uint256(18));
+
 
     function decimals() public view  override returns (uint8) {
         return _decimals;
