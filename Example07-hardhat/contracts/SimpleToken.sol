@@ -2,7 +2,7 @@
 
 // File contracts/IERC20.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 pragma solidity ^0.8.0;
@@ -83,7 +83,7 @@ interface IERC20 {
 
 // File contracts/extensions/IERC20Metadata.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -112,7 +112,7 @@ interface IERC20Metadata is IERC20 {
 
 // File contracts/utils/Context.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -140,7 +140,7 @@ abstract contract Context {
 
 // File contracts/ERC20.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -454,7 +454,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
 // File contracts/utils/Strings.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -525,7 +525,7 @@ library Strings {
 
 // File contracts/extensions/IERC165.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -553,7 +553,7 @@ interface IERC165 {
 
 // File contracts/extensions/ERC165.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -583,7 +583,7 @@ abstract contract ERC165 is IERC165 {
 
 // File contracts/extensions/AccessControl.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -828,7 +828,7 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
 
 // File contracts/utils/EnumerableSet.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1127,7 +1127,7 @@ library EnumerableSet {
 
 // File contracts/extensions/AccessControlEnumerable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1216,7 +1216,7 @@ abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessCon
 
 // File contracts/extensions/draft-IERC20Permit.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1271,7 +1271,7 @@ interface IERC20Permit {
 
 // File contracts/utils/cryptography/ECDSA.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1390,7 +1390,7 @@ library ECDSA {
 
 // File contracts/utils/cryptography/draft-EIP712.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1494,7 +1494,7 @@ abstract contract EIP712 {
 
 // File contracts/utils/Counters.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1540,7 +1540,7 @@ library Counters {
 
 // File contracts/extensions/draft-ERC20Permit.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1630,7 +1630,7 @@ abstract contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
 
 // File contracts/extensions/ERC20Burnable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1674,7 +1674,7 @@ abstract contract ERC20Burnable is Context, ERC20 {
 
 // File contracts/extensions/ERC20Capped.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1712,7 +1712,7 @@ abstract contract ERC20Capped is ERC20 {
 
 // File contracts/extensions/IERC3156.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1784,7 +1784,7 @@ interface IERC3156FlashLender {
 
 // File contracts/extensions/ERC20FlashMint.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1861,7 +1861,7 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
 
 // File contracts/extensions/Pausable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1953,7 +1953,7 @@ abstract contract Pausable is Context {
 
 // File contracts/extensions/ERC20Pausable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -1983,7 +1983,7 @@ abstract contract ERC20Pausable is ERC20, Pausable {
 
 // File contracts/utils/Math.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2029,7 +2029,7 @@ library Math {
 
 // File contracts/utils/Arrays.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2078,7 +2078,7 @@ library Arrays {
 
 // File contracts/extensions/ERC20Snapshot.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2272,7 +2272,7 @@ abstract contract ERC20Snapshot is ERC20 {
 
 // File contracts/utils/SafeCast.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2516,7 +2516,7 @@ library SafeCast {
 
 // File contracts/extensions/ERC20Votes.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2769,7 +2769,7 @@ abstract contract ERC20Votes is ERC20Permit {
 
 // File contracts/extensions/ERC20VotesComp.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2817,7 +2817,7 @@ abstract contract ERC20VotesComp is ERC20Votes {
 
 // File contracts/presets/ERC20PresetFixedSupply.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 /**
@@ -2851,7 +2851,7 @@ contract ERC20PresetFixedSupply is ERC20Burnable {
 
 // File contracts/presets/ERC20PresetMinterPauser.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -2967,7 +2967,7 @@ contract SimpleToken is ERC20PresetMinterPauser {
 
 // File contracts/utils/Address.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -3160,7 +3160,7 @@ library Address {
 
 // File contracts/utils/SafeERC20.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -3239,7 +3239,7 @@ library SafeERC20 {
 
 // File contracts/utils/TokenTimelock.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
@@ -3308,7 +3308,7 @@ contract TokenTimelock {
 
 // File contracts/utils/cryptography/MerkleProof.sol
 
-// SPDX-License-Identifier: MIT
+
 
 
 
