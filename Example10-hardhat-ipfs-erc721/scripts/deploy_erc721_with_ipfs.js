@@ -19,7 +19,7 @@ async function main() {
     );
 
     const contractfactory = await ethers.getContractFactory("MYERC721");
-    const myerc721Ins = await contractfactory.deploy("MYERC721","TEST");
+    const myerc721Ins = await contractfactory.deploy("MYERC721","TEST","");
 
     console.log("ERC721 address:", myerc721Ins.address);
 
