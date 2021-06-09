@@ -13,10 +13,24 @@ web3.py是类似于web3.js的在ethereum client API上封装的一层api，熟�
 的是ganache会为我们管理这10个测试账号的私钥，这样我们可以在脚本中直接使用send_transaction而不必对其进行显式签名
  
 
-- 使用brownie来初始化一个目录结构，也可以使用相关的模版来生成目录
-  - brownie init
-  - brownie unbox metacoin
-  
+- ~~使用brownie来初始化一个目录结构，也可以使用相关的模版来生成目录~~
+  - ~~brownie init~~
+  - ~~brownie unbox metacoin~~
+
+
+- 建立项目，目录结构如下：
+  - Project/
+    - build/
+    - contracts/
+      - contract1.sol
+      - contract2.sol
+      - ...
+    - scripts/
+    - tests/
+    - README.md
+    - .gitignore
+      
+- 编译contracts中的智能合约，可以参考solidity官网的编译指南（各种框架都能很方便地编译，这里为了展示原始的步骤）
 
 - 以ERC20代币发行为例来说明如何在ganache上发行一种代币，从[openZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts) 的网站上可以
-下载模板程序，将其拷贝到brownie创建的相关目录结构中
+下载模板程序，将其拷贝到相关目录结构中
