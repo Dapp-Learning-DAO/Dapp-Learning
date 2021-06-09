@@ -1,4 +1,4 @@
-# Rebase Courses
+# Rebase Dapp Courses
 
 本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO** 项目。  
 
@@ -74,6 +74,7 @@ https://web3py.readthedocs.io/en/stable/quickstart.html
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
+https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
