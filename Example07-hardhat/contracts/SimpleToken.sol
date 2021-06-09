@@ -1,10 +1,6 @@
 // Sources flattened with hardhat v2.3.0 https://hardhat.org
 
 // File contracts/IERC20.sol
-
-
-
-
 pragma solidity ^0.8.0;
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -83,10 +79,6 @@ interface IERC20 {
 
 // File contracts/extensions/IERC20Metadata.sol
 
-
-
-
-
 /**
  * @dev Interface for the optional metadata functions from the ERC20 standard.
  *
@@ -113,9 +105,6 @@ interface IERC20Metadata is IERC20 {
 // File contracts/utils/Context.sol
 
 
-
-
-
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -139,12 +128,6 @@ abstract contract Context {
 
 
 // File contracts/ERC20.sol
-
-
-
-
-
-
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -458,9 +441,6 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
 
 
-/**
- * @dev String operations.
- */
 library Strings {
     bytes16 private constant alphabet = "0123456789abcdef";
 
@@ -582,12 +562,6 @@ abstract contract ERC165 is IERC165 {
 
 
 // File contracts/extensions/AccessControl.sol
-
-
-
-
-
-
 
 /**
  * @dev External interface of AccessControl declared to support ERC165 detection.
@@ -827,10 +801,6 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
 
 
 // File contracts/utils/EnumerableSet.sol
-
-
-
-
 
 /**
  * @dev Library for managing
@@ -1215,10 +1185,6 @@ abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessCon
 
 
 // File contracts/extensions/draft-IERC20Permit.sol
-
-
-
-
 
 /**
  * @dev Interface of the ERC20 Permit extension allowing approvals to be made via signatures, as defined in
@@ -2848,128 +2814,7 @@ contract ERC20PresetFixedSupply is ERC20Burnable {
     }
 }
 
-
-// File contracts/presets/ERC20PresetMinterPauser.sol
-
-
-
-
-
-
-
-
-
-/**
- * @dev {ERC20} token, including:
- *
- *  - ability for holders to burn (destroy) their tokens
- *  - a minter role that allows for token minting (creation)
- *  - a pauser role that allows to stop all token transfers
- *
- * This contract uses {AccessControl} to lock permissioned functions using the
- * different roles - head to its documentation for details.
- *
- * The account that deploys the contract will be granted the minter and pauser
- * roles, as well as the default admin role, which will let it grant both minter
- * and pauser roles to other accounts.
- */
-contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burnable, ERC20Pausable {
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-
-    /**
-     * @dev Grants `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE` and `PAUSER_ROLE` to the
-     * account that deploys the contract.
-     *
-     * See {ERC20-constructor}.
-     */
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-
-        _setupRole(MINTER_ROLE, _msgSender());
-        _setupRole(PAUSER_ROLE, _msgSender());
-    }
-
-    /**
-     * @dev Creates `amount` new tokens for `to`.
-     *
-     * See {ERC20-_mint}.
-     *
-     * Requirements:
-     *
-     * - the caller must have the `MINTER_ROLE`.
-     */
-    function mint(address to, uint256 amount) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have minter role to mint");
-        _mint(to, amount);
-    }
-
-    /**
-     * @dev Pauses all token transfers.
-     *
-     * See {ERC20Pausable} and {Pausable-_pause}.
-     *
-     * Requirements:
-     *
-     * - the caller must have the `PAUSER_ROLE`.
-     */
-    function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to pause");
-        _pause();
-    }
-
-    /**
-     * @dev Unpauses all token transfers.
-     *
-     * See {ERC20Pausable} and {Pausable-_unpause}.
-     *
-     * Requirements:
-     *
-     * - the caller must have the `PAUSER_ROLE`.
-     */
-    function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to unpause");
-        _unpause();
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Pausable) {
-        super._beforeTokenTransfer(from, to, amount);
-    }
-}
-
-
-
-contract SimpleToken is ERC20PresetMinterPauser {
-
-
-    /**
-     * @dev Constructor that gives msg.sender all of existing tokens.
-     */
-
-    uint8 private _decimals;
-    uint256 public  INITIAL_SUPPLY = 10000 * (10 ** uint256(18));
-
-
-    function decimals() public view  override returns (uint8) {
-        return _decimals;
-    }
-
-    constructor(string memory name, string memory symbol, uint8  decimals, uint256  initial_supply) public  ERC20PresetMinterPauser(name, symbol){
-        
-    
-        _decimals = decimals;
-        INITIAL_SUPPLY = initial_supply * (10 ** uint256(decimals)) ;
-        _mint(msg.sender, INITIAL_SUPPLY);
-    }
-
-}
-
-
 // File contracts/utils/Address.sol
-
-
-
-
 
 /**
  * @dev Collection of functions related to the address type
@@ -3346,4 +3191,117 @@ library MerkleProof {
         // Check if the computed hash (root) is equal to the provided root
         return computedHash == root;
     }
+}
+
+
+// File contracts/presets/ERC20PresetMinterPauser.sol
+
+
+
+
+
+
+
+
+
+/**
+ * @dev {ERC20} token, including:
+ *
+ *  - ability for holders to burn (destroy) their tokens
+ *  - a minter role that allows for token minting (creation)
+ *  - a pauser role that allows to stop all token transfers
+ *
+ * This contract uses {AccessControl} to lock permissioned functions using the
+ * different roles - head to its documentation for details.
+ *
+ * The account that deploys the contract will be granted the minter and pauser
+ * roles, as well as the default admin role, which will let it grant both minter
+ * and pauser roles to other accounts.
+ */
+contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burnable, ERC20Pausable {
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+
+    /**
+     * @dev Grants `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE` and `PAUSER_ROLE` to the
+     * account that deploys the contract.
+     *
+     * See {ERC20-constructor}.
+     */
+    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
+    _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+
+    _setupRole(MINTER_ROLE, _msgSender());
+    _setupRole(PAUSER_ROLE, _msgSender());
+    }
+
+    /**
+     * @dev Creates `amount` new tokens for `to`.
+     *
+     * See {ERC20-_mint}.
+     *
+     * Requirements:
+     *
+     * - the caller must have the `MINTER_ROLE`.
+     */
+    function mint(address to, uint256 amount) public virtual {
+    require(hasRole(MINTER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have minter role to mint");
+    _mint(to, amount);
+    }
+
+    /**
+     * @dev Pauses all token transfers.
+     *
+     * See {ERC20Pausable} and {Pausable-_pause}.
+     *
+     * Requirements:
+     *
+     * - the caller must have the `PAUSER_ROLE`.
+     */
+    function pause() public virtual {
+    require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to pause");
+    _pause();
+    }
+
+    /**
+     * @dev Unpauses all token transfers.
+     *
+     * See {ERC20Pausable} and {Pausable-_unpause}.
+     *
+     * Requirements:
+     *
+     * - the caller must have the `PAUSER_ROLE`.
+     */
+    function unpause() public virtual {
+    require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to unpause");
+    _unpause();
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Pausable) {
+    super._beforeTokenTransfer(from, to, amount);
+    }
+}
+
+
+
+contract SimpleToken is ERC20PresetMinterPauser {
+
+    /**
+     * @dev Constructor that gives msg.sender all of existing tokens.
+     */
+
+    uint8 private _decimals;
+    uint256 public  INITIAL_SUPPLY = 10000 * (10 ** uint256(18));
+
+
+    function decimals() public view  override returns (uint8) {
+    return _decimals;
+    }
+
+    constructor(string memory name, string memory symbol, uint8  decimals, uint256  initial_supply) public  ERC20PresetMinterPauser(name, symbol){
+    _decimals = decimals;
+    INITIAL_SUPPLY = initial_supply * (10 ** uint256(decimals)) ;
+    _mint(msg.sender, INITIAL_SUPPLY);
+    }
+
 }
