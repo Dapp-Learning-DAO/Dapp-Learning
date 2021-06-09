@@ -1,6 +1,6 @@
 # Rebase Dapp Courses
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, Dao** 项目。  
+本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO** 项目。  
 
   主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
   项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
@@ -114,6 +114,9 @@ https://zhuanlan.zhihu.com/p/350541979
   
 - Day-31 Merkel-Patricia Tree(MPT)
 https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+
+- Day-32 JavaScript Cryptography
+https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
