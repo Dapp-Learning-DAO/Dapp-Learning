@@ -93,6 +93,10 @@ ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
 修改项目：
 mintWithTokenURI新增方法，任何人可以发发行nft。  
 
+合约拍平  
+
+npx hardhat flatten ./contracts/MYERC721.sol > MYERC721.sol
+
 
 ## 参考文档  
 https://docs.ipfs.io/install/command-line/#official-distributions  
