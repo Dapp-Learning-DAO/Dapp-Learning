@@ -63,10 +63,10 @@ https://learnblockchain.cn/article/1776
 - Day-16 scaffold-ETH  
   https://github.com/austintgriffith/scaffold-eth
 
-//todo!!!  
-- Day-17 pooltogether  
- https://pooltogether.com/   
-
+**//todo!!!**  
+- Day-17 proxy contract  
+  
+  
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
@@ -118,6 +118,9 @@ https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?le
 - Day-32 JavaScript Cryptography
 https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
 
+- Day-33 pooltogether  
+ https://pooltogether.com/ 
+ 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
  此部分建议以submoudle方式引入。
