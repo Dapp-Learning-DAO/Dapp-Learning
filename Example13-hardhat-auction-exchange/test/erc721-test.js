@@ -10,7 +10,7 @@ describe("ERC721 contract", function() {
         console.log(addr1.address)
 
         const contractfactory = await ethers.getContractFactory("MYERC721");
-        const myerc721 = await contractfactory.deploy("MYERC721", "TEST");
+        const myerc721 = await contractfactory.deploy("MYERC721", "TEST","");
 
         console.log(myerc721.address);
 

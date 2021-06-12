@@ -1,5 +1,5 @@
-pragma solidity ^0.4.25;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
+
 import "./IERC721.sol";
 import "./IERC20.sol";
 import "./IERC721Receiver.sol";
@@ -81,7 +81,7 @@ contract AuctionFixedPrice is IERC721Receiver {
         address,
         uint256,
         bytes calldata
-    )public  returns(bytes4) {
+    )public override returns(bytes4) {
         return bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
     }
 

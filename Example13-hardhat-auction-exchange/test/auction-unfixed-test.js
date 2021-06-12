@@ -6,7 +6,7 @@ async function auction_init() {
     const hardhatToken = await Token.deploy("HEHE", "HH", 1, 100000000);
     console.log("erc20 : ", hardhatToken.address);
     const contractfactory = await ethers.getContractFactory("MYERC721");
-    const myerc721 = await contractfactory.deploy("MYERC721", "TEST");
+    const myerc721 = await contractfactory.deploy("MYERC721", "TEST","");
     console.log("erc721 : ", myerc721.address);
     const auctionContractFactory = await ethers.getContractFactory("AuctionUnfixedPrice");
     const auctionContract = await auctionContractFactory.deploy();
