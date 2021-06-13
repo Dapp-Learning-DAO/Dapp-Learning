@@ -2,7 +2,7 @@ pragma solidity ^0.6.6;
 
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
-contract RandomNumberSampleVRF is VRFConsumerBase {
+contract RandomNumberVRF is VRFConsumerBase {
 
     bytes32 internal keyHash;
     uint256 internal fee;
@@ -27,7 +27,6 @@ contract RandomNumberSampleVRF is VRFConsumerBase {
     constructor(address _VRFCoordinator, address _LinkToken, bytes32 _keyhash)
     public
     VRFConsumerBase(_VRFCoordinator, _LinkToken)
-    ERC721("DungeonsAndDragonsCharacter", "D&D")
     {
         VRFCoordinator = _VRFCoordinator;
         LinkToken = _LinkToken;
@@ -48,7 +47,7 @@ contract RandomNumberSampleVRF is VRFConsumerBase {
     function fulfillRandomness(bytes32 requestId, uint256 randomNumber) internal override
     {
         require(validIds[requestId], "id must be not used!") ;
-        randomResult = randomness;
+        randomResult = randomNumber;
         resultMap[requestId]=  randomResult;
         delete validIds[requestId];
     }
