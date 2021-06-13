@@ -52,20 +52,17 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 - Day-12  Crowdfund   
-- Day-13 simple Exchange & auction  
-
+- Day-13 simple Exchange  
 - Day-14 chainlink-api  
 https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
 
 - Day-15 nft-blindbox-chainlink-vrf  
 https://learnblockchain.cn/article/1776  
 
-- Day-16 scaffold-ETH  
-  https://github.com/austintgriffith/scaffold-eth
+- Day-16 nft auction  & exchange
 
 **//todo!!!**  
 - Day-17 proxy contract  
-  
   
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
@@ -74,6 +71,7 @@ https://web3py.readthedocs.io/en/stable/quickstart.html
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
+https://github.com/austintgriffith/scaffold-eth
 https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
