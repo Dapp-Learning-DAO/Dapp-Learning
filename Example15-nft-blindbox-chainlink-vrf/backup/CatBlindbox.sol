@@ -1,7 +1,6 @@
 // contracts/DungeonsAndDragonsCharacter.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.4.25;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 import "../simpleVrf/RandomNumberSampleVRF.sol";
 import "../simpleVrf/Ownable.sol";
 import "../bac002/BAC002.sol";
