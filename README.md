@@ -105,8 +105,7 @@ https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup
 https://zhuanlan.zhihu.com/p/350541979
 
 - Day-29 matic layer2  
-  https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
-
+ 
 - Day-30 nft Filecoin     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
   
