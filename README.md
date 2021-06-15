@@ -52,21 +52,18 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 - Day-12  Crowdfund   
-- Day-13 simple Exchange & auction  
-
+- Day-13 simple Exchange  
 - Day-14 chainlink-api  
 https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
 
 - Day-15 nft-blindbox-chainlink-vrf  
 https://learnblockchain.cn/article/1776  
 
-- Day-16 scaffold-ETH  
-  https://github.com/austintgriffith/scaffold-eth
+- Day-16 nft auction  & exchange
 
-//todo!!!  
-- Day-17 pooltogether  
- https://pooltogether.com/   
-
+**//todo!!!**  
+- Day-17 proxy contract  
+  
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
 
@@ -74,6 +71,7 @@ https://web3py.readthedocs.io/en/stable/quickstart.html
 https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
+https://github.com/austintgriffith/scaffold-eth
 https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
@@ -118,6 +116,9 @@ https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?le
 - Day-32 JavaScript Cryptography
 https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
 
+- Day-33 pooltogether  
+ https://pooltogether.com/ 
+ 
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
  此部分建议以submoudle方式引入。
@@ -145,6 +146,8 @@ https://blog.0xproject.com/
 - P7 Bancor  
 
 - P8 YFI  
+
+-P9 AMPL  
 
 
 ## NFT 进阶
