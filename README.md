@@ -137,7 +137,11 @@ V3 https://learnblockchain.cn/article/2357
 - P4 SNX  
 https://github.com/Synthetixio  
 
-- P5 Curve  
+- P5 Curve 
+https://curve.fi/files/stableswap-paper.pdf
+https://github.com/curvefi/curve-contract/tree/master/contracts
+https://curve.fi/files/crypto-pools-paper.pdf 
+https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic
 
 - P6 0x-protocol  
 https://blog.0xproject.com/  
