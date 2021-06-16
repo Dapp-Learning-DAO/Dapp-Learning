@@ -52,17 +52,12 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 - Day-12  Crowdfund   
-- Day-13 simple Exchange  
+- Day-13 dex Exchange  
 - Day-14 chainlink-api  
-https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
-
 - Day-15 nft-blindbox-chainlink-vrf  
-https://learnblockchain.cn/article/1776  
-
 - Day-16 nft auction  & exchange
-
 **//todo!!!**  
-- Day-17 proxy contract  
+- Day-17 erc865 
   
 - Day-18 web3.py  
 https://web3py.readthedocs.io/en/stable/quickstart.html  
@@ -87,7 +82,8 @@ https://soliditydeveloper.com/eip-3156
 https://www.chainnews.com/articles/038258049958.htm    
 https://snapshot.org/#/  
 
-- Day-24 vyper  
+- Day-24 proxy contract
+
 
 - Day-25 multi-sig-wallet  
 https://zhuanlan.zhihu.com/p/337823524
@@ -117,6 +113,8 @@ https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with
 
 - Day-33 pooltogether  
  https://pooltogether.com/ 
+
+- Day-34 vyper   
  
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
