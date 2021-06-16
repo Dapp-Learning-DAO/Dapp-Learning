@@ -67,7 +67,7 @@ const hashedTightPacked = args => ethUtil.keccak256(Buffer.concat(args));
       const message_bytes = ethers.utils.arrayify(messageHash);
       // let hash = ethers.utils.solidityKeccak256(['string', 'bytes32'],
       //     ['\x19Ethereum Signed Message:\n32', messageHash]);
-      console.log('message: ' + message_bytes);
+     // console.log('message: ' + message_bytes);
 
       const sig = await wallet.signMessage(message_bytes);
       // alice send sig to charlie offline
@@ -81,7 +81,7 @@ const hashedTightPacked = args => ethUtil.keccak256(Buffer.concat(args));
       const { events } = await txreceipt.wait();
 
       const args = events.find(({ event }) => event === 'TransferPreSigned').args
-      console.log("args:", args)
+     // console.log("args:", args)
       aliceBalance = await hardhatToken.balanceOf(alice.address);
       console.log("alice balance after: ", aliceBalance.toNumber());
       bobBalance = await hardhatToken.balanceOf(bob.address);
