@@ -144,7 +144,7 @@ https://blog.0xproject.com/
 
 - P8 YFI  
 
--P9 AMPL  
+- P9 AMPL  
 
 
 ## NFT 进阶
@@ -156,8 +156,9 @@ https://blog.0xproject.com/
 ## DAO 进阶 
 ### Learn-DAO-XXX  
 - Aragon  
-- https://github.com/MolochVentures
-- https://www.subdao.network/  
+    - https://github.com/MolochVentures
+    - https://www.subdao.network/  
+- Augur
 
 ## Crypto 进阶
 ### Learn-Crypto-XXX 
