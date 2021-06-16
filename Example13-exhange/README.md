@@ -9,4 +9,5 @@
 https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol   
 https://github.com/Uniswap/old-solidity-contracts/blob/master/contracts/Exchange/UniswapExchange.sol
 
-https://github.com/PhABC/ethereum-alarm-clock    
+https://github.com/PhABC/ethereum-alarm-clock 
+https://www.codementor.io/@yosriady/signing-and-verifying-ethereum-signatures-vhe8ro3h6   
