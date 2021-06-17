@@ -102,7 +102,7 @@ https://zhuanlan.zhihu.com/p/350541979
 
 - Day-29 matic layer2  
  
-- Day-30 nft Filecoin     
+- Day-30 zksync layer2     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
   
 - Day-31 Merkel-Patricia Tree(MPT)
@@ -114,7 +114,16 @@ https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with
 - Day-33 pooltogether  
  https://pooltogether.com/ 
 
-- Day-34 vyper   
+- Day-34 vyper  
+
+- Day-35  duneanalytics & nansen
+https://cloud.tencent.com/developer/article/1754684 
+
+- Day-36 nft Filecoin     
+  https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
+
+- Day-37 swarm
+    https://www.chainnews.com/articles/625290542956.htm  
  
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
