@@ -96,7 +96,7 @@ const deploy = async (contractName, _args = [], overrides = {}, libraries = {}) 
   const artifact = artifacts.readArtifactSync(contractName)
 
   if (contractName.indexOf(":")) {
-    contractName = contractName.substring(contractName.lastIndexOf("/") + 1);
+    contractName = contractName.substring(contractName.lastIndexOf(":") + 1);
   }
 
   let addressConent = 'module.exports = "' + deployed.address + '"'
