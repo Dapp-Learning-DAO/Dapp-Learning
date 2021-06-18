@@ -1,6 +1,6 @@
 # Rebase Dapp Courses
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO** 项目。  
+本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。  
 
   主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
   项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
@@ -56,14 +56,10 @@
 - Day-14 chainlink-api  
 - Day-15 nft-blindbox-chainlink-vrf  
 - Day-16 nft auction  & exchange
-**//todo!!!**  
-- Day-17 erc865 
-  
+- Day-17 ERC865 & ERC875  
 - Day-18 web3.py  
-https://web3py.readthedocs.io/en/stable/quickstart.html  
-
 - Day-19 brownie   
-https://github.com/eth-brownie/brownie 
+    https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
 https://github.com/austintgriffith/scaffold-eth
@@ -83,8 +79,7 @@ https://www.chainnews.com/articles/038258049958.htm
 https://snapshot.org/#/  
 
 - Day-24 proxy contract
-
-
+ https://zhuanlan.zhihu.com/p/34690916
 - Day-25 multi-sig-wallet  
 https://zhuanlan.zhihu.com/p/337823524
 https://github.com/gnosis/MultiSigWallet/tree/master/contracts
@@ -115,6 +110,7 @@ https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with
  https://pooltogether.com/ 
 
 - Day-34 vyper  
+https://vyper.readthedocs.io/en/stable/
 
 - Day-35  duneanalytics & nansen
 https://cloud.tencent.com/developer/article/1754684 
@@ -191,3 +187,10 @@ https://blog.0xproject.com/
 - 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本  
 
+## 注意事项
+  刚入手项目，可以有四众方式切入：  
+  1 可以优化之前的项目代码和readme  
+  2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）  
+  3 可以自由新增任务卡（需附上参考链接）  
+  4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+ 
