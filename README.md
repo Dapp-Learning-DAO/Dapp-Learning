@@ -121,6 +121,8 @@ https://cloud.tencent.com/developer/article/1754684
 
 - Day-36 nft Filecoin     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
+  https://pinata.cloud/pinmanager
+  https://nft.storage
 
 - Day-37 swarm
     https://www.chainnews.com/articles/625290542956.htm  
