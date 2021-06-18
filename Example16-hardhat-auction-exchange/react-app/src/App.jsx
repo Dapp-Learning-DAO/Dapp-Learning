@@ -36,7 +36,7 @@ const assetsInitAuctionStat = {}
     assetsInitAuctionStat[assetsAuctionStat[a]] = {}
     assetsInitAuctionStat[assetsAuctionStat[a]].forSale = true
     assetsInitAuctionStat[assetsAuctionStat[a]].forAuction = false
-    assetsInitAuctionStat[assetsAuctionStat[a]].auctionType = 1
+    assetsInitAuctionStat[assetsAuctionStat[a]].assetAuctionType = "1"
   }
 
 console.log("Hello , I'm  assetsInitAuctionStat")
@@ -144,10 +144,10 @@ function App (props) {
   const [injectedProvider, setInjectedProvider] = useState();
 
   /* 💵 This hook will get the price of ETH from 🦄 Uniswap: */
-  const price = useExchangePrice(targetNetwork,mainnetProvider);
+  const price = useExchangePrice(targetNetwork, mainnetProvider);
 
   /* 🔥 This hook will get the price of Gas from ⛽️ EtherGasStation */
-  const gasPrice = useGasPrice(targetNetwork,"fast");
+  const gasPrice = useGasPrice(targetNetwork, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
   const userProvider = useUserProvider(injectedProvider, localProvider);
   const address = useUserAddress(userProvider);
@@ -155,7 +155,7 @@ function App (props) {
   // You can warn the user if you would like them to be on a specific network
   let localChainId = localProvider && localProvider._network && localProvider._network.chainId
   let selectedChainId = userProvider && userProvider._network && userProvider._network.chainId
-  console.log("user provider network",userProvider._network)
+  console.log("user provider network", userProvider._network)
 
   // For more hooks, check out 🔗eth-hooks at: https://www.npmjs.com/package/eth-hooks
 
@@ -179,24 +179,24 @@ function App (props) {
   // If you want to bring in the mainnet DAI contract it would look like:
   const mainnetDAIContract = useExternalContractLoader(mainnetProvider, DAI_ADDRESS, DAI_ABI)
 
-  if (DEBUG) console.log("🌍 DAI contract on mainnet:",mainnetDAIContract)
+  if (DEBUG) console.log("🌍 DAI contract on mainnet:", mainnetDAIContract)
   //
   // Then read your DAI balance like:
-  const myMainnetDAIBalance = useContractReader({DAI: mainnetDAIContract},"DAI", "balanceOf",["0x34aA3F359A9D614239015126635CE7732c18fDF3"])
-  if (DEBUG)console.log("🥇 myMainnetDAIBalance:",myMainnetDAIBalance)
+  const myMainnetDAIBalance = useContractReader({ DAI: mainnetDAIContract }, "DAI", "balanceOf", ["0x34aA3F359A9D614239015126635CE7732c18fDF3"])
+  if (DEBUG) console.log("🥇 myMainnetDAIBalance:", myMainnetDAIBalance)
 
 
   // keep track of a variable from the contract in the local React state:
-  const balance = useContractReader(readContracts,"MYERC721", "balanceOf", [ address ])
-  if (DEBUG) console.log("🤗 balance:",balance)
+  const balance = useContractReader(readContracts, "MYERC721", "balanceOf", [address])
+  if (DEBUG) console.log("🤗 balance:", balance)
 
   //📟 Listen for broadcast events
   const transferEvents = useEventListener(readContracts, "MYERC721", "Transfer", localProvider, 1);
-  if (DEBUG) console.log("📟 Transfer events:",transferEvents)
+  if (DEBUG) console.log("📟 Transfer events:", transferEvents)
 
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [auctionDetails, setAuctionDetails] = useState({price: "", duration: ""});
+  const [auctionDetails, setAuctionDetails] = useState({ price: "", duration: "" });
   const [auctionToken, setAuctionToken] = useState("");
 
   //
@@ -239,9 +239,9 @@ function App (props) {
     WalletCheck.walletExist = true
   }
 
-  useEffect(()=>{
-    if(readContracts && readContracts.YourCollectible) updateYourCollectibles()
-  }, [ assets, readContracts, transferEvents ]);
+  useEffect(() => {
+    if (readContracts && readContracts.YourCollectible) updateYourCollectibles()
+  }, [assets, readContracts, transferEvents]);
 
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
@@ -251,25 +251,25 @@ function App (props) {
   //
   // 🧫 DEBUG 👨🏻‍🔬
   //
-  useEffect(()=>{
-    if(DEBUG && mainnetProvider && address && selectedChainId && yourLocalBalance && readContracts && writeContracts && mainnetDAIContract){
+  useEffect(() => {
+    if (DEBUG && mainnetProvider && address && selectedChainId && yourLocalBalance && readContracts && writeContracts && mainnetDAIContract) {
       console.log("_____________________________________ 🏗 scaffold-eth _____________________________________")
-      console.log("🌎 mainnetProvider",mainnetProvider)
-      console.log("🏠 localChainId",localChainId)
-      console.log("👩‍💼 selected address:",address)
-      console.log("🕵🏻‍♂️ selectedChainId:",selectedChainId)
-      console.log("💵 yourLocalBalance",yourLocalBalance ? yourLocalBalance : "...")
-      console.log("📝 readContracts",readContracts)
-      console.log("🌍 DAI contract on mainnet:",mainnetDAIContract)
-      console.log("🔐 writeContracts",writeContracts)
+      console.log("🌎 mainnetProvider", mainnetProvider)
+      console.log("🏠 localChainId", localChainId)
+      console.log("👩‍💼 selected address:", address)
+      console.log("🕵🏻‍♂️ selectedChainId:", selectedChainId)
+      console.log("💵 yourLocalBalance", yourLocalBalance ? yourLocalBalance : "...")
+      console.log("📝 readContracts", readContracts)
+      console.log("🌍 DAI contract on mainnet:", mainnetDAIContract)
+      console.log("🔐 writeContracts", writeContracts)
     }
   }, [mainnetProvider, address, selectedChainId, yourLocalBalance, readContracts, writeContracts, mainnetDAIContract])
 
 
   let networkDisplay = ""
-  if(localChainId && selectedChainId && localChainId != selectedChainId ){
+  if (localChainId && selectedChainId && localChainId != selectedChainId) {
     networkDisplay = (
-      <div style={{zIndex:2, position:'absolute', right:0,top:60,padding:16}}>
+      <div style={{ zIndex: 2, position: 'absolute', right: 0, top: 60, padding: 16 }}>
         <Alert
           message={"⚠️ Wrong Network"}
           description={(
@@ -282,9 +282,9 @@ function App (props) {
         />
       </div>
     )
-  }else{
+  } else {
     networkDisplay = (
-      <div style={{zIndex:-1, position:'absolute', right:154,top:28,padding:16,color:targetNetwork.color}}>
+      <div style={{ zIndex: -1, position: 'absolute', right: 154, top: 28, padding: 16, color: targetNetwork.color }}>
         {targetNetwork.name}
       </div>
     )
@@ -309,28 +309,30 @@ function App (props) {
   let faucetHint = ""
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name == "localhost"
 
-  const [faucetClicked, setFaucetClicked] = useState(false);
+
   const grabFounds = async () => {
     let currentSupply = parseInt(await readContracts.SimpleToken.balanceOf(address))
     console.log("Total balance of erc20 with current address is", currentSupply)
     if (currentSupply < 1000) {
-      await tx(readContracts.SimpleToken.mint(address,1000))
+      await tx(readContracts.SimpleToken.mint(address, 1000))
     }
     currentSupply = await readContracts.SimpleToken.balanceOf(address)
     console.log("Total balance of erc20 with current address is", currentSupply)
   }
-  if(!faucetClicked&&localProvider&&localProvider._network&&localProvider._network.chainId==31337&&yourLocalBalance&& yourLocalBalance <= 1000){
+
+  console.log("For grabFounds")
+  console.log("Your local Balance")
+  console.log(yourLocalBalance)
     faucetHint = (
       <div style={{padding:16}}>
         <Button type={"primary"} onClick={()=>{
           grabFounds()
-          setFaucetClicked(true)
         }}>
-          💰 Grab funds from the faucet ⛽️
+          💰 Grab funds from the faucet when balance less than 1000 ⛽️
         </Button>
       </div>
     )
-  }
+
 
 
   const [ yourJSON, setYourJSON ] = useState( STARTING_JSON );
@@ -371,13 +373,17 @@ function App (props) {
           const tokenId = url2TokenID[a]
           owner = await readContracts.MYERC721.ownerOf(tokenId)
           const nftAddress = readContracts.MYERC721.address;
+          console.log("yourCollectibles[a]")
+          console.log(yourCollectibles[a])
           if (yourCollectibles[a].forAuction) {
-            if (yourCollectibles[a].auctionType == 1) {
+            if (yourCollectibles[a].assetAuctionType == 1) {
               auctionInfo = await readContracts.AuctionUnfixedPrice.getTokenAuctionDetails(nftAddress, tokenId);
             } else {
               auctionInfo = await readContracts.AuctionFixedPrice.getTokenAuctionDetails(nftAddress, tokenId);
             }
           }
+          console.log("========== forSale is false")
+          console.log(auctionInfo)
         }
         assetUpdate.push({id:a,...assets[a],forSale:forSale,owner:owner, auctionInfo})
       }catch(e){console.log(e)}
@@ -425,10 +431,14 @@ function App (props) {
   }
 
   const mintItem = async (tokenUri) => {
-    await tx(readContracts.MYERC721.mintWithTokenURI(address, tokenUri))
+    await readContracts.MYERC721.mintWithTokenURI(address, tokenUri)
     const tokenId = (await readContracts.MYERC721.totalSupply()) - 1
+
+    // get Token URl 
+    let tokenURl = await readContracts.MYERC721.tokenURI(tokenId)
+    console.log("In Mint , tokenURL is ",tokenURl)
+
     let currentSupply = parseInt(await readContracts.SimpleToken.balanceOf(address))
-    console.log("Total balance of erc20 with current address is", currentSupply)
     url2TokenID[tokenUri] = tokenId
     assetsInitAuctionStat[tokenUri].forSale = false
     const ethBalance = await localProvider.getBalance(address);
@@ -443,6 +453,7 @@ function App (props) {
       console.log("Trans ETH result: ",result)
     }
     setYourCollectibles(assetsInitAuctionStat)
+    updateYourCollectibles();
   }
 
   let galleryList = []
@@ -467,6 +478,8 @@ function App (props) {
       const deadline = new Date(auctionInfo.duration * 1000);
       const isEnded = deadline <= new Date();
 
+      console.log("======auctionInfo")
+      console.log(auctionInfo)
       cardActions.push(
         <div>
           <div>
@@ -483,10 +496,11 @@ function App (props) {
         </div>
       )
 
+      console.log("auction price is now ",loadedAssets[a])
       auctionDetails.push(auctionInfo.isActive ? (
           <div style={{ marginTop: "20px" }}>
-            <p style={{ fontWeight: "bold" }}>Auction is in progress</p>
-            <p style={{ margin: 0, marginBottom: "2px"}}>Minimal price is {utils.formatEther(auctionInfo.price)} ETH</p>
+          <p style={{ fontWeight: "bold" }}>{ assetsInitAuctionStat[a] == 1 ? "Unfixed Price " : "Fixed Price " }Auction is in progress</p>
+            <p style={{ margin: 0, marginBottom: "2px"}}>Minimal price is {(auctionInfo.price).toString()} </p>
             <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(deadline, "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p>
             <div>
               {auctionInfo.maxBidUser === constants.AddressZero ? "Highest bid was not made yet" : <div>Highest bid by: <Address
@@ -536,6 +550,9 @@ function App (props) {
     const tokenId = url2TokenID[auctionToken];
     const nftAddress = readContracts.MYERC721.address
     const erc20Address = readContracts.SimpleToken.address
+    let tokenURL = await readContracts.MYERC721.tokenURI(tokenId)
+    tokenURL = tokenURL.substring(9)
+    console.log("Token URL is ",tokenURL)
 
     let auctionAddress
     let writeAuction
@@ -545,27 +562,27 @@ function App (props) {
       auctionAddress = readContracts.AuctionUnfixedPrice.address
       writeAuction = writeContracts.AuctionUnfixedPrice
       readAuction = readContracts.AuctionUnfixedPrice
+      console.log()
+      assetsInitAuctionStat[tokenURL].assetAuctionType = 1
     } else {
       auctionAddress = readContracts.AuctionFixedPrice.address
       writeAuction = writeContracts.AuctionFixedPrice
       readAuction = readContracts.AuctionFixedPrice
+      assetsInitAuctionStat[tokenURL].assetAuctionType = 2
     }
 
-    console.log("==========before 721 approve")
-    let ower = await writeContracts.MYERC721.ownerOf(tokenId)
-    console.log("owner of ", tokenId)
-    console.log("MYERC721 address is  ===========")
-    console.log(auctionAddress)
-    await writeContracts.MYERC721.approve(auctionAddress, tokenId);
+    let approveTransaction = await writeContracts.MYERC721.approve(auctionAddress, tokenId);
     console.log("==========after 721 approve")
 
-    const erc20Price = utils.parseEther(price.toString());
+    const erc20Price = parseInt(price.toString());
+    console.log("ERC20 Price for Auction is",erc20Price)
     const blockDuration = Math.floor(new Date().getTime() / 1000) + duration;
 
     await tx(writeAuction.createTokenAuction(nftAddress, tokenId, erc20Address, erc20Price, blockDuration));
 
-    const auctionInfo = await readAuction.getTokenAuctionDetails(nftAddress, tokenId);
-    console.log('Going to auction, and auctionInfo is ', { auctionInfo });
+    //Get Token URL 
+    assetsInitAuctionStat[tokenURL].forAuction = true
+    setYourCollectibles(assetsInitAuctionStat)
   }
 
   const handleCancel = () => {
