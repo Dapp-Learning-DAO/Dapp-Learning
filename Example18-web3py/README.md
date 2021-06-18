@@ -34,3 +34,7 @@ web3.py是类似于web3.js的在ethereum client API上封装的一层api，熟�
 
 - 以ERC20代币发行为例来说明如何在ganache上发行一种代币，从[openZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts) 的网站上可以
 下载模板程序，将其拷贝到相关目录结构中
+
+
+## 参考链接
+https://web3py.readthedocs.io/en/stable/quickstart.html  
