@@ -50,9 +50,9 @@
 - Day-7 hardhat  
 - Day-8 graph  
 - Day-9 react（metamask)  
-- Day-10  ERC721+ ERC1155 + ipfs  
+- Day-10 ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
-- Day-12  Crowdfund   
+- Day-12 Crowdfund   
 - Day-13 dex Exchange  
 - Day-14 chainlink-api  
 - Day-15 nft-blindbox-chainlink-vrf  
@@ -63,8 +63,8 @@
     https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
-https://github.com/austintgriffith/scaffold-eth
-https://soliditydeveloper.com/eip-3156
+    https://github.com/austintgriffith/scaffold-eth
+    https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
