@@ -4,7 +4,7 @@
 
   主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
   项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。
-  愿景是给Rebase社区初级开发者一个可执行且最简的区块链学习路线图，给进阶开发者一个可以交流和协作的平台。  
+  愿景是给Rebase社区初级开发者一个可执行且最简的区块链DAPP学习路线图，给进阶开发者一个可以交流和协作的平台。  
 
 
 ## 基础知识
@@ -134,7 +134,8 @@ https://cloud.tencent.com/developer/article/1754684
 https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90   
 V3 https://learnblockchain.cn/article/2357  
 
-- P2 Compound  
+- P2 Compound    
+https://learnblockchain.cn/article/1015
 
 - P3 Aave  
   https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade    
@@ -150,7 +151,9 @@ https://curve.fi/files/crypto-pools-paper.pdf
 https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic    
 
 - P6 0x-protocol  
-https://blog.0xproject.com/  
+https://blog.0xproject.com/    
+https://github.com/0xProject/0x-protocol-specification/blob/master/v2/v2-specification.md#exchange  
+https://0x.org/docs/guides/use-0x-api-liquidity-in-your-smart-contracts 
 
 - P7 Bancor  
 
