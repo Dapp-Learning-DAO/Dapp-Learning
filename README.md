@@ -1,6 +1,6 @@
 # Rebase Dapp Courses
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO** 项目。  
+本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。  
 
   主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
   项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
@@ -52,23 +52,14 @@
 - Day-10  ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
 - Day-12  Crowdfund   
-- Day-13 simple Exchange  
+- Day-13 dex Exchange  
 - Day-14 chainlink-api  
-https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ  
-
 - Day-15 nft-blindbox-chainlink-vrf  
-https://learnblockchain.cn/article/1776  
-
 - Day-16 nft auction  & exchange
-
-**//todo!!!**  
-- Day-17 proxy contract  
-  
+- Day-17 ERC865 & ERC875  
 - Day-18 web3.py  
-https://web3py.readthedocs.io/en/stable/quickstart.html  
-
 - Day-19 brownie   
-https://github.com/eth-brownie/brownie 
+    https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
 https://github.com/austintgriffith/scaffold-eth
@@ -87,8 +78,8 @@ https://soliditydeveloper.com/eip-3156
 https://www.chainnews.com/articles/038258049958.htm    
 https://snapshot.org/#/  
 
-- Day-24 vyper  
-
+- Day-24 proxy contract
+ https://zhuanlan.zhihu.com/p/34690916
 - Day-25 multi-sig-wallet  
 https://zhuanlan.zhihu.com/p/337823524
 https://github.com/gnosis/MultiSigWallet/tree/master/contracts
@@ -105,9 +96,8 @@ https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup
 https://zhuanlan.zhihu.com/p/350541979
 
 - Day-29 matic layer2  
-  https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
-
-- Day-30 nft Filecoin     
+ 
+- Day-30 zksync layer2     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
   
 - Day-31 Merkel-Patricia Tree(MPT)
@@ -118,6 +108,20 @@ https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with
 
 - Day-33 pooltogether  
  https://pooltogether.com/ 
+
+- Day-34 vyper  
+https://vyper.readthedocs.io/en/stable/
+
+- Day-35  duneanalytics & nansen
+https://cloud.tencent.com/developer/article/1754684 
+
+- Day-36 nft Filecoin     
+  https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
+  https://pinata.cloud/pinmanager
+  https://nft.storage
+
+- Day-37 swarm
+    https://www.chainnews.com/articles/625290542956.htm  
  
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
@@ -138,7 +142,11 @@ V3 https://learnblockchain.cn/article/2357
 - P4 SNX  
 https://github.com/Synthetixio  
 
-- P5 Curve  
+- P5 Curve     
+https://curve.fi/files/stableswap-paper.pdf    
+https://github.com/curvefi/curve-contract/tree/master/contracts    
+https://curve.fi/files/crypto-pools-paper.pdf     
+https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic    
 
 - P6 0x-protocol  
 https://blog.0xproject.com/  
@@ -147,7 +155,10 @@ https://blog.0xproject.com/
 
 - P8 YFI  
 
--P9 AMPL  
+- P9 AMPL  
+
+- P10 DODO 
+    https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
 
 
 ## NFT 进阶
@@ -159,8 +170,9 @@ https://blog.0xproject.com/
 ## DAO 进阶 
 ### Learn-DAO-XXX  
 - Aragon  
-- https://github.com/MolochVentures
-- https://www.subdao.network/  
+    - https://github.com/MolochVentures
+    - https://www.subdao.network/  
+- Augur
 
 ## Crypto 进阶
 ### Learn-Crypto-XXX 
@@ -175,3 +187,10 @@ https://blog.0xproject.com/
 - 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本  
 
+## 注意事项
+  刚入手项目，可以有四众方式切入：  
+  1 可以优化之前的项目代码和readme  
+  2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）  
+  3 可以自由新增任务卡（需附上参考链接）  
+  4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+ 

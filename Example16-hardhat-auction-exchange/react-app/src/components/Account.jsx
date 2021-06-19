@@ -88,7 +88,16 @@ export default function Account({
   ) : (
     <span>
       {address ? <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} /> : "Connecting..."}
-      <Balance address={address} provider={localProvider} price={price} />
+      <span
+      style={{
+        verticalAlign: "middle",
+        fontSize: 24,
+        padding: 8,
+        cursor: "pointer",
+      }}
+    >
+      {price}
+    </span>
       <Wallet address={address} provider={userProvider} ensProvider={mainnetProvider} price={price} color={currentTheme == "light" ? "#1890ff" : "#2caad9"} />
     </span>
   );
