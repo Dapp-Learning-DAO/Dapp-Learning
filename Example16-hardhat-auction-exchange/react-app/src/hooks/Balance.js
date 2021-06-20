@@ -20,33 +20,33 @@ import useOnBlock from "./OnBlock";
 
 let DEBUG = false
 
-export default function useBalance(provider, address, pollTime = 0) {
+export default function useBalance(contract, address, provider,pollTime = 0) {
 
 const [balance, setBalance] = useState();
 
-const pollBalance = useCallback(async (provider, address) => {
-  if (provider && address) {
-    const newBalance = await provider.getBalance(address);
+const pollBalance = useCallback(async (contract, address) => {
+  if (contract.SimpleToken && address) {
+    const newBalance = parseInt(await contract.SimpleToken.balanceOf(address));
     if (newBalance !== balance) {
       setBalance(newBalance);
     }
   }
-}, [provider, address]);
+}, [contract, address]);
 
 // Only pass a provider to watch on a block if there is no pollTime
-useOnBlock((pollTime === 0)&&provider, () => {
-  if (provider && address && pollTime === 0) {
-    pollBalance(provider, address);
+useOnBlock((pollTime === 0)&& provider, () => {
+  if (contract && address && pollTime === 0) {
+    pollBalance(contract, address);
 }
 })
 
 // Use a poller if a pollTime is provided
 usePoller(async () => {
-  if (provider && address && pollTime > 0) {
+  if (contract && address && pollTime > 0) {
     if (DEBUG) console.log('polling!', address)
     pollBalance()
   }
-}, pollTime, provider && address)
+}, pollTime, contract && address)
 
 return balance;
 }

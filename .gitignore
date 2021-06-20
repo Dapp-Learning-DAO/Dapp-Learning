@@ -9,6 +9,9 @@
 .pnp.js
 */cache
 **/node_modules
+**/*.bytecode.js
+**/*.abi.js
+**/*.address.js
 */yarn.lock
 */artifacts
 */cache
