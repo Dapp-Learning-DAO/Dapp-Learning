@@ -1,7 +1,7 @@
 const ethers = require('ethers');
 const fs = require("fs");
 const contractFile = require('./compile');
-var sleep = require('sleep');
+//var sleep = require('sleep');
 
 const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 
@@ -31,6 +31,10 @@ const account_from = {
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
+
+// hash test
+console.log("&&&1： mint: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("createAndInitializePoolIfNecessary(address token0,address token1,uint24 fee,uint160 sqrtPriceX96)")));
+console.log("&&&1： increase: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("function mint(MintParams calldata)")));
 // Create Wallet
 let wallet = new ethers.Wallet(account_from.privateKey, provider);
 

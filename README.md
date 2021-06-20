@@ -3,7 +3,8 @@
 本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。  
 
   主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。  
-  项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
+  项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。
+  愿景是给Rebase社区初级开发者一个可执行且最简的区块链DAPP学习路线图，给进阶开发者一个可以交流和协作的平台。  
 
 
 ## 基础知识
@@ -49,9 +50,9 @@
 - Day-7 hardhat  
 - Day-8 graph  
 - Day-9 react（metamask)  
-- Day-10  ERC721+ ERC1155 + ipfs  
+- Day-10 ERC721+ ERC1155 + ipfs  
 - Day-11 react + express + hardhat  
-- Day-12  Crowdfund   
+- Day-12 Crowdfund   
 - Day-13 dex Exchange  
 - Day-14 chainlink-api  
 - Day-15 nft-blindbox-chainlink-vrf  
@@ -62,8 +63,8 @@
     https://github.com/eth-brownie/brownie 
 
 - Day-20 scaffold-flash-loan  
-https://github.com/austintgriffith/scaffold-eth
-https://soliditydeveloper.com/eip-3156
+    https://github.com/austintgriffith/scaffold-eth
+    https://soliditydeveloper.com/eip-3156
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
@@ -133,7 +134,8 @@ https://cloud.tencent.com/developer/article/1754684
 https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90   
 V3 https://learnblockchain.cn/article/2357  
 
-- P2 Compound  
+- P2 Compound    
+https://learnblockchain.cn/article/1015
 
 - P3 Aave  
   https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade    
@@ -149,7 +151,9 @@ https://curve.fi/files/crypto-pools-paper.pdf
 https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic    
 
 - P6 0x-protocol  
-https://blog.0xproject.com/  
+https://blog.0xproject.com/    
+https://github.com/0xProject/0x-protocol-specification/blob/master/v2/v2-specification.md#exchange  
+https://0x.org/docs/guides/use-0x-api-liquidity-in-your-smart-contracts 
 
 - P7 Bancor  
 
@@ -188,7 +192,7 @@ https://blog.0xproject.com/
 - solidity 建议0.6以上版本  
 
 ## 注意事项
-  刚入手项目，可以有四众方式切入：  
+  刚入手项目，可以有四种方式切入：  
   1 可以优化之前的项目代码和readme  
   2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）  
   3 可以自由新增任务卡（需附上参考链接）  
