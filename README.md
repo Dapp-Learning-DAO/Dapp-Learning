@@ -82,9 +82,6 @@ https://snapshot.org/#/
 - Day-24 proxy contract
  https://zhuanlan.zhihu.com/p/34690916
 - Day-25 multi-sig-wallet  
-https://zhuanlan.zhihu.com/p/337823524
-https://github.com/gnosis/MultiSigWallet/tree/master/contracts
-
 - Day-26 wallet develop  
 https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
 
@@ -101,8 +98,8 @@ https://zhuanlan.zhihu.com/p/350541979
 - Day-30 zksync layer2     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2
   
-- Day-31 Merkel-Patricia Tree(MPT)
-https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+- Day-31  duneanalytics & nansen
+https://cloud.tencent.com/developer/article/1754684 
 
 - Day-32 JavaScript Cryptography
 https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
@@ -113,8 +110,9 @@ https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with
 - Day-34 vyper  
 https://vyper.readthedocs.io/en/stable/
 
-- Day-35  duneanalytics & nansen
-https://cloud.tencent.com/developer/article/1754684 
+- Day-35 Merkel-Patricia Tree(MPT)
+https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+
 
 - Day-36 nft Filecoin     
   https://www.bilibili.com/video/BV1j5411w7MH?p=1&share_medium=iphone&share_plat=ios&share_source=WEIXIN&share_tag=s_i&timestamp=1622515696&unique_k=RWDVRu&share_times=2

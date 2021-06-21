@@ -8,6 +8,9 @@ router合约对外接口 ,交易
 
 ```
 
+1 token0, token1, fee 构成一个池子
+2 UniswapV3Pool 池子主要有 swap , mint ,collect, burn
+3 router 对于用户使用
 
 ## 参考链接
   https://learnblockchain.cn/article/2357
