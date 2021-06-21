@@ -19,3 +19,4 @@ export { default as ThemeSwitch } from "./ThemeSwitch";
 export { default as NoWalletDetected } from "./NoWalletDetected";
 export { default as ConnectWallet } from "./ConnectWallet";
 export { default as NetworkErrorMessage } from "./NetworkErrorMessage";
+export { default as Loading } from "./Loading";
