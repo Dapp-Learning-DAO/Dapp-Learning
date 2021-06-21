@@ -76,3 +76,8 @@
 * getTransactionIds
 * 
   查询交易id列表，参数为：from、to、pending（是否包含处理中）、executed（是否包含已处理）
+
+
+## 参考链接
+https://zhuanlan.zhihu.com/p/337823524
+https://github.com/gnosis/MultiSigWallet/tree/master/contracts

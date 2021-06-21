@@ -82,9 +82,6 @@ https://snapshot.org/#/
 - Day-24 proxy contract
  https://zhuanlan.zhihu.com/p/34690916
 - Day-25 multi-sig-wallet  
-https://zhuanlan.zhihu.com/p/337823524
-https://github.com/gnosis/MultiSigWallet/tree/master/contracts
-
 - Day-26 wallet develop  
 https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
 
