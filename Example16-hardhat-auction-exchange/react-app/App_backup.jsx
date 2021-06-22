@@ -9,7 +9,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 import { format } from "date-fns";
-import { Header, Account, Faucet, Ramp, Contract, GasGauge, Address, AddressInput, ConnectWallet,ThemeSwitch,NoWalletDetected,NetworkErrorMessage, Loading } from "./components";
+import { Header, Account, Faucet, Ramp, Contract, GasGauge, Address, AddressInput, ConnectWallet,ThemeSwitch,NoWalletDetected,NetworkErrorMessage } from "./components";
 import { useExchangePrice, useGasPrice, useUserProvider, useContractLoader, useContractReader, useEventListener, useBalance, useExternalContractLoader, useOnBlock } from "./hooks";
 import { Transactor } from "./helpers";
 import { formatEther, parseEther } from "@ethersproject/units";
@@ -38,11 +38,6 @@ const assetsInitAuctionStat = {}
     assetsInitAuctionStat[assetsAuctionStat[a]].forAuction = false
     assetsInitAuctionStat[assetsAuctionStat[a]].assetAuctionType = "1"
   }
-
-const allUserCollections = {}
-const usersBid = {}
-let networkError;
-
 
 console.log("Hello , I'm  assetsInitAuctionStat")
 /*
@@ -90,12 +85,11 @@ const STARTING_JSON = {
 }
 
 
-const LOCALHOST_NETWORK_ID = '31337';
+const HARDHAT_NETWORK_ID = '31337';
 
 const WalletCheck = {
   walletExist: false,
-  approvePermission: {},
-  connecting: false
+  selectedAddress: undefined
 }
 
 
@@ -138,11 +132,11 @@ const blockExplorer = targetNetwork.blockExplorer;
 
 function App (props) {
 
-  if (window.ethereum) {
+  const windowEthereum = window.ethereum
+
+  if (windowEthereum) {
     WalletCheck.walletExist = true
   }
-
-  let [ permissionApproved,setPermissionApproved] = useState(false);
 
   const mainnetProvider = (scaffoldEthProvider && scaffoldEthProvider._network) ? scaffoldEthProvider : mainnetInfura
 
@@ -157,19 +151,6 @@ function App (props) {
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
   const userProvider = useUserProvider(injectedProvider, localProvider);
   const address = useUserAddress(userProvider);
-  if(!allUserCollections[address]){
-    allUserCollections[address] = []
-  }
-  
-  if(!usersBid[address]){
-    usersBid[address] = {}
-  }
-
-  if(!WalletCheck.approvePermission[address]){
-    WalletCheck.approvePermission[address] = false
-  }else{
-    permissionApproved = WalletCheck.approvePermission[address]
-  }
 
   // You can warn the user if you would like them to be on a specific network
   let localChainId = localProvider && localProvider._network && localProvider._network.chainId
@@ -191,7 +172,7 @@ function App (props) {
   const writeContracts = useContractLoader(userProvider)
 
   // 🏗 scaffold-eth is full of handy hooks like this one to get your balance:
-  const yourLocalBalance = useBalance(writeContracts, address, localProvider);
+  const yourLocalBalance = useBalance(readContracts, address, localProvider);
 
   // EXTERNAL CONTRACT EXAMPLE:
   //
@@ -222,11 +203,6 @@ function App (props) {
   // 🧠 This effect will update yourCollectibles by polling when your balance changes
   //
   const [yourCollectibles, setYourCollectibles] = useState(assetsInitAuctionStat)
-
-  let [ userCollections, setUserCollections ] = useState([])
-  if(allUserCollections[address]){
-    userCollections = [...allUserCollections[address]]
-  }
 
   
 
@@ -259,6 +235,14 @@ function App (props) {
   //   updateYourCollectibles()
   // },[ address, yourBalance ])
 
+  if (window.ethereum) {
+    WalletCheck.walletExist = true
+  }
+
+  useEffect(() => {
+    if (readContracts && readContracts.YourCollectible) updateYourCollectibles()
+  }, [assets, readContracts, transferEvents]);
+
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
   console.log("🏷 Resolved austingriffith.eth as:",addressFromENS)
@@ -281,7 +265,7 @@ function App (props) {
     }
   }, [mainnetProvider, address, selectedChainId, yourLocalBalance, readContracts, writeContracts, mainnetDAIContract])
 
-  
+
   let networkDisplay = ""
   if (localChainId && selectedChainId && localChainId != selectedChainId) {
     networkDisplay = (
@@ -358,17 +342,14 @@ function App (props) {
 
   const [ downloading, setDownloading ] = useState()
   const [ ipfsContent, setIpfsContent ] = useState()
-  let [yourBid, setYourBid] = useState(usersBid[address]);
-  if(usersBid[address]){
-    yourBid = usersBid[address]
-  }
-
+  const [yourBid, setYourBid] = useState({});
 
   const [ transferToAddresses, setTransferToAddresses ] = useState({})
 
   const [loadedAssets, setLoadedAssets] = useState()
 
   const [url2TokenID, setUrl2TokenID] = useState({})
+  console.log(url2TokenID)
 
   const [auctionType, setAuctionType] = useState(1);
   
@@ -422,74 +403,29 @@ function App (props) {
     }
   }
 
-  const placeBid = async (tokenUri, bidPrice, BidType) => {
-    console.log("In placeBid , the tokenUri is ", tokenUri)
-    const tokenId = url2TokenID[tokenUri]
-    const nftAddress = readContracts.MYERC721.address;
-    
-    try{
-      if( BidType == 1){
-        console.log("Going to bid when auctionType is 1")
-        await tx(writeContracts.AuctionUnfixedPrice.bid(nftAddress,tokenId,bidPrice))
-      }else{
-        console.log("Going to bid when auctionType is 2")
-        await tx(writeContracts.AuctionFixedPrice.purchaseNFTToken(nftAddress,tokenId))
-        assetsInitAuctionStat[auctionToken].forAuction = false
-        delete yourBid[tokenUri]
-        userCollections.push(tokenUri)
-        allUserCollections[address] = userCollections
-        setUserCollections(userCollections)
-        setYourCollectibles(assetsInitAuctionStat)
-      } 
-      usersBid[address] = yourBid
-      updateYourCollectibles();
-    }catch(e){
-      console.log("Failed to placeBid")
-      console.log(e)
-    }
-
+  const placeBid = async (tokenUri, ethAmount) => {
+    const tokenId = await readContracts.YourCollectible.uriToTokenId(utils.id(tokenUri));
+    const nftAddress = readContracts.YourCollectible.address;
+    await tx( writeContracts.Auction.bid(nftAddress, tokenId, {
+      value: parseEther(ethAmount.toString())
+    }));
+    updateYourCollectibles();
   }
 
   const completeAuction = (tokenUri) => {
     return async () => {
-      const tokenId = url2TokenID[tokenUri]
-      const nftAddress = readContracts.MYERC721.address
-      const auctionInfo = await readContracts.AuctionUnfixedPrice.getTokenAuctionDetails(nftAddress, tokenId);
-      const maxBidUser = auctionInfo.maxBidUser
-      console.log("When complete Auction, maxBid User is ",maxBidUser)
-      try{
-        await tx(writeContracts.AuctionUnfixedPrice.executeSale(nftAddress, tokenId));
-        if(maxBidUser == address){
-          userCollections.push(tokenUri)
-          allUserCollections[address] = userCollections
-        }else{
-          allUserCollections[maxBidUser].push(tokenUri)
-        }
-        assetsInitAuctionStat[tokenUri].forAuction = false
-        setYourCollectibles(assetsInitAuctionStat)
-        updateYourCollectibles();
-      }catch(e){
-        console.log("Failed to complete Auction")
-        console.log(e)
-      }
+      const tokenId = await readContracts.YourCollectible.uriToTokenId(utils.id(tokenUri));
+      const nftAddress = readContracts.YourCollectible.address;
+      await tx(writeContracts.Auction.executeSale(nftAddress, tokenId));
+      updateYourCollectibles();
     }
   }
 
-  const cancelAuction = (tokenUri,auctionType) => {
+  const cancelAuction = (tokenUri) => {
     return async () => {
-      const tokenId = url2TokenID[tokenUri]
-      const nftAddress = readContracts.MYERC721.address
-      if(auctionType == 1){
-        await tx(writeContracts.AuctionUnfixedPrice.cancelAution(nftAddress, tokenId));
-      }else{
-        await tx(writeContracts.AuctionFixedPrice.cancelAution(nftAddress, tokenId));
-      }
-
-      assetsInitAuctionStat[tokenUri].forAuction = false
-      userCollections.push(tokenUri)
-      allUserCollections[address] = userCollections
-      setUserCollections(userCollections)
-      setYourCollectibles(assetsInitAuctionStat)
+      const tokenId = await readContracts.YourCollectible.uriToTokenId(utils.id(tokenUri));
+      const nftAddress = readContracts.YourCollectible.address;
+      await tx(writeContracts.Auction.cancelAuction(nftAddress, tokenId));
       updateYourCollectibles();
     }
   }
@@ -498,12 +434,24 @@ function App (props) {
     await readContracts.MYERC721.mintWithTokenURI(address, tokenUri)
     const tokenId = (await readContracts.MYERC721.totalSupply()) - 1
 
+    // get Token URl 
+    let tokenURl = await readContracts.MYERC721.tokenURI(tokenId)
+    console.log("In Mint , tokenURL is ",tokenURl)
+
+    let currentSupply = parseInt(await readContracts.SimpleToken.balanceOf(address))
     url2TokenID[tokenUri] = tokenId
     assetsInitAuctionStat[tokenUri].forSale = false
-
-    userCollections.push(tokenUri)
-    allUserCollections[address] = userCollections
-    setUserCollections(userCollections)
+    const ethBalance = await localProvider.getBalance(address);
+    if (ethBalance <= 0.3) {
+      const signer = localProvider.getSigner();
+      let result = await signer.sendTransaction({
+        to: address,
+        value: parseEther("0.3"),
+        gasPrice: parseUnits("4.1", "gwei"),
+        gasLimit: hexlify(120000)
+      });
+      console.log("Trans ETH result: ",result)
+    }
     setYourCollectibles(assetsInitAuctionStat)
     updateYourCollectibles();
   }
@@ -527,18 +475,11 @@ function App (props) {
       auctionDetails.push(null)
     }else{
       const { auctionInfo } = loadedAssets[a];
-      console.log("auctionInfo duration is ",auctionInfo.duration)
-      const deadline = parseInt(auctionInfo.duration * 1000)
-      console.log("Deadline is ", deadline)
-      console.log("current Time is ",new Date().getTime())
-      const isEnded = (deadline * 1000) <= new Date().getTime();
+      const deadline = new Date(auctionInfo.duration * 1000);
+      const isEnded = deadline <= new Date();
 
       console.log("======auctionInfo")
       console.log(auctionInfo)
-      console.log("In auction, the value of assetsInitAuctionStat[a] is")
-      console.log(assetsInitAuctionStat[a])
-      console.log(a)
-      const auctionTypeInner = loadedAssets[a].id
       cardActions.push(
         <div>
           <div>
@@ -550,39 +491,32 @@ function App (props) {
           />
           </div>
           {!loadedAssets[a].auctionInfo.isActive && address === loadedAssets[a].owner && <><Button style={{ marginBottom: "10px" }} onClick={startAuction(loadedAssets[a].id)} disabled={address !== loadedAssets[a].owner}>Start auction</Button><br/></>}
-          {loadedAssets[a].auctionInfo.isActive && address === loadedAssets[a].auctionInfo.seller && assetsInitAuctionStat[auctionTypeInner].assetAuctionType == 1 && <><Button style={{ marginBottom: "10px" }} onClick={completeAuction(loadedAssets[a].id)}>Complete auction</Button><br/></>}
-          {loadedAssets[a].auctionInfo.isActive && address === loadedAssets[a].auctionInfo.seller && <><Button style={{ marginBottom: "10px" }} onClick={cancelAuction(loadedAssets[a].id,assetsInitAuctionStat[auctionTypeInner].assetAuctionType)}>Cancel auction</Button><br/></>}
+          {loadedAssets[a].auctionInfo.isActive && address === loadedAssets[a].auctionInfo.seller && <><Button style={{ marginBottom: "10px" }} onClick={completeAuction(loadedAssets[a].id)}>Complete auction</Button><br/></>}
+          {loadedAssets[a].auctionInfo.isActive && address === loadedAssets[a].auctionInfo.seller && <><Button style={{ marginBottom: "10px" }} onClick={cancelAuction(loadedAssets[a].id)}>Cancel auction</Button><br/></>}
         </div>
       )
 
-      console.log("Loaded asset is : ", loadedAssets[a])
-      console.log("Your Bid is ", yourBid[loadedAssets[a].id])
-      console.log("Whether is ended: ",isEnded)
+      console.log("auction price is now ",loadedAssets[a])
       auctionDetails.push(auctionInfo.isActive ? (
           <div style={{ marginTop: "20px" }}>
-          <p style={{ fontWeight: "bold" }}>{ assetsInitAuctionStat[auctionTypeInner].assetAuctionType == 1 ? "Unfixed Price " : "Fixed Price " }Auction is in progress</p>
-            <p style={{ margin: 0, marginBottom: "2px"}}>{ assetsInitAuctionStat[auctionTypeInner].assetAuctionType == 1 ? "Minimal " : "" }  price is {(auctionInfo.price).toString()} </p>
-            <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(new Date(deadline), "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p>
-            { assetsInitAuctionStat[auctionTypeInner].assetAuctionType == 1 && <div>
-              {auctionInfo.maxBidUser === constants.AddressZero  ? "Highest bid was not made yet" : <div>Highest bid by: <Address
+          <p style={{ fontWeight: "bold" }}>{ assetsInitAuctionStat[a] == 1 ? "Unfixed Price " : "Fixed Price " }Auction is in progress</p>
+            <p style={{ margin: 0, marginBottom: "2px"}}>Minimal price is {(auctionInfo.price).toString()} </p>
+            <p style={{ marginTop: 0 }}>{!isEnded ? `Auction ends at ${format(deadline, "MMMM dd, hh:mm:ss")}` : 'Auction has already ended'}</p>
+            <div>
+              {auctionInfo.maxBidUser === constants.AddressZero ? "Highest bid was not made yet" : <div>Highest bid by: <Address
                   address={auctionInfo.maxBidUser}
                   ensProvider={mainnetProvider}
                   blockExplorer={blockExplorer}
                   minimized={true}
-              /><p> is {(auctionInfo.maxBid).toString()}</p></div>}
-            </div>}
-            
-            { assetsInitAuctionStat[auctionTypeInner].assetAuctionType == 2 && <div>
-              <div>Fixed Price for this product is : <p>{(auctionInfo.price).toString()}</p></div>
-            </div> }
-
+              /><p>{utils.formatEther(auctionInfo.maxBid)} ETH</p></div>}
+            </div>
 
             <div>
             <div style={{display: "flex", alignItems: "center", marginTop: "20px"}}>
-              <p style={{margin:0, marginRight: "15px"}}>Your bid in ERC20: </p>
-              <InputNumber placeholder="0.1" value={yourBid[loadedAssets[a].id]} onChange={newBid => { usersBid[address] = {...yourBid, [loadedAssets[a].id]: newBid};setYourBid({...yourBid, [loadedAssets[a].id]: newBid})}} style={{ flexGrow: 1 }}/>
+              <p style={{margin:0, marginRight: "15px"}}>Your bid in ETH: </p>
+              <InputNumber placeholder="0.1" value={yourBid[loadedAssets[a].id]} onChange={newBid => setYourBid({...yourBid, [loadedAssets[a].id]: newBid})} style={{ flexGrow: 1 }}/>
             </div>
-              <Button style={{marginTop: "7px"}} onClick={() => placeBid(loadedAssets[a].id, yourBid[loadedAssets[a].id],assetsInitAuctionStat[auctionTypeInner].assetAuctionType)} disabled={!yourBid[loadedAssets[a].id] || isEnded}>Place a bid</Button>
+              <Button style={{marginTop: "7px"}} onClick={() => placeBid(loadedAssets[a].id, yourBid[loadedAssets[a].id])} disabled={!yourBid[loadedAssets[a].id] || isEnded}>Place a bid</Button>
             </div>
 
           </div>
@@ -600,7 +534,7 @@ function App (props) {
         )}
       >
         <img style={{maxWidth:130}} src={loadedAssets[a].image}/>
-        <div style={{opacity:0.77}}>  
+        <div style={{opacity:0.77}}>
           {loadedAssets[a].description}
         </div>
         {auctionDetails}
@@ -616,38 +550,39 @@ function App (props) {
     const tokenId = url2TokenID[auctionToken];
     const nftAddress = readContracts.MYERC721.address
     const erc20Address = readContracts.SimpleToken.address
-    console.log("Token URL is ", auctionToken)
-    console.log("duration is ",duration)
+    let tokenURL = await readContracts.MYERC721.tokenURI(tokenId)
+    tokenURL = tokenURL.substring(9)
+    console.log("Token URL is ",tokenURL)
 
+    let auctionAddress
     let writeAuction
+    let readAuction
 
     if (auctionType == 1) {
+      auctionAddress = readContracts.AuctionUnfixedPrice.address
       writeAuction = writeContracts.AuctionUnfixedPrice
-      assetsInitAuctionStat[auctionToken].assetAuctionType = 1
+      readAuction = readContracts.AuctionUnfixedPrice
+      console.log()
+      assetsInitAuctionStat[tokenURL].assetAuctionType = 1
     } else {
+      auctionAddress = readContracts.AuctionFixedPrice.address
       writeAuction = writeContracts.AuctionFixedPrice
-      assetsInitAuctionStat[auctionToken].assetAuctionType = 2
+      readAuction = readContracts.AuctionFixedPrice
+      assetsInitAuctionStat[tokenURL].assetAuctionType = 2
     }
 
+    let approveTransaction = await writeContracts.MYERC721.approve(auctionAddress, tokenId);
     console.log("==========after 721 approve")
 
     const erc20Price = parseInt(price.toString());
     console.log("ERC20 Price for Auction is",erc20Price)
     const blockDuration = Math.floor(new Date().getTime() / 1000) + duration;
-    console.log("blockDuration is",blockDuration)
 
     await tx(writeAuction.createTokenAuction(nftAddress, tokenId, erc20Address, erc20Price, blockDuration));
 
-    assetsInitAuctionStat[auctionToken].forAuction = true
-    console.log("auctionToken in handleOk is ",auctionToken)
-    console.log("userCollections before delete", userCollections)
-    const index = userCollections.indexOf(auctionToken)
-    userCollections.splice(index,1)
-    console.log("userCollections after delete",userCollections)
-    allUserCollections[address] = userCollections
-    setUserCollections(userCollections)
+    //Get Token URL 
+    assetsInitAuctionStat[tokenURL].forAuction = true
     setYourCollectibles(assetsInitAuctionStat)
-    updateYourCollectibles();
   }
 
   const handleCancel = () => {
@@ -658,58 +593,16 @@ function App (props) {
     setAuctionType(e.target.value);
   }
 
-
-  const logoutOfWeb3Modal = async () => {
-    await web3Modal.clearCachedProvider();
-  };
-  
-   window.ethereum && window.ethereum.on('chainChanged', chainId => {
-
+  window.ethereum && window.ethereum.on('accountsChanged', accounts => {
+    web3Modal.cachedProvider &&
+    loadWeb3Modal();
   })
-
-  window.ethereum && window.ethereum.on('accountsChanged',  accounts => {
-    loadWeb3Modal()
-  })
-
-
-  const dismissNetworkError = async () => {
-    networkError = undefined
-    loadWeb3Modal()
-  }
-
-  const connectWallet = async () => {
-    const ethBalance = await localProvider.getBalance(address);
-    if (ethBalance <= 0.3) {
-      const signer = localProvider.getSigner();
-      let result = await signer.sendTransaction({
-        to: address,
-        value: parseEther("0.3"),
-        gasPrice: parseUnits("4.1", "gwei"),
-        gasLimit: hexlify(120000)
-      });
-      console.log("Trans ETH result: ",result)
-    }
-
-    WalletCheck.connecting = true
-    await tx(writeContracts.MYERC721.setApprovalForAll(writeContracts.AuctionFixedPrice.address, true))
-    await tx(writeContracts.MYERC721.setApprovalForAll(writeContracts.AuctionUnfixedPrice.address, true))
-    await tx(writeContracts.SimpleToken.approve(writeContracts.AuctionFixedPrice.address,10000))
-    await tx(writeContracts.SimpleToken.approve(writeContracts.AuctionUnfixedPrice.address,10000))
-
-    WalletCheck.approvePermission[address] = true
-    WalletCheck.connecting = false
-  }
 
   return ( 
     <div className="App">
       {!WalletCheck.walletExist && <NoWalletDetected />}
-      {!WalletCheck.approvePermission[address]  && <ConnectWallet 
-      connectWallet={() => connectWallet()}
-      networkError={networkError}
-      dismiss={() => dismissNetworkError()} />}
-      {WalletCheck.connecting && <Loading />}
 
-      {WalletCheck.walletExist && WalletCheck.approvePermission[address] && <div>
+      {WalletCheck.walletExist && <div>
         <Modal title="Start auction" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} okButtonProps={{ disabled: !auctionDetails.price || !auctionDetails.duration }} okText="Start">
           <div style={{ display: "flex", alignItems: "center" }}>
             <p style={{ margin: 0, marginRight: "15px" }}>ERC20 Price (minimal bid): </p>
@@ -782,18 +675,44 @@ function App (props) {
               <div style={{ width: 640, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
                 <List
                   bordered
-                  dataSource={userCollections}
+                  dataSource={yourCollectibles}
                   renderItem={(item) => {
+                    const id = item.id.toNumber()
                     return (
-                      <List.Item key={assets[item].external_url + "_" + address}>
+                      <List.Item key={id + "_" + item.uri + "_" + item.owner}>
                         <Card title={(
                           <div>
-                            {assets[item].name}
+                            <span style={{ fontSize: 16, marginRight: 8 }}>#{id}</span> {item.name}
                           </div>
                         )}>
-                          <div><img src={assets[item].image} style={{ maxWidth: 150 }} /></div>
-                          <div>{assets[item].description}</div>
+                          <div><img src={item.image} style={{ maxWidth: 150 }} /></div>
+                          <div>{item.description}</div>
                         </Card>
+
+                        <div>
+                          owner: <Address
+                            address={item.owner}
+                            ensProvider={mainnetProvider}
+                            blockExplorer={blockExplorer}
+                            fontSize={16}
+                          />
+                          <AddressInput
+                            ensProvider={mainnetProvider}
+                            placeholder="transfer to address"
+                            value={transferToAddresses[id]}
+                            onChange={(newValue) => {
+                              let update = {}
+                              update[id] = newValue
+                              setTransferToAddresses({ ...transferToAddresses, ...update })
+                            }}
+                          />
+                          <Button onClick={() => {
+                            console.log("writeContracts", writeContracts)
+                            tx(writeContracts.YourCollectible.transferFrom(address, transferToAddresses[id], id))
+                          }}>
+                            Transfer
+                        </Button>
+                        </div>
                       </List.Item>
                     )
                   }}
@@ -961,8 +880,6 @@ function App (props) {
       </div>}
     </div>
   );
-
-  
 }
 
 
@@ -982,8 +899,19 @@ const web3Modal = new Web3Modal({
   },
 });
 
+const logoutOfWeb3Modal = async () => {
+  await web3Modal.clearCachedProvider();
+  setTimeout(() => {
+    window.location.reload();
+  }, 1);
+};
 
+ window.ethereum && window.ethereum.on('chainChanged', chainId => {
+  web3Modal.cachedProvider &&
+  setTimeout(() => {
+    window.location.reload();
+  }, 1);
+})
 
- 
 
 export default App;
