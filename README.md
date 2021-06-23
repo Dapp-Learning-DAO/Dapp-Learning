@@ -125,6 +125,9 @@ https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?le
 - Day-37 swarm
     https://www.chainnews.com/articles/625290542956.htm  
  
+- Day-38 Flashbots provider for ethers.js
+https://github.com/flashbots/ethers-provider-flashbots-bundle
+
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
  此部分建议以submoudle方式引入。
