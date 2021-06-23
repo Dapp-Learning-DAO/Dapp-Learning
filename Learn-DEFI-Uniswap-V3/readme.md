@@ -375,3 +375,4 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
   //https://github.com/GammaStrategies/awesome-uniswap-v3
   https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg  星想法
   https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol   nft farming
+  https://github.com/omarish/uniswap-v3-deploy-plugin  一键部署V3
