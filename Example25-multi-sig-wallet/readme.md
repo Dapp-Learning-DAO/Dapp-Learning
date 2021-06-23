@@ -81,3 +81,4 @@
 ## 参考链接
 https://zhuanlan.zhihu.com/p/337823524
 https://github.com/gnosis/MultiSigWallet/tree/master/contracts
+https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c

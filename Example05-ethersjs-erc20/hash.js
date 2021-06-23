@@ -32,6 +32,11 @@ const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
 
+// hash test
+console.log("&&&1： mint: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("createAndInitializePoolIfNecessary(address,address,uint24,uint160)")));
+console.log("&&&1： increase: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256))")));
+console.log("&&&1： muticall: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("multicall(bytes[])")));
+console.log("&&&1： refund: ", ethers.utils.keccak256( ethers.utils.toUtf8Bytes("refundETH()")));
 // Create Wallet
 let wallet = new ethers.Wallet(account_from.privateKey, provider);
 
@@ -39,7 +44,7 @@ let wallet = new ethers.Wallet(account_from.privateKey, provider);
    -- Deploy Contract --
 */
 // Create Contract Instance with Signer
-const deployContractIns = new ethers.ContractFactory(abi, bytecode, wallet);
+//const deployContractIns = new ethers.ContractFactory(abi, bytecode, wallet);
 
 const Trans = async () => {
    console.log("===============================1. Deploy Contract");
@@ -125,4 +130,4 @@ const Trans = async () => {
 
 };
 
-Trans();
+//Trans();

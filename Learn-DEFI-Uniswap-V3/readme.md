@@ -322,6 +322,51 @@ NonfungiblePositionManager提供了collect函数提取手续费。每个Position
 tick范围
  imin=−887272,imax=887272
 
+
+## 测试代码
+ delegatecall 相当于把另外一个合约（或库）的函数“拉”到了当前合约（D）来执行，就像当前合约的内部函数一样。
+
+ 委托调用一个经典用法是合约的升级， 如果合约数据与逻辑分开， 逻辑函数通过委托调用来实现，就很容易实现逻辑的升级。
+ 保证sender不变
+
+ multicall 方法主要调用了两个方法：
+
+ 主网weth地址：0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+ 主网USDT地址：0xdac17f958d2ee523a2206206994597c13d831ec7
+ NonfungiblePositionManager: 0xc36442b4a4522e871399cd717abdd847ab11fe88
+
+1.首次添加流动性：
+```
+Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256))
+
+ struct MintParams {
+        address token0;   //
+        address token1;   //
+        uint24 fee;
+        int24 tickLower;   //
+        int24 tickUpper;
+        uint256 amount0Desired;   //提供的 token0 数
+        uint256 amount1Desired;   //提供的 token1 数
+        uint256 amount0Min;
+        uint256 amount1Min;
+        address recipient;
+        uint256 deadline;
+    }
+```
+2. increaseLiquidity
+```
+ struct IncreaseLiquidityParams {
+        uint256 tokenId;
+        uint256 amount0Desired;
+        uint256 amount1Desired;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        uint256 deadline;
+    }
+```
+
+
+
 ## 参考链接
   https://learnblockchain.cn/article/2357
   https://learnblockchain.cn/article/2580
@@ -330,3 +375,4 @@ tick范围
   //https://github.com/GammaStrategies/awesome-uniswap-v3
   https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg  星想法
   https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol   nft farming
+  https://github.com/omarish/uniswap-v3-deploy-plugin  一键部署V3

@@ -37,6 +37,8 @@
 - **https://github.com/HQ20/contracts**    
 - **https://learnblockchain.cn/**  
 （很多很棒的教程）
+- **https://live.csdn.net/list/Kevin_M_00**
+（密码学课程）
 
 
 ## 基础课程列表(可自由添加任务卡)
@@ -84,6 +86,7 @@ https://snapshot.org/#/
 - Day-25 multi-sig-wallet  
 - Day-26 wallet develop  
 https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
+http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/
 
 - Day-27 Quadratic vote  
 https://www.chainnews.com/zh-hant/articles/460460084917.htm  
@@ -134,6 +137,7 @@ V3 https://learnblockchain.cn/article/2357
 
 - P2 Compound    
 https://learnblockchain.cn/article/1015
+https://github.com/compound-developers/compound-supply-examples
 
 - P3 Aave  
   https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade    
