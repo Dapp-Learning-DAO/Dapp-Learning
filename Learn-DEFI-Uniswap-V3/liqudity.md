@@ -63,7 +63,7 @@ emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
 ```
 
 ## 地址跟踪：
-以0x6b50ed5c2f8ab4dd7a02b7cdc4e57e140292e10f地址为例
+以 `0x6b50ed5c2f8ab4dd7a02b7cdc4e57e140292e10f` 地址为例
 
 1  添加流动性
 https://etherscan.io/tx/0xb340ded02a373b71104ebf0e7acfe53d4f05bbf9102a15f72fa10dabdce95c53
