@@ -12,7 +12,24 @@
     npx hardhat test   
    
   3 script下有相应合约测试代码。  
-    npx hardhat run scripts/auction-fix-price-script.js --network kovan  
+    npx hardhat run scripts/auction-fix-price-script.js --network kovan
+
+## 测试步骤
+
+- 启动hardhat node
+npx hardhat node --network hardhat
+
+- 启动ipfs
+ipfs daemon
+
+- 部署合约
+npx hardhat run scripts/upload.js --network localhost
+npx hardhat run scripts/react_app_contract.js --network localhost
+
+- 启动前端
+yarn install
+yarn start
+
 
 ## 参考链接
  https://medium.com/coinmonks/how-to-implement-an-erc721-market-f805959ddcf  

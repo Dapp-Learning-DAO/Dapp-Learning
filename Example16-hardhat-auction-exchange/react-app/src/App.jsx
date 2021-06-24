@@ -306,8 +306,12 @@ function App (props) {
     )
   }
 
+
+
   const loadWeb3Modal = useCallback(async () => {
+    console.log('loadWeb3Modal', web3Modal, web3Modal.cachedProvider)
     const provider = await web3Modal.connect();
+    console.log(provider)
     setInjectedProvider(new Web3Provider(provider));
   }, [setInjectedProvider]);
 
@@ -340,7 +344,7 @@ function App (props) {
   console.log("Your local Balance")
   console.log(yourLocalBalance)
     faucetHint = (
-      <div style={{padding:16}}>
+      <div style={{padding:16, position: "fixed", textAlign: "right", right: 0, top: 40 }}>
         <Button type={"primary"} onClick={()=>{
           grabFounds()
         }}>
@@ -371,6 +375,8 @@ function App (props) {
   const [url2TokenID, setUrl2TokenID] = useState({})
 
   const [auctionType, setAuctionType] = useState(1);
+
+  let [Hover, setHover] = useState(false);
   
   const updateYourCollectibles = async () => {
     let assetUpdate = []
@@ -416,6 +422,12 @@ function App (props) {
 
   const startAuction = (tokenUri) => {
     return async () => {
+      if (!injectedProvider) {
+        await loadWeb3Modal();
+      }
+      if (!WalletCheck.approvePermission[address]) {
+        await connectWallet();
+      }
       setAuctionToken(tokenUri);
       setModalVisible(true);
       setAuctionType(1);
@@ -495,6 +507,12 @@ function App (props) {
   }
 
   const mintItem = async (tokenUri) => {
+    if (!injectedProvider) {
+      await loadWeb3Modal()
+    }
+    if (!WalletCheck.approvePermission[address]) {
+        await connectWallet();
+    }
     await readContracts.MYERC721.mintWithTokenURI(address, tokenUri)
     const tokenId = (await readContracts.MYERC721.totalSupply()) - 1
 
@@ -700,16 +718,23 @@ function App (props) {
     WalletCheck.connecting = false
   }
 
+
+
+  const toggleHover = async () => {
+    console.log('toggleHover')
+    setHover(!Hover);
+  }
+
   return ( 
     <div className="App">
       {!WalletCheck.walletExist && <NoWalletDetected />}
-      {!WalletCheck.approvePermission[address]  && <ConnectWallet 
+      {/*{!WalletCheck.approvePermission[address]  && <ConnectWallet
       connectWallet={() => connectWallet()}
       networkError={networkError}
-      dismiss={() => dismissNetworkError()} />}
+      dismiss={() => dismissNetworkError()} />}*/}
       {WalletCheck.connecting && <Loading />}
 
-      {WalletCheck.walletExist && WalletCheck.approvePermission[address] && <div>
+      {WalletCheck.walletExist && <div>
         <Modal title="Start auction" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} okButtonProps={{ disabled: !auctionDetails.price || !auctionDetails.duration }} okText="Start">
           <div style={{ display: "flex", alignItems: "center" }}>
             <p style={{ margin: 0, marginRight: "15px" }}>ERC20 Price (minimal bid): </p>
@@ -735,7 +760,7 @@ function App (props) {
 
         <BrowserRouter>
 
-          <Menu style={{ textAlign: "center", alignItems: "center" }} selectedKeys="/" mode="horizontal">
+          <Menu style={{ textAlign: "center", alignItems: "center" }} selectedKeys={route} mode="horizontal">
             <Menu.Item key="/">
               <Link onClick={() => { setRoute("/") }} to="/">Gallery</Link>
             </Menu.Item>
@@ -890,7 +915,14 @@ function App (props) {
             </Route>
             <Route path="/debugcontracts">
               <Contract
-                name="YourCollectible"
+                name="AuctionFixedPrice"
+                signer={userProvider.getSigner()}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+              />
+              <Contract
+                name="AuctionUnfixedPrice"
                 signer={userProvider.getSigner()}
                 provider={localProvider}
                 address={address}
@@ -904,7 +936,7 @@ function App (props) {
 
 
         {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
-        <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
+        <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
           <Account
             address={address}
             localProvider={localProvider}
@@ -916,7 +948,7 @@ function App (props) {
             logoutOfWeb3Modal={logoutOfWeb3Modal}
             blockExplorer={blockExplorer}
           />
-          {faucetHint}
+          {Hover && faucetHint}
         </div>
 
         {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
