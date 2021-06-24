@@ -14,15 +14,6 @@ npx hardhat test
 npx hardhat node
 ```
 
-- create frontend with react
-
-```shell
-npx create-react-app frontend
-cd frontend
-npm install bootstrap --save
-npm start
-```
-
 - Deploy
 
 ```shell
@@ -37,4 +28,12 @@ npx hardhat run scripts/deploy.js --network kovan
 cd backend
 npm install
 node app.js
+```
+
+- start react
+
+```shell
+cd frontend
+yarn 
+yarn start
 ```
