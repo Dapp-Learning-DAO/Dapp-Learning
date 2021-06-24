@@ -39,6 +39,8 @@
 （很多很棒的教程）
 - **https://live.csdn.net/list/Kevin_M_00**
 （密码学课程）
+- **https://github.com/OffcierCia/DeFi-Developer-Road-Map**
+  （defi教程）
 
 
 ## 基础课程列表(可自由添加任务卡)
