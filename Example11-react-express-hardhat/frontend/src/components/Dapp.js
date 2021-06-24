@@ -24,7 +24,7 @@ const API = require("../api.js");
 // This is the Hardhat Network id, you might change it in the hardhat.config.js
 // Here's a list of network ids https://docs.metamask.io/guide/ethereum-provider.html#properties
 // to use when deploying to other networks.
-const HARDHAT_NETWORK_ID = "1337";
+const HARDHAT_NETWORK_ID = "42";
 
 // This is an error code that indicates that the user canceled a transaction
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
@@ -366,7 +366,8 @@ export class Dapp extends React.Component {
   }
 
   // This method checks if Metamask selected network is Localhost:8545
-  _checkNetwork() {
+  _checkNetwork () {
+    console.log(window.ethereum.networkVersion)
     if (window.ethereum.networkVersion === HARDHAT_NETWORK_ID) {
       return true;
     }
