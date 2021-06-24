@@ -61,7 +61,7 @@
 - Day-17 ERC865 & ERC875
 - Day-18 web3.py
 - Day-19 brownie
-  https://github.com/eth-brownie/brownie
+  - https://github.com/eth-brownie/brownie
 
 - Day-20 scaffold-flash-loan &  dex arbitrage
   - https://github.com/austintgriffith/scaffold-eth
@@ -75,7 +75,7 @@
   - https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da
 
 - Day-22 scaffold-zk
-  https://blog.iden3.io/circom-snarkjs-plonk.html
+  - https://blog.iden3.io/circom-snarkjs-plonk.html
 
 - Day-23 snapshot
   - https://www.chainnews.com/articles/038258049958.htm
@@ -91,7 +91,7 @@
   - http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/
 
 - Day-27 Quadratic vote
-  https://www.chainnews.com/zh-hant/articles/460460084917.htm
+  - https://www.chainnews.com/zh-hant/articles/460460084917.htm
 
 - Day-28 optimism layer2
   - https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts
@@ -103,19 +103,19 @@
 - Day-30 zksync layer2
 
 - Day-31  duneanalytics & nansen
-  https://cloud.tencent.com/developer/article/1754684
+  - https://cloud.tencent.com/developer/article/1754684
 
 - Day-32 JavaScript Cryptography
-  https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
+  - https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
 
 - Day-33 pooltogether
-  https://pooltogether.com/
+  - https://pooltogether.com/
 
 - Day-34 vyper
-  https://vyper.readthedocs.io/en/stable/
+  - https://vyper.readthedocs.io/en/stable/
 
 - Day-35 Merkel-Patricia Tree(MPT)
-  https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+  - https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
 
 - Day-36 nft Filecoin
   - https://www.bilibili.com/video/BV1j5411w7MH
@@ -123,10 +123,10 @@
   - https://nft.storage
 
 - Day-37 swarm
-  https://www.chainnews.com/articles/625290542956.htm
+  - https://www.chainnews.com/articles/625290542956.htm
 
 - Day-38 Flashbots provider for ethers.js
-  https://github.com/flashbots/ethers-provider-flashbots-bundle
+  - https://github.com/flashbots/ethers-provider-flashbots-bundle
 
 ## 进阶课程(可自由添加项目卡)
 
@@ -149,7 +149,7 @@
   - https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol
 
 - P4 SNX
-  https://github.com/Synthetixio
+  - https://github.com/Synthetixio
 
 - P5 Curve
   - https://curve.fi/files/stableswap-paper.pdf
@@ -169,7 +169,7 @@
 - P9 AMPL
 
 - P10 DODO
-  https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
+  - https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
 
 ## NFT 进阶
 
@@ -197,7 +197,7 @@
 
 ## 注意事项
   刚入手项目，可以有四种方式切入：
-  1 可以优化之前的项目代码和readme
-  2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
-  3 可以自由新增任务卡（需附上参考链接）
-  4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+  - 1 可以优化之前的项目代码和readme
+  - 2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
+  - 3 可以自由新增任务卡（需附上参考链接）
+  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
