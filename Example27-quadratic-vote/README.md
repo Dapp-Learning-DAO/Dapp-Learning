@@ -1,38 +1,36 @@
-### 参考资料
-参考链接
+## 参考资料
 
-二次方投票和二次方资助
-https://www.matataki.io/p/6113
+[二次方投票和二次方资助](https://www.matataki.io/p/6113)
 
+## 代码解读
 
 1. voteTool 二次方投票
 2. FinancingTool 二次方融资
 
 **共性一**
-两个的提案都是先通过hash获取到id
+两个的提案都是先通过 hash 获取到 id
 
-``
+```
+function hash(bytes memory _b) public pure returns (bytes32){
+    return keccak256(_b);
+}
+```
 
-    function hash(bytes memory _b) public pure returns (bytes32){
-	        return keccak256(_b);
-    }
-``
-在实际添加或者投票的时候用的上面获取到的id, 内部用的数字，是为了event可以保持该id  
+在实际添加或者投票的时候用的上面获取到的 id, 内部用的数字，是为了 event 可以保持该 id
 
-实际好像bytes32也可以，但是bytes/string不行，event中会被hash
+实际好像 bytes32 也可以，但是 bytes/string 不行，event 中会被 hash
 
 **共性二**
-0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE  
+0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
 表示接受以太坊，其他表示接受代币
 
 另外， 两个都是例子，实际按照需求稍微修改即可
 
 #### voteTool
-    
+
 二次方投票， 票数越多，需要金额越多
-例： 第一票1eth, 第二票2eth,第三票4eth,第四票8eth
-票数n  
-金额 = 2**(n-1)  
+例： 第一票 1eth，第二票 2eth， 第三票 4eth，第四票 8eth，
+票数 n 金额 = 2\*\*(n-1)
 
 暂未兼容eth/token一起投
 
@@ -42,11 +40,11 @@ https://www.matataki.io/p/6113
 - withdraw() public onlyOwner(内部只是提eth, 代币需要修改)
 
 #### financingTool
+
 每个用户针对某个提案投票都是总金额的开平方
-公式解读由 **rebase_Harry** 大佬提供~
+公式解读由 **Harry** 提供
 
-``
-
+```
 	 /**
         绿色：
         项目A：1*1 = 1
@@ -70,11 +68,6 @@ https://www.matataki.io/p/6113
         D: 9 + 3/14 * 150 = 41.142857143
 	*/
 
-
-
-
-
-
     struct Proposal {
         uint256 name;//提案id
         uint256 amount;//获得的金额
@@ -89,9 +82,9 @@ https://www.matataki.io/p/6113
         uint256 amount;//金额
     }
 
-``
+```
 
-场景： 每个人可以对多个提案进行捐助，在一定时间内结束,结束后给一定时间用于增加配捐时间，确认完整结束后，可以由提案owner去领取捐助额
+场景：每个人可以对多个提案进行捐助，在一定时间内结束，结束后给一定时间用于增加配捐时间，确认完整结束后，可以由提案 owner 去领取捐助额。
 
 - addProposal(uint256 _proposal) public onlyOwner(添加提案，内部的p.owner=msg.sender有误，看需求修改)
 - vote(uint256 _proposal, uint256 _inAmount) public payable(捐助)
