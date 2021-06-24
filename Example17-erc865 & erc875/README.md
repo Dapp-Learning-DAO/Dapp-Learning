@@ -6,3 +6,4 @@
 
 ## 参考链接
 https://github.com/propsproject/props-token-distribution
+EIP712 ：https://learnblockchain.cn/article/1357  

@@ -26,7 +26,7 @@
 - remix本地环境 https://zhuanlan.zhihu.com/p/38309494   
 
 
-## 合约参考库及相关项目
+## 合约参考库及致敬相关项目
 - **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**  
 （shooter大佬的项目，适合入门solidity）
   
@@ -37,6 +37,10 @@
 - **https://github.com/HQ20/contracts**    
 - **https://learnblockchain.cn/**  
 （很多很棒的教程）
+- **https://live.csdn.net/list/Kevin_M_00**
+（密码学课程）
+- **https://github.com/OffcierCia/DeFi-Developer-Road-Map**
+  （defi教程）
 
 
 ## 基础课程列表(可自由添加任务卡)
@@ -62,9 +66,10 @@
 - Day-19 brownie   
     https://github.com/eth-brownie/brownie 
 
-- Day-20 scaffold-flash-loan  
+- Day-20 scaffold-flash-loan &  dex arbitrage
     https://github.com/austintgriffith/scaffold-eth
     https://soliditydeveloper.com/eip-3156
+    https://research.nansen.ai/a-deep-dive-into-arbitrage-on-decentralised-exchanges/
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
@@ -84,6 +89,7 @@ https://snapshot.org/#/
 - Day-25 multi-sig-wallet  
 - Day-26 wallet develop  
 https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js  
+http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/
 
 - Day-27 Quadratic vote  
 https://www.chainnews.com/zh-hant/articles/460460084917.htm  
@@ -122,6 +128,9 @@ https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?le
 - Day-37 swarm
     https://www.chainnews.com/articles/625290542956.htm  
  
+- Day-38 Flashbots provider for ethers.js
+https://github.com/flashbots/ethers-provider-flashbots-bundle
+
 ## 进阶课程(可自由添加项目卡)
  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和code view。可采用小组协作方式将项目部署至测试网，以此为基础在Rebase社区进行分享。 
  此部分建议以submoudle方式引入。
@@ -134,6 +143,7 @@ V3 https://learnblockchain.cn/article/2357
 
 - P2 Compound    
 https://learnblockchain.cn/article/1015
+https://github.com/compound-developers/compound-supply-examples
 
 - P3 Aave  
   https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade    
