@@ -64,9 +64,10 @@
 - Day-19 brownie   
     https://github.com/eth-brownie/brownie 
 
-- Day-20 scaffold-flash-loan  
+- Day-20 scaffold-flash-loan &  dex arbitrage
     https://github.com/austintgriffith/scaffold-eth
     https://soliditydeveloper.com/eip-3156
+    https://research.nansen.ai/a-deep-dive-into-arbitrage-on-decentralised-exchanges/
 
 - Day-21 scaffold-Lender  
     https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  

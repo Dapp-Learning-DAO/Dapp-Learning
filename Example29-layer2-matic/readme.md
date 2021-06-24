@@ -11,8 +11,7 @@
 ## 操作步骤
   npx hardhat run scripts/sample-script.js --network matic_mumbai
 ## 参考链接
-
- https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
+https://www.yuque.com/docs/share/8e737364-c380-418e-af21-0f07095fe900 使用教程
+https://cloud.tencent.com/developer/article/1828250?from=article.detail.1794419
 hardhat: https://docs.matic.network/docs/develop/hardhat/
-
 https://medium.com/pinata/how-to-create-layer-2-nfts-with-polygon-and-ipfs-aef998ff8ef2

@@ -334,6 +334,7 @@ tick范围
  主网weth地址：0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
  主网USDT地址：0xdac17f958d2ee523a2206206994597c13d831ec7
  NonfungiblePositionManager: 0xc36442b4a4522e871399cd717abdd847ab11fe88
+ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 
 1.首次添加流动性：
 ```
