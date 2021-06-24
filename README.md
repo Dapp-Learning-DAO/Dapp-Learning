@@ -26,7 +26,7 @@
 - remix本地环境 https://zhuanlan.zhihu.com/p/38309494   
 
 
-## 合约参考库及相关项目
+## 合约参考库及致敬相关项目
 - **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**  
 （shooter大佬的项目，适合入门solidity）
   
