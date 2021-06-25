@@ -82,7 +82,7 @@ Account balance of receiver is:  50
 4. 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可
 5. 如果yarn install 失败，可以进入新生成的项目目录，手动安装npm依赖，然后依次执行
    yarn codegen
-   yarn buld
+   yarn build
    会自动生成 ./generated/ 目录和文件
 ```
 
