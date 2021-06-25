@@ -87,9 +87,6 @@
 - Day-25 multi-sig-wallet
 
 - Day-26 wallet develop
-  - https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
-  - http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/
-
 - Day-27 Quadratic vote
   - https://www.chainnews.com/zh-hant/articles/460460084917.htm
 
