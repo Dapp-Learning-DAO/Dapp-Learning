@@ -1,20 +1,29 @@
 /*
 There are two way to fetch data from TheGraph
-The first one, we can use execute with operation
 */
-const grid = require("console-gridlist")
 const { execute, makePromise } = require('apollo-link');
 const { HttpLink } = require('apollo-link-http');
 const gql = require('graphql-tag');
 const fetch = require('node-fetch');
+const mysql  = require('mysql');  
  
 const query = gql`query($input: String){
     positions(where : { owner: $input }) {
         id
         owner
         liquidity
+        pool {
+          createdAtTimestamp
+          id
+        }
         depositedToken0
         depositedToken1
+        token0{
+          symbol
+        }
+        token1 {
+          symbol
+        }
         withdrawnToken0
         withdrawnToken1
     }
@@ -38,28 +47,45 @@ const operation = {
     // extensions: {}, //optional
   };
 
+
+// Get data, and insert into mysql
+let connection = mysql.createConnection({
+  host : 'localhost',
+  user : 'root', 
+  password : 'Aa12345!',
+  database : 'test'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('连接失败: ' + err.stack);
+    return;
+  }
+  console.log('连接成功 id ' + connection.threadId);
+});
+
+// The first way to get data, we can use execute with operation
 execute(link, operation).subscribe({
     next: res => {
-        let title = "Positions"
-        let head = ["depositedToken0", "depositedToken1", "id", "liquidity", "owner", "pool.createdAtTimestamp", "pool.id", "token0.symbol", "token1.symbol", "withdrawnToken0", "withdrawnToken1"]
-        let example = grid(title, head, res.data.positions)
-        console.log(example)
-        /* console.log(typeof res.data.positions)
-        let arr = [];
         let obj = res.data.positions
         Object.keys(obj).forEach(v => {
-        let o = [];
-        o[v] = obj[v];
-        arr.push(o)
+          connection.query('INSERT INTO swap_positions(id, owner,liquidity,pool_createdAtTimestamp,pool_id,depositedToken0, \
+            depositedToken1, token0_symbol, token1_symbol, withdrawnToken0, withdrawnToken1) \
+            VALUES(?, ?,?,?,?,?,?,?,?,?,?)', [parseInt(obj[v].id), obj[v].owner, parseInt(obj[v].liquidity), parseInt(obj[v].pool.createdAtTimestamp),obj[v].pool.id, parseFloat(obj[v].depositedToken0), parseFloat(obj[v].depositedToken1), obj[v].token0.symbol, obj[v].token1.symbol, parseFloat(obj[v].withdrawnToken0), parseFloat(obj[v].withdrawnToken1)], (err, results) => {
+            if(err){
+                console.log(err);
+            }
+            console.log(results);
+          })
+          console.log(typeof obj[v].id)
         })
-        console.log(typeof arr)
-        console.log(res.data) */
+    console.log(res.data)
+    connection.end();
 
     },
     error: error => console.log(`received error ${error}`),
     complete: () => console.log(`complete`),
-  });
-
+});
 
 /*
 Second one, we can fetch data directly

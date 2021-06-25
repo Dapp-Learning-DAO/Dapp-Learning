@@ -12,10 +12,9 @@
   "dependencies": {
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
-    "console-grid": "^1.0.17",
-    "console-gridlist": "^1.2.0",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.4",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "urql": "^2.0.4"
   }

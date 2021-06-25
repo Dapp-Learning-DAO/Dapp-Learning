@@ -13,8 +13,6 @@ npx 想要解决的主要问题，就是调用项目内部安装的模块。
 - 1 创建项目：
 ```
 npx hardhat  
-
-Create a sample project
 ```
 
 - 2 编译合约

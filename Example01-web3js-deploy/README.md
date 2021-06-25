@@ -14,7 +14,7 @@ https://ithelp.ithome.com.tw/articles/10202794
 
 3) 部署合约  
 调用 deployContract.deploy 方法构造 deploy 交易, 然后调用 signTransaction 方法进行签名, 之后发送交易。 
-合约调用分两种，一种不改变区块链状态call, 一种改变世界状态 transaction. 
+合约调用分两种，一种不改变区块链状态call, 一种改变区块链状态 transaction. 
 
 
 ## 测试流程:
