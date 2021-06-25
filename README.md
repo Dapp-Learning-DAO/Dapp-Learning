@@ -5,6 +5,7 @@
 主要工具是 web3.js（hardhat), web3.py (Brownie) ，我们选取主流技术和项目作为研究对象，可以认领待完成的任务或者自由添加自己感兴趣的项目。
 项目分基础组件任务卡和项目任务卡，组件任务卡是基本工具组件的了解和集成，项目任务卡是主流 DeFi, NFT, DAO 的典型项目。
 愿景是给 Rebase 社区初级开发者一个可执行且最简的区块链 DAPP 学习路线图，给进阶开发者一个可以交流和协作的平台。
+任务类型涵盖面广泛，实属黑客马拉松必备工具。
 
 ## 基础知识
 
@@ -77,19 +78,16 @@
 - Day-22 scaffold-zk
   - https://blog.iden3.io/circom-snarkjs-plonk.html
 
-- Day-23 snapshot
-  - https://www.chainnews.com/articles/038258049958.htm
-  - https://snapshot.org/#/
+- Day-23 wallet develop
 
 - Day-24 proxy contract
   - https://zhuanlan.zhihu.com/p/34690916
 
 - Day-25 multi-sig-wallet
 
-- Day-26 wallet develop
-  - https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
-  - http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/
-
+- Day-26 snapshot
+  - https://www.chainnews.com/articles/038258049958.htm
+  - https://snapshot.org/#/
 - Day-27 Quadratic vote
   - https://www.chainnews.com/zh-hant/articles/460460084917.htm
 
