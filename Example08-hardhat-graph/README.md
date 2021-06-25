@@ -80,7 +80,11 @@ Account balance of receiver is:  50
 2. Ethereum network 这里选择 kovan
 3. "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
 4. 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可
-``` 
+5. 如果yarn install 失败，可以进入新生成的项目目录，手动安装npm依赖，然后依次执行
+   yarn codegen
+   yarn buld
+   会自动生成 ./generated/ 目录和文件
+```
 
 8) 定义模式  
 这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
@@ -96,7 +100,7 @@ Account balance of receiver is:  50
    
 
 9) 部署 Subgraph
-在控制台先用 graph auth 进行授权:  
+在控制台先用 graph auth 进行授权(注意`deploy/`与`<ACCESS_TOKEN>`之间有空格):  
 ```
   graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 ```
@@ -112,6 +116,10 @@ Account balance of receiver is:  50
 ```
 <SUBGRAPH_NAME> 使用完成的 Subgraph 名称，我们这里是：longdacao/graphtest 。
 
+或者直接运行
+```
+yarn deploy
+```
 
 10) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
