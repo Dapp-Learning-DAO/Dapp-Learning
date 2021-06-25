@@ -12,10 +12,13 @@
   "dependencies": {
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
+    "apollo-link-ws": "^1.0.20",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.4",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
-    "urql": "^2.0.4"
+    "subscriptions-transport-ws": "^0.9.19",
+    "urql": "^2.0.4",
+    "ws": "^7.5.0"
   }
 }
