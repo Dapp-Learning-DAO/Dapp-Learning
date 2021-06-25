@@ -97,7 +97,7 @@ Account balance of receiver is:  50
 9) 修改实体名字
 
 - 进入 graphtest 目录
-- 修改 entities 定义如下
+- 修改 subgraph.yaml 中 entities 定义如下
 ```
 entities:
         - TransferEntity
