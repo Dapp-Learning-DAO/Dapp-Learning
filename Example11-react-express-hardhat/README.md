@@ -1,12 +1,12 @@
 # Todo
 
-- install hardhat
+- 安装 hardhat
 
 ```shell
 npx hardhat
 ```
 
-- Choose Create a sample project.Add a contract SimpleToken.sol to ./contracts, compile contract and test
+- 选择创建一个简单的项目。添加一个名为 SimpleToken.sol 的合约到 ./contracts, 编译此合约并且运行测试
 
 ```shell
 npx hardhat compile
@@ -14,15 +14,15 @@ npx hardhat test
 npx hardhat node
 ```
 
-- Deploy
+- 部署
 
 ```shell
 npx hardhat run scripts/deploy.js --network kovan
 ```
 
-- Find your local node account private key and token address, and import to Metamask
+- 找到你的本地节点账户的私有 key 以及 token 地址，导入到 Metamask 中
 
-- Backend
+- 后端
 
 ```shell
 cd backend
@@ -30,7 +30,7 @@ npm install
 node app.js
 ```
 
-- start react
+- 启动 react
 
 ```shell
 cd frontend

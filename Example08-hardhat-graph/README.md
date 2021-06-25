@@ -87,7 +87,7 @@ Account balance of receiver is:  50
 ```
 
 8) 定义模式  
-这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
+这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts 所以我们使用调整后的这两个个文件。
 
 - 复制文件
 ```
@@ -97,9 +97,18 @@ Account balance of receiver is:  50
   >> 复制 mapping.ts 文件
   cp ./scripts/mapping.ts graphtest/src
 ```
-   
 
-9) 部署 Subgraph
+9) 修改实体名字
+
+- 进入 graphtest 目录
+- 修改 subgraph.yaml 中 entities 定义如下
+```
+entities:
+        - TransferEntity
+        - ApprovalEntity
+```
+
+10) 部署 Subgraph
 在控制台先用 graph auth 进行授权(注意`deploy/`与`<ACCESS_TOKEN>`之间有空格):  
 ```
   graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
@@ -121,7 +130,7 @@ Account balance of receiver is:  50
 yarn deploy
 ```
 
-10) 在 TheGraph 查看  
+11) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
 ## subgraph 
