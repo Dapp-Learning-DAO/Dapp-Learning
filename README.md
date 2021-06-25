@@ -77,16 +77,16 @@
 - Day-22 scaffold-zk
   - https://blog.iden3.io/circom-snarkjs-plonk.html
 
-- Day-23 snapshot
-  - https://www.chainnews.com/articles/038258049958.htm
-  - https://snapshot.org/#/
+- Day-23 wallet develop
 
 - Day-24 proxy contract
   - https://zhuanlan.zhihu.com/p/34690916
 
 - Day-25 multi-sig-wallet
 
-- Day-26 wallet develop
+- Day-26 snapshot
+  - https://www.chainnews.com/articles/038258049958.htm
+  - https://snapshot.org/#/
 - Day-27 Quadratic vote
   - https://www.chainnews.com/zh-hant/articles/460460084917.htm
 
