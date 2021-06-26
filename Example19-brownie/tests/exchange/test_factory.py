@@ -8,7 +8,7 @@ def test_factory(w3, HAY_token, BEE_token, uniswap_factory):
     transaction_receipt2 = uniswap_factory.launchExchange(BEE_token)
     launched_exchange_address = transaction_receipt.return_value
 
-    print(launched_exchange_address)
+    # print(launched_exchange_address)
     assert uniswap_factory.getExchangeCount() == 2
 
     hay_token_exchange = uniswap_factory.tokenToExchangeLookup(HAY_token)
