@@ -59,7 +59,7 @@
 - Day-14 chainlink-api
 - Day-15 nft-blindbox-chainlink-vrf
 - Day-16 nft auction  & exchange
-- Day-17 ERC865 & ERC875
+- Day-17 wallet develop
 - Day-18 web3.py
 - Day-19 brownie
   - https://github.com/eth-brownie/brownie
@@ -78,7 +78,7 @@
 - Day-22 scaffold-zk
   - https://blog.iden3.io/circom-snarkjs-plonk.html
 
-- Day-23 wallet develop
+- Day-23 ERC865 & ERC875
 
 - Day-24 proxy contract
   - https://zhuanlan.zhihu.com/p/34690916
@@ -128,8 +128,8 @@
 
 ## 进阶课程(可自由添加项目卡)
 
-此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。
-此部分建议以 submoudle 方式引入。
+此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
+开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
 
 ## DeFi 进阶
 ### Learn-DEFI-XXX
@@ -189,6 +189,7 @@
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @liberhe 联系方式
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
 - 原则上每周一次开发者沟通会议
+- 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
 - script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功
 - 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本
@@ -199,3 +200,9 @@
   - 2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
   - 3 可以自由新增任务卡（需附上参考链接）
   - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+
+
+## 社区捐助
+  - 欢迎感兴趣的小伙伴一起参与进来，开源项目维护不易，我们欢迎捐助。
+  以太坊地址：0x
+  我们会用多签钱包管理资金，并定期按commit提交记录分配资金给开发者。
