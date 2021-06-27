@@ -59,7 +59,7 @@
 - Day-14 chainlink-api
 - Day-15 nft-blindbox-chainlink-vrf
 - Day-16 nft auction  & exchange
-- Day-17 ERC865 & ERC875
+- Day-17 wallet develop
 - Day-18 web3.py
 - Day-19 brownie
   - https://github.com/eth-brownie/brownie
@@ -78,7 +78,7 @@
 - Day-22 scaffold-zk
   - https://blog.iden3.io/circom-snarkjs-plonk.html
 
-- Day-23 wallet develop
+- Day-23 ERC865 & ERC875
 
 - Day-24 proxy contract
   - https://zhuanlan.zhihu.com/p/34690916
