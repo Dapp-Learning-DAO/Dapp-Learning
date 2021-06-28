@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "npx hardhat compile",
+    "test": "npx hardhat test"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
     "hardhat": "^2.3.0"
