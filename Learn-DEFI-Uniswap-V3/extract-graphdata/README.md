@@ -56,6 +56,9 @@ select * from swap_positions \G;
 node subscription.js
 ```
 
+- 触发事件，观察订阅结果
+触发对应地址上的事件，观察输出结果
+
 ## 参考文档
 https://blog.csdn.net/luxinghong199106/article/details/103471633  
 https://thegraph.com/docs/graphql-api#pagination 
