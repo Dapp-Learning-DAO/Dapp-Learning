@@ -20,20 +20,33 @@ const createSubscriptionObservable = (wsurl, query, variables) => {
 
 // A subscription query to get changes for author with parametrised id 
 // using $id as a query variable
-const SUBSCRIBE_QUERY = gql`subscription {
-    transferEntities {
+const SUBSCRIBE_QUERY = gql`subscription($input: String) {
+    positions(where : { owner: $input }) {
         id
-        from
-        to
-        value
-      }
+        owner
+        liquidity
+        pool {
+          createdAtTimestamp
+          id
+        }
+        depositedToken0
+        depositedToken1
+        token0{
+          symbol
+        }
+        token1 {
+          symbol
+        }
+        withdrawnToken0
+        withdrawnToken1
+    }
 }
 `;
 
 const subscriptionClient = createSubscriptionObservable(
-  'wss://api.thegraph.com/subgraphs/name/yingjingyang/zoranfts-subgraph', // GraphQL endpoint
+  'wss:////api.thegraph.com/subgraphs/name/benesjan/uniswap-v3-subgraph', // GraphQL endpoint
   SUBSCRIBE_QUERY,                                       // Subscription query
-  {}                                                // Query variables
+  {'input': '0x4247269401bcb49d8455e275d70c25be9e2f9285'}                                                // Query variables
 );
 var consumer = subscriptionClient.subscribe(eventData => {
   // Do something on receipt of the event

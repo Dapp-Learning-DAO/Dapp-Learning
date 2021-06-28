@@ -1,6 +1,6 @@
 ## Exchange
 
-  有去中心化交易所， 有 etherdelta订单薄模式和AMM做市商模式。
+  有去中心化交易所， 有 etherdelta订单薄模式和uniswap的AMM做市商模式。
   待集成 0x & bancor & kyber
    
 ### uniswap-v1-like
