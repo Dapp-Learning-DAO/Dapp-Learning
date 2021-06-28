@@ -287,3 +287,5 @@ https://learnblockchain.cn/article/1746
 https://docs.duneanalytics.com/data-tables/data-tables/raw-data/ethereum-data
 
 https://duneanalytics.com/browse/queries?user_name=shooter
+
+https://app.flipsidecrypto.com/velocity
