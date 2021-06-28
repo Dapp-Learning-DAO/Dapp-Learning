@@ -62,8 +62,6 @@
 - Day-17 wallet develop
 - Day-18 web3.py
 - Day-19 brownie
-  - https://github.com/eth-brownie/brownie
-
 - Day-20 scaffold-flash-loan &  dex arbitrage
   - https://github.com/austintgriffith/scaffold-eth
   - https://soliditydeveloper.com/eip-3156
@@ -79,12 +77,10 @@
   - https://blog.iden3.io/circom-snarkjs-plonk.html
 
 - Day-23 ERC865 & ERC875
-
 - Day-24 proxy contract
   - https://zhuanlan.zhihu.com/p/34690916
 
 - Day-25 multi-sig-wallet
-
 - Day-26 snapshot
   - https://www.chainnews.com/articles/038258049958.htm
   - https://snapshot.org/#/

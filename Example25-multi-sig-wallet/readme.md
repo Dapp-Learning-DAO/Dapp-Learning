@@ -7,19 +7,16 @@
 ## 二、合约解读
 > 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
 
-
-* Factory.sol
-* Migrations.sol
 * MultiSigWallet.sol
 * MultiSigWalletFactory.sol
 * MultiSigWalletWithDailyLimit.sol
 * MultiSigWalletWithDailyLimitFactory.sol
 * TestCalls.sol
 * TestToken.sol
-* 
 
 
-## MultiSigWallet.sol
+
+## 合约接口
 
 * 构造函数
 
