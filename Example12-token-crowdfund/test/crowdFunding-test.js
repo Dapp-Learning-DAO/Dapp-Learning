@@ -20,7 +20,7 @@ describe("CrowdFunding contract", function() {
 
     it("Whenever you can start a new crowdfunding project", async function () {
         await crowdFundingContract.startProject("Buy toys","Buy toys",1,100)
-        let allProject = await await crowdFundingContract.returnAllProjects()
+        let allProject = await crowdFundingContract.returnAllProjects()
 
         expect(allProject.length).to.equal(1);
     });
