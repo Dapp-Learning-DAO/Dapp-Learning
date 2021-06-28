@@ -112,6 +112,32 @@ await exchange.getEthAmount(toWei(2000)); // 500
 
 ## `Exchange.sol` 合约实现
 
+### 增加流动性
+
+```solidity
+function addLiquidity(uint256 _tokenAmount)
+    public
+    payable
+{
+    if (getReserve() == 0) {
+        // 初始添加流动性，直接添加，不需要限制
+        IERC20 token = IERC20(tokenAddress);
+        token.transferFrom(msg.sender, address(this), _tokenAmount);
+    } else {
+        // 后续新增流动性则需要按照当前的储备量比例，等比增加
+        // 保证价格添加流动性前后一致
+        uint256 ethReserve = address(this).balance - msg.value;
+        uint256 tokenReserve = getReserve();
+        uint256 tokenAmount = msg.value * (tokenReserve / ethReserve);
+
+        require(_tokenAmount >= tokenAmount, "insufficient token amount");
+
+        IERC20 token = IERC20(tokenAddress);
+        token.transferFrom(msg.sender, address(this), tokenAmount);
+    }
+}
+```
+
 ### 定价功能
 
 虽然是定价功能，但实际上我们得出的是能够换取的数量。
@@ -178,9 +204,187 @@ function tokenToEthSwap(uint256 _tokensSold, uint256 _minEth) public {
 
 `_tokensSold`从用户的余额中转移代币，并发送以太币 `ethBought` 作为交换。
 
+### LP token
+
+我们需要有一种方法来奖励流动性提供者的代币。如果他们没有得到激励，他们就不会提供流动性，因为没有人会白白把他们的代币放在第三方合同中。此外，该奖励不应该由我们支付，因为我们必须获得投资或发行通货膨胀代币来为其提供资金。
+
+唯一好的解决方案是对每次代币交易时收取少量费用，并在流动性提供者之间分配累积费用。这似乎也很公平：用户（交易者）为其他人提供的服务（流动性）付费。
+
+为了奖励公平，我们需要按比例奖励流动性提供者，他们的贡献，即他们提供的流动性数量。如果有人提供了 50% 的池流动性，他们应该得到 50% 的手续费。
+
+#### 定义
+
+`LP token` 是向流动性提供者发行的 ERC20 代币，是一种权益证明：
+
+1. 流动性提供者注入流动性，获得 `LP token`
+2. 获得的代币数量与用户在流动性池中的流动性份额成正比
+3. 手续费根据持有的代币数量按比例分配
+4. `LP token` 可以换回 流动性 + 累计分配的手续费
+
+#### 如何制定发行数量
+
+首先 LP 合约需要满足两个要求
+
+1. 由于流动性随时都可能变化，每一位用户所拥有的份额必须时刻保持正确性
+2. 减少非常昂贵的写操作（例如在合约中存储新/更新数据），因此，不能频繁重新计算和更新份额
+
+如果我们发行大量代币（比如 10 亿个）并将它们分配给所有流动性提供者。如果我们总是分发所有的代币（第一个流动性提供者得到 10 亿，第二个得到一部分，等等），我们将被迫重新计算已发行的股份，这样操作是很昂贵的。如果我们最初只分配一部分代币，那么我们就有可能达到供应限制，这最终将迫使使用重新分配现有份额。
+
+唯一好的解决方案就是不设限制，在增加新的流动性时铸造新的代币。也就是说 `LP token` 是没有发行上限的。
+不过也不用担心通货膨胀，因为铸造 `LP token` 是需要提供流动性，而想要取回流动性，则必须销毁`LP token`。
+
+下面是计算流动性铸造 LP token 的公式：
+
+$$ amountMinted = totalAmount \* \frac{ethDeposited} {ethReserve} $$
+
+由于 V1 的交易对都含有 eth，这里只考虑 eth 的价值和储备量比例
+
+在修改 `addLiquidity()` 之前，需要让我们的 Exchange 合约成为 `ERC20` 合约并修改构造函数
+
+```solidity
+// 继承ERC20标准合约
+// 原文中通过构造函数继承，编译无法通过
+contract Exchange is ERC20("Uniswap-v1-like", "UNI-v1")
+{...}
+```
+
+现在改造 `addLiquidity()`
+
+```solidity
+function addLiquidity(uint256 _tokenAmount)
+    public
+    payable
+    returns (uint256)
+{
+    if (getReserve() == 0) {
+        ...
+
+        uint256 liquidity = address(this).balance;
+        _mint(msg.sender, liquidity);   //  ERC20._mint() 向流动性提供者发送 LP token
+
+        return liquidity;
+    } else {
+        // 后续新增流动性则需要按照当前的储备量比例，等比增加
+        // 保证价格添加流动性前后一致
+        uint256 ethReserve = address(this).balance - msg.value;
+        uint256 tokenReserve = getReserve();
+        uint256 tokenAmount = msg.value * (tokenReserve / ethReserve);
+
+        // 保证流动性按照当前比例注入，如果token少于应有数量则不能执行
+        require(_tokenAmount >= tokenAmount, "insufficient token amount");
+
+        IERC20 token = IERC20(tokenAddress);
+        token.transferFrom(msg.sender, address(this), tokenAmount);
+
+        uint256 liquidity = (totalSupply() * msg.value) / ethReserve;
+        _mint(msg.sender, liquidity);   //  ERC20._mint() 向流动性提供者发送 LP token
+
+        return liquidity;
+    }
+}
+```
+
+### 手续费
+
+在收取手续费之前先思考几个问题：
+
+1. 我们要收取以太币或代币的费用吗？我们想用以太币还是代币向流动性提供者支付奖励？
+2. 如何从每次交易中收取少量固定费用？
+3. 如何根据流动性提供者的贡献将累积费用分配给他们？
+
+先看看问题 2 和 3，我们可以在每次交易进行时发送额外的费用，并积累到一个基金池中，任何流动性提供者都可以从中提取相应份额的手续费。
+
+1. 每次交易，从中扣除手续费，而不是额外收取
+2. 我们已经有了资金——这是外汇储备！储备金可用于积累费用。这意味着**储备会随着时间的推移而增长**，所以恒定的产品公式不是那么恒定！不过和储备金相比，支出给流动性提供者的费用是很小一部分，并因此也很难通过分配手续费的路径来影响储备金。
+3. 所以，现在已经有了第一个问题的答案：费用以交易资产的货币支付
+
+UniswapV1 从每次交易中收取 0.03% 的手续费。为了计算简单，我们收取 1%。向合约添加费用就像添加几个乘数一样简单 `Exchange.getAmount()`
+
+```solidity
+// This is a low-level function, so let it be private.
+// 基础公式 outputAmount = (inputAmount * outputReserve) / (inputReserve + inputAmount)
+function getAmount(
+    uint256 inputAmount,
+    uint256 inputReserve,
+    uint256 outputReserve
+) private pure returns (uint256) {
+    require(inputReserve > 0 && outputReserve > 0, "invalid reserves");
+
+    // 收取1%的手续费
+    // solidity 不支持浮点运算，所以分子和分母同时 × 100
+    uint256 inputAmountWithFee = inputAmount * 99;
+    uint256 numerator = inputAmountWithFee * outputReserve;
+    uint256 denominator = (inputReserve * 100) + inputAmountWithFee;
+
+    return numerator / denominator;
+}
+```
+
+### 去除流动性 Remove liquidity
+
+为了去除流动性，我们可以再次使用 `LP token` ：我们不需要记住每个流动性提供者存入的金额，而是根据 `LP token` 份额计算去除的流动性数量
+
+```solidity
+function removeLiquidity(uint256 _amount)
+    public
+    returns (uint256, uint256)
+{
+    uint256 ethAmount = (address(this).balance * _amount) / totalSupply();
+    uint256 tokenAmount = (getReserve() * _amount) / totalSupply();
+
+    // ERC20._burn() 销毁LP
+    _burn(msg.sender, _amount);
+    // 向用户返回 eth 和 token
+    payable(msg.sender).transfer(ethAmount);
+    IERC20(tokenAddress).transfer(msg.sender, tokenAmount);
+
+    return (ethAmount, tokenAmount);
+}
+```
+
+当流动性被移除时，它会以以太币和代币的形式返回，当然，它们的数量是平衡的。
+这是造成**无常损失**的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
+
+$$ removedAmount = reserve \* \frac{amountLP} {totalAmountLP} $$
+
+### LP 奖励和无常损失演示
+
+编写一个测试流程，重现增加流动性、交换代币、累计费用和去除流动性的完整流程：
+
+1. 首先，流动性提供者存入 100 个以太币和 200 个代币。这使得 1 个代币等于 0.5 个以太币，而 1 个以太币等于 2 个代币。
+
+   ```js
+   exchange.addLiquidity(toWei(200), { value: toWei(100) });
+   ```
+
+2. 用户交换 10 个以太币并期望获得至少 18 个代币。事实上，他们得到了 18.0164 个代币。它包括滑点（交易量相对较大）和 1% 的费用。
+
+   ```js
+   exchange.connect(user).ethToTokenSwap(toWei(18), { value: toWei(10) });
+   ```
+
+3. 流动性提供者然后移除他们的流动性
+
+   ```js
+   exchange.removeLiquidity(toWei(100));
+   ```
+
+4. 流动性提供者获得 109.9 个以太币（包括交易费用）和 181.9836 个代币。如您所见，这些数字与存入的数字不同：我们获得了用户交易的 10 个以太币，但必须提供 18.0164 个代币作为交换。但是，该金额包括用户支付给我们的 1% 的费用。由于流动性提供者提供了所有流动性，他们获得了所有费用。
+
 ## 参考链接
 
-原教程：https://jeiwan.net/posts/programming-defi-uniswap-1/
-源代码仓库：https://github.com/Jeiwan/zuniswap/tree/part_1/
+### 原系列教程
+
+Part 1 ：https://jeiwan.net/posts/programming-defi-uniswap-1/
+源代码仓库 part1：https://github.com/Jeiwan/zuniswap/tree/part_1/
+Part 2 ：https://jeiwan.net/posts/programming-defi-uniswap-2/
+源代码仓库 part2：https://github.com/Jeiwan/zuniswap/tree/part_2/
+Part 3 ：https://jeiwan.net/posts/programming-defi-uniswap-3/
+源代码仓库 part3：https://github.com/Jeiwan/zuniswap/tree/part_3/
+
+### 其他参考
+
 Uniswap V1 文档: https://uniswap.org/docs/v1/
 Uniswap V1 white paper: https://hackmd.io/@HaydenAdams/HJ9jLsfTz
+Constant Function Market Makers- DeFi’s “Zero to One” Innovation: https://medium.com/bollinger-investment-group/constant-function-market-makers-defis-zero-to-one-innovation-968f77022159
+Automated Market Making - Theory and Practice: http://reports-archive.adm.cs.cmu.edu/anon/2012/CMU-CS-12-123.pdf
