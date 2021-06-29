@@ -26,6 +26,7 @@ describe("Exchange", () => {
   let owner;
   let user;
   let exchange;
+  let token;
 
   beforeEach(async () => {
     [owner, user] = await ethers.getSigners();

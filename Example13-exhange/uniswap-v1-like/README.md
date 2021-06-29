@@ -455,7 +455,7 @@ function createExchange(address _tokenAddress) public returns (address) {
 为了完成合约，我们只需要再实现一个函数 - getExchange，这将允许我们通过另一个合约的接口查询注册表：
 
 ```solidity
-function getExhange(address _tokenAddress) public view returns (address) {
+function getExchange(address _tokenAddress) public view returns (address) {
     return tokenToExchange[_tokenAddress];
 }
 ```
@@ -597,6 +597,9 @@ function ethToTokenTransfer(uint256 _minTokens, address _recipient)
 }
 ```
 
+## 总结
+
+我们的 Uniswap V1 副本现已完成。如果您对如何改进它有任何想法，请尝试一下！例如，Exchange 中可以有一个函数来计算代币交换中代币的输出量。如果您在理解某些东西是如何工作的方面有任何问题，请随时检查 测试。我已经涵盖了所有功能，包括 `tokenToTokenSwap`.
 
 
 ## 可能遇到的问题
