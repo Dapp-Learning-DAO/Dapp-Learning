@@ -389,7 +389,7 @@ function removeLiquidity(uint256 _amount)
 这是造成**无常损失**的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
 
 ```math
-removedAmount = reserve * \frac{amountLP} {totalAmountLP}
+removedAmount = reserve * (amountLP / totalAmountLP)
 ```
 
 ### LP 奖励和无常损失演示
