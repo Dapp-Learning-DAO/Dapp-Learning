@@ -92,8 +92,9 @@ npx hardhat test
 ```
 
 - 部署合约
-
-
+```
+npx hardhat run scripts/deploy.js  --network kovan
+```
 
 
 ## 参考链接
