@@ -114,8 +114,7 @@ x∗y=k
 <!-- $$(x + \Delta x)(y - \Delta y) = xy$$ -->
 ![(x + \Delta x)(y - \Delta y) = xy](./images/uniswap-v1-like-math01.png)
 
-
-这里的意思是用 `Delta x` 数量的`token x` 交换出 `Delta y` 数量的 `token y`。所以计算 $\Delta y$ 的公式为：
+这里的意思是用 `Delta x` 数量的`token x` 交换出 `Delta y` 数量的 `token y`。所以计算 `Delta y` 的公式为：
 
 <!-- $$\Delta y = \frac{y \Delta x} {x + \Delta x}$$ -->
 ![\Delta y = \frac{y \Delta x} {x + \Delta x}](./images/uniswap-v1-like-math02.png)
@@ -147,7 +146,7 @@ await exchange.getEthAmount(toWei(2000)) // 500
 
 ## Exchange 合约实现
 
-V1 的 Exchange 合约包含了交易功能(定价、交换代币)，添加、删除流动性，分发 LPtoken 代币
+V1 的 Exchange 合约包含了定价功能、交易功能，添加、删除流动性，分发 LPtoken 代币
 
 ### 增加流动性
 
