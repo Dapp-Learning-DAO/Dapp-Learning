@@ -1,11 +1,43 @@
 # uniswap-v1-like
 
-仿 uniswap-v1 项目(合约部分)，原教程链接见最下方，强烈建议跟着原教程的步骤撸一遍，风味最佳。
+> 仿 uniswap-v1 项目(合约部分)，文档内容和相关代码来自于 Ivan Kuznetsov 的 《Programming DeFi: Uniswap》 系列教程，这里只节选了部分原文，翻译并加入了一点点的个人理解。原教程链接见最下方，强烈建议跟着原教程的步骤撸一遍，风味最佳。
 
 截至 2021 年 6 月，Uniswap 已推出三个版本（`V1`, `V2`, `V3`）。
 
 `V1` 只允许在以太币和代币之间进行交换。如果需要进行非 eth 之间的交换，则需要通过 eth 中转。
 我们将尝试了解 `V1` 的经济机制，找出、分解、学习和构建它们的核心机制。
+
+## 代码使用方法
+
+### 安装
+
+```sh
+yarn install
+```
+
+### 编译合约
+
+```sh
+yarn build
+```
+
+或
+
+```sh
+npx hardhat compile
+```
+
+### 运行测试
+
+```sh
+yarn test
+```
+
+或
+
+```sh
+npx hardhat test
+```
 
 ## 经济模型
 
@@ -77,7 +109,7 @@ x 轴和 y 轴分别代表了两个代币的储备量，函数穿过 x 轴和 y 
 x∗y=k
 ```
 
-每一笔交易都会概变两个代币的储备量，该公式指出无论储备量如何变化， `k` 都应该保持不变。
+每一笔交易都会改变两个代币的储备量，无论储备量如何变化， `k` 都应该保持不变。
 
 $$(x + \Delta x)(y - \Delta y) = xy$$
 
@@ -96,21 +128,23 @@ $$\Delta y = \frac{y \Delta x} {x + \Delta x} $$
 
 ```js
 // getTokenAmount
-await exchange.getTokenAmount(toWei(1)); // 1.998001998001998001
-await exchange.getTokenAmount(toWei(100)); // 181.818181818181818181
-await exchange.getTokenAmount(toWei(1000)); // 1000.0
+await exchange.getTokenAmount(toWei(1)) // 1.998001998001998001
+await exchange.getTokenAmount(toWei(100)) // 181.818181818181818181
+await exchange.getTokenAmount(toWei(1000)) // 1000.0
 
 // getEthAmount
-await exchange.getEthAmount(toWei(2)); // 0.999000999000999
-await exchange.getEthAmount(toWei(100)); // 47.619047619047619047
-await exchange.getEthAmount(toWei(2000)); // 500
+await exchange.getEthAmount(toWei(2)) // 0.999000999000999
+await exchange.getEthAmount(toWei(100)) // 47.619047619047619047
+await exchange.getEthAmount(toWei(2000)) // 500
 ```
 
-如上所示，当我们试图掏空池子的时候，我们只得到预期的一般。
+如上所示，当我们试图掏空池子的时候，却只得到预期的一半。
 
-这里要注意的最后一件事：我们最初的、基于汇率的定价函数没有错。事实上，当我们交易的代币数量与储备相比非常小时，这是正确的。但是要制作 AMM，我们需要更复杂的东西。
+注意：我们最初基于汇率的定价函数没有错。事实上，当我们交易的代币数量相对储备量非常小时，这是正确的。但是要提供 AMM，我们需要更复杂的东西。
 
-## `Exchange.sol` 合约实现
+## Exchange 合约实现
+
+V1 的 Exchange 合约包含了交易功能(定价、交换代币)，添加、删除流动性，分发 LPtoken 代币
 
 ### 增加流动性
 
@@ -183,7 +217,7 @@ function ethToTokenSwap(uint256 _minTokens) public payable {
 
 将以太币换成代币意味着将一定数量的以太币（存储在 `msg.value` 变量中）发送到可支付的合约函数并获得代币作为回报。请注意，我们需要 `msg.value` 从合约的余额中减去，因为在调用该函数时，发送的以太币已经添加到其余额中。
 
-这里的另一个重要变量是 `__minTokens` ——这是用户想要用以太币换取的最小数量的代币。此金额在 UI 中计算，并且始终包括滑点容差；用户同意至少获得那么多但不少于。这是一个非常重要的机制，可以保护用户免受前端机器人的攻击，这些机器人试图拦截他们的交易并修改池余额以获取利润。
+这里的另一个重要变量是 `__minTokens` ——这是用户想要用以太币换取代币的最小数量。此金额在 UI 中计算，并且始终包括滑点容差；用户同意至少获得那么多但不少于。这是一个非常重要的机制，可以保护用户免受前端机器人的攻击，这些机器人试图拦截他们的交易并修改池余额以获取利润。
 
 ```solidity
 // 使用token购买eth
@@ -228,14 +262,14 @@ function tokenToEthSwap(uint256 _tokensSold, uint256 _minEth) public {
 1. 由于流动性随时都可能变化，每一位用户所拥有的份额必须时刻保持正确性
 2. 减少非常昂贵的写操作（例如在合约中存储新/更新数据），因此，不能频繁重新计算和更新份额
 
-如果我们发行大量代币（比如 10 亿个）并将它们分配给所有流动性提供者。如果我们总是分发所有的代币（第一个流动性提供者得到 10 亿，第二个得到一部分，等等），我们将被迫重新计算已发行的股份，这样操作是很昂贵的。如果我们最初只分配一部分代币，那么我们就有可能达到供应限制，这最终将迫使使用重新分配现有份额。
+如果我们发行大量代币（比如 10 亿个）并将它们分配给所有流动性提供者。如果我们总是分发所有的代币（第一个流动性提供者得到 10 亿，第二个得到一部分，等等），我们将被迫重新计算已发行的代币，这样操作是很昂贵的。如果我们最初只分配一部分代币，那么我们就有可能达到供应限制，这最终将迫使使用重新分配现有份额。
 
 唯一好的解决方案就是不设限制，在增加新的流动性时铸造新的代币。也就是说 `LP token` 是没有发行上限的。
-不过也不用担心通货膨胀，因为铸造 `LP token` 是需要提供流动性，而想要取回流动性，则必须销毁`LP token`。
+不过也不用担心通货膨胀，因为铸造 `LP token` 需要提供流动性，而想要取回流动性，则必须销毁`LP token`。
 
-下面是计算流动性铸造 LP token 的公式：
+下面是通过注入的流动性数量计算铸造 LP token 数量的公式：
 
-$$ amountMinted = totalAmount \* \frac{ethDeposited} {ethReserve} $$
+$$ amountMinted = totalAmount * \frac{ethDeposited} {ethReserve} $$
 
 由于 V1 的交易对都含有 eth，这里只考虑 eth 的价值和储备量比例
 
@@ -243,9 +277,13 @@ $$ amountMinted = totalAmount \* \frac{ethDeposited} {ethReserve} $$
 
 ```solidity
 // 继承ERC20标准合约
-// 原文中通过构造函数继承，编译无法通过
-contract Exchange is ERC20("Uniswap-v1-like", "UNI-v1")
-{...}
+contract Exchange is ERC20
+{
+    constructor(address _token) ERC20("Uniswap-V1-like", "UNI-V1")  {
+        ...
+    }
+    ...
+}
 ```
 
 现在改造 `addLiquidity()`
@@ -265,17 +303,20 @@ function addLiquidity(uint256 _tokenAmount)
         return liquidity;
     } else {
         // 后续新增流动性则需要按照当前的储备量比例，等比增加
-        // 保证价格添加流动性前后一致
+        // 保证价格在添加流动性前后一致
         uint256 ethReserve = address(this).balance - msg.value;
         uint256 tokenReserve = getReserve();
-        uint256 tokenAmount = msg.value * (tokenReserve / ethReserve);
+        // solidity不支持浮点运算，所以运算顺序非常重要
+        // 如果 msg.value * (tokenReserve / ethReserve) 的写法会产生计算误差
+        uint256 tokenAmount = (msg.value * tokenReserve) / ethReserve;
 
         // 保证流动性按照当前比例注入，如果token少于应有数量则不能执行
         require(_tokenAmount >= tokenAmount, "insufficient token amount");
 
         IERC20 token = IERC20(tokenAddress);
         token.transferFrom(msg.sender, address(this), tokenAmount);
-
+       
+        // 根据注入的eth流动性 与 合约eth储备量 的比值分发 LP token
         uint256 liquidity = (totalSupply() * msg.value) / ethReserve;
         _mint(msg.sender, liquidity);   //  ERC20._mint() 向流动性提供者发送 LP token
 
@@ -296,7 +337,7 @@ function addLiquidity(uint256 _tokenAmount)
 
 1. 每次交易，从中扣除手续费，而不是额外收取
 2. 我们已经有了资金——这是外汇储备！储备金可用于积累费用。这意味着**储备会随着时间的推移而增长**，所以恒定的产品公式不是那么恒定！不过和储备金相比，支出给流动性提供者的费用是很小一部分，并因此也很难通过分配手续费的路径来影响储备金。
-3. 所以，现在已经有了第一个问题的答案：费用以交易资产的货币支付
+3. 所以，现在已经有了第一个问题的答案：费用以交易资产的货币支付(即交易对中的两种货币)
 
 UniswapV1 从每次交易中收取 0.03% 的手续费。为了计算简单，我们收取 1%。向合约添加费用就像添加几个乘数一样简单 `Exchange.getAmount()`
 
@@ -345,7 +386,7 @@ function removeLiquidity(uint256 _amount)
 当流动性被移除时，它会以以太币和代币的形式返回，当然，它们的数量是平衡的。
 这是造成**无常损失**的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
 
-$$ removedAmount = reserve \* \frac{amountLP} {totalAmountLP} $$
+$$ removedAmount = reserve * \frac{amountLP} {totalAmountLP} $$
 
 ### LP 奖励和无常损失演示
 
@@ -354,22 +395,47 @@ $$ removedAmount = reserve \* \frac{amountLP} {totalAmountLP} $$
 1. 首先，流动性提供者存入 100 个以太币和 200 个代币。这使得 1 个代币等于 0.5 个以太币，而 1 个以太币等于 2 个代币。
 
    ```js
-   exchange.addLiquidity(toWei(200), { value: toWei(100) });
+   exchange.addLiquidity(toWei(200), { value: toWei(100) })
    ```
 
 2. 用户交换 10 个以太币并期望获得至少 18 个代币。事实上，他们得到了 18.0164 个代币。它包括滑点（交易量相对较大）和 1% 的费用。
 
    ```js
-   exchange.connect(user).ethToTokenSwap(toWei(18), { value: toWei(10) });
+   exchange.connect(user).ethToTokenSwap(toWei(18), { value: toWei(10) })
    ```
 
 3. 流动性提供者然后移除他们的流动性
 
    ```js
-   exchange.removeLiquidity(toWei(100));
+   exchange.removeLiquidity(toWei(100))
    ```
 
 4. 流动性提供者获得 109.9 个以太币（包括交易费用）和 181.9836 个代币。如您所见，这些数字与存入的数字不同：我们获得了用户交易的 10 个以太币，但必须提供 18.0164 个代币作为交换。但是，该金额包括用户支付给我们的 1% 的费用。由于流动性提供者提供了所有流动性，他们获得了所有费用。
+
+## 可能遇到的问题
+
+### gas 费用测试不通过
+
+如果遇到 gas 费用与预期不一致的情况，请先检查 `hardhat.config.js`。因为 hardhat 的 gasPrice 默认是 8000000000,这里我们设置 1000，便于计算
+
+### 账户余额不足测试不通过
+
+hardhat 初始化默认每个账户 100eth，这里需要给多点，设置 `accountsBalance` 1000000
+
+```js
+module.exports = {
+  networks: {
+    hardhat: {
+      accounts: {
+        accountsBalance: utils.parseEther("1000000").toString(),
+      },
+      gasPrice: 1000,
+    },
+  },
+  solidity: "0.8.4",
+  ...
+};
+```
 
 ## 参考链接
 

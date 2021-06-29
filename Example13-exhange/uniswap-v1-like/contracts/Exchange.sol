@@ -1,20 +1,16 @@
 // contract/Exchange.sol
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Exchange is ERC20("Uniswap-V1-like", "UNI-V1") {
+contract Exchange is ERC20 {
     address public tokenAddress;
 
-    constructor(address _token) {
+    constructor(address _token) ERC20("Uniswap-V1-like", "UNI-V1") {
         require(_token != address(0), "invalid token address");
 
         tokenAddress = _token;
-    }
-
-    function getReserve() public view returns (uint256) {
-        return IERC20(tokenAddress).balanceOf(address(this));
     }
 
     function addLiquidity(uint256 _tokenAmount)
@@ -36,7 +32,9 @@ contract Exchange is ERC20("Uniswap-V1-like", "UNI-V1") {
             // 保证价格添加流动性前后一致
             uint256 ethReserve = address(this).balance - msg.value;
             uint256 tokenReserve = getReserve();
-            uint256 tokenAmount = msg.value * (tokenReserve / ethReserve);
+            // solidity不支持浮点运算，所以运算顺序非常重要
+            // 如果 msg.value * (tokenReserve / ethReserve) 的写法会产生计算误差
+            uint256 tokenAmount = (msg.value * tokenReserve) / ethReserve;
 
             // 保证流动性按照当前比例注入，如果token少于应有数量则不能执行
             require(_tokenAmount >= tokenAmount, "insufficient token amount");
@@ -44,7 +42,8 @@ contract Exchange is ERC20("Uniswap-V1-like", "UNI-V1") {
             IERC20 token = IERC20(tokenAddress);
             token.transferFrom(msg.sender, address(this), tokenAmount);
 
-            uint256 liquidity = (totalSupply() * msg.value) / ethReserve;
+           // 根据注入的eth流动性 与 合约eth储备量 的比值分发 LP token
+            uint256 liquidity = (msg.value * totalSupply()) / ethReserve;
             _mint(msg.sender, liquidity); //  ERC20._mint() 向流动性提供者发送 LP token
 
             return liquidity;
@@ -55,6 +54,8 @@ contract Exchange is ERC20("Uniswap-V1-like", "UNI-V1") {
         public
         returns (uint256, uint256)
     {
+        require(_amount > 0, "invalid amount");
+
         uint256 ethAmount = (address(this).balance * _amount) / totalSupply();
         uint256 tokenAmount = (getReserve() * _amount) / totalSupply();
 
@@ -65,6 +66,10 @@ contract Exchange is ERC20("Uniswap-V1-like", "UNI-V1") {
         IERC20(tokenAddress).transfer(msg.sender, tokenAmount);
 
         return (ethAmount, tokenAmount);
+    }
+    
+    function getReserve() public view returns (uint256) {
+        return IERC20(tokenAddress).balanceOf(address(this));
     }
 
     // This is a low-level function, so let it be private.
