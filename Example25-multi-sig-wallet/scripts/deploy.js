@@ -6,12 +6,12 @@
 const hre = require("hardhat");
 
 async function main(){
-    const [Alice,Bob] = await ethers.getSigners();
+    const [Alice] = await ethers.getSigners();
     console.log("MultiSigWallet owner is :",Alice.address);
     
     //部署MyToken.sol
     const MultiSigWallet = await ethers.getContractFactory("MultiSigWallet");
-    const multiSigWalletReceipt = await MultiSigWallet.deploy([Alice.address,Bob.address],2);
+    const multiSigWalletReceipt = await MultiSigWallet.deploy([Alice.address],1);
     await multiSigWalletReceipt.deployed();
     
     console.log("MultiSigWallet address:", multiSigWalletReceipt.address);
