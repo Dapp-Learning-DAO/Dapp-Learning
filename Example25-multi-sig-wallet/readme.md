@@ -75,6 +75,27 @@
   查询交易id列表，参数为：from、to、pending（是否包含处理中）、executed（是否包含已处理）
 
 
+## 操作流程
+- 安装依赖
+```
+yarn
+```
+
+- 编译合约
+```
+npx hardhat compile
+```
+
+- 测试合约
+```
+npx hardhat test
+```
+
+- 部署合约
+
+
+
+
 ## 参考链接
 https://zhuanlan.zhihu.com/p/337823524
 https://github.com/gnosis/MultiSigWallet/tree/master/contracts
