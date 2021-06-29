@@ -412,6 +412,193 @@ $$ removedAmount = reserve * \frac{amountLP} {totalAmountLP} $$
 
 4. 流动性提供者获得 109.9 个以太币（包括交易费用）和 181.9836 个代币。如您所见，这些数字与存入的数字不同：我们获得了用户交易的 10 个以太币，但必须提供 18.0164 个代币作为交换。但是，该金额包括用户支付给我们的 1% 的费用。由于流动性提供者提供了所有流动性，他们获得了所有费用。
 
+## Factory 合约实现
+
+到目前为止，我们其实已经基本实现了V1的核心功能，但目前其实只支持一种交易对。为了解决这个问题，我们需要引入 Factory 合约。并让非eth的两个代币之间可交易。
+
+Factory 合约提供的另一个方便的实用程序是无需处理代码、节点、部署脚本和任何其他开发工具即可部署交换的能力。Factory 实现了一个函数，允许用户通过简单地调用这个函数来创建和部署一个交换。所以，今天我们还将学习一个合约如何部署另一个合约。
+
+Uniswap 只有一个 Factory 合约，因此 Uniswap 对只有一个注册表。当然，其他用户也可以部署他们自己的工厂，甚至没有在官方工厂注册的交换合约。但 Uniswap 不会识别此类交换，并且无法使用它们通过官方网站交换代币。
+
+### 创建工厂
+
+Factory 是一个注册表，所以我们需要一个数据结构来存储交易对，这将是地址到地址的映射——通过它们能找到对应的 Echange 合约地址。
+
+#### createExchange
+
+`createExchange`允许通过简单地获取令牌地址来创建和部署交换的功能。
+
+```solidity
+function createExchange(address _tokenAddress) public returns (address) {
+    require(_tokenAddress != address(0), "invalid token address");
+    require(
+        tokenToExchange[_tokenAddress] == address(0),
+        "exchange already exists"
+    );
+
+    Exchange exchange = new Exchange(_tokenAddress);
+    tokenToExchange[_tokenAddress] = address(exchange);
+
+    return address(exchange);
+}
+```
+
+需要两个检查：
+
+1. 确保 新建的交易所 地址是 address 0 （代表该交易对的交易所还未创建）
+2. 保证同一个 交易对 地址相同，不会出现多个交易所的情况。我们不希望流动性分散在多个交易所，最好集中在一个交易所以减少滑点并提供更好的汇率。
+
+接下来，我们使用提供的令牌地址实例化 Exchange，这就是我们需要提前导入“Exchange.sol”的原因。这种实例化类似于 OOP 语言中类的实例化，但是，在 Solidity 中，`new` 操作符实际上会部署一个合约。返回值具有合约 (Exchange) 的类型，并且每个合约都可以转换为地址——这就是我们在下一行中所做的，以获取新交易所的地址并将其保存到注册表中。
+
+#### getExchange
+
+为了完成合约，我们只需要再实现一个函数 - getExchange，这将允许我们通过另一个合约的接口查询注册表：
+
+```solidity
+function getExhange(address _tokenAddress) public view returns (address) {
+    return tokenToExchange[_tokenAddress];
+}
+```
+
+这就是工厂！这真的很简单。
+
+接下来，我们需要改进交换合约，以便它可以使用工厂进行代币到代币的交换。
+
+### 将 Exchange 与 Factory 关联起来
+
+首先，我们需要将 Exchange 链接到 Factory，因为每个 Exchange 都需要知道 Factory 的地址，而且我们不想进行硬编码，因此合约更加灵活。要将 Exchange 链接到工厂，我们需要添加一个新的状态变量来存储工厂地址，我们需要更新构造函数：
+
+```solidity
+contract Exchange is ERC20 {
+    address public tokenAddress;
+    address public factoryAddress; // <--- new line
+
+    constructor(address _token) ERC20("Uniswap-V1-like", "UNI-V1") {
+        require(_token != address(0), "invalid token address");
+
+        tokenAddress = _token;
+        factoryAddress = msg.sender;  // <--- new line
+
+    }
+    ...
+}
+```
+
+现在就可以进行令牌到令牌的交换了。
+
+### 代币交易
+
+当我们有两个由注册表链接的交易所时，我们如何将令牌交换为令牌？
+
+1. 开始标准的令牌到以太交换。
+2. 不是向用户发送以太币，而是找到用户提供的代币地址的交易所。
+3. 如果交易所存在，将以太币发送到交易所以将它们交换为代币。
+4. 将交换的令牌返回给用户。
+
+在Exchange中新增方法 `tokenToTokenSwap`
+
+```solidity
+// Exchange.sol
+
+function tokenToTokenSwap(
+    uint256 _tokensSold,
+    uint256 _minTokensBought,
+    address _tokenAddress
+) public {
+    ...
+```
+
+该函数接受三个参数：要出售的代币数量、要交换的最小代币数量、要交换已售代币的代币地址。
+
+我们首先检查用户提供的令牌地址是否存在交换。如果没有，它会抛出一个错误。
+
+```solidity
+address exchangeAddress = IFactory(factoryAddress).getExchange(
+    _tokenAddress
+);
+require(
+    exchangeAddress != address(this) && exchangeAddress != address(0),
+    "invalid exchange address"
+);
+```
+
+我们使用的`IFactory`是工厂合约的接口。在与其他合约（或 OOP 中的类）交互时使用接口是一种很好的做法。然而，接口不允许访问状态变量，这就是我们`getExchange`在工厂合约中实现该功能的原因——因此我们可以通过接口使用合约。
+
+```solidity
+interface IFactory {
+    function getExchange(address _tokenAddress) external returns (address);
+}
+```
+
+接下来，我们使用当前的交易所将代币换成以太币，并将用户的代币转移到交易所。这是以太币到代币交换的标准程序：
+
+```solidity
+uint256 tokenReserve = getReserve();
+uint256 ethBought = getAmount(
+    _tokensSold,
+    tokenReserve,
+    address(this).balance
+);
+
+IERC20(tokenAddress).transferFrom(
+    msg.sender,
+    address(this),
+    _tokensSold
+);
+```
+
+该功能的最后一步是使用其他交易所将以太币交换为代币：
+
+```solidity
+IExchange(exchangeAddress).ethToTokenSwap{value: ethBought}(
+    _minTokensBought
+);
+```
+
+看起来完成了！实际上并没有。让我们看看最后一行`etherToTokenSwap`：
+
+```solidity
+IERC20(tokenAddress).transfer(msg.sender, tokensBought);
+```
+
+它将购买的代币发送到`msg.sender`. 在 Solidity 中，它`msg.sender`是动态的，而不是静态的，它指向发起当前调用的人（或在合约的情况下是什么）。当用户调用合约函数时，它会指向用户的地址。但是当一个合约调用另一个合约时，`msg.sender`是调用合约的地址！
+
+因此，tokenToTokenSwap将代币发送到第一个交易所的地址！但这不是问题，因为我们可以调用ERC20(_tokenAddress).transfer(...)将这些令牌发送给用户。但是，有一个 getter 解决方案：让我们节省一些 gas 并将令牌直接发送给用户。为此，我们需要将etherToTokenSwap函数拆分为两个函数：
+
+```solidity
+function ethToToken(uint256 _minTokens, address recipient) private {
+  uint256 tokenReserve = getReserve();
+  uint256 tokensBought = getAmount(
+    msg.value,
+    address(this).balance - msg.value,
+    tokenReserve
+  );
+
+  require(tokensBought >= _minTokens, "insufficient output amount");
+
+  IERC20(tokenAddress).transfer(recipient, tokensBought);
+}
+
+function ethToTokenSwap(uint256 _minTokens) public payable {
+  ethToToken(_minTokens, msg.sender);
+}
+```
+
+`ethToToken`是私有函数，所有东西`ethToTokenSwap`都用来做，只有一个区别：它需要一个代币接收地址，这让我们可以灵活地选择我们想要发送代币的人。`ethToTokenSwap`反过来，现在只是一个包装器，`ethToToken`它总是`msg.sender`作为接收者传递。
+
+现在，我们需要另一个函数来向自定义接收者发送令牌。我们本来可以使用`ethToToken`，但让我们将其保留为私有且无需支付。
+
+```solidity
+function ethToTokenTransfer(uint256 _minTokens, address _recipient)
+  public
+  payable
+{
+  ethToToken(_minTokens, _recipient);
+}
+```
+
+
+
 ## 可能遇到的问题
 
 ### gas 费用测试不通过
@@ -421,6 +608,8 @@ $$ removedAmount = reserve * \frac{amountLP} {totalAmountLP} $$
 ### 账户余额不足测试不通过
 
 hardhat 初始化默认每个账户 100eth，这里需要给多点，设置 `accountsBalance` 1000000
+
+`hardhat.config.js`
 
 ```js
 module.exports = {

@@ -4,13 +4,27 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+interface IExchange {
+    function ethToTokenSwap(uint256 _minTokens) external payable;
+
+    function ethToTokenTransfer(uint256 _minTokens, address _recipient)
+        external
+        payable;
+}
+
+interface IFactory {
+    function getExchange(address _tokenAddress) external returns (address);
+}
+
 contract Exchange is ERC20 {
     address public tokenAddress;
+    address public factoryAddress;
 
     constructor(address _token) ERC20("Uniswap-V1-like", "UNI-V1") {
         require(_token != address(0), "invalid token address");
 
         tokenAddress = _token;
+        factoryAddress = msg.sender;
     }
 
     function addLiquidity(uint256 _tokenAmount)
@@ -42,7 +56,7 @@ contract Exchange is ERC20 {
             IERC20 token = IERC20(tokenAddress);
             token.transferFrom(msg.sender, address(this), tokenAmount);
 
-           // 根据注入的eth流动性 与 合约eth储备量 的比值分发 LP token
+            // 根据注入的eth流动性 与 合约eth储备量 的比值分发 LP token
             uint256 liquidity = (msg.value * totalSupply()) / ethReserve;
             _mint(msg.sender, liquidity); //  ERC20._mint() 向流动性提供者发送 LP token
 
@@ -67,7 +81,7 @@ contract Exchange is ERC20 {
 
         return (ethAmount, tokenAmount);
     }
-    
+
     function getReserve() public view returns (uint256) {
         return IERC20(tokenAddress).balanceOf(address(this));
     }
@@ -107,7 +121,21 @@ contract Exchange is ERC20 {
     }
 
     // 使用eth购买token
-    function ethToTokenSwap(uint256 _minTokens) public payable {
+    // 拆分为 ethToToken 和 ethToTokenSwap
+    // function ethToTokenSwap(uint256 _minTokens) public payable {
+    //     uint256 tokenReserve = getReserve();
+    //     uint256 tokensBought = getAmount(
+    //         msg.value,
+    //         address(this).balance - msg.value,
+    //         tokenReserve
+    //     );
+
+    //     require(tokensBought >= _minTokens, "insufficient output amount");
+
+    //     IERC20(tokenAddress).transfer(msg.sender, tokensBought);
+    // }
+
+    function ethToToken(uint256 _minTokens, address recipient) private {
         uint256 tokenReserve = getReserve();
         uint256 tokensBought = getAmount(
             msg.value,
@@ -115,9 +143,20 @@ contract Exchange is ERC20 {
             tokenReserve
         );
 
-        require(tokensBought >= _minTokens, "insufficient output amount");
+        require(tokensBought >= _minTokens, "unsufficient output amount");
 
-        IERC20(tokenAddress).transfer(msg.sender, tokensBought);
+        IERC20(tokenAddress).transfer(recipient, tokensBought);
+    }
+
+    function ethToTokenSwap(uint256 _minTokens) public payable {
+        ethToToken(_minTokens, msg.sender);
+    }
+
+    function ethToTokenTransfer(uint256 _minTokens, address _recipient)
+        public
+        payable
+    {
+        ethToToken(_minTokens, _recipient);
     }
 
     // 使用token购买eth
@@ -137,5 +176,38 @@ contract Exchange is ERC20 {
             _tokensSold
         );
         payable(msg.sender).transfer(ethBought);
+    }
+
+    // tokenA swap tokenB
+    function tokenToTokenSwap(
+        uint256 _tokensSold,
+        uint256 _minTokensBought,
+        address _tokenAddress
+    ) public {
+        address exchangeAddress = IFactory(factoryAddress).getExchange(
+            _tokenAddress
+        );
+        require(
+            exchangeAddress != address(this) && exchangeAddress != address(0),
+            "invalid exchange address"
+        );
+
+        uint256 tokenReserve = getReserve();
+        uint256 ethBought = getAmount(
+            _tokensSold,
+            tokenReserve,
+            address(this).balance
+        );
+
+        IERC20(tokenAddress).transferFrom(
+            msg.sender,
+            address(this),
+            _tokensSold
+        );
+
+        IExchange(exchangeAddress).ethToTokenTransfer{value: ethBought}(
+            _minTokensBought,
+            msg.sender
+        );
     }
 }
