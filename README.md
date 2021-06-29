@@ -1,4 +1,4 @@
-# Rebase Dapp Courses
+#  Dapp Learning 
 
 本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。
 
