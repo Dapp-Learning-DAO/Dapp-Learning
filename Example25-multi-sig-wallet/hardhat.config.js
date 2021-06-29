@@ -21,7 +21,21 @@ function mnemonic() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.6.0",
+  solidity: {
+    compilers: [
+      {
+        version: "0.6.0"
+      },
+      {
+        version: "0.4.25",
+        settings: {}
+      },
+      {
+        version: "0.8.0",
+        settings: {}
+      },
+    ]
+  },
   networks: {
     localhost: {
       url: "http://localhost:8545",
