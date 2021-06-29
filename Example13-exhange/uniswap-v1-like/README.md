@@ -111,11 +111,11 @@ x∗y=k
 
 每一笔交易都会改变两个代币的储备量，无论储备量如何变化， `k` 都应该保持不变。
 
-$$(x + \Delta x)(y - \Delta y) = xy$$
+<img src="https://render.githubusercontent.com/render/math?math=(x + \Delta x)(y - \Delta y) = xy"/>
 
 这里的意思是用 $\Delta x$ 数量的`token x` 交换出 $\Delta y$ 数量的 `token y`。所以计算 $\Delta y$ 的公式为：
 
-$$\Delta y = \frac{y \Delta x} {x + \Delta x} $$
+<img src="https://render.githubusercontent.com/render/math?math=\Delta y = \frac{y \Delta x} {x + \Delta x}"/>
 
 请注意，我们现在得到的 $\Delta y$ 是数量而不是价格。计算数量的方法对应 `Exchange.getAmount()`。
 
@@ -269,7 +269,9 @@ function tokenToEthSwap(uint256 _tokensSold, uint256 _minEth) public {
 
 下面是通过注入的流动性数量计算铸造 LP token 数量的公式：
 
-$$ amountMinted = totalAmount * \frac{ethDeposited} {ethReserve} $$
+```math
+amountMinted = totalAmount * (ethDeposited / ethReserve)
+```
 
 由于 V1 的交易对都含有 eth，这里只考虑 eth 的价值和储备量比例
 
@@ -386,7 +388,9 @@ function removeLiquidity(uint256 _amount)
 当流动性被移除时，它会以以太币和代币的形式返回，当然，它们的数量是平衡的。
 这是造成**无常损失**的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
 
-$$ removedAmount = reserve * \frac{amountLP} {totalAmountLP} $$
+```math
+removedAmount = reserve * \frac{amountLP} {totalAmountLP}
+```
 
 ### LP 奖励和无常损失演示
 
