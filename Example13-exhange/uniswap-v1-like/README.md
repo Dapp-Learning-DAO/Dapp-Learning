@@ -66,7 +66,7 @@ x∗y=k
 #### 简单的设想，利用汇率构建价格
 
 ```math
-Px = y / x\\
+Px = y / x,
 Py = x / y
 ```
 
@@ -76,7 +76,7 @@ Py = x / y
 假设我们用 2000 个 token 和 1000 个 eth 创建了一个流动性池，此时 1 个 token 等于 0.5 个 eth，1 个 eth 等于 2 个 token。
 
 ```math
-Ptoken = 1000 / 2000 = 0.5 \\
+Ptoken = 1000 / 2000 = 0.5,
 Peth = 2000 / 1000 = 2
 ```
 
@@ -111,13 +111,16 @@ x∗y=k
 
 每一笔交易都会改变两个代币的储备量，无论储备量如何变化， `k` 都应该保持不变。
 
-<img src="https://render.githubusercontent.com/render/math?math=(x + \Delta x)(y - \Delta y) = xy"/>
+<!-- $$(x + \Delta x)(y - \Delta y) = xy$$ -->
+![(x + \Delta x)(y - \Delta y) = xy](./images/uniswap-v1-like-math01.png)
 
-这里的意思是用 $\Delta x$ 数量的`token x` 交换出 $\Delta y$ 数量的 `token y`。所以计算 $\Delta y$ 的公式为：
 
-<img src="https://render.githubusercontent.com/render/math?math=\Delta y = \frac{y \Delta x} {x + \Delta x}"/>
+这里的意思是用 `Delta x` 数量的`token x` 交换出 `Delta y` 数量的 `token y`。所以计算 $\Delta y$ 的公式为：
 
-请注意，我们现在得到的 $\Delta y$ 是数量而不是价格。计算数量的方法对应 `Exchange.getAmount()`。
+<!-- $$\Delta y = \frac{y \Delta x} {x + \Delta x}$$ -->
+![\Delta y = \frac{y \Delta x} {x + \Delta x}](./images/uniswap-v1-like-math02.png)
+
+请注意，我们现在得到的 `Delta y` 是数量而不是价格。计算数量的方法对应 `Exchange.getAmount()`。
 
 ![x * y = k](./images/uniswap-v1-like-02.png)
 
@@ -446,15 +449,23 @@ module.exports = {
 ### 原系列教程
 
 Part 1 ：https://jeiwan.net/posts/programming-defi-uniswap-1/
+
 源代码仓库 part1：https://github.com/Jeiwan/zuniswap/tree/part_1/
+
 Part 2 ：https://jeiwan.net/posts/programming-defi-uniswap-2/
+
 源代码仓库 part2：https://github.com/Jeiwan/zuniswap/tree/part_2/
+
 Part 3 ：https://jeiwan.net/posts/programming-defi-uniswap-3/
+
 源代码仓库 part3：https://github.com/Jeiwan/zuniswap/tree/part_3/
 
 ### 其他参考
 
 Uniswap V1 文档: https://uniswap.org/docs/v1/
+
 Uniswap V1 white paper: https://hackmd.io/@HaydenAdams/HJ9jLsfTz
+
 Constant Function Market Makers- DeFi’s “Zero to One” Innovation: https://medium.com/bollinger-investment-group/constant-function-market-makers-defis-zero-to-one-innovation-968f77022159
+
 Automated Market Making - Theory and Practice: http://reports-archive.adm.cs.cmu.edu/anon/2012/CMU-CS-12-123.pdf
