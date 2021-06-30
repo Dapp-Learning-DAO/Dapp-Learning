@@ -16,6 +16,7 @@
 
 ## 必备工具清单
 开发前请安装和了解以下工具：
+某某ASD SD 
 - metamask（浏览器钱包插件）: https://www.jianshu.com/p/b5b2c05e9090
 导出私钥放到各项目的sk.txt文件里
 - infura（节点服务）: https://infura.io/
