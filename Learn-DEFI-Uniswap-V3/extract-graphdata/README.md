@@ -59,6 +59,8 @@ node subscription.js
 - 触发事件，观察订阅结果
 触发对应地址上的事件，观察输出结果
 
+PS: 成功创建自己的 graph 后, 修改订阅的代码，订阅地址指向自己的 graph， 然后触发相应的事件, 就可以观察到成功收到通知
+
 ## 参考文档
 https://blog.csdn.net/luxinghong199106/article/details/103471633  
 https://thegraph.com/docs/graphql-api#pagination 
