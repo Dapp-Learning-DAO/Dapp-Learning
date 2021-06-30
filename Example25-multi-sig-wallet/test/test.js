@@ -5,7 +5,7 @@ const { expect } = require("chai");
 function getPayLoad(contractABI,functionName,param){
   for(let i=0;i<contractABI.length;i++){
     const functionABI = contractABI[i];
-    if(functionName!=functionABI.name){
+    if (functionName != functionABI.name) {
       continue;
     }
     
@@ -50,7 +50,7 @@ describe("MultiSigWallet test",function(){
     const payload = getPayLoad(tokenArtifact.abi,"set",233);
     const submitTransaction = await multiSigWallet.submitTransaction(hello.address, 0, payload);
     const transactionReceipt = await submitTransaction.wait();
-    console.log("transactionReceipt:",transactionReceipt);
+    //console.log("transactionReceipt:",transactionReceipt);
     
     
     // await multiSigWallet.queryFilter("Submission" , transactionReceipt.blockNumber ,transactionReceipt.blockNumber)
