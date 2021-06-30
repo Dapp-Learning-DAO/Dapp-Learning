@@ -1,7 +1,8 @@
 ## 简介
-有去中心化交易所， 有 etherdelta订单薄模式和uniswap的AMM做市商模式。
+本样例主要介绍 etherdelta 合约逻辑, 演示对 etherdelta 合约的基本使用.
+
+有去中心化交易所， 有 etherdelta 订单薄模式和uniswap的AMM做市商模式。
 待集成 0x & bancor & kyber
-   
 
 
 ## 参考链接
