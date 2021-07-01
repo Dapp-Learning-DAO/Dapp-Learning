@@ -1,11 +1,23 @@
 # Uniswap V3
 ## 预言机介绍
 
-https://liaoph.com/uniswap-v3-5/
-
-调用指定交易对pool合约的observe函数即可
+Oracle 数据使用一个结构体 Observation 来表示：
+```solidity
+struct Observation {
+    // 记录区块的时间戳
+    uint32 blockTimestamp;
+    // tick index 的时间加权累积值
+    int56 tickCumulative;
+    // 价格所在区间的流动性的时间加权累积值
+    uint160 liquidityCumulative;
+    // 是否已经被初始化
+    bool initialized;
+}
 
 ```
+
+
+调用指定交易对pool合约的observe函数即可
 const Web3 = require('web3');
 const contractFile = require('./eth-usdt.json') //交易对pool合约abi
 
@@ -27,3 +39,5 @@ const get_price = async() => {
 get_price();
 
 ```
+## 参考链接
+https://liaoph.com/uniswap-v3-5/
