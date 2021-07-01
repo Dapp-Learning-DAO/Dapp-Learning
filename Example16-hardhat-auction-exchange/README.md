@@ -4,17 +4,8 @@
  - 支持定价出售
  - 支持拍卖
  
- ## 操作步骤：
- 
-  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
-  
-  2 功能AuctionFixedPrice.sol 定价拍卖    AuctionUnfixedPrice.sol 不定价拍卖。  
-    npx hardhat test   
-   
-  3 script下有相应合约测试代码。  
-    npx hardhat run scripts/auction-fix-price-script.js --network kovan
 
-## 测试步骤
+## 操作步骤
 
 - 启动hardhat node  
 npx hardhat node --network hardhat
@@ -52,6 +43,15 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
 使用新的账户, 对 Auction 的图片进行 Bid , 成功购买之后, 可以在 "yourcollectibles" 中查看购买到的资产
 
 
+ ## 操作步骤：
+ 
+  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
+  
+  2 功能AuctionFixedPrice.sol 定价拍卖    AuctionUnfixedPrice.sol 不定价拍卖。  
+    npx hardhat test   
+   
+  3 script下有相应合约测试代码。  
+    npx hardhat run scripts/auction-fix-price-script.js --network kovan
 
 
 
