@@ -395,9 +395,11 @@ contract EtherDelta {
                     v,
                     r,
                     s
-                ) == user) &&
-                block.number > expires &&
-                SafeMath.add(orderFills[user][hash], amount) > amountGet)
+                ) ==
+                user) &&
+                block.number <= expires &&
+                SafeMath.add(orderFills[user][hash], amount) <= amountGet),
+            "permit not pass"
         );
         tradeBalances(tokenGet, amountGet, tokenGive, amountGive, user, amount);
         orderFills[user][hash] = SafeMath.add(orderFills[user][hash], amount);
@@ -486,7 +488,7 @@ contract EtherDelta {
         return true;
     }
 
-    function availableVolume(Volume memory volume) public returns (uint256) {
+    function availableVolume(Volume memory volume) public view returns (uint256) {
         bytes32 hash = sha256(
             abi.encodePacked(
                 address(this),
