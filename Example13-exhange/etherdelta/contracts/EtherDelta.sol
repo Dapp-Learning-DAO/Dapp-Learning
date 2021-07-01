@@ -62,7 +62,7 @@ contract StandardToken is Token {
             //if (balances[msg.sender] >= _value && _value > 0) {
             balances[msg.sender] -= _value;
             balances[_to] += _value;
-            Transfer(msg.sender, _to, _value);
+            emit Transfer(msg.sender, _to, _value);
             return true;
         } else {
             return false;
@@ -84,14 +84,19 @@ contract StandardToken is Token {
             balances[_to] += _value;
             balances[_from] -= _value;
             allowed[_from][msg.sender] -= _value;
-            Transfer(_from, _to, _value);
+            emit Transfer(_from, _to, _value);
             return true;
         } else {
             return false;
         }
     }
 
-    function balanceOf(address _owner) public view override returns (uint256 balance) {
+    function balanceOf(address _owner)
+        public
+        view
+        override
+        returns (uint256 balance)
+    {
         return balances[_owner];
     }
 
@@ -101,7 +106,7 @@ contract StandardToken is Token {
         returns (bool success)
     {
         allowed[msg.sender][_spender] = _value;
-        Approval(msg.sender, _spender, _value);
+        emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
@@ -163,6 +168,8 @@ contract AccountLevelsTest is AccountLevels {
 }
 
 contract EtherDelta {
+    using SafeMath for *;
+
     address public admin; //the admin address
     address public feeAccount; //the account that will receive fees
     address public accountLevelsAddr; //the address of the AccountLevels contract
@@ -262,27 +269,46 @@ contract EtherDelta {
     }
 
     function deposit() public payable {
-        tokens[address(0)][msg.sender] = SafeMath.add(tokens[address(0)][msg.sender], msg.value);
-        Deposit(address(0), msg.sender, msg.value, tokens[address(0)][msg.sender]);
+        tokens[address(0)][msg.sender] = SafeMath.add(
+            tokens[address(0)][msg.sender],
+            msg.value
+        );
+        emit Deposit(
+            address(0),
+            msg.sender,
+            msg.value,
+            tokens[address(0)][msg.sender]
+        );
     }
 
     function withdraw(uint256 amount) public {
         require(tokens[address(0)][msg.sender] >= amount);
-        tokens[address(0)][msg.sender] = SafeMath.sub(tokens[address(0)][msg.sender], amount);
-        // require(msg.sender.call.value(amount)());
-        msg.sender.call.value(amount)();
-        Withdraw(address(0), msg.sender, amount, tokens[address(0)][msg.sender]);
+        tokens[address(0)][msg.sender] = SafeMath.sub(
+            tokens[address(0)][msg.sender],
+            amount
+        );
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "withdraw failed.");
+        emit Withdraw(
+            address(0),
+            msg.sender,
+            amount,
+            tokens[address(0)][msg.sender]
+        );
     }
 
     function depositToken(address token, uint256 amount) public {
         //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
         require(token != address(0));
-        require(Token(token).transferFrom(msg.sender, this, amount));
+        require(
+            Token(token).transferFrom(msg.sender, address(this), amount),
+            "Token.transferFrom fiald"
+        );
         tokens[token][msg.sender] = SafeMath.add(
             tokens[token][msg.sender],
             amount
         );
-        Deposit(token, msg.sender, amount, tokens[token][msg.sender]);
+        emit Deposit(token, msg.sender, amount, tokens[token][msg.sender]);
     }
 
     function withdrawToken(address token, uint256 amount) public {
@@ -293,7 +319,7 @@ contract EtherDelta {
             amount
         );
         require(Token(token).transfer(msg.sender, amount));
-        Withdraw(token, msg.sender, amount, tokens[token][msg.sender]);
+        emit Withdraw(token, msg.sender, amount, tokens[token][msg.sender]);
     }
 
     function balanceOf(address token, address user)
@@ -313,16 +339,18 @@ contract EtherDelta {
         uint256 nonce
     ) public {
         bytes32 hash = sha256(
-            this,
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce
+            abi.encodePacked(
+                address(this),
+                tokenGet,
+                amountGet,
+                tokenGive,
+                amountGive,
+                expires,
+                nonce
+            )
         );
         orders[msg.sender][hash] = true;
-        Order(
+        emit Order(
             tokenGet,
             amountGet,
             tokenGive,
@@ -348,29 +376,32 @@ contract EtherDelta {
     ) public {
         //amount is in amountGet terms
         bytes32 hash = sha256(
-            this,
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce
+            abi.encodePacked(
+                address(this),
+                tokenGet,
+                amountGet,
+                tokenGive,
+                amountGive,
+                expires,
+                nonce
+            )
         );
-        require (
+        require(
             ((orders[user][hash] ||
                 ecrecover(
-                    sha3("\x19Ethereum Signed Message:\n32", hash),
+                    keccak256(
+                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
+                    ),
                     v,
                     r,
                     s
-                ) ==
-                user) &&
+                ) == user) &&
                 block.number > expires &&
                 SafeMath.add(orderFills[user][hash], amount) > amountGet)
         );
         tradeBalances(tokenGet, amountGet, tokenGive, amountGive, user, amount);
         orderFills[user][hash] = SafeMath.add(orderFills[user][hash], amount);
-        Trade(
+        emit Trade(
             tokenGet,
             amount,
             tokenGive,
@@ -391,7 +422,7 @@ contract EtherDelta {
         uint256 feeMakeXfer = SafeMath.mul(amount, feeMake) / (1 ether);
         uint256 feeTakeXfer = SafeMath.mul(amount, feeTake) / (1 ether);
         uint256 feeRebateXfer = 0;
-        if (accountLevelsAddr != 0x0) {
+        if (accountLevelsAddr != address(0)) {
             uint256 accountLevel = AccountLevels(accountLevelsAddr)
             .accountLevel(user);
             if (accountLevel == 1)
@@ -420,73 +451,73 @@ contract EtherDelta {
         );
     }
 
+    struct Volume {
+        address tokenGet;
+        uint256 amountGet;
+        address tokenGive;
+        uint256 amountGive;
+        uint256 expires;
+        uint256 nonce;
+        address user;
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
+    }
+
     function testTrade(
-        address tokenGet,
-        uint256 amountGet,
-        address tokenGive,
-        uint256 amountGive,
-        uint256 expires,
-        uint256 nonce,
-        address user,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
+        // address tokenGet,
+        // uint256 amountGet,
+        // address tokenGive,
+        // uint256 amountGive,
+        // uint256 expires,
+        // uint256 nonce,
+        // address user,
+        // uint8 v,
+        // bytes32 r,
+        // bytes32 s,
+        Volume memory volume,
         uint256 amount,
         address sender
     ) public returns (bool) {
         if (
-            !(tokens[tokenGet][sender] >= amount &&
-                availableVolume(
-                    tokenGet,
-                    amountGet,
-                    tokenGive,
-                    amountGive,
-                    expires,
-                    nonce,
-                    user,
-                    v,
-                    r,
-                    s
-                ) >=
-                amount)
+            !(tokens[volume.tokenGet][sender] >= amount &&
+                availableVolume(volume) >= amount)
         ) return false;
         return true;
     }
 
-    function availableVolume(
-        address tokenGet,
-        uint256 amountGet,
-        address tokenGive,
-        uint256 amountGive,
-        uint256 expires,
-        uint256 nonce,
-        address user,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public returns (uint256) {
+    function availableVolume(Volume memory volume) public returns (uint256) {
         bytes32 hash = sha256(
-            this,
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce
+            abi.encodePacked(
+                address(this),
+                volume.tokenGet,
+                volume.amountGet,
+                volume.tokenGive,
+                volume.amountGive,
+                volume.expires,
+                volume.nonce
+            )
         );
         if (
-            !((orders[user][hash] ||
+            !((orders[volume.user][hash] ||
                 ecrecover(
-                    sha3("\x19Ethereum Signed Message:\n32", hash),
-                    v,
-                    r,
-                    s
+                    keccak256(
+                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
+                    ),
+                    volume.v,
+                    volume.r,
+                    volume.s
                 ) ==
-                user) && block.number <= expires)
+                volume.user) && block.number <= volume.expires)
         ) return 0;
-        uint256 available1 = SafeMath.sub(amountGet, orderFills[user][hash]);
-        uint256 available2 = SafeMath.mul(tokens[tokenGive][user], amountGet) /
-            amountGive;
+        uint256 available1 = SafeMath.sub(
+            volume.amountGet,
+            orderFills[volume.user][hash]
+        );
+        uint256 available2 = SafeMath.mul(
+            tokens[volume.tokenGive][volume.user],
+            volume.amountGet
+        ) / volume.amountGive;
         if (available1 < available2) return available1;
         return available2;
     }
@@ -504,13 +535,15 @@ contract EtherDelta {
         bytes32 s
     ) public view returns (uint256) {
         bytes32 hash = sha256(
-            this,
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce
+            abi.encodePacked(
+                address(this),
+                tokenGet,
+                amountGet,
+                tokenGive,
+                amountGive,
+                expires,
+                nonce
+            )
         );
         return orderFills[user][hash];
     }
@@ -527,18 +560,22 @@ contract EtherDelta {
         bytes32 s
     ) public {
         bytes32 hash = sha256(
-            this,
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce
+            abi.encodePacked(
+                address(this),
+                tokenGet,
+                amountGet,
+                tokenGive,
+                amountGive,
+                expires,
+                nonce
+            )
         );
-        require (
+        require(
             (orders[msg.sender][hash] ||
                 ecrecover(
-                    sha3("\x19Ethereum Signed Message:\n32", hash),
+                    keccak256(
+                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
+                    ),
                     v,
                     r,
                     s
@@ -546,7 +583,7 @@ contract EtherDelta {
                 msg.sender)
         );
         orderFills[msg.sender][hash] = amountGet;
-        Cancel(
+        emit Cancel(
             tokenGet,
             amountGet,
             tokenGive,

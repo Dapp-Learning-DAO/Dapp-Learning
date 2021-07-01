@@ -1,10 +1,11 @@
 {
   "name": "etherdelta",
   "scripts": {
-    "build": "npx hardhat compile",
+    "build": "npx hardhat compile --show-stack-traces",
     "test": "npx hardhat test"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
     "hardhat": "^2.3.0"
   },
   "devDependencies": {
