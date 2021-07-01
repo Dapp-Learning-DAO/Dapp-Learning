@@ -4,6 +4,9 @@
 有去中心化交易所， 有 etherdelta 订单薄模式和uniswap的AMM做市商模式。
 待集成 0x & bancor & kyber
 
+### EtherDelta
+EtherDelta, 详情参见 [./EtherDelta/README.md](./EtherDelta/README.md)
+
 ### uniswap-v1-like
 仿uniV1项目，详情参见 [./uniswap-v1-like/README.md](./uniswap-v1-like/README.md)
 
