@@ -357,8 +357,10 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
         address recipient;
         uint256 deadline;
     }
+     emit IncreaseLiquidity(tokenId, liquidity, amount0, amount1);
 ```
-2. increaseLiquidity
+ 调用poll的mint方法
+2. 添加流动性 increaseLiquidity
 ```
  struct IncreaseLiquidityParams {
         uint256 tokenId;
@@ -368,10 +370,42 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
         uint256 amount1Min;
         uint256 deadline;
     }
+
+   emit IncreaseLiquidity(params.tokenId, liquidity, amount0, amount1);
 ```
+ 调用poll的mint方法
+
+3. 移除流动性 decreaseLiquidity
+```
+ struct DecreaseLiquidityParams {
+        uint256 tokenId;
+        uint128 liquidity;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        uint256 deadline;
+    }
+ emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
+```
+会调用pool池的burn方法
 
 
+4 collect
+```
+  struct CollectParams {
+        uint256 tokenId;
+        address recipient;
+        uint128 amount0Max;
+        uint128 amount1Max;
+    }
 
+   emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
+```
+会调用collect方法
+
+5 burn
+```
+burn(uint256 tokenId)
+```
 ## 参考链接
   https://learnblockchain.cn/article/2357
   https://learnblockchain.cn/article/2580
