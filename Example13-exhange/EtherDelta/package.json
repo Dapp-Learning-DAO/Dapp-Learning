@@ -1,0 +1,18 @@
+{
+  "name": "etherdelta",
+  "scripts": {
+    "build": "npx hardhat compile --show-stack-traces",
+    "test": "npx hardhat test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "hardhat": "^2.3.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4"
+  }
+}

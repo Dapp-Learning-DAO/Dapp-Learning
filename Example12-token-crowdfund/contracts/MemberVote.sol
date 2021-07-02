@@ -9,7 +9,7 @@ pragma solidity >=0.4.0 <0.8.0;
  * 5. Approve successful investment proposals (i.e send money)
  */
 
-contract membersVote {
+contract MembersVote {
     struct Proposal {
         uint id;
         string name;
