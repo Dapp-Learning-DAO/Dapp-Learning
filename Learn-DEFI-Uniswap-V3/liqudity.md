@@ -28,6 +28,8 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
  emit IncreaseLiquidity(tokenId, liquidity, amount0, amount1);
 以及 获取id事件
 Transfer (index_topic_1 address from, index_topic_2 address to, index_topic_3 uint256 tokenId)
+
+pool池子： pool.mint方法
 ```
 2.添加流动性 increaseLiquidity
 ```
@@ -41,6 +43,8 @@ struct IncreaseLiquidityParams {
     }
  emit IncreaseLiquidity(params.tokenId, liquidity, amount0, amount1);
 监听方法和event均可
+
+ 调用pool的mint方法
 ```
 
 3 移出流动性 decreaseLiquidity
