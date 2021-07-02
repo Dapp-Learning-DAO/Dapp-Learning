@@ -391,21 +391,33 @@ contract EtherDelta {
             )
         );
         require(
-            ((orders[orderSigned.user][hash] ||
-                ecrecover(
-                    keccak256(
-                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
-                    ),
-                    orderSigned.v,
-                    orderSigned.r,
-                    orderSigned.s
-                ) ==
-                orderSigned.user) &&
-                block.number <= orderSigned.expires &&
-                SafeMath.add(orderFills[orderSigned.user][hash], amount) <=
-                orderSigned.amountGet),
+            (ecrecover(
+                keccak256(
+                    abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
+                ),
+                orderSigned.v,
+                orderSigned.r,
+                orderSigned.s
+            ) == orderSigned.user),
             "permit not pass"
         );
+
+        // require(
+        //     ((orders[orderSigned.user][hash] ||
+        //         ecrecover(
+        //             keccak256(
+        //                 abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
+        //             ),
+        //             orderSigned.v,
+        //             orderSigned.r,
+        //             orderSigned.s
+        //         ) ==
+        //         orderSigned.user) &&
+        //         block.number <= orderSigned.expires &&
+        //         SafeMath.add(orderFills[orderSigned.user][hash], amount) <=
+        //         orderSigned.amountGet),
+        //     "permit not pass"
+        // );
         tradeBalances(
             orderSigned.tokenGet,
             orderSigned.amountGet,

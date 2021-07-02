@@ -76,7 +76,7 @@ constructor(
 
 ```solidity
 ...
-mapping(address => mapping(address => uint256)) public tokens; // token 合约地址列表 (0地址 代表 Ether)
+mapping(address => mapping(address => uint256)) public tokens; // token 用户持有每种token数量的列表 (0地址 代表 Ether)
 mapping(address => mapping(bytes32 => bool)) public orders; // 挂单列表 (true = 用户提交的挂单, 需要验证离线签名)
 mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔挂单完成的数量 (amount of order that has been filled)
 ```

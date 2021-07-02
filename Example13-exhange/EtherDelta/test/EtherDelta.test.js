@@ -168,9 +168,8 @@ describe("EtherDelta", () => {
     expires,
     orderNonce,
     user,
-    targetUser=user
   ) {
-    const hash = utils.solidityPack(
+    const hash = utils.soliditySha256(
       [
         "address",
         "address",
@@ -195,7 +194,9 @@ describe("EtherDelta", () => {
     // console.log('signature ', signature.length, signature )
     const r = signature.slice(0, 66)
     const s = "0x" + signature.slice(66, 130)
-    const v = "0x" + signature.slice(130, 132)
+    let v = "0x" + signature.slice(130, 132)
+    v = BigNumber.from(v)
+
     return {
       tokenGet,
       amountGet,
@@ -203,7 +204,7 @@ describe("EtherDelta", () => {
       amountGive,
       expires,
       nonce: orderNonce,
-      user: targetUser.address,
+      user: user.address,
       v,
       r,
       s,
@@ -233,7 +234,6 @@ describe("EtherDelta", () => {
         amountGive,
         expires,
         orderNonce,
-        user2,
         user1,
       )
 
@@ -249,9 +249,9 @@ describe("EtherDelta", () => {
         initialBalance22,
       ] = await checkUsersBlance()
 
-      await etherDelta
-        .connect(user1)
-        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce)
+      // await etherDelta
+      //   .connect(user1)
+      //   .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce)
 
       await etherDelta.connect(user2).trade(orderSigned, amount)
 
@@ -373,7 +373,6 @@ describe("EtherDelta", () => {
         expires,
         orderNonce,
         user1,
-        user1
       )
 
       const availableVolume = await etherDelta.availableVolume(orderSigned)
@@ -440,7 +439,6 @@ describe("EtherDelta", () => {
         amountGive,
         expires,
         orderNonce,
-        user1,
         user1,
       )
 
