@@ -453,6 +453,8 @@ contract EtherDelta {
         );
     }
 
+    // solidity 函数的变量不能超过16个，需要使用struct传参
+
     struct Volume {
         address tokenGet;
         uint256 amountGet;
