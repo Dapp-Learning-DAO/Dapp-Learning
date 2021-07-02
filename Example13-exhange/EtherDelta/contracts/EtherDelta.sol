@@ -180,6 +180,20 @@ contract EtherDelta {
     mapping(address => mapping(bytes32 => bool)) public orders; //mapping of user accounts to mapping of order hashes to booleans (true = submitted by user, equivalent to offchain signature)
     mapping(address => mapping(bytes32 => uint256)) public orderFills; //mapping of user accounts to mapping of order hashes to uints (amount of order that has been filled)
 
+    // 订单信息入参struct
+    struct OrderSigned {
+        address tokenGet;
+        uint256 amountGet;
+        address tokenGive;
+        uint256 amountGive;
+        uint256 expires;
+        uint256 nonce;
+        address user;
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
+    }
+
     event Order(
         address tokenGet,
         uint256 amountGet,
@@ -361,54 +375,55 @@ contract EtherDelta {
         );
     }
 
-    function trade(
-        address tokenGet,
-        uint256 amountGet,
-        address tokenGive,
-        uint256 amountGive,
-        uint256 expires,
-        uint256 nonce,
-        address user,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
-        uint256 amount
-    ) public {
+    // solidity 函数的变量不能超过16个，需要使用struct传参
+
+    function trade(OrderSigned memory orderSigned, uint256 amount) public {
         //amount is in amountGet terms
         bytes32 hash = sha256(
             abi.encodePacked(
                 address(this),
-                tokenGet,
-                amountGet,
-                tokenGive,
-                amountGive,
-                expires,
-                nonce
+                orderSigned.tokenGet,
+                orderSigned.amountGet,
+                orderSigned.tokenGive,
+                orderSigned.amountGive,
+                orderSigned.expires,
+                orderSigned.nonce
             )
         );
         require(
-            ((orders[user][hash] ||
+            ((orders[orderSigned.user][hash] ||
                 ecrecover(
                     keccak256(
                         abi.encode("\x19Ethereum Signed Message:\n32", hash)
                     ),
-                    v,
-                    r,
-                    s
+                    orderSigned.v,
+                    orderSigned.r,
+                    orderSigned.s
                 ) ==
-                user) &&
-                block.number <= expires &&
-                SafeMath.add(orderFills[user][hash], amount) <= amountGet),
+                orderSigned.user) &&
+                block.number <= orderSigned.expires &&
+                SafeMath.add(orderFills[orderSigned.user][hash], amount) <=
+                orderSigned.amountGet),
             "permit not pass"
         );
-        tradeBalances(tokenGet, amountGet, tokenGive, amountGive, user, amount);
-        orderFills[user][hash] = SafeMath.add(orderFills[user][hash], amount);
+        tradeBalances(
+            orderSigned.tokenGet,
+            orderSigned.amountGet,
+            orderSigned.tokenGive,
+            orderSigned.amountGive,
+            orderSigned.user,
+            amount
+        );
+        orderFills[orderSigned.user][hash] = SafeMath.add(
+            orderFills[orderSigned.user][hash],
+            amount
+        );
         emit Trade(
-            tokenGet,
+            orderSigned.tokenGet,
             amount,
-            tokenGive,
-            (amountGive * amount) / amountGet,
-            user,
+            orderSigned.tokenGive,
+            (orderSigned.amountGive * amount) / orderSigned.amountGet,
+            orderSigned.user,
             msg.sender
         );
     }
@@ -453,125 +468,75 @@ contract EtherDelta {
         );
     }
 
-    // solidity 函数的变量不能超过16个，需要使用struct传参
-
-    struct Volume {
-        address tokenGet;
-        uint256 amountGet;
-        address tokenGive;
-        uint256 amountGive;
-        uint256 expires;
-        uint256 nonce;
-        address user;
-        uint8 v;
-        bytes32 r;
-        bytes32 s;
-    }
-
-    function testTrade(
-        // address tokenGet,
-        // uint256 amountGet,
-        // address tokenGive,
-        // uint256 amountGive,
-        // uint256 expires,
-        // uint256 nonce,
-        // address user,
-        // uint8 v,
-        // bytes32 r,
-        // bytes32 s,
-        Volume memory volume,
-        uint256 amount,
-        address sender
-    ) public returns (bool) {
-        if (
-            !(tokens[volume.tokenGet][sender] >= amount &&
-                availableVolume(volume) >= amount)
-        ) return false;
-        return true;
-    }
-
-    function availableVolume(Volume memory volume) public view returns (uint256) {
+    function availableVolume(OrderSigned memory orderSigned)
+        public
+        view
+        returns (uint256)
+    {
         bytes32 hash = sha256(
             abi.encodePacked(
                 address(this),
-                volume.tokenGet,
-                volume.amountGet,
-                volume.tokenGive,
-                volume.amountGive,
-                volume.expires,
-                volume.nonce
+                orderSigned.tokenGet,
+                orderSigned.amountGet,
+                orderSigned.tokenGive,
+                orderSigned.amountGive,
+                orderSigned.expires,
+                orderSigned.nonce
             )
         );
         if (
-            !((orders[volume.user][hash] ||
+            !((orders[orderSigned.user][hash] ||
                 ecrecover(
                     keccak256(
                         abi.encode("\x19Ethereum Signed Message:\n32", hash)
                     ),
-                    volume.v,
-                    volume.r,
-                    volume.s
+                    orderSigned.v,
+                    orderSigned.r,
+                    orderSigned.s
                 ) ==
-                volume.user) && block.number <= volume.expires)
+                orderSigned.user) && block.number <= orderSigned.expires)
         ) return 0;
         uint256 available1 = SafeMath.sub(
-            volume.amountGet,
-            orderFills[volume.user][hash]
+            orderSigned.amountGet,
+            orderFills[orderSigned.user][hash]
         );
         uint256 available2 = SafeMath.mul(
-            tokens[volume.tokenGive][volume.user],
-            volume.amountGet
-        ) / volume.amountGive;
+            tokens[orderSigned.tokenGive][orderSigned.user],
+            orderSigned.amountGet
+        ) / orderSigned.amountGive;
         if (available1 < available2) return available1;
         return available2;
     }
 
-    function amountFilled(
-        address tokenGet,
-        uint256 amountGet,
-        address tokenGive,
-        uint256 amountGive,
-        uint256 expires,
-        uint256 nonce,
-        address user,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public view returns (uint256) {
+    function amountFilled(OrderSigned memory orderSigned)
+        public
+        view
+        returns (uint256)
+    {
         bytes32 hash = sha256(
             abi.encodePacked(
                 address(this),
-                tokenGet,
-                amountGet,
-                tokenGive,
-                amountGive,
-                expires,
-                nonce
+                orderSigned.tokenGet,
+                orderSigned.amountGet,
+                orderSigned.tokenGive,
+                orderSigned.amountGive,
+                orderSigned.expires,
+                orderSigned.nonce
             )
         );
-        return orderFills[user][hash];
+        return orderFills[orderSigned.user][hash];
     }
 
-    function cancelOrder(
-        address tokenGet,
-        uint256 amountGet,
-        address tokenGive,
-        uint256 amountGive,
-        uint256 expires,
-        uint256 nonce,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public {
+    function cancelOrder(OrderSigned memory orderSigned) public {
         bytes32 hash = sha256(
             abi.encodePacked(
                 address(this),
-                tokenGet,
-                amountGet,
-                tokenGive,
-                amountGive,
-                expires,
-                nonce
+                orderSigned.tokenGet,
+                orderSigned.amountGet,
+                orderSigned.tokenGive,
+                orderSigned.amountGive,
+                orderSigned.expires,
+                orderSigned.nonce
             )
         );
         require(
@@ -580,24 +545,24 @@ contract EtherDelta {
                     keccak256(
                         abi.encode("\x19Ethereum Signed Message:\n32", hash)
                     ),
-                    v,
-                    r,
-                    s
+                    orderSigned.v,
+                    orderSigned.r,
+                    orderSigned.s
                 ) ==
                 msg.sender)
         );
-        orderFills[msg.sender][hash] = amountGet;
+        orderFills[msg.sender][hash] = orderSigned.amountGet;
         emit Cancel(
-            tokenGet,
-            amountGet,
-            tokenGive,
-            amountGive,
-            expires,
-            nonce,
+            orderSigned.tokenGet,
+            orderSigned.amountGet,
+            orderSigned.tokenGive,
+            orderSigned.amountGive,
+            orderSigned.expires,
+            orderSigned.nonce,
             msg.sender,
-            v,
-            r,
-            s
+            orderSigned.v,
+            orderSigned.r,
+            orderSigned.s
         );
     }
 }

@@ -38,6 +38,57 @@ yarn test
 npx hardhat test
 ```
 
+## 合约功能简述
+
+### ReserveToken
+
+EtherDelta 实现了简单的 token 合约，类似 ERC20 标准合约，用于交易所内的 token 交易（非 eth）
+
+### AccountLevelsTest
+
+内部维护一张用户 vip 等级列表，管理员可以设置用户的 vip 等级。
+
+### EtherDelta
+
+交易所核心合约
+
+用户交易用的资产必须先存入 (`deposit()`) 交易所合约，交易完成后，可以提现 (`withdraw()`) 到自己的钱包，基本和中心化交易所流程相同。
+
+#### 交易流程
+
+1. 卖家挂单 `order()`，以挂单信息转换为 hash，作为键，存入 `orders` 合约变量
+2. 买家吃单 `trade()`，传入指定的挂单 hash
+
+#### constructor
+
+```solidity
+constructor(
+    address admin_,     //  创建者
+    address feeAccount_,  // 手续费受益人
+    address accountLevelsAddr_, // AccountLevelsTest 合约地址
+    uint256 feeMake_,   //  买入手续费率
+    uint256 feeTake_,   //  卖出手续费率
+    uint256 feeRebate_  //  vip佣金回扣费率
+)
+```
+
+#### 合约 public 变量
+
+```solidity
+...
+mapping(address => mapping(address => uint256)) public tokens; // token 合约地址列表 (0地址 代表 Ether)
+mapping(address => mapping(bytes32 => bool)) public orders; // 挂单列表 (true = 用户提交的挂单, 需要验证离线签名)
+mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔挂单完成的数量 (amount of order that has been filled)
+```
+
+#### deposit
+
+存入 eth，eth 直接在交易中发送
+
+```solidity
+function deposit() public payable
+```
+
 ## 参考链接
 
-EtherDelta github仓库: https://github.com/etherdelta/smart_contract
+EtherDelta github 仓库: https://github.com/etherdelta/smart_contract
