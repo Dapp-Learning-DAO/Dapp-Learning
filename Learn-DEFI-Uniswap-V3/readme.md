@@ -389,7 +389,8 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 会调用pool池的burn方法
 
 
-4 collect
+4 collect  收取手续费
+手续费单独存储。
 ```
   struct CollectParams {
         uint256 tokenId;
@@ -400,7 +401,7 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 
    emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
 ```
-会调用collect方法
+会调用pool.collect方法
 
 5 burn
 ```
