@@ -1,7 +1,11 @@
 require("@nomiclabs/hardhat-waffle")
 const { expect } = require("chai")
 
+const fs = require("fs")
+const testAccounts = JSON.parse(fs.readFileSync("./testAccounts.json"));
+
 const { BigNumber, utils, provider } = ethers
+const { solidityPack, hashMessage, concat, sha256, toUtf8Bytes, keccak256, SigningKey } = utils
 
 const toWei = (value) => utils.parseEther(value.toString())
 const fromWei = (value) =>
@@ -25,6 +29,10 @@ describe("EtherDelta", () => {
 
   beforeEach(async () => {
     ;[owner, user1, user2] = await ethers.getSigners()
+    // 加载privateKey
+    owner.privateKey = testAccounts[0]
+    user1.privateKey = testAccounts[1]
+    user2.privateKey = testAccounts[2]
 
     feeAccount = owner.address
     admin = owner.address
@@ -169,33 +177,41 @@ describe("EtherDelta", () => {
     orderNonce,
     user,
   ) {
-    const hash = utils.soliditySha256(
-      [
-        "address",
-        "address",
-        "uint256",
-        "address",
-        "uint256",
-        "uint256",
-        "uint256",
-      ],
-      [
-        etherDelta.address,
-        tokenGet,
-        amountGet,
-        tokenGive,
-        amountGive,
-        expires,
-        orderNonce,
-      ]
+
+    let hash = keccak256(
+      solidityPack(
+        [
+          "address",
+          "address",
+          "uint256",
+          "address",
+          "uint256",
+          "uint256",
+          "uint256",
+        ],
+        [
+          etherDelta.address,
+          tokenGet,
+          amountGet,
+          tokenGive,
+          amountGive,
+          expires,
+          orderNonce,
+        ]
+      )
     )
 
-    const signature = await user.signMessage(hash)
-    // console.log('signature ', signature.length, signature )
-    const r = signature.slice(0, 66)
-    const s = "0x" + signature.slice(66, 130)
-    let v = "0x" + signature.slice(130, 132)
-    v = BigNumber.from(v)
+    // console.log('hash', hash.length, hash)
+    const messagePrefix = "\x19Ethereum Signed Message:\n";
+    hash = keccak256(concat([
+      toUtf8Bytes(messagePrefix),
+      toUtf8Bytes(String(32)),
+      hash
+    ]));
+
+    const signingKey = new SigningKey(user.privateKey)
+    const signature = signingKey.signDigest(hash)
+    const { v,r,s } = signature
 
     return {
       tokenGet,

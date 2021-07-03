@@ -352,7 +352,7 @@ contract EtherDelta {
         uint256 expires,
         uint256 nonce
     ) public {
-        bytes32 hash = sha256(
+        bytes32 hash = keccak256(
             abi.encodePacked(
                 address(this),
                 tokenGet,
@@ -379,7 +379,7 @@ contract EtherDelta {
 
     function trade(OrderSigned memory orderSigned, uint256 amount) public {
         //amount is in amountGet terms
-        bytes32 hash = sha256(
+        bytes32 hash = keccak256(
             abi.encodePacked(
                 address(this),
                 orderSigned.tokenGet,
@@ -390,34 +390,24 @@ contract EtherDelta {
                 orderSigned.nonce
             )
         );
+
+        
         require(
-            (ecrecover(
-                keccak256(
-                    abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
-                ),
-                orderSigned.v,
-                orderSigned.r,
-                orderSigned.s
-            ) == orderSigned.user),
+            ((orders[orderSigned.user][hash] ||
+                ecrecover(
+                    keccak256(
+                        abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
+                    ),
+                    orderSigned.v,
+                    orderSigned.r,
+                    orderSigned.s
+                ) ==
+                orderSigned.user) &&
+                block.number <= orderSigned.expires &&
+                SafeMath.add(orderFills[orderSigned.user][hash], amount) <=
+                orderSigned.amountGet),
             "permit not pass"
         );
-
-        // require(
-        //     ((orders[orderSigned.user][hash] ||
-        //         ecrecover(
-        //             keccak256(
-        //                 abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
-        //             ),
-        //             orderSigned.v,
-        //             orderSigned.r,
-        //             orderSigned.s
-        //         ) ==
-        //         orderSigned.user) &&
-        //         block.number <= orderSigned.expires &&
-        //         SafeMath.add(orderFills[orderSigned.user][hash], amount) <=
-        //         orderSigned.amountGet),
-        //     "permit not pass"
-        // );
         tradeBalances(
             orderSigned.tokenGet,
             orderSigned.amountGet,
@@ -485,7 +475,7 @@ contract EtherDelta {
         view
         returns (uint256)
     {
-        bytes32 hash = sha256(
+        bytes32 hash = keccak256(
             abi.encodePacked(
                 address(this),
                 orderSigned.tokenGet,
@@ -500,7 +490,7 @@ contract EtherDelta {
             !((orders[orderSigned.user][hash] ||
                 ecrecover(
                     keccak256(
-                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
+                        abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
                     ),
                     orderSigned.v,
                     orderSigned.r,
@@ -525,7 +515,7 @@ contract EtherDelta {
         view
         returns (uint256)
     {
-        bytes32 hash = sha256(
+        bytes32 hash = keccak256(
             abi.encodePacked(
                 address(this),
                 orderSigned.tokenGet,
@@ -540,7 +530,7 @@ contract EtherDelta {
     }
 
     function cancelOrder(OrderSigned memory orderSigned) public {
-        bytes32 hash = sha256(
+        bytes32 hash = keccak256(
             abi.encodePacked(
                 address(this),
                 orderSigned.tokenGet,
@@ -555,7 +545,7 @@ contract EtherDelta {
             (orders[msg.sender][hash] ||
                 ecrecover(
                     keccak256(
-                        abi.encode("\x19Ethereum Signed Message:\n32", hash)
+                        abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
                     ),
                     orderSigned.v,
                     orderSigned.r,
