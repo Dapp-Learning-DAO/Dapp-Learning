@@ -126,6 +126,13 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+
+- Day-40  Layer2: Arbitrum
+  - https://arbitrum.io/quickstart/
+
+- Day-41  NFT farming
+  - https://superfarm.com/farms
+
 ## 进阶课程(可自由添加项目卡)
 
 此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
