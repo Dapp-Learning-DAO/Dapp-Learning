@@ -80,10 +80,14 @@ Account balance of receiver is:  50
 2. Ethereum network 这里选择 kovan
 3. "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
 4. 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可
-``` 
+5. 如果yarn install 失败，可以进入新生成的项目目录，手动安装npm依赖，然后依次执行
+   yarn codegen
+   yarn build
+   会自动生成 ./generated/ 目录和文件
+```
 
 8) 定义模式  
-这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts, 所以我们使用调整后的这两个个文件。
+这里，已经根据 SimpleToken 合约，调整了 schema.graphql, mapping.ts 所以我们使用调整后的这两个个文件。
 
 - 复制文件
 ```
@@ -93,10 +97,19 @@ Account balance of receiver is:  50
   >> 复制 mapping.ts 文件
   cp ./scripts/mapping.ts graphtest/src
 ```
-   
 
-9) 部署 Subgraph
-在控制台先用 graph auth 进行授权:  
+9) 修改实体名字
+
+- 进入 graphtest 目录
+- 修改 subgraph.yaml 中 entities 定义如下
+```
+entities:
+        - TransferEntity
+        - ApprovalEntity
+```
+
+10) 部署 Subgraph
+在控制台先用 graph auth 进行授权(注意`deploy/`与`<ACCESS_TOKEN>`之间有空格):  
 ```
   graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 ```
@@ -112,9 +125,25 @@ Account balance of receiver is:  50
 ```
 <SUBGRAPH_NAME> 使用完成的 Subgraph 名称，我们这里是：longdacao/graphtest 。
 
+或者直接运行
+```
+yarn deploy
+```
 
-10) 在 TheGraph 查看  
+11) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
+
+## subgraph 
+subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数据访问模式。开发者可以选择直接使用别人已经部署[17]的 subgraph，或者自己定义并部署 subgraph。
+1 GraphQL Schema
+GraphQL Schema 定义了你想保存和查询的数据类型/实体。也可定义如关系或全文搜索的配置项。
+2 subgraph 清单（ yaml 配置）
+manifest定义了 subgraph 索引的智能合约、合约的ABI、关注这些合约的事件，以及如何将事件数据映射到 Graph 节点存储并允许查询。
+3 AssemblyScript 映射
+AssemblyScript 映射允许您使用 schema 中定义的实体类型保存要索引的数据。Graph CLI还使用 schema 与智能合约的 ABI 的组合生成 AssemblyScript 类型。
+
+通过@derivedFrom建立关系
+通过@derivedFrom字段在实体上定义反向查询，这样就在实体上创建了一个虚拟字段，使它可以被查询，但不能通过映射 API 手动设置。实际上，这是从另一个实体上定义的关系中衍生出来的。这样的关系，对存储关系的两者意义不大，如果只存储一方而派生另一方，则索引和查询性能都会更好。
 
 ## 参考链接  
 官方文档：   
@@ -122,10 +151,12 @@ https://thegraph.com/docs/introduction
    
 本项目参考文档：  
 https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA  
+https://mp.weixin.qq.com/s/LhdAREmhXSHxIaVfhcJQ_g
 https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
 https://learnblockchain.cn/article/2566  
  
    
 ## to do
 在 thegraph 网站上支持字段过滤  
-https://thegraph.com/   
+https://thegraph.com/  
+https://graphql.cn/learn/ 
