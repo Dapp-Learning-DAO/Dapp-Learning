@@ -202,6 +202,18 @@
   - 3 可以自由新增任务卡（需附上参考链接）
   - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
 
+## 常见问题
+  - 安装前端依赖时，如果在npm或者yarn修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
+    ```
+    npm config set proxy http://username:password@server:port
+    npm confit set https-proxy http://username:password@server:port
+    ```
+    例如：（要为yarn设置代理将其中的npm替换为yarn即可。）
+    ```
+    npm config set proxy http://127.0.0.1:2802
+    npm config set https-proxy http://127.0.0.1:2802
+    ```
+    
 
 ## 社区捐助
   - 欢迎感兴趣的小伙伴一起参与进来，开源项目维护不易，我们欢迎捐助。  
