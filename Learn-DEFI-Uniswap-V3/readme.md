@@ -50,6 +50,9 @@ router合约对外接口 ,交易
 ### 添加流动性
  NonfungiblePositionManager的mint函数实现初始的流动性的添加，increaseLiquidity函数实现了流动性的增加。这两个函数的逻辑基本一致，都是通过调用addLiquidity函数实现。mint需要额外创建ERC721的token。
  addLiquidity实现在LiquidityManagement.sol：
+
+  nfm合约根据用户输入的amount0Desired，amount1Desired 计算出liquidity, 然后计算出时间需要的 amount0, amount1,
+  实际支付在mintcallback中实现，然后关注pool池子逻辑。
 ```
 struct AddLiquidityParams {
     address token0;     // token0 的地址
@@ -91,6 +94,7 @@ function addLiquidity(AddLiquidityParams memory params)
     require(amount1 <= params.amount1Max);
 }
 ```
+
 流动性添加的核心逻辑由交易池的mint函数实现。mint函数又是由两个子函数实现：_modifyPosition和_updatePosition。
 - _updatePosition
  _updatePosition 创建或修改一个用户的 Position
@@ -353,8 +357,10 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
         address recipient;
         uint256 deadline;
     }
+     emit IncreaseLiquidity(tokenId, liquidity, amount0, amount1);
 ```
-2. increaseLiquidity
+ 调用poll的mint方法
+2. 添加流动性 increaseLiquidity
 ```
  struct IncreaseLiquidityParams {
         uint256 tokenId;
@@ -364,10 +370,42 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
         uint256 amount1Min;
         uint256 deadline;
     }
+
+   emit IncreaseLiquidity(params.tokenId, liquidity, amount0, amount1);
 ```
+ 调用poll的mint方法
+
+3. 移除流动性 decreaseLiquidity
+```
+ struct DecreaseLiquidityParams {
+        uint256 tokenId;
+        uint128 liquidity;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        uint256 deadline;
+    }
+ emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
+```
+会调用pool池的burn方法
 
 
+4 collect
+```
+  struct CollectParams {
+        uint256 tokenId;
+        address recipient;
+        uint128 amount0Max;
+        uint128 amount1Max;
+    }
 
+   emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
+```
+会调用collect方法
+
+5 burn
+```
+burn(uint256 tokenId)
+```
 ## 参考链接
   https://learnblockchain.cn/article/2357
   https://learnblockchain.cn/article/2580
@@ -377,3 +415,4 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
   https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg  星想法
   https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol   nft farming
   https://github.com/omarish/uniswap-v3-deploy-plugin  一键部署V3
+  https://www.gelato.network/

@@ -2,7 +2,6 @@ const Web3 = require('web3');
 const fs = require("fs");
 const contractFile = require('./compile');
 
-const defaultNetwork = "kovan";
 
 const privatekey = fs.readFileSync("./sk.txt").toString().trim()
 /*
@@ -96,4 +95,9 @@ const Trans = async () => {
    })
 };
 
-Trans();
+Trans()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

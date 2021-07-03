@@ -18,7 +18,7 @@ contract('SimpleToken', (accounts) => {
   it('Transfer 100 to other account', async () => {
     const simpleTokenIns = await SimpleToken.deployed()
 
-    const target = 0x5df22be367b95788cd51c7dbdf7c7ab70fe856ee
+    const target = "0x5df22be367b95788cd51c7dbdf7c7ab70fe856ee"
     // transfer 100 to other account
     await simpleTokenIns.transfer(target, 1000)
 

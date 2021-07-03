@@ -46,7 +46,7 @@ const Trans = async () => {
    console.log(`Attempting to deploy from account: ${wallet.address}`);
 
    // Send Tx (Initial Value set to 5) and Wait for Receipt
-   const deployedContract = await deployContractIns.deploy("hello","Dapp",1,100000000);
+   const deployedContract = await deployContractIns.deploy("hello","Dapp",1,100000000, { gasLimit: 8000000 });
    await deployedContract.deployed();
 
    console.log(`Contract deployed at address: ${deployedContract.address}`);
@@ -125,4 +125,9 @@ const Trans = async () => {
 
 };
 
-Trans();
+Trans()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
