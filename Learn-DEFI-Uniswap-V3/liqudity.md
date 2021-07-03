@@ -30,6 +30,8 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 Transfer (index_topic_1 address from, index_topic_2 address to, index_topic_3 uint256 tokenId)
 
 pool池子： pool.mint方法
+
+ emit Mint(msg.sender, recipient, tickLower, tickUpper, amount, amount0, amount1);
 ```
 2.添加流动性 increaseLiquidity
 ```
@@ -64,6 +66,12 @@ emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
 或者 UniswapV3Pool.sol合约的burn  
  emit Burn(msg.sender, tickLower, tickUpper, amount, amount0, amount1);
 
+```
+
+4 收取手续费 
+```
+
+ emit Collect(msg.sender, recipient, tickLower, tickUpper, amount0, amount1);
 ```
 
 ## 地址跟踪：
