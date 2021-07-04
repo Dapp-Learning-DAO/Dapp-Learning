@@ -9,7 +9,7 @@ const {
   solidityPack,
   concat,
   toUtf8Bytes,
-  keccak256,
+  sha256,
   SigningKey,
 } = utils;
 
@@ -183,7 +183,7 @@ describe("EtherDelta", () => {
     orderNonce,
     user
   ) {
-    let hash = keccak256(
+    let hash = sha256(
       solidityPack(
         [
           "address",
@@ -208,7 +208,7 @@ describe("EtherDelta", () => {
 
     // console.log('hash', hash.length, hash)
     const messagePrefix = "\x19Ethereum Signed Message:\n";
-    hash = keccak256(
+    hash = sha256(
       concat([toUtf8Bytes(messagePrefix), toUtf8Bytes(String(32)), hash])
     );
 
