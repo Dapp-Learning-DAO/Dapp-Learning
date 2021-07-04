@@ -11,3 +11,5 @@
 ## 参考链接
 https://github.com/propsproject/props-token-distribution
 EIP712 ：https://learnblockchain.cn/article/1357  
+https://learnblockchain.cn/2019/04/24/token-EIP712
+https://learnblockchain.cn/article/1496
