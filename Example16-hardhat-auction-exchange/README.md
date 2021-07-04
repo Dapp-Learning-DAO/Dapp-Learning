@@ -67,3 +67,29 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
 荷兰拍卖：
 https://medium.com/@shopevery/building-smart-contracts-for-a-dutch-auction-part-1-81dc5c770f1f
 https://corporatefinanceinstitute.com/resources/knowledge/finance/dutch-auction/
+
+
+## Todo List
+
+### 管理页面
+- NFT生成页
+- 我的NFT列表页
+- 发起拍卖操作对话框
+- 发起拍卖列表页
+- 出价记录列表页
+
+### 前端页面
+- 主页
+- About
+- NFT列表页
+- 拍卖列表页
+- 出价对话框
+
+### 异常页面
+- 确实账号时, Metamask调起页面
+- 没有MetaMask, MetaMask下载页面
+
+### 未确定
+
+- Collection功能
+- 个人资料功能
