@@ -51,7 +51,7 @@ router合约对外接口 ,交易
  NonfungiblePositionManager的mint函数实现初始的流动性的添加，increaseLiquidity函数实现了流动性的增加。这两个函数的逻辑基本一致，都是通过调用addLiquidity函数实现。mint需要额外创建ERC721的token。
  addLiquidity实现在LiquidityManagement.sol：
 
-  nfm合约根据用户输入的amount0Desired，amount1Desired 计算出liquidity, 然后计算出时间需要的 amount0, amount1,
+  nft合约根据用户输入的amount0Desired，amount1Desired 计算出liquidity, 然后计算出时间需要的 amount0, amount1,
   实际支付在mintcallback中实现，然后关注pool池子逻辑。
 ```
 struct AddLiquidityParams {
@@ -373,7 +373,7 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 
    emit IncreaseLiquidity(params.tokenId, liquidity, amount0, amount1);
 ```
- 调用poll的mint方法
+ 调用pool的mint方法
 
 3. 移除流动性 decreaseLiquidity
 ```
@@ -389,7 +389,8 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 会调用pool池的burn方法
 
 
-4 collect
+4 collect  收取手续费
+手续费单独存储。
 ```
   struct CollectParams {
         uint256 tokenId;
@@ -400,7 +401,7 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 
    emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
 ```
-会调用collect方法
+会调用pool.collect方法
 
 5 burn
 ```
