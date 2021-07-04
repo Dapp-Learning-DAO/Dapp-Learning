@@ -127,7 +127,7 @@
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
 
-- Day-40  Layer2: Arbitrum
+- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
   - https://arbitrum.io/quickstart/
 
 - Day-41  NFT farming
