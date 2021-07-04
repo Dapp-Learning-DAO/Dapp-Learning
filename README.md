@@ -126,6 +126,13 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+
+- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
+  - https://arbitrum.io/quickstart/
+
+- Day-41  NFT farming
+  - https://superfarm.com/farms
+
 ## 进阶课程(可自由添加项目卡)
 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
