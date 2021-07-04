@@ -4,17 +4,8 @@
  - 支持定价出售
  - 支持拍卖
  
- ## 操作步骤：
- 
-  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
-  
-  2 功能AuctionFixedPrice.sol 定价拍卖    AuctionUnfixedPrice.sol 不定价拍卖。  
-    npx hardhat test   
-   
-  3 script下有相应合约测试代码。  
-    npx hardhat run scripts/auction-fix-price-script.js --network kovan
 
-## 测试步骤
+## 操作步骤
 
 - 启动hardhat node  
 npx hardhat node --network hardhat
@@ -52,6 +43,15 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
 使用新的账户, 对 Auction 的图片进行 Bid , 成功购买之后, 可以在 "yourcollectibles" 中查看购买到的资产
 
 
+ ## 测试步骤：
+ 
+  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
+  
+  2 功能AuctionFixedPrice.sol 定价拍卖    AuctionUnfixedPrice.sol 不定价拍卖。  
+    npx hardhat test   
+   
+  3 script下有相应合约测试代码。  
+    npx hardhat run scripts/auction-fix-price-script.js --network kovan
 
 
 
@@ -67,3 +67,29 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
 荷兰拍卖：
 https://medium.com/@shopevery/building-smart-contracts-for-a-dutch-auction-part-1-81dc5c770f1f
 https://corporatefinanceinstitute.com/resources/knowledge/finance/dutch-auction/
+
+
+## Todo List
+
+### 管理页面
+- NFT生成页
+- 我的NFT列表页
+- 发起拍卖操作对话框
+- 发起拍卖列表页
+- 出价记录列表页
+
+### 前端页面
+- 主页
+- About
+- NFT列表页
+- 拍卖列表页
+- 出价对话框
+
+### 异常页面
+- 确实账号时, Metamask调起页面
+- 没有MetaMask, MetaMask下载页面
+
+### 未确定
+
+- Collection功能
+- 个人资料功能
