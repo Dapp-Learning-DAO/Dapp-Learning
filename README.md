@@ -1,7 +1,7 @@
 #  Dapp Learning 
 
 本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。
-主要工具是 web3.js（hardhat), web3.py (Brownie) 。  
+主要工具是 web3.js（hardhat), web3.py (Brownie) ，也可以使用Java，rust语言。    
 我们选取主流技术和项目作为研究对象，开发者可以认领待完成的任务或者自由添加自己感兴趣的项目。 
 
 项目分基础任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成。
