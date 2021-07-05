@@ -118,8 +118,7 @@
   - https://pinata.cloud/pinmanager
   - https://nft.storage
 
-- Day-37 swarm
-  - https://www.chainnews.com/articles/625290542956.htm
+- Day-37 state channel
 
 - Day-38 Flashbots provider for ethers.js
   - https://github.com/flashbots/ethers-provider-flashbots-bundle
@@ -132,6 +131,9 @@
 
 - Day-41  NFT farming
   - https://superfarm.com/farms
+  
+- Day-37 swarm
+  - https://www.chainnews.com/articles/625290542956.htm
 
 ## 进阶课程(可自由添加项目卡)
 
