@@ -4,11 +4,11 @@ from web3 import Web3
 
 def main():
     w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
-    with open('../build/contracts/MyTokenMintable1.json', 'r') as fr:
+    with open('./build/contracts/MyTokenMintable2.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
     my_contract = w3.eth.contract(abi=erc20_json_dict['abi'], bytecode=erc20_json_dict['bytecode'])
-    tx_hash = my_contract.constructor(w3.eth.accounts[1]).transact({'from': w3.eth.accounts[0]})
+    tx_hash = my_contract.constructor().transact({'from': w3.eth.accounts[0]})
 
     # 0. 使用my_contract类直接构建一个contract
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
@@ -29,9 +29,15 @@ def main():
     for acc in w3.eth.accounts:
         print(contract.functions.balanceOf(acc).call(), contract.functions.hasRole(minter_role, acc).call())
 
+    # 3. 设置权限，现在默认管理员是合约的创建者accounts[0]
+    # accounts[0]能赋予任何一个账户minter的角色，包括它自己
+    # 使用AccessControl提供的grantRole接口进行授权，发起人是管理员
+    grant_role = contract.functions.MINTER_ROLE().call()
+    tx_hash = contract.functions.grantRole(role=grant_role, account=w3.eth.accounts[5]).transact({"from":w3.eth.accounts[0]})
+
     # give everyone 10 Tokens
     for acc in w3.eth.accounts:
-        contract.functions.mint(to=acc, amount=10).transact({'from':w3.eth.accounts[1]})
+        contract.functions.mint(to=acc, amount=10).transact({'from': w3.eth.accounts[5]})
         print(contract.functions.balanceOf(acc).call())
 
 
