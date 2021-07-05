@@ -127,7 +127,7 @@
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
 
-- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
+- Day-40  deploy Uniswap V3 to Layer2: Arbitrum
   - https://arbitrum.io/quickstart/
 
 - Day-41  NFT farming
@@ -174,8 +174,12 @@
 
 - P9 AMPL
 
-- P10 DODO
+- P10 Perpetual Protocol
+https://www.chainnews.com/articles/163436212237.htm
+
+- P11 DODO
   - https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
+  
 
 ## NFT 进阶
 
