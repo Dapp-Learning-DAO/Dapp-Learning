@@ -126,10 +126,18 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+
+- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
+  - https://arbitrum.io/quickstart/
+
+- Day-41  NFT farming
+  - https://superfarm.com/farms
+
 ## 进阶课程(可自由添加项目卡)
 
-此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
-开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
+  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
+  可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
+  开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
 
 ## DeFi 进阶
 ### Learn-DEFI-XXX
@@ -201,9 +209,21 @@
   - 3 可以自由新增任务卡（需附上参考链接）
   - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
 
+## 常见问题
+  - 安装前端依赖时，如果在npm或者yarn修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
+    ```
+    npm config set proxy http://username:password@server:port
+    npm confit set https-proxy http://username:password@server:port
+    ```
+    例如：（要为yarn设置代理将其中的npm替换为yarn即可。）
+    ```
+    npm config set proxy http://127.0.0.1:2802
+    npm config set https-proxy http://127.0.0.1:2802
+    ```
+    
 
 ## 社区捐助
   - 欢迎感兴趣的小伙伴一起参与进来，开源项目维护不易，我们欢迎捐助。  
-  以太坊或matic地址：0x0x1F7b953113f4dFcBF56a1688529CC812865840e1  
+  以太坊或matic地址：0x1F7b953113f4dFcBF56a1688529CC812865840e1  
   我们会用多签钱包管理资金(会将资金从主网转入matic网络，在matic网络实现多签钱包管理)，并定期按PR提交记录分配资金给开发者。  
   且项目会给PR贡献者发放nft作为纪念奖品，以DAO治理形式管理此开源项目。
