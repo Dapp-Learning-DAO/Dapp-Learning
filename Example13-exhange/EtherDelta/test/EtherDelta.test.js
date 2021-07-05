@@ -1,7 +1,17 @@
 require("@nomiclabs/hardhat-waffle");
 const { expect } = require("chai");
 
+const fs = require("fs");
+const testAccounts = JSON.parse(fs.readFileSync("./testAccounts.json"));
+
 const { BigNumber, utils, provider } = ethers;
+const {
+  solidityPack,
+  concat,
+  toUtf8Bytes,
+  keccak256,
+  SigningKey,
+} = utils;
 
 const toWei = (value) => utils.parseEther(value.toString());
 const fromWei = (value) =>
@@ -25,6 +35,10 @@ describe("EtherDelta", () => {
 
   beforeEach(async () => {
     [owner, user1, user2] = await ethers.getSigners();
+    // 加载privateKey
+    owner.privateKey = testAccounts[0];
+    user1.privateKey = testAccounts[1];
+    user2.privateKey = testAccounts[2];
 
     feeAccount = owner.address;
     admin = owner.address;
@@ -109,8 +123,13 @@ describe("EtherDelta", () => {
     );
   });
 
+  // 交易前为账户准备token并向交易所授权，存入
   async function prepareTokens() {
     const _tokenAmountInit = toWei(100000);
+
+    await etherDelta.connect(user1).deposit({ value: toWei(100) });
+    await etherDelta.connect(user2).deposit({ value: toWei(100) });
+
     await token1.create(user1.address, _tokenAmountInit);
     await token1.connect(user1).approve(etherDelta.address, _tokenAmountInit);
     await etherDelta
@@ -133,24 +152,39 @@ describe("EtherDelta", () => {
       .depositToken(token2.address, _tokenAmountInit);
   }
 
-  it("Should do some trades initiated onchain", async () => {
-    await prepareTokens();
+  // 查询各个账户余额情况
+  async function checkUsersBlance() {
+    const feeBalance1 = await etherDelta.balanceOf(token1.address, feeAccount);
+    const feeBalance2 = await etherDelta.balanceOf(token2.address, feeAccount);
 
-    async function testTrade(
-      expiresIn,
-      orderNonce,
-      tokenGet,
-      tokenGive,
-      amountGet,
-      amountGive,
-      amount,
-      accountLevel
-    ) {
-      let expires = expiresIn;
-      const blockNumber = await ethers.provider.getBlockNumber();
-      expires = expiresIn + blockNumber;
+    const balance11 = await etherDelta.balanceOf(token1.address, user1.address);
+    const balance12 = await etherDelta.balanceOf(token1.address, user2.address);
 
-      const hash = utils.solidityPack(
+    const balance21 = await etherDelta.balanceOf(token2.address, user1.address);
+    const balance22 = await etherDelta.balanceOf(token2.address, user2.address);
+
+    return [
+      feeBalance1,
+      feeBalance2,
+      balance11,
+      balance12,
+      balance21,
+      balance22,
+    ];
+  }
+
+  // 签名获得 v, r, s
+  async function signOrder(
+    tokenGet,
+    amountGet,
+    tokenGive,
+    amountGive,
+    expires,
+    orderNonce,
+    user
+  ) {
+    let hash = keccak256(
+      solidityPack(
         [
           "address",
           "address",
@@ -169,117 +203,90 @@ describe("EtherDelta", () => {
           expires,
           orderNonce,
         ]
-      );
+      )
+    );
 
-      const signature = await user2.signMessage(hash);
-      // console.log('signature ', signature.length, signature )
-      const r = signature.slice(0, 66);
-      const s = "0x" + signature.slice(66, 130);
-      const v = "0x" + signature.slice(130, 132);
+    // console.log('hash', hash.length, hash)
+    const messagePrefix = "\x19Ethereum Signed Message:\n";
+    hash = keccak256(
+      concat([toUtf8Bytes(messagePrefix), toUtf8Bytes(String(32)), hash])
+    );
 
-      await accountLevelsTest.setAccountLevel(user1.address, accountLevel);
-      const level = await accountLevelsTest.accountLevel(user1.address);
+    const signingKey = new SigningKey(user.privateKey);
+    const signature = signingKey.signDigest(hash);
+    const { v, r, s } = signature;
 
-      const initialFeeBalance1 = await etherDelta.balanceOf(
-        token1.address,
-        feeAccount
-      );
-      const initialFeeBalance2 = await etherDelta.balanceOf(
-        token2.address,
-        feeAccount
-      );
+    return {
+      tokenGet,
+      amountGet,
+      tokenGive,
+      amountGive,
+      expires,
+      nonce: orderNonce,
+      user: user.address,
+      v,
+      r,
+      s,
+    };
+  }
 
-      const initialBalance11 = await etherDelta.balanceOf(
-        token1.address,
-        user1.address
-      );
-      const initialBalance12 = await etherDelta.balanceOf(
-        token1.address,
-        user2.address
-      );
+  it("Should do some trades initiated offchain", async () => {
+    await prepareTokens();
 
-      const initialBalance21 = await etherDelta.balanceOf(
-        token2.address,
-        user1.address
-      );
-      const initialBalance22 = await etherDelta.balanceOf(
-        token2.address,
-        user2.address
-      );
+    async function testTrade(
+      expiresIn,
+      orderNonce,
+      tokenGet,
+      tokenGive,
+      amountGet,
+      amountGive,
+      amount,
+      accountLevel
+    ) {
+      let expires = await ethers.provider.getBlockNumber();
+      expires += expiresIn;
 
-      await etherDelta
-        .connect(user1)
-        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
-      await etherDelta
-        .connect(user2)
-        .trade(
-          tokenGet,
-          amountGet,
-          tokenGive,
-          amountGive,
-          expires,
-          orderNonce,
-          user1.address,
-          v,
-          r,
-          s,
-          amount
-        );
-
-      const feeBalance1 = await etherDelta.balanceOf(
-        token1.address,
-        feeAccount
-      );
-      const feeBalance2 = await etherDelta.balanceOf(
-        token2.address,
-        feeAccount
-      );
-
-      const balance11 = await etherDelta.balanceOf(
-        token1.address,
-        user1.address
-      );
-      const balance12 = await etherDelta.balanceOf(
-        token1.address,
-        user2.address
-      );
-
-      const balance21 = await etherDelta.balanceOf(
-        token2.address,
-        user1.address
-      );
-      const balance22 = await etherDelta.balanceOf(
-        token2.address,
-        user2.address
-      );
-
-      const volume = {
-        tokenGet,
-        amountGet,
-        tokenGive,
-        amountGive,
-        expires,
-        nonce: orderNonce,
-        user: user1.address,
-        v,
-        r,
-        s,
-      };
-      const availableVolume = await etherDelta.availableVolume(volume);
-      expect(availableVolume).to.equal(amountGet.sub(amount));
-
-      const amountFilled = await etherDelta.amountFilled(
+      const orderSigned = await signOrder(
         tokenGet,
         amountGet,
         tokenGive,
         amountGive,
         expires,
         orderNonce,
-        user1.address,
-        v,
-        r,
-        s
+        user1
       );
+
+      await accountLevelsTest.setAccountLevel(user1.address, accountLevel);
+      const level = await accountLevelsTest.accountLevel(user1.address);
+
+      const [
+        initialFeeBalance1,
+        initialFeeBalance2,
+        initialBalance11,
+        initialBalance12,
+        initialBalance21,
+        initialBalance22,
+      ] = await checkUsersBlance();
+
+      // await etherDelta
+      //   .connect(user1)
+      //   .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce)
+
+      await etherDelta.connect(user2).trade(orderSigned, amount);
+
+      const [
+        feeBalance1,
+        feeBalance2,
+        balance11,
+        balance12,
+        balance21,
+        balance22,
+      ] = await checkUsersBlance();
+
+      const availableVolume = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume).to.equal(amountGet.sub(amount));
+
+      const amountFilled = await etherDelta.amountFilled(orderSigned);
       expect(amountFilled).to.equal(amount);
 
       const feeMakeXfer = amount.mul(feeMake).div(toWei(1));
@@ -356,5 +363,190 @@ describe("EtherDelta", () => {
         trade.accountLevel
       );
     }
+  });
+
+  it("Should place an order offchain, check availableVolume and amountFilled, then cancel", async () => {
+    await prepareTokens();
+
+    async function testCancel(
+      expiresIn,
+      orderNonce,
+      tokenGet,
+      tokenGive,
+      amountGet,
+      amountGive,
+      amount
+    ) {
+      let expires = await ethers.provider.getBlockNumber();
+      expires += expiresIn;
+
+      await etherDelta
+        .connect(user1)
+        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
+
+      const orderSigned = await signOrder(
+        tokenGet,
+        amountGet,
+        tokenGive,
+        amountGive,
+        expires,
+        orderNonce,
+        user1
+      );
+
+      const availableVolume = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume).to.equal(amountGet);
+
+      const amountFilled = await etherDelta.amountFilled(orderSigned);
+      expect(amountFilled).to.equal(toWei(0));
+    }
+
+    const trades = [
+      {
+        expires: 10,
+        orderNonce: 7,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: toWei(50),
+        amountGive: toWei(25),
+        amount: toWei(25),
+      },
+      {
+        expires: 10,
+        orderNonce: 8,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: BigNumber.from(50),
+        amountGive: BigNumber.from(25),
+        amount: BigNumber.from(25),
+      },
+    ];
+
+    for (let i = 0; i < trades.length; i++) {
+      const trade = trades[i];
+      await testCancel(
+        trade.expires,
+        trade.orderNonce,
+        trade.tokenGet,
+        trade.tokenGive,
+        trade.amountGet,
+        trade.amountGive,
+        trade.amount
+      );
+    }
+  });
+
+  it("Should do a trade and check available volume depletion", async () => {
+    await prepareTokens();
+
+    async function testDepletion(
+      expiresIn,
+      orderNonce,
+      tokenGet,
+      tokenGive,
+      amountGet,
+      amountGive,
+      amount
+    ) {
+      let expires = await ethers.provider.getBlockNumber();
+      expires += expiresIn;
+
+      const orderSigned = await signOrder(
+        tokenGet,
+        amountGet,
+        tokenGive,
+        amountGive,
+        expires,
+        orderNonce,
+        user1
+      );
+
+      await etherDelta
+        .connect(user1)
+        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
+
+      await etherDelta.connect(user2).trade(orderSigned, amount);
+
+      const availableVolume = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume).to.equal(amountGet.sub(amount));
+    }
+
+    const trades = [
+      {
+        expires: 1000,
+        orderNonce: 11,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: toWei(50),
+        amountGive: toWei(25),
+        amount: toWei(50).div(2),
+        accountLevel: 0,
+      },
+    ];
+
+    for (let i = 0; i < trades.length; i++) {
+      const trade = trades[i];
+      await testDepletion(
+        trade.expires,
+        trade.orderNonce,
+        trade.tokenGet,
+        trade.tokenGive,
+        trade.amountGet,
+        trade.amountGive,
+        trade.amount,
+        trade.accountLevel
+      );
+    }
+  });
+
+  it("Should do a token withdrawal", async () => {
+    await prepareTokens();
+
+    const amount = toWei(100);
+
+    const initialBalance = await etherDelta.balanceOf(
+      token1.address,
+      user1.address
+    );
+    const initialTokenBalance = await token1.balanceOf(user1.address);
+
+    await etherDelta.connect(user1).withdrawToken(token1.address, amount);
+
+    const finalBalance = await etherDelta.balanceOf(
+      token1.address,
+      user1.address
+    );
+    const finalTokenBalance = await token1.balanceOf(user1.address);
+
+    expect(finalBalance).to.equal(initialBalance.sub(amount));
+    expect(finalTokenBalance).to.equal(initialTokenBalance.add(amount));
+  });
+
+  it("Should do a Ether withdrawal", async () => {
+    await prepareTokens();
+
+    const amount = toWei(10);
+
+    const initialBalance = await etherDelta.balanceOf(
+      ADDRESS_ZERO,
+      user1.address
+    );
+    const initialEthBalance = await getBalance(user1.address);
+
+    // 预估gas 费用
+    const gas = await etherDelta.connect(user1).estimateGas.withdraw(amount);
+    const gasPrice = await provider.getGasPrice();
+    const gasFee = gas.mul(gasPrice);
+
+    await etherDelta.connect(user1).withdraw(amount);
+
+    const finalBalance = await etherDelta.balanceOf(
+      ADDRESS_ZERO,
+      user1.address
+    );
+    const finalEthBalance = await getBalance(user1.address);
+
+    expect(finalBalance).to.equal(initialBalance.sub(amount));
+    expect(finalEthBalance.add(gasFee)).to.equal(initialEthBalance.add(amount));
   });
 });
