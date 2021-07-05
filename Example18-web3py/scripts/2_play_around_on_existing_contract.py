@@ -4,11 +4,11 @@ import json
 
 def main():
     w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
-    with open('../build/contracts/MyToken.json', 'r') as fr:
+    with open('./build/contracts/MyToken.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
-    # 1. 查看ganache上的输出，（在shell界面上可以查看，转账记录有etherscan??），如果不能查看可以考虑重新deploy一个合约，得到其地址
-    tx_receipt = w3.eth.get_transaction_receipt('0x09d02b76e7b6d4a5a44279caca98f37a5968374dcf13efc985ea3661a7f5bf7e')
+    # 1. 查看ganache上的输出，获取 transactionHash，替换下面的值（在shell界面上可以查看，转账记录有etherscan??），如果不能查看可以考虑重新deploy一个合约，得到其地址
+    tx_receipt = w3.eth.get_transaction_receipt('0x3faffc7833d11110041f8d9abe07a21dd0eec3687c62c5c847e2a9931fd4f964')
     contract_addr = tx_receipt['contractAddress']
 
     # 2. 生成该合约地址的合约对象，有两种方法

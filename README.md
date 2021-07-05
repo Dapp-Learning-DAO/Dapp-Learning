@@ -21,7 +21,7 @@
 开发前请安装和了解以下工具：
 - metamask（浏览器钱包插件）: https://www.jianshu.com/p/b5b2c05e9090
 - infura（节点服务）: https://infura.io/
-- 测试均连接kovan测试网，kovan测试ETH申请: https://faucet.kovan.network
+- 测试均连接kovan测试网，kovan测试ETH申请: https://faucet.kovan.network,也可自由使用其他测试网络。
 - 以太坊区块链浏览器: https://kovan.etherscan.io
 - JSON-PRC接口: https://eth.wiki/json-rpc/API
 - tenderly合约验证 https://dashboard.tenderly.co/explorer
@@ -126,6 +126,13 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+
+- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
+  - https://arbitrum.io/quickstart/
+
+- Day-41  NFT farming
+  - https://superfarm.com/farms
+
 ## 进阶课程(可自由添加项目卡)
 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  

@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "./ierc20.sol";
 import "./erc20metadata.sol";
-import "./context.sol";
+import "./openzepplin/Context.sol";
 
 /**
  * @dev Implementation of the {IERC20} interface.

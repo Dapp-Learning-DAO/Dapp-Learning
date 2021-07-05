@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "OpenZeppelin/openzeppelin-contracts@4.1.0/contracts/token/ERC20/ERC20.sol";
-import "OpenZeppelin/openzeppelin-contracts@4.1.0/contracts/access/AccessControl.sol";
+import "./erc20.sol";
+import "./openzepplin/AccessControl.sol";
 
 contract MyTokenOpenZeppelin is ERC20 {
     constructor(uint256 initialSupply) public ERC20("MyTokenOpenZeppelin", "MTOZ") {
