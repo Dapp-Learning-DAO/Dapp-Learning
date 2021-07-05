@@ -36,11 +36,6 @@ pipenv install --skip-lock
 pipenv shell
 ```
 
-- 编译合约
-```
-brownie compile
-```
-
 - 执行脚本
 ```
 python 1_deploy_using_web3.py
