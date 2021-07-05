@@ -1,0 +1,130 @@
+{
+  "data": {
+    "positions": [
+      {
+        "depositedToken0": "3710",
+        "depositedToken1": "1.51176490583184423",
+        "id": "66266",
+        "liquidity": "0",
+        "owner": "0xacc8d326fc37a21c421517ac6944bc3c68a39667",
+        "pool": {
+          "burns": [
+            {
+              "amount0": "3833.800051",
+              "amount1": "1.453952723381230629",
+              "amountUSD": "6955.809475530538077603781393199094",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "198180",
+              "tickUpper": "201360",
+              "timestamp": "1625293971"
+            }
+          ],
+          "createdAtTimestamp": "1620169800",
+          "id": "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8",
+          "liquidity": "13731965848703021244",
+          "mints": [
+            {
+              "amount": "982576363843883",
+              "amount0": "3710",
+              "amount1": "1.51176490583184423",
+              "amountUSD": "6938.518324342058078654596609567866",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "198180",
+              "tickUpper": "201360",
+              "timestamp": "1625036161",
+              "token0": {
+                "symbol": "USDC"
+              },
+              "token1": {
+                "symbol": "WETH"
+              }
+            },
+            {
+              "amount": "18367349757663393",
+              "amount0": "38232.270378",
+              "amount1": "11.343560795314951795",
+              "amountUSD": "62589.76179947751922718575470424313",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "199020",
+              "tickUpper": "200520",
+              "timestamp": "1625295614",
+              "token0": {
+                "symbol": "USDC"
+              },
+              "token1": {
+                "symbol": "WETH"
+              }
+            }
+          ],
+          "sqrtPrice": "1638724903009906285008712123591253",
+          "token0Price": "2337.475461386360965587159479639901",
+          "token1Price": "0.0004278119777167192905986258736730044"
+        },
+        "withdrawnToken0": "3833.800051",
+        "withdrawnToken1": "1.453952723381230629"
+      },
+      {
+        "depositedToken0": "38232.270378",
+        "depositedToken1": "11.343560795314951795",
+        "id": "70049",
+        "liquidity": "18367349757663393",
+        "owner": "0xacc8d326fc37a21c421517ac6944bc3c68a39667",
+        "pool": {
+          "burns": [
+            {
+              "amount0": "3833.800051",
+              "amount1": "1.453952723381230629",
+              "amountUSD": "6955.809475530538077603781393199094",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "198180",
+              "tickUpper": "201360",
+              "timestamp": "1625293971"
+            }
+          ],
+          "createdAtTimestamp": "1620169800",
+          "id": "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8",
+          "liquidity": "13731965848703021244",
+          "mints": [
+            {
+              "amount": "982576363843883",
+              "amount0": "3710",
+              "amount1": "1.51176490583184423",
+              "amountUSD": "6938.518324342058078654596609567866",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "198180",
+              "tickUpper": "201360",
+              "timestamp": "1625036161",
+              "token0": {
+                "symbol": "USDC"
+              },
+              "token1": {
+                "symbol": "WETH"
+              }
+            },
+            {
+              "amount": "18367349757663393",
+              "amount0": "38232.270378",
+              "amount1": "11.343560795314951795",
+              "amountUSD": "62589.76179947751922718575470424313",
+              "owner": "0xc36442b4a4522e871399cd717abdd847ab11fe88",
+              "tickLower": "199020",
+              "tickUpper": "200520",
+              "timestamp": "1625295614",
+              "token0": {
+                "symbol": "USDC"
+              },
+              "token1": {
+                "symbol": "WETH"
+              }
+            }
+          ],
+          "sqrtPrice": "1638724903009906285008712123591253",
+          "token0Price": "2337.475461386360965587159479639901",
+          "token1Price": "0.0004278119777167192905986258736730044"
+        },
+        "withdrawnToken0": "0",
+        "withdrawnToken1": "0"
+      }
+    ]
+  }
+}

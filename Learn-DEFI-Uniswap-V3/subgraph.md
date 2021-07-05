@@ -17,30 +17,34 @@
 }
 
 
+// 计算某个地址的持仓
 {
-  positions(where : {owner : "0x1aeF26E2B724fFDe7d1105E206620e43bc8077C9" } ) {
+  positions(where : {owner : "0xacc8d326fc37a21c421517ac6944bc3c68a39667" } ) {
     id
     owner
     liquidity
- 
+  
+    tickLower{
+      tickIdx
+    }
+    tickUpper{
+      tickIdx
+    }
+    transaction {
+      id
+      gasUsed
+      gasPrice
+    }
     depositedToken0
     depositedToken1
     withdrawnToken0
     withdrawnToken1
-    pool {
-      id
-      createdAtTimestamp
-    }
-    token0 {
-    symbol
-    }
-    token1 {
-      symbol
-    }
-  
+    collectedFeesToken0
+    collectedFeesToken1
   }
+}
 
-// 池子为单位
+// 池子为单位，计算池子中某用户的所有流动性交易记录
 
 {
   pools(where : {id : "0x290a6a7460b308ee3f19023d2d00de604bcf5b42" 
