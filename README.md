@@ -1,7 +1,7 @@
 #  Dapp Learning 
 
 本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。
-主要工具是 web3.js（hardhat), web3.py (Brownie) 。  
+主要工具是 web3.js（hardhat), web3.py (Brownie) ，也可以使用Java，rust语言。    
 我们选取主流技术和项目作为研究对象，开发者可以认领待完成的任务或者自由添加自己感兴趣的项目。 
 
 项目分基础任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成。
@@ -118,8 +118,7 @@
   - https://pinata.cloud/pinmanager
   - https://nft.storage
 
-- Day-37 swarm
-  - https://www.chainnews.com/articles/625290542956.htm
+- Day-37 state channel
 
 - Day-38 Flashbots provider for ethers.js
   - https://github.com/flashbots/ethers-provider-flashbots-bundle
@@ -127,12 +126,14 @@
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
 
-- Day-40  部署 Uniswap V3 到 Layer2: Arbitrum
+- Day-40  deploy Uniswap V3 to Layer2: Arbitrum
   - https://arbitrum.io/quickstart/
 
 - Day-41  NFT farming
   - https://superfarm.com/farms
-
+   
+- Day-42  merkle-distributor air drop
+  - https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol  
 ## 进阶课程(可自由添加项目卡)
 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
@@ -174,8 +175,12 @@
 
 - P9 AMPL
 
-- P10 DODO
+- P10 Perpetual Protocol
+https://www.chainnews.com/articles/163436212237.htm
+
+- P11 DODO
   - https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
+  
 
 ## NFT 进阶
 
@@ -224,6 +229,6 @@
 
 ## 社区捐助
   - 欢迎感兴趣的小伙伴一起参与进来，开源项目维护不易，我们欢迎捐助。  
-  以太坊或matic地址：0x1F7b953113f4dFcBF56a1688529CC812865840e1  
+  以太坊/matic/zksync地址：0x1F7b953113f4dFcBF56a1688529CC812865840e1  
   我们会用多签钱包管理资金(会将资金从主网转入matic网络，在matic网络实现多签钱包管理)，并定期按PR提交记录分配资金给开发者。  
   且项目会给PR贡献者发放nft作为纪念奖品，以DAO治理形式管理此开源项目。
