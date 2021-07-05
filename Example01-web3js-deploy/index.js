@@ -33,7 +33,7 @@ const contractFile = tempFile.contracts['Incrementer.sol']['Incrementer'];
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
-// Create web3 with kovan provider
+// Create web3 with kovan provider，you can fix kovan to other testnet
 const web3 = new Web3('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'); 
 
 // Create account from privatekey
