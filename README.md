@@ -131,7 +131,9 @@
 
 - Day-41  NFT farming
   - https://superfarm.com/farms
-  
+   
+- Day-42  merkle-distributor air drop
+  - https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol  
 ## 进阶课程(可自由添加项目卡)
 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
