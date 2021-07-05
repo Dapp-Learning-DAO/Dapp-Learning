@@ -29,7 +29,7 @@ ganache-cli
 
 - 安装 pip 依赖
 ```
-pipenv install --skip-lock
+pipenv install
 ```
 
 - 进入 pipenv

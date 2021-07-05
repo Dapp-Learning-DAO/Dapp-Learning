@@ -4,9 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-eth-brownie = "*"
 web3 = "*"
-requests = "*"
 
 [dev-packages]
 
