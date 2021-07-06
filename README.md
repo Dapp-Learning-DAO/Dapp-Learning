@@ -28,11 +28,11 @@
 - remix本地环境 https://zhuanlan.zhihu.com/p/38309494
 
 ## 合约参考库及致敬相关项目
-- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**
-（shooter大佬的项目，适合入门solidity）
 
 - **https://github.com/OpenZeppelin/openzeppelin-contracts**
   (经典合约库)
+- **https://github.com/ConsenSys/smart-contract-best-practices**
+   (合约安全库)  
 - **https://github.com/austintgriffith/scaffold-eth**
 (向此神级项目致敬)
 - **https://github.com/HQ20/contracts**
@@ -42,6 +42,8 @@
 （密码学课程）
 - **https://github.com/OffcierCia/DeFi-Developer-Road-Map**
   （defi教程）
+- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**
+（shooter大佬的项目，适合入门solidity）  
 
 ## 基础课程列表(可自由添加任务卡)
 **添加任务卡时请附上相关参考链接**
