@@ -161,3 +161,4 @@ https://learnblockchain.cn/article/2566
 https://thegraph.com/  
 https://graphql.cn/learn/ 
 https://gql-guide.vercel.app/
+https://thegraph.com/docs/graphql-api
