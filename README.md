@@ -125,6 +125,7 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+  - https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol
 
 - Day-40  deploy Uniswap V3 to Layer2: Arbitrum
   - https://arbitrum.io/quickstart/
