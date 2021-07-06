@@ -39,7 +39,20 @@ pipenv shell
 
 - 执行脚本
 ```
-python 1_deploy_using_web3.py
+## 演示合约构造及部署
+python scripts/1_deploy_using_web3.py
+
+## 根据已存在的合约地址构造合约实例
+python scripts/2_play_around_on_existing_contract.py
+
+## 使用 openzepplin 合约演示转账
+python scripts/3_use_openzeppelin.py
+
+## 演示 ERC20 合约的调用
+python scripts/4_use_openzeppelin_mintable_contract.py
+
+## 演示 ERC20 动态 Mint 调用
+python scripts/5_use_openzeppelin_dynamic_mintable_contract.py
 ```
 
 
