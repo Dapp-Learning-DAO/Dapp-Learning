@@ -7,13 +7,10 @@ def main():
     with open('./build/contracts/MyToken.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
-    print(type(erc20_json_dict))
-    print(erc20_json_dict['abi'])
-    print(erc20_json_dict.keys())
-
     # 1. 查看ganache上的账号以及设置默认账号等
+    print("Accounts Balance before send transaction :")
     for acc in w3.eth.accounts:
-        print(acc)
+        print("Account " + acc + " : " + str(w3.eth.get_balance(acc)))
     w3.eth.default_account = w3.eth.accounts[0]
 
     # 2. 部署智能合约， 使用web3.eth.contract， 传入abi和bytecode，
@@ -31,13 +28,12 @@ def main():
 
     # 2.3 查看交易状态等，返回中会包括合约创建者地址，合约地址等关键信息
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-
-    for k, v in tx_receipt.items():
-        print(k, v)
+    print(f'\nTransaction receipt : { tx_receipt }')
 
     # 2.4 还可以查看一下ganache上发出合约的账户是否消耗了eth
+    print("\nAccounts balance after send transaction ")
     for acc in w3.eth.accounts:
-        print(w3.eth.get_balance(acc))
+        print("Account " + acc + " : " + str(w3.eth.get_balance(acc)))
 
 
 if __name__ =='__main__':

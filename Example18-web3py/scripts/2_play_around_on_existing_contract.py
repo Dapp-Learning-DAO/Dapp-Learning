@@ -7,8 +7,12 @@ def main():
     with open('./build/contracts/MyToken.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
-    # 1. 查看ganache上的输出，获取 transactionHash，替换下面的值（在shell界面上可以查看，转账记录有etherscan??），如果不能查看可以考虑重新deploy一个合约，得到其地址
-    tx_receipt = w3.eth.get_transaction_receipt('0x3faffc7833d11110041f8d9abe07a21dd0eec3687c62c5c847e2a9931fd4f964')
+    # 1. 进行合约部署，然后获取交易回执中的 contractAddress
+    my_contract = w3.eth.contract(abi=erc20_json_dict['abi'], bytecode=erc20_json_dict['bytecode'])
+    tx_hash = my_contract.constructor(100 * 10**18).transact({'from': w3.eth.accounts[3]})
+
+    # 1.2 查看交易状态等，返回中会包括合约创建者地址，合约地址等关键信息
+    tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
     contract_addr = tx_receipt['contractAddress']
 
     # 2. 生成该合约地址的合约对象，有两种方法
@@ -32,13 +36,13 @@ def main():
 
     # 4. 查看合约的各种属性，包括了address, abi, bytecode, functions, events
     # 其中functions和events是对abi进行了解析
-    print(contract.address)
-    print(contract.abi)
-    print(contract.bytecode)
+    print(f'\nContract Address : {contract.address}')
+    print(f'\nContract Abi: {contract.abi}')
+    print(f'\nContract ByteCode: { erc20_json_dict["bytecode"] }')
     for x in contract.functions:
-        print(x)
+        print(f'Contract function : { x }')
     for x in contract.events:
-        print(x)
+        print(f'Contract event : { x }')
 
     print(type(contract.functions.increaseAllowance))
 

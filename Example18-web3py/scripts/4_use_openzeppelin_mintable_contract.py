@@ -17,22 +17,24 @@ def main():
     # 1. 测试account[1]的mint权限
     # 根据MyTokenMintable1的初始函数可以看到account[1]是被赋予了铸币权限
     print('1. ---- mint role')
-    print(w3.toHex(contract.functions.MINTER_ROLE().call()))
-    print(w3.toHex(w3.keccak(text="MINTER_ROLE")))
-    print(contract.functions.hasRole(contract.functions.MINTER_ROLE().call(), w3.eth.accounts[1]).call())
-    print(w3.toHex(contract.functions.getRoleAdmin(contract.functions.MINTER_ROLE().call()).call()))
+    #print("ssss",w3.toHex(contract.functions.MINTER_ROLE().call()))
+    #print("ttt",w3.toHex(w3.keccak(text="MINTER_ROLE")))
+    print("Account " + w3.eth.accounts[1] + ", Mint Role : " ,contract.functions.hasRole(contract.functions.MINTER_ROLE().call(), w3.eth.accounts[1]).call())
+    #print(w3.toHex(contract.functions.getRoleAdmin(contract.functions.MINTER_ROLE().call()).call()))
 
     # 2. 进行铸币，
     # 开始前查看所有账户的Token数量
-    print('2. ---- check and mint')
+    print('\n2. ---- check and mint')
+    print("Before Mint")
     minter_role = contract.functions.MINTER_ROLE().call()
     for acc in w3.eth.accounts:
-        print(contract.functions.balanceOf(acc).call(), contract.functions.hasRole(minter_role, acc).call())
+        print("Account " + acc + " Tokens Balance :" + str(contract.functions.balanceOf(acc).call()), ", Mint Role: " + str(contract.functions.hasRole(minter_role, acc).call()))
 
     # give everyone 10 Tokens
+    print("\nAfter Mint")
     for acc in w3.eth.accounts:
         contract.functions.mint(to=acc, amount=10).transact({'from':w3.eth.accounts[1]})
-        print(contract.functions.balanceOf(acc).call())
+        print("Account " + acc + " Tokens Balance :" + str(contract.functions.balanceOf(acc).call()), ", Mint Role: " + str(contract.functions.hasRole(minter_role, acc).call()))
 
 
 if __name__ =='__main__':

@@ -13,8 +13,8 @@ def main():
     # 1. 使用my_contract类直接构建一个contract
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
     contract = my_contract(address=tx_receipt['contractAddress'])
-    print(contract.address)
-    print(w3.eth.accounts[0])
+    print(f'Contract Address : {contract.address} ')
+    print(f'Account[0] : {w3.eth.accounts[0]} ')
 
 
     # 2. call和transact的区别
@@ -24,7 +24,7 @@ def main():
     # 实在不按照这个规则来调用也是可以的
 
     return_value = contract.functions.name().call()
-    print(return_value)
+    print(f'Contract name : {return_value} ')
     tx_hash = contract.functions.name().transact({'from': w3.eth.accounts[0]})
     tx_receipt2 = w3.eth.get_transaction_receipt(tx_hash)
 
@@ -41,23 +41,21 @@ def main():
     assert transaction_data['data'] == encoded_function_bytecode
 
     xx = w3.eth.call(transaction_data)
-    print(xx)
-    print(contract.functions.name().call())
+    print('Result of w3.eth.call :' + bytes.decode(xx))
     # 这里两个方法返回的结果不一致，原因未知
 
     # 4. 查看ganachi上10个默认账户的Token数量，注意这里的Token与ETH的数量不是一个东西，使用的API也是不一样的，如下：
-    print(w3.fromWei(w3.eth.get_balance(w3.eth.accounts[0]), 'ether'))
+    print("Account[0] Blance (ETh): " + str(w3.fromWei(w3.eth.get_balance(w3.eth.accounts[0]), 'ether')))
     # if decimal() of the Token is 18, could use fromWei function
-    print(w3.fromWei(contract.functions.balanceOf(w3.eth.accounts[0]).call(), 'ether'))
-
+    print("\nBefore call function transferfrom")
     for acc in w3.eth.accounts:
-        print(w3.fromWei(contract.functions.balanceOf(acc).call(), 'ether'))
+        print("Tokens of Acccount " + acc + " :", w3.fromWei(contract.functions.balanceOf(acc).call(), 'ether'))
 
 
     # 5. 使用ERC20的相关函数
     # 5.1 transferFrom(): test allowance utility
 
-    print('5.1 ---- transferFrom')
+    print('\nCall Function transferFrom')
 
     acc1 = w3.eth.accounts[0]
     acc2 = w3.eth.accounts[1]
@@ -68,13 +66,14 @@ def main():
     tx_hash0 = contract.functions.approve(acc3, 22* 10**decimal).transact({"from": acc1})
     tx_hash = contract.functions.transferFrom(acc1, acc2, 22 * 10**decimal).transact({"from": acc3})
 
+    print("After transfer")
     for acc in w3.eth.accounts:
-        print(w3.fromWei(contract.functions.balanceOf(acc).call(), 'ether'))
+        print("Tokens of Acccount " + acc + " :",w3.fromWei(contract.functions.balanceOf(acc).call(), 'ether'))
 
     # 5.2 _mint(): 使用铸币函数，合约创建者在创建合约的时候可以设置其能获得的初始Token数量，
     # 其他账户获得代币需要使用_mint()函数
 
-    print('5.2 ---- mint')
+    #print('5.2 ---- mint')
     # 不能使用下列函数来铸币，因为_mint函数是internal的，不能从外部调用
     # 参考下一个.py文件中的方法，先构建一个mintable的合约，然后再赋予某个账户mint权限，进行铸币
     # _ = contract.functions._mint(w3.eth.accounts[3], 444 * 10**decimal).transact()
