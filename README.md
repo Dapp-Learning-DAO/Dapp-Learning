@@ -59,7 +59,7 @@
 - Day-10 ERC721+ ERC1155 + ipfs
 - Day-11 react + express + hardhat
 - Day-12 Crowdfund
-- Day-13 dex Exchange
+- Day-13 decentralized exchange
 - Day-14 chainlink-api
 - Day-15 nft-blindbox-chainlink-vrf
 - Day-16 nft auction  & exchange
