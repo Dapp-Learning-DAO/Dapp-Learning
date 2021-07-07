@@ -28,11 +28,11 @@
 - remix本地环境 https://zhuanlan.zhihu.com/p/38309494
 
 ## 合约参考库及致敬相关项目
-- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**
-（shooter大佬的项目，适合入门solidity）
 
 - **https://github.com/OpenZeppelin/openzeppelin-contracts**
   (经典合约库)
+- **https://github.com/ConsenSys/smart-contract-best-practices**
+   (合约安全库)  
 - **https://github.com/austintgriffith/scaffold-eth**
 (向此神级项目致敬)
 - **https://github.com/HQ20/contracts**
@@ -42,6 +42,8 @@
 （密码学课程）
 - **https://github.com/OffcierCia/DeFi-Developer-Road-Map**
   （defi教程）
+- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**
+（shooter大佬的项目，适合入门solidity）  
 
 ## 基础课程列表(可自由添加任务卡)
 **添加任务卡时请附上相关参考链接**
@@ -57,7 +59,7 @@
 - Day-10 ERC721+ ERC1155 + ipfs
 - Day-11 react + express + hardhat
 - Day-12 Crowdfund
-- Day-13 dex Exchange
+- Day-13 decentralized exchange
 - Day-14 chainlink-api
 - Day-15 nft-blindbox-chainlink-vrf
 - Day-16 nft auction  & exchange
@@ -125,6 +127,7 @@
 
 - Day-39  Ethlend
   - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
+  - https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol
 
 - Day-40  deploy Uniswap V3 to Layer2: Arbitrum
   - https://arbitrum.io/quickstart/
@@ -212,7 +215,8 @@ https://www.chainnews.com/articles/163436212237.htm
   - 1 可以优化之前的项目代码和readme
   - 2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
   - 3 可以自由新增任务卡（需附上参考链接）
-  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
+  - 5 参与三个task的完成可以给予PR审核者的权限
 
 ## 常见问题
   - 安装前端依赖时，如果在npm或者yarn修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
