@@ -215,7 +215,8 @@ https://www.chainnews.com/articles/163436212237.htm
   - 1 可以优化之前的项目代码和readme
   - 2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
   - 3 可以自由新增任务卡（需附上参考链接）
-  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
+  - 5 参与三个task的完成可以进入给予PR审核者的权限
 
 ## 常见问题
   - 安装前端依赖时，如果在npm或者yarn修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
