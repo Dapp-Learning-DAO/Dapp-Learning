@@ -407,6 +407,7 @@ Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint2
 ```
 burn(uint256 tokenId)
 ```
+
 ## 参考链接
   https://learnblockchain.cn/article/2357
   https://learnblockchain.cn/article/2580
