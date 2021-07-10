@@ -112,8 +112,7 @@
 - Day-34 vyper
   - https://vyper.readthedocs.io/en/stable/
 
-- Day-35 Merkel-Patricia Tree(MPT)
-  - https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+- Day-35 CryptoKitties
 
 - Day-36 nft Filecoin
   - https://www.bilibili.com/video/BV1j5411w7MH
