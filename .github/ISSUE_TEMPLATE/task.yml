@@ -1,0 +1,35 @@
+name: 更新任务
+description: 更新任务信息
+title: "[Task]: "
+labels: [task]
+assignees:
+  - izayl
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: 这个 PR/issue 属于什么类型?
+      multiple: false
+      options:
+        - bug 修复（Bugfix）
+        - 创建新的基础任务
+        - 创建新的进阶任务
+        - 更新任务内容
+        - 任务认领
+  - type: input
+    id: task
+    attributes:
+      label: 涉及的任务是哪个
+      description: 请填写任务名
+      placeholder: 例如：uniswap-v3
+    validations:
+      required: true
+  - type: textarea
+    id: info
+    attributes:
+      label: 详细信息
+      description: Bug详细信息，或者更新、创建任务的内容
+      placeholder: Tell us what you see!
+      value: ""
+    validations:
+      required: false
