@@ -444,6 +444,25 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
     burn(uint256 tokenId)
     ```
 
+<<<<<<< HEAD:Learn-DEFI-Uniswap-V3/readme.md
+5 burn
+```
+burn(uint256 tokenId)
+```
+
+## 参考链接
+  https://learnblockchain.cn/article/2357
+  https://learnblockchain.cn/article/2580
+  https://liaoph.com/uniswap-v3-1/
+  https://medium.com/taipei-ethereum-meetup/uniswap-v3-features-explained-in-depth-178cfe45f223
+  //https://github.com/GammaStrategies/awesome-uniswap-v3
+  https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg  星想法
+  https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol   nft farming
+  https://github.com/omarish/uniswap-v3-deploy-plugin  一键部署V3
+  https://www.gelato.network/
+  https://www.chainnews.com/articles/715772476688.htm
+  https://arxiv.org/pdf/2106.12033.pdf   流动性策略
+=======
 ## 参考链接
 
 - https://learnblockchain.cn/article/2357
@@ -456,3 +475,4 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 - https://github.com/omarish/uniswap-v3-deploy-plugin 一键部署 V3
 - https://www.gelato.network/
 - https://www.chainnews.com/articles/715772476688.htm
+>>>>>>> upstream/main:courses/defi/Uniswap-V3/readme.md
