@@ -25,7 +25,7 @@
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理 以及推荐阅读《主权个人》**
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理**
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
@@ -39,6 +39,9 @@
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
+
+**人文书籍推荐：**
+- 《主权个人》（尚无中译本，可关注不懂经公众号阅读）
 
 ## 基础任务 - Basic Tasks
 
