@@ -1,0 +1,3 @@
+- <https://blog.0xproject.com/>
+- <https://github.com/0xProject/0x-protocol-specification/blob/master/v2/v2-specification.md#exchange>
+- <https://0x.org/docs/guides/use-0x-api-liquidity-in-your-smart-contracts>
