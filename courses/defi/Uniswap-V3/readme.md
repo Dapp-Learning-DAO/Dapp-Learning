@@ -316,23 +316,23 @@ function mint(
 
 ```solidity
 position.tokensOwed0 +=
-         uint128(amount0) +
-         uint128(
-             FullMath.mulDiv(
-                 feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
-                 position.liquidity,
-                 FixedPoint128.Q128
-             )
-         );
-     position.tokensOwed1 +=
-         uint128(amount1) +
-         uint128(
-             FullMath.mulDiv(
-                 feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
-                 position.liquidity,
-                 FixedPoint128.Q128
-             )
-         );
+    uint128(amount0) +
+    uint128(
+        FullMath.mulDiv(
+            feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
+            position.liquidity,
+            FixedPoint128.Q128
+        )
+    );
+position.tokensOwed1 +=
+    uint128(amount1) +
+    uint128(
+        FullMath.mulDiv(
+            feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
+            position.liquidity,
+            FixedPoint128.Q128
+        )
+    );
 ```
 
 如果某个流动性为 0，并且所有的手续费已经收取，可以通过 NonfungiblePositionManager 的 burn 函数删除该流动性对应的 ERC721 的 Token 。
@@ -373,19 +373,19 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
     Function: mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256))
 
     struct MintParams {
-            address token0;   //
-            address token1;   //
-            uint24 fee;
-            int24 tickLower;   //
-            int24 tickUpper;
-            uint256 amount0Desired;   //提供的 token0 数
-            uint256 amount1Desired;   //提供的 token1 数
-            uint256 amount0Min;
-            uint256 amount1Min;
-            address recipient;
-            uint256 deadline;
-        }
-        emit IncreaseLiquidity(tokenId, liquidity, amount0, amount1);
+        address token0;   //
+        address token1;   //
+        uint24 fee;
+        int24 tickLower;   //
+        int24 tickUpper;
+        uint256 amount0Desired;   //提供的 token0 数
+        uint256 amount1Desired;   //提供的 token1 数
+        uint256 amount0Min;
+        uint256 amount1Min;
+        address recipient;
+        uint256 deadline;
+    }
+    emit IncreaseLiquidity(tokenId, liquidity, amount0, amount1);
     ```
 
     调用 poll 的 mint 方法
@@ -394,13 +394,13 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 
     ```solidity
     struct IncreaseLiquidityParams {
-            uint256 tokenId;
-            uint256 amount0Desired;
-            uint256 amount1Desired;
-            uint256 amount0Min;
-            uint256 amount1Min;
-            uint256 deadline;
-        }
+        uint256 tokenId;
+        uint256 amount0Desired;
+        uint256 amount1Desired;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        uint256 deadline;
+    }
 
     emit IncreaseLiquidity(params.tokenId, liquidity, amount0, amount1);
     ```
@@ -411,12 +411,12 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 
     ```solidity
     struct DecreaseLiquidityParams {
-            uint256 tokenId;
-            uint128 liquidity;
-            uint256 amount0Min;
-            uint256 amount1Min;
-            uint256 deadline;
-        }
+        uint256 tokenId;
+        uint128 liquidity;
+        uint256 amount0Min;
+        uint256 amount1Min;
+        uint256 deadline;
+    }
     emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
     ```
 
@@ -427,11 +427,11 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 
     ```solidity
     struct CollectParams {
-            uint256 tokenId;
-            address recipient;
-            uint128 amount0Max;
-            uint128 amount1Max;
-        }
+        uint256 tokenId;
+        address recipient;
+        uint128 amount0Max;
+        uint128 amount1Max;
+    }
 
     emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
     ```
