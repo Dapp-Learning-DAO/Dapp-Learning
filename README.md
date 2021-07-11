@@ -112,7 +112,7 @@
 - Day-34 vyper
   - https://vyper.readthedocs.io/en/stable/
 
-- Day-35 CryptoKitties
+- Day-35 Merkel-Patricia Tree(MPT)
 
 - Day-36 nft Filecoin
   - https://www.bilibili.com/video/BV1j5411w7MH
@@ -136,6 +136,9 @@
    
 - Day-42  merkle-distributor air drop
   - https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol  
+
+- Day-43 CryptoKitties
+
 ## 进阶课程(可自由添加项目卡)
 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
