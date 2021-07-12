@@ -40,7 +40,7 @@
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
 
-**人文书籍推荐：**
+**推荐阅读：**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
 
 ## 基础任务 - Basic Tasks
