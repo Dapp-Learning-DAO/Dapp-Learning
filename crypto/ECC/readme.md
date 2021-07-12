@@ -62,3 +62,5 @@ https://eng.paxos.com/blockchain-101-foundational-math
 https://eng.paxos.com/blockchain-101-elliptic-curve-cryptography
 
 https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+
+https://zhuanlan.zhihu.com/p/31671646
