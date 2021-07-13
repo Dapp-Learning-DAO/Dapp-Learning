@@ -2,6 +2,7 @@
 */sk.txt
 */sk*.txt
 */sk*.json
+**/.env
 */package-lock.json
 # dependencies
 /node_modules
