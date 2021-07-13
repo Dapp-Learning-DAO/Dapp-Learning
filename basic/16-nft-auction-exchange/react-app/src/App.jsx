@@ -613,7 +613,7 @@ function App (props) {
         actions={cardActions}
         title={(
           <div>
-            {loadedAssets[a].name} <a style={{cursor:"pointer",opacity:0.33}} href={loadedAssets[a].external_url} target="_blank"><LinkOutlined /></a>
+            {loadedAssets[a].name} <a style={{cursor:"pointer",opacity:0.33}} href={loadedAssets[a].external_url} target="_blank" rel="noopener noreferrer"><LinkOutlined /></a>
           </div>
         )}
       >
