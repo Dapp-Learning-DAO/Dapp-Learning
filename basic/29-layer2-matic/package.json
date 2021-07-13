@@ -7,6 +7,7 @@
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.3.1",
     "hardhat": "^2.3.3",
-    "@maticnetwork/maticjs": "2.0.43"
+    "@maticnetwork/maticjs": "2.0.43",
+    "dotenv": "10.0.0"
   }
 }

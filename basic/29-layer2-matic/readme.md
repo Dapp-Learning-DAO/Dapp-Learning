@@ -6,6 +6,7 @@ Polygon支持与以太坊兼容的两种区块链网络：独立网络（stand-a
 当谈到Polygon的架构时，我们需要关注的主要要点是它被刻意地设计成通用和抽象的。这允许其他希望扩展的应用程序选择最适合其需求的扩展解决方案。
 
 [matic官方文档](https://docs.matic.network/docs/develop/getting-started)
+[原理图](./img/matic.jpeg)
 
 ## Matic PoS Chain
 Matic PoS Chain是一个未经许可的侧链，它与以太坊链并行运行。该链由具有自身验证节点的权益证明共识机制来保护。
