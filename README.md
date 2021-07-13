@@ -70,7 +70,7 @@
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
+24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
@@ -99,7 +99,7 @@
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
 43. [front running](https://github.com/Supercycled/cake_sniper)  
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
-
+45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
