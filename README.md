@@ -19,7 +19,7 @@
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为基础任务和项目任务两部分，基础任务用于熟悉区块链开发的基本工具组件的使用和集成，项目任务通过主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
+教程分为基础任务和项目任务两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
 此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
 
@@ -78,12 +78,11 @@
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
 33. [pooltogether](https://pooltogether.com)
 34. [vyper](https://vyper.readthedocs.io/en/stable/)
 35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
 36. nft Filecoin
-
 - <https://www.bilibili.com/video/BV1j5411w7MH>
 - <https://pinata.cloud/pinmanager>
 - <https://nft.storage>
@@ -98,6 +97,9 @@
 40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
+43. [front running](https://github.com/Supercycled/cake_sniper)  
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
