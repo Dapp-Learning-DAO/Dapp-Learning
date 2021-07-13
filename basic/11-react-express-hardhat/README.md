@@ -1,9 +1,9 @@
-# Todo
+## Express 结合 hardhat
 
-- 安装 hardhat
+- 安装依赖
 
 ```shell
-npx hardhat
+yarn
 ```
 
 - 选择创建一个简单的项目。添加一个名为 SimpleToken.sol 的合约到 ./contracts, 编译此合约并且运行测试
@@ -11,7 +11,6 @@ npx hardhat
 ```shell
 npx hardhat compile
 npx hardhat test
-npx hardhat node
 ```
 
 - 部署
@@ -26,7 +25,7 @@ npx hardhat run scripts/deploy.js --network kovan
 
 ```shell
 cd backend
-npm install
+yarn
 node app.js
 ```
 

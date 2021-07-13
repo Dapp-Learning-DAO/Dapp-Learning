@@ -22,11 +22,11 @@ let request = (url, method, data) => {
   });
 };
 
-module.exports = {
-  receipt_create: (data) => {
+export function receipt_create(data) {
     return request("/receipt/create", "post", data);
-  },
-  receipt_list: (adress) => {
+  }
+
+export function receipt_list(adress) {
     return request("/receipt/all?from=" + adress, "get", {});
-  },
-};
+  }
+
