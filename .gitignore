@@ -1,9 +1,9 @@
 */node_modules
-*/sk.txt
-*/sk*.txt
-*/sk*.json
+**/sk.txt
+**/sk*.txt
+**/sk*.json
+**/package-lock.json
 **/.env
-*/package-lock.json
 # dependencies
 /node_modules
 /.pnp
@@ -15,9 +15,9 @@
 **/*.bytecode.js
 **/*.abi.js
 **/*.address.js
-*/yarn.lock
-*/artifacts
-*/cache
+**/yarn.lock
+**/artifacts
+**/cache
 
 # testing
 coverage
@@ -27,7 +27,7 @@ build
 
 # misc
 .DS_Store
-.env*
+.env
 
 # debug
 npm-debug.log*

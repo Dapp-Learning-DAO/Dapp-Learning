@@ -6,6 +6,7 @@ const { HttpLink } = require('apollo-link-http');
 const gql = require('graphql-tag');
 const fetch = require('node-fetch');
 const mysql  = require('mysql');  
+const mysqlConf = require('./mysql_conf.json')
  
 const query = gql`query($input: String){
     positions(where : { owner: $input }) {
@@ -50,10 +51,10 @@ const operation = {
 
 // Get data, and insert into mysql
 let connection = mysql.createConnection({
-  host : 'localhost',
-  user : 'root', 
-  password : 'Aa12345!',
-  database : 'test'
+  host : mysqlConf.host,
+  user : mysqlConf.user, 
+  password : mysqlConf.password,
+  database : mysqlConf.database
 });
 
 connection.connect(function(err) {
