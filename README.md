@@ -19,7 +19,7 @@
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为基础任务和项目任务两部分，基础任务用于熟悉区块链开发的基本工具组件的使用和集成，项目任务通过主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
+教程分为基础任务和项目任务两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
 此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
 
@@ -70,7 +70,7 @@
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
+24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
@@ -78,12 +78,11 @@
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
 33. [pooltogether](https://pooltogether.com)
 34. [vyper](https://vyper.readthedocs.io/en/stable/)
 35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
 36. nft Filecoin
-
 - <https://www.bilibili.com/video/BV1j5411w7MH>
 - <https://pinata.cloud/pinmanager>
 - <https://nft.storage>
@@ -98,6 +97,9 @@
 40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
+43. [front running](https://github.com/Supercycled/cake_sniper)  
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -154,21 +156,8 @@
 5. 参与三个task的完成可以给予PR审核者的权限
 
 ## 常见问题
-
-- 安装前端依赖时，如果在 npm 或者 yarn 修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
-
-    ```shell
-    npm config set proxy http://username:password@server:port
-    npm config set https-proxy http://username:password@server:port
-    ```
-
-    例如：（要为yarn设置代理将其中的npm替换为yarn即可，端口需要替换为本地代理的端口）
-
-    ```shell
-    npm config set proxy http://127.0.0.1:2802
-    npm config set https-proxy http://127.0.0.1:2802
-    ```
-
+  安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+  
 ## 合约参考库及致敬相关项目
 
 - 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>
