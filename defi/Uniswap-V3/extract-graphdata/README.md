@@ -38,7 +38,7 @@ yarn
 ```
 
 - 修改 mysql 连接配置
-修改 fetch_data.js 脚本中 connection  的连接配置，包括 user, password, database
+修改 mysql_conf.json 配置文件中的配置，包括 user, password, database
 
 - 获取数据
 ```
