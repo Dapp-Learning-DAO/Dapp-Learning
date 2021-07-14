@@ -1,6 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
-
-const fs = require("fs");
+require('dotenv').config()
+// const fs = require("fs");
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async () => {
@@ -12,9 +12,11 @@ task("accounts", "Prints the list of accounts", async () => {
 });
 
 function mnemonic() {
-  
-  return fs.readFileSync("./sk.txt").toString().trim();
-  
+ // return fs.readFileSync("./sk.txt").toString().trim();
+  const privatekey = process.env.PRIVATE_KEY;
+  return privatekey;
+ 
+ 
 }
 
 // You need to export an object to set up your config
