@@ -2,6 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 //todo import typechain
 //require("hardhat-typechain");
 const fs = require("fs");
+require('dotenv').config()
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -15,25 +16,25 @@ task("accounts", "Prints the list of accounts", async () => {
 
 function mnemonic() {
 
-  return fs.readFileSync("./sk.txt").toString().trim();
+  return process.env.PRIVATE_KEY_MAIN
 
 }
 
 function mnemonicAlice() {
 
-  return fs.readFileSync("./sk-alice.txt").toString().trim();
+  return process.env.PRIVATE_KEY_ALICE
 
 }
 
 function mnemonicBob() {
 
-  return fs.readFileSync("./sk-bob.txt").toString().trim();
+  return process.env.PRIVATE_KEY_BOB
 
 }
 
 function mnemonicTest() {
 
-  return fs.readFileSync("./sk-test.txt").toString().trim();
+  return process.env.PRIVATE_KEY_TEST
 
 }
 // You need to export an object to set up your config

@@ -85,13 +85,13 @@ describe("Project contract", function () {
             let overrides = {
                 // To convert Ether to Wei:
                 value: 101,
+                gasPrice: 1000
             }
 
             const artifact = artifacts.readArtifactSync("Project")
             const transactionContract = new ethers.Contract(projectContract.address, artifact.abi, donator1);
             await transactionContract.contribute(overrides)
 
-            expect((await creator.getBalance()).toString()).to.equal("9999943194600000000202")
         })
     })
 

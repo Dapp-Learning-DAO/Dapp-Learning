@@ -19,7 +19,7 @@ import { TransactionErrorMessage } from "./TransactionErrorMessage";
 import { WaitingForTransactionMessage } from "./WaitingForTransactionMessage";
 import { NoTokensMessage } from "./NoTokensMessage";
 import { Receipt } from "./Receipt";
-const API = require("../api.js");
+import { receipt_create, receipt_list} from '../api.js'
 
 // This is the Hardhat Network id, you might change it in the hardhat.config.js
 // Here's a list of network ids https://docs.metamask.io/guide/ethereum-provider.html#properties
@@ -275,7 +275,7 @@ export class Dapp extends React.Component {
     const balance = await this._token.balanceOf(this.state.selectedAddress);
     this.setState({ balance });
 
-    API.receipt_list(this.state.selectedAddress).then((res) => {
+    receipt_list(this.state.selectedAddress).then((res) => {
       this.setState({ receipts: res.data });
     });
   }
@@ -317,7 +317,7 @@ export class Dapp extends React.Component {
         throw new Error("Transaction failed");
       }
 
-      API.receipt_create(receipt);
+      receipt_create(receipt);
 
       // If we got here, the transaction was successful, so you may want to
       // update your state. Here, we update the user's balance.

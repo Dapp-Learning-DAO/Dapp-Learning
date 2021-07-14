@@ -5,7 +5,15 @@
  - 支持拍卖
  
 
-## 操作步骤
+## 操作步骤  
+- 配置私钥  
+在 .env 中放入的 4 个私钥，格式如下:
+```
+PRIVATE_KEY_MAIN=xxxxx
+PRIVATE_KEY_ALICE=yyyyy
+PRIVATE_KEY_BOB=ttttt
+PRIVATE_KEY_TEST=zzzzz
+```
 
 - 启动hardhat node  
 npx hardhat node --network hardhat

@@ -10,6 +10,7 @@
     "hardhat": "^2.3.0"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "ipfs-api": "^26.1.2",
     "ramda": "^0.27.1"
   }
