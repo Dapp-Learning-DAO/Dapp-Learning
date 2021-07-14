@@ -5,10 +5,11 @@ require("@nomiclabs/hardhat-waffle");
 // testing the frontend.
 require("./tasks/faucet");
 const fs = require("fs");
+require('dotenv').config()
 
 function mnemonic() {
 
-  return fs.readFileSync("./sk.txt").toString().trim();
+  return process.env.PRIVATE_KEY;
  
 }
 

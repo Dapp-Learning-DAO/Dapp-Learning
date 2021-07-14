@@ -7,7 +7,7 @@ https://ithelp.ithome.com.tw/articles/10202794
 
 ## 代码逻辑
 1)  私钥获取  
-新建sk.txt文件， 并填入私钥（metamask自行导出），然后代码自动从中读取
+新建 .env 文件， 并填入私钥（metamask自行导出），格式为 "PRIVATE_KEY=xxxx" 然后代码自动从中读取
 
 2)  编译合约  
 使用 solc.compile 对合约进行编译

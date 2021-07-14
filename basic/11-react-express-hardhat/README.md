@@ -1,5 +1,8 @@
 ## Express 结合 hardhat
 
+- 配置私钥
+在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+
 - 安装依赖
 
 ```shell

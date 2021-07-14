@@ -2,8 +2,8 @@ const Web3 = require('web3');
 const fs = require("fs");
 const contractFile = require('./compile');
 
-
-const privatekey = fs.readFileSync("./sk.txt").toString().trim()
+require('dotenv').config()
+const privatekey = process.env.PRIVATE_KEY;
 /*
    -- Define Provider & Variables --
 */

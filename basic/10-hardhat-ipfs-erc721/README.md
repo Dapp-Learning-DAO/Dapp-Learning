@@ -74,13 +74,16 @@ ipfs daemon
 3) IPFS Web console  
 在浏览器中输入地址 localhost:5001/webui 查看 IPFS 控制台
 
-## 测试 IPFS 和 ERC721   
-1) 执行如下命令  
+## 测试 IPFS 和 ERC721 
+1) 配置私钥
+在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+
+2) 执行如下命令  
 ```angular2html
 npx hardhat run scripts/deploy.js --network kovan
 ```
 
-2) 对比文件  
+3) 对比文件  
 在当前目录下执行如下命令
 ```angular2html
 ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
