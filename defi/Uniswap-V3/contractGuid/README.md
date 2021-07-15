@@ -40,7 +40,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 #### 代码导航
 
-- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createandinitializepoolifnecessary)
+- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
 
 
 
