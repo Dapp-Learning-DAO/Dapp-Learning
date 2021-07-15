@@ -30,7 +30,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ## 流程梳理
 
-### 创建交易对
+### Create Pool (创建交易对)
 
 ![创建交易对流程图](./img/create-pool.png)
 
@@ -38,7 +38,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 1. 用户首先调用 `NonfungiblePositionManager` 合约的 `createAndInitializePoolIfNecessary` 方法创建交易对，传入的参数为交易对的 token0, token1, fee 和初始价格 sqrtPrice.
 
-#### 代码导航
+#### 代码解读
 
 - [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
 

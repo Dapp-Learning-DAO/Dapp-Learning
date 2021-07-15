@@ -1,4 +1,4 @@
-# NonfungiblePositionManager 主要代码详解
+# NonfungiblePositionManager 主要代码解读
 
 ## State Variables
 
@@ -93,6 +93,7 @@ struct Position {
 
 ### createAndInitializePoolIfNecessary
 
+创建Pool，如果有必要，对其初始化
 
 ```solidity
 /// @inheritdoc IPoolInitializer
@@ -102,17 +103,27 @@ function createAndInitializePoolIfNecessary(
     uint24 fee,
     uint160 sqrtPriceX96
 ) external payable override returns (address pool) {
+    // 保证token地址排序一致
     require(token0 < token1);
+    // 通过Factory查询Pool的地址
     pool = IUniswapV3Factory(factory).getPool(token0, token1, fee);
 
     if (pool == address(0)) {
+        // 如果Pool为0 则需要创建并初始化
         pool = IUniswapV3Factory(factory).createPool(token0, token1, fee);
         IUniswapV3Pool(pool).initialize(sqrtPriceX96);
     } else {
+        // Pool已存在 获取最新价格
         (uint160 sqrtPriceX96Existing, , , , , , ) = IUniswapV3Pool(pool).slot0();
+        // 如果价格为 0 则初始化Pool
         if (sqrtPriceX96Existing == 0) {
             IUniswapV3Pool(pool).initialize(sqrtPriceX96);
         }
     }
 }
 ```
+
+相关代码
+
+- [UniswapV3Factory(factory).getPool](./UniswapV3Factory.md#getPool)
+- [UniswapV3Factory(factory).createPool](./UniswapV3Factory.md#createPool)
