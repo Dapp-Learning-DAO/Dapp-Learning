@@ -27,9 +27,10 @@ uint24 public immutable override fee;
 ### tickSpacing
 
 用于计算费率的tick计算间隔
-尽管tick已经是一个个离散的价格点，但依旧很密集，所以引入了tickSpacing概念，使得计算费率时节省gas
 
-> 对于价格波动较小的交易池，我们希望 tickSpacing 更小，这样价格可选值更多，同时也希望费率更低。反之波动大的交易对，可以让 tickSpacing 更大，这样更节约 gas，但是我们希望它的费率更高。
+尽管tick已经是一个个离散的价格点，但依旧很密集，所以引入了tickSpacing概念，使得计算时节省gas
+
+对于价格波动较小的交易池，我们希望 tickSpacing 更小，这样价格可选值更多，同时也希望费率更低。反之波动大的交易对，可以让 tickSpacing 更大，这样更节约 gas，但是我们希望它的费率更高。
 
 ```solidity
 /// @inheritdoc IUniswapV3PoolImmutables
@@ -38,10 +39,16 @@ int24 public immutable override tickSpacing;
 
 ### maxLiquidityPerTick
 
+每个tick上能承载的最大流动性
+
 ```solidity
 /// @inheritdoc IUniswapV3PoolImmutables
 uint128 public immutable override maxLiquidityPerTick;
 ```
+
+相关代码
+
+- [Tick.tickSpacingToMaxLiquidityPerTick](./Tick.md#tickSpacingToMaxLiquidityPerTick)
 
 ### slot0
 

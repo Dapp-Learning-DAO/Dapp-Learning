@@ -91,6 +91,8 @@ function tickSpacingToMaxLiquidityPerTick(int24 tickSpacing) internal pure retur
 
 相关代码
 
+- [TickMath.MIN_TICK](#MIN_TICK)
+- [TickMath.MAX_TICK](#MAX_TICK)
 - [tickSpacing](./UniswapV3Pool.md#tickSpacing)
 
 ### getFeeGrowthInside
@@ -252,10 +254,118 @@ Tick 的数学计算方法
 
 tick 的序号，用`i`表示。`i = log√1.0001√P` (以√1.0001为底数，√Price的log值)
 
+### sqrtPriceX96
+
 UniswapV3中的价格（√P）用`sqrtPriceX96`参数表示
 
 - `sqrtPriceX96` (√P) 可以用 `1.0001^i` 表示
-- `sqrtPriceX96` 是一个Q64.96的定点数，即 二进制中，前64位表示整数部分，后96位表示小数部分，总位数160（由于solidity不支持浮点数，用uint160类型记录）
+- `sqrtPriceX96` 是一个Q64.96的定点数，即 前64位表示整数部分，后96位表示小数部分，总位数160（由于solidity不支持浮点数，用uint160类型记录）
 - 价格的取值范围 [2^-128, 2^128]。因为 `sqrtPriceX96` 的整数相当于（uint64），即 √P 取值范围 [2^-64, 2^64]
 - 由上可得tick序号`i`的取值范围 [log√1.0001√2^-64, log√1.0001√2^64]。因此tick的序号是在区间 [-887272, 887272] 的整数集合
+- -887272, 887272 即为 `MIN_TICK` 和 `MAX_TICK`
 
+### MIN_TICK
+
+tick序号在负区间的最大个数
+
+```solidity
+/// @dev The minimum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**-128
+int24 internal constant MIN_TICK = -887272;
+```
+
+### MAX_TICK
+
+tick序号在正区间的最大个数
+
+```solidity
+/// @dev The maximum tick that may be passed to #getSqrtRatioAtTick computed from log base 1.0001 of 2**128
+int24 internal constant MAX_TICK = -MIN_TICK;
+```
+
+### MIN_SQRT_RATIO
+
+`getSqrtRatioAtTick` 函数能返回的最小价格
+
+```solidity
+/// @dev The minimum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MIN_TICK)
+uint160 internal constant MIN_SQRT_RATIO = 4295128739;
+```
+
+### MAX_SQRT_RATIO
+
+`getSqrtRatioAtTick` 函数能返回的最大价格
+
+```solidity
+/// @dev The maximum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MAX_TICK)
+uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
+```
+
+### getSqrtRatioAtTick
+
+由tickIndex计算出 √P
+
+![getSqrtRatioAtTick原理解析](./img/getSqrtRatioAtTick.png)
+
+```solidity
+/// @notice Calculates sqrt(1.0001^tick) * 2^96
+/// 计算 sqrt(1.0001^tick) * 2^96 (因为 sqrtPriceX96 是96位定点数)
+/// @dev Throws if |tick| > max tick
+/// tick 绝对值 不能超过 MAX_TICK
+/// @param tick The input tick for the above formula
+/// @return sqrtPriceX96 A Fixed point Q64.96 number representing the sqrt of the ratio of the two assets (token1/token0)
+/// 函数返回 sqrtPriceX96 是一个 Q64.96 定点数， 表示 √(token1/token0) 
+/// at the given tick
+function getSqrtRatioAtTick(int24 tick) internal pure returns (uint160 sqrtPriceX96) {
+    // 求出 tick 的绝对值
+    uint256 absTick = tick < 0 ? uint256(-int256(tick)) : uint256(int256(tick));
+    // tick 绝对值 不能超过 MAX_TICK
+    require(absTick <= uint256(MAX_TICK), 'T');
+
+    // 这些魔数分别表示 1/sqrt(1.0001)^1, 1/sqrt(1.0001)^2, 1/sqrt(1.0001)^4....
+    // tick 可以用 20 位二进制数表示， 下列代码是计算出每一位的数值（从后往前）
+
+    // absTick & 0x1 将 |tick| 和 0x1 按位与 得出第 20 位数值 （0或1）
+    // 第20位(末位)如果为0，需要特殊处理，ratio赋值为0x100...0(32个0)
+    // 原因有2点：
+    //    1. 函数最后需要将ratio (Q128.128定点数) 转换为 sqrtPriceX96 (Q64.96)
+    //       结果需要右移32位，所以这里有32个0
+    //    2. 因为后续做乘法运算，所以给1不会改变结果
+    uint256 ratio = absTick & 0x1 != 0 ? 0xfffcb933bd6fad37aa2d162d1a594001 : 0x100000000000000000000000000000000;
+    // ratio采用连乘的方式来累加指数（tick），当某一位数值是0时，不参与连乘
+    // 每一个魔数都是小于1的Q128.128定点数，所以在每次运算完成后，需要将结果右移128位
+    if (absTick & 0x2 != 0) ratio = (ratio * 0xfff97272373d413259a46990580e213a) >> 128;
+    if (absTick & 0x4 != 0) ratio = (ratio * 0xfff2e50f5f656932ef12357cf3c7fdcc) >> 128;
+    if (absTick & 0x8 != 0) ratio = (ratio * 0xffe5caca7e10e4e61c3624eaa0941cd0) >> 128;
+    if (absTick & 0x10 != 0) ratio = (ratio * 0xffcb9843d60f6159c9db58835c926644) >> 128;
+    if (absTick & 0x20 != 0) ratio = (ratio * 0xff973b41fa98c081472e6896dfb254c0) >> 128;
+    if (absTick & 0x40 != 0) ratio = (ratio * 0xff2ea16466c96a3843ec78b326b52861) >> 128;
+    if (absTick & 0x80 != 0) ratio = (ratio * 0xfe5dee046a99a2a811c461f1969c3053) >> 128;
+    if (absTick & 0x100 != 0) ratio = (ratio * 0xfcbe86c7900a88aedcffc83b479aa3a4) >> 128;
+    if (absTick & 0x200 != 0) ratio = (ratio * 0xf987a7253ac413176f2b074cf7815e54) >> 128;
+    if (absTick & 0x400 != 0) ratio = (ratio * 0xf3392b0822b70005940c7a398e4b70f3) >> 128;
+    if (absTick & 0x800 != 0) ratio = (ratio * 0xe7159475a2c29b7443b29c7fa6e889d9) >> 128;
+    if (absTick & 0x1000 != 0) ratio = (ratio * 0xd097f3bdfd2022b8845ad8f792aa5825) >> 128;
+    if (absTick & 0x2000 != 0) ratio = (ratio * 0xa9f746462d870fdf8a65dc1f90e061e5) >> 128;
+    if (absTick & 0x4000 != 0) ratio = (ratio * 0x70d869a156d2a1b890bb3df62baf32f7) >> 128;
+    if (absTick & 0x8000 != 0) ratio = (ratio * 0x31be135f97d08fd981231505542fcfa6) >> 128;
+    if (absTick & 0x10000 != 0) ratio = (ratio * 0x9aa508b5b7a84e1c677de54f3e99bc9) >> 128;
+    if (absTick & 0x20000 != 0) ratio = (ratio * 0x5d6af8dedb81196699c329225ee604) >> 128;
+    if (absTick & 0x40000 != 0) ratio = (ratio * 0x2216e584f5fa1ea926041bedfe98) >> 128;
+    if (absTick & 0x80000 != 0) ratio = (ratio * 0x48a170391f7dc42444e8fa2) >> 128;
+
+    if (tick > 0) ratio = type(uint256).max / ratio;
+
+    // this divides by 1<<32 rounding up to go from a Q128.128 to a Q128.96.
+    // we then downcast because we know the result always fits within 160 bits due to our tick input constraint
+    // we round up in the division so getTickAtSqrtRatio of the output price is always consistent
+    sqrtPriceX96 = uint160((ratio >> 32) + (ratio % (1 << 32) == 0 ? 0 : 1));
+}
+```
+
+补充
+
+- 代码解析原文 [Uniswap v3 详解（二）：创建交易对/提供流动性 #TickIndex -> √P](https://liaoph.com/uniswap-v3-2/#tick-index---sqrt-p)
+
+### getTickAtSqrtRatio
+
+由tickIndex计算出 √P
