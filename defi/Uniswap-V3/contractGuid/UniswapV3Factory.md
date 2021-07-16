@@ -11,7 +11,7 @@ address public override owner;
 
 ### feeAmountTickSpacing
 
-根据费率设置的不同的 [tickSpacing]() 间隔
+根据费率设置的不同的 [tickSpacing](./UniswapV3Pool.md#tickSpacing) 间隔
 
 ```solidity
 /// @inheritdoc IUniswapV3Factory
@@ -96,8 +96,11 @@ function createPool(
 部署 `UniswapV3Pool` 合约
 
 - 先将初始化参数存入storage，方便Pool合约初始化时调用，部署完成后，清除storage
-- 不直接传入初始化参数的原因是这里使用了 `create2` 来部署合约，目的是为了保证pool的地址是可链下计算的，如果传入初始化参数，将使得地址非常难以控制
-
+- 不直接传入初始化参数的原因是这里使用了 `CREATE2` 来部署合约，`CREATE2` 会将合约的 `initcode`(包含constructor的参数) 和 `salt` 一起用来计算创建出的合约地址
+- 使用 `CREATE2` 的优势：
+  - 可以在链下计算出已经创建的交易池的地址
+  - 其他合约不必通过 UniswapV3Factory 中的接口来查询交易池的地址，可以节省 gas
+  - 合约地址不会因为 reorg 而改变
 
 ```solidity
 /// @dev Deploys a pool with the given parameters by transiently setting the parameters storage slot and then

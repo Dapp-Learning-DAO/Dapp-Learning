@@ -115,6 +115,10 @@ uint128 public override liquidity;
 mapping(int24 => Tick.Info) public override ticks;
 ```
 
+相关代码
+
+- [Tick.info](./Tick.md#Info(struct))
+
 ### tickBitmap
 
 ```solidity
@@ -138,47 +142,6 @@ Oracle.Observation[65535] public override observations;
 
 ## Struct
 
-### `Tick.info`
-
-```solidity
-// info stored for each initialized individual tick
-// 每一个初始化之后的 tick 以下列结构储存
-struct Info {
-    // the total position liquidity that references this tick
-    // 该tick上 所有position的流动性累加
-    uint128 liquidityGross;
-    // amount of net liquidity added (subtracted) when tick is crossed from left to right (right to left),
-    // 该tick上 所有position的流动性净值
-    int128 liquidityNet;
-    // fee growth per unit of liquidity on the _other_ side of this tick (relative to the current tick)
-    // 每单位流动性的 手续费数量 outside （相对于当前交易价格的另一边）
-    // only has relative meaning, not absolute — the value depends on when the tick is initialized
-    // 这只是一个相对的概念，并不是绝对的数值（手续费的计算工具，而并不是实际的手续费）
-    // 只有当tick已经初始化后，才会被使用
-    uint256 feeGrowthOutside0X128;
-    uint256 feeGrowthOutside1X128;
-    // the cumulative tick value on the other side of the tick
-    // tick 外侧（outside）的 价格 × 时间 累加值
-    // 用于 Oracle 的相关计算
-    int56 tickCumulativeOutside;
-    // the seconds per unit of liquidity on the _other_ side of this tick (relative to the current tick)
-    // 每流动性单位的 tick激活时间 (t/L 主要用于计算流动性挖矿的收益) （outside)
-    // only has relative meaning, not absolute — the value depends on when the tick is initialized
-    // 这只是一个相对的概念，并不是绝对的数值 -- 只有当tick已经初始化后，才会被使用
-    uint160 secondsPerLiquidityOutsideX128;
-    // the seconds spent on the other side of the tick (relative to the current tick)
-    // tick激活时间 （outside）
-    // only has relative meaning, not absolute — the value depends on when the tick is initialized
-    // 这只是一个相对的概念，并不是绝对的数值 -- 只有当tick已经初始化后，才会被使用
-    uint32 secondsOutside;
-    // true iff the tick is initialized, i.e. the value is exactly equivalent to the expression liquidityGross != 0
-    // tick是否初始化 即 该值完全等同于表达式 liquidityGross != 0 
-    // these 8 bits are set to prevent fresh sstores when crossing newly initialized ticks
-    // 这个参数的目的是为了防止tick未初始化时，发生更新和存储状态的操作
-    bool initialized;
-}
-```
-
 ## Functions
 
 ### constructor
@@ -200,3 +163,4 @@ constructor() {
 相关代码
 
 - [UniswapV3PoolDeployer(msg.sender).parameters](./UniswapV3Factory.md#parameters)
+- [tickSpacing](#tickSpacing)
