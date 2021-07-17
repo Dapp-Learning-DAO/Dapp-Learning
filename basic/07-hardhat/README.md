@@ -3,7 +3,9 @@ Hardhat是一个编译、部署、测试和调试以太坊应用的开发环境�
 Hardhat内置了Hardhat网络，这是一个专为开发设计的本地以太坊网络。主要功能有Solidity调试，跟踪调用堆栈、console.log()和交易失败时的明确错误信息提示等。  
 Hardhat Runner是与Hardhat交互的CLI命令，是一个可扩展的任务运行器。它是围绕任务和插件的概念设计的。每次你从CLI运行Hardhat时，你都在运行一个任务。例如，npx hardhat compile运行的是内置的compile任务。任务可以调用其他任务，允许定义复杂的工作流程。用户和插件可以覆盖现有的任务，从而定制和扩展工作流程。
 
-Hardhat的很多功能都来自于插件，而作为开发者，你可以自由选择想使用的插件。     
+Hardhat的很多功能都来自于插件，而作为开发者，你可以自由选择想使用的插件。  
+
+为方便获取，在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
  
 - npx介绍 
 https://www.ruanyifeng.com/blog/2019/02/npx.html  

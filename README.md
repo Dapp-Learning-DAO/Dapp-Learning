@@ -19,13 +19,13 @@
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为基础任务和项目任务两部分，基础任务用于熟悉区块链开发的基本工具组件的使用和集成，项目任务通过主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
+教程分为基础任务和项目任务两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
 此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理 以及推荐阅读《主权个人》**
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理**
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
@@ -40,47 +40,49 @@
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
 
+**推荐阅读：**
+- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
 
-01. [use web3.js deploy contract](courses/basic/01-web3js-deploy/README.md)
-02. [use web3.js create transaction](courses/basic/02-web3js-transaction/README.md)
-03. [use web3.js call ERC20 contract](courses/basic/03-web3js-erc20/README.md)
-04. [use truffle](courses/basic/04-web3js-truffle/README.md)
-05. [use ethers.js call ERC20 contract](courses/basic/05-ethersjs-erc20/README.md)
-06. [use waffle and ethers.js test contract](courses/basic/06-ethersjs-waffle/README.md)
-07. [use hardhat](courses/basic/07-hardhat/README.md)
-08. [graph](courses/basic/08-hardhat-graph/README.md)
-09. [react（metamask)](courses/basic/09-hardhat-react/README.md)
-10. [ERC721+ ERC1155 + ipfs](courses/basic/10-hardhat-ipfs-erc721/README.md)
-11. [react + express + hardhat](courses/basic/11-react-express-hardhat/README.md)
-12. [Crowdfund](courses/basic/12-token-crowdfund/README.md)
-13. [decentralized exchange](courses/basic/13-decentralized-exchange/README.md)
-14. [chainlink-api](courses/basic/14-chainlink-price-feed/README.md)
-15. [nft-blindbox-chainlink-vrf](courses/basic/15-nft-blindbox-chainlink-vrf/readme.md)
-16. [nft auction  & exchange](courses/basic/16-nft-auction-exchange/README.md)
-17. [wallet develop](courses/basic/17-etherjs-wallet-develop/readme.md)
-18. [web3.py](courses/basic/18-web3py/README.md)
-19. [brownie](courses/basic/19-brownie/README.md)
-20. [scaffold-flash-loan &  dex arbitrage](courses/basic/20-scaffold-flash-loan/readme.md)
-21. [scaffold-Lender](courses/basic/21-scaffold-lender/README.md)
-22. [scaffold-zk](courses/basic/22-scaffold-zk/readme.md)
-23. [ERC865 & ERC875](courses/basic/23-erc865-and-erc875/README.md)
-24. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
-25. [multi-sig-wallet](courses/basic/25-multi-sig-wallet/readme.md)
+01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
+02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
+03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md)
+04. [use truffle](basic/04-web3js-truffle/README.md)
+05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md)
+06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md)
+07. [use hardhat](basic/07-hardhat/README.md)
+08. [graph](basic/08-hardhat-graph/README.md)
+09. [react（metamask)](basic/09-hardhat-react/README.md)
+10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md)
+11. [react + express + hardhat](basic/11-react-express-hardhat/README.md)
+12. [Crowdfund](basic/12-token-crowdfund/README.md)
+13. [decentralized exchange](basic/13-decentralized-exchange/README.md)
+14. [chainlink-api](basic/14-chainlink-price-feed/README.md)
+15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md)
+16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md)
+17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md)
+18. [web3.py](basic/18-web3py/README.md)
+19. [brownie](basic/19-brownie/README.md)
+20. [scaffold-flash-loan &  dex arbitrage](basic/20-scaffold-flash-loan/readme.md)
+21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
+22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
+24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
+25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
-27. [Quadratic vote](courses/basic/27-quadratic-vote/README.md)
-28. [optimism layer2](courses/basic/28-optimism-layer2/readme.md)
-29. [matic layer2](courses/basic/29-layer2-matic/readme.md)
-30. [zksync layer2](courses/basic/30-layer2-zksync/readme.md)
-31. [duneanalytics & nansen](courses/basic/31-dune-analytics-nansen/readme.md)
-32. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+27. [Quadratic vote](basic/27-quadratic-vote/README.md)
+28. [optimism layer2](basic/28-optimism-layer2/readme.md)
+29. [matic layer2](basic/29-layer2-matic/readme.md)
+30. [zksync layer2](basic/30-layer2-zksync/readme.md)
+31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
+32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
 33. [pooltogether](https://pooltogether.com)
 34. [vyper](https://vyper.readthedocs.io/en/stable/)
 35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
 36. nft Filecoin
-
 - <https://www.bilibili.com/video/BV1j5411w7MH>
 - <https://pinata.cloud/pinmanager>
 - <https://nft.storage>
@@ -95,6 +97,9 @@
 40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
+43. [front running](https://github.com/Supercycled/cake_sniper)  
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -106,13 +111,13 @@
 
 ## DeFi 进阶
 
-01. [UniswapV2](courses/defi/Uniswap-V2/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-02. [UniswapV3](courses/defi/Uniswap-V3/readme.md)
-03. [Compound](courses/defi/Compound/readme.md)
+01. [UniswapV2](defi/Uniswap-V2/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+02. [UniswapV3](defi/Uniswap-V3/readme.md)
+03. [Compound](defi/Compound/readme.md)
 04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](courses/defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-07. [0x-protocol](courses/defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 08. Bancor [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -121,12 +126,14 @@
 
 ## NFT 进阶
 
-- 01. [OpenSea](courses/nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## DAO 进阶
 
-- 01. [Aragon](courses/dao/Aragon/readme.md)
+- 01. [Aragon](dao/Aragon/readme.md)
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [DAOHaus](https://daohaus.club/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
 
@@ -151,21 +158,8 @@
 5. 参与三个task的完成可以给予PR审核者的权限
 
 ## 常见问题
-
-- 安装前端依赖时，如果在 npm 或者 yarn 修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
-
-    ```shell
-    npm config set proxy http://username:password@server:port
-    npm config set https-proxy http://username:password@server:port
-    ```
-
-    例如：（要为yarn设置代理将其中的npm替换为yarn即可，端口需要替换为本地代理的端口）
-
-    ```shell
-    npm config set proxy http://127.0.0.1:2802
-    npm config set https-proxy http://127.0.0.1:2802
-    ```
-
+  安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+  
 ## 合约参考库及致敬相关项目
 
 - 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>

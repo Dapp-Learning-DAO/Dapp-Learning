@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "ethereumjs-tx": "^2.1.2",
     "minimist": "^1.2.5",
     "solc": "^0.8.0",

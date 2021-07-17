@@ -2,8 +2,10 @@ let Web3 = require('web3');
 let solc = require("solc");
 let fs   = require('fs');
 
+
 // Get privatekey from sk.txt
-const privatekey = fs.readFileSync("./sk.txt").toString().trim()
+require('dotenv').config()
+const privatekey = process.env.PRIVATE_KEY;
 
 // Load contract
 const source = fs.readFileSync('Incrementer.sol','utf8');
