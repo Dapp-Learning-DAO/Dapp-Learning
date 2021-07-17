@@ -16,7 +16,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - UniswapV3Pool 由 UniswapV3PoolDeployer 统一部署。 实现代币交易，流动性管理，交易手续费的收取，oracle 数据管理。接口的实现粒度比较低，不适合普通用户使用，错误的调用其中的接口可能会造成经济上的损失。
   UniswapV3Pool 是核心逻辑，管理了 Tick 和 Position，实现流动性管理以及一个交易池中 swap 功能实现。
 
-### **peirphery 仓库**
+### **periphery 仓库**
 
 - NonfungiblePositionManager 负责交易池的创建以及流动性的添加删除，用来增加/移除/修改 Pool 的流动性，并且通过 NFT token 将流动性代币化。使用 ERC721 token（v2 使用的是 ERC20）的原因是同一个池的多个流动性并不能等价替换（v3 的集中流性动功能）。
 - SwapRouter 是 swap 路由的管理。提供代币交易的接口，它是对 UniswapV3Pool 合约中交易相关接口的进一步封装，前端界面主要与这个合约来进行对接。
