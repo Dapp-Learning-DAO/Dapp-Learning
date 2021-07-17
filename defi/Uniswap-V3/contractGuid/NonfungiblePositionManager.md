@@ -231,7 +231,7 @@ function mint(MintParams calldata params)
 
 相关代码
 
-- [Pool.positions](./UniswapV3Pool.md#postions)
+- [Pool.positions](./UniswapV3Pool.md#positions)
 - [struct Position](#Position)
 - [Manager.addLiquidity](#addLiquidity)
 

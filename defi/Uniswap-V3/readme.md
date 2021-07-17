@@ -456,3 +456,4 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 - https://github.com/omarish/uniswap-v3-deploy-plugin 一键部署 V3
 - https://www.gelato.network/
 - https://www.chainnews.com/articles/715772476688.htm
+- https://arxiv.org/pdf/2106.12033.pdf 流动性策略
