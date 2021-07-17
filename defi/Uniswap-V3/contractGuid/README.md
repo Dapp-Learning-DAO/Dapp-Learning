@@ -75,4 +75,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 相关代码
 
+- [Pool.mint](./UniswapV3Pool.md#mint)
 - [struct AddLiquidityParams](./NonfungiblePositionManager.md#AddLiquidityParams)
+- [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
+- [Manager.mint](./NonfungiblePositionManager.md#mint)
