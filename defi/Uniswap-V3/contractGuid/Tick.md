@@ -99,7 +99,9 @@ function tickSpacingToMaxLiquidityPerTick(int24 tickSpacing) internal pure retur
 
 ```solidity
 /// @notice Retrieves fee growth data
+/// 检索手续费数据 返回feeInside
 /// @param self The mapping containing all tick information for initialized ticks
+/// self 
 /// @param tickLower The lower tick boundary of the position
 /// @param tickUpper The upper tick boundary of the position
 /// @param tickCurrent The current tick
@@ -147,19 +149,35 @@ function getFeeGrowthInside(
 
 ### update
 
+更新tick的状态，返回激活状态是否发生改变
+
 ```solidity
 /// @notice Updates a tick and returns true if the tick was flipped from initialized to uninitialized, or vice versa
+/// 更新一个tick的状态，返回该tick的激活状态是否发生改变
 /// @param self The mapping containing all tick information for initialized ticks
+/// 包含所有tick的mapping
 /// @param tick The tick that will be updated
+/// 需要更新的tick
 /// @param tickCurrent The current tick
+/// Pool当前价格所在的tick
 /// @param liquidityDelta A new amount of liquidity to be added (subtracted) when tick is crossed from left to right (right to left)
+/// 流动性变化量，当价格穿过该tick时需要增减的流动性数量
 /// @param feeGrowthGlobal0X128 The all-time global fee growth, per unit of liquidity, in token0
+/// 当前每单位流动性应得的手续费数量
+/// Pool的token0总手续费 / 当前流动性数量 （便于计算不同position应得的手续费数量）
 /// @param feeGrowthGlobal1X128 The all-time global fee growth, per unit of liquidity, in token1
+/// 同上
 /// @param secondsPerLiquidityCumulativeX128 The all-time seconds per max(1, liquidity) of the pool
+/// tick激活时间 / 流动性总和 的加权平均值
 /// @param time The current block timestamp cast to a uint32
+/// blocktime
 /// @param upper true for updating a position's upper tick, or false for updating a position's lower tick
+/// true 为更新tickupper false 为更新ticklower
 /// @param maxLiquidity The maximum liquidity allocation for a single tick
+// tick所能承载的最大流动性数量
 /// @return flipped Whether the tick was flipped from initialized to uninitialized, or vice versa
+/// 返回该tick的激活状态是否发生改变
+/// 激活 -> 未激活 | 未激活 -> 激活
 function update(
     mapping(int24 => Tick.Info) storage self,
     int24 tick,
@@ -173,17 +191,29 @@ function update(
     bool upper,
     uint128 maxLiquidity
 ) internal returns (bool flipped) {
+    // 获取需要更新的tick当前数据
     Tick.Info storage info = self[tick];
 
+    // tick更新之前的流动性总量
     uint128 liquidityGrossBefore = info.liquidityGross;
+    // tick更新之后的流动性总量
     uint128 liquidityGrossAfter = LiquidityMath.addDelta(liquidityGrossBefore, liquidityDelta);
 
+    // 更新的总量不能超过tick所能承载的最大流动性数量
     require(liquidityGrossAfter <= maxLiquidity, 'LO');
 
+    // 返回当前tick的激活状态是否发生了改变
+    // 激活 -> 未激活 | 未激活 -> 激活
+    // 根据流动性总量是否为0来判断激活状态 为0未激活
     flipped = (liquidityGrossAfter == 0) != (liquidityGrossBefore == 0);
 
+    // 如果tick之前未激活 需要对tick进行初始化并激活
     if (liquidityGrossBefore == 0) {
         // by convention, we assume that all growth before a tick was initialized happened _below_ the tick
+        // 这里规定当价格在tick左侧
+        // feeOutside = Pool的总手续费
+        // feeOutside为外侧手续费， 外侧手续费 + 内侧 = 总手续费
+        // 具体原理请参见博客原文
         if (tick <= tickCurrent) {
             info.feeGrowthOutside0X128 = feeGrowthGlobal0X128;
             info.feeGrowthOutside1X128 = feeGrowthGlobal1X128;
@@ -191,19 +221,34 @@ function update(
             info.tickCumulativeOutside = tickCumulative;
             info.secondsOutside = time;
         }
+        // 设置激活状态
         info.initialized = true;
     }
 
+    // 更新tick的总流动性
     info.liquidityGross = liquidityGrossAfter;
 
     // when the lower (upper) tick is crossed left to right (right to left), liquidity must be added (removed)
+    // 更新tick的流动性净值 即 当价格穿过该tick时 用于计算的流动性数量
+    // 当此tick作为价格上限更新时 流动性净值需要减
+    // 当此tick作为价格下限更新时 流动性净值需要加
     info.liquidityNet = upper
         ? int256(info.liquidityNet).sub(liquidityDelta).toInt128()
         : int256(info.liquidityNet).add(liquidityDelta).toInt128();
 }
 ```
 
+相关代码
+
+- [maxLiquidity](#tickSpacingToMaxLiquidityPerTick)
+
+补充
+
+- [Uniswap v3 详解（四）：交易手续费](https://liaoph.com/uniswap-v3-4/)
+
 ### clear
+
+清除tick的数据
 
 ```solidity
 /// @notice Clears tick data
@@ -215,6 +260,8 @@ function clear(mapping(int24 => Tick.Info) storage self, int24 tick) internal {
 ```
 
 ### cross
+
+当价格穿过tick时，需要对tick状态做出改变
 
 ```solidity
 /// @notice Transitions to next tick as needed by price movement
@@ -243,6 +290,10 @@ function cross(
     liquidityNet = info.liquidityNet;
 }
 ```
+
+补充
+
+- [Uniswap v3 详解（二）：创建交易对/提供流动性#tick-管理](https://liaoph.com/uniswap-v3-2/#tick-%E7%AE%A1%E7%90%86)
 
 ## TickBitmap(library)
 
@@ -326,10 +377,8 @@ function getSqrtRatioAtTick(int24 tick) internal pure returns (uint160 sqrtPrice
 
     // absTick & 0x1 将 |tick| 和 0x1 按位与 得出第 20 位数值 （0或1）
     // 第20位(末位)如果为0，需要特殊处理，ratio赋值为0x100...0(32个0)
-    // 原因有2点：
-    //    1. 函数最后需要将ratio (Q128.128定点数) 转换为 sqrtPriceX96 (Q64.96)
-    //       结果需要右移32位，所以这里有32个0
-    //    2. 因为后续做乘法运算，所以给1不会改变结果
+    // 函数最后需要将ratio (Q128.128定点数) 转换为 sqrtPriceX96 (Q64.96)
+    // 结果需要右移32位，所以这里有32个0
     uint256 ratio = absTick & 0x1 != 0 ? 0xfffcb933bd6fad37aa2d162d1a594001 : 0x100000000000000000000000000000000;
     // ratio采用连乘的方式来累加指数（tick），当某一位数值是0时，不参与连乘
     // 每一个魔数都是小于1的Q128.128定点数，所以在每次运算完成后，需要将结果右移128位
