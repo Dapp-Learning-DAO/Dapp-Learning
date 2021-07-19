@@ -30,7 +30,77 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ## 流程梳理
 
-### CreatePool
+### NonfungiblePositionManager
+
+#### mint
+
+在合约内，v3 会保存所有用户的流动性，代码内称作 Position
+
+![添加流动性对流程图](./img/add-liquidity.png)
+
+用户调用 `Manager.mint`创建Position并添加流动性：
+
+- Manager内部调用 `Manager.addLiquidity`
+- Manager调用`Pool.mint`
+  - 修改用户的position状态
+  - 调用manager的mint回调函数，进行token的转帐操作
+- Manager内部调用`Manager.mint`，返回`amount0` `amount1`(token0,token1 的实际注入数量)
+  - 将代表相关流动性postion的ERC721代币返回给用户
+  - 创建流动性头寸存入Manager
+- 广播 `IncreaseLiquidity(tokenId, liquidity, amount0, amount1)`
+
+相关代码
+
+- [Manager.mint](./NonfungiblePositionManager.md#mint)
+- [Pool.mint](./UniswapV3Pool.md#mint)
+- [struct AddLiquidityParams](./NonfungiblePositionManager.md#AddLiquidityParams)
+- [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
+
+#### increaseLiquidity
+
+用户调用 `Manager.increaseLiquidity` 向已有Position添加流动性：
+
+- Manager内部调用 `Manager.addLiquidity`
+- 从Pool中获取position最新的手续费数值
+- 将手续费加到position的记录中（两种token分别记录）
+- 广播 `IncreaseLiquidity(tokenId, liquidity, amount0, amount1)`
+
+注意：添加或移除流动性都会触发Manager从Pool中更新手续费数据，但不会提取
+
+相关代码
+
+- [struct AddLiquidityParams](./NonfungiblePositionManager.md#AddLiquidityParams)
+- [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
+
+#### decreaseLiquidity
+
+用户调用 `Manager.decreaseLiquidity` 移除已有Position的流动性：
+
+- 检查入参，position现有流动性 >= 传入的流动性
+- 调用`Pool.burn` 返回实际移除的流动性转换为token的数量（amount0, amount1）
+- 回收用户在Pool中积累的手续费
+  - 先获取Pool中手续费数值
+  - 手续费增量 = Pool手续费数值 - position中记录的手续费数值
+  - 将手续费增量累加到position的待取token数量中
+  - 更新 position中记录的手续费数值
+- 更新 position中记录的流动性
+- 广播 `IncreaseLiquidity(tokenId, liquidity, amount0, amount1)`
+
+相关代码
+
+- [struct DecreaseLiquidityParams](./NonfungiblePositionManager.md#DecreaseLiquidityParams)
+- [Manager.decreaseLiquidity](./NonfungiblePositionManager.md#decreaseLiquidity)
+
+
+### SwapRouter
+
+#### exactInput
+
+#### exactOutput
+
+### UniswapV3Pool
+
+#### CreatePool
 
 ![创建交易对流程图](./img/create-pool.png)
 
@@ -55,27 +125,3 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
 - [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
 - [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
-
-### addLiquidity
-
-在合约内，v3 会保存所有用户的流动性，代码内称作 Position，提供流动性的调用流程如下：
-
-![添加流动性对流程图](./img/add-liquidity.png)
-
-用户调用 `Manager.mint`添加流动性，其内部流程如下：
-
-- Manager内部调用 `Manager.addLiquidity`
-- Manager调用`Pool.mint`
-  - 修改用户的position状态
-  - 调用manager的mint回调函数，进行token的转帐操作
-- Manager内部调用`Manager.mint`
-  - 将代表相关流动性postion的ERC721代币返回给用户
-  - 创建流动性头寸存入Manager
-  - 广播 `IncreaseLiquidity(tokenId, liquidity, amount0, amount1)`
-
-相关代码
-
-- [Pool.mint](./UniswapV3Pool.md#mint)
-- [struct AddLiquidityParams](./NonfungiblePositionManager.md#AddLiquidityParams)
-- [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
-- [Manager.mint](./NonfungiblePositionManager.md#mint)
