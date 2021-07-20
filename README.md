@@ -68,9 +68,9 @@
 19. [brownie](basic/19-brownie/README.md)
 20. [scaffold-flash-loan &  dex arbitrage](basic/20-scaffold-flash-loan/readme.md)
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
-22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
+22. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
+24. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
@@ -136,7 +136,9 @@
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
-
+- 01.[ECC](./crypto/ECC)
+- 02.[PLONK](./crypto/PLONK)
+- 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
