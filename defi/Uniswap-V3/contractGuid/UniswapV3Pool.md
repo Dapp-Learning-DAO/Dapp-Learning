@@ -74,6 +74,10 @@ struct Slot0 {
 Slot0 public override slot0;
 ```
 
+相关代码
+
+- [modifier lock](#lock)
+
 ### feeGrowthGlobal0X128
 
 Pool当前收取的手续费（token0）
@@ -280,6 +284,7 @@ function mint(
 
 相关代码
 
+- [modifier lock](#lock)
 - [IUniswapV3MintCallback.uniswapV3MintCallback](./NonfungiblePositionManager.md#uniswapV3MintCallback)
 - [Pool._modifyPosition](#_modifyPosition)
 - [Pool._updatePosition](#_updatePosition)
@@ -546,4 +551,86 @@ function burn(
 
 相关函数
 
+- [modifier lock](#lock)
 - [_modifyPosition](#_modifyPosition)
+
+### collect
+
+回收position中的手续费，并转给接收者
+
+```solidity
+/// @inheritdoc IUniswapV3PoolActions
+function collect(
+    address recipient,
+    int24 tickLower,
+    int24 tickUpper,
+    uint128 amount0Requested, // 期望回收的手续费数量
+    uint128 amount1Requested
+) external override lock returns (uint128 amount0, uint128 amount1) {
+    // we don't need to checkTicks here, because invalid positions will never have non-zero tokensOwed{0,1}
+    // 这里不需要做tick检查 因为非法的position是不可能拥有tokenOwned
+    Position.Info storage position = positions.get(msg.sender, tickLower, tickUpper);
+
+    // 当position tokensOwed余额 < 期望数值 取出 余额
+    amount0 = amount0Requested > position.tokensOwed0 ? position.tokensOwed0 : amount0Requested;
+    amount1 = amount1Requested > position.tokensOwed1 ? position.tokensOwed1 : amount1Requested;
+
+    if (amount0 > 0) {
+        position.tokensOwed0 -= amount0;
+        TransferHelper.safeTransfer(token0, recipient, amount0);
+    }
+    if (amount1 > 0) {
+        position.tokensOwed1 -= amount1;
+        TransferHelper.safeTransfer(token1, recipient, amount1);
+    }
+
+    emit Collect(msg.sender, recipient, tickLower, tickUpper, amount0, amount1);
+}
+```
+
+相关代码
+
+- [modifier lock](#lock)
+
+### checkTicks
+
+检查tickindex是否非法（不能超过上下限）
+
+```solidity
+/// @dev Common checks for valid tick inputs.
+function checkTicks(int24 tickLower, int24 tickUpper) private pure {
+    require(tickLower < tickUpper, 'TLU');
+    require(tickLower >= TickMath.MIN_TICK, 'TLM');
+    require(tickUpper <= TickMath.MAX_TICK, 'TUM');
+}
+```
+
+## modifier
+
+### lock
+
+被修饰的函数执行时，slot0 为锁定状态，执行完成后解锁
+防止重入攻击
+
+```solidity
+/// @dev Mutually exclusive reentrancy protection into the pool to/from a method. This method also prevents entrance
+/// to a function before the pool is initialized. The reentrancy guard is required throughout the contract because
+/// we use balance checks to determine the payment status of interactions such as mint, swap and flash.
+/// 资金出入Pool时，防止重入攻击的互斥锁。
+/// 整个合约都需要重入保护，因为我们使用余额检查来确定交互的支付状态，例如 mint、swap 和 flash。
+/// 此方法还可以防止Pool在初始化之前，有资金出入（Pool初始化前unlocked为false）
+modifier lock() {
+    require(slot0.unlocked, 'LOK');
+    slot0.unlocked = false;
+    _;
+    slot0.unlocked = true;
+}
+```
+
+相关代码
+
+- [Pool.slot0](#slot0)
+
+补充
+
+- [re-entrancy(重入攻击)](https://docs.soliditylang.org/en/latest/security-considerations.html#re-entrancy)

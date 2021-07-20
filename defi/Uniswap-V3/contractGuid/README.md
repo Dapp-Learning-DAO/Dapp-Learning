@@ -91,6 +91,35 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [struct DecreaseLiquidityParams](./NonfungiblePositionManager.md#DecreaseLiquidityParams)
 - [Manager.decreaseLiquidity](./NonfungiblePositionManager.md#decreaseLiquidity)
 
+#### collect
+
+用户调用 `Manager.collect` 回收Pool中累计的手续费收益：
+
+- 检查入参
+  - 回收手续费最大数量需要 > 0
+  - 当入参recipient为0，设为本Manager合约地址
+- 如果position流动性 > 0，触发Pool更新手续费相关数据的快照
+  - 调用`Pool.burn`触发更新手续费相关的数据，这里数量传0，并不会真的移除流动性
+  - Pool的手续费 - Manager中记录的手续费 = 手续费增量（即本次可取的手续费数量）
+  - 期望取回的手续费数量 = max(手续费增量，入参的手续费最大值)
+- 调用 `Pool.collect` ，Pool将手续费转给接收者，返回实际取回的手续费数量
+- 更新Manager中手续费数据与Pool同步
+- 广播 `Collect(params.tokenId, recipient, amount0Collect, amount1Collect)`
+
+相关代码
+
+- [struct CollectParams](./NonfungiblePositionManager.md#CollectParams)
+- [Manager.collect](./NonfungiblePositionManager.md#collect)
+- [Pool.collect](./UniswapV3Pool.md#collect)
+
+#### burn
+
+用户调用 `Manager.burn`，移除position，并销毁ERC721token
+
+相关代码
+
+- [Manager.burn](./NonfungiblePositionManager.md#burn)
+
 
 ### SwapRouter
 
