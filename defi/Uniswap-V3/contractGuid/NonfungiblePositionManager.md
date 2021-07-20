@@ -458,3 +458,161 @@ function pay(
     }
 }
 ```
+
+### DecreaseLiquidityParams
+
+移除流动性的入参结构体
+
+```solidity
+struct DecreaseLiquidityParams {
+    uint256 tokenId;        // ERC721的id
+    uint128 liquidity;      // 要移除的流动性数量
+    uint256 amount0Min;     // token0要移除的最小数量
+    uint256 amount1Min;     // token1要移除的最小数量
+    uint256 deadline;       // blocktime超过deadline终止执行
+}
+```
+
+### decreaseLiquidity
+
+移除position的流动性
+更新Manager中的position状态（流动性和存在Manager中的token数量），调用`Pool.burn`
+
+```solidity
+/// @inheritdoc INonfungiblePositionManager
+function decreaseLiquidity(DecreaseLiquidityParams calldata params)
+    external
+    payable
+    override
+    isAuthorizedForToken(params.tokenId)
+    checkDeadline(params.deadline)
+    returns (uint256 amount0, uint256 amount1)
+{
+    require(params.liquidity > 0);
+    Position storage position = _positions[params.tokenId];
+
+    // 检查position现有流动性 >= 传入的流动性
+    uint128 positionLiquidity = position.liquidity;
+    require(positionLiquidity >= params.liquidity);
+
+    // 缓存PoolKey 优化gas消耗
+    PoolAddress.PoolKey memory poolKey = _poolIdToPoolKey[position.poolId];
+    // 通过PoolKey拿到对应的Pool
+    IUniswapV3Pool pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
+    // 调用Pool的burn函数 返回实际移除的流动性转换为token的数量
+    (amount0, amount1) = pool.burn(position.tickLower, position.tickUpper, params.liquidity);
+
+    // 实际移除的流动性不能小于设置的最小移除流动性数量
+    require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, 'Price slippage check');
+
+    // 计算positionKey
+    bytes32 positionKey = PositionKey.compute(address(this), position.tickLower, position.tickUpper);
+
+    // this is now updated to the current transaction
+    // 现在为用户回收position中的手续费
+
+    // 获取移除之后的position中的 手续费每流动性单位 （fee/liquidity）
+    // 此时Pool中的position记录的fee是最新的
+    // 而Manager中的fee，只会在 增加或移除 流动性时，从Pool的数据中更新
+    (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) = pool.positions(positionKey);
+
+    // position中记录着拥有者的token数量
+    // token数量 = 移除流动性转换的token + 用户赚取的手续费增量 （相比于上次更新手续费时）
+    // 用户赚取的手续费增量 = Pool中的手续费 - Manager中的手续费
+    position.tokensOwed0 +=
+        uint128(amount0) +
+        uint128(
+            // FullMath.mulDiv 是先乘后除的安全计算方法
+            // feeGrowthInside0LastX128 是 手续费每流动性单位
+            // 即 feeGrowth增量 × positionLiquidity = 手续费增量
+            // 又因feeGrowthInside0LastX128是Q128.128精度的定点数
+            // 所以最后要将小数位左移128位（二进制）
+            // FixedPoint128.Q128 = 0x100000000000000000000000000000000
+            FullMath.mulDiv(
+                feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
+                positionLiquidity,
+                FixedPoint128.Q128
+            )
+        );
+    // 同上
+    position.tokensOwed1 +=
+        uint128(amount1) +
+        uint128(
+            FullMath.mulDiv(
+                feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
+                positionLiquidity,
+                FixedPoint128.Q128
+            )
+        );
+
+    // 从Pool的数据中更新手续费
+    position.feeGrowthInside0LastX128 = feeGrowthInside0LastX128;
+    position.feeGrowthInside1LastX128 = feeGrowthInside1LastX128;
+
+    // 更新position的流动性 （减去移除的量）
+    // subtraction is safe because we checked positionLiquidity is gte params.liquidity
+    // 我们检查了 positionLiquidity >= params.liquidity 所以这里减法是安全的
+    position.liquidity = positionLiquidity - params.liquidity;
+
+    emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
+}
+```
+
+相关代码
+
+- [struct DecreaseLiquidityParams](#DecreaseLiquidityParams)
+- [modifer Manager.isAuthorizedForToken](#isAuthorizedForToken)
+- [modifer Manager.checkDeadline](#checkDeadline)
+- [Manager._positions](#_positions)
+- [Pool.positions](./UniswapV3Pool.md#positions)
+- [Pool.burn](./UniswapV3Pool.md#burn)
+- [Manager.computeAddress](#computeAddress)
+
+### burn
+
+传入`tokenId`调用Manager内部方法`_burn()`，销毁ERC721代币代表的position
+`_burn()` 继承自 ERC721 类，即销毁ERC721token的标准方法
+
+```solidity
+/// @inheritdoc INonfungiblePositionManager
+function burn(uint256 tokenId) external payable override isAuthorizedForToken(tokenId) {
+    // 获取tokenId对应的postion
+    Position storage position = _positions[tokenId];
+    // 检查position的 liquidity tokensOwed0 tokensOwed1 必须为0
+    // 否则不能销毁position
+    require(position.liquidity == 0 && position.tokensOwed0 == 0 && position.tokensOwed1 == 0, 'Not cleared');
+    // 删除position数据
+    delete _positions[tokenId];
+    // 销毁ERC721 TOKEN
+    _burn(tokenId);
+}
+```
+
+相关代码
+
+- [modifer Manager.isAuthorizedForToken](#isAuthorizedForToken)
+
+## modifer
+
+### isAuthorizedForToken
+
+调用 ERC721 类的 `_isApprovedOrOwner`函数
+被修饰的函数只能是ERC721token所有者，或被approve授权者
+
+```solidity
+modifier isAuthorizedForToken(uint256 tokenId) {
+    require(_isApprovedOrOwner(msg.sender, tokenId), 'Not approved');
+    _;
+}
+```
+
+### checkDeadline
+
+当blocktime超过deadline，被修饰的函数终止执行
+
+```solidity
+modifier checkDeadline(uint256 deadline) {
+    require(_blockTimestamp() <= deadline, 'Transaction too old');
+    _;
+}
+```

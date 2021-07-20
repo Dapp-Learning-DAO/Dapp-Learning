@@ -143,6 +143,10 @@ mapping(int16 => uint256) public override tickBitmap;
 mapping(bytes32 => Position.Info) public override positions;
 ```
 
+相关代码
+
+- [Position Info](#Position.info)
+
 ### observations
 
 ```solidity
@@ -151,6 +155,24 @@ Oracle.Observation[65535] public override observations;
 ```
 
 ## Struct
+
+### Position.Info
+
+用户position的数据结构
+
+```solidity
+// info stored for each user's position
+struct Info {
+    // the amount of liquidity owned by this position
+    uint128 liquidity;
+    // fee growth per unit of liquidity as of the last update to liquidity or fees owed
+    uint256 feeGrowthInside0LastX128;
+    uint256 feeGrowthInside1LastX128;
+    // the fees owed to the position owner in token0/token1
+    uint128 tokensOwed0;
+    uint128 tokensOwed1;
+}
+```
 
 ## Functions
 
@@ -480,3 +502,48 @@ function _updatePosition(
 - [ticks.getFeeGrowthInside](./Tick.md#getFeeGrowthInside)
 - [ticks.clear](./Tick.md#clear)
 
+### burn
+
+移除(position的)流动性
+注意`burn()`只是移除流动性，转为token，并未将token发送回给用户
+
+```solidity
+/// @inheritdoc IUniswapV3PoolActions
+/// @dev noDelegateCall is applied indirectly via _modifyPosition
+/// 由于_modifyPosition 使用了 noDelegateCall 修饰符，所以这里也有同样的限制
+function burn(
+    int24 tickLower,
+    int24 tickUpper,
+    uint128 amount
+) external override lock returns (uint256 amount0, uint256 amount1) {
+    // 函数入参amount >= 0 传入 _modifyPosition 需要加负号
+    (Position.Info storage position, int256 amount0Int, int256 amount1Int) =
+        _modifyPosition(
+            ModifyPositionParams({
+                owner: msg.sender,
+                tickLower: tickLower,
+                tickUpper: tickUpper,
+                liquidityDelta: -int256(amount).toInt128()
+            })
+        );
+
+    // amount0Int < 0 此处需要反号
+    amount0 = uint256(-amount0Int);
+    amount1 = uint256(-amount1Int);
+
+    // 在用户position上记录增加token数量
+    // 注意burn只是移除流动性，转为token，并未将token发送回给用户
+    if (amount0 > 0 || amount1 > 0) {
+        (position.tokensOwed0, position.tokensOwed1) = (
+            position.tokensOwed0 + uint128(amount0),
+            position.tokensOwed1 + uint128(amount1)
+        );
+    }
+
+    emit Burn(msg.sender, tickLower, tickUpper, amount, amount0, amount1);
+}
+```
+
+相关函数
+
+- [_modifyPosition](#_modifyPosition)
