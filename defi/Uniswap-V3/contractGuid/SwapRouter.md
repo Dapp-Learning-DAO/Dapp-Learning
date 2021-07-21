@@ -156,6 +156,72 @@ function decodeFirstPool(bytes memory path)
 }
 ```
 
+相关代码
+
+- [path.toAddress](#path.toAddress)
+- [path.toUint24](#path.toUint24)
+
+### path.toAddress
+
+传入`bytes` 类型，和读取的起始位，返回内存中的地址
+
+```solidity
+function toAddress(bytes memory _bytes, uint256 _start) internal pure returns (address) {
+    // 检查 _start+20 是否会溢出（超过uint256的最大值）
+    // 若溢出则为负数
+    require(_start + 20 >= _start, 'toAddress_overflow');
+    // 检查_start 起始位 + 20字节（地址类型的长度） 不能超过bytes的总长度
+    require(_bytes.length >= _start + 20, 'toAddress_outOfBounds');
+    address tempAddress;
+
+    assembly {
+        // add(_bytes, 0x20)
+        // 从 _bytes 指针开始向后越过32字节（16进制0x20）
+        // 即 跳过内存中表达 _bytes 长度的区域（一个uint256数值）
+
+        // add(..., _start)
+        // 加上入参设置的读取起始位
+
+        // div(mload(...), 0x1000000000000000000000000) 这里有24个0，即 2^96
+        // 将mload的结果右移96位（12个字节）
+        // 因为mload取出的数据是uint256类型（32个字节）而address类型是（20个字节）
+        // 结果会自动在后面补0，即后12个字节（96位）补0，所以这里需要用除法将结果右移96位
+
+        tempAddress := div(mload(add(add(_bytes, 0x20), _start)), 0x1000000000000000000000000)
+    }
+
+    return tempAddress;
+}
+```
+
+原理解析：
+
+- bytes在内存中前32字节是存储的bytes长度数值（uint256），所以这里要加上32越过这个uint256区域
+- 由于address是uin160（20个字节），用mload操作符取出来是一个uint256（32个字节），所以得到的值后面会被补0。于是我们需要将取出的结果右移。
+- 这里补了12个字节，也就是`12 * 8 = 96` 个0 (2进制)，所以结果需要除以 2^96。转换成16进制就是上面的0x100...0(24个0）
+
+补充
+
+- [Formal Specification of the Encoding](https://docs.soliditylang.org/en/latest/abi-spec.html#formal-specification-of-the-encoding)
+
+### toUint24
+
+传入`bytes` 类型，和读取的起始位，返回内存中的fee费率数值(`uint24`)
+
+```solidity
+function toUint24(bytes memory _bytes, uint256 _start) internal pure returns (uint24) {
+    require(_start + 3 >= _start, 'toUint24_overflow');
+    require(_bytes.length >= _start + 3, 'toUint24_outOfBounds');
+    uint24 tempUint;
+
+    assembly {
+        tempUint := mload(add(add(_bytes, 0x3), _start))
+    }
+
+    return tempUint;
+}
+```
+
 ## modifier
 
 ### checkDeadline
