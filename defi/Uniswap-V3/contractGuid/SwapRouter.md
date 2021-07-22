@@ -32,7 +32,11 @@ struct SwapCallbackData {
 ### exactInput
 
 指定交易对路径，将 x token 交换为 y token。
-传入 x token 数和预期得到的最小 y token 数
+
+- 传入 x token 数和预期得到的最小 y token 数
+- path中传入多个token地址，可设置中间代币 （Base token），即 tokenX -> Basetoken -> tokenY
+  - tokenAddress0 + fee0 + tokenAddress1（无Base token）
+  - tokenAddress0 + fee0 + tokenAddress1 + fee1 + tokenAddress2（有Base token）
 
 ```solidity
 /// @inheritdoc ISwapRouter
@@ -54,7 +58,7 @@ function exactInput(ExactInputParams memory params)
         params.amountIn = exactInputInternal(
             params.amountIn,
             hasMultiplePools ? address(this) : params.recipient, // for intermediate swaps, this contract custodies
-            0,
+            0,                          // 传入价格 0 代表以市价交易
             SwapCallbackData({
                 path: params.path.getFirstPool(), // only the first pool in the path is necessary
                 payer: payer
@@ -62,15 +66,19 @@ function exactInput(ExactInputParams memory params)
         );
 
         // decide whether to continue or terminate
+        // 判断path中是否还有未交易的token地址，即是否需要继续交易
         if (hasMultiplePools) {
-            payer = address(this); // at this point, the caller has paid
+            // 继续循环，需要将交易者设置为本合约地址
+            payer = address(this);  // at this point, the caller has paid
             params.path = params.path.skipToken();
         } else {
+            // 交易完成跳出循环
             amountOut = params.amountIn;
             break;
         }
     }
 
+    // 检查交易输出量，不能过小
     require(amountOut >= params.amountOutMinimum, 'Too little received');
 }
 ```
@@ -78,8 +86,10 @@ function exactInput(ExactInputParams memory params)
 相关代码
 
 - [struct ExactInputParams](#ExactInputParams)
+- [struct SwapCallbackData](#SwapCallbackData)
 - [modifier checkDeadLine](#checkDeadLine)
 - [hasMultiplePools](#hasMultiplePools)
+- [exactInputInternal](#exactInputInternal)
 
 ### exactInputInternal
 
@@ -97,15 +107,26 @@ function exactInputInternal(
     // 允许0地址作为接受者 自动转为本合约地址
     if (recipient == address(0)) recipient = address(this);
 
+    // 从path中解析出Pool的关键信息
+    // 这里从交易链路（path）中解析出的地址有可能 tokenIn > tokenOut 
     (address tokenIn, address tokenOut, uint24 fee) = data.path.decodeFirstPool();
 
+    // 判断两个token地址大小
+    // 由于Pool中price始终以 y/x 表示 （x地址 < y地址）
+    // zeroForOne 实际代表的是Pool.swap中的交易方向
+    //      true  token x -> token y
+    //      false token y -> token x
     bool zeroForOne = tokenIn < tokenOut;
 
+    // 调用Pool.swap 返回实际交易的token数量
+    // amount0 输入的实际数量
+    // amount1 输出的实际数量
     (int256 amount0, int256 amount1) =
         getPool(tokenIn, tokenOut, fee).swap(
             recipient,
             zeroForOne,
             amountIn.toInt256(),
+            // 传入价格 0 代表以市价交易
             sqrtPriceLimitX96 == 0
                 ? (zeroForOne ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1)
                 : sqrtPriceLimitX96,
@@ -115,6 +136,10 @@ function exactInputInternal(
     return uint256(-(zeroForOne ? amount1 : amount0));
 }
 ```
+
+相关代码
+
+- [swap](./UniswapV3Pool.md#swap)
 
 ### hasMultiplePools
 
