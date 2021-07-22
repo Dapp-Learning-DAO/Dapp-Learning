@@ -81,7 +81,7 @@
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
 32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
 33. [pooltogether](https://pooltogether.com)
-34. [vyper](https://vyper.readthedocs.io/en/stable/)
+34. [subgraph](https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad)
 35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
 36. nft Filecoin
 - <https://www.bilibili.com/video/BV1j5411w7MH>
@@ -101,7 +101,7 @@
 43. [front running](https://github.com/Supercycled/cake_sniper)  
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
-
+46. [vyper](https://vyper.readthedocs.io/en/stable/)
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 进阶任务
