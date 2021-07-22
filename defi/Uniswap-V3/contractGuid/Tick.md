@@ -320,6 +320,14 @@ mapping(int16 => uint256) public override tickBitmap;
 
 传入tick，获取其在bitmap上，位于第几个word(wordPos)的第几位(bitPos)
 
+**注意：** 在同一个`word`内，`bitPos`越大，tick(index) 反而越小。 
+
+- 假设 `tick = 3`, 此时 `bitPos = 3 % 256 = 3`
+- 而记录tick状态是利用掩码和异或运算(参见[flipTick](#flipTick)函数)
+  - `mask = 1 << 3 = 8` 8 的二进制是 1000
+  - `self[wordPos] ^= mask` 可以看出这里是对 uint256 的倒数第4位进行操作
+- 即 在一个word内，第 `(256 - bitPos)` 位数值代表了tick的状态
+
 ```solidity
 /// @notice Computes the position in the mapping where the initialized bit for a tick lives
 /// @param tick The tick for which to compute the position
@@ -386,22 +394,32 @@ function nextInitializedTickWithinOneWord(
 ) internal view returns (int24 next, bool initialized) {
     // 计算传入position函数的入参
     int24 compressed = tick / tickSpacing;
-    // 若tick < 0 , 即 price < 1, 需要向下舍
+    // 若tick < 0 , 需要 -1
+    // 若tick >= 0, 因为正数轴上第一个wordPos是0，所以不需要+1
     if (tick < 0 && tick % tickSpacing != 0) compressed--; // round towards negative infinity
 
+    // 向左搜索(target tick <= starting tick)
     if (lte) {
+        // 获取wordPos bitPos
         (int16 wordPos, uint8 bitPos) = position(compressed);
         // all the 1s at or to the right of the current bitPos
+        // mask 在二进制下是 1...1 (bitPos+1 个 1)
         uint256 mask = (1 << bitPos) - 1 + (1 << bitPos);
         uint256 masked = self[wordPos] & mask;
 
         // if there are no initialized ticks to the right of or at the current tick, return rightmost in the word
+        // 在word内，starting tick 左侧是否有已初始化的tick
         initialized = masked != 0;
+
         // overflow/underflow is possible, but prevented externally by limiting both tickSpacing and tick
+        // 上溢或下溢都是有可能的，但这里限制了 tickSpacing 和 tick 防止这种情况发生
+        // 当有初始化时，查找starting左侧距离最近的已初始化tick，即 查找word内，距离开头最近的1
+        // 没有初始化时，直接返回word的边界（右侧，tickindex最小值）
         next = initialized
             ? (compressed - int24(bitPos - BitMath.mostSignificantBit(masked))) * tickSpacing
             : (compressed - int24(bitPos)) * tickSpacing;
     } else {
+        // 向右搜索(target tick > starting tick)
         // start from the word of the next tick, since the current tick state doesn't matter
         (int16 wordPos, uint8 bitPos) = position(compressed + 1);
         // all the 1s at or to the left of the bitPos
@@ -415,6 +433,55 @@ function nextInitializedTickWithinOneWord(
             ? (compressed + 1 + int24(BitMath.leastSignificantBit(masked) - bitPos)) * tickSpacing
             : (compressed + 1 + int24(type(uint8).max - bitPos)) * tickSpacing;
     }
+}
+```
+
+- [TickBitMap.position](#position)
+- [TickBitMap.mostSignificantBit](#mostSignificantBit)
+
+#### mostSignificantBit
+
+传入x，查找x二进制下距离开头最近的1是倒数第几位
+
+```solidity
+/// @notice Returns the index of the most significant bit of the number,
+///     where the least significant bit is at index 0 and the most significant bit is at index 255
+/// @dev The function satisfies the property:
+///     x >= 2**mostSignificantBit(x) and x < 2**(mostSignificantBit(x)+1)
+/// @param x the value for which to compute the most significant bit, must be greater than 0
+/// @return r the index of the most significant bit
+function mostSignificantBit(uint256 x) internal pure returns (uint8 r) {
+    require(x > 0);
+
+    if (x >= 0x100000000000000000000000000000000) { // 2^128
+        x >>= 128;
+        r += 128;
+    }
+    if (x >= 0x10000000000000000) { // 2^64
+        x >>= 64;
+        r += 64;
+    }
+    if (x >= 0x100000000) { // 2^32
+        x >>= 32;
+        r += 32;
+    }
+    if (x >= 0x10000) { // 2^16
+        x >>= 16;
+        r += 16;
+    }
+    if (x >= 0x100) { // 2^8
+        x >>= 8;
+        r += 8;
+    }
+    if (x >= 0x10) { // 2^4
+        x >>= 4;
+        r += 4;
+    }
+    if (x >= 0x4) { // 2^2
+        x >>= 2;
+        r += 2;
+    }
+    if (x >= 0x2) r += 1;
 }
 ```
 
