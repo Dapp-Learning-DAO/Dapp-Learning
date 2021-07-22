@@ -310,7 +310,6 @@ using TickBitmap for mapping(int16 => uint256);
 mapping(int16 => uint256) public override tickBitmap;
 ```
 
-- 存储一个mapping，以tickIndex做键，是否初始化做值
 - 键(wordPos)为uint16，值(word)为uint256，即 每256位为一个word
 - 使用二进制0和1记录初始化状态，0 未初始化 1 已初始化，参见flipTick
 
