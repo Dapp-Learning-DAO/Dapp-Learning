@@ -34,11 +34,18 @@
 
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - infura（节点服务）: <https://infura.io/>
+- alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
 - 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
 - 以太坊区块链浏览器: <https://kovan.etherscan.io>
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
+
+**测试网 testnet**
+
+- Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
+- Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
+- Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
 **推荐阅读：**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
