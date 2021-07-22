@@ -154,6 +154,10 @@ https://mp.weixin.qq.com/s/DlC5jAS_CzXuOZFmmveNXA
 https://mp.weixin.qq.com/s/LhdAREmhXSHxIaVfhcJQ_g
 https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa   
 https://learnblockchain.cn/article/2566  
+https://blog.openzeppelin.com/subgraphs-announcement 
+OpenZeppelin subgraphs库:为常用的OpenZepplin合约建立subgraphs
+
+
  
    
 ## to do
