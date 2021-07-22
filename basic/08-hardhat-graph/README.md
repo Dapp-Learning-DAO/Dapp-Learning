@@ -156,7 +156,8 @@ https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
 https://learnblockchain.cn/article/2566  
 https://blog.openzeppelin.com/subgraphs-announcement 
 OpenZeppelin subgraphs库:为常用的OpenZepplin合约建立subgraphs
-
+https://github.com/graphprotocol/agora
+成本模型
 
  
    
@@ -166,3 +167,5 @@ https://thegraph.com/
 https://graphql.cn/learn/ 
 https://gql-guide.vercel.app/
 https://thegraph.com/docs/graphql-api
+新特性支持
+
