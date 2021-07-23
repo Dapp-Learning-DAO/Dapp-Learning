@@ -325,7 +325,7 @@ mapping(int16 => uint256) public override tickBitmap;
 - 而记录tick状态是利用掩码和异或运算(参见[flipTick](#flipTick)函数)
   - `mask = 1 << 3 = 8` 8 的二进制是 1000
   - `self[wordPos] ^= mask` 可以看出这里是对 uint256 的倒数第4位进行操作
-- 即 在一个word内，第 `(256 - bitPos)` 位数值代表了tick的状态
+- 即 在第`wordPos`个word内，第 `(256 - bitPos)` 位数值代表了tick的状态
 
 ```solidity
 /// @notice Computes the position in the mapping where the initialized bit for a tick lives
@@ -373,7 +373,23 @@ function flipTick(
 
 #### nextInitializedTickWithinOneWord
 
-传入tick(可能未初始化), 在一个word内寻找最近离tick最近的已初始化的tick，若没有已初始化的tick，返回word的边界。
+传入`starting tick`(可能未初始化), 在其所在的word内寻找最近离`starting tick`最近的已初始化的tick，若没有已初始化的tick，返回word的边界。
+
+入参解释
+
+- `int24 tick` starting tick 搜索的起始tick
+- `int24 tickSpacing` 参见 [tickSpacing](./UniswapV3Pool.md#tickSpacing)
+- `lte` next tick (返回值) <= starting tick 的bool值
+  - true 为寻找价格较小的tick(包括 starting tick 本身)
+  - false 为寻找较大价格的tick
+
+函数返回值 (`next`, `initialized`)
+
+- 当word内已有初始化tick，`next` 返回其索引值
+- 当word内无初始化tick，`next` 返回word的边界
+  - `lte = true` 时，`next` 返回word **右** 边界对应的 `bitPos`
+  - `lte = false` 时，`next` 返回word **左** 边界对应的 `bitPos`
+- `initialized` 返回`next`的初始化状态(有可能为false)
 
 ```solidity
 /// @notice Returns the next initialized tick contained in the same word (or adjacent word) as the tick that is either
@@ -397,7 +413,7 @@ function nextInitializedTickWithinOneWord(
     // 若tick >= 0, 因为正数轴上第一个wordPos是0，所以不需要+1
     if (tick < 0 && tick % tickSpacing != 0) compressed--; // round towards negative infinity
 
-    // 向左搜索(target tick <= starting tick)
+    // 向左搜索(next tick <= starting tick)
     if (lte) {
         // 获取wordPos bitPos
         (int16 wordPos, uint8 bitPos) = position(compressed);
@@ -418,7 +434,7 @@ function nextInitializedTickWithinOneWord(
             ? (compressed - int24(bitPos - BitMath.mostSignificantBit(masked))) * tickSpacing
             : (compressed - int24(bitPos)) * tickSpacing;
     } else {
-        // 向右搜索(target tick > starting tick)
+        // 向右搜索(next tick > starting tick)
         // start from the word of the next tick, since the current tick state doesn't matter
         (int16 wordPos, uint8 bitPos) = position(compressed + 1);
         // all the 1s at or to the left of the bitPos
