@@ -43,7 +43,7 @@
 
 **推荐阅读：**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
-- 推荐了解奥地利学派，(Hayek)[https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ]
+- 推荐了解奥地利学派，[Hayek](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
