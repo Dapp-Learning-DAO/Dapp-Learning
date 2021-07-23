@@ -134,15 +134,15 @@ yarn deploy
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
 ## subgraph 
-subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数据访问模式。开发者可以选择直接使用别人已经部署[17]的 subgraph，或者自己定义并部署 subgraph。
-1 GraphQL Schema
-GraphQL Schema 定义了你想保存和查询的数据类型/实体。也可定义如关系或全文搜索的配置项。
-2 subgraph 清单（ yaml 配置）
-manifest定义了 subgraph 索引的智能合约、合约的ABI、关注这些合约的事件，以及如何将事件数据映射到 Graph 节点存储并允许查询。
-3 AssemblyScript 映射
-AssemblyScript 映射允许您使用 schema 中定义的实体类型保存要索引的数据。Graph CLI还使用 schema 与智能合约的 ABI 的组合生成 AssemblyScript 类型。
+subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数据访问模式。开发者可以选择直接使用别人已经部署[17]的 subgraph，或者自己定义并部署 subgraph。  
 
-通过@derivedFrom建立关系
+1. GraphQL Schema  
+GraphQL Schema 定义了你想保存和查询的数据类型/实体。也可定义如关系或全文搜索的配置项。
+2. subgraph 清单（ yaml 配置）  
+manifest定义了 subgraph 索引的智能合约、合约的ABI、关注这些合约的事件，以及如何将事件数据映射到 Graph 节点存储并允许查询。
+3. AssemblyScript 映射  
+AssemblyScript 映射允许您使用 schema 中定义的实体类型保存要索引的数据。Graph CLI还使用 schema 与智能合约的 ABI 的组合生成 AssemblyScript 类型。  
+4. 通过@derivedFrom建立关系  
 通过@derivedFrom字段在实体上定义反向查询，这样就在实体上创建了一个虚拟字段，使它可以被查询，但不能通过映射 API 手动设置。实际上，这是从另一个实体上定义的关系中衍生出来的。这样的关系，对存储关系的两者意义不大，如果只存储一方而派生另一方，则索引和查询性能都会更好。
 
 ## 参考链接  
