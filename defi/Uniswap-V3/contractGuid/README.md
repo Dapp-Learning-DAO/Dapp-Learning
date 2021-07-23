@@ -30,13 +30,39 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ## 流程梳理
 
+### Factory
+
+#### CreatePool
+
+![创建交易对流程图](./img/create-pool.png)
+
+用户首先调用 `NonfungiblePositionManager` 合约的 `createAndInitializePoolIfNecessary` 方法创建交易对，传入的参数为交易对的 token0, token1, fee 和初始价格 sqrtPrice.
+
+- 调用`Factory.getPool(tokenA, tokenB, fee)`获取 Pool 地址
+
+- 如果 Pool 地址为 0，说明 Pool 还未创建
+
+  - 调用`Factory.createPool(tokenA, tokenB, fee)`，创建 Pool
+    - Factory调用 `Pool.deploy` 部署Pool合约
+  - 调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
+
+- 如果 Pool 地址不为 0 ，说明 Pool 已存在
+
+  - 检查 Pool 的价格，若为 0,调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
+
+相关代码
+
+- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
+- [UniswapV3Factory.getPool](./UniswapV3Factory.md#getPool)
+- [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
+- [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
+- [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
+
 ### NonfungiblePositionManager
 
 #### mint
 
 在合约内，v3 会保存所有用户的流动性，代码内称作 Position
-
-![添加流动性对流程图](./img/add-liquidity.png)
 
 用户调用 `Manager.mint`创建Position并添加流动性：
 
@@ -57,6 +83,8 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
 
 #### increaseLiquidity
+
+![添加流动性对流程图](./img/add-liquidity.png)
 
 用户调用 `Manager.increaseLiquidity` 向已有Position添加流动性：
 
@@ -128,29 +156,3 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 #### exactOutput
 
 ### UniswapV3Pool
-
-#### CreatePool
-
-![创建交易对流程图](./img/create-pool.png)
-
-用户首先调用 `NonfungiblePositionManager` 合约的 `createAndInitializePoolIfNecessary` 方法创建交易对，传入的参数为交易对的 token0, token1, fee 和初始价格 sqrtPrice.
-
-- 调用`Factory.getPool(tokenA, tokenB, fee)`获取 Pool 地址
-
-- 如果 Pool 地址为 0，说明 Pool 还未创建
-
-  - 调用`Factory.createPool(tokenA, tokenB, fee)`，创建 Pool
-    - Factory调用 `Pool.deploy` 部署Pool合约
-  - 调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
-
-- 如果 Pool 地址不为 0 ，说明 Pool 已存在
-
-  - 检查 Pool 的价格，若为 0,调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
-
-相关代码
-
-- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
-- [UniswapV3Factory.getPool](./UniswapV3Factory.md#getPool)
-- [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
-- [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
-- [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
