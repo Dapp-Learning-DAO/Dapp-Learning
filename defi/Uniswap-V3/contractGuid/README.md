@@ -30,7 +30,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ## 流程梳理
 
-### Factory
+### NonfungiblePositionManager
 
 #### CreatePool
 
@@ -57,8 +57,6 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
 - [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
 - [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
-
-### NonfungiblePositionManager
 
 #### mint
 
