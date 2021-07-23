@@ -18,7 +18,7 @@ npm install -g ganache-cli
 
 ## 安装 web3  
 ```
-pip3 web3  
+pip3 install web3  
 ```
 
 ## 操作步骤
