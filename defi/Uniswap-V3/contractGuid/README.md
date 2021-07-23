@@ -60,7 +60,9 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 #### mint
 
-在合约内，v3 会保存所有用户的流动性，代码内称作 Position
+铸造代表流动性头寸的ERC721代笔返回给用户
+
+![添加流动性对流程图](./img/add-liquidity.png)
 
 用户调用 `Manager.mint`创建Position并添加流动性：
 
@@ -81,8 +83,6 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [Manager.addLiquidity](./NonfungiblePositionManager.md#addLiquidity)
 
 #### increaseLiquidity
-
-![添加流动性对流程图](./img/add-liquidity.png)
 
 用户调用 `Manager.increaseLiquidity` 向已有Position添加流动性：
 
@@ -151,6 +151,36 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 #### exactInput
 
+指定交易对路径，将 tokenIn 交换为 tokenOut， 返回实际的交易数量。
+
+![exactInput](./img/swap-exact-input.png)
+
+**路径选择**
+
+在进行两个代币交易时，是首先需要在链下计算出交易的路径，例如使用 `ETH` -> `DAI` ：
+
+- 可以直接通过 `ETH`/`DAI` 的交易池完成
+- 也可以通过 `ETH` -> `USDC` -> `DAI` 路径，即经过 `ETH/USDC`, `USDC/DAI` 两个交易池完成交易
+- token地址没有排序限制
+
+**执行过程**
+
+用户调用 `Router.exactInput`：
+
+- 遍历传入的交易路径 `path`, 相邻两个token地址组成交易对，依次执行交易
+- 每次遍历，调用 `Router.exactInputInternal`
+  - 从交易链路 `path` 中解析出 `tokenIn`, `tokenOut`, `fee`, 即 Pool 的关键信息，以此可计算出Pool的地址
+  - 获取 `zeroForOne` ，即 `tokenIn < tokenOut` 的布尔值
+    - 在Pool中价格始终以 `y/x` 表示，这里 `address(x) < address(y)`
+    - `zeroForOne` 代表的是交易的方向，即`tokenIn`是作为x还是y，`tokenOut`反之
+  - 调用 `Pool.swap` 执行实际的交易方法
+    - 传入的价格为0代表以市价执行交易
+
+
+相关代码
+
+- [Router.exactInput](./SwapRouter.md#exactInput)
+- [Router.exactInputInternal](./SwapRouter.md#exactInputInternal)
+
 #### exactOutput
 
-### UniswapV3Pool

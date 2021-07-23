@@ -31,7 +31,7 @@ struct SwapCallbackData {
 
 ### exactInput
 
-指定交易对路径，将 x token 交换为 y token。
+指定交易对路径，将 tokenIn 交换为 tokenOut， 返回实际的交易数量。
 
 - 传入 x token 数和预期得到的最小 y token 数
 - path中传入多个token地址，可设置中间代币 （Base token），即 tokenX -> Basetoken -> tokenY
@@ -121,6 +121,7 @@ function exactInputInternal(
     // 调用Pool.swap 返回实际交易的token数量
     // amount0 输入的实际数量
     // amount1 输出的实际数量
+    // 执行完成后 Pool 会调用 uniswapV3SwapCallback 回调函数
     (int256 amount0, int256 amount1) =
         getPool(tokenIn, tokenOut, fee).swap(
             recipient,
@@ -139,7 +140,48 @@ function exactInputInternal(
 
 相关代码
 
-- [swap](./UniswapV3Pool.md#swap)
+- [Pool.swap](./UniswapV3Pool.md#swap)
+- [Router.uniswapV3SwapCallback](#uniswapV3SwapCallback)
+
+### uniswapV3SwapCallback
+
+swap回调函数，只执行path交易链路中的第一个token转账
+
+- 执行 `exactInput`时，将直接把token从Manager合约内转到Pool中
+
+`Pool.swap` 执行完成后，会调用本回调函数
+
+```solidity
+/// @inheritdoc IUniswapV3SwapCallback
+function uniswapV3SwapCallback(
+    int256 amount0Delta,
+    int256 amount1Delta,
+    bytes calldata _data
+) external override {
+    require(amount0Delta > 0 || amount1Delta > 0); // swaps entirely within 0-liquidity regions are not supported
+    SwapCallbackData memory data = abi.decode(_data, (SwapCallbackData));
+    (address tokenIn, address tokenOut, uint24 fee) = data.path.decodeFirstPool();
+    CallbackValidation.verifyCallback(factory, tokenIn, tokenOut, fee);
+
+    (bool isExactInput, uint256 amountToPay) =
+        amount0Delta > 0
+            ? (tokenIn < tokenOut, uint256(amount0Delta))
+            : (tokenOut < tokenIn, uint256(amount1Delta));
+    if (isExactInput) {
+        pay(tokenIn, data.payer, msg.sender, amountToPay);
+    } else {
+        // either initiate the next swap or pay
+        if (data.path.hasMultiplePools()) {
+            data.path = data.path.skipToken();
+            exactOutputInternal(amountToPay, msg.sender, 0, data);
+        } else {
+            amountInCached = amountToPay;
+            tokenIn = tokenOut; // swap in/out because exact output swaps are reversed
+            pay(tokenIn, data.payer, msg.sender, amountToPay);
+        }
+    }
+}
+```
 
 ### hasMultiplePools
 
