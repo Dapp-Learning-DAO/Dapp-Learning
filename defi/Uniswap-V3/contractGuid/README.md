@@ -174,7 +174,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
     - 在Pool中价格始终以 `y/x` 表示，这里 `address(x) < address(y)`
     - `zeroForOne` 代表的是交易的方向，即`tokenIn`是作为x还是y，`tokenOut`反之
   - 调用 `Pool.swap` 执行实际的交易方法
-    - 传入的价格为0代表以市价执行交易
+    - 传入的priceLimit为0代表以市价执行交易
 
 
 相关代码
