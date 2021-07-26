@@ -49,7 +49,7 @@
 
 **推荐阅读：**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
-
+- 推荐了解奥地利学派，[Hayek](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -87,7 +87,7 @@
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
 32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
 33. [pooltogether](https://pooltogether.com)
-34. [vyper](https://vyper.readthedocs.io/en/stable/)
+34. [subgraph](https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad)
 35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
 36. nft Filecoin
 - <https://www.bilibili.com/video/BV1j5411w7MH>
@@ -107,7 +107,7 @@
 43. [front running](https://github.com/Supercycled/cake_sniper)  
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
-
+46. [vyper](https://vyper.readthedocs.io/en/stable/)
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 进阶任务
@@ -166,6 +166,12 @@
 4. 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
 5. 参与三个task的完成可以给予PR审核者的权限
 
+## 小组学习
+  进阶任务如defi，dao, nft项目研究，采用小组学习模式，有以下要求。
+ 1. 提交3次PR以上的开发者方可参与小组学习；
+ 2. 小组组员需分工明确，每周周例会进行成果分享；
+ 3. 原则上小组的子任务研究不超过3个人。
+ 
 ## 常见问题
   安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
   
