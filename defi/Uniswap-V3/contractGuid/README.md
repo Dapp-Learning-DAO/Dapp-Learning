@@ -32,9 +32,35 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ### NonfungiblePositionManager
 
+#### CreatePool
+
+![创建交易对流程图](./img/create-pool.png)
+
+用户首先调用 `NonfungiblePositionManager` 合约的 `createAndInitializePoolIfNecessary` 方法创建交易对，传入的参数为交易对的 token0, token1, fee 和初始价格 sqrtPrice.
+
+- 调用`Factory.getPool(tokenA, tokenB, fee)`获取 Pool 地址
+
+- 如果 Pool 地址为 0，说明 Pool 还未创建
+
+  - 调用`Factory.createPool(tokenA, tokenB, fee)`，创建 Pool
+    - Factory调用 `Pool.deploy` 部署Pool合约
+  - 调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
+
+- 如果 Pool 地址不为 0 ，说明 Pool 已存在
+
+  - 检查 Pool 的价格，若为 0,调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
+
+相关代码
+
+- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
+- [UniswapV3Factory.getPool](./UniswapV3Factory.md#getPool)
+- [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
+- [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
+- [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
+
 #### mint
 
-在合约内，v3 会保存所有用户的流动性，代码内称作 Position
+铸造代表流动性头寸的ERC721代笔返回给用户
 
 ![添加流动性对流程图](./img/add-liquidity.png)
 
@@ -91,37 +117,70 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [struct DecreaseLiquidityParams](./NonfungiblePositionManager.md#DecreaseLiquidityParams)
 - [Manager.decreaseLiquidity](./NonfungiblePositionManager.md#decreaseLiquidity)
 
+#### collect
+
+用户调用 `Manager.collect` 回收Pool中累计的手续费收益：
+
+- 检查入参
+  - 回收手续费最大数量需要 > 0
+  - 当入参recipient为0，设为本Manager合约地址
+- 如果position流动性 > 0，触发Pool更新手续费相关数据的快照
+  - 调用`Pool.burn`触发更新手续费相关的数据，这里数量传0，并不会真的移除流动性
+  - Pool的手续费 - Manager中记录的手续费 = 手续费增量（即本次可取的手续费数量）
+  - 期望取回的手续费数量 = max(手续费增量，入参的手续费最大值)
+- 调用 `Pool.collect` ，Pool将手续费转给接收者，返回实际取回的手续费数量
+- 更新Manager中手续费数据与Pool同步
+- 广播 `Collect(params.tokenId, recipient, amount0Collect, amount1Collect)`
+
+相关代码
+
+- [struct CollectParams](./NonfungiblePositionManager.md#CollectParams)
+- [Manager.collect](./NonfungiblePositionManager.md#collect)
+- [Pool.collect](./UniswapV3Pool.md#collect)
+
+#### burn
+
+用户调用 `Manager.burn`，移除position，并销毁ERC721token
+
+相关代码
+
+- [Manager.burn](./NonfungiblePositionManager.md#burn)
+
 
 ### SwapRouter
 
 #### exactInput
 
-#### exactOutput
+指定交易对路径，将 tokenIn 交换为 tokenOut， 返回实际的交易数量。
 
-### UniswapV3Pool
+![exactInput](./img/swap-exact-input.png)
 
-#### CreatePool
+**路径选择**
 
-![创建交易对流程图](./img/create-pool.png)
+在进行两个代币交易时，是首先需要在链下计算出交易的路径，例如使用 `ETH` -> `DAI` ：
 
-用户首先调用 `NonfungiblePositionManager` 合约的 `createAndInitializePoolIfNecessary` 方法创建交易对，传入的参数为交易对的 token0, token1, fee 和初始价格 sqrtPrice.
+- 可以直接通过 `ETH`/`DAI` 的交易池完成
+- 也可以通过 `ETH` -> `USDC` -> `DAI` 路径，即经过 `ETH/USDC`, `USDC/DAI` 两个交易池完成交易
+- token地址没有排序限制
 
-- 调用`Factory.getPool(tokenA, tokenB, fee)`获取 Pool 地址
+**执行过程**
 
-- 如果 Pool 地址为 0，说明 Pool 还未创建
+用户调用 `Router.exactInput`：
 
-  - 调用`Factory.createPool(tokenA, tokenB, fee)`，创建 Pool
-    - Factory调用 `Pool.deploy` 部署Pool合约
-  - 调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
+- 遍历传入的交易路径 `path`, 相邻两个token地址组成交易对，依次执行交易
+- 每次遍历，调用 `Router.exactInputInternal`
+  - 从交易链路 `path` 中解析出 `tokenIn`, `tokenOut`, `fee`, 即 Pool 的关键信息，以此可计算出Pool的地址
+  - 获取 `zeroForOne` ，即 `tokenIn < tokenOut` 的布尔值
+    - 在Pool中价格始终以 `y/x` 表示，这里 `address(x) < address(y)`
+    - `zeroForOne` 代表的是交易的方向，即`tokenIn`是作为x还是y，`tokenOut`反之
+  - 调用 `Pool.swap` 执行实际的交易方法
+    - 传入的priceLimit为0代表以市价执行交易
 
-- 如果 Pool 地址不为 0 ，说明 Pool 已存在
-
-  - 检查 Pool 的价格，若为 0,调用`Pool.initialize(sqrtPriceX96)`对 Pool 初始化
 
 相关代码
 
-- [createAndInitializePoolIfNecessary](./NonfungiblePositionManager.md#createAndInitializePoolIfNecessary)
-- [UniswapV3Factory.getPool](./UniswapV3Factory.md#getPool)
-- [UniswapV3Factory.createPool](./UniswapV3Factory.md#createPool)
-- [UniswapV3Factory.deploy](./UniswapV3Factory.md#deploy)
-- [UniswapV3Pool.initialize](./UniswapV3Pool.md#initialize)
+- [Router.exactInput](./SwapRouter.md#exactInput)
+- [Router.exactInputInternal](./SwapRouter.md#exactInputInternal)
+
+#### exactOutput
+
