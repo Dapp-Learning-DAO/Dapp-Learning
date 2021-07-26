@@ -6,7 +6,7 @@ UniswapV3将连续的价格范围，分割成有限个离散的价格点。每�
 
 - 为了计算方便，实际上储存的是√P。而使用时，通常使用tick的序号 `i`。
 
-- tick的序号是固定的整数集合，即 区间 [-887272, 887272] 的整数。原因见下方 [tickIndex](#tickIndex)
+- tick的序号是固定的整数集合，即 区间 [-887272, 887272] 的整数。原因见下方 [TickMath](#TickMath)
 
 ## Tick(library)
 
@@ -14,7 +14,9 @@ tick的数据结构和相关计算方法
 
 ### state
 
-### Info(struct)
+### struct
+
+#### Info
 
 ```solidity
 // info stored for each initialized individual tick
@@ -55,7 +57,9 @@ struct Info {
 }
 ```
 
-### tickSpacingToMaxLiquidityPerTick
+### functions
+
+#### tickSpacingToMaxLiquidityPerTick
 
 根据tickSpacing计算每个tick上能承载的最大流动性。
 
@@ -95,7 +99,7 @@ function tickSpacingToMaxLiquidityPerTick(int24 tickSpacing) internal pure retur
 - [TickMath.MAX_TICK](#MAX_TICK)
 - [tickSpacing](./UniswapV3Pool.md#tickSpacing)
 
-### getFeeGrowthInside
+#### getFeeGrowthInside
 
 ```solidity
 /// @notice Retrieves fee growth data
@@ -147,7 +151,7 @@ function getFeeGrowthInside(
 }
 ```
 
-### update
+#### update
 
 更新tick的状态，返回激活状态是否发生改变
 
@@ -246,7 +250,7 @@ function update(
 
 - [Uniswap v3 详解（四）：交易手续费](https://liaoph.com/uniswap-v3-4/)
 
-### clear
+#### clear
 
 清除tick的数据
 
@@ -259,7 +263,7 @@ function clear(mapping(int24 => Tick.Info) storage self, int24 tick) internal {
 }
 ```
 
-### cross
+#### cross
 
 当价格穿过tick时，需要对tick状态做出改变
 
@@ -295,17 +299,280 @@ function cross(
 
 - [Uniswap v3 详解（二）：创建交易对/提供流动性#tick-管理](https://liaoph.com/uniswap-v3-2/#tick-%E7%AE%A1%E7%90%86)
 
-## TickBitmap(library)
+## TickBitmap
 
-## TickMath(library)
+管理tick初始化状态的位图，在Pool内初始化
+
+```solidity
+using TickBitmap for mapping(int16 => uint256);
+...
+/// @inheritdoc IUniswapV3PoolState
+mapping(int16 => uint256) public override tickBitmap;
+```
+
+- 键(wordPos)为`int16`(有符号)，值(word)为`uint256`(无符号)，即 每256位为一个word
+- 使用二进制0和1记录初始化状态，0 未初始化 1 已初始化，参见flipTick
+
+### functions
+
+#### position
+
+传入tick，获取其在bitmap上，位于第几个word(wordPos)的第几位(bitPos)
+
+**注意：** 在同一个`word`内，`bitPos`越大，tick(index) 反而越小。
+
+- 假设 `tick = 3`, 此时 `bitPos = 3 % 256 = 3`
+- 而记录tick状态是利用掩码和异或运算(参见[flipTick](#flipTick)函数)
+  - `mask = 1 << 3 = 8` 8 的二进制是 1000
+  - `self[wordPos] ^= mask` 可以看出这里是对 uint256 的倒数第4位进行操作
+- 即 在第`wordPos`个word内，第 `(256 - bitPos)` 位数值代表了tick的状态
+
+```solidity
+/// @notice Computes the position in the mapping where the initialized bit for a tick lives
+/// @param tick The tick for which to compute the position
+/// @return wordPos The key in the mapping containing the word in which the bit is stored
+/// @return bitPos The bit position in the word where the flag is stored
+function position(int24 tick) private pure returns (int16 wordPos, uint8 bitPos) {
+    wordPos = int16(tick >> 8);
+    bitPos = uint8(tick % 256);
+}
+```
+
+#### flipTick
+
+翻转tick初始化状态。
+
+```solidity
+/// @notice Flips the initialized state for a given tick from false to true, or vice versa
+/// 翻转tick的初始化状态， 未初始化 -> 初始化，反之亦然
+/// @param self The mapping in which to flip the tick
+/// self代表bitmap
+/// @param tick The tick to flip
+/// @param tickSpacing The spacing between usable ticks
+/// tickSpacing tick的间距
+function flipTick(
+    mapping(int16 => uint256) storage self,
+    int24 tick,
+    int24 tickSpacing
+) internal {
+    // 检查tick是否已经设置间隔
+    // 如果余数不为零，说明tick未按照间隔排列
+    require(tick % tickSpacing == 0); // ensure that the tick is spaced
+    // 获取tick在哪个word的哪一位上
+    (int16 wordPos, uint8 bitPos) = position(tick / tickSpacing);
+    // 利用掩码和异或运算做状态的翻转
+    uint256 mask = 1 << bitPos;
+    self[wordPos] ^= mask;
+}
+```
+
+相关代码
+
+- [tickSpacing](./UniswapV3Pool.md#tickSpacing)
+- [tick.position](#position)
+
+#### nextInitializedTickWithinOneWord
+
+传入`starting tick`(可能未初始化), 在其所在的word内寻找最近离`starting tick`最近的已初始化的tick，若没有已初始化的tick，返回word的边界。
+
+入参解释
+
+- `int24 tick` starting tick 搜索的起始tick
+- `int24 tickSpacing` 参见 [tickSpacing](./UniswapV3Pool.md#tickSpacing)
+- `lte` next tick (返回值) <= starting tick 的bool值
+  - true 为寻找价格较小的tick(包括 starting tick 本身)
+  - false 为寻找较大价格的tick
+
+函数返回值 (`next`, `initialized`)
+
+- 当word内已有初始化tick，`next` 返回其 tickIndex
+- 当word内无初始化tick，`next` 返回word的边界
+  - `lte = true` 时，`next` 返回word **右** 边界对应的 tickIndex
+  - `lte = false` 时，`next` 返回word **左** 边界对应的 tickIndex
+- `initialized` 返回`next`的初始化状态(有可能为false)
+
+```solidity
+/// @notice Returns the next initialized tick contained in the same word (or adjacent word) as the tick that is either
+/// 在同一个word内返回离传入tick最近的已初始化的tick
+/// to the left (less than or equal to) or right (greater than) of the given tick
+/// @param self The mapping in which to compute the next initialized tick
+/// @param tick The starting tick
+/// @param tickSpacing The spacing between usable ticks
+/// @param lte Whether to search for the next initialized tick to the left (less than or equal to the starting tick)
+/// @return next The next initialized or uninitialized tick up to 256 ticks away from the current tick
+/// @return initialized Whether the next tick is initialized, as the function only searches within up to 256 ticks
+function nextInitializedTickWithinOneWord(
+    mapping(int16 => uint256) storage self,
+    int24 tick,
+    int24 tickSpacing,
+    bool lte
+) internal view returns (int24 next, bool initialized) {
+    // 计算传入position函数的入参
+    int24 compressed = tick / tickSpacing;
+    // 若tick < 0 , 需要 -1
+    // 若tick >= 0, 因为正数轴上第一个wordPos是0，所以不需要+1
+    if (tick < 0 && tick % tickSpacing != 0) compressed--; // round towards negative infinity
+
+    // 搜索价格较小的next(next tick <= starting tick)
+    if (lte) {
+        // 获取wordPos bitPos
+        (int16 wordPos, uint8 bitPos) = position(compressed);
+        // all the 1s at or to the right of the current bitPos
+        // mask 在二进制下是 1...1 (bitPos+1 个 1)
+        uint256 mask = (1 << bitPos) - 1 + (1 << bitPos);
+        uint256 masked = self[wordPos] & mask;
+
+        // if there are no initialized ticks to the right of or at the current tick, return rightmost in the word
+        // 在word内，小于等于 starting tick 的价格是否有已初始化的tick
+        initialized = masked != 0;
+
+        // overflow/underflow is possible, but prevented externally by limiting both tickSpacing and tick
+        // 上溢或下溢都是有可能的，但这里限制了 tickSpacing 和 tick 防止这种情况发生
+        // 当有初始化tick时，查找小于 starting tick 价格最近的已初始化tick
+        // 即 查找word内，starting tick右侧距离最近值为1的位
+        // 没有初始化时，直接返回word的右边界（tickindex最小）
+        next = initialized
+            ? (compressed - int24(bitPos - BitMath.mostSignificantBit(masked))) * tickSpacing
+            : (compressed - int24(bitPos)) * tickSpacing;
+    } else {
+        // 搜索价格较大的next(next tick > starting tick) 不包括 starting tick
+        // start from the word of the next tick, since the current tick state doesn't matter
+        // 直接从 compressed + 1 开始搜索，因为这里搜索的目标范围不包括 starting tick 本身
+        (int16 wordPos, uint8 bitPos) = position(compressed + 1);
+        // all the 1s at or to the left of the bitPos
+        // 获得掩码 111...110...0 形式，共256位，bitPos 个0，前面全是1
+        uint256 mask = ~((1 << bitPos) - 1);
+        uint256 masked = self[wordPos] & mask;
+
+        // if there are no initialized ticks to the left of the current tick, return leftmost in the word
+        // 在word内，大于 starting tick 的价格是否有已初始化的tick
+        initialized = masked != 0;
+
+        // overflow/underflow is possible, but prevented externally by limiting both tickSpacing and tick
+
+        // 当有初始化tick时，查找大于 starting tick 价格最近的已初始化tick
+        // 即 查找word内，starting tick左侧距离最近值为1的位
+        // 没有初始化时，直接返回word的右边界（tickindex最小）
+        next = initialized
+            ? (compressed + 1 + int24(BitMath.leastSignificantBit(masked) - bitPos)) * tickSpacing
+            : (compressed + 1 + int24(type(uint8).max - bitPos)) * tickSpacing;
+    }
+}
+```
+
+- [TickBitMap.position](#position)
+- [TickBitMap.mostSignificantBit](#mostSignificantBit)
+- [TickBitMap.leastSignificantBit](#leastSignificantBit)
+
+#### mostSignificantBit
+
+传入x，x二进制下从前往后查第一个值为1的是倒数第几位
+
+```solidity
+/// @notice Returns the index of the most significant bit of the number,
+///     where the least significant bit is at index 0 and the most significant bit is at index 255
+/// @dev The function satisfies the property:
+///     x >= 2**mostSignificantBit(x) and x < 2**(mostSignificantBit(x)+1)
+/// @param x the value for which to compute the most significant bit, must be greater than 0
+/// @return r the index of the most significant bit
+function mostSignificantBit(uint256 x) internal pure returns (uint8 r) {
+    require(x > 0);
+
+    if (x >= 0x100000000000000000000000000000000) { // 2^128
+        x >>= 128;
+        r += 128;
+    }
+    if (x >= 0x10000000000000000) { // 2^64
+        x >>= 64;
+        r += 64;
+    }
+    if (x >= 0x100000000) { // 2^32
+        x >>= 32;
+        r += 32;
+    }
+    if (x >= 0x10000) { // 2^16
+        x >>= 16;
+        r += 16;
+    }
+    if (x >= 0x100) { // 2^8
+        x >>= 8;
+        r += 8;
+    }
+    if (x >= 0x10) { // 2^4
+        x >>= 4;
+        r += 4;
+    }
+    if (x >= 0x4) { // 2^2
+        x >>= 2;
+        r += 2;
+    }
+    if (x >= 0x2) r += 1;
+}
+```
+
+#### leastSignificantBit
+
+传入x，x二进制下从后往前查第一个值为1的是倒数第几位
+
+```solidity
+/// @notice Returns the index of the least significant bit of the number,
+///     where the least significant bit is at index 0 and the most significant bit is at index 255
+/// @dev The function satisfies the property:
+///     (x & 2**leastSignificantBit(x)) != 0 and (x & (2**(leastSignificantBit(x)) - 1)) == 0)
+/// @param x the value for which to compute the least significant bit, must be greater than 0
+/// @return r the index of the least significant bit
+function leastSignificantBit(uint256 x) internal pure returns (uint8 r) {
+    require(x > 0);
+
+    r = 255;
+    if (x & type(uint128).max > 0) {
+        r -= 128;
+    } else {
+        x >>= 128;
+    }
+    if (x & type(uint64).max > 0) {
+        r -= 64;
+    } else {
+        x >>= 64;
+    }
+    if (x & type(uint32).max > 0) {
+        r -= 32;
+    } else {
+        x >>= 32;
+    }
+    if (x & type(uint16).max > 0) {
+        r -= 16;
+    } else {
+        x >>= 16;
+    }
+    if (x & type(uint8).max > 0) {
+        r -= 8;
+    } else {
+        x >>= 8;
+    }
+    if (x & 0xf > 0) {
+        r -= 4;
+    } else {
+        x >>= 4;
+    }
+    if (x & 0x3 > 0) {
+        r -= 2;
+    } else {
+        x >>= 2;
+    }
+    if (x & 0x1 > 0) r -= 1;
+}
+```
+
+## TickMath
 
 Tick 的数学计算方法
 
-### tickIndex
-
 tick 的序号，用`i`表示。`i = log√1.0001√P` (以√1.0001为底数，√Price的log值)
 
-### sqrtPriceX96
+### state
+
+#### sqrtPriceX96
 
 UniswapV3中的价格（√P）用`sqrtPriceX96`参数表示
 
@@ -315,7 +582,7 @@ UniswapV3中的价格（√P）用`sqrtPriceX96`参数表示
 - 由上可得tick序号`i`的取值范围 [log√1.0001√2^-64, log√1.0001√2^64]。因此tick的序号是在区间 [-887272, 887272] 的整数集合
 - -887272, 887272 即为 `MIN_TICK` 和 `MAX_TICK`
 
-### MIN_TICK
+#### MIN_TICK
 
 tick序号在负区间的最大个数
 
@@ -324,7 +591,7 @@ tick序号在负区间的最大个数
 int24 internal constant MIN_TICK = -887272;
 ```
 
-### MAX_TICK
+#### MAX_TICK
 
 tick序号在正区间的最大个数
 
@@ -333,7 +600,7 @@ tick序号在正区间的最大个数
 int24 internal constant MAX_TICK = -MIN_TICK;
 ```
 
-### MIN_SQRT_RATIO
+#### MIN_SQRT_RATIO
 
 `getSqrtRatioAtTick` 函数能返回的最小价格
 
@@ -342,7 +609,7 @@ int24 internal constant MAX_TICK = -MIN_TICK;
 uint160 internal constant MIN_SQRT_RATIO = 4295128739;
 ```
 
-### MAX_SQRT_RATIO
+#### MAX_SQRT_RATIO
 
 `getSqrtRatioAtTick` 函数能返回的最大价格
 
@@ -351,7 +618,9 @@ uint160 internal constant MIN_SQRT_RATIO = 4295128739;
 uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
 ```
 
-### getSqrtRatioAtTick
+### functions
+
+#### getSqrtRatioAtTick
 
 由tickIndex计算出 √P
 
@@ -415,6 +684,6 @@ function getSqrtRatioAtTick(int24 tick) internal pure returns (uint160 sqrtPrice
 
 - 代码解析原文 [Uniswap v3 详解（二）：创建交易对/提供流动性 #TickIndex -> √P](https://liaoph.com/uniswap-v3-2/#tick-index---sqrt-p)
 
-### getTickAtSqrtRatio
+#### getTickAtSqrtRatio
 
 由tickIndex计算出 √P

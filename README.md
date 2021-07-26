@@ -41,6 +41,12 @@
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
 
+**测试网 testnet**
+
+- Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
+- Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
+- Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
+
 **推荐阅读：**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
 - 推荐了解奥地利学派，[Hayek](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
