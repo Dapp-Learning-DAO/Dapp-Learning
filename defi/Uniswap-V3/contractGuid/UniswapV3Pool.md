@@ -594,20 +594,25 @@ function collect(
 
 ### swap
 
+交易函数
+
 ```solidity
 /// @inheritdoc IUniswapV3PoolActions
 function swap(
-    address recipient,
-    bool zeroForOne,
-    int256 amountSpecified,
-    uint160 sqrtPriceLimitX96,
-    bytes calldata data
+    address recipient,          // 交易输出token的接收者
+    bool zeroForOne,            // token x 地址是否小于 token y
+    int256 amountSpecified,     // 输入的token数量
+    uint160 sqrtPriceLimitX96,  // 交易的价格限制（超出即停止交易）
+    bytes calldata data         // 回调函数的入参数据
 ) external override noDelegateCall returns (int256 amount0, int256 amount1) {
     require(amountSpecified != 0, 'AS');
 
+    // 优化gas消耗
     Slot0 memory slot0Start = slot0;
 
+    // 防止重入攻击
     require(slot0Start.unlocked, 'LOK');
+    // zeroForOne 是 token x 是否小于 token y 的布尔值
     require(
         zeroForOne
             ? sqrtPriceLimitX96 < slot0Start.sqrtPriceX96 && sqrtPriceLimitX96 > TickMath.MIN_SQRT_RATIO
