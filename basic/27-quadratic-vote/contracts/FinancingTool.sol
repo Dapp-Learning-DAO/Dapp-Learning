@@ -1,4 +1,4 @@
-pragma solidity ^0.6.6;
+pragma solidity ^0.8.0;
 
 interface IERC20 {
 
@@ -113,8 +113,8 @@ contract FinancingTool {
     constructor() public {
         owner = msg.sender;
         tokenAddr = emptyAddr;
-        startTime = now;
-        endTime = now + 10 days;
+        startTime = block.timestamp;
+        endTime = block.timestamp + 10 days;
     }
 
 
@@ -125,11 +125,11 @@ contract FinancingTool {
 
 
     modifier checkStart(){
-        require(now >= startTime, "not start");
+        require(block.timestamp >= startTime, "not start");
         _;
     }
     modifier checkEnd(){
-        require(now >= endTime, "not end");
+        require(block.timestamp >= endTime, "not end");
         _;
     }
 
@@ -225,7 +225,7 @@ contract FinancingTool {
     }
 
     function withdraw() public onlyOwner {
-        msg.sender.transfer(address(this).balance);
+        payable(msg.sender).transfer(address(this).balance);
     }
 
     function withdrawToken(address _tokenAddr, uint256 _amount) public onlyOwner {
@@ -320,9 +320,9 @@ contract FinancingTool {
 
     }
 
-    function _withdrawToken(address erc, address payable _to, uint256 _value) internal {
+    function _withdrawToken(address erc, address _to, uint256 _value) internal {
         if (erc == emptyAddr) {
-            _to.transfer(_value);
+            payable(_to).transfer(_value);
         } else {
             safeTransfer(erc, _to, _value);
         }
