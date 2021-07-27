@@ -84,16 +84,16 @@ describe('VotingTool', function () {
       let [proposalName, voteCount, donationAmount,proposalStauts] = await voteTool.getProposal(0)
 
       // Compare the proposalName
-      expect(parseInt(proposalName)).to.equal(parseInt(proposalHashId));
+      expect(parseInt(proposalName)).to.equal(parseInt(proposalHashId))
 
       // Compare the voteCount
-      expect(voteCount).to.equal(0);
+      expect(voteCount).to.equal(0)
 
       // Compare the donationAmount
-      expect(donationAmount).to.equal(0);
+      expect(donationAmount).to.equal(0)
 
       // Compare the proposalStauts
-      expect(proposalStauts).to.equal(1);
+      expect(proposalStauts).to.equal(1)
 
     })
 
@@ -128,7 +128,7 @@ describe('VotingTool', function () {
       let proposalLength = await voteTool.getProposalLength()
 
       // The proposal length should be 2
-      expect(proposalLength).to.equal(2);
+      expect(proposalLength).to.equal(2)
 
     })
 
@@ -150,7 +150,7 @@ describe('VotingTool', function () {
       let [proposalName, voteCount, donationAmount,proposalStauts] = await voteTool.getProposal(0)
 
       // Compare the proposalStauts
-      expect(proposalStauts).to.equal(1);
+      expect(proposalStauts).to.equal(1)
 
       // Expire the proposal
       await voteTool.expireProposal(proposalHashId)
@@ -159,7 +159,7 @@ describe('VotingTool', function () {
       ;[proposalName, voteCount, donationAmount,proposalStauts] = await voteTool.getProposal(0)
 
       // Compare the proposalStauts
-      expect(proposalStauts).to.equal(2);
+      expect(proposalStauts).to.equal(2)
 
     })
   })
@@ -234,7 +234,7 @@ describe('VotingTool', function () {
       let userVoteNum = await userContract.getUserVoteNum(addr1.address,proposalHashId)
 
       // Compare user vote num
-      expect(userVoteNum).to.equal(2);
+      expect(userVoteNum).to.equal(2)
 
     })
 
