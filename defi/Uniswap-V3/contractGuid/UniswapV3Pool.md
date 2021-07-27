@@ -52,22 +52,37 @@ uint128 public immutable override maxLiquidityPerTick;
 
 ### slot0
 
+交易相关的全局状态，存于 `storage slot` 插槽中
+
+- Pool合约的全局状态 (public state) 在slot0之前定义的都是 `immutable` 类型变量，不会占用slot插槽，该结构体存储位置是 `storage slot` 的第一个插槽，因而命名为 `slot0`
+- `storage slot` 每个插槽有32个字节（256位），内部数据会被紧凑型打包，如果超出会进入第二个插槽；这里打包的数据加起来255位，可以比较合理的利用存储空间，节省访问的gas开销（不用访问多个插槽）
+
 ```solidity
 struct Slot0 {
     // the current price
+    // 当前的交易价格 √P sqrt(token1/token0) Q64.96
     uint160 sqrtPriceX96;
     // the current tick
+    // 当前价格对应的tick index
     int24 tick;
     // the most-recently updated index of the observations array
+    // 最近更新的预言机数据的索引值
     uint16 observationIndex;
     // the current maximum number of observations that are being stored
+    // oracle 当前能存储的最大数量（数据的个数）
     uint16 observationCardinality;
     // the next maximum number of observations to store, triggered in observations.write
+    // Oracle 下次将要写入数据位置的索引值
     uint16 observationCardinalityNext;
     // the current protocol fee as a percentage of the swap fee taken on withdrawal
     // represented as an integer denominator (1/x)%
+    // 当前的协议费率 uint8类型 前4位代表 x 换成 y 的费率 后4位反之
+    // 协议费率的 x 为计算费率的时候的分母
+    // 即 protocolFee = fee * (1/x)%
+    // x = 0 或 4 <= x <= 10 的整数
     uint8 feeProtocol;
     // whether the pool is locked
+    // 防止重入攻击的互斥锁
     bool unlocked;
 }
 /// @inheritdoc IUniswapV3PoolState
@@ -77,6 +92,11 @@ Slot0 public override slot0;
 相关代码
 
 - [modifier lock](#lock)
+
+补充
+
+- [Constant and Immutable State Variables](https://docs.soliditylang.org/en/latest/contracts.html#constant-and-immutable-state-variables)
+- [Layout of State Variables in Storage](https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html#layout-of-state-variables-in-storage)
 
 ### feeGrowthGlobal0X128
 
@@ -112,7 +132,7 @@ ProtocolFees public override protocolFees;
 
 ### liquidity
 
-Pool当前的流动性（公式中的L， L^2 = K)
+Pool当前的可用的流动性（当前激活的position流动性总和）（公式中的L， L^2 = K)
 
 ```solidity
 /// @inheritdoc IUniswapV3PoolState
@@ -600,19 +620,19 @@ function collect(
 /// @inheritdoc IUniswapV3PoolActions
 function swap(
     address recipient,          // 交易输出token的接收者
-    bool zeroForOne,            // token x 地址是否小于 token y
+    bool zeroForOne,            // 交易方向
     int256 amountSpecified,     // 输入的token数量
     uint160 sqrtPriceLimitX96,  // 交易的价格限制（超出即停止交易）
     bytes calldata data         // 回调函数的入参数据
 ) external override noDelegateCall returns (int256 amount0, int256 amount1) {
     require(amountSpecified != 0, 'AS');
 
-    // 优化gas消耗
+    // 优化gas消耗 将storage中的slot0缓存入memory，对memory的读写比storage便宜
     Slot0 memory slot0Start = slot0;
 
     // 防止重入攻击
     require(slot0Start.unlocked, 'LOK');
-    // zeroForOne 是 token x 是否小于 token y 的布尔值
+    // zeroForOne 代表了交易方向 true  输入x输出y, false 输入y输出x
     require(
         zeroForOne
             ? sqrtPriceLimitX96 < slot0Start.sqrtPriceX96 && sqrtPriceLimitX96 > TickMath.MIN_SQRT_RATIO
@@ -620,20 +640,33 @@ function swap(
         'SPL'
     );
 
+    // 作用和 modifier lock 一样
+    // 1. 这里的 slot0.unlocked 是修改的storage 
+    // 2. 这里不直接使用modifier lock，因为上一个断言可能不通过
+    //    如果使用modifier lock 会先执行storage的状态修改，造成不必要的gas消耗
     slot0.unlocked = false;
 
+    // 缓存交易相关的全局状态
     SwapCache memory cache =
         SwapCache({
+            // 当前Pool可用的总流动性
             liquidityStart: liquidity,
             blockTimestamp: _blockTimestamp(),
+            // 协议手续费率的存储结构是 由 4 位 反方向的费率数值 + 4 位正方向的费率数值组成
+            // 即 0000 + 0000 共8位的结构，参见 slot0.feeProtocol
             feeProtocol: zeroForOne ? (slot0Start.feeProtocol % 16) : (slot0Start.feeProtocol >> 4),
+            // t / max(1,liquidity) 的加权累计值
             secondsPerLiquidityCumulativeX128: 0,
+            // t * tickIndex 的加权累计值
             tickCumulative: 0,
+            // 是否获取过最新的Oracle数据 只获取一次
             computedLatestObservation: false
         });
 
+    // exactInput还是exactOutinput
     bool exactInput = amountSpecified > 0;
 
+    // 缓存分步执行交易的状态
     SwapState memory state =
         SwapState({
             amountSpecifiedRemaining: amountSpecified,
@@ -795,6 +828,11 @@ function swap(
     slot0.unlocked = true;
 }
 ```
+
+相关代码
+
+- [modifier lock](#lock)
+- [state slot0](#slot0)
 
 ### checkTicks
 
