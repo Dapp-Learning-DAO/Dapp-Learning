@@ -4,7 +4,7 @@ import json
 
 def main():
     w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
-    with open('./build/contracts/MyToken.json', 'r') as fr:
+    with open('./ABI/MyToken.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
     # 1. 进行合约部署，然后获取交易回执中的 contractAddress
