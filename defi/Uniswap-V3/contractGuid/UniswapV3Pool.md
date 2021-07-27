@@ -178,6 +178,10 @@ mapping(bytes32 => Position.Info) public override positions;
 Oracle.Observation[65535] public override observations;
 ```
 
+相关代码
+
+- [Observation](./Oracle.md#Observation)
+
 ## Struct
 
 ### Position.Info
@@ -195,6 +199,36 @@ struct Info {
     // the fees owed to the position owner in token0/token1
     uint128 tokensOwed0;
     uint128 tokensOwed1;
+}
+```
+
+### StepComputations
+
+用于swap函数的分步交易状态缓存
+
+```solidity
+struct StepComputations {
+    // the price at the beginning of the step
+    // 当前步的起始价格
+    uint160 sqrtPriceStartX96;
+    // the next tick to swap to from the current tick in the swap direction
+    // 目标价格的tickindex
+    int24 tickNext;
+    // whether tickNext is initialized or not
+    // tickNext 是否已初始化 （已有流动性）
+    bool initialized;
+    // sqrt(price) for the next tick (1/0)
+    // 目标价格(根号)
+    uint160 sqrtPriceNextX96;
+    // how much is being swapped in in this step
+    // 当前步交易了多少输入token
+    uint256 amountIn;
+    // how much is being swapped out
+    // 当前步交易了多少输出token
+    uint256 amountOut;
+    // how much fee is being paid in
+    // 当前步收取的手续费数量
+    uint256 feeAmount;
 }
 ```
 
@@ -669,21 +703,32 @@ function swap(
     // 缓存分步执行交易的状态
     SwapState memory state =
         SwapState({
+            // 输入的token数量
             amountSpecifiedRemaining: amountSpecified,
+            // 已计算交易的输入数量
             amountCalculated: 0,
+            // 当前交易价格
             sqrtPriceX96: slot0Start.sqrtPriceX96,
+            // 当前tickindex
             tick: slot0Start.tick,
+            // 全局费feeGrowth 手续费从输入的token中扣除
             feeGrowthGlobalX128: zeroForOne ? feeGrowthGlobal0X128 : feeGrowthGlobal1X128,
+            // 协议费率
             protocolFee: 0,
+            // 当前可用的流动性（当前处于激活状态的position总和）
             liquidity: cache.liquidityStart
         });
 
     // continue swapping as long as we haven't used the entire input/output and haven't reached the price limit
+    // 不断的分步执行交易直到输入token耗尽或达到了价格限制
     while (state.amountSpecifiedRemaining != 0 && state.sqrtPriceX96 != sqrtPriceLimitX96) {
         StepComputations memory step;
 
+        // 该步的起始价格
         step.sqrtPriceStartX96 = state.sqrtPriceX96;
 
+        // 在bitmap的当前word上寻找下一个已初始化的tick
+        // 若当前word没有已初始化的tick 返回word的边界
         (step.tickNext, step.initialized) = tickBitmap.nextInitializedTickWithinOneWord(
             state.tick,
             tickSpacing,
@@ -691,6 +736,7 @@ function swap(
         );
 
         // ensure that we do not overshoot the min/max tick, as the tick bitmap is not aware of these bounds
+        // 确认我们没有超出最大/最小的tickindex,因为已经超出了bitmap的边界
         if (step.tickNext < TickMath.MIN_TICK) {
             step.tickNext = TickMath.MIN_TICK;
         } else if (step.tickNext > TickMath.MAX_TICK) {
@@ -698,9 +744,11 @@ function swap(
         }
 
         // get the price for the next tick
+        // 通过tickNext获取下一个价格点
         step.sqrtPriceNextX96 = TickMath.getSqrtRatioAtTick(step.tickNext);
 
         // compute values to swap to the target tick, price limit, or point where input/output amount is exhausted
+        // 具体计算该步交易的函数，返回交易后的价格，消耗的输入token，和交换出的输出token
         (state.sqrtPriceX96, step.amountIn, step.amountOut, step.feeAmount) = SwapMath.computeSwapStep(
             state.sqrtPriceX96,
             (zeroForOne ? step.sqrtPriceNextX96 < sqrtPriceLimitX96 : step.sqrtPriceNextX96 > sqrtPriceLimitX96)
@@ -711,6 +759,7 @@ function swap(
             fee
         );
 
+        // 将输入输出累计到交易状态缓存
         if (exactInput) {
             state.amountSpecifiedRemaining -= (step.amountIn + step.feeAmount).toInt256();
             state.amountCalculated = state.amountCalculated.sub(step.amountOut.toInt256());
@@ -720,6 +769,7 @@ function swap(
         }
 
         // if the protocol fee is on, calculate how much is owed, decrement feeAmount, and increment protocolFee
+        // 若开启了协议费，从手续费中分出协议费用
         if (cache.feeProtocol > 0) {
             uint256 delta = step.feeAmount / cache.feeProtocol;
             step.feeAmount -= delta;
@@ -727,16 +777,22 @@ function swap(
         }
 
         // update global fee tracker
+        // 更新全局手续费的计算值 即每单流动性手续费的总和 (feeGrowth * 整体流动性 = 所有的手续费)
         if (state.liquidity > 0)
             state.feeGrowthGlobalX128 += FullMath.mulDiv(step.feeAmount, FixedPoint128.Q128, state.liquidity);
 
         // shift tick if we reached the next price
+        // 当交易价格触及下一个tick 需要将目标价格移动
         if (state.sqrtPriceX96 == step.sqrtPriceNextX96) {
             // if the tick is initialized, run the tick transition
+            // 如果当前目标价格已初始化 需要更新tick上的数据
             if (step.initialized) {
                 // check for the placeholder value, which we replace with the actual value the first time the swap
+                // 检查本次交易是否更新过Oracle数据 没有则在第一次分步交易时更新
                 // crosses an initialized tick
+                // 这里价格跨过了一个已初始化的tick(有流动性)
                 if (!cache.computedLatestObservation) {
+                    // 读取Oracle最近的一次数据
                     (cache.tickCumulative, cache.secondsPerLiquidityCumulativeX128) = observations.observeSingle(
                         cache.blockTimestamp,
                         0,
@@ -833,6 +889,10 @@ function swap(
 
 - [modifier lock](#lock)
 - [state slot0](#slot0)
+- [struct StepComputations](#StepComputations)
+- [tickBitMap.nextInitializedTickWithinOneWord](./Tick.md#nextInitializedTickWithinOneWord)
+- [Pool.computeSwapStep](#computeSwapStep)
+- [observations.observeSingle](./Oracle.md#observeSingle)
 
 ### checkTicks
 
@@ -844,6 +904,204 @@ function checkTicks(int24 tickLower, int24 tickUpper) private pure {
     require(tickLower < tickUpper, 'TLU');
     require(tickLower >= TickMath.MIN_TICK, 'TLM');
     require(tickUpper <= TickMath.MAX_TICK, 'TUM');
+}
+```
+
+### computeSwapStep
+
+用于swap函数的分步交易，计算具体的输入输出数量以及交易后的价格
+
+```solidity
+/// @notice Computes the result of swapping some amount in, or amount out, given the parameters of the swap
+/// @dev The fee, plus the amount in, will never exceed the amount remaining if the swap's `amountSpecified` is positive
+/// @param sqrtRatioCurrentX96 The current sqrt price of the pool
+/// @param sqrtRatioTargetX96 The price that cannot be exceeded, from which the direction of the swap is inferred
+/// @param liquidity The usable liquidity
+/// @param amountRemaining How much input or output amount is remaining to be swapped in/out
+/// @param feePips The fee taken from the input amount, expressed in hundredths of a bip
+/// @return sqrtRatioNextX96 The price after swapping the amount in/out, not to exceed the price target
+/// @return amountIn The amount to be swapped in, of either token0 or token1, based on the direction of the swap
+/// @return amountOut The amount to be received, of either token0 or token1, based on the direction of the swap
+/// @return feeAmount The amount of input that will be taken as a fee
+function computeSwapStep(
+    uint160 sqrtRatioCurrentX96,
+    uint160 sqrtRatioTargetX96,
+    uint128 liquidity,
+    int256 amountRemaining,
+    uint24 feePips
+)
+    internal
+    pure
+    returns (
+        uint160 sqrtRatioNextX96,
+        uint256 amountIn,
+        uint256 amountOut,
+        uint256 feeAmount
+    )
+{
+    bool zeroForOne = sqrtRatioCurrentX96 >= sqrtRatioTargetX96;
+    bool exactIn = amountRemaining >= 0;
+
+    if (exactIn) {
+        // 刨除手续费之后的输入数量 (以1e6为100%, feePips是费率)
+        uint256 amountRemainingLessFee = FullMath.mulDiv(uint256(amountRemaining), 1e6 - feePips, 1e6);
+        // 通过deltaPrice（当前价格到目标价格的差）和流动性L计算deltaX
+        amountIn = zeroForOne
+            ? SqrtPriceMath.getAmount0Delta(sqrtRatioTargetX96, sqrtRatioCurrentX96, liquidity, true)
+            : SqrtPriceMath.getAmount1Delta(sqrtRatioCurrentX96, sqrtRatioTargetX96, liquidity, true);
+        
+        // 如果刨除手续费之后的输入 >= 计算得出能够交换的数量 (输入仍未被耗尽)
+        // 下个价格点即为目标价格
+        if (amountRemainingLessFee >= amountIn) sqrtRatioNextX96 = sqrtRatioTargetX96;
+        else
+            // 如果输出被耗尽，需要重新计算交易停止的价格点
+            sqrtRatioNextX96 = SqrtPriceMath.getNextSqrtPriceFromInput(
+                sqrtRatioCurrentX96,
+                liquidity,
+                amountRemainingLessFee,
+                zeroForOne
+            );
+    } else {
+        // exactOut 的情况类似
+        amountOut = zeroForOne
+            ? SqrtPriceMath.getAmount1Delta(sqrtRatioTargetX96, sqrtRatioCurrentX96, liquidity, false)
+            : SqrtPriceMath.getAmount0Delta(sqrtRatioCurrentX96, sqrtRatioTargetX96, liquidity, false);
+        if (uint256(-amountRemaining) >= amountOut) sqrtRatioNextX96 = sqrtRatioTargetX96;
+        else
+            sqrtRatioNextX96 = SqrtPriceMath.getNextSqrtPriceFromOutput(
+                sqrtRatioCurrentX96,
+                liquidity,
+                uint256(-amountRemaining),
+                zeroForOne
+            );
+    }
+
+    // max 交易后的价格是否达到了下一个tick对应的价格
+    // 即判断交易价格是否越过了tickNext
+    bool max = sqrtRatioTargetX96 == sqrtRatioNextX96;
+
+    // get the input/output amounts
+    if (zeroForOne) {
+        amountIn = max && exactIn
+            ? amountIn
+            : SqrtPriceMath.getAmount0Delta(sqrtRatioNextX96, sqrtRatioCurrentX96, liquidity, true);
+        amountOut = max && !exactIn
+            ? amountOut
+            : SqrtPriceMath.getAmount1Delta(sqrtRatioNextX96, sqrtRatioCurrentX96, liquidity, false);
+    } else {
+        amountIn = max && exactIn
+            ? amountIn
+            : SqrtPriceMath.getAmount1Delta(sqrtRatioCurrentX96, sqrtRatioNextX96, liquidity, true);
+        amountOut = max && !exactIn
+            ? amountOut
+            : SqrtPriceMath.getAmount0Delta(sqrtRatioCurrentX96, sqrtRatioNextX96, liquidity, false);
+    }
+
+    // cap the output amount to not exceed the remaining output amount
+    // 当处于 exactOutinput 调用时，需要将输出反号（入参的amountRemaining是负数）
+    if (!exactIn && amountOut > uint256(-amountRemaining)) {
+        amountOut = uint256(-amountRemaining);
+    }
+
+    if (exactIn && sqrtRatioNextX96 != sqrtRatioTargetX96) {
+        // we didn't reach the target, so take the remainder of the maximum input as fee
+        // 当该步交易没有越过下一个tick时，将剩余的输入token作为手续费
+        feeAmount = uint256(amountRemaining) - amountIn;
+    } else {
+        // 当该步交易越过下一个tick时，使用费率计算手续费
+        // 注意这里分母是 1e6 - feePips 不是 1e6
+        // 因为此时amountIn是由amountRemainingLessFee计算而来，而amountRemainingLessFee已经在最开始刨除了手续费
+        feeAmount = FullMath.mulDivRoundingUp(amountIn, feePips, 1e6 - feePips);
+    }
+}
+```
+
+相关代码
+
+- [getAmount0Delta](#getAmount0Delta)
+- [getNextSqrtPriceFromInput](#getNextSqrtPriceFromInput)
+
+补充
+
+- [Uniswap v3 详解（三）：交易过程#拆分后的交易计算](https://liaoph.com/uniswap-v3-3/#%E6%8B%86%E5%88%86%E5%90%8E%E7%9A%84%E4%BA%A4%E6%98%93%E8%AE%A1%E7%AE%97)
+
+### getAmount0Delta
+
+通过价格差Δ√P和流动性L计算 ΔX (token0)
+
+```math
+Δx=1/(Δ√P⋅L)
+Δy=Δ√P⋅L
+```
+
+```solidity
+/// @notice Gets the amount0 delta between two prices
+/// @dev Calculates liquidity / sqrt(lower) - liquidity / sqrt(upper),
+/// i.e. liquidity * (sqrt(upper) - sqrt(lower)) / (sqrt(upper) * sqrt(lower))
+/// @param sqrtRatioAX96 A sqrt price
+/// @param sqrtRatioBX96 Another sqrt price
+/// @param liquidity The amount of usable liquidity
+/// @param roundUp Whether to round the amount up or down
+/// @return amount0 Amount of token0 required to cover a position of size liquidity between the two passed prices
+function getAmount0Delta(
+    uint160 sqrtRatioAX96,
+    uint160 sqrtRatioBX96,
+    uint128 liquidity,
+    bool roundUp
+) internal pure returns (uint256 amount0) {
+    // A,B价格排序
+    if (sqrtRatioAX96 > sqrtRatioBX96) (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96);
+
+    // FixedPoint96.RESOLUTION 为 96
+    // 因为价格是 96位定点数，所以liquidity需要左移96位
+    uint256 numerator1 = uint256(liquidity) << FixedPoint96.RESOLUTION;
+    uint256 numerator2 = sqrtRatioBX96 - sqrtRatioAX96;
+
+    // A,B 价格都要大于0 (B>A)
+    require(sqrtRatioAX96 > 0);
+
+    // 价格向上入：若不能整除则结果+1
+    // 价格向下舍：若不能整除则结果取整数
+    return
+        roundUp
+            ? UnsafeMath.divRoundingUp(
+                FullMath.mulDivRoundingUp(numerator1, numerator2, sqrtRatioBX96),
+                sqrtRatioAX96
+            )
+            : FullMath.mulDiv(numerator1, numerator2, sqrtRatioBX96) / sqrtRatioAX96;
+}
+```
+
+### getNextSqrtPriceFromInput
+
+通过输入的token数量和流动性L计算交易后的价格
+
+```math
+√Pn = L√Pc / (L · Δx√Pc)
+```
+
+```solidity
+/// @notice Gets the next sqrt price given an input amount of token0 or token1
+/// @dev Throws if price or liquidity are 0, or if the next price is out of bounds
+/// @param sqrtPX96 The starting price, i.e., before accounting for the input amount
+/// @param liquidity The amount of usable liquidity
+/// @param amountIn How much of token0, or token1, is being swapped in
+/// @param zeroForOne Whether the amount in is token0 or token1
+/// @return sqrtQX96 The price after adding the input amount to token0 or token1
+function getNextSqrtPriceFromInput(
+    uint160 sqrtPX96,
+    uint128 liquidity,
+    uint256 amountIn,
+    bool zeroForOne
+) internal pure returns (uint160 sqrtQX96) {
+    require(sqrtPX96 > 0);
+    require(liquidity > 0);
+
+    // round to make sure that we don't pass the target price
+    return
+        zeroForOne
+            ? getNextSqrtPriceFromAmount0RoundingUp(sqrtPX96, liquidity, amountIn, true)
+            : getNextSqrtPriceFromAmount1RoundingDown(sqrtPX96, liquidity, amountIn, true);
 }
 ```
 
