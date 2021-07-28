@@ -1,7 +1,6 @@
 {
   "name": "27-quadratic-vote",
   "version": "1.0.0",
-  "description": "[二次方投票和二次方资助](https://www.matataki.io/p/6113)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

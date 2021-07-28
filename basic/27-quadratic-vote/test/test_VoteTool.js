@@ -225,7 +225,7 @@ describe('VotingTool', function () {
     
         // Or, promises are also supported:
         // value: provider.getBalance(addr)
-    };
+      };
 
       // Try to vote first proposal with 2 votes
       await userContract.vote(proposalHashId,2,overrides)
