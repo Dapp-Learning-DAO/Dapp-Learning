@@ -96,18 +96,21 @@ function observeSingle(
     // 计算时间区间的另一个点
     uint32 target = time - secondsAgo;
 
-    // 返回与时间区间最接近的两个数据
+    // 计算出请求时间戳最近的两个 Oracle 数据
     (Observation memory beforeOrAt, Observation memory atOrAfter) =
         getSurroundingObservations(self, time, target, tick, index, liquidity, cardinality);
 
     if (target == beforeOrAt.blockTimestamp) {
         // we're at the left boundary
+        // 如果请求时间和返回的左侧时间戳吻合，那么可以直接使用
         return (beforeOrAt.tickCumulative, beforeOrAt.secondsPerLiquidityCumulativeX128);
     } else if (target == atOrAfter.blockTimestamp) {
         // we're at the right boundary
+        // 如果请求时间和返回的右侧时间戳吻合，那么可以直接使用
         return (atOrAfter.tickCumulative, atOrAfter.secondsPerLiquidityCumulativeX128);
     } else {
         // we're in the middle
+        // 如果请求时间介于两个Oracle数据之间，我们需要线性的算出时间戳对应的数据
         uint32 observationTimeDelta = atOrAfter.blockTimestamp - beforeOrAt.blockTimestamp;
         uint32 targetDelta = target - beforeOrAt.blockTimestamp;
         return (

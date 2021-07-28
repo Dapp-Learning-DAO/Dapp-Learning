@@ -801,8 +801,11 @@ function swap(
                         cache.liquidityStart,
                         slot0Start.observationCardinality
                     );
+                    // 将缓存状态改为已加载Oracle数据
                     cache.computedLatestObservation = true;
                 }
+                // 价格穿过tick，更新tick数据，得到tick上的流动性净值
+                // (用于价格变化时，计算当前已激活的总流动性)
                 int128 liquidityNet =
                     ticks.cross(
                         step.tickNext,
@@ -813,20 +816,27 @@ function swap(
                         cache.blockTimestamp
                     );
                 // if we're moving leftward, we interpret liquidityNet as the opposite sign
+                // 如果价格向左移动（变小），需要反号
                 // safe because liquidityNet cannot be type(int128).min
                 if (zeroForOne) liquidityNet = -liquidityNet;
 
+                // 当前激活的总流动性 + 流动性净值 (即为更新后的总流动性)
                 state.liquidity = LiquidityMath.addDelta(state.liquidity, liquidityNet);
             }
 
+            // 更新 tick 的值，使得下一次循环时让 tickBitmap 进入下一个 word 中查询
+            // 这里zeroForOne为false时没有+1是因为向右寻找时会+1
+            // 具体可参考 nextInitializedTickWithinOneWord 的代码
             state.tick = zeroForOne ? step.tickNext - 1 : step.tickNext;
         } else if (state.sqrtPriceX96 != step.sqrtPriceStartX96) {
             // recompute unless we're on a lower tick boundary (i.e. already transitioned ticks), and haven't moved
+            // 价格没有越过目标tick 需要重新通过价格计算tick的索引值
             state.tick = TickMath.getTickAtSqrtRatio(state.sqrtPriceX96);
         }
     }
 
     // update tick and write an oracle entry if the tick change
+    // 如果分步交易循环完成之后 tick index发生变化，需要向Oracle写入新数据
     if (state.tick != slot0Start.tick) {
         (uint16 observationIndex, uint16 observationCardinality) =
             observations.write(
@@ -845,14 +855,18 @@ function swap(
         );
     } else {
         // otherwise just update the price
+        // 否则只更新slot0的价格(此时交易在bitmap的同一个word内完成)
         slot0.sqrtPriceX96 = state.sqrtPriceX96;
     }
 
     // update liquidity if it changed
+    // 更新当前激活状态的所有流动性
     if (cache.liquidityStart != state.liquidity) liquidity = state.liquidity;
 
     // update fee growth global and, if necessary, protocol fees
+    // 更新全局的交易手续费 若有必要 更新协议手续费
     // overflow is acceptable, protocol has to withdraw before it hits type(uint128).max fees
+    // 溢出是可以接受的，协议手续费必须在达到 type(uint128).max 之前取出
     if (zeroForOne) {
         feeGrowthGlobal0X128 = state.feeGrowthGlobalX128;
         if (state.protocolFee > 0) protocolFees.token0 += state.protocolFee;
@@ -861,16 +875,20 @@ function swap(
         if (state.protocolFee > 0) protocolFees.token1 += state.protocolFee;
     }
 
+    // 返回交易实际的输入和输出数量
     (amount0, amount1) = zeroForOne == exactInput
         ? (amountSpecified - state.amountSpecifiedRemaining, state.amountCalculated)
         : (state.amountCalculated, amountSpecified - state.amountSpecifiedRemaining);
 
     // do the transfers and collect payment
+    // 将交易输出转给接收者
     if (zeroForOne) {
         if (amount1 < 0) TransferHelper.safeTransfer(token1, recipient, uint256(-amount1));
 
         uint256 balance0Before = balance0();
+        // 调用回调函数 回调函数需要将输入token转给Pool
         IUniswapV3SwapCallback(msg.sender).uniswapV3SwapCallback(amount0, amount1, data);
+        // 检查输入token转入数量
         require(balance0Before.add(uint256(amount0)) <= balance0(), 'IIA');
     } else {
         if (amount0 < 0) TransferHelper.safeTransfer(token0, recipient, uint256(-amount0));
@@ -893,6 +911,7 @@ function swap(
 - [tickBitMap.nextInitializedTickWithinOneWord](./Tick.md#nextInitializedTickWithinOneWord)
 - [Pool.computeSwapStep](#computeSwapStep)
 - [observations.observeSingle](./Oracle.md#observeSingle)
+- [observations.write](./Oracle.md#write)
 
 ### checkTicks
 

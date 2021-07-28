@@ -387,8 +387,8 @@ function flipTick(
 
 - 当word内已有初始化tick，`next` 返回其 tickIndex
 - 当word内无初始化tick，`next` 返回word的边界
-  - `lte = true` 时，`next` 返回word **右** 边界对应的 tickIndex
-  - `lte = false` 时，`next` 返回word **左** 边界对应的 tickIndex
+  - `lte = true` 时，代表价格趋于变小，`next` 返回word **右** 边界对应的 tickIndex
+  - `lte = false` 时，代表价格趋于变大，`next` 返回word **左** 边界对应的 tickIndex
 - `initialized` 返回`next`的初始化状态(有可能为false)
 
 ```solidity
