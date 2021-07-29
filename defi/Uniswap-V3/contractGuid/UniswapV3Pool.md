@@ -650,6 +650,12 @@ function collect(
 
 交易函数
 
+#### flashswap
+
+- 因为swap函数在计算完实际的交易数量之后，Pool会先将输出函数转给接收者，然后由调用者实现的回调函数中，将输入token转给Pool
+- 由于回调函数是由调用者实现，所以实际上每次交易都是一次闪电贷，因为接收者会先接受输出token，然后再支付输入token，而这期间输出token是可以直接使用的
+- 即 接收者先借出 `tokenOut` 最后归还 `tokenIn` ， 实现了借出和归还不同币种的闪电贷
+
 ```solidity
 /// @inheritdoc IUniswapV3PoolActions
 function swap(
@@ -1121,6 +1127,76 @@ function getNextSqrtPriceFromInput(
         zeroForOne
             ? getNextSqrtPriceFromAmount0RoundingUp(sqrtPX96, liquidity, amountIn, true)
             : getNextSqrtPriceFromAmount1RoundingDown(sqrtPX96, liquidity, amountIn, true);
+}
+```
+
+### flash
+
+闪电贷接口，无需抵押和零信任的借贷，借贷到还贷需要在一个区块内完成。本接口只能归还相同品种相同数量的token，如果需要借出和归还不同品种，直接使用swap函数
+
+实现原理：
+
+- 借贷方可以先向合约借贷 x, y token 中某一个（或者两个都借贷）
+- 借贷方指定借贷的数量，以及回调函数的参数，调用 flashswap
+- 合约会先将用户请求借贷的 token 按指定数量发送给借贷方
+- 发送完毕后，Pool会向借贷方指定的合约的地址调用指定的回调函数，并将回调函数的参数传入
+- 调用完成后，Pool检查 x, y token 余额满足 x′⋅y′≥k (x⋅y=k)
+
+```solidity
+/// @inheritdoc IUniswapV3PoolActions
+function flash(
+    address recipient,
+    uint256 amount0,
+    uint256 amount1,
+    bytes calldata data
+) external override lock noDelegateCall {
+    // 若Pool中没有流动性，无法提供借贷
+    uint128 _liquidity = liquidity;
+    require(_liquidity > 0, 'L');
+
+    // 计算手续费
+    uint256 fee0 = FullMath.mulDivRoundingUp(amount0, fee, 1e6);
+    uint256 fee1 = FullMath.mulDivRoundingUp(amount1, fee, 1e6);
+    // 记录借贷之前的Pool的token总余额
+    uint256 balance0Before = balance0();
+    uint256 balance1Before = balance1();
+
+    // 将贷款打给借贷者
+    if (amount0 > 0) TransferHelper.safeTransfer(token0, recipient, amount0);
+    if (amount1 > 0) TransferHelper.safeTransfer(token1, recipient, amount1);
+
+    // flash的回调
+    // 用户在回调中需要完成还贷的逻辑，将贷款归还Pool
+    IUniswapV3FlashCallback(msg.sender).uniswapV3FlashCallback(fee0, fee1, data);
+
+    // 查询借贷流程之后的Pool的token总余额
+    uint256 balance0After = balance0();
+    uint256 balance1After = balance1();
+
+    // 两种token余额，只能多不能少
+    require(balance0Before.add(fee0) <= balance0After, 'F0');
+    require(balance1Before.add(fee1) <= balance1After, 'F1');
+
+    // sub is safe because we know balanceAfter is gt balanceBefore by at least fee
+    // 这里减法不用担心下溢出，因为after至少比before多了fee
+    uint256 paid0 = balance0After - balance0Before;
+    uint256 paid1 = balance1After - balance1Before;
+
+    // 分别计算交易手续费和协议手续费
+    if (paid0 > 0) {
+        uint8 feeProtocol0 = slot0.feeProtocol % 16;
+        uint256 fees0 = feeProtocol0 == 0 ? 0 : paid0 / feeProtocol0;
+        if (uint128(fees0) > 0) protocolFees.token0 += uint128(fees0);
+        feeGrowthGlobal0X128 += FullMath.mulDiv(paid0 - fees0, FixedPoint128.Q128, _liquidity);
+    }
+    if (paid1 > 0) {
+        uint8 feeProtocol1 = slot0.feeProtocol >> 4;
+        uint256 fees1 = feeProtocol1 == 0 ? 0 : paid1 / feeProtocol1;
+        if (uint128(fees1) > 0) protocolFees.token1 += uint128(fees1);
+        feeGrowthGlobal1X128 += FullMath.mulDiv(paid1 - fees1, FixedPoint128.Q128, _liquidity);
+    }
+
+    emit Flash(msg.sender, recipient, amount0, amount1, paid0, paid1);
 }
 ```
 
