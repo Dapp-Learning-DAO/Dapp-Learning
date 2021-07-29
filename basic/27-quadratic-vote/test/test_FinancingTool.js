@@ -587,9 +587,9 @@ describe('FinancingTool', function () {
       // Withdraw first proposal
       await financingTool.withdraw()
 
-      let provider = ethers.getDefaultProvider();
+      let provider = ethers.getDefaultProvider()
 
-      const balance = await provider.getBalance(userContractBob.address);
+      const balance = await provider.getBalance(userContractBob.address)
 
       //After withdraw all of the amount, the proposal contract balance should be zero
       expect(parseInt(balance)).to.equal(0)

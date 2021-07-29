@@ -107,8 +107,9 @@
 43. [front running](https://github.com/Supercycled/cake_sniper)  
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
-46. [vyper](https://vyper.readthedocs.io/en/stable/)
-欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
+46. [vyper](https://vyper.readthedocs.io/en/stable/)  
+47. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
+欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 
 ## 进阶任务
 
@@ -128,8 +129,8 @@
 08. Bancor [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 
 ## NFT 进阶
 
