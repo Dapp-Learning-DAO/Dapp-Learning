@@ -127,7 +127,7 @@ xmind
 
 xmind
 
-- [DecreateLiquidity 程序流程图](./xmind/DecreateLiquidity.png)
+- [DecreaseLiquidity 程序流程图](./xmind/DecreaseLiquidity.png)
 
 #### collect
 
