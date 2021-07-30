@@ -1,8 +1,15 @@
 ## circom与snarkjs  
 本章节, 我们将讲解如何使用 circom 和 snarkjs 创建一个零知识 zkSnark电路, 并展示如何创建证明并在以太坊上进行链外和链上验证  
 
+## 电路使用步骤 
+libsnark使用步骤：
+1. 将待证明的命题表达为R1CS
+2. 使用生成算法G为该命题生成公共参数
+3. 使用证明生成算法生成R1CS可满足的证明
+4. 使用验证算法来验证证明
+
 ## 测试步骤 
-### 链下证明 
+### 链外证明 
 - 安装依赖 
 ```
 yarn
@@ -109,9 +116,3 @@ npx snarkjs zkey export soliditycalldata public.json proof.json
 https://learnblockchain.cn/article/1078  
 https://iden3.io/blog/circom-and-snarkjs-tutorial2.html  
 https://github.com/iden3/circom/blob/master/TUTORIAL.md  
-
-  libsnark使用步骤：
-  1. 将待证明的命题表达为R1CS
-  2. 使用生成算法G为该命题生成公共参数
-  3. 使用证明生成算法生成R1CS可满足的证明
-  4. 使用验证算法来验证证明
