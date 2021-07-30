@@ -3,6 +3,7 @@
 **/sk.txt
 **/sk*.txt
 **/sk*.json
+**/__pycache__
 **/package-lock.json
 # dependencies
 /node_modules
