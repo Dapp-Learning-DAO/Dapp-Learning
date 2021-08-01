@@ -1,13 +1,10 @@
 #About DAOhaus
-+ 有段时间自己想要建立一个DAO，就把知乎和链闻、律动的关于DAO的文章，都看了下
-+ 然后访问了几个高大上的DAO创建的网站后
-+ 决定使用DAOhaus，建立一个试试
 + 网址：https://daohaus.club/
 + app：https://app.daohaus.club/
 + launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a（这篇我会翻译）
 ## 主要功能
 + 主要功能：只要metamask有一点ETH，就可以创建一个DAO，并且自身也是一个DAO的聚合
-+ 细节我列下
++ 功能细节
 ### Guilds
 + Work collectively to offer services
 + 最出名的最近就是YGG了，好像发行了自己的Token，在Axie这次风口显示了实力
@@ -40,7 +37,6 @@
 + ![images](https://www.asset3.org/images/oss/daohaus-summon.png)
 + 340个DAO lists（包含目前成员只有一个的Asset3，我的社区^_^)
 + ![images](https://www.asset3.org/images/oss/daohaus-dao-list.png)
-
 + 
 + 建立DAO的过程参考这里：
 + 我就不再支付一次费用了
