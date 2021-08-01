@@ -2,37 +2,11 @@
 
 来自XStack18(Rebase社区名称：Survivor)
 
-问题list和精华
-
 DAO是什么？
 
 decentralized autonomous organization（DAO）
 
-**决策机制、资源聚合、利益分配**  做了巨大创新，给到我们未来无限可能
-
-DAO当下现状，成功的DAO有哪些？
-
-DAO的好处和缺点及风险?
-
-自由（创建、离开、决策），平等（所有人平等参与），
-
-DAO未来会走向何方?
-
-DAO和区块链的关系？
-
-DAO的可能路径：实现价值发现、传递、分配的民间组织?
-
-DAO的工具链条试用和分析?
-
-Arogon，DAOhuas（moloch）
-
-DAO当下最缺少的工具是？
-
-我应该加入一个什么DAO？
-
-我应该创建一个什么DAO？
-
-欢迎添加，修改，完善
+在 **决策机制、资源聚合、利益分配**  做了巨大创新，给到我们未来无限可能。
 
 # 问题回答
 
@@ -72,7 +46,6 @@ DAO，就是**涌现**（Emergence，复杂系统的核心概念之一）在区�
 
 ![图片](https://mmbiz.qpic.cn/mmbiz_png/hQOcLbSk4VZUnxOaibgSzIVsDhsnjBQ9qfOC72wfW5yBDKLhh7AQkQH9I2UyhePFpdjNWNl3jiakUjmohhoY7SxA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
-今天先讲这么多，下篇继续^_^
 
 参考资料：
 
