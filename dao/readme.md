@@ -1,6 +1,6 @@
 # DAO的自问自答
 
-来自XStack18(Dapp learning社区名称：Survivor)
+来自XStack18(Rebase社区名称：Survivor)
 
 问题list和精华
 
