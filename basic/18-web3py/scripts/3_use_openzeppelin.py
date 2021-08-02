@@ -4,7 +4,7 @@ from web3 import Web3
 
 def main():
     w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
-    with open('./build/contracts/MyTokenOpenZeppelin.json', 'r') as fr:
+    with open('./ABI/MyTokenOpenZeppelin.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
     my_contract = w3.eth.contract(abi=erc20_json_dict['abi'], bytecode=erc20_json_dict['bytecode'])

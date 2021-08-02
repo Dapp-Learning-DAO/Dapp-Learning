@@ -1,4 +1,4 @@
-pragma solidity ^0.6.6;
+pragma solidity ^0.8.0;
 
 interface IERC20 {
 
@@ -113,8 +113,8 @@ contract FinancingTool {
     constructor() public {
         owner = msg.sender;
         tokenAddr = emptyAddr;
-        startTime = now;
-        endTime = now + 10 days;
+        startTime = block.timestamp;
+        endTime = block.timestamp + 1;  // 测试需要，这里修改 endTime 为 block.timestamp + 1, 实际中应该根据具体需求进行修改
     }
 
 
@@ -125,11 +125,11 @@ contract FinancingTool {
 
 
     modifier checkStart(){
-        require(now >= startTime, "not start");
+        require(block.timestamp >= startTime, "not start");
         _;
     }
     modifier checkEnd(){
-        require(now >= endTime, "not end");
+        require(block.timestamp >= endTime, "not end");
         _;
     }
 
@@ -140,6 +140,8 @@ contract FinancingTool {
         uint256 index = proposalMap[_proposal];
         require(index > 0, "not exists");
         //-1
+        Proposal storage p = proposals[index - 1];  
+        require(p.isEnd == 0, "withdrawn");
 
         if (tokenAddr != emptyAddr) {
             require(msg.value == 0, "eth 0");
@@ -215,7 +217,7 @@ contract FinancingTool {
     }
 
     function withdrawProposal(uint256 _proposal) public checkEnd {
-        Proposal storage p = proposals[proposalMap[_proposal]];
+        Proposal storage p = proposals[proposalMap[_proposal] - 1];  // 这里应该是 proposalMap[_proposal] - 1, 原始代码有误
         require(p.owner == msg.sender, "now owner");
         require(p.isEnd == 0, "withdrawn");
         (uint256 amount,uint256 count) = getResult(_proposal);
@@ -225,7 +227,7 @@ contract FinancingTool {
     }
 
     function withdraw() public onlyOwner {
-        msg.sender.transfer(address(this).balance);
+        payable(msg.sender).transfer(address(this).balance);
     }
 
     function withdrawToken(address _tokenAddr, uint256 _amount) public onlyOwner {
@@ -249,7 +251,7 @@ contract FinancingTool {
     }
 
     function getProposalUser(uint256 _proposal, uint256 start, uint256 len) public view returns (address[] memory arr){
-        Proposal  memory p = proposals[proposalMap[_proposal]];
+        Proposal  memory p = proposals[proposalMap[_proposal] - 1]; // 这里应该是 proposalMap[_proposal] - 1, 原始代码有误
         uint256 end = start.add(len);
         require(end <= p.userAddrArr.length, "out range");
         arr = new address[](len);
@@ -320,9 +322,9 @@ contract FinancingTool {
 
     }
 
-    function _withdrawToken(address erc, address payable _to, uint256 _value) internal {
+    function _withdrawToken(address erc, address _to, uint256 _value) internal {
         if (erc == emptyAddr) {
-            _to.transfer(_value);
+            payable(_to).transfer(_value);
         } else {
             safeTransfer(erc, _to, _value);
         }

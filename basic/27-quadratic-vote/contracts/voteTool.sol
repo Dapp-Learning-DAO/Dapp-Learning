@@ -1,4 +1,4 @@
-pragma solidity ^0.6.6;
+pragma solidity ^0.8.0;
 
 library SafeMath {
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -106,7 +106,7 @@ contract VoteTool {
         userVoteMap[msg.sender][_proposal] = nextNum;
 
         if (msg.value > amount) {
-            msg.sender.transfer(msg.value.sub(amount));
+            payable(msg.sender).transfer(msg.value.sub(amount));
         }
         emit Vote(msg.sender, _proposal, _n);
     }
@@ -125,7 +125,7 @@ contract VoteTool {
     }
 
     function withdraw() public onlyOwner {
-        msg.sender.transfer(address(this).balance);
+        payable(msg.sender).transfer(address(this).balance);
     }
 
     function getProposalLength() public view returns (uint256){
