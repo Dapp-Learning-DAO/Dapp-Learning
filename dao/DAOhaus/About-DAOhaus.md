@@ -1,8 +1,6 @@
 #About DAOhaus
 + 网址：https://daohaus.club/
 + app：https://app.daohaus.club/
-+ launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
-+ 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译
 ## 主要功能
 + 主要功能：只要metamask有一点ETH，就可以创建一个DAO，并且自身也是一个DAO的聚合。
 + 功能细节
@@ -34,24 +32,24 @@
 + 不是Venture，而是通过一起打造一个产品聚合的社区。
 ## 图
 + 创建DAO
-+ ![images](https://www.asset3.org/images/oss/daohaus-summon.png)
+![images](https://www.asset3.org/images/oss/daohaus-summon.png)
 + 354个DAO lists（包含目前成员只有一个的Asset3，我的社区^_^)
-+ ![images](https://www.asset3.org/images/oss/daohaus-dao-list.png)
+![images](https://www.asset3.org/images/oss/daohaus-dao-list.png)
 
   
 ## 创建一个DAO
 + 访问https://app.daohaus.club/
 + 选择用哪个钱包接入，注意选择Mainnet，钱包内大约需要0.1以内的ETH余额。
 + 连接后，进入的左侧如图
-+ ![images]images/(inital-left.png)
+![images]images/(inital-left.png)
 + 第一次来DAOhaus，有四个选择：
-+ 1.Explore：找到所有的DAO，默认会给列出当下354个DAO。
-+ 2.**Summon**：直译是召唤，就是呼朋唤友，建立一个DAO。
-+ 3.Help：指向相关文档链接。
-+ 4.Community link：DAOhaus的相关社交媒体等的链接。
+1.	Explore：找到所有的DAO，默认会给列出当下354个DAO。
+2.	**Summon**：直译是召唤，就是呼朋唤友，建立一个DAO。
+3.	Help：指向相关文档链接。
+4.	Community link：DAOhaus的相关社交媒体等的链接。
 + 左侧上方，有切换到其他DAO的链接（如果你有多个DAO的话）。
 + 右侧如图：
-+ ![images](images/inital-right.png)
+![images](images/inital-right.png)
 + 列出了一些热门DAO，例如MetaCartel（元的卡特尔？）等等。
 + 你可以右上角切换你的登录钱包地址和方式。
 ### Summon =Create a DAO
@@ -72,46 +70,59 @@
 + 上述参数，都是传递给molochv3.sol的参数，用来在以太坊主网创建链上数据。
 + 还可以 Add Multiple Summonners（添加多个发起人）。
 + 快速建立的话，点击黄色的Summon即可。
-+ ![images](images/summon.png)
+![images](images/summon.png)
 + 然后钱包确认付费（会有两次确认）。
-+ ![images](images/summon-2.png)
+![images](images/summon-2.png)
 + 如果想要定制化，例如我的投票通过提案速度要求是3天，冷静期是7天等等，可以点击右上方的“Hard Mode”
 + 会有更多定制内容提供给你，如图：
-+ ![images](images/hard-mode.png)
+![images](images/hard-mode.png)
 + 这里我跟踪了这个contract（就是moloch.sol）地址：https://etherscan.io/address/0x38064f40b20347d58b326e767791a6f79cdeddce，可以看到，基于DAOhaus的智能合同，所有的建立记录：
-+ ![images](images/contracts.png)
+![images](images/contracts.png)
 ### 管理一个DAO
 + 创建完成后，需要日常管理，链接钱包登录DAOhaus
 + 左侧菜单，除去Change DAO（切换DAO），Community links之外
 + 还增加了：
 + Proposals：提案
-+ ![images](images/proposals.png)
+![images](images/proposals.png)
 + 看图可知，有多重提案类型，加入/踢人，交易，发行新token，基金求助/资助，还有个Signal，发出信号？这个不了解，懂的同学补充下信息。
 + Vaults：财库
-+ ![images](images/vaults.png)
+![images](images/vaults.png)
 + 展示属于DAO的相关链上资产，默认WXDAI，可以自己添加多个Vault
 + Members：会员
-+ ![images](images/members.png)
+![images](images/members.png)
 + 显示你的会员信息，新创建的DAO，初始状态只有Summoner一个人。
 + Settings：设置
-+ ![images](images/settings.png)
+![images](images/settings.png)
 + 这个不解释了，常规信息设置信息，注意的是，有些是不能修改的，例如提案押金存款等，因为已经是链上数据。
 + Boosts：加速
-+ ![images](images/boosts.png)
+![images](images/boosts.png)
 + 可以理解为插件，扩展DAO的场景应用能力，例如Discord插件，当有提案通过或者其他DAO事件发生的时候，自动发送Discord社区消息。
 + Allies：联盟
-+ ![images](images/allies.png)
+![images](images/allies.png)
 + 目前看没有创建联盟的入口，猜测是官方建立了一个UberDAO，用来联盟，目前在xDAI网络上。
 + Profile：档案
-+ ![images](images/profile.png)
+![images](images/profile.png)
 + 这里指登录钱包（用户）的档案信息。
 ## 其他
 
 + DAOhaus由**[Raid Guild](images/https://raidguild.org/)**（一个研发者组织）投资建立，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
+
 + DAOhaus推动了许多DAO组织的建立，在易用性上，DAOhaus突出一些。
+
 + DAOhaus已经发行了自己的Token：HAUS，价格10USDT左右。
+
 + Token总容量未知（社区决定），Coincapmarket信息：
-+ ![images](images/cap-haus.png)
+
+![images](images/cap-haus.png)
+
 + Github代码地址：https://github.com/HausDAO/daohaus-app
+
 + Medium：https://medium.com/daohaus-club
-+ ![images](images/medium.png)
+
+  ![images](images/medium.png)
+
++ ## TODO list
+
++ launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
+
++ 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译
