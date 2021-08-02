@@ -110,6 +110,7 @@
 46. [vyper](https://vyper.readthedocs.io/en/stable/)
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
 48. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
+49. [sniper](https://github.com/Supercycled/cake_sniper.git)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
