@@ -32,9 +32,9 @@
 + 不是Venture，而是通过一起打造一个产品聚合的社区。
 ## 图
 + 创建DAO
-![images](https://www.asset3.org/images/oss/daohaus-summon.png)
+![images](images/daohaus-summon.png)
 + 354个DAO lists（包含目前成员只有一个的Asset3，我的社区^_^)
-![images](https://www.asset3.org/images/oss/daohaus-dao-list.png)
+![images](images/daohaus-dao-list.png)
 
   
 ## 创建一个DAO
