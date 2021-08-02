@@ -6,8 +6,8 @@
 + 功能细节
 ### Guilds
 + Work collectively to offer services
-+ 最出名的最近就是YGG（Yield Games Guild）了，发行了自己的Token，在本次Axie风口显示了实力。
-+ 工会、行会，YGG就是帮助普通人利用玩游戏挣钱：Play to Earn。
++ 最出名的最近是YGG（Yield Games Guild）了，发行了自己的Token，在本次Axie风口显示了实力。
++ 工会、行会，YGG定位帮助普通人利用玩游戏挣钱：Play to Earn。
 
 ### Clubs
 + Little to no financial decisions
@@ -16,7 +16,7 @@
 
 ### Ventures
 + Large to XL financial decisions
-+ 最出名的就是The DAO了，志愿者募捐了几千万的ETH，期待能一起合力，投资未来（后来被黑客攻击）。
++ 最早最著名之一是The DAO，志愿者募捐了几千万的ETH，期待能一起合力，投资未来（后来被黑客攻击）。
 + 2021七月最火爆的，是由部分中心化完全过渡到了去中心的MakerDAO，创始人Rune Christensen，抛弃巨大利益，令人钦佩。
 + 一群人组建MakerDAO，通过共识建立了Maker协议，通过联合抵押一组加密资产，铸造了Dai这种去中心化的稳定币。
 + Maker protocol, which uses a combination of crypto assets to operate and maintain DAI without the need for any bank or government. 
@@ -44,7 +44,7 @@
 ![images]images/(inital-left.png)
 + 第一次来DAOhaus，有四个选择：
 1.	Explore：找到所有的DAO，默认会给列出当下354个DAO。
-2.	**Summon**：直译是召唤，就是呼朋唤友，建立一个DAO。
+2.	**Summon**：直译是召唤，呼朋唤友，建立一个DAO。
 3.	Help：指向相关文档链接。
 4.	Community link：DAOhaus的相关社交媒体等的链接。
 + 左侧上方，有切换到其他DAO的链接（如果你有多个DAO的话）。
@@ -73,10 +73,10 @@
 ![images](images/summon.png)
 + 然后钱包确认付费（会有两次确认）。
 ![images](images/summon-2.png)
-+ 如果想要定制化，例如我的投票通过提案速度要求是3天，冷静期是7天等等，可以点击右上方的“Hard Mode”
++ 如果想要定制化，例如某DAO的投票通过提案速度要求是3天，冷静期是7天等等，可以点击右上方的“Hard Mode”
 + 会有更多定制内容提供给你，如图：
 ![images](images/hard-mode.png)
-+ 这里我跟踪了这个contract（就是moloch.sol）地址：https://etherscan.io/address/0x38064f40b20347d58b326e767791a6f79cdeddce，可以看到，基于DAOhaus的智能合同，所有的建立记录：
++ 这里跟踪了这个contract（moloch.sol）地址：https://etherscan.io/address/0x38064f40b20347d58b326e767791a6f79cdeddce，可以看到，基于DAOhaus的智能合同，所有的建立记录：
 ![images](images/contracts.png)
 ### 管理一个DAO
 + 创建完成后，需要日常管理，链接钱包登录DAOhaus
@@ -125,4 +125,4 @@
 
 + launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
 
-+ 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译
++ 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译，不在本文范围。
