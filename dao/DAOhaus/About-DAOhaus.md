@@ -105,7 +105,7 @@
 + 这里指登录钱包（用户）的档案信息。
 ## 其他
 
-+ DAOhaus由**[Raid Guild](images/https://raidguild.org/)**（一个研发者组织）投资建立，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
++ DAOhaus由**[Raid Guild](https://raidguild.org/)**（一个研发者组织）投资建立，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
 
 + DAOhaus推动了许多DAO组织的建立，在易用性上，DAOhaus突出一些。
 
