@@ -41,7 +41,7 @@
 + 访问https://app.daohaus.club/
 + 选择用哪个钱包接入，注意选择Mainnet，钱包内大约需要0.1以内的ETH余额。
 + 连接后，进入的左侧如图
-![images]images/(inital-left.png)
+![images](images/inital-left.png)
 + 第一次来DAOhaus，有四个选择：
 1.	Explore：找到所有的DAO，默认会给列出当下354个DAO。
 2.	**Summon**：直译是召唤，呼朋唤友，建立一个DAO。
