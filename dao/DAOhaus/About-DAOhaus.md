@@ -41,7 +41,7 @@
 + 访问https://app.daohaus.club/
 + 选择用哪个钱包接入，注意选择Mainnet，钱包内大约需要0.1以内的ETH余额。
 + 连接后，进入的左侧如图
-![images](images/inital-left.png)
+ <br/>![images](images/inital-left.png)
 + 第一次来DAOhaus，有四个选择：
 1.	Explore：找到所有的DAO，默认会给列出当下354个DAO。
 2.	**Summon**：直译是召唤，呼朋唤友，建立一个DAO。
@@ -105,7 +105,7 @@
 + 这里指登录钱包（用户）的档案信息。
 ## 其他
 
-+ DAOhaus由**[Raid Guild](https://raidguild.org/)**（一个研发者组织）投资建立，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
++ DAOhaus由**[Raid Guild]**  (https://raidguild.org/，一个研发者组织）投资建立，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
 
 + DAOhaus推动了许多DAO组织的建立，在易用性上，DAOhaus突出一些。
 
@@ -121,7 +121,7 @@
 
   ![images](images/medium.png)
 
-+ ## TODO list
+## TODO list
 
 + launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
 
