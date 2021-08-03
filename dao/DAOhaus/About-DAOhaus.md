@@ -1,4 +1,4 @@
-#About DAOhaus
+# About DAOhaus
 + 网址：https://daohaus.club/
 + app：https://app.daohaus.club/
 ## 主要功能
@@ -119,8 +119,19 @@
 
   ![images](images/medium.png)
 
+
+
+------
+
+参考资料：
+DAOhaus 官网 https://daohaus.club
+
+扩展阅读：rebase公众号文章 https://mp.weixin.qq.com/s/73jdIt6RXTpVGEuiWNoO-g
+
+
 ## TODO
 
 + launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
 
 + 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译，不在本文范围。
+
