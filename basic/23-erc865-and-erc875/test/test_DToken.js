@@ -173,7 +173,7 @@ const hashedTightPacked = args => ethUtil.keccak256(Buffer.concat(args));
       let messageHash = hashedTightPacked(components);
       let message_bytes = ethers.utils.arrayify(messageHash);
 
-      // Sign the message_bytes by alice
+      // Sign the message_bytes by bob
       let sig = await bob.signMessage(message_bytes);
 
       //Swith to charlie
@@ -197,7 +197,7 @@ const hashedTightPacked = args => ethUtil.keccak256(Buffer.concat(args));
 
     it('Alice decrease Bob allowance by Charlie (fee=1)', async () => {
       // //Swith to charlie
-      let dTokenAlice = dTokenOwner.connect(alice);
+      const dTokenAlice = dTokenOwner.connect(alice);
       // Allow bob to transfer 1000 from alice 
       await dTokenAlice.approve(bob.address, 1000)
 
