@@ -1,4 +1,4 @@
-#About DAOhaus
+# About DAOhaus
 + 网址：https://daohaus.club/
 + app：https://app.daohaus.club/
 ## 主要功能
@@ -105,13 +105,11 @@
 + 这里指登录钱包（用户）的档案信息。
 ## 其他
 
-+ DAOhaus由 Raid Guild，一个研发者组织投资建立，URL：https://raidguild.org/，基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
++ DAOhaus最早于2019年的ETH Berlin黑客松会议上，由Raid Guild成员，一个研发者组织建立，URL：https://raidguild.org/ ， 基于Moloch的基础代码，建立了前端管理页面，以快速建立DAO为目标。
 
-+ DAOhaus推动了许多DAO组织的建立，在易用性上，DAOhaus突出一些。
++ DAOhaus推动了许多DAO组织的建立，在易用性上，DAOhaus突出一些，并且于2020年8月份从在以太坊主网建立，提升为同时支持Mainnet和xDai（一个以太坊侧链）上建立DAO，核心原因是建立一个DAO的gas fee，从几美元上升到了最高达150美元。
 
-+ DAOhaus已经发行了自己的Token：HAUS，价格10USDT左右。
-
-+ Token总容量未知（社区决定），Coincapmarket信息：
++ DAOhaus已经于2021年3月，发行了自己的Token：HAUS，价格10USDT左右，2021年8月看，只在虎符（hoo）和hotbit有交易量（较少），DEX上Sushi和Uni都没有，但可以从coinGecko导入。
 
 ![images](images/cap-haus.png)
 
@@ -121,8 +119,19 @@
 
   ![images](images/medium.png)
 
-## TODO list
+
+
+------
+
+参考资料：
+DAOhaus 官网 https://daohaus.club
+
+扩展阅读：rebase公众号文章 https://mp.weixin.qq.com/s/73jdIt6RXTpVGEuiWNoO-g
+
+
+## TODO
 
 + launch：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
 
 + 目前未找到白皮书，官方Medium有launch近似白皮书的文章，稍后翻译，不在本文范围。
+
