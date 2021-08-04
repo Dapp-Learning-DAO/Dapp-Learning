@@ -144,7 +144,7 @@
 
 - 01. [Aragon](dao/Aragon/readme.md)
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. [DAOHaus](https://daohaus.club/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [DAOHaus](https://daohaus.club/) 
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
