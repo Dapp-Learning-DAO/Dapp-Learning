@@ -1,4 +1,4 @@
-# DAOhaus Lauch- 中文翻译+解读
+# DAOhaus Launch- 中文翻译+解读
 
 + James Waugh，DAOhaus发起者之一（RaidGuild成员）。
 + 在2021年3月份，Medium上发布了一篇文章：https://medium.com/daohaus-club/haus-launch-bd781bbbf13a
