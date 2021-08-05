@@ -65,13 +65,13 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic(),
         mnemonicAlice(),
@@ -80,13 +80,13 @@ module.exports = {
       ],
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/3f8471cb133047efa90cb89936e9f8bb", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
