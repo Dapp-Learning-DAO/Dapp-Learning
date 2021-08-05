@@ -75,9 +75,9 @@
 19. [brownie](basic/19-brownie/README.md)
 20. [scaffold-flash-loan &  dex arbitrage](basic/20-scaffold-flash-loan/readme.md)
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
-22. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
+22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [scaffold-zk](basic/22-scaffold-zk/readme.md)
+24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
@@ -94,7 +94,7 @@
 - <https://pinata.cloud/pinmanager>
 - <https://nft.storage>
 
-37. state channel
+37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
 38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
 39. Ethlend
 
@@ -109,7 +109,8 @@
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 46. [vyper](https://vyper.readthedocs.io/en/stable/)
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
-48. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
+48. state channel
+49. [sniper](https://github.com/Supercycled/cake_sniper.git)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -137,12 +138,13 @@
 ## NFT 进阶
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## DAO 进阶
 
 - 01. [Aragon](dao/Aragon/readme.md)
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. [DAOHaus](https://daohaus.club/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [DAOHaus](https://daohaus.club/) 
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
@@ -173,7 +175,16 @@
   进阶任务如defi，dao, nft项目研究，采用小组学习模式，有以下要求。
  1. 提交3次PR以上的开发者方可参与小组学习；
  2. 小组组员需分工明确，每周周例会进行成果分享；
- 3. 原则上小组的子任务研究不超过3个人。
+ 3. 原则上小组的子任务研究不超过3个人。  
+ 
+ 小组学习输出成果（参考）：  
+ 白皮书： rebase视频分享
+ 
+ 合约： 部署，文档加rebase视频分享
+ 
+ 前端： 部署，文档和rebase视频分享
+ 
+ graph：部署，文档和rebase视频分享
  
 ## 常见问题
   安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  

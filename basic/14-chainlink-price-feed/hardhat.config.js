@@ -28,7 +28,7 @@ function mnemonic() {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-const kovanRpcUrl = "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07"
+const kovanRpcUrl = "https://kovan.infura.io/v3/" + process.env.INFURA_ID
 const privateKey = mnemonic()
 
 module.exports = {

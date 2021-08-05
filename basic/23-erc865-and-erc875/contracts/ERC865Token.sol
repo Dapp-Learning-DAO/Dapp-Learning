@@ -73,7 +73,7 @@ contract ERC865Token is Initializable, ERC20, IERC865 {
         require(_spender != address(0),"Invalid _spender address");
 
         bytes32 hashedParams = getApprovePreSignedHash(address(this), _spender, _value, _fee, _nonce);
-        address from = ECDSA.recover(hashedParams, _signature);
+        address from = ECDSA.recover(ECDSA.toEthSignedMessageHash(hashedParams), _signature);
         require(from != address(0),"Invalid from address recovered");
         bytes32 hashedTx = keccak256(abi.encodePacked(from, hashedParams));
         require(hashedTxs[hashedTx] == false,"Transaction hash was already used");
@@ -107,7 +107,7 @@ contract ERC865Token is Initializable, ERC20, IERC865 {
         require(_spender != address(0),"Invalid _spender address");
 
         bytes32 hashedParams = getIncreaseAllowancePreSignedHash(address(this), _spender, _addedValue, _fee, _nonce);
-        address from = ECDSA.recover(hashedParams, _signature);
+        address from = ECDSA.recover(ECDSA.toEthSignedMessageHash(hashedParams), _signature);
         require(from != address(0),"Invalid from address recovered");
         bytes32 hashedTx = keccak256(abi.encodePacked(from, hashedParams));
         require(hashedTxs[hashedTx] == false,"Transaction hash was already used");
@@ -141,7 +141,7 @@ contract ERC865Token is Initializable, ERC20, IERC865 {
         require(_spender != address(0),"Invalid _spender address");
 
         bytes32 hashedParams = getDecreaseAllowancePreSignedHash(address(this), _spender, _subtractedValue, _fee, _nonce);
-        address from = ECDSA.recover(hashedParams, _signature);
+        address from = ECDSA.recover(ECDSA.toEthSignedMessageHash(hashedParams), _signature);
         require(from != address(0),"Invalid from address recovered");
         bytes32 hashedTx = keccak256(abi.encodePacked(from, hashedParams));
         require(hashedTxs[hashedTx] == false,"Transaction hash was already used");
@@ -179,7 +179,7 @@ contract ERC865Token is Initializable, ERC20, IERC865 {
 
         bytes32 hashedParams = getTransferFromPreSignedHash(address(this), _from, _to, _value, _fee, _nonce);
 
-        address spender = ECDSA.recover(hashedParams, _signature);
+        address spender = ECDSA.recover(ECDSA.toEthSignedMessageHash(hashedParams), _signature);
         require(spender != address(0),"Invalid spender address recovered");
         bytes32 hashedTx = keccak256(abi.encodePacked(spender, hashedParams));
         require(hashedTxs[hashedTx] == false,"Transaction hash was already used");
