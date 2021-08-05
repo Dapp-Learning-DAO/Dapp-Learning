@@ -1,4 +1,4 @@
-## DAUhaus 初步技术分析
+## DAUhaus Code Analysis
 
 ## 前言
 
