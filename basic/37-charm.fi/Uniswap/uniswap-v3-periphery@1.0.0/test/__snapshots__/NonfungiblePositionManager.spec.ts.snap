@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NonfungiblePositionManager #burn gas 1`] = `41297`;
+
+exports[`NonfungiblePositionManager #collect gas transfers both 1`] = `98570`;
+
+exports[`NonfungiblePositionManager #collect gas transfers token0 only 1`] = `111897`;
+
+exports[`NonfungiblePositionManager #collect gas transfers token1 only 1`] = `112104`;
+
+exports[`NonfungiblePositionManager #createAndInitializePoolIfNecessary gas 1`] = `4612043`;
+
+exports[`NonfungiblePositionManager #decreaseLiquidity gas complete decrease 1`] = `92916`;
+
+exports[`NonfungiblePositionManager #decreaseLiquidity gas partial decrease 1`] = `161366`;
+
+exports[`NonfungiblePositionManager #increaseLiquidity gas 1`] = `176626`;
+
+exports[`NonfungiblePositionManager #mint gas first mint for pool 1`] = `619406`;
+
+exports[`NonfungiblePositionManager #mint gas first mint for pool using eth with non-zero refund 1`] = `629749`;
+
+exports[`NonfungiblePositionManager #mint gas first mint for pool using eth with zero refund 1`] = `622524`;
+
+exports[`NonfungiblePositionManager #mint gas mint for same pool, different ticks 1`] = `451862`;
+
+exports[`NonfungiblePositionManager #mint gas mint on same ticks 1`] = `344732`;
+
+exports[`NonfungiblePositionManager #permit owned by eoa gas 1`] = `64528`;
+
+exports[`NonfungiblePositionManager #permit owned by verifying contract gas 1`] = `68325`;
+
+exports[`NonfungiblePositionManager #transferFrom gas 1`] = `79091`;
+
+exports[`NonfungiblePositionManager #transferFrom gas comes from approved 1`] = `67491`;
+
+exports[`NonfungiblePositionManager bytecode size 1`] = `24450`;
+
+exports[`NonfungiblePositionManager multicall exit gas 1`] = `142949`;

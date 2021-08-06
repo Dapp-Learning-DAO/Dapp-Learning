@@ -1,0 +1,66 @@
+{
+  "name": "@uniswap/v3-periphery",
+  "description": "🎚 Peripheral smart contracts for interacting with Uniswap V3",
+  "license": "GPL-2.0-or-later",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "homepage": "https://uniswap.org",
+  "keywords": [
+    "uniswap",
+    "periphery",
+    "v3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Uniswap/uniswap-v3-periphery"
+  },
+  "files": [
+    "contracts/interfaces",
+    "contracts/libraries",
+    "artifacts/contracts/**/*.json",
+    "!artifacts/contracts/**/*.dbg.json",
+    "!artifacts/contracts/test/**/*",
+    "!artifacts/contracts/base/**/*"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "3.4.1-solc-0.7-2",
+    "@uniswap/lib": "^4.0.1-alpha",
+    "@uniswap/v2-core": "1.0.1",
+    "@uniswap/v3-core": "1.0.0",
+    "base64-sol": "1.0.1"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/ethers-v5": "^4.0.0",
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "decimal.js": "^10.2.1",
+    "ethereum-waffle": "^3.0.2",
+    "ethers": "^5.0.8",
+    "hardhat": "^2.2.0",
+    "hardhat-typechain": "^0.3.5",
+    "is-svg": "^4.3.1",
+    "mocha": "^6.2.2",
+    "mocha-chai-jest-snapshot": "^1.1.0",
+    "prettier": "^2.0.5",
+    "prettier-plugin-solidity": "^1.0.0-beta.10",
+    "solhint": "^3.2.1",
+    "solhint-plugin-prettier": "^0.0.5",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^8.5.4",
+    "typechain": "^4.0.0",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  }
+}
