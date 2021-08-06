@@ -6,6 +6,7 @@ B (base threshold)   [X-B, X+B]
 L (limit threshold)   [X-R, X], or [X, X+R]
 每隔12小时，触发rebalance函数。
 
+
 ## 相关依赖  
 - python3 
 - [brownie](https://eth-brownie.readthedocs.io/en/stable/toctree.html)
@@ -26,8 +27,28 @@ brownie pm clone Uniswap/uniswap-v3-periphery@1.0.0
 - 执行测试  
 ```
 brownie test 
+``` 
+
+## rinkeby测试网部署 
+- 配置账户 
+```
+brownie addcounts new deployer
 ```
 
+- 设置 WEB3_INFURA_PROJECT_ID 
+``` 
+export WEB3_INFURA_PROJECT_ID=0aae8358bfe04803b8e75bb4755eaf07
+```
+
+- 设置 ETHERSCAN_TOKEN 
+```
+export ETHERSCAN_TOKEN=xxxxxxxxxx
+``` 
+
+- 部署 
+```
+brownie run deploy_rinkeby.py --network rinkeby
+```
 
 ## 参考链接：
 - 策略研究: https://learn.charm.fi/charm-finance/alpha-vaults/strategy  

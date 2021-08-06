@@ -153,6 +153,13 @@
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
+## 奥派经济学
+
+-  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
+-  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
+-  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
+-  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
+
 ## 如何参与
 
 - 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @liberhe 联系方式。
