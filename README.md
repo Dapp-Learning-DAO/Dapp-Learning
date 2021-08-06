@@ -47,9 +47,17 @@
 - Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
 - Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
-**推荐阅读：**
+**推荐阅读**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
-- 推荐了解奥地利学派，[Hayek](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
+- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
+
+**奥派经济学**
+-  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
+-  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
+-  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
+-  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
+
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -152,13 +160,6 @@
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-
-## 奥派经济学
-
--  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
--  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
--  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
--  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
 
 ## 如何参与
 
