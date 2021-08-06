@@ -115,24 +115,24 @@ To create a production build, use yarn build.
 ### App结构
 + 这里分析整体目录结构和主要代码实现的功能。
 ![hard-mode](images/dir.png)
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 ### 钱包连接
 + 这里分析下链接钱包的过程，包括profile的加载和现实。
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 ### 获取链上数据
 + 这里分析获取链上的已经存在的DAO信息和其他链上数据。
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 ### 调用智能合约
 + 这里主要分析调用Moloch智能合约的过程，入口和返回参数等。
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 ### 新建DAO
 + 这里完整跟进一个建立新DAO的过程。
 + 新建DAO核心是合约参数传递给Moloch线上合约，然后运行，生成新建DAO的配置数据，写入链上，并且发行新建DAOToken的过程。
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 
 ### 插件系统
 + 这里分析几个插件系统运作机制：snapshot proposals、Token supply、discord消息三个，如果有新力量加入，欢迎分享、分担一部分分析工作，欢迎认领~！
-+ 欢迎认领~！联系 Survivor
++ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
 
 
 
