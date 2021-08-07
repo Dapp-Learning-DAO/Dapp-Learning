@@ -54,10 +54,10 @@ contract ERC875Token is ERC875 {
     // price is encoded in the server and the msg.value is added to the message digest,
     // if the message digest is thus invalid then either the price or something else in the message is invalid
     function trade(uint256 expiry,
-                   uint256[] tokenIndices,
-                   uint8 v,
-                   bytes32 r,
-                   bytes32 s) public payable
+        uint256[] tokenIndices,
+        uint8 v,
+        bytes32 r,
+        bytes32 s) public payable
     {
         //checks expiry timestamp,
         //if fake timestamp is added then message verification will fail
