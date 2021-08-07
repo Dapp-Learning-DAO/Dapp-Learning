@@ -1,0 +1,29 @@
+{
+  "name": "aave-flashloan",
+  "description": "A truffle box containing all you need to get started with developing flash loans",
+  "version": "0.1.0",
+  "author": "Rebase Team",
+  "license": "BSD-3-Clause",
+  "contributors": [
+    "David Truong <david@aave.com>"
+  ],
+  "homepage": "",
+  "repository": "https://github.com/rebase-network/Dapp-Learning/tree/main/basic/20-flash-loan/aave",
+  "dependencies": {
+    "truffle-flattener": "^1.5.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^3.0.0",
+    "@truffle/hdwallet-provider": "^1.0.36",
+    "dotenv": "^8.2.0",
+    "truffle": "^5.1.32"
+  },
+  "scripts": {
+    "build": "truffle compile",
+    "console": "truffle console",
+    "test:sol": "truffle test --stacktrace-extra",
+    "deploy:dev": "truffle migrate --reset --skip-dry-run",
+    "deploy:testnet": "truffle migrate --network kovan --reset --skip-dry-run",
+    "gen:sol": "truffle-flattener contracts/Flashloan.sol > build/Flashloan.sol"
+  }
+}
