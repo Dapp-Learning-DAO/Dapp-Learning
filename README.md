@@ -8,7 +8,8 @@
 
 ## 序 - Preface
 
-本项目适合零基础开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。
+本项目适合零基础开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。  
+项目由Rebase社区成员发起，秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传B站。  
 
 技术栈：
 
@@ -163,8 +164,7 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-
-- 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @liberhe 联系方式。
+- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群。
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
 - 原则上每周一次开发者沟通会议
 - 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
