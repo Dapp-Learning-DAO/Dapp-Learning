@@ -44,7 +44,7 @@
 **测试网 testnet**
 
 - Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
-- Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
+- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
 - Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
 **推荐阅读：**
