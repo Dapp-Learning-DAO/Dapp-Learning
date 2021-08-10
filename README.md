@@ -45,7 +45,7 @@
 **测试网 testnet**
 
 - Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
-- Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
+- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
 - Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
 **推荐阅读**
@@ -86,30 +86,24 @@
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
+24. [CryptoKitties](basic/24-cryptokitties/README.md)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
-26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
+26. [snapshot](basic/26-snapshot/README.md)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
 28. [optimism layer2](basic/28-optimism-layer2/readme.md)
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
-33. [pooltogether](https://pooltogether.com)
-34. [subgraph](https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad)
-35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
-36. nft Filecoin
-- <https://www.bilibili.com/video/BV1j5411w7MH>
-- <https://pinata.cloud/pinmanager>
-- <https://nft.storage>
-
+32. [chainlink-alarm](basic/32-chainlink-alarm/README.md)
+33. [pooltogether](basic/33-pooltogether/README.md)
+34. [subgraph](basic/34-subgraph/readme.md)
+35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
+36. [NFT Filecoin](basic/36-nft-filecoin/README.md)
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
 38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
 39. Ethlend
-
 - <https://www.youtube.com/watch?v=Pi-Qva6Fg3I>
 - <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
-
 40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
@@ -185,19 +179,19 @@
  1. 提交3次PR以上的开发者方可参与小组学习；
  2. 小组组员需分工明确，每周周例会进行成果分享；
  3. 原则上小组的子任务研究不超过3个人。  
- 
+
  小组学习输出成果（参考）：  
  白皮书： rebase视频分享
- 
+
  合约： 部署，文档加rebase视频分享
- 
+
  前端： 部署，文档和rebase视频分享
- 
+
  graph：部署，文档和rebase视频分享
- 
+
 ## 常见问题
   安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
-  
+
 ## 合约参考库及致敬相关项目
 
 - 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>

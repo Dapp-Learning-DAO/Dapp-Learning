@@ -78,7 +78,7 @@
 + 看到个人profile头像，是调用3box存储在ipfs上的头像，通过3box桥的方式获取链上数据。
 + 详细参考下面代码分析
 
-## App代码分析
+## App代码分析-本地先跑起来
 + 主要分析来源：https://github.com/HausDAO/daohaus-app
 + clone到本地后，进入目录：
 + 先安装依赖包
@@ -111,29 +111,10 @@ To create a production build, use yarn build.
 + 连接后和官网一致：
 ![hard-mode](images/login-homepage.png)
 + 猜测是几个测试网络的数据，是从主网真实数据复制过来的，所以测试网络依然存在我在官网主网创建的Asset3 DAO。
-
-### App结构
-+ 这里分析整体目录结构和主要代码实现的功能。
-![hard-mode](images/dir.png)
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-### 钱包连接
-+ 这里分析下链接钱包的过程，包括profile的加载和现实。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-### 获取链上数据
-+ 这里分析获取链上的已经存在的DAO信息和其他链上数据。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-### 调用智能合约
-+ 这里主要分析调用Moloch智能合约的过程，入口和返回参数等。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-### 新建DAO
-+ 这里完整跟进一个建立新DAO的过程。
-+ 新建DAO核心是合约参数传递给Moloch线上合约，然后运行，生成新建DAO的配置数据，写入链上，并且发行新建DAOToken的过程。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-
-### 插件系统
-+ 这里分析几个插件系统运作机制：snapshot proposals、Token supply、discord消息三个，如果有新力量加入，欢迎分享、分担一部分分析工作，欢迎认领~！
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-
++ 后面把
++ DAOhaus前端：https://github.com/HausDAO/daohaus-app（内部代号pokemol项目）
++ DAOhaus后端：https://github.com/MolochVentures/moloch/(Moloch合约代码)
++ 分为两个文档分析，本文算是code分析的开头。
 
 
 

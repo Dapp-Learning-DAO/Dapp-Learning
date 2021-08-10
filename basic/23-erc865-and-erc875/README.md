@@ -25,3 +25,6 @@ https://github.com/propsproject/props-token-distribution
 https://learnblockchain.cn/article/1357    
 https://learnblockchain.cn/2019/04/24/token-EIP712  
 https://learnblockchain.cn/article/1496  
+https://medium.com/alphawallet/erc875-a-new-standard-for-non-fungible-tokens-and-cheap-atomic-swaps-93ab85b9e7f9  
+https://github.com/AlphaWallet/ERC875-Example-Implementation  
+https://github.com/ethereum/EIPs/tree/master/assets 

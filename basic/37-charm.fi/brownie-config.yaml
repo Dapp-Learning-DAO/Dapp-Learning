@@ -1,0 +1,16 @@
+
+dependencies:
+  - OpenZeppelin/openzeppelin-contracts@3.4.0
+  - Uniswap/uniswap-v3-core@1.0.0
+  - Uniswap/uniswap-v3-periphery@1.0.0
+
+autofetch_sources: true
+
+compiler:
+  solc:
+    version: 0.7.6
+    remappings:
+      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.0"
+      - "@uniswap/v3-core=Uniswap/uniswap-v3-core@1.0.0"
+      - "@uniswap/v3-periphery=Uniswap/uniswap-v3-periphery@1.0.0"
+
