@@ -41,6 +41,7 @@
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
+- 代码美化工具 <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
 **测试网 testnet**
 
