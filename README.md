@@ -8,7 +8,8 @@
 
 ## 序 - Preface
 
-本项目适合零基础开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。
+本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。  
+项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传[B站的Rebase官方账号](https://space.bilibili.com/382886213)。  
 
 技术栈：
 
@@ -44,12 +45,20 @@
 **测试网 testnet**
 
 - Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
-- Kovan [申请 Kovan 测试币](https://linkfaucet.protofire.io/kovan)
+- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
 - Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
-**推荐阅读：**
+**推荐阅读**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
-- 推荐了解奥地利学派，[Hayek](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
+- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
+
+**奥派经济学**
+-  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
+-  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
+-  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
+-  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
+
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -77,33 +86,28 @@
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [CryptoKitties](https://zhuanlan.zhihu.com/p/34690916)
+24. [CryptoKitties](basic/24-cryptokitties/README.md)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
-26. [snapshot](https://www.chainnews.com/articles/038258049958.htm)
+26. [snapshot](basic/26-snapshot/README.md)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
 28. [optimism layer2](basic/28-optimism-layer2/readme.md)
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [chainlink-alarm](https://docs.chain.link/docs/chainlink-alarm-clock/)
-33. [pooltogether](https://pooltogether.com)
-34. [subgraph](https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad)
-35. [Merkel-Patricia Tree(MPT)](https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851)
-36. nft Filecoin
-- <https://www.bilibili.com/video/BV1j5411w7MH>
-- <https://pinata.cloud/pinmanager>
-- <https://nft.storage>
-
+32. [chainlink-alarm](basic/32-chainlink-alarm/README.md)
+33. [pooltogether](basic/33-pooltogether/README.md)
+34. [subgraph](basic/34-subgraph/readme.md)
+35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
+36. [NFT Filecoin](basic/36-nft-filecoin/README.md)
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
 38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
 39. Ethlend
-
 - <https://www.youtube.com/watch?v=Pi-Qva6Fg3I>
 - <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
-
 40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
-42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
+42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
+   https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts  
 43. [front running](https://github.com/Supercycled/cake_sniper)  
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
@@ -153,16 +157,8 @@
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## 奥派经济学
-
--  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
--  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
--  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
--  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
-
 ## 如何参与
-
-- 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @liberhe 联系方式。
+- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群。
 - 参与项目的开发者务必保证能够至少每两周提交一个PR
 - 原则上每周一次开发者沟通会议
 - 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
@@ -183,19 +179,19 @@
  1. 提交3次PR以上的开发者方可参与小组学习；
  2. 小组组员需分工明确，每周周例会进行成果分享；
  3. 原则上小组的子任务研究不超过3个人。  
- 
+
  小组学习输出成果（参考）：  
  白皮书： rebase视频分享
- 
+
  合约： 部署，文档加rebase视频分享
- 
+
  前端： 部署，文档和rebase视频分享
- 
+
  graph：部署，文档和rebase视频分享
- 
+
 ## 常见问题
   安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
-  
+
 ## 合约参考库及致敬相关项目
 
 - 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>
