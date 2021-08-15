@@ -48,10 +48,16 @@
 - Govemance 社区治理模块
 - Application 存储当前区块高度，弹窗数据
 
-了解详细的状态数据结构图请戳这里 :point-right: [状态数据的结构-详细](./xmind/Statcks.png)
+了解详细的状态数据结构图请戳这里 :point_right: [状态数据的结构-详细](./xmind/Statcks.png)
 
 
 ### 用户使用流程
+
+#### AddLiquidity
+
+#### RemoveLiquidity
+
+#### Swap
 
 
 ## 相关引用
