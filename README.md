@@ -8,8 +8,11 @@
 
 ## 序 - Preface
 
-本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。  
-项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传[B站的Rebase官方账号](https://space.bilibili.com/382886213)。  
+本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。   
+
+项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
+ 
+项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传[B站的Rebase官方账号](https://space.bilibili.com/382886213)。    
 
 技术栈：
 
@@ -41,6 +44,7 @@
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
 - tenderly合约验证 <https://dashboard.tenderly.co/explorer>
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
+- 代码美化工具 <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
 **测试网 testnet**
 
@@ -127,9 +131,9 @@
 
 ## DeFi 进阶
 
-01. [UniswapV2](defi/Uniswap-V2/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+01. [UniswapV2](defi/Uniswap-V2/readme.md) 
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
-03. [Compound](defi/Compound/readme.md)
+03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -173,11 +177,17 @@
 2. 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
 3. 可以自由新增任务卡（需附上参考链接）
 4. 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
-5. 参与三个task的完成可以给予PR审核者的权限
+
+## DAO组织管理项目
+  1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
+  2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限；
+  3. PR审核者可以发起学习小组；
+  4. PR审核者可以发起提案，决定项目发展规划，获取多数PR审核者同意即可通过提案；
+  5. PR审核者须两周内至少一次PR，否则移除PR审核者权限，降为普通开发者，可以提PR重新加入。
 
 ## 小组学习
   进阶任务如defi，dao, nft项目研究，采用小组学习模式，有以下要求。
- 1. 提交3次PR以上的开发者方可参与小组学习；
+ 1. 提交1次PR以上的开发者方可参与小组学习；
  2. 小组组员需分工明确，每周周例会进行成果分享；
  3. 原则上小组的子任务研究不超过3个人。  
 
