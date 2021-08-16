@@ -16,7 +16,7 @@
 - 工具类
 
 
-[UniswapV2Interface 技术栈详细图示](./xmind/Statcks.png)
+了解详细的技术栈图示请戳这里 :point_right:[Interface 技术栈详细图示](./xmind/Statcks.png)
 
 ## 需要提前了解的知识点
 
@@ -28,11 +28,11 @@
 
 ## 项目初识
 
-### 状态数据的结构
+### State数据的结构
 
 ![状态数据的结构-min](./xmind/State-min.png)
 
-从状态管理的角度来看，主要分为六个部分：
+从状态管理(State)的角度来看，主要分为六个部分：
 
 - UserSate 用户的钱包数据，使用习惯，自定义token和自定义交易对等信息
 - User Interface 用户的交互界面状态，主要是 swap 和 添加/删除流动性 的操作产生的数据变化
@@ -44,20 +44,31 @@
         - 将不同请求合并为一个个批次同时发送，节省gas费用
         - 保证每个请求批次不会超过最大gas限制
     - 这也是相对复杂的一个模块
-- TokenList 从其他服务器获取交易用的token列表，用户可自定义获取的节点，如Gemini Token List
+- TokenList 从其他服务器获取交易用的token列表，用户可自定义获取的节点，如 Gemini Token List
 - Govemance 社区治理模块
 - Application 存储当前区块高度，弹窗数据
 
 了解详细的状态数据结构图请戳这里 :point_right: [状态数据的结构-详细](./xmind/Statcks.png)
 
 
-### 用户使用流程
+### 用户使用流程及State的变化
+
+追踪交互动作与状态数据变化的关系，可以帮助我们更好的理解程序运行的逻辑
+
+#### 添加自定义token
+
+1. 在Swap界面点击 `Select a token` 按钮，填入自定义token的地址
+2. 
+
+#### create pair
 
 #### AddLiquidity
 
+#### Swap
+
 #### RemoveLiquidity
 
-#### Swap
+详细解析请戳这里 :point_right: [V2的用户交互流程及状态变化](./InterfaceAndStates.md)
 
 
 ## 相关引用
