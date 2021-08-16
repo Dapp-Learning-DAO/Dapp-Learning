@@ -55,20 +55,15 @@
 
 追踪交互动作与状态数据变化的关系，可以帮助我们更好的理解程序运行的逻辑
 
-#### 添加自定义token
+详细解析请戳这里 :point_right: [V2的用户交互流程及状态变化](./UsageAndStates.md)
 
-1. 在Swap界面点击 `Select a token` 按钮，填入自定义token的地址
-2. 
+### 代码解析
 
-#### create pair
+详细解析请戳这里 :point_right: [V2 interface 代码解析](./Code.md)
 
-#### AddLiquidity
+### 相关辅助数据
 
-#### Swap
-
-#### RemoveLiquidity
-
-详细解析请戳这里 :point_right: [V2的用户交互流程及状态变化](./InterfaceAndStates.md)
+请戳这里 :point_right: [V2 interface 代码解析](./InfoList.md)
 
 
 ## 相关引用
