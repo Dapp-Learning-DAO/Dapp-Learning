@@ -50,7 +50,7 @@ callResults: {
 1. 在 Swap 界面点击 `Select a token` 按钮，填入自定义 token 的地址
 2. `CurrencySearch` 的 `searchQuery` 被赋值为自定义 token 地址，其值产生变化，触发 `useToken` 获取 token 的信息
 3. `useToken` 首先会在已有的 tokenlist 中查找，如果有则直接返回 token 信息
-4. 找不到已有信息，会调用 `useSingleCallResult` 请求自定义 token 合约的 `name` `symbol` 和 `decimals` 字段，这里返回 'HEHE' 'HH' 和 1
+4. 找不到token信息，会调用 `useSingleCallResult` 请求自定义 token 合约的 `name` `symbol` 和 `decimals` 字段，这里返回 'HEHE' 'HH' 和 1
 
    - `useSingleCallResult` 是调用 multicall 合约的方法
    - 在 state 中可以看到 callResults 新增了三条数据，其键的组成格式为 `{contract address}-{methodid}`
