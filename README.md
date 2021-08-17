@@ -120,7 +120,7 @@
 48. state channel  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
-
+51. [solidity 学习](https://www.bilibili.com/video/BV1St411a7Pk?p=1)  
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 进阶任务
