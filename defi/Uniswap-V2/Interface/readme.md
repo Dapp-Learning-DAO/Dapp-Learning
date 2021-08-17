@@ -16,7 +16,7 @@
 - 工具类
 
 
-了解详细的技术栈图示请戳这里 :point_right:[Interface 技术栈详细图示](./xmind/Statcks.png)
+了解详细的技术栈图示请戳这里 :point_right:[Interface 技术栈详细图示](./xmind/Stacks.png)
 
 ## 需要提前了解的知识点
 
@@ -48,7 +48,7 @@
 - Govemance 社区治理模块
 - Application 存储当前区块高度，弹窗数据
 
-了解详细的状态数据结构图请戳这里 :point_right: [状态数据的结构-详细](./xmind/Statcks.png)
+了解详细的状态数据结构图请戳这里 :point_right: [状态数据的结构-详细](./xmind/State.png)
 
 
 ### 用户使用流程及State的变化
@@ -63,7 +63,7 @@
 
 ### 相关辅助数据
 
-请戳这里 :point_right: [V2 interface 代码解析](./InfoList.md)
+请戳这里 :point_right: [辅助数据列表](./InfoList.md)
 
 
 ## 相关引用
