@@ -77,15 +77,11 @@ describe("Project contract", function () {
     })
 
     describe('Creator get payout when donation success', function () {
-        // `it` is another Mocha function. This is the one you use to define your
-        // tests. It receives the test name, and a callback function.
-        
-        
         it('Payout to the creator', async function () {
             let overrides = {
                 // To convert Ether to Wei:
                 value: 101,
-                gasPrice: 1000
+                gasPrice: 1000000000
             }
 
             const artifact = artifacts.readArtifactSync("Project")
