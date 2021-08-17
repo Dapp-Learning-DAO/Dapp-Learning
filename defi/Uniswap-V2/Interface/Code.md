@@ -140,7 +140,6 @@ export function useDerivedSwapInfo(): {
 }
 ```
 
-
 ### useTradeExactOut
 
 根据精确的输出数量，计算出预计的输入数量和最佳交易路径
@@ -497,6 +496,7 @@ function useSwapCallArguments(
     switch (tradeVersion) {
       case Version.v2:
         swapMethods.push(
+          // @uniswap/v2-sdk/Router
           // 返回调用router合约的 methodName, args, value(eth)
           Router.swapCallParameters(trade, {
             feeOnTransfer: false,
@@ -531,4 +531,317 @@ function useSwapCallArguments(
   }, [account, allowedSlippage, chainId, deadline, library, recipient, trade, v1Exchange])
 }
 
+```
+
+## Approve
+
+### useApproveCallback
+
+返回当前token对于router合约的approve状态，和向token合约发起approve授权的方法<br>
+
+```js
+// approve 状态
+export enum ApprovalState {
+  UNKNOWN,
+  NOT_APPROVED,
+  PENDING,
+  APPROVED
+}
+```
+
+```js
+// src/hooks/useApproveCallback.ts
+// returns a variable indicating the state of the approval and a function which approves if necessary or early returns
+export function useApproveCallback(
+  amountToApprove?: CurrencyAmount,
+  spender?: string
+): [ApprovalState, () => Promise<void>] {
+  const { account } = useActiveWeb3React()
+  const token = amountToApprove instanceof TokenAmount ? amountToApprove.token : undefined
+
+  // useTokenAllowance会发起一个 multicall 调用，查询token对于router合约的allowance
+  const currentAllowance = useTokenAllowance(token, account ?? undefined, spender)
+  // 判断该token是否已有pending状态的授权交易 (之前已发送过approve)
+  // 具体方法是在 transaction state 内部筛选符合条件的交易记录
+  // 1. 没有reciept，即交易还在进行中 (pending)
+  // 2. 记录有 approval 属性 且 spender, token 符合
+  const pendingApproval = useHasPendingApproval(token?.address, spender)
+
+  // check the current approval status
+  // 检查allowance 数量，返回approval状态
+  // 1. pending 2. not approved 3. approved
+  const approvalState: ApprovalState = useMemo(() => {
+    if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
+    if (amountToApprove.currency === ETHER) return ApprovalState.APPROVED
+    // we might not have enough data to know whether or not we need to approve
+    if (!currentAllowance) return ApprovalState.UNKNOWN
+
+    // amountToApprove will be defined if currentAllowance is
+    return currentAllowance.lessThan(amountToApprove)
+      ? pendingApproval
+        ? ApprovalState.PENDING
+        : ApprovalState.NOT_APPROVED
+      : ApprovalState.APPROVED
+  }, [amountToApprove, currentAllowance, pendingApproval, spender])
+
+  const tokenContract = useTokenContract(token?.address)
+  const addTransaction = useTransactionAdder()
+
+  // 生成approve授权方法
+  const approve = useCallback(async (): Promise<void> => {
+    if (approvalState !== ApprovalState.NOT_APPROVED) {
+      console.error('approve was called unnecessarily')
+      return
+    }
+    if (!token) {
+      console.error('no token')
+      return
+    }
+
+    if (!tokenContract) {
+      console.error('tokenContract is null')
+      return
+    }
+
+    if (!amountToApprove) {
+      console.error('missing amount to approve')
+      return
+    }
+
+    if (!spender) {
+      console.error('no spender')
+      return
+    }
+
+    // 是否精确授权数量 默认最大数量授权
+    let useExact = false
+    // 先预执行最大数量授权 如果失败尝试精确数量的授权
+    const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
+      // general fallback for tokens who restrict approval amounts
+      useExact = true
+      return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
+    })
+
+    // 实际发送交易
+    return tokenContract
+      .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+        gasLimit: calculateGasMargin(estimatedGas)  //  gasLimit 为预估数量上浮10%
+      })
+      .then((response: TransactionResponse) => {
+        // 若发送交易成功 添加 transaction state
+        addTransaction(response, {
+          summary: 'Approve ' + amountToApprove.currency.symbol,
+          approval: { tokenAddress: token.address, spender: spender }
+        })
+      })
+      .catch((error: Error) => {
+        console.debug('Failed to approve token', error)
+        throw error
+      })
+  }, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction])
+
+  return [approvalState, approve]
+}
+```
+
+## Transaction
+
+### TransactionReducer
+
+Transaction State 的更新逻辑
+
+```js
+// src/state/transactions/reducer.ts
+
+export const initialState: TransactionState = {}
+
+export default createReducer(initialState, builder =>
+  builder
+    .addCase(addTransaction, (transactions, { payload: { chainId, from, hash, approval, summary, claim } }) => {
+      // 校验添加的新交易记录是否已存在
+      if (transactions[chainId]?.[hash]) {
+        throw Error('Attempted to add existing transaction.')
+      }
+      const txs = transactions[chainId] ?? {}
+      txs[hash] = { hash, approval, summary, claim, from, addedTime: now() }
+      transactions[chainId] = txs
+    })
+    .addCase(clearAllTransactions, (transactions, { payload: { chainId } }) => {
+      // 清空所有交易记录
+      if (!transactions[chainId]) return
+      transactions[chainId] = {}
+    })
+    .addCase(checkedTransaction, (transactions, { payload: { chainId, hash, blockNumber } }) => {
+      // 检查交易状态的变化
+      const tx = transactions[chainId]?.[hash]
+      if (!tx) {
+        return
+      }
+      // 更新 lastCheckedBlockNumber 字段
+      if (!tx.lastCheckedBlockNumber) {
+        tx.lastCheckedBlockNumber = blockNumber
+      } else {
+        tx.lastCheckedBlockNumber = Math.max(blockNumber, tx.lastCheckedBlockNumber)
+      }
+    })
+    .addCase(finalizeTransaction, (transactions, { payload: { hash, chainId, receipt } }) => {
+      // 交易确认事件
+      const tx = transactions[chainId]?.[hash]
+      if (!tx) {
+        return
+      }
+      // 为记录添加交易返回数据 和 确认时间戳
+      tx.receipt = receipt
+      tx.confirmedTime = now()
+    })
+)
+```
+
+### userTransactionAdder
+
+添加新的交易记录 (hook)
+
+```js
+// src/state/transactions/hooks.tsx
+
+// helper that can take a ethers library transaction response and add it to the list of transactions
+export function useTransactionAdder(): (
+  response: TransactionResponse,
+  customData?: { summary?: string; approval?: { tokenAddress: string; spender: string }; claim?: { recipient: string } }
+) => void {
+  const { chainId, account } = useActiveWeb3React()
+  const dispatch = useDispatch<AppDispatch>()
+
+  // 除了交易本身的信息，额外添加了交易概览，approval授权结果，claim空头字段
+  return useCallback(
+    (
+      response: TransactionResponse,
+      {
+        summary,
+        approval,
+        claim
+      }: { summary?: string; claim?: { recipient: string }; approval?: { tokenAddress: string; spender: string } } = {}
+    ) => {
+      if (!account) return
+      if (!chainId) return
+
+      const { hash } = response
+      if (!hash) {
+        throw Error('No transaction hash found.')
+      }
+      dispatch(addTransaction({ hash, from: account, chainId, approval, summary, claim }))
+    },
+    [dispatch, chainId, account]
+  )
+}
+```
+
+### TransactionUpdater
+
+```js
+// src/state/transactions/updater.tsx
+export default function Updater(): null {
+  const { chainId, library } = useActiveWeb3React()
+
+  const lastBlockNumber = useBlockNumber()
+
+  const dispatch = useDispatch<AppDispatch>()
+  const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
+
+  const transactions = chainId ? state[chainId] ?? {} : {}
+
+  // 显示交易确认弹窗的方法
+  const addPopup = useAddPopup()
+
+  // 利用useEffect机制监听，一旦有依赖参数变化，触发useEffect方法更新交易记录
+  useEffect(() => {
+    if (!chainId || !library || !lastBlockNumber) return
+
+    // 从所有记录中筛选出需要检查的记录
+    // 详细筛选逻辑参见 shouldCheck
+    Object.keys(transactions)
+      .filter(hash => shouldCheck(lastBlockNumber, transactions[hash]))
+      .forEach(hash => {
+        // 遍历请求交易状态
+        library
+          .getTransactionReceipt(hash)
+          .then(receipt => {
+            // 如果得到交易结果 触发 finalizeTransaction 事件，修改交易状态为完成
+            if (receipt) {
+              dispatch(
+                finalizeTransaction({
+                  chainId,
+                  hash,
+                  receipt: {
+                    blockHash: receipt.blockHash,
+                    blockNumber: receipt.blockNumber,
+                    contractAddress: receipt.contractAddress,
+                    from: receipt.from,
+                    status: receipt.status,
+                    to: receipt.to,
+                    transactionHash: receipt.transactionHash,
+                    transactionIndex: receipt.transactionIndex
+                  }
+                })
+              )
+
+              // 显示交易已确认的提示窗口
+              addPopup(
+                {
+                  txn: {
+                    hash,
+                    success: receipt.status === 1,
+                    summary: transactions[hash]?.summary
+                  }
+                },
+                hash
+              )
+            } else {
+              // 交易还没有结果，发送 checkedTransaction 事件继续监听
+              dispatch(checkedTransaction({ chainId, hash, blockNumber: lastBlockNumber }))
+            }
+          })
+          .catch(error => {
+            console.error(`failed to check transaction hash: ${hash}`, error)
+          })
+      })
+  }, [chainId, library, transactions, lastBlockNumber, dispatch, addPopup])
+
+  return null
+}
+```
+
+### shouldCheck
+
+判断当前交易记录是否需要监听的方法
+
+```js
+// src/state/transactions/updater.tsx
+export function shouldCheck(
+  lastBlockNumber: number,
+  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number }
+): boolean {
+  // 排除已完成的交易
+  if (tx.receipt) return false
+  // 没有lastCheckedBlockNumber字段表示该交易刚刚发送，还没有监听过
+  if (!tx.lastCheckedBlockNumber) return true
+  // 排除距离上次检查间隔小于一个区块的记录
+  const blocksSinceCheck = lastBlockNumber - tx.lastCheckedBlockNumber
+  if (blocksSinceCheck < 1) return false
+  // 处于pending状态多少分钟
+  const minutesPending = (new Date().getTime() - tx.addedTime) / 1000 / 60
+  if (minutesPending > 60) {
+    // every 10 blocks if pending for longer than an hour
+    // 对于pending 超过60分钟的记录，只监听区块距离现在超过9的记录(防止积累太多)
+    return blocksSinceCheck > 9
+  } else if (minutesPending > 5) {
+    // every 3 blocks if pending more than 5 minutes
+    // pending 5分钟 区块距离大于2
+    return blocksSinceCheck > 2
+  } else {
+    // otherwise every block
+    // pending 小于5分钟的所有记录
+    return true
+  }
+}
 ```

@@ -19,7 +19,7 @@
 - 自定义 token HEHE(HH) `0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - LPtoken `0x25c1CF39598DdD67bD68cA9e52f0c861D9Bf4c70`
 
-详细请戳这里 :point_right:[Interface 技术栈详细图示](./InfoList.md)
+详细请戳这里 :point_right:[相关辅助数据](./InfoList.md)
 
 ## 添加自定义 token
 
@@ -50,7 +50,7 @@ callResults: {
 1. 在 Swap 界面点击 `Select a token` 按钮，填入自定义 token 的地址
 2. `CurrencySearch` 的 `searchQuery` 被赋值为自定义 token 地址，其值产生变化，触发 `useToken` 获取 token 的信息
 3. `useToken` 首先会在已有的 tokenlist 中查找，如果有则直接返回 token 信息
-4. 找不到token信息，会调用 `useSingleCallResult` 请求自定义 token 合约的 `name` `symbol` 和 `decimals` 字段，这里返回 'HEHE' 'HH' 和 1
+4. 找不到 token 信息，会调用 `useSingleCallResult` 请求自定义 token 合约的 `name` `symbol` 和 `decimals` 字段，这里返回 'HEHE' 'HH' 和 1
 
    - `useSingleCallResult` 是调用 multicall 合约的方法
    - 在 state 中可以看到 callResults 新增了三条数据，其键的组成格式为 `{contract address}-{methodid}`
@@ -106,6 +106,8 @@ token 交易界面
 - `useCurrencyBalance`: `src/state/wallet/hooks.ts`
 - `useSwapActionHandlers`, `useDerivedSwapInfo`: `src/state/swap/hooks.ts`
 - `useTradeExactIn`, `useTradeExactOut`, `useAllCommonPairs`: `src/hooks/Trades.ts`
+
+详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Swap)
 
 ### init state
 
@@ -165,56 +167,14 @@ transactions: {}
      - 调用 `useAllCommonPairs` 获取所有可能用到的交易对(包含中转交易对)，具体的逻辑[参见 useAllCommonPairs](./Code.md#useAllCommonPairs)
      - 调用 `@uniswap/sdk/Trade.bestTradeExactOut` 计算最优交易路径
 
-7. 现在界面上已经显示出了最优交易路径和预计需要的输入数量，点击 swap 按钮和确认弹窗
-8. `useSwapCallback` 向router合约发起交易，返回交易的 状态，回调，报错
-    - `useSwapCallback` 中会先检查所有交易，并估算gas费用，在预执行过程中若有报错会立即抛出
-    - `useSwapCallback` 实际上一次只实际发送一笔交易，当需要发起多笔交易时，由 `SwapPage` 中的 `handleSwap` 监听上一笔交易的回调，当上一笔交易完成，会继续执行下一笔交易，直到全部执行完成
-    - 交易发送成功，向 transactions state 推送交易信息，以便追踪交易结果
+7. 现在界面上已经显示出了最优交易路径和预计需要的输入数量，点击 swap 按钮和确认弹窗。如果 token 未授权会先提示 approve，[过程参考 ApproveToken](#ApproveToken)
+8. `useSwapCallback` 向 router 合约发起交易，返回交易的 状态，回调，报错
 
-    ```js
-    // transactions state add transation
-    transactions: {
-      '4': {
-        '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce': {
-          hash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
-          summary: 'Swap 40100000000 DAI for 1 HH',
-          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-          addedTime: 1629128326722, // 时间戳
-          lastCheckedBlockNumber: 9125844 // 区块高度
-        }
-      }
-    }
-    ```
-9. 监听交易结果，transactions state 触发 `transactions/checkedTransaction` 事件，当区块高度变化，更新交易信息的 `lastCheckedBlockNumber` 字段
-10. 交易确认，transactions state 触发 `transactions/finalizeTransaction` 事件， 记录交易结果
+   - `useSwapCallback` 中会先检查所有交易，并估算 gas 费用，在预执行过程中若有报错会立即抛出
+   - `useSwapCallback` 实际上一次只实际发送一笔交易，当需要发起多笔交易时，由 `SwapPage` 中的 `handleSwap` 监听上一笔交易的回调，当上一笔交易完成，会继续执行下一笔交易，直到全部执行完成
+   - 交易发送成功，向 transactions state 推送交易信息，以便追踪交易结果
 
-    ```js
-    // transactions state add 
-    transactions: {
-      '4': {
-        '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce': {
-          hash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
-          summary: 'Swap 40100000000 DAI for 1 HH',
-          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-          addedTime: 1629128326722,
-          lastCheckedBlockNumber: 9125844,
-          // 以下是新增的交易结果数据
-          receipt: {
-            blockHash: '0xe05e5d4f90bf808baa02267b356ddcd3e694f0da3c88498f33572efd482d74a1',
-            blockNumber: 9125845,
-            contractAddress: null,
-            from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-            status: 1,
-            to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-            transactionHash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
-            transactionIndex: 12
-          },
-          confirmedTime: 1629128357461
-        }
-      }
-    }
-    ```
-
+9. 监听交易的过程请看 [WatchingTransaction](#WatchingTransaction)
 
 #### 不同的交易方法
 
@@ -229,7 +189,151 @@ transactions: {}
 | token       | ETH          | input        | swapExactTokensForETH    |
 | ETH         | token        | output       | swapETHForExactTokens    |
 
-## create pair
+## WatchingTransaction
+
+监听交易
+
+### 涉及的源码
+
+`useTransactionAdder`: `src/state/transactions/hooks.tsx`
+`TransactionReducer`: `src/state/transactions/reducer.ts`
+`userTransactionAdder`: `src/state/transactions/reducer.ts`
+`TransactionUpdater`: `src/state/transactions/updater.ts`
+
+详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Transaction)
+
+### init state
+
+```js
+transactions: {
+}
+```
+
+### 流程
+
+1. 接着看 Swap 部分的后续，发送交易后，会向 transaction state 添加交易记录
+
+   ```js
+   // transactions state add transation
+   transactions: {
+     '4': {
+       '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce': {
+         hash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
+         summary: 'Swap 40100000000 DAI for 1 HH',
+         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+         addedTime: 1629128326722, // 时间戳
+         lastCheckedBlockNumber: 9125844 // 区块高度
+       }
+     }
+   }
+   ```
+
+2. 监听交易结果，transactions state 触发 `transactions/checkedTransaction` 事件，当区块高度变化，更新交易信息的 `lastCheckedBlockNumber` 字段
+3. 交易确认，transactions state 触发 `transactions/finalizeTransaction` 事件， 记录交易结果
+
+   ```js
+   // transactions state add
+   transactions: {
+     '4': {
+       '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce': {
+         hash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
+         summary: 'Swap 40100000000 DAI for 1 HH',
+         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+         addedTime: 1629128326722,
+         lastCheckedBlockNumber: 9125844,
+         // 以下是新增的交易结果数据
+         receipt: {
+           blockHash: '0xe05e5d4f90bf808baa02267b356ddcd3e694f0da3c88498f33572efd482d74a1',
+           blockNumber: 9125845,
+           contractAddress: null,
+           from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+           status: 1,
+           to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+           transactionHash: '0x28e3b29d664593fa382caa736d5418a426567abf4271b747d467144b31cd26ce',
+           transactionIndex: 12
+         },
+         confirmedTime: 1629128357461
+       }
+     }
+   }
+   ```
+
+## ApproveToken
+
+### 涉及的源码
+
+- `useApproveCallback`: `src/hooks/useApproveCallback.ts`
+- `useTokenAllowance`: `src/data/Allowances.ts`
+- `useHasPendingApproval`: `src/state/transactions/hooks.tsx`
+
+详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Approve)
+
+### init state
+
+```js
+transactions: {
+}
+```
+
+### 操作流程
+
+1. 在需要 token 授权的场景，程序会自动获取 allowance 数量判断是否需要发起 approve
+2. 调用 `useApproveCallback` 有两个返回
+   - `approvalState` 当前 token 对于 router 合约的 approve 状态
+   - `approve` 向 token 发起 approve 的方法
+3. `useApproveCallback` 的运行过程：
+   - 向 token 发送 multicall 调用查询对于 router 合约的 allowance 数量
+   - 如果数量不足，会先检查 transaction state 是否有 pending 状态的 approve 请求
+   - approve 状态有四种： `UNKNOWN`, `NOT_APPROVED`, `PENDING`, `APPROVED`
+   - 内部详细的执行过程可以看[useApproveCallback 的代码解析](./Code.md#useApproveCallback)
+4. 当用户点击 Approve 按钮，会调用上一步返回的 approve 方法
+
+   - approve 的执行方法有两种模式，一个是最大数量授权，一个是精确数量的授权，会预执行前者若失败则执行后者
+   - 交易发送成功，向 transactions state 推送交易信息，以便追踪交易结果
+
+   ```js
+   transactions: {
+    '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
+        hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+        approval: {   //  相比swap交易多了approval字段
+          tokenAddress: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
+          spender: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+        },
+        summary: 'Approve HH',
+        from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+        addedTime: 1629196516760
+      }
+    }
+   ```
+
+5. 交易确认，显示提示弹窗
+
+   ```js
+   transactions: {
+     '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
+       hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+       approval: {
+         tokenAddress: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
+         spender: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+       },
+       summary: 'Approve HH',
+       from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+       addedTime: 1629196516760,
+       lastCheckedBlockNumber: 9130389,
+       receipt: {   // 交易结果字段
+         blockHash: '0xb191afae62ee3625ac2f388fcb44a14c3ad9448ec93db0fc5bd65388bc30c5f1',
+         blockNumber: 9130390,
+         contractAddress: null,
+         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+         status: 1,
+         to: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
+         transactionHash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+         transactionIndex: 12
+       },
+       confirmedTime: 1629196539067
+     }
+   }
+   ```
 
 ## AddLiquidity
 
