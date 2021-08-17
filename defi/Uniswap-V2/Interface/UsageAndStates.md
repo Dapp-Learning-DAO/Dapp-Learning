@@ -272,6 +272,9 @@ transactions: {
 
 ```js
 transactions: {
+},
+application: {
+
 }
 ```
 
@@ -310,28 +313,48 @@ transactions: {
 
    ```js
    transactions: {
-     '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
-       hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
-       approval: {
-         tokenAddress: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
-         spender: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
-       },
-       summary: 'Approve HH',
-       from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-       addedTime: 1629196516760,
-       lastCheckedBlockNumber: 9130389,
-       receipt: {   // 交易结果字段
-         blockHash: '0xb191afae62ee3625ac2f388fcb44a14c3ad9448ec93db0fc5bd65388bc30c5f1',
-         blockNumber: 9130390,
-         contractAddress: null,
-         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-         status: 1,
-         to: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
-         transactionHash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
-         transactionIndex: 12
-       },
-       confirmedTime: 1629196539067
+     '4': {
+      '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
+        hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+        approval: {
+          tokenAddress: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
+          spender: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+        },
+        summary: 'Approve HH',
+        from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+        addedTime: 1629196516760,
+        lastCheckedBlockNumber: 9130389,
+        receipt: {   // 交易结果字段
+          blockHash: '0xb191afae62ee3625ac2f388fcb44a14c3ad9448ec93db0fc5bd65388bc30c5f1',
+          blockNumber: 9130390,
+          contractAddress: null,
+          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+          status: 1,
+          to: '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85',
+          transactionHash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+          transactionIndex: 12
+        },
+        confirmedTime: 1629196539067
+      }
      }
+   },
+   application: {
+     ...
+     // 显示交易成功的提示弹窗
+      popupList: [
+      {
+        key: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+        show: true,
+        content: {
+          txn: {
+            hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
+            success: true,
+            summary: 'Approve HH'
+          }
+        },
+        removeAfterMs: 15000
+      }
+    ],
    }
    ```
 

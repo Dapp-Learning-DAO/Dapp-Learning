@@ -42,3 +42,27 @@
 | transfer           | 0xa9059cbb |
 | transferFrom       | 0x23b872dd |
 | unpause            | 0x3f4ba83a |
+
+### UniswapV2Router
+
+| method name                  | method id  |
+| ---------------------------- | ---------- |
+| WETH                         | 0xad5c4648 |
+| addLiquidity                 | 0xe8e33700 |
+| addLiquidityETH              | 0xf305d719 |
+| factory                      | 0xc45a0155 |
+| getAmountIn                  | 0x85f8c259 |
+| getAmountOut                 | 0x054d50d4 |
+| getAmountsIn                 | 0x1f00ca74 |
+| getAmountsOut                | 0xd06ca61f |
+| quote                        | 0xad615dec |
+| removeLiquidity              | 0xbaa2abde |
+| removeLiquidityETH           | 0x02751cec |
+| removeLiquidityETHWithPermit | 0xded9382a |
+| removeLiquidityWithPermit    | 0x2195995c |
+| swapETHForExactTokens        | 0xfb3bdb41 |
+| swapExactETHForTokens        | 0x7ff36ab5 |
+| swapExactTokensForETH        | 0x18cbafe5 |
+| swapExactTokensForTokens     | 0x38ed1739 |
+| swapTokensForExactETH        | 0x4a25d94a |
+| swapTokensForExactTokens     | 0x8803dbee |
