@@ -845,3 +845,354 @@ export function shouldCheck(
   }
 }
 ```
+
+## AddLiquidity
+
+添加流动性/创建流动性池子
+
+### MintReducer
+
+更新Mint state的方法
+
+```js
+// src/state/mint/reducer.ts
+export default createReducer<MintState>(initialState, builder =>
+  builder
+    .addCase(resetMintState, () => initialState)
+    .addCase(typeInput, (state, { payload: { field, typedValue, noLiquidity } }) => {
+      // noLiquidity 为true代表创建新池子
+      // 创建新的池子不需要自动计算另一边的数量，不用清空另一个输入框
+      if (noLiquidity) {
+        // they're typing into the field they've last typed in
+        if (field === state.independentField) {
+          return {
+            ...state,
+            independentField: field,
+            typedValue
+          }
+        }
+        // they're typing into a new field, store the other value
+        else {
+          return {
+            ...state,
+            independentField: field,
+            typedValue,
+            otherTypedValue: state.typedValue
+          }
+        }
+      } else {
+        // 向已有池子添加流动性，另一个输入框需要自动计算数量，所以需要清空
+        return {
+          ...state,
+          independentField: field,
+          typedValue,
+          otherTypedValue: ''
+        }
+      }
+    })
+)
+```
+
+### useDerivedMintInfo
+
+根据用户的输入数据，返回预估添加流动性的数据：
+
+- dependentField 自动计算另一侧需要的token数量
+- currencies 两个token对象
+- pair 流动性池子对象
+- pairState 池子状态
+- currencyBalances 用户在两个token上的余额
+- parsedAmounts 解析后的数量数值
+- price 当前交易价格
+- noLiquidity 池子是否流动性为0
+- liquidityMinted 预计用户能得到的流动性数量
+- poolTokenPercentage 预计本次添加占总流动性的百分比
+- error 报错信息
+
+```js
+// src/state/mint/hooks.ts
+export function useDerivedMintInfo(
+  currencyA: Currency | undefined,
+  currencyB: Currency | undefined
+): {
+  dependentField: Field
+  currencies: { [field in Field]?: Currency }
+  pair?: Pair | null
+  pairState: PairState
+  currencyBalances: { [field in Field]?: CurrencyAmount }
+  parsedAmounts: { [field in Field]?: CurrencyAmount }
+  price?: Price
+  noLiquidity?: boolean
+  liquidityMinted?: TokenAmount
+  poolTokenPercentage?: Percent
+  error?: string
+} {
+  const { account, chainId } = useActiveWeb3React()
+
+  // 从 Mint state 获取用户的输入数据
+  // independentField 代表用户最新键入的输入框 tokenA/tokenB
+  const { independentField, typedValue, otherTypedValue } = useMintState()
+
+  // dependentField 依赖用户输入数值来计算的输入框 tokenA/tokenB
+  const dependentField = independentField === Field.CURRENCY_A ? Field.CURRENCY_B : Field.CURRENCY_A
+
+  // tokens
+  const currencies: { [field in Field]?: Currency } = useMemo(
+    () => ({
+      [Field.CURRENCY_A]: currencyA ?? undefined,
+      [Field.CURRENCY_B]: currencyB ?? undefined
+    }),
+    [currencyA, currencyB]
+  )
+
+  // pair
+  // 调用 @uniswap/sdk/Pair.getAddress() 来获取池子的地址
+  const [pairState, pair] = usePair(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B])
+  // 将池子合约作为ERC20 token 来查询totalSupply
+  const totalSupply = useTotalSupply(pair?.liquidityToken)
+
+  // 池子流动性是否为0 池子不存在或流动性为0
+  const noLiquidity: boolean =
+    pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+
+  // balances
+  const balances = useCurrencyBalances(account ?? undefined, [
+    currencies[Field.CURRENCY_A],
+    currencies[Field.CURRENCY_B]
+  ])
+  const currencyBalances: { [field in Field]?: CurrencyAmount } = {
+    [Field.CURRENCY_A]: balances[0],
+    [Field.CURRENCY_B]: balances[1]
+  }
+
+  // amounts
+  // 用户键入的数量
+  const independentAmount: CurrencyAmount | undefined = tryParseAmount(typedValue, currencies[independentField])
+  // 自动计算另一侧数量
+  const dependentAmount: CurrencyAmount | undefined = useMemo(() => {
+    if (noLiquidity) {
+      // 当前池子不存在或流动性为0 不需要自动计算，由用户手动输入
+      if (otherTypedValue && currencies[dependentField]) {
+        return tryParseAmount(otherTypedValue, currencies[dependentField])
+      }
+      return undefined
+    } else if (independentAmount) {
+      // we wrap the currencies just to get the price in terms of the other token
+      // 这里会用 @uniswap/v2-sdk/TokenAmount 类型包装输入数值
+      const wrappedIndependentAmount = wrappedCurrencyAmount(independentAmount, chainId)
+      const [tokenA, tokenB] = [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
+      if (tokenA && tokenB && wrappedIndependentAmount && pair) {
+        // 判断需要计算的是tokenA还是tokenB
+        const dependentCurrency = dependentField === Field.CURRENCY_B ? currencyB : currencyA
+        // 调用sdk计算数值
+        // pair是 @uniswap/v2-sdk/Pair 类型
+        // sdk会本地计算 price * independentAmount
+        const dependentTokenAmount =
+          dependentField === Field.CURRENCY_B
+            ? pair.priceOf(tokenA).quote(wrappedIndependentAmount)
+            : pair.priceOf(tokenB).quote(wrappedIndependentAmount)
+        return dependentCurrency === ETHER ? CurrencyAmount.ether(dependentTokenAmount.raw) : dependentTokenAmount
+      }
+      return undefined
+    } else {
+      return undefined
+    }
+  }, [noLiquidity, otherTypedValue, currencies, dependentField, independentAmount, currencyA, chainId, currencyB, pair])
+  const parsedAmounts: { [field in Field]: CurrencyAmount | undefined } = {
+    [Field.CURRENCY_A]: independentField === Field.CURRENCY_A ? independentAmount : dependentAmount,
+    [Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount
+  }
+
+  // 计算当前池子的价格
+  const price = useMemo(() => {
+    // 没有流动性按照用户输入的比例作为价格
+    if (noLiquidity) {
+      const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
+      if (currencyAAmount && currencyBAmount) {
+        return new Price(currencyAAmount.currency, currencyBAmount.currency, currencyAAmount.raw, currencyBAmount.raw)
+      }
+      return undefined
+    } else {
+      // 已有流动性则调用sdk
+      // @uniswap/v2-sdk/Pair.priceOf()
+      const wrappedCurrencyA = wrappedCurrency(currencyA, chainId)
+      return pair && wrappedCurrencyA ? pair.priceOf(wrappedCurrencyA) : undefined
+    }
+  }, [chainId, currencyA, noLiquidity, pair, parsedAmounts])
+
+  // liquidity minted
+  // 预估用户可以得到的流动性数量
+  const liquidityMinted = useMemo(() => {
+    const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
+    const [tokenAmountA, tokenAmountB] = [
+      wrappedCurrencyAmount(currencyAAmount, chainId),
+      wrappedCurrencyAmount(currencyBAmount, chainId)
+    ]
+    if (pair && totalSupply && tokenAmountA && tokenAmountB) {
+      // @uniswap/v2-sdk/Pair.getLiquidityMinted()
+      // 本地计算用户预计能够得到的流动性数量
+      // 将两种token数量分别带入公式计算，取最小值
+      // tokenAmount / totalAmount * totalLiquidity
+      // 如果是新建池子则 tokenAmountA * tokenAmountB - MINIMUM_LIQUIDITY
+      return pair.getLiquidityMinted(totalSupply, tokenAmountA, tokenAmountB)
+    } else {
+      return undefined
+    }
+  }, [parsedAmounts, chainId, pair, totalSupply])
+
+  // 预估本地添加占池子总流动性的百分比
+  const poolTokenPercentage = useMemo(() => {
+    if (liquidityMinted && totalSupply) {
+      return new Percent(liquidityMinted.raw, totalSupply.add(liquidityMinted).raw)
+    } else {
+      return undefined
+    }
+  }, [liquidityMinted, totalSupply])
+
+  let error: string | undefined
+  if (!account) {
+    error = 'Connect Wallet'
+  }
+
+  if (pairState === PairState.INVALID) {
+    error = error ?? 'Invalid pair'
+  }
+
+  if (!parsedAmounts[Field.CURRENCY_A] || !parsedAmounts[Field.CURRENCY_B]) {
+    error = error ?? 'Enter an amount'
+  }
+
+  const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
+
+  if (currencyAAmount && currencyBalances?.[Field.CURRENCY_A]?.lessThan(currencyAAmount)) {
+    error = 'Insufficient ' + currencies[Field.CURRENCY_A]?.symbol + ' balance'
+  }
+
+  if (currencyBAmount && currencyBalances?.[Field.CURRENCY_B]?.lessThan(currencyBAmount)) {
+    error = 'Insufficient ' + currencies[Field.CURRENCY_B]?.symbol + ' balance'
+  }
+
+  return {
+    dependentField,
+    currencies,
+    pair,
+    pairState,
+    currencyBalances,
+    parsedAmounts,
+    price,
+    noLiquidity,
+    liquidityMinted,
+    poolTokenPercentage,
+    error
+  }
+}
+```
+
+### onAdd
+
+确认添加流动性，返回发送交易的方法
+
+```js
+// src/pages/AddLiquidity/index.tsx
+async function onAdd() {
+  if (!chainId || !library || !account) return
+  // 获取一个router合约对象 IUniswapV2Router02ABI
+  const router = getRouterContract(chainId, library, account)
+
+  // 检查数量
+  const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
+  if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
+    return
+  }
+
+  // 根据滑点百分比计算最小添加的数量
+  const amountsMin = {
+    [Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, noLiquidity ? 0 : allowedSlippage)[0],
+    [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0]
+  }
+
+  let estimate,
+    method: (...args: any) => Promise<TransactionResponse>,
+    args: Array<string | string[] | number>,
+    value: BigNumber | null
+  if (currencyA === ETHER || currencyB === ETHER) {
+    // 当其中一种token是ETH 调用router合约的 addLiquidityETH
+    const tokenBIsETH = currencyB === ETHER
+    estimate = router.estimateGas.addLiquidityETH
+    method = router.addLiquidityETH
+    // 根据ETH的位置调整入参
+    args = [
+      wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
+      (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
+      amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
+      amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
+      account,
+      deadline.toHexString()
+    ]
+    // ETH 发送的数量
+    value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+  } else {
+    // 没有ETH 调用router合约的 addLiquidity
+    estimate = router.estimateGas.addLiquidity
+    method = router.addLiquidity
+    args = [
+      wrappedCurrency(currencyA, chainId)?.address ?? '',
+      wrappedCurrency(currencyB, chainId)?.address ?? '',
+      parsedAmountA.raw.toString(),
+      parsedAmountB.raw.toString(),
+      amountsMin[Field.CURRENCY_A].toString(),
+      amountsMin[Field.CURRENCY_B].toString(),
+      account,
+      deadline.toHexString()
+    ]
+    // 不用发送ETH
+    value = null
+  }
+
+  // 打开确认发送交易的弹窗
+  setAttemptingTxn(true)
+  // 交易预执行
+  await estimate(...args, value ? { value } : {})
+    .then(estimatedGasLimit =>
+      // 返回真实发送交易的方法
+      method(...args, {
+        ...(value ? { value } : {}),  // 若有ETH放在这里
+        gasLimit: calculateGasMargin(estimatedGasLimit) //  根据预执行预估的gas费用上浮10%
+      }).then(response => {
+        // 发送交易成功后关闭确认弹窗
+        setAttemptingTxn(false)
+
+        // 将交易记录推入 Transaction state
+        addTransaction(response, {
+          summary:
+            'Add ' +
+            parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) +
+            ' ' +
+            currencies[Field.CURRENCY_A]?.symbol +
+            ' and ' +
+            parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) +
+            ' ' +
+            currencies[Field.CURRENCY_B]?.symbol
+        })
+
+        setTxHash(response.hash)
+
+        // 谷歌分析的插件
+        ReactGA.event({
+          category: 'Liquidity',
+          action: 'Add',
+          label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/')
+        })
+      })
+    )
+    .catch(error => {
+      setAttemptingTxn(false)
+      // we only care if the error is something _other_ than the user rejected the tx
+      // 交易发生错误,忽略错误码4001的情况
+      // 4001 代表用户在钱包确认阶段拒绝了交易
+      if (error?.code !== 4001) {
+        console.error(error)
+      }
+    })
+}
+```
