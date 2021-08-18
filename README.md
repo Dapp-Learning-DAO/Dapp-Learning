@@ -33,6 +33,7 @@
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
+- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 
 **开发工具：**
 
@@ -148,6 +149,7 @@
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
 
 ## DAO 进阶
 
@@ -213,6 +215,7 @@
 - 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
 - DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
 - Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
+- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 ## 社区捐助
 
