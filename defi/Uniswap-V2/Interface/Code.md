@@ -846,6 +846,99 @@ export function shouldCheck(
 }
 ```
 
+## PoolList
+
+追踪用户的Pool信息
+
+### useTrackedTokenPairs
+
+返回用户关心token的相关Pool列表
+
+```js
+// src/state/user/hooks.tsx
+
+/**
+ * Returns all the pairs of tokens that are tracked by the user for the current chain ID.
+ */
+export function useTrackedTokenPairs(): [Token, Token][] {
+  const { chainId } = useActiveWeb3React()
+  // 所有处于激活状态的token (界面中的token列表)
+  const tokens = useAllTokens()
+
+  // pinned pairs
+  // 获取置顶的交易对
+  // 只有主网有置顶交易对 ： [cDAI, cUSDC], [USDC, USDT], [DAI, USDT]
+  const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId])
+
+  // pairs for every token against every base
+  // 根据base token 和所有token配对
+  // BASES_TO_TRACK_LIQUIDITY_FOR
+  //    WETH
+  //    主网：WETH, DAI, USDC, USDT, WBTC
+  const generatedPairs: [Token, Token][] = useMemo(
+    () =>
+      chainId
+        ? flatMap(Object.keys(tokens), tokenAddress => {
+            const token = tokens[tokenAddress]
+            // for each token on the current chain,
+            return (
+              // loop though all bases on the current chain
+              (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
+                // to construct pairs of the given token with each base
+                .map(base => {
+                  if (base.address === token.address) {
+                    return null
+                  } else {
+                    return [base, token]
+                  }
+                })
+                .filter((p): p is [Token, Token] => p !== null)
+            )
+          })
+        : [],
+    [tokens, chainId]
+  )
+
+  // pairs saved by users
+  // 从user state 中取出用户自定义的pair
+  const savedSerializedPairs = useSelector<AppState, AppState['user']['pairs']>(({ user: { pairs } }) => pairs)
+
+  // 自定义pair匹配当前网络
+  const userPairs: [Token, Token][] = useMemo(() => {
+    if (!chainId || !savedSerializedPairs) return []
+    const forChain = savedSerializedPairs[chainId]
+    if (!forChain) return []
+
+    return Object.keys(forChain).map(pairId => {
+      return [deserializeToken(forChain[pairId].token0), deserializeToken(forChain[pairId].token1)]
+    })
+  }, [savedSerializedPairs, chainId])
+
+  // 拼接遍历的列表 基于basetoken的交易对 + 置顶的交易对 + 用户自定义的pair
+  const combinedList = useMemo(() => userPairs.concat(generatedPairs).concat(pinnedPairs), [
+    generatedPairs,
+    pinnedPairs,
+    userPairs
+  ])
+
+  return useMemo(() => {
+    // dedupes pairs of tokens in the combined list
+    // 最后对列表进行去重 统一将token地址升序排列
+    const keyed = combinedList.reduce<{ [key: string]: [Token, Token] }>((memo, [tokenA, tokenB]) => {
+      const sorted = tokenA.sortsBefore(tokenB)
+      const key = sorted ? `${tokenA.address}:${tokenB.address}` : `${tokenB.address}:${tokenA.address}`
+      if (memo[key]) return memo
+      memo[key] = sorted ? [tokenA, tokenB] : [tokenB, tokenA]
+      return memo
+    }, {})
+    console.log(Object.keys(keyed).map(key => keyed[key]))
+
+    return Object.keys(keyed).map(key => keyed[key])
+  }, [combinedList])
+}
+
+```
+
 ## AddLiquidity
 
 添加流动性/创建流动性池子
@@ -1090,7 +1183,7 @@ export function useDerivedMintInfo(
 
 ### onAdd
 
-确认添加流动性，返回发送交易的方法
+确认添加流动性，先预执行再真实发送交易
 
 ```js
 // src/pages/AddLiquidity/index.tsx
@@ -1149,7 +1242,7 @@ async function onAdd() {
     value = null
   }
 
-  // 打开确认发送交易的弹窗
+  // 打开交易执行中的提示弹窗
   setAttemptingTxn(true)
   // 交易预执行
   await estimate(...args, value ? { value } : {})
@@ -1159,7 +1252,7 @@ async function onAdd() {
         ...(value ? { value } : {}),  // 若有ETH放在这里
         gasLimit: calculateGasMargin(estimatedGasLimit) //  根据预执行预估的gas费用上浮10%
       }).then(response => {
-        // 发送交易成功后关闭确认弹窗
+        // 发送交易成功后关闭提示弹窗
         setAttemptingTxn(false)
 
         // 将交易记录推入 Transaction state
