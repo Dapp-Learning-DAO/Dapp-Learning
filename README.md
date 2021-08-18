@@ -33,7 +33,8 @@
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
-- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1>
+- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+
 **开发工具：**
 
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
