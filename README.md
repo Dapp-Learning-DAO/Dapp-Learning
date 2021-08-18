@@ -215,6 +215,7 @@
 - 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
 - DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
 - Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
+- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 ## 社区捐助
 
