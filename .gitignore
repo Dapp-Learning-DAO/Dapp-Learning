@@ -3,6 +3,8 @@
 **/sk.txt
 **/sk*.txt
 **/sk*.json
+**/__pycache__
+**/Uniswap
 **/package-lock.json
 # dependencies
 /node_modules

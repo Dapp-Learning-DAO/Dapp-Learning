@@ -4,7 +4,7 @@ from web3 import Web3
 
 def main():
     w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
-    with open('./build/contracts/MyToken.json', 'r') as fr:
+    with open('./ABI/MyToken.json', 'r') as fr:
         erc20_json_dict = json.load(fr)
 
     # 1. 查看ganache上的账号以及设置默认账号等
