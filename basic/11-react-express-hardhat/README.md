@@ -39,3 +39,11 @@ cd frontend
 yarn 
 yarn start
 ```
+
+
+## 参考文档  
+https://github.com/dzzzzzy/Nestjs-Learning    
+https://docs.nestjs.cn/8/firststeps  
+https://github.com/HeyiMaster/nest-starter  nestjs 
+https://www.bilibili.com/video/BV1bQ4y1A77L?p=4  netstjs Bilibili
+  
