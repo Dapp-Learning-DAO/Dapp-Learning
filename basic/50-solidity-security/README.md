@@ -14,7 +14,7 @@ docker pull mythril/myth
 
 - 进行检查 
 ```shell
-docker run -v ${PWD}:/contract mythril/myth analyze  /contract/bec.sol --solv 0.4.25
+docker run -v ${PWD}:/contract mythril/myth analyze  /contract/Overflow_Add.sol --solv 0.4.25
 ```
 
 之后可以得到如下输出
@@ -93,6 +93,30 @@ mythX 是一个付费工具, 支持命令行, vscode 插件等形式进行分析
 进行正确配置后, 就可以进行 solidity 文件漏洞扫描了, 这里以 vscode 为例, 扫描结果如下.  
 总的来说, 毕竟是付费的, 体验还是很不错的 ^_^
 ![安全分析模型](./images/scanResult.png)  
+
+## Solgraph 
+合约中会存在很多的方法, 特别是一些大型商业合约, 方法相互嵌套, 很容易令人迷惑. [SolGraph](https://github.com/raineorshine/solgraph) 就是用于展示合约方法之间相互关系的一个工具, 使用这个这个工具, 可以清晰的展示合约方法之间的调用关系.  
+
+- 安装 solgraph
+```
+yarn global add solgraph
+```
+
+- 安装 graphviz ( 以 macos 为例 )
+```
+brew install graphviz
+```
+
+- 进行分析  
+```
+solgraph GraphContract.sol > GraphContract.dot 
+```
+
+- 转换分析结果为图片  
+```
+dot -Tpng GraphContract.dot -o GraphContract.png
+```
+
 
 ## 参考链接 
 https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html  
