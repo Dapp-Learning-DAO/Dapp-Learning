@@ -1039,7 +1039,7 @@ export function useDerivedMintInfo(
   )
 
   // pair
-  // 调用 @uniswap/sdk/Pair.getAddress() 来获取池子的地址
+  // 调用 @uniswap/sdk/Pair 来获取池子的对象
   const [pairState, pair] = usePair(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B])
   // 将池子合约作为ERC20 token 来查询totalSupply
   const totalSupply = useTotalSupply(pair?.liquidityToken)
@@ -1287,5 +1287,400 @@ async function onAdd() {
         console.error(error)
       }
     })
+}
+```
+
+## RemoveLiquidity
+
+### useDerivedBurnInfo
+
+根据用户输入，返回预估移除流动性的数据
+
+- pair 池子对象，@uniswap/v2-sdk/Pair 类型
+- parsedAmounts 计算后的移除流动性数据，用于发起移除交易
+- error 报错信息
+
+```js
+// src/state/burn/hooks.ts
+export function useDerivedBurnInfo(
+  currencyA: Currency | undefined,
+  currencyB: Currency | undefined
+): {
+  pair?: Pair | null
+  parsedAmounts: {
+    [Field.LIQUIDITY_PERCENT]: Percent
+    [Field.LIQUIDITY]?: TokenAmount
+    [Field.CURRENCY_A]?: CurrencyAmount
+    [Field.CURRENCY_B]?: CurrencyAmount
+  }
+  error?: string
+} {
+  const { account, chainId } = useActiveWeb3React()
+
+  // 拿到用户的输入数值，independentField 输入的在哪一边 typedValue 销毁流动性数量的百分比
+  const { independentField, typedValue } = useBurnState()
+
+  // pair + totalsupply
+  // 调用 @uniswap/sdk/Pair 来获取池子的对象
+  const [, pair] = usePair(currencyA, currencyB)
+
+  // balances
+  // 查询用户的流动性数量 pair.balanceOf
+  const relevantTokenBalances = useTokenBalances(account ?? undefined, [pair?.liquidityToken])
+  const userLiquidity: undefined | TokenAmount = relevantTokenBalances?.[pair?.liquidityToken?.address ?? '']
+
+  const [tokenA, tokenB] = [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
+  const tokens = {
+    [Field.CURRENCY_A]: tokenA,
+    [Field.CURRENCY_B]: tokenB,
+    [Field.LIQUIDITY]: pair?.liquidityToken
+  }
+
+  // liquidity values
+  // 查询pair的总流动性数量 pair.totalSupply()
+  const totalSupply = useTotalSupply(pair?.liquidityToken)
+  // 估算用户在池子内两个token的总量
+  // @uniswap/v2-sdk/Pair.getLiquidityValue
+  // tokenAmount = liquidit / liquidityTotal * reserve
+  const liquidityValueA =
+    pair &&
+    totalSupply &&
+    userLiquidity &&
+    tokenA &&
+    // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+    JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
+      ? new TokenAmount(tokenA, pair.getLiquidityValue(tokenA, totalSupply, userLiquidity, false).raw)
+      : undefined
+  const liquidityValueB =
+    pair &&
+    totalSupply &&
+    userLiquidity &&
+    tokenB &&
+    // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+    JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
+      ? new TokenAmount(tokenB, pair.getLiquidityValue(tokenB, totalSupply, userLiquidity, false).raw)
+      : undefined
+  const liquidityValues: { [Field.CURRENCY_A]?: TokenAmount; [Field.CURRENCY_B]?: TokenAmount } = {
+    [Field.CURRENCY_A]: liquidityValueA,
+    [Field.CURRENCY_B]: liquidityValueB
+  }
+
+  // 计算要移除的百分比
+  let percentToRemove: Percent = new Percent('0', '100')
+  // user specified a %
+  // simple模式，用户直接托滑块选择百分比
+  if (independentField === Field.LIQUIDITY_PERCENT) {
+    percentToRemove = new Percent(typedValue, '100')
+  }
+  // user specified a specific amount of liquidity tokens
+  // detail模式，用户输入要移除的liquidity数量，换算成百分比
+  else if (independentField === Field.LIQUIDITY) {
+    if (pair?.liquidityToken) {
+      const independentAmount = tryParseAmount(typedValue, pair.liquidityToken)
+      // 移除的流动性不能大于用户的总流动性
+      if (independentAmount && userLiquidity && !independentAmount.greaterThan(userLiquidity)) {
+        // 移除百分比 = 移除流动性 / 用户总流动性
+        percentToRemove = new Percent(independentAmount.raw, userLiquidity.raw)
+      }
+    }
+  }
+  // user specified a specific amount of token a or b
+  // detail模式，用户输入要移除的token数量(tokenA/tokenB)，换算成百分比
+  else {
+    if (tokens[independentField]) {
+      const independentAmount = tryParseAmount(typedValue, tokens[independentField])
+      const liquidityValue = liquidityValues[independentField]
+      // 移除的token数量不能大于池子内用户的token总数
+      if (independentAmount && liquidityValue && !independentAmount.greaterThan(liquidityValue)) {
+        // 移除百分比 = 移除的token数量 / 池子内用户的token总数
+        percentToRemove = new Percent(independentAmount.raw, liquidityValue.raw)
+      }
+    }
+  }
+
+  // 组装数据
+  const parsedAmounts: {
+    [Field.LIQUIDITY_PERCENT]: Percent
+    [Field.LIQUIDITY]?: TokenAmount
+    [Field.CURRENCY_A]?: TokenAmount
+    [Field.CURRENCY_B]?: TokenAmount
+  } = {
+    [Field.LIQUIDITY_PERCENT]: percentToRemove,
+    [Field.LIQUIDITY]:
+      userLiquidity && percentToRemove && percentToRemove.greaterThan('0')
+        ? new TokenAmount(userLiquidity.token, percentToRemove.multiply(userLiquidity.raw).quotient)
+        : undefined,
+    [Field.CURRENCY_A]:
+      tokenA && percentToRemove && percentToRemove.greaterThan('0') && liquidityValueA
+        ? new TokenAmount(tokenA, percentToRemove.multiply(liquidityValueA.raw).quotient)
+        : undefined,
+    [Field.CURRENCY_B]:
+      tokenB && percentToRemove && percentToRemove.greaterThan('0') && liquidityValueB
+        ? new TokenAmount(tokenB, percentToRemove.multiply(liquidityValueB.raw).quotient)
+        : undefined
+  }
+
+  let error: string | undefined
+  if (!account) {
+    error = 'Connect Wallet'
+  }
+
+  if (!parsedAmounts[Field.LIQUIDITY] || !parsedAmounts[Field.CURRENCY_A] || !parsedAmounts[Field.CURRENCY_B]) {
+    error = error ?? 'Enter an amount'
+  }
+
+  return { pair, parsedAmounts, error }
+}
+```
+
+### onAttemptToApprove
+
+根据用户移除的输入数值，计算签名消息并调用钱包签名方法，获得v,r,s 和 deadline一起存入 setSignatureData 字段
+
+```js
+// src/pages/RemoveLiquidity/index.tsx
+async function onAttemptToApprove() {
+  if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
+  const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
+  if (!liquidityAmount) throw new Error('missing liquidity amount')
+
+  // 如果是ArgentWallet 直接返回pair合约的approve方法
+  if (isArgentWallet) {
+    return approveCallback()
+  }
+
+  // try to gather a signature for permission
+  // 尝试生成一个授权签名
+  // 获取用户在pair合约中的nonce值
+  const nonce = await pairContract.nonces(account)
+
+  // 一些签名用的参数
+  const EIP712Domain = [
+    { name: 'name', type: 'string' },
+    { name: 'version', type: 'string' },
+    { name: 'chainId', type: 'uint256' },
+    { name: 'verifyingContract', type: 'address' }
+  ]
+  const domain = {
+    name: 'Uniswap V2',
+    version: '1',
+    chainId: chainId,
+    verifyingContract: pair.liquidityToken.address
+  }
+  const Permit = [
+    { name: 'owner', type: 'address' },
+    { name: 'spender', type: 'address' },
+    { name: 'value', type: 'uint256' },
+    { name: 'nonce', type: 'uint256' },
+    { name: 'deadline', type: 'uint256' }
+  ]
+  // 组装被签名的消息，其中包括要移除的流动性数量，所以当数值变化需要重新生成签名参数
+  const message = {
+    owner: account,
+    spender: ROUTER_ADDRESS,
+    value: liquidityAmount.raw.toString(),
+    nonce: nonce.toHexString(),
+    deadline: deadline.toNumber()
+  }
+  const data = JSON.stringify({
+    types: {
+      EIP712Domain,
+      Permit
+    },
+    domain,
+    primaryType: 'Permit',
+    message
+  })
+
+  // 调用provider的签名方法获得 v,r,s 和 deadline一起存入 setSignatureData 字段
+  library
+    .send('eth_signTypedData_v4', [account, data])
+    .then(splitSignature)
+    .then(signature => {
+      setSignatureData({
+        v: signature.v,
+        r: signature.r,
+        s: signature.s,
+        deadline: deadline.toNumber()
+      })
+    })
+    .catch(error => {
+      // for all errors other than 4001 (EIP-1193 user rejected request), fall back to manual approve
+      // 忽略用户拒绝签名的情况
+      if (error?.code !== 4001) {
+        approveCallback()
+      }
+    })
+}
+
+```
+
+### onRemove
+
+发送移除流动性交易的方法
+
+```js
+async function onRemove() {
+  if (!chainId || !library || !account || !deadline) throw new Error('missing dependencies')
+  const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
+  if (!currencyAmountA || !currencyAmountB) {
+    throw new Error('missing currency amounts')
+  }
+
+  // 拿到Router合约对象
+  const router = getRouterContract(chainId, library, account)
+
+  // 根据滑点百分比计算最少需要移除的流动性数量 - 针对token的数量
+  const amountsMin = {
+    [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],
+    [Field.CURRENCY_B]: calculateSlippageAmount(currencyAmountB, allowedSlippage)[0]
+  }
+
+  if (!currencyA || !currencyB) throw new Error('missing tokens')
+  const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
+  if (!liquidityAmount) throw new Error('missing liquidity amount')
+
+  // 判断交易对是否有ETH
+  const currencyBIsETH = currencyB === ETHER
+  const oneCurrencyIsETH = currencyA === ETHER || currencyBIsETH
+
+  if (!tokenA || !tokenB) throw new Error('could not wrap')
+
+  // 有ETH调用router合约的 removeLiquidityETH 方法，没有则调用 removeLiquidity
+  let methodNames: string[], args: Array<string | string[] | number | boolean>
+  // we have approval, use normal remove liquidity
+  // 如果pair合约已经授权给router，直接调用普通的remove方法
+  if (approval === ApprovalState.APPROVED) {
+    // removeLiquidityETH
+    if (oneCurrencyIsETH) {
+      // 同时尝试两种方法，优先执行第一个
+      methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+      args = [
+        currencyBIsETH ? tokenA.address : tokenB.address,
+        liquidityAmount.raw.toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+        account,
+        deadline.toHexString()
+      ]
+    }
+    // removeLiquidity
+    else {
+      methodNames = ['removeLiquidity']
+      args = [
+        tokenA.address,
+        tokenB.address,
+        liquidityAmount.raw.toString(),
+        amountsMin[Field.CURRENCY_A].toString(),
+        amountsMin[Field.CURRENCY_B].toString(),
+        account,
+        deadline.toHexString()
+      ]
+    }
+  }
+  // we have a signataure, use permit versions of remove liquidity
+  // 没有授权，使用签名移除流动性的方法
+  else if (signatureData !== null) {
+    // removeLiquidityETHWithPermit
+    if (oneCurrencyIsETH) {
+      // ...SupportingFeeOnTransferTokens 是可以让router不验证token返回数量的方法
+      methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+      args = [
+        currencyBIsETH ? tokenA.address : tokenB.address,
+        liquidityAmount.raw.toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+        account,
+        signatureData.deadline,
+        false,
+        signatureData.v,
+        signatureData.r,
+        signatureData.s
+      ]
+    }
+    // removeLiquidityETHWithPermit
+    else {
+      methodNames = ['removeLiquidityWithPermit']
+      args = [
+        tokenA.address,
+        tokenB.address,
+        liquidityAmount.raw.toString(),
+        amountsMin[Field.CURRENCY_A].toString(),
+        amountsMin[Field.CURRENCY_B].toString(),
+        account,
+        signatureData.deadline,
+        false,
+        signatureData.v,
+        signatureData.r,
+        signatureData.s
+      ]
+    }
+  } else {
+    throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
+  }
+
+  // 预执行所有交易
+  const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    methodNames.map(methodName =>
+      router.estimateGas[methodName](...args)
+        .then(calculateGasMargin)
+        .catch(error => {
+          console.error(`estimateGas failed`, methodName, args, error)
+          return undefined
+        })
+    )
+  )
+
+  // 找出第一条执行成功的索引
+  const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(safeGasEstimate =>
+    BigNumber.isBigNumber(safeGasEstimate)
+  )
+
+  // all estimations failed...
+  if (indexOfSuccessfulEstimation === -1) {
+    // 所有预执行都失败
+    console.error('This transaction would fail. Please contact support.')
+  } else {
+    // 执行优先级高的成功的方法
+    const methodName = methodNames[indexOfSuccessfulEstimation]
+    const safeGasEstimate = safeGasEstimates[indexOfSuccessfulEstimation]
+
+    // 打开交易进行中的提示窗
+    setAttemptingTxn(true)
+    // 调用router的移除方法
+    await router[methodName](...args, {
+      gasLimit: safeGasEstimate
+    })
+      .then((response: TransactionResponse) => {
+        // 执行成功关闭提示弹窗
+        setAttemptingTxn(false)
+
+        // 向Transaction state推送交易记录
+        addTransaction(response, {
+          summary:
+            'Remove ' +
+            parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) +
+            ' ' +
+            currencyA?.symbol +
+            ' and ' +
+            parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) +
+            ' ' +
+            currencyB?.symbol
+        })
+
+        setTxHash(response.hash)
+
+        ReactGA.event({
+          category: 'Liquidity',
+          action: 'Remove',
+          label: [currencyA?.symbol, currencyB?.symbol].join('/')
+        })
+      })
+      .catch((error: Error) => {
+        setAttemptingTxn(false)
+        // we only care if the error is something _other_ than the user rejected the tx
+        console.error(error)
+      })
+  }
 }
 ```

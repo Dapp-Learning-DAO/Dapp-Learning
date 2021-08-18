@@ -626,3 +626,85 @@ transactions: {}
     ```
 
 ## RemoveLiquidity
+
+移除流动性
+
+### 涉及的源码
+
+- `RemoveLiquidityPage`: src/pages/RemoveLiquidity/index.tsx
+- `useBurnState`, `useDerivedBurnInfo`, `useBurnActionHandlers`: src/state/burn/hooks.ts
+- `onAttemptToApprove`, `onRemove`: src/pages/RemoveLiquidity/index.tsx
+
+详细代码解析请戳这里 :point_right: [RemoveLiquidity 代码解析](./Code.md#RemoveLiquidity)
+
+### init state
+
+```js
+burn: {
+  independentField: 'LIQUIDITY_PERCENT',  // LIQUIDITY_PERCENT | LIQUIDITY | CURRENCY_A | CURRENCY_B
+  typedValue: ''  //  用户的输入数值
+},
+multicall: {},
+transactions: {}
+```
+
+### 交互流程
+
+1. 移除流动性在用户输入数据环节和添加流动性不同
+    - 移除有两种模式
+    - Simple mode : 用户直接拖动滑块控制 `typedValue`
+    - Detail mode 有两种种情况：
+        - 用户直接输入移除的流动性数量(这里是`HH:WETH`栏)，`independentField` 变成 `LIQUIDITY`
+        - 用户直接输入要移除的token数量，`independentField` 变成 `CURRENCY_A | CURRENCY_B`
+
+    ```js
+    // 拖动滑块输入百分比
+    burn: {
+      independentField: 'LIQUIDITY_PERCENT',
+      typedValue: '25'
+    }
+    // 直接输入流动性数量
+    burn: {
+      independentField: 'LIQUIDITY',
+      typedValue: '0.0000000175505'
+    }
+    // 直接输入tokenA数量
+     burn: {
+      independentField: 'CURRENCY_A',
+      typedValue: '10.6'
+    }
+    ```
+2. 输入的变化会触发 `useDerivedBurnInfo` 更新移除流动性的数据，自动计算要移除的百分比，流动性数量，token数量
+    - 过程和添加流动性类似
+    - 主要区别在于区别输入模式不同的三种情况
+
+3. 输入的变化还会导致清空 `signatureData`，这是存储钱包签名的字段，界面会显示两个按钮 `Approve` 和 `Remove`，后者现在是置灰状态
+
+4. 点击`Approve`按钮，调用 `onAttemptToApprove` 生成 v,r,s 签名，存入 `signatureData`，界面显示签名成功状态，此时未发交易
+
+5. 点击`Remove`按钮，调用 `onRemove`，发送移除交易，向Transaction state推送交易记录，并监听结果,过程和添加流动性类似
+
+    ```js
+    transactions: {
+      '4': {
+        '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366': {
+          hash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
+          summary: 'Remove 49.5 HH and 0.0506 ETH',
+          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+          addedTime: 1629279660975,
+          lastCheckedBlockNumber: 9135930,
+          receipt: {
+            blockHash: '0xec98d54353ab2f5985837f26d956cead77917e37904397063a757de960b62463',
+            blockNumber: 9135932,
+            contractAddress: null,
+            from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+            status: 1,
+            to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+            transactionHash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
+            transactionIndex: 9
+          },
+          confirmedTime: 1629279682092
+        }
+      }
+    }
+    ```
