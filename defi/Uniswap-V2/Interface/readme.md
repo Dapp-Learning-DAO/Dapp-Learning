@@ -50,14 +50,37 @@
 
 了解详细的状态数据结构图请戳这里 :point_right: [状态数据的结构-详细](./xmind/State.png)
 
+#### Multicall State 解析
+
+- Multicall Contract
+- State 结构
+- Reducer 初始值和规定触发state事件的方法
+- Updater 更新state的具体逻辑
+- Hooks 页面中实际使用Multicall模块的钩子函数
+
+详细解析请戳这里 :point_right: [Multicall模块解析](./Multicall.md)
 
 ### 用户使用流程及State的变化
 
 追踪交互动作与状态数据变化的关系，可以帮助我们更好的理解程序运行的逻辑
 
+- 添加自定义的token流程
+- Swap交易流程
+- WatchingTransaction 发送交易,及监听和更新的流程
+- Approve Token流程
+- PoolList 索引用户池子的流程
+- AddLiquidity 添加流动性的流程(add/mint)
+- RemoveLiquidity 移除流动性的流程
+
 详细解析请戳这里 :point_right: [V2的用户交互流程及状态变化](./UsageAndStates.md)
 
 ### 代码解析
+
+- Swap
+- Transaction
+- PoolList
+- AddLiquidity
+- RemoveLiquidity
 
 详细解析请戳这里 :point_right: [V2 interface 代码解析](./Code.md)
 
