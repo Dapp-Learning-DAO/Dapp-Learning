@@ -6,7 +6,7 @@
 
 ## Interface
 
-Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括 token swap， 添加和移除流动性等功能。
+Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括 token交易,添加和移除流动性等功能。
 
 - 代码分析使用版本 `tag 3.2.7`
 - UniswapV2Interface 源码地址：https://github.com/Uniswap/uniswap-interface/tree/v3.2.7
@@ -22,7 +22,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 相关辅助数据
 - 相关引用
 
-详细内容请戳这里 :point_right: [UniswapV2 Interface Guid](./Interface/README.md)
+详细内容请戳这里 :point_right: [UniswapV2 Interface Guid](./Interface/readme.md)
 
 ## 参考链接
 
