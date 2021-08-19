@@ -33,7 +33,7 @@
 
 ### initial state
 
-```js
+```ts
 user: {
   ...
   tokens: {}
@@ -57,7 +57,7 @@ callResults: {
    - 对照[methodid 列表](./InfoList.md#ERC20)查询 methodid 可以验证其对应的正是合约的三个 getter 函数 `name()` `symbol()` `decimals()`
    - 关于 multicall 模块的批量请求过程会在 [Multicall 模块详解](./Multicall.md) 中解析，这里不再赘述
 
-   ```js
+   ```ts
    // callResults 新增三条数据
    ...
    '0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85-0x06fdde03': {
@@ -74,7 +74,7 @@ callResults: {
 5. `CurrencySearch` 拿到 token 信息，判断其不在已有列表中，固显示 import 按钮
 6. 用户点击 import，再次确认之后，触发 user state 的 `user/addSerializedToken` 事件，添加新的自定义 token
 
-   ```js
+   ```ts
    // user state 新增自定义token信息
    user: {
      ...
@@ -111,7 +111,7 @@ token 交易界面
 
 ### init state
 
-```js
+```ts
 // swap state tokenInput 默认 ETH
 swap: {
   INPUT: {
@@ -135,7 +135,7 @@ transactions: {}
 3. 选择 `DAI` 作为输入 token， 触发 swap state 的 `swap/selectCurrency` 事件
 4. 选择 `HH` 作为输出 token，此时 swap state 变化如下
 
-   ```js
+   ```ts
    swap: {
      INPUT: {
        currencyId: '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735'  // DAI 的地址
@@ -149,7 +149,7 @@ transactions: {}
 
 5. 以指定输出数量为例，用户在输出 token 前面(下方的输入框)输入交易金额，触发 swap state 的 `swap/typeInput` 事件，
 
-   ```js
+   ```ts
    // swap state changed
    swap: {
     ...
@@ -204,7 +204,7 @@ transactions: {}
 
 ### init state
 
-```js
+```ts
 transactions: {
 }
 ```
@@ -213,7 +213,7 @@ transactions: {
 
 1. 接着看 Swap 部分的后续，发送交易后，会向 transaction state 添加交易记录
 
-   ```js
+   ```ts
    // transactions state add transation
    transactions: {
      '4': {
@@ -231,7 +231,7 @@ transactions: {
 2. 监听交易结果，transactions state 触发 `transactions/checkedTransaction` 事件，当区块高度变化，更新交易信息的 `lastCheckedBlockNumber` 字段
 3. 交易确认，transactions state 触发 `transactions/finalizeTransaction` 事件， 记录交易结果
 
-   ```js
+   ```ts
    // transactions state add
    transactions: {
      '4': {
@@ -270,7 +270,7 @@ transactions: {
 
 ### init state
 
-```js
+```ts
 transactions: {
 },
 application: {
@@ -294,7 +294,7 @@ application: {
    - approve 的执行方法有两种模式，一个是最大数量授权，一个是精确数量的授权，会预执行前者若失败则执行后者
    - 交易发送成功，向 transactions state 推送交易信息，以便追踪交易结果
 
-   ```js
+   ```ts
    transactions: {
     '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
         hash: '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611',
@@ -311,7 +311,7 @@ application: {
 
 5. 交易确认，显示提示弹窗
 
-   ```js
+   ```ts
    transactions: {
      '4': {
       '0xd5c0fc192774b5a6d7ac7eb5e1937096909aca9ba78454386a371b6876fab611': {
@@ -370,7 +370,7 @@ application: {
 
 ### init state
 
-```js
+```ts
 multicall: {
   callListeners: {},
   callResults: {},
@@ -394,7 +394,7 @@ multicall: {
    - 在 callListeners 中可以看到添加的追踪记录
    - 键的格式为 `{pairAddress}-{methodid}{calldata}`, 0x70a08231 是 `balanceOf` 的 methodid
 
-   ```js
+   ```ts
    multicall: {
      // 批量调用balanceOf方法，调用监听器推入记录
      callListeners: {
@@ -423,7 +423,7 @@ multicall: {
 
 4. 返回查询结果，推入 callResults，目前只有 `HH-WETH` 池子有余额
 
-   ```js
+   ```ts
    multicall: {
      callListeners: {
        ...
@@ -478,7 +478,7 @@ multicall: {
 
 ### init state
 
-```js
+```ts
 mint: {
   independentField: 'CURRENCY_A',
   typedValue: '',
@@ -499,7 +499,7 @@ transactions: {}
 
    - 输入框打字会触发 `mint/typeInputMint` 事件，Mint state 更新状态
 
-   ```js
+   ```ts
    // 用户在第二个输入框输入10
    mint: {
      independentField: 'CURRENCY_B', // 变为CURRENCY_B
@@ -515,7 +515,7 @@ transactions: {}
    - 调用 sdk 的 `@uniswap/sdk/Pair.getAddress(tokenA, tokenB)` 本地计算出池子地址
    - 使用 Multicall 模块的 `useSingleCallResult` 查询池子合约的 `totalSupply` 方法，得到池子的流动性总数量
 
-     ```js
+     ```ts
      // 调用 totalSupply 方法
      multicall: {
        '4': {
@@ -530,7 +530,7 @@ transactions: {}
      }
      ```
 
-     ```js
+     ```ts
      //  得到 totalSupply 结果
      multicall: {
        '4': {
@@ -582,7 +582,7 @@ transactions: {}
     - 将交易记录推入 Transaction State ，监听交易结果
     - 这里会忽略错误码为4001的交易报错，这代表用户在钱包确认阶段拒绝了交易
 
-    ```js
+    ```ts
     transactions: {
       '4': {
         '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
@@ -598,7 +598,7 @@ transactions: {}
 
 7. 交易确认，用户收到确认提示窗
 
-    ```js
+    ```ts
     transactions: {
       '4': {
         '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
@@ -639,7 +639,7 @@ transactions: {}
 
 ### init state
 
-```js
+```ts
 burn: {
   independentField: 'LIQUIDITY_PERCENT',  // LIQUIDITY_PERCENT | LIQUIDITY | CURRENCY_A | CURRENCY_B
   typedValue: ''  //  用户的输入数值
@@ -657,7 +657,7 @@ transactions: {}
         - 用户直接输入移除的流动性数量(这里是`HH:WETH`栏)，`independentField` 变成 `LIQUIDITY`
         - 用户直接输入要移除的token数量，`independentField` 变成 `CURRENCY_A | CURRENCY_B`
 
-    ```js
+    ```ts
     // 拖动滑块输入百分比
     burn: {
       independentField: 'LIQUIDITY_PERCENT',
@@ -684,7 +684,7 @@ transactions: {}
 
 5. 点击`Remove`按钮，调用 `onRemove`，发送移除交易，向Transaction state推送交易记录，并监听结果,过程和添加流动性类似
 
-    ```js
+    ```ts
     transactions: {
       '4': {
         '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366': {

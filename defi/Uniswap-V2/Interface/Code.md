@@ -7,7 +7,7 @@
 
 从用户的输入数值来计算最佳的交易路径
 
-```js
+```ts
 // src/state/swap/hooks.ts
 
 // from the current swap inputs, compute the best trade and return it.
@@ -144,7 +144,7 @@ export function useDerivedSwapInfo(): {
 
 根据精确的输出数量，计算出预计的输入数量和最佳交易路径
 
-```js
+```ts
 // src/hooks/Trades.ts
 /**
  * Returns the best trade for the token in to the exact amount of token out
@@ -195,7 +195,7 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
 
 筛选 tokenA 和 tokenB 所有可用的交易对（包含中转交易对）
 
-```js
+```ts
 // src/hooks/Trades.ts
 
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
@@ -289,7 +289,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
 向router合约发起交易，返回交易的 状态，回调，报错
 
-```js
+```ts
 // src/hooks/useSwapCallback.ts
 
 // returns a function that will execute a swap, if the parameters are all valid
@@ -457,7 +457,7 @@ export function useSwapCallback(
 
 解析交易对生成用于调用router合约的方法名和参数
 
-```js
+```ts
 // src/hooks/useSwapCallback.ts
 
 /**
@@ -539,7 +539,7 @@ function useSwapCallArguments(
 
 返回当前token对于router合约的approve状态，和向token合约发起approve授权的方法<br>
 
-```js
+```ts
 // approve 状态
 export enum ApprovalState {
   UNKNOWN,
@@ -549,7 +549,7 @@ export enum ApprovalState {
 }
 ```
 
-```js
+```ts
 // src/hooks/useApproveCallback.ts
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useApproveCallback(
@@ -650,7 +650,7 @@ export function useApproveCallback(
 
 Transaction State 的更新逻辑
 
-```js
+```ts
 // src/state/transactions/reducer.ts
 
 export const initialState: TransactionState = {}
@@ -701,7 +701,7 @@ export default createReducer(initialState, builder =>
 
 添加新的交易记录 (hook)
 
-```js
+```ts
 // src/state/transactions/hooks.tsx
 
 // helper that can take a ethers library transaction response and add it to the list of transactions
@@ -738,7 +738,7 @@ export function useTransactionAdder(): (
 
 ### TransactionUpdater
 
-```js
+```ts
 // src/state/transactions/updater.tsx
 export default function Updater(): null {
   const { chainId, library } = useActiveWeb3React()
@@ -815,7 +815,7 @@ export default function Updater(): null {
 
 判断当前交易记录是否需要监听的方法
 
-```js
+```ts
 // src/state/transactions/updater.tsx
 export function shouldCheck(
   lastBlockNumber: number,
@@ -854,7 +854,7 @@ export function shouldCheck(
 
 返回用户关心token的相关Pool列表
 
-```js
+```ts
 // src/state/user/hooks.tsx
 
 /**
@@ -947,7 +947,7 @@ export function useTrackedTokenPairs(): [Token, Token][] {
 
 更新Mint state的方法
 
-```js
+```ts
 // src/state/mint/reducer.ts
 export default createReducer<MintState>(initialState, builder =>
   builder
@@ -1002,7 +1002,7 @@ export default createReducer<MintState>(initialState, builder =>
 - poolTokenPercentage 预计本次添加占总流动性的百分比
 - error 报错信息
 
-```js
+```ts
 // src/state/mint/hooks.ts
 export function useDerivedMintInfo(
   currencyA: Currency | undefined,
@@ -1185,7 +1185,7 @@ export function useDerivedMintInfo(
 
 确认添加流动性，先预执行再真实发送交易
 
-```js
+```ts
 // src/pages/AddLiquidity/index.tsx
 async function onAdd() {
   if (!chainId || !library || !account) return
@@ -1300,7 +1300,7 @@ async function onAdd() {
 - parsedAmounts 计算后的移除流动性数据，用于发起移除交易
 - error 报错信息
 
-```js
+```ts
 // src/state/burn/hooks.ts
 export function useDerivedBurnInfo(
   currencyA: Currency | undefined,
@@ -1437,7 +1437,7 @@ export function useDerivedBurnInfo(
 
 根据用户移除的输入数值，计算签名消息并调用钱包签名方法，获得v,r,s 和 deadline一起存入 setSignatureData 字段
 
-```js
+```ts
 // src/pages/RemoveLiquidity/index.tsx
 async function onAttemptToApprove() {
   if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
@@ -1519,7 +1519,7 @@ async function onAttemptToApprove() {
 
 发送移除流动性交易的方法
 
-```js
+```ts
 async function onRemove() {
   if (!chainId || !library || !account || !deadline) throw new Error('missing dependencies')
   const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
