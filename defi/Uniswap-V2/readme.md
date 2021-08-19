@@ -26,6 +26,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 
 ## 参考链接
 
-<https://www.youtube.com/watch?v=U3fTTqHy7F4>
-<https://www.youtube.com/watch?v=TCYnec5G9pE>
-<https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90>
+- <https://www.youtube.com/watch?v=U3fTTqHy7F4>
+- <https://www.youtube.com/watch?v=TCYnec5G9pE>
+- <https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90>
+- [催眠大师]手把手教你开发去中心化交易所-Uniswap交易所开发课程：https://www.bilibili.com/video/BV1jk4y1y7t9
