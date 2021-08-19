@@ -58,12 +58,89 @@ import FourOhFour from './pages/404';
 import HubBalances from './pages/HubBalances';
 ```
 + 可以看到，关键的Hub：聚合功能、Dao本身管理、Explore搜索更多DAO、Summon召唤新建一个DAO等等，都有了，不一一解释，基本和首页对应，我们来探索下。
-### 钱包连接
-+ 这里分析下链接钱包的过程，包括profile的加载和现实。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
-### 获取链上数据
-+ 这里分析获取链上的已经存在的DAO信息和其他链上数据。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
+### 目录概述
++ 主要目录
+#### 1 storybook
++ 独立开发React、Vue和Angular的UI组件工具，这个目录猜测是用来展示、测试UI组件的。
++ npm run storybook
++ 扩展阅读：
++ https://www.jianshu.com/p/9cb75ae50515
++ https://storybook.js.org/docs/react/get-started/introduction
++ License：GPLV3,https://www.gnu.org/licenses/gpl-3.0.txt
+#### 2 vscode
++ 设置文件，不解释
+#### 3 public
++ 全局静态文件
++ icon集合，index静态文件
+#### 4 src
++ 主要目录文件
++ 分为几个大类
+##### 入口
+
+index.jsx
+
+App.jsx
+##### 控制部分
+
+**routers**  
+
+**contexts** 
+
+**pages**       
+
+**forms**  
+
+##### 实现部分
+
+**contracts**  
+
+**graphQL**  
+
+**services**  
+
+**hooks**  
+
+**components**     
+
+##### 辅助内容
+
+**themes**
+
+**header**   
+
+**content**      
+
+**data**             
+
+**modals**     
+
+**stories**
+
+**nav** 
+
+**polls**       
+
+**formBuilder**    
+
+**assets** 
+
+**staticElements**   
+
+**utils**
+
+##### 其他
+
+global.css
+
+ index.css
+
+reportWebVitals.js
+
+setupTests.js
+### 分析路径
++ 前端分析目标是具备React基本开发能力的同学，看完本文后，能够动手修改前端页面功能，改为自己的XXXDAOClub之类的DAO建设工具（后端也要对应修改、完善）。
++ 以App.jsx为入口，描述下整体分析思路，
++ 
 ### 调用智能合约
 + 这里主要分析调用Moloch智能合约的过程，入口和返回参数等。
 + [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
