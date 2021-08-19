@@ -107,7 +107,7 @@ token 交易界面
 - `useSwapActionHandlers`, `useDerivedSwapInfo`: src/state/swap/hooks.ts
 - `useTradeExactIn`, `useTradeExactOut`, `useAllCommonPairs`: src/hooks/Trades.ts
 
-详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Swap)
+详细代码解析请戳这里 :point_right: [Swap 代码解析](./Code.md#Swap)
 
 ### init state
 
@@ -266,7 +266,7 @@ transactions: {
 - `useTokenAllowance`: src/data/Allowances.ts
 - `useHasPendingApproval`: src/state/transactions/hooks.tsx
 
-详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Approve)
+详细代码解析请戳这里 :point_right: [ApproveToken 代码解析](./Code.md#Approve)
 
 ### init state
 
