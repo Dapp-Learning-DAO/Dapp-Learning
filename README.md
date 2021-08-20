@@ -121,6 +121,7 @@
 48. state channel  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
+51. [ganache](https://github.com/trufflesuite/ganache)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
