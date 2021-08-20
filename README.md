@@ -1,234 +1,229 @@
-#  Dapp Learning 
+<div align="center">
+ <h1>Dapp Learning</h1>
+ <h4 align="center">
+  区块链 Dapp 开发教程
+ </h4>
+ <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+</div>
 
-本项目适合零基础开发者入门区块链 DAPP 开发，了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。
-主要工具是 web3.js（hardhat), web3.py (Brownie) ，也可以使用Java，rust语言。    
-我们选取主流技术和项目作为研究对象，开发者可以认领待完成的任务或者自由添加自己感兴趣的项目。 
+## 序 - Preface
 
-项目分基础任务卡和项目任务卡，基础任务卡是基本工具组件的了解和集成。
-项目任务卡是主流 DeFi, NFT, DAO 的典型项目。  
+本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。   
 
-项目愿景是给**初级开发者**一个可执行且最简的区块链 **DAPP** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。
-项目任务类型涵盖面广泛，实属黑客马拉松必备工具。
+项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
+ 
+项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传[B站的Rebase官方账号](https://space.bilibili.com/382886213)。    
 
-## 基础知识
+技术栈：
 
-**建议开发者先阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)**
+- `web3.js`
+- `ethers.js`
+- `hardhat`
+- `web3.py (Brownie)`
+- `Java` （可选）
+- `rust` （可选）
 
-- 以太坊原理书：https://ethbook.abyteahead.com/howto.html
-- 以太坊开发工具汇总：https://learnblockchain.cn/article/2006
+教程分为基础任务和项目任务两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-## 必备工具清单
-开发前请安装和了解以下工具：
-- metamask（浏览器钱包插件）: https://www.jianshu.com/p/b5b2c05e9090
-- infura（节点服务）: https://infura.io/
-- 测试均连接kovan测试网，kovan测试ETH申请: https://faucet.kovan.network,也可自由使用其他测试网络。
-- 以太坊区块链浏览器: https://kovan.etherscan.io
-- JSON-PRC接口: https://eth.wiki/json-rpc/API
-- tenderly合约验证 https://dashboard.tenderly.co/explorer
-- remix本地环境 https://zhuanlan.zhihu.com/p/38309494
+此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
 
-## 合约参考库及致敬相关项目
-- **https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018**
-（shooter大佬的项目，适合入门solidity）
+## 准备工作 - Preparatory Work
 
-- **https://github.com/OpenZeppelin/openzeppelin-contracts**
-  (经典合约库)
-- **https://github.com/austintgriffith/scaffold-eth**
-(向此神级项目致敬)
-- **https://github.com/HQ20/contracts**
-- **https://learnblockchain.cn/**
-（很多很棒的教程）
-- **https://live.csdn.net/list/Kevin_M_00**
-（密码学课程）
-- **https://github.com/OffcierCia/DeFi-Developer-Road-Map**
-  （defi教程）
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理**
 
-## 基础课程列表(可自由添加任务卡)
-**添加任务卡时请附上相关参考链接**
-- Day-1 web3j-deploy
-- Day-2 web3j-transaction
-- Day-3 web3j-erc20
-- Day-4 web3j-truffle
-- Day-5 ethersjs-erc20
-- Day-6 ethersjs-waffle
-- Day-7 hardhat
-- Day-8 graph
-- Day-9 react（metamask)
-- Day-10 ERC721+ ERC1155 + ipfs
-- Day-11 react + express + hardhat
-- Day-12 Crowdfund
-- Day-13 dex Exchange
-- Day-14 chainlink-api
-- Day-15 nft-blindbox-chainlink-vrf
-- Day-16 nft auction  & exchange
-- Day-17 wallet develop
-- Day-18 web3.py
-- Day-19 brownie
-- Day-20 scaffold-flash-loan &  dex arbitrage
-  - https://github.com/austintgriffith/scaffold-eth
-  - https://soliditydeveloper.com/eip-3156
-  - https://research.nansen.ai/a-deep-dive-into-arbitrage-on-decentralised-exchanges/
+- 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
+- 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
+- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 
-- Day-21 scaffold-Lender
-  - https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens
-  - https://github.com/austintgriffith/scaffold-eth/tree/unifactory
-  - https://github.com/austintgriffith/scaffold-eth/tree/clr-dev
-  - https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da
+**开发工具：**
 
-- Day-22 scaffold-zk
-  - https://blog.iden3.io/circom-snarkjs-plonk.html
+- metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
+- infura（节点服务）: <https://infura.io/>
+- alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
+- 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
+- 以太坊区块链浏览器: <https://kovan.etherscan.io>
+- JSON-PRC接口: <https://eth.wiki/json-rpc/API>
+- tenderly合约验证 <https://dashboard.tenderly.co/explorer>
+- remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
+- 代码美化工具 <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
-- Day-23 ERC865 & ERC875
-- Day-24 proxy contract
-  - https://zhuanlan.zhihu.com/p/34690916
+**测试网 testnet**
 
-- Day-25 multi-sig-wallet
-- Day-26 snapshot
-  - https://www.chainnews.com/articles/038258049958.htm
-  - https://snapshot.org/#/
-- Day-27 Quadratic vote
-  - https://www.chainnews.com/zh-hant/articles/460460084917.htm
+- Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
+- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
+- Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
-- Day-28 optimism layer2
-  - https://community.optimism.io/docs/developers/integration.html#step-1-compiling-contracts
-  - https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537
-  - https://zhuanlan.zhihu.com/p/350541979
+**推荐阅读**
+- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
+- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
 
-- Day-29 matic layer2
+**奥派经济学**
+-  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
+-  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
+-  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
+-  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
 
-- Day-30 zksync layer2
 
-- Day-31  duneanalytics & nansen
-  - https://cloud.tencent.com/developer/article/1754684
+## 基础任务 - Basic Tasks
 
-- Day-32 JavaScript Cryptography
-  - https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c
+通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
 
-- Day-33 pooltogether
-  - https://pooltogether.com/
+01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
+02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
+03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md)
+04. [use truffle](basic/04-web3js-truffle/README.md)
+05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md)
+06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md)
+07. [use hardhat](basic/07-hardhat/README.md)
+08. [graph](basic/08-hardhat-graph/README.md)
+09. [react（metamask)](basic/09-hardhat-react/README.md)
+10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md)
+11. [react + express + hardhat](basic/11-react-express-hardhat/README.md)
+12. [Crowdfund](basic/12-token-crowdfund/README.md)
+13. [decentralized exchange](basic/13-decentralized-exchange/README.md)
+14. [chainlink-api](basic/14-chainlink-price-feed/README.md)
+15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md)
+16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md)
+17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md)
+18. [web3.py](basic/18-web3py/README.md)
+19. [brownie](basic/19-brownie/README.md)
+20. [flash-loan](basic/20-flash-loan/readme.md)
+21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
+22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
+24. [CryptoKitties](basic/24-cryptokitties/README.md)
+25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
+26. [snapshot](basic/26-snapshot/README.md)
+27. [Quadratic vote](basic/27-quadratic-vote/README.md)
+28. [optimism layer2](basic/28-optimism-layer2/readme.md)
+29. [matic layer2](basic/29-layer2-matic/readme.md)
+30. [zksync layer2](basic/30-layer2-zksync/readme.md)
+31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
+32. [chainlink-alarm](basic/32-chainlink-alarm/README.md)
+33. [pooltogether](basic/33-pooltogether/README.md)
+34. [subgraph](basic/34-subgraph/readme.md)
+35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
+36. [NFT Filecoin](basic/36-nft-filecoin/README.md)
+37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
+38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
+39. Ethlend
+- <https://www.youtube.com/watch?v=Pi-Qva6Fg3I>
+- <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
+40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
+41. [NFT farming](https://superfarm.com/farms)
+42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
+   https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts  
+43. [front running](https://github.com/Supercycled/cake_sniper)  
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
+45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
+46. [vyper](https://vyper.readthedocs.io/en/stable/)
+47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
+48. state channel  
+49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
+50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
 
-- Day-34 vyper
-  - https://vyper.readthedocs.io/en/stable/
+欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-- Day-35 Merkel-Patricia Tree(MPT)
-  - https://study.163.com/course/courseLearn.htm?courseId=1209599851#/learn/video?lessonId=1280010943&courseId=1209599851
+## 进阶任务
 
-- Day-36 nft Filecoin
-  - https://www.bilibili.com/video/BV1j5411w7MH
-  - https://pinata.cloud/pinmanager
-  - https://nft.storage
-
-- Day-37 state channel
-
-- Day-38 Flashbots provider for ethers.js
-  - https://github.com/flashbots/ethers-provider-flashbots-bundle
-
-- Day-39  Ethlend
-  - https://www.youtube.com/watch?v=Pi-Qva6Fg3I
-
-- Day-40  deploy Uniswap V3 to Layer2: Arbitrum
-  - https://arbitrum.io/quickstart/
-
-- Day-41  NFT farming
-  - https://superfarm.com/farms
-   
-- Day-42  merkle-distributor air drop
-  - https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol  
-## 进阶课程(可自由添加项目卡)
-
-  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code view。  
+  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
 
 ## DeFi 进阶
-### Learn-DEFI-XXX
 
-- P1 Uniswap
-  - https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90
-  - uniswapV3 https://learnblockchain.cn/article/2357
-
-- P2 Compound
-  - https://learnblockchain.cn/article/1015
-  - https://github.com/compound-developers/compound-supply-examples
-
-- P3 Aave
-  - https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade
-  - https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol
-
-- P4 SNX
-  - https://github.com/Synthetixio
-
-- P5 Curve
-  - https://curve.fi/files/stableswap-paper.pdf
-  - https://github.com/curvefi/curve-contract/tree/master/contracts
-  - https://curve.fi/files/crypto-pools-paper.pdf
-  - https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic
-
-- P6 0x-protocol
-  - https://blog.0xproject.com/
-  - https://github.com/0xProject/0x-protocol-specification/blob/master/v2/v2-specification.md#exchange
-  - https://0x.org/docs/guides/use-0x-api-liquidity-in-your-smart-contracts
-
-- P7 Bancor
-
-- P8 YFI
-
-- P9 AMPL
-
-- P10 Perpetual Protocol
-https://www.chainnews.com/articles/163436212237.htm
-
-- P11 DODO
-  - https://dodoex.github.io/docs/zh/docs/DODO-Economics-102
-  
+01. [UniswapV2](defi/Uniswap-V2/readme.md) 
+02. [UniswapV3](defi/Uniswap-V3/readme.md)
+03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. Bancor [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 
 ## NFT 进阶
 
-### Learn-NFT-XXX
-- OpenSea
+- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
 
 ## DAO 进阶
-### Learn-DAO-XXX
-- Aragon
-  - https://github.com/MolochVentures
-  - https://www.subdao.network/
-- Augur
+
+- 01. [Aragon](dao/Aragon/readme.md)
+- 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 03. [DAOHaus](https://daohaus.club/) 
+- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
-### Learn-Crypto-XXX
+- 01.[ECC](./crypto/ECC)
+- 02.[PLONK](./crypto/PLONK)
+- 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
+[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-
-- 关注公众号 「Rebase社区」，回复「Rebase Courses」获得 Maintainer @liberhe 联系方式。
-- 参与项目的开发者务必保证能够至少每两周提交一个PR
+- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进群。
 - 原则上每周一次开发者沟通会议
 - 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
 - script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功
 - 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本
 
-## 注意事项
-  刚入手项目，可以有四种方式切入：
-  - 1 可以优化之前的项目代码和readme
-  - 2 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
-  - 3 可以自由新增任务卡（需附上参考链接）
-  - 4 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究。
+刚入手项目，可以有四种方式切入：
+
+1. 可以优化之前的项目代码和readme
+2. 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
+3. 可以自由新增任务卡（需附上参考链接）
+4. 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
+
+## DAO组织管理项目
+  1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
+  2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限；
+  3. PR审核者可以发起学习小组；
+  4. PR审核者可以发起提案，决定项目发展规划，获取多数PR审核者同意即可通过提案；
+  5. PR审核者须两周内至少一次PR，否则移除PR审核者权限，降为普通开发者，可以提PR重新加入。
+
+## 小组学习
+  进阶任务如defi，dao, nft项目研究，采用小组学习模式，有以下要求。
+ 1. 提交1次PR以上的开发者方可参与小组学习；
+ 2. 小组组员需分工明确，每周周例会进行成果分享；
+ 3. 原则上小组的子任务研究不超过3个人。  
+
+ 小组学习输出成果（参考）：  
+ 白皮书： rebase视频分享
+
+ 合约： 部署，文档加rebase视频分享
+
+ 前端： 部署，文档和rebase视频分享
+
+ graph：部署，文档和rebase视频分享
 
 ## 常见问题
-  - 安装前端依赖时，如果在npm或者yarn修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：
-    ```
-    npm config set proxy http://username:password@server:port
-    npm confit set https-proxy http://username:password@server:port
-    ```
-    例如：（要为yarn设置代理将其中的npm替换为yarn即可。）
-    ```
-    npm config set proxy http://127.0.0.1:2802
-    npm config set https-proxy http://127.0.0.1:2802
-    ```
-    
+  安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+
+## 合约参考库及致敬相关项目
+
+- 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>
+- 合约安全库 - <https://github.com/ConsenSys/smart-contract-best-practices>
+- Dapp 脚手架 - <https://github.com/austintgriffith/scaffold-eth>
+- 合约教程 - <https://github.com/HQ20/contracts>
+- 区块链教程 - <https://learnblockchain.cn/>
+- 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
+- DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
+- Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
+- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 ## 社区捐助
-  - 欢迎感兴趣的小伙伴一起参与进来，开源项目维护不易，我们欢迎捐助。  
-  以太坊/matic/zksync地址：0x1F7b953113f4dFcBF56a1688529CC812865840e1  
-  我们会用多签钱包管理资金(会将资金从主网转入matic网络，在matic网络实现多签钱包管理)，并定期按PR提交记录分配资金给开发者。  
-  且项目会给PR贡献者发放nft作为纪念奖品，以DAO治理形式管理此开源项目。
+
+欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
+
+捐助地址：
+
+- 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
+- 通过 Polygon: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://polygonscan.com/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
+- 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
+
+捐助资金管理：我们会用多签钱包管理资金（会将资金从主网转入matic网络，在matic网络实现多签钱包管理），并定期按 PR 提交记录分配资金给开发者。同时项目会给PR贡献者发放nft作为纪念奖品，以DAO治理形式管理此开源项目。

@@ -1,0 +1,7 @@
+{
+  "compilerType": "solcjs",
+  "compilerVersion": "0.8.0",
+  "sourceDirectory": "./contract",
+  "outputDirectory": "./build",
+  "nodeModulesDirectory": "./node_modules"
+}

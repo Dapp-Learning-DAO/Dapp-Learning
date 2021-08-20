@@ -1,1 +1,0 @@
-module.exports = ["AuctionFixedPrice","AuctionUnfixedPrice","SimpleToken","MYERC721"];
