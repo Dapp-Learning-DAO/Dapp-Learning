@@ -133,6 +133,58 @@ yarn deploy
 11) 在 TheGraph 查看  
 如果顺利的话，可以在 TheGraph 的面板上观察到 subgraph 索引过程，初始索引可能需要等待几分钟
 
+## Graph Node本地搭建
+1） 搭建graph-node
+出于便捷的考虑，我们使用官方提供的docker compose来进行节点、数据库、IPFS的部署。
+
+ - 克隆graph node( https://github.com/graphprotocol/graph-node/ )代码
+ - 进入docker 目录
+ - 将docker-compose.yml中 ethereum 字段的值改为需要连接链的节点连接信息。
+ ```
+ graph-node:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修改
+      RUST_LOG: info
+ ```
+ >> 注意： graph-node连接的节点需要开启archive模式（启动节点时，添加flag --syncmode full --gcmode archive）。
+
+2） graph-node启动
+
+直接使用docker compose来进行启动
+```
+docker-compose -f docker-compose.yml up -d
+```
+
+3) 编译subgraph
+```
+graph codegen --output-dir src/types/
+graph build
+```
+
+4) 部署subgraph
+```
+graph create davekaj/SimpleToken --node http://127.0.0.1:8020
+
+graph deploy davekaj/anbswap --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020
+```
+  
+5) 可以使用GraphQL来进行查询数据。 
+
 ## subgraph 
 subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数据访问模式。开发者可以选择直接使用别人已经部署[17]的 subgraph，或者自己定义并部署 subgraph。
 1 GraphQL Schema
