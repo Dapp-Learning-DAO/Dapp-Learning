@@ -457,3 +457,4 @@ factory: 0x1F98431c8aD98523631AE4a59f267346ea31F984
 - https://www.gelato.network/
 - https://www.chainnews.com/articles/715772476688.htm
 - https://arxiv.org/pdf/2106.12033.pdf 流动性策略
+- https://mellowprotocol.medium.com/uniswap-v3-liquidity-providing-101-f1db3822f16d
