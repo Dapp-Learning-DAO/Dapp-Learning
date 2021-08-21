@@ -14,8 +14,6 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
   - NonfungiblePositionManager 负责交易池的创建以及流动性的添加删除，用来增加/移除/修改 Pool 的流动性，并且通过 NFT token 将流动性代币化。使用 ERC721 token（v2 使用的是 ERC20）的原因是同一个池的多个流动性并不能等价替换（v3 的集中流性动功能）。
   - SwapRouter 是 swap 路由的管理。提供代币交易的接口，它是对 UniswapV3Pool 合约中交易相关接口的进一步封装，前端界面主要与这个合约来进行对接。
 
-详细内容请戳这里 :point_right: [UniswapV3 合约导读](./contractGuid/readme.md)
-
 ### 代码解析
 
 主要代码解析：
@@ -43,6 +41,8 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - exactInput 指定精确输入的交易
 - exactOutput 指定精确输出的交易
 - flash swap 闪电贷交易
+
+详细内容请戳这里 :point_right: [UniswapV3 合约导读](./contractGuid/readme.md)
 
 ## SDK
 
