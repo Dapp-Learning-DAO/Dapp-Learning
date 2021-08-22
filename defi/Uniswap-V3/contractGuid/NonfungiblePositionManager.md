@@ -66,24 +66,33 @@ struct PoolKey {
 
 ### Position
 
+Manager的position数据结构
+
 ```solidity
 // details about the uniswap position
 struct Position {
     // the nonce for permits
+    // 用于授权的nonce值
     uint96 nonce;
     // the address that is approved for spending this token
+    // 被授权使用此position的账户地址
     address operator;
     // the ID of the pool with which this token is connected
     uint80 poolId;
     // the tick range of the position
+    // position 做市的价格区间(tickindex)
     int24 tickLower;
     int24 tickUpper;
     // the liquidity of the position
+    // position提供做市的流动性
     uint128 liquidity;
     // the fee growth of the aggregate position as of the last action on the individual position
+    // 当前position 每单位流动性能收取的手续费
+    // 注意 这里的数据只有当添加或移除流动性时才会与Pool的数据同步
     uint256 feeGrowthInside0LastX128;
     uint256 feeGrowthInside1LastX128;
     // how many uncollected tokens are owed to the position, as of the last computation
+    // 当前存在Manager中，用户未取回的token
     uint128 tokensOwed0;
     uint128 tokensOwed1;
 }
@@ -116,6 +125,33 @@ uniswapV3MintCallback 回调函数的入参结构
 struct MintCallbackData {
     PoolAddress.PoolKey poolKey;
     address payer;
+}
+```
+
+### DecreaseLiquidityParams
+
+移除流动性的入参结构体
+
+```solidity
+struct DecreaseLiquidityParams {
+    uint256 tokenId;        // ERC721的id
+    uint128 liquidity;      // 要移除的流动性数量
+    uint256 amount0Min;     // token0要移除的最小数量
+    uint256 amount1Min;     // token1要移除的最小数量
+    uint256 deadline;       // blocktime超过deadline终止执行
+}
+```
+
+### CollectParams
+
+取回手续费的入参结构体
+
+```solidity
+struct CollectParams {
+    uint256 tokenId;
+    address recipient;
+    uint128 amount0Max;
+    uint128 amount1Max;
 }
 ```
 
@@ -456,5 +492,249 @@ function pay(
         // payer不是本合约（可能是用户）
         TransferHelper.safeTransferFrom(token, payer, recipient, value);
     }
+}
+```
+
+### decreaseLiquidity
+
+移除position的流动性
+更新Manager中的position状态（流动性和存在Manager中的token数量），调用`Pool.burn`
+
+```solidity
+/// @inheritdoc INonfungiblePositionManager
+function decreaseLiquidity(DecreaseLiquidityParams calldata params)
+    external
+    payable
+    override
+    isAuthorizedForToken(params.tokenId)
+    checkDeadline(params.deadline)
+    returns (uint256 amount0, uint256 amount1)
+{
+    require(params.liquidity > 0);
+    Position storage position = _positions[params.tokenId];
+
+    // 检查position现有流动性 >= 传入的流动性
+    uint128 positionLiquidity = position.liquidity;
+    require(positionLiquidity >= params.liquidity);
+
+    // 缓存PoolKey 优化gas消耗
+    PoolAddress.PoolKey memory poolKey = _poolIdToPoolKey[position.poolId];
+    // 通过PoolKey拿到对应的Pool
+    IUniswapV3Pool pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
+    // 调用Pool的burn函数 返回实际移除的流动性转换为token的数量
+    (amount0, amount1) = pool.burn(position.tickLower, position.tickUpper, params.liquidity);
+
+    // 实际移除的流动性不能小于设置的最小移除流动性数量
+    require(amount0 >= params.amount0Min && amount1 >= params.amount1Min, 'Price slippage check');
+
+    // 计算positionKey
+    bytes32 positionKey = PositionKey.compute(address(this), position.tickLower, position.tickUpper);
+
+    // this is now updated to the current transaction
+    // 现在为用户回收position中的手续费
+
+    // 获取移除之后的position中的 手续费每流动性单位 （fee/liquidity）
+    // 此时Pool中的position记录的fee是最新的
+    // 而Manager中的fee，只会在 增加或移除 流动性时，从Pool的数据中更新
+    (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) = pool.positions(positionKey);
+
+    // position中记录着拥有者的token数量
+    // token数量 = 移除流动性转换的token + 用户赚取的手续费增量 （相比于上次更新手续费时）
+    // 用户赚取的手续费增量 = Pool中的手续费 - Manager中的手续费
+    position.tokensOwed0 +=
+        uint128(amount0) +
+        uint128(
+            // FullMath.mulDiv 是先乘后除的安全计算方法
+            // feeGrowthInside0LastX128 是 手续费每流动性单位
+            // 即 feeGrowth增量 × positionLiquidity = 手续费增量
+            // 又因feeGrowthInside0LastX128是Q128.128精度的定点数
+            // 所以最后要将小数位左移128位（二进制）
+            // FixedPoint128.Q128 = 0x100000000000000000000000000000000
+            FullMath.mulDiv(
+                feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
+                positionLiquidity,
+                FixedPoint128.Q128
+            )
+        );
+    // 同上
+    position.tokensOwed1 +=
+        uint128(amount1) +
+        uint128(
+            FullMath.mulDiv(
+                feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
+                positionLiquidity,
+                FixedPoint128.Q128
+            )
+        );
+
+    // 从Pool的数据中更新手续费
+    position.feeGrowthInside0LastX128 = feeGrowthInside0LastX128;
+    position.feeGrowthInside1LastX128 = feeGrowthInside1LastX128;
+
+    // 更新position的流动性 （减去移除的量）
+    // subtraction is safe because we checked positionLiquidity is gte params.liquidity
+    // 我们检查了 positionLiquidity >= params.liquidity 所以这里减法是安全的
+    position.liquidity = positionLiquidity - params.liquidity;
+
+    emit DecreaseLiquidity(params.tokenId, params.liquidity, amount0, amount1);
+}
+```
+
+相关代码
+
+- [struct DecreaseLiquidityParams](#DecreaseLiquidityParams)
+- [modifier Manager.isAuthorizedForToken](#isAuthorizedForToken)
+- [modifier Manager.checkDeadline](#checkDeadline)
+- [Manager._positions](#_positions)
+- [Pool.positions](./UniswapV3Pool.md#positions)
+- [Pool.burn](./UniswapV3Pool.md#burn)
+- [Manager.computeAddress](#computeAddress)
+
+### collect
+
+回收Pool中累计的手续费收益，Manager的position手续费数据与Pool的同步
+
+```solidity
+/// @inheritdoc INonfungiblePositionManager
+function collect(CollectParams calldata params)
+    external
+    payable
+    override
+    isAuthorizedForToken(params.tokenId)
+    returns (uint256 amount0, uint256 amount1)
+{
+    // 回收手续费最大数量需要 > 0
+    require(params.amount0Max > 0 || params.amount1Max > 0);
+    // allow collecting to the nft position manager address with address 0
+    // 当入参recipient为0，设为本Manager合约地址
+    address recipient = params.recipient == address(0) ? address(this) : params.recipient;
+
+    // 根据tokenId获取用户的position
+    Position storage position = _positions[params.tokenId];
+
+    PoolAddress.PoolKey memory poolKey = _poolIdToPoolKey[position.poolId];
+
+    IUniswapV3Pool pool = IUniswapV3Pool(PoolAddress.computeAddress(factory, poolKey));
+
+    // 从Manager的position中取出tokenOwned
+    (uint128 tokensOwed0, uint128 tokensOwed1) = (position.tokensOwed0, position.tokensOwed1);
+
+    // trigger an update of the position fees owed and fee growth snapshots if it has any liquidity
+    // 如果position流动性 > 0 , 触发 Pool更新 fees owed 和 growth 的快照
+    // fees owed 是Pool的 position.tokensOwed0 (tokensOwed1) 
+    // 用户当前在position中token0的数量
+    // growth 是feeGrowthInside0LastX128 ，即 每流动性单位该position收取的手续费
+    if (position.liquidity > 0) {
+        // Pool的burn方法会触发更新手续费相关的数据
+        // 这里传入的数量是0，所以不会移除流动性
+        pool.burn(position.tickLower, position.tickUpper, 0);
+        // 拿到更新手续费之后的position数据
+        (, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, , ) =
+            pool.positions(PositionKey.compute(address(this), position.tickLower, position.tickUpper));
+
+        // 参见decreaseLiquidity的类似代码注释
+        tokensOwed0 += uint128(
+            FullMath.mulDiv(
+                // 相比于上次更新时，Pool内增加的手续费
+                feeGrowthInside0LastX128 - position.feeGrowthInside0LastX128,
+                position.liquidity,
+                FixedPoint128.Q128
+            )
+        );
+        tokensOwed1 += uint128(
+            FullMath.mulDiv(
+                feeGrowthInside1LastX128 - position.feeGrowthInside1LastX128,
+                position.liquidity,
+                FixedPoint128.Q128
+            )
+        );
+
+        // 更新Manager内的position手续费数据
+        position.feeGrowthInside0LastX128 = feeGrowthInside0LastX128;
+        position.feeGrowthInside1LastX128 = feeGrowthInside1LastX128;
+    }
+
+    // compute the arguments to give to the pool#collect method
+    // 计算Pool collect函数的入参
+    // 以设置的手续费最大值作为上限
+    (uint128 amount0Collect, uint128 amount1Collect) =
+        (
+            params.amount0Max > tokensOwed0 ? tokensOwed0 : params.amount0Max,
+            params.amount1Max > tokensOwed1 ? tokensOwed1 : params.amount1Max
+        );
+
+    // the actual amounts collected are returned
+    // 调用Pool.collect 方法，返回实际取回的手续费数量
+    (amount0, amount1) = pool.collect(
+        recipient,
+        position.tickLower,
+        position.tickUpper,
+        amount0Collect,
+        amount1Collect
+    );
+
+    // sometimes there will be a few less wei than expected due to rounding down in core, but we just subtract the full amount expected
+    // 因为Pool.collect使用了下舍算法(rouding down)，有时候实际取回的手续费要略低于预期
+    // instead of the actual amount so we can burn the token
+    // 更新Manager中position的tokenOwned
+    (position.tokensOwed0, position.tokensOwed1) = (tokensOwed0 - amount0Collect, tokensOwed1 - amount1Collect);
+
+    emit Collect(params.tokenId, recipient, amount0Collect, amount1Collect);
+}
+```
+
+相关代码
+
+- [struct Manager.CollectParams](#CollectParams)
+- [struct Manager.Position](#Position)
+- [modifier Manager.isAuthorizedForToken](#isAuthorizedForToken)
+- [Pool.collect](./UniswapV3Pool.md#collect)
+
+### burn
+
+传入`tokenId`调用Manager内部方法`_burn()`，销毁ERC721代币代表的position
+`_burn()` 继承自 ERC721 类，即销毁ERC721token的标准方法
+
+```solidity
+/// @inheritdoc INonfungiblePositionManager
+function burn(uint256 tokenId) external payable override isAuthorizedForToken(tokenId) {
+    // 获取tokenId对应的postion
+    Position storage position = _positions[tokenId];
+    // 检查position的 liquidity tokensOwed0 tokensOwed1 必须为0
+    // 否则不能销毁position
+    require(position.liquidity == 0 && position.tokensOwed0 == 0 && position.tokensOwed1 == 0, 'Not cleared');
+    // 删除position数据
+    delete _positions[tokenId];
+    // 销毁ERC721 TOKEN
+    _burn(tokenId);
+}
+```
+
+相关代码
+
+- [modifier Manager.isAuthorizedForToken](#isAuthorizedForToken)
+
+## modifier
+
+### isAuthorizedForToken
+
+调用 ERC721 类的 `_isApprovedOrOwner`函数
+被修饰的函数只能是ERC721token所有者，或被approve授权者
+
+```solidity
+modifier isAuthorizedForToken(uint256 tokenId) {
+    require(_isApprovedOrOwner(msg.sender, tokenId), 'Not approved');
+    _;
+}
+```
+
+### checkDeadline
+
+当blocktime超过deadline，被修饰的函数终止执行
+
+```solidity
+modifier checkDeadline(uint256 deadline) {
+    require(_blockTimestamp() <= deadline, 'Transaction too old');
+    _;
 }
 ```
