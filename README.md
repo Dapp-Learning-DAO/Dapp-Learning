@@ -10,7 +10,7 @@
 
 本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。   
 
-项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
+项目愿景是给 **初级开发者** 一个可执行且最简的区块链 **Dapp** 学习路线图，给 **进阶开发者** 一个可以交流和协作的平台。   
  
 项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，输出成果会作为视频上传[B站的Rebase官方账号](https://space.bilibili.com/382886213)。    
 
@@ -121,6 +121,7 @@
 48. state channel  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
+51. [Governace](https://github.com/withtally/safeguard)  
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
