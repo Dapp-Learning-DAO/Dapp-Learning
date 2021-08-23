@@ -54,8 +54,9 @@
 - Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
 
 **推荐阅读**
-- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
+- 《主权个人》(Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读)
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
+- 《政治经济学》(https://www.marxists.org/subject/economy/index.htm)
 
 **奥派经济学**
 -  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
