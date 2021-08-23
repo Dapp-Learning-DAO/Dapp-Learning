@@ -278,3 +278,8 @@ https://thegraph.com/
 https://graphql.cn/learn/
 https://gql-guide.vercel.app/
 https://thegraph.com/docs/graphql-api
+GraphGen——命令行工具，用于快速生成子图，由一些有 GraphGen 命令注释的 Solidity 接口文件组成。  
+https://medium.com/protean-labs/introducing-graphgen-a-subgraph-generator-for-the-graph-network-836fe0385336  
+
+Matchstick ——是 Limechain 做一个开发的单元测试框架，一个graph模拟节点，用于在沙盒环境中测试子图部署的映射逻辑  
+相关教程：https://limechain.tech/blog/matchstick-what-it-is-and-how-to-use-it/  
