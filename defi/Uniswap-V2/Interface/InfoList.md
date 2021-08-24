@@ -3,6 +3,7 @@
 ## 演示环境
 
 - rinkeby 测试网络
+- V2Router地址 `0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D`
 - 测试网 DAI `0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735`
 - 自定义 token HEHE(HH) `0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - LPtoken `0x25c1CF39598DdD67bD68cA9e52f0c861D9Bf4c70`
@@ -42,3 +43,27 @@
 | transfer           | 0xa9059cbb |
 | transferFrom       | 0x23b872dd |
 | unpause            | 0x3f4ba83a |
+
+### UniswapV2Router
+
+| method name                  | method id  |
+| ---------------------------- | ---------- |
+| WETH                         | 0xad5c4648 |
+| addLiquidity                 | 0xe8e33700 |
+| addLiquidityETH              | 0xf305d719 |
+| factory                      | 0xc45a0155 |
+| getAmountIn                  | 0x85f8c259 |
+| getAmountOut                 | 0x054d50d4 |
+| getAmountsIn                 | 0x1f00ca74 |
+| getAmountsOut                | 0xd06ca61f |
+| quote                        | 0xad615dec |
+| removeLiquidity              | 0xbaa2abde |
+| removeLiquidityETH           | 0x02751cec |
+| removeLiquidityETHWithPermit | 0xded9382a |
+| removeLiquidityWithPermit    | 0x2195995c |
+| swapETHForExactTokens        | 0xfb3bdb41 |
+| swapExactETHForTokens        | 0x7ff36ab5 |
+| swapExactTokensForETH        | 0x18cbafe5 |
+| swapExactTokensForTokens     | 0x38ed1739 |
+| swapTokensForExactETH        | 0x4a25d94a |
+| swapTokensForExactTokens     | 0x8803dbee |

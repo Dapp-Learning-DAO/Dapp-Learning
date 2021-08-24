@@ -25,4 +25,6 @@ npm start
 ## 参考文档  
 https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005   
 https://create-react-app.dev/docs/getting-started/     
-https://github.com/nomiclabs/hardhat-hackathon-boilerplate    
+https://github.com/nomiclabs/hardhat-hackathon-boilerplate   
+https://www.nextjs.cn/ next.js 
+  

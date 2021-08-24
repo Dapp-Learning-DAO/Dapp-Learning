@@ -33,6 +33,7 @@
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
+- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 
 **开发工具：**
 
@@ -164,8 +165,7 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群。
-- 参与项目的开发者务必保证能够至少每两周提交一个PR
+- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进群。
 - 原则上每周一次开发者沟通会议
 - 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
 - script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功
@@ -214,6 +214,7 @@
 - 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
 - DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
 - Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
+- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 ## 社区捐助
 
