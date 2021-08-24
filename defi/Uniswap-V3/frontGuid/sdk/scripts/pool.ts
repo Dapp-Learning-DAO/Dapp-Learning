@@ -8,6 +8,11 @@ import {BigNumber} from "ethers";
 // usdc/eth
 const poolAddress = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8";
 
+const poolContract = new ethers.Contract(
+    poolAddress,
+    IUniswapV3PoolABI,
+    ethers.provider
+);
 
 interface Immutables {
     factory: string;
@@ -29,17 +34,8 @@ interface State {
     unlocked: boolean;
 }
 
-
-async function main() {
-
-    const accounts = await ethers.getSigners();
-    const poolContract = new ethers.Contract(
-        poolAddress,
-        IUniswapV3PoolABI,
-        accounts[0]
-    );
-
-    const immutables = {
+async function getPoolImmutables() {
+    const immutables: Immutables = {
         factory: await poolContract.factory(),
         token0: await poolContract.token0(),
         token1: await poolContract.token1(),
@@ -47,10 +43,12 @@ async function main() {
         tickSpacing: await poolContract.tickSpacing(),
         maxLiquidityPerTick: await poolContract.maxLiquidityPerTick(),
     };
+    return immutables;
+}
 
+async function getPoolState() {
     const slot = await poolContract.slot0();
-
-    const poolState = {
+    const PoolState: State = {
         liquidity: await poolContract.liquidity(),
         sqrtPriceX96: slot[0],
         tick: slot[1],
@@ -60,8 +58,13 @@ async function main() {
         feeProtocol: slot[5],
         unlocked: slot[6],
     };
+    return PoolState;
+}
 
-    console.log(poolState);
+async function main() {
+
+    const immutables = await getPoolImmutables();
+    const state = await getPoolState();
     const TokenA = new Token(1, immutables.token0, 6, "USDC", "USD Coin");
     const TokenB = new Token(1, immutables.token1, 18, "WETH", "Wrapped Ether");
 
@@ -69,9 +72,9 @@ async function main() {
         TokenA,
         TokenB,
         immutables.fee,
-        poolState.sqrtPriceX96.toString(),
-        poolState.liquidity.toString(),
-        poolState.tick
+        state.sqrtPriceX96.toString(),
+        state.liquidity.toString(),
+        state.tick
     );
     console.log(poolExample);
 }
