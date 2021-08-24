@@ -15,3 +15,4 @@ npx hardhat run scripts/pool.ts --network mainnet
 
 ## 参考文档  
 https://docs.uniswap.org/sdk/introduction
+https://hardhat.org/guides/typescript.html  hardhat use ts
