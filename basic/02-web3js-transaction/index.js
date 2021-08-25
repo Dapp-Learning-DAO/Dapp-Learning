@@ -1,8 +1,8 @@
-const Web3 = require("web3");
-const fs = require("fs");
-const contractOfIncrementer = require("./compile");
+const Web3 = require('web3');
+const fs = require('fs');
+const contractOfIncrementer = require('./compile');
 
-require("dotenv").config();
+require('dotenv').config();
 const privatekey = process.env.PRIVATE_KEY;
 
 /*
@@ -10,8 +10,8 @@ const privatekey = process.env.PRIVATE_KEY;
 */
 // Provider
 const providerRPC = {
-  development: "https://kovan.infura.io/v3/" + process.env.INFURA_ID,
-  moonbase: "https://rpc.testnet.moonbeam.network",
+  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
+  moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
 
@@ -34,7 +34,7 @@ const abi = contractOfIncrementer.abi;
 
 */
 const Trans = async () => {
-  console.log("============================ 1. Deploy Contract");
+  console.log('============================ 1. Deploy Contract');
   console.log(`Attempting to deploy from account ${account.address}`);
 
   // Create Contract Instance
@@ -74,7 +74,7 @@ const Trans = async () => {
   // Create the contract with contract address
   console.log();
   console.log(
-    "============================ 2. Call Contract Interface getNumber"
+    '============================ 2. Call Contract Interface getNumber'
   );
   let incrementer = new web3.eth.Contract(abi, createReceipt.contractAddress);
 
@@ -88,7 +88,7 @@ const Trans = async () => {
   // Add 3 to Contract Public Variable
   console.log();
   console.log(
-    "============================ 3. Call Contract Interface increment"
+    '============================ 3. Call Contract Interface increment'
   );
   const _value = 3;
   let incrementTx = incrementer.methods.increment(_value);
@@ -121,7 +121,7 @@ const Trans = async () => {
    *
    */
   console.log();
-  console.log("============================ 4. Call Contract Interface reset");
+  console.log('============================ 4. Call Contract Interface reset');
   const resetTx = incrementer.methods.reset();
 
   const resetTransaction = await web3.eth.accounts.signTransaction(
@@ -149,26 +149,26 @@ const Trans = async () => {
    *
    */
   console.log();
-  console.log("============================ 5. Listen to Events");
-  console.log(" Listen to Increment Event only once && continuouslly");
+  console.log('============================ 5. Listen to Events');
+  console.log(' Listen to Increment Event only once && continuouslly');
 
   // kovan don't support http protocol to event listen, need to use websocket
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      "wss://kovan.infura.io/ws/v3/" + process.env.INFURA_ID
+      'wss://kovan.infura.io/ws/v3/' + process.env.INFURA_ID
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
 
   // listen to  Increment event only once
-  incrementer.once("Increment", (error, event) => {
-    console.log("I am a onetime event listner, I am going to die now");
+  incrementer.once('Increment', (error, event) => {
+    console.log('I am a onetime event listner, I am going to die now');
   });
 
   // listen to Increment event continuouslly
   incrementer.events.Increment(() => {
-    console.log("I am a longlive event listner, I get a event now");
+    console.log('I am a longlive event listner, I get a event now');
   });
 
   for (let step = 0; step < 3; step++) {
@@ -186,7 +186,7 @@ const Trans = async () => {
     if (step == 2) {
       // clear all the listeners
       web3Socket.eth.clearSubscriptions();
-      console.log("Clearing all the events listeners !!!!");
+      console.log('Clearing all the events listeners !!!!');
     }
   }
 
@@ -199,10 +199,10 @@ const Trans = async () => {
    *
    */
   console.log();
-  console.log("============================ 6. Going to get past events");
-  const pastEvents = await incrementer.getPastEvents("Increment", {
+  console.log('============================ 6. Going to get past events');
+  const pastEvents = await incrementer.getPastEvents('Increment', {
     fromBlock: deployedBlockNumber,
-    toBlock: "latest",
+    toBlock: 'latest',
   });
 
   pastEvents.map((event) => {
@@ -218,7 +218,7 @@ const Trans = async () => {
    *
    */
   console.log();
-  console.log("============================ 7. Check the transaction error");
+  console.log('============================ 7. Check the transaction error');
   incrementTx = incrementer.methods.increment(0);
   incrementTransaction = await web3.eth.accounts.signTransaction(
     {
@@ -232,7 +232,7 @@ const Trans = async () => {
   const receipt = null;
   receipt = await web3.eth
     .sendSignedTransaction(incrementTransaction.rawTransaction)
-    .on("error", console.error);
+    .on('error', console.error);
 };
 
 Trans()
