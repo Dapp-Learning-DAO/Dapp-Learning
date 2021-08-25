@@ -99,7 +99,7 @@
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [chainlink-alarm](basic/32-chainlink-alarm/README.md)
+32. [chainlink-keeper](basic/32-chainlink-keeper/README.md)
 33. [pooltogether](basic/33-pooltogether/README.md)
 34. [subgraph](basic/34-subgraph/readme.md)
 35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
