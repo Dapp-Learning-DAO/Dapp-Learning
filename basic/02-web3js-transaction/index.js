@@ -156,7 +156,7 @@ const Trans = async () => {
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      "wss://kovan.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"
+      "wss://kovan.infura.io/ws/v3/" + process.env.INFURA_ID
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
