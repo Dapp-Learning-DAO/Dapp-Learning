@@ -7,10 +7,12 @@ const privatekey = process.env.PRIVATE_KEY;
 /*
    -- Define Provider & Variables --
 */
-// Provider
-const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'));
 
 const receiver = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+
+// Provider
+const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/' + process.env.INFURA_ID));
+
 //account
 const  account = web3.eth.accounts.privateKeyToAccount(privatekey);
 const account_from = {
