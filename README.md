@@ -88,6 +88,7 @@
 18. [web3.py](basic/18-web3py/README.md)
 19. [brownie](basic/19-brownie/README.md)
 20. [flash-loan](basic/20-flash-loan/readme.md)
+
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
@@ -99,7 +100,7 @@
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [chainlink-alarm](basic/32-chainlink-alarm/README.md)
+32. [chainlink-keeper](basic/32-chainlink-keeper/README.md)
 33. [pooltogether](basic/33-pooltogether/README.md)
 34. [subgraph](basic/34-subgraph/readme.md)
 35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
@@ -121,6 +122,7 @@
 48. state channel  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
+51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
