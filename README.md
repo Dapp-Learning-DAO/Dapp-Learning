@@ -92,7 +92,7 @@
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [CryptoKitties](basic/24-cryptokitties/README.md)
+24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
 26. [snapshot](basic/26-snapshot/README.md)
 27. [Quadratic vote](basic/27-quadratic-vote/README.md)
