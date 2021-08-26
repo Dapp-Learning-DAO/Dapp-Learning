@@ -1,9 +1,10 @@
 <div align="center">
- <h1>Dapp Learning</h1>
- <h4 align="center">
-  区块链 Dapp 开发教程
- </h4>
- <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+  <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;max-width: 380px;" />
+  <!-- <h1>Dapp Learning</h1> -->
+  <h4 align="center">
+    区块链 Dapp 开发教程
+  </h4>
+  <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
 </div>
 
 ## 序 - Preface
