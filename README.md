@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;max-width: 380px;" />
+  <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;max-width: 240px;" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
     区块链 Dapp 开发教程
