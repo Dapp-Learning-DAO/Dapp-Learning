@@ -2,25 +2,26 @@
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
-    区块链 Dapp 开发教程
+    Blockchain Dapp Development Tutorial
   </h4>
-  <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+  <p>Learn blockchain Dapp development step by step through actual projects。</p>
 </div>
 
-## 序 - Preface
+## Preface
 
 Dapp-Learing Project, incubated by Rebase Community, is suitable for developers with certain programming language foundation to start blockchain Dapp development. It allows developers to understand and develop various projects like Defi, NFT, DAO and CRYPTO from a lower level to the higher level step by step.  
 
 The vision of the project is not only to give junior developers an executable and simple learning roadmap for blockchain Dapp development, but to give advanced developers a platform to communicate and collaborate.
 Specifically, the project will be deeply combined with Rebase University and a learning group will be set up by community members. Through their division and cooperation, they will be able to study mainstream DAPP projects in depth together and make thier own contributions. In addition, through weekly technology sharing workshops, they will have opportunities to share more about technology development and application. After the sharing session, the workshop will be recorded as videos and uploaded to the Rebase Channel in Bili Bili. https://space.bilibili.com/382886213/video
 
-The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. Based on it, community members will manage this open source project in the Dao management pattern. Any member that can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.
+The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. Based on it, community members will manage this open source project in the Dao management pattern. Any member that can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.  
 
-技术栈：
+
+
+Technology Stack：
 
 - `web3.js`
-- `ethers.js`
-- `hardhat`
+- `ethers.js (Hardhat)`
 - `web3.py (Brownie)`
 - `Java` （可选）
 - `rust` （可选）
