@@ -25,7 +25,7 @@
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为基础任务和项目任务两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
+教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
 此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
 
@@ -35,7 +35,7 @@
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
-- solidity 学习<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 
 **开发工具：**
 
@@ -45,15 +45,9 @@
 - 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
 - 以太坊区块链浏览器: <https://kovan.etherscan.io>
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
-- tenderly合约验证 <https://dashboard.tenderly.co/explorer>
-- remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
-- 代码美化工具 <https://www.cnblogs.com/kuronekonano/p/11794302.html>
-
-**测试网 testnet**
-
-- Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
-- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
-- Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
+- tenderly合约验证: <https://dashboard.tenderly.co/explorer>
+- remix本地环境: <https://zhuanlan.zhihu.com/p/38309494>
+- 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
 **推荐阅读**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
@@ -189,17 +183,11 @@
  2. 小组组员需分工明确，每周周例会进行成果分享；
  3. 原则上小组的子任务研究不超过3个人。  
 
- 小组学习输出成果（参考）：  
- 白皮书： rebase视频分享
-
- 合约： 部署，文档加rebase视频分享
-
- 前端： 部署，文档和rebase视频分享
-
- graph：部署，文档和rebase视频分享
+ 小组学习输出成果（参考）：    
+ 白皮书/合约/前端/graph： 部署，文档和rebase视频分享
 
 ## 常见问题
-  安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+  测试币申请，安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
 
 ## 合约参考库及致敬相关项目
 
@@ -216,9 +204,9 @@
 ## 社区捐助
 
 欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
+gitcoin grant: [grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
 
-捐助地址：
-
+捐助地址：  
 - 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 Polygon: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://polygonscan.com/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
