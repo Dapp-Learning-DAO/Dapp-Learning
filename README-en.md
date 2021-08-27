@@ -50,12 +50,6 @@ Technology Stack：
 - remix本地环境 <https://zhuanlan.zhihu.com/p/38309494>
 - 代码美化工具 <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
-**测试网 testnet**
-
-- Rinkeby [申请 Rinkeby 测试币](https://faucet.rinkeby.io/)
-- Kovan [申请 Kovan 测试币1](https://linkfaucet.protofire.io/kovan) [申请 Kovan 测试币2](https://faucet.kovan.network)
-- Ropsten [申请 Ropsten 测试币](https://faucet.metamask.io/)
-
 **推荐阅读**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
