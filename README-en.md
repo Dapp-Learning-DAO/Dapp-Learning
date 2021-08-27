@@ -2,25 +2,26 @@
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
-    区块链 Dapp 开发教程
+    Blockchain Dapp Development Tutorial
   </h4>
-  <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+  <p>Learn blockchain Dapp development step by step through actual projects。</p>
 </div>
 
-## 序 - Preface
+## Preface
 
-本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。   
+The Dapp-Learing Project, incubated by Rebase Community, is suitable for developers with certain programming language foundation to start blockchain Dapp development. It allows developers to understand and develop various projects like Defi, NFT, DAO and CRYPTO from a lower level to the higher level step by step.  
 
-项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
+The vision of the project is not only to provide junior developers an executable and simple learning roadmap for blockchain Dapp development, but to give advanced developers a platform to communicate and collaborate.
+Specifically, the project will be deeply combined with Rebase University and a learning group will be set up by community members. Through their division and cooperation, they will be able to study mainstream DAPP projects in depth together and make their own contributions. In addition, through weekly technology sharing workshops, they will have opportunities to share more about technology development and application. After the sharing session, the workshop will be recorded as videos and uploaded to the Rebase Channel in Bili Bili. https://space.bilibili.com/382886213/video
 
-项目跟Rebase大学深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
+The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. On this basis, community members will manage this open source project with the Dao management pattern. Any member who can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.  
 
-项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。  
 
-技术栈：
+
+Technology Stack：
 
 - `web3.js`
-- `ethers.js (hardhat)`
+- `ethers.js (Hardhat)`
 - `web3.py (Brownie)`
 - `Java` （可选）
 - `rust` （可选）
