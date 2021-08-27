@@ -14,6 +14,7 @@ Dapp-Learing Project, incubated by Rebase Community, is suitable for developers 
 The vision of the project is not only to give junior developers an executable and simple learning roadmap for blockchain Dapp development, but to give advanced developers a platform to communicate and collaborate.
 Specifically, the project will be deeply combined with Rebase University and a learning group will be set up by community members. Through their division and cooperation, they will be able to study mainstream DAPP projects in depth together and make thier own contributions. In addition, through weekly technology sharing workshops, they will have opportunities to share more about technology development and application. After the sharing session, the workshop will be recorded as videos and uploaded to the Rebase Channel in Bili Bili. https://space.bilibili.com/382886213/video
 
+The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. Based on it, community members will manage this open source project in the Dao management pattern. Any member that can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.
 
 技术栈：
 
