@@ -1,4 +1,4 @@
-中文 / [English](./README_en.md)
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/README-en.md)
 
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
