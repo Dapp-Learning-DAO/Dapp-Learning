@@ -1,0 +1,10 @@
+{
+  "name": "DappLearn",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^2.0.5"
+  }
+}

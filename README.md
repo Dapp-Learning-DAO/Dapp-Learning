@@ -55,15 +55,8 @@
 
 **推荐阅读**
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
-- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
-
-**奥派经济学**
--  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
--  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
--  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
--  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
-
-
+- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
+- [给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -110,7 +103,7 @@
 39. Ethlend
 - <https://www.youtube.com/watch?v=Pi-Qva6Fg3I>
 - <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
-40. [deploy Uniswap V3 to Layer2: Arbitrum](https://arbitrum.io/quickstart/)
+40. [Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
    https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts  
