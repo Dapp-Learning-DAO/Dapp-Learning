@@ -152,6 +152,7 @@
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
+- 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
 
 ## DAO 进阶
 
