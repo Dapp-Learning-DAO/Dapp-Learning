@@ -23,12 +23,12 @@ Technology Stack：
 - `web3.js`
 - `ethers.js (Hardhat)`
 - `web3.py (Brownie)`
-- `Java` （可选）
-- `rust` （可选）
+- `Java` (Optional)
+- `rust` (Optional)
 
-The tutorial is divided into two parts: basic tasks and project tasks. Basic tasks are familiar with and integrate the basic tool components necessary for blockchain development (such as ERC standard, Oracle, GRAPH). Project tasks are to study the mainstream DeFi, NFT, DAO typical projects to allow developers to dive into real project development.
+This tutorial is divided into two parts: basic tasks and project tasks. Basic tasks are familiar with and integrate the basic tool components necessary for blockchain development (such as ERC standard, Oracle, GRAPH). Our project tasks are preparing to study the mainstream DeFi, NFT, DAO typical projects to help developers to dive into real project development.
 
-This tutorial is still in development, so you are welcome to create pull request to create more tutorial projects or improve existing ones 🤗.
+This tutorial is still in developing, so you are welcome to create pull request to create more tutorial projects or improve existing ones 🤗.
 
 ## Preparatory Work
 
@@ -60,7 +60,9 @@ This tutorial is still in development, so you are welcome to create pull request
 
 - 《Sovereign Individuals》
 - The Austrian school of thought is recommended,[Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
-- [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+- Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+- [《Political Economy》](https://www.marxists.org/subject/economy/index.htm)
+
 ## Basic Tasks
 
 Learn the basic tools and development knowledge of Dapp development through the following basic tasks.
@@ -119,7 +121,8 @@ Learn the basic tools and development knowledge of Dapp development through the 
 48. state channel  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
-51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
+51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)
+52. [Governace](https://github.com/withtally/safeguard)   
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
