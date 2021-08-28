@@ -63,13 +63,6 @@ This tutorial is still in developing, so you are welcome to create pull request 
 - Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 - [《Political Economy》](https://www.marxists.org/subject/economy/index.htm)
 
-**The Austrian school of economics**
-
-[The curriculum of Austrian economic school on blockchain(1)](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
-[The curriculum of Austrian economic school on blockchain(2)](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
-[The curriculum of Austrian economic school on blockchain(3)](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
-[The curriculum of Austrian economic school on blockchain(4)](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
-
 ## Basic Tasks
 
 Learn the basic tools and development knowledge of Dapp development through the following basic tasks.
