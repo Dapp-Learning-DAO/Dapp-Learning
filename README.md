@@ -19,6 +19,7 @@
 
 项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。  
 
+
 技术栈：
 
 - `web3.js`
@@ -55,6 +56,15 @@
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+- 《政治经济学》(https://www.marxists.org/subject/economy/index.htm)
+
+**奥派经济学**
+-  [给区块链爱好者的奥派经济学课（1）](https://mp.weixin.qq.com/s/OZhhmVliPzT7xIiTxPhGKQ)
+-  [给区块链爱好者的奥派经济学课（2）](https://mp.weixin.qq.com/s/TI0e7sNuC76ohEQgADwcLQ)
+-  [给区块链爱好者的奥派经济学课（3）](https://mp.weixin.qq.com/s/7CaYMAoB636YA1rBPBJ-wQ)
+-  [给区块链爱好者的奥派经济学课（4）](https://mp.weixin.qq.com/s/-5yszc6NKeepuYQ-r6XdIw)
+
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -112,6 +122,7 @@
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
+52. [Governace](https://github.com/withtally/safeguard)  
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -141,6 +152,7 @@
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
+- 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
 
 ## DAO 进阶
 
