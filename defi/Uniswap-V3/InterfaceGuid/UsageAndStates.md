@@ -22,3 +22,20 @@
 - LPtoken `0x25c1CF39598DdD67bD68cA9e52f0c861D9Bf4c70`
 
 详细请戳这里 :point_right:[相关辅助数据](./InfoList.md)
+
+## Swap
+
+token 交易界面
+
+详细代码解析请戳这里 :point_right: [Swap 代码解析](./Code.md#Swap)
+
+### 交互流程
+
+swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
+
+- 根据模式匹配滑点百分比：V3，V2， layer2
+- 预估交易量不在是本地利用 sdk 计算，而是使用去调用 Quoter 合约查询，最后通过revert拿到预计的交易量
+  - Quoter合约会真实调用Pool的swap函数，而swap函数又会去调用Quoter合约的uniswapV3SwapCallback回调函数
+  - 回调函数中会把得到的输入输出量，作为revert信息传回
+  - 因为V2直接可用x*y=k的公式计算，而V3的交易过程非常复杂，是分段执行，并且每段的状态都不一样
+
