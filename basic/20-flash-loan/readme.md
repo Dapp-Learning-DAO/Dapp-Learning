@@ -22,3 +22,5 @@
 - https://ethfans.org/posts/flash-loans-as-an-example-what-can-a-transaction-reach
 - https://github.com/austintgriffith/scaffold-eth
 - https://soliditydeveloper.com/eip-3156
+- https://learnblockchain.cn/article/2856
+- https://mp.weixin.qq.com/s/APAUeoPl2s-t0VIiP3IASA
