@@ -355,3 +355,471 @@ function computeAllRoutes(
   return allPaths;
 }
 ```
+
+## AddLiquidity
+
+### useV3DerivedMintInfo
+
+根据用户的输入计算预计添加流动性的数据，返回数据：
+
+- `pool` Pool对象，@uniswap/v3-sdk/Pool 类型的实例
+- `poolState` Pool的状态 LOADING | NOT_EXISTS | EXISTS | INVALID
+- `ticks` 价格区间上下限所在的tick
+- `price` Pool的价格(当前交易价格)
+- `pricesAtTicks` 价格所在的tick
+- `currencies`  tokenA 和 tokenB
+- `currencyBalances`  用户在两个token上的余额
+- `dependentField`  需要自动计算数量的token
+- `parsedAmounts` 格式化后的用户输入值(添加流动性的token数量)
+- `position` position实例
+- `noLiquidity` Pool是否没有流动性
+- `errorMessage` 报错信息
+- `invalidPool` Pool是否非法
+- `outOfRange` 当前交易价格是否在设定的价格区间之外
+- `invalidRange` 非法的价格 (Lower >= Upper)
+- `depositADisabled` 价格区间外不能注入tokenA的流动性
+- `depositBDisabled` 价格区间外不能注入tokenB的流动性
+- `invertPrice` 非法的价格 (在最大价格区间外)
+- `ticksAtLimit` 最大价格区间所在的tick
+ 
+```ts
+export function useV3DerivedMintInfo(
+  currencyA?: Currency,       // tokenA
+  currencyB?: Currency,       // tokenB
+  feeAmount?: FeeAmount,      // 费率水平 rate% = feeAmount / 10**6 %
+  baseCurrency?: Currency,    // 以哪个token为计价单位 例如 HH per ETH，ETH即为baseCurrency
+  // override for existing position
+  existingPosition?: Position // 当路由有positionId时，会获取链上的position信息从这里传入
+): {
+  pool?: Pool | null
+  poolState: PoolState
+  ticks: { [bound in Bound]?: number | undefined }
+  price?: Price<Token, Token>
+  pricesAtTicks: {
+    [bound in Bound]?: Price<Token, Token> | undefined
+  }
+  currencies: { [field in Field]?: Currency }
+  currencyBalances: { [field in Field]?: CurrencyAmount<Currency> }
+  dependentField: Field
+  parsedAmounts: { [field in Field]?: CurrencyAmount<Currency> }
+  position: Position | undefined
+  noLiquidity?: boolean
+  errorMessage?: string
+  invalidPool: boolean
+  outOfRange: boolean
+  invalidRange: boolean
+  depositADisabled: boolean
+  depositBDisabled: boolean
+  invertPrice: boolean
+  ticksAtLimit: { [bound in Bound]?: boolean | undefined }
+} {
+  const { account } = useActiveWeb3React()
+
+  // 获取用户的输入数值
+  const { independentField, typedValue, leftRangeTypedValue, rightRangeTypedValue, startPriceTypedValue } =
+    useV3MintState()
+
+  const dependentField = independentField === Field.CURRENCY_A ? Field.CURRENCY_B : Field.CURRENCY_A
+
+  // currencies
+  const currencies: { [field in Field]?: Currency } = useMemo(
+    () => ({
+      [Field.CURRENCY_A]: currencyA,
+      [Field.CURRENCY_B]: currencyB,
+    }),
+    [currencyA, currencyB]
+  )
+
+  // formatted with tokens
+  // baseToken是用来计价的token 例如  HH per ETH，ETH即为baseToken
+  const [tokenA, tokenB, baseToken] = useMemo(
+    () => [currencyA?.wrapped, currencyB?.wrapped, baseCurrency?.wrapped],
+    [currencyA, currencyB, baseCurrency]
+  )
+
+  // token 地址排序，因为获取Pool地址需要以地址升序排列
+  const [token0, token1] = useMemo(
+    () =>
+      tokenA && tokenB ? (tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]) : [undefined, undefined],
+    [tokenA, tokenB]
+  )
+
+  // balances
+  // 拿到用户在两个token上的余额
+  const balances = useCurrencyBalances(account ?? undefined, [
+    currencies[Field.CURRENCY_A],
+    currencies[Field.CURRENCY_B],
+  ])
+  const currencyBalances: { [field in Field]?: CurrencyAmount<Currency> } = {
+    [Field.CURRENCY_A]: balances[0],
+    [Field.CURRENCY_B]: balances[1],
+  }
+
+  // pool
+  // 通过 tokenA,tokenB,fee 三个要素获取Pool对象
+  // Pool对象是 @uniswap/v3-sdk/Pool 类的实例
+  // poolState: LOADING | NOT_EXISTS | EXISTS | INVALID
+  const [poolState, pool] = usePool(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B], feeAmount)
+  // 根据pool状态判断是否存在流动性
+  const noLiquidity = poolState === PoolState.NOT_EXISTS
+
+  // note to parse inputs in reverse
+  // 标记计价token是否为token1（tokenA tokenB 排序之后，地址较大的）
+  const invertPrice = Boolean(baseToken && token0 && !baseToken.equals(token0))
+
+  // always returns the price with 0 as base token
+  const price: Price<Token, Token> | undefined = useMemo(() => {
+    // if no liquidity use typed value
+    // 当Pool没有流动性，直接以用户输入的初始价格作为返回值
+    if (noLiquidity) {
+      // 解析用户输入值，并根据baseToken的精度换算值
+      // 因为精度不同的两个token相除，价格需要根据精度的差来对小数点位移
+      const parsedQuoteAmount = tryParseAmount(startPriceTypedValue, invertPrice ? token0 : token1)
+      if (parsedQuoteAmount && token0 && token1) {
+        // 获取计价token的价格，即价格为1
+        const baseAmount = tryParseAmount('1', invertPrice ? token1 : token0)
+        // 初始价格即为用户的输入数值 / 1
+        const price =
+          baseAmount && parsedQuoteAmount
+            // @uniswap/sdk-core/Price
+            ? new Price(
+                baseAmount.currency,
+                parsedQuoteAmount.currency,
+                baseAmount.quotient,
+                parsedQuoteAmount.quotient
+              )
+            : undefined
+        return (invertPrice ? price?.invert() : price) ?? undefined
+      }
+      return undefined
+    } else {
+      // get the amount of quote currency
+      // 如果Pool已有流动性，则直接从链上获取Pool的价格数据
+      // @uniswap/v3-sdk/Pool.priceOf(token0) 表示token0的价格，以token1计价
+      return pool && token0 ? pool.priceOf(token0) : undefined
+    }
+  }, [noLiquidity, startPriceTypedValue, invertPrice, token1, token0, pool])
+
+  // check for invalid price input (converts to invalid ratio)
+  // 校验价格是否非法：能开根号，且没有超出最大价格范围
+  const invalidPrice = useMemo(() => {
+    // 计算根号价格
+    // @uniswap/v3-sdk/encodeSqrtRatioX96
+    const sqrtRatioX96 = price ? encodeSqrtRatioX96(price.numerator, price.denominator) : undefined
+    const invalid =
+      price &&
+      sqrtRatioX96 &&
+      !(
+        // @uniswap/v3-sdk/TickMath
+        JSBI.greaterThanOrEqual(sqrtRatioX96, TickMath.MIN_SQRT_RATIO) &&
+        JSBI.lessThan(sqrtRatioX96, TickMath.MAX_SQRT_RATIO)
+      )
+    return invalid
+  }, [price])
+
+  // used for ratio calculation when pool not initialized
+  // 模拟的Pool对象，当Pool未初始化时，用于代替Pool对象做计算
+  const mockPool = useMemo(() => {
+    if (tokenA && tokenB && feeAmount && price && !invalidPrice) {
+      const currentTick = priceToClosestTick(price)
+      const currentSqrt = TickMath.getSqrtRatioAtTick(currentTick)
+      // @uniswap/v3-sdk/Pool
+      return new Pool(tokenA, tokenB, feeAmount, currentSqrt, JSBI.BigInt(0), currentTick, [])
+    } else {
+      return undefined
+    }
+  }, [feeAmount, invalidPrice, price, tokenA, tokenB])
+
+  // if pool exists use it, if not use the mock pool
+  // 当Pool未初始化，使用模拟Pool对象做计算
+  const poolForPosition: Pool | undefined = pool ?? mockPool
+
+  // lower and upper limits in the tick space for `feeAmount`
+  // 设置tick序号的范围（上下限）
+  // 根据tickSpacing查找最大值和最小值附近可用的tick的序号
+  // tickSpacing 是计算时tick的间隔，为了减少计算量
+  // 根据费率水平确定 费率越大，tickSpacing越大，反之亦然
+  const tickSpaceLimits: {
+    [bound in Bound]: number | undefined
+  } = useMemo(
+    () => ({
+      // @uniswap/v3-sdk/nearestUsableTick
+      [Bound.LOWER]: feeAmount ? nearestUsableTick(TickMath.MIN_TICK, TICK_SPACINGS[feeAmount]) : undefined,
+      [Bound.UPPER]: feeAmount ? nearestUsableTick(TickMath.MAX_TICK, TICK_SPACINGS[feeAmount]) : undefined,
+    }),
+    [feeAmount]
+  )
+
+  // parse typed range values and determine closest ticks
+  // lower should always be a smaller tick
+  // 根据价格区间上下限代表的tick序号
+  // 以下限为例：
+  //    1. 当用户下限的输入值为boolean类型，表示点击了 `set all range` 按钮
+  //        此时下限价格是全价格轴上可用的最小值，即为 tickSpaceLimits.lower 
+  //    2. 当用户下限的输入值为数值类型，则根据用户输入价格查找最近的可用的tick序号
+  //        因为Pool上的价格是离散的点，且又有tickSpacing的存在，
+  //        用户输入的价格和实际匹配的tick所代表的价格，有一定偏差
+  const ticks: {
+    [key: string]: number | undefined
+  } = useMemo(() => {
+    return {
+      [Bound.LOWER]:
+        typeof existingPosition?.tickLower === 'number'
+          ? existingPosition.tickLower
+          : (invertPrice && typeof rightRangeTypedValue === 'boolean') ||
+            (!invertPrice && typeof leftRangeTypedValue === 'boolean')
+          ? tickSpaceLimits[Bound.LOWER]
+          : invertPrice
+          ? tryParseTick(token1, token0, feeAmount, rightRangeTypedValue.toString())
+          : tryParseTick(token0, token1, feeAmount, leftRangeTypedValue.toString()),
+      [Bound.UPPER]:
+        typeof existingPosition?.tickUpper === 'number'
+          ? existingPosition.tickUpper
+          : (!invertPrice && typeof rightRangeTypedValue === 'boolean') ||
+            (invertPrice && typeof leftRangeTypedValue === 'boolean')
+          ? tickSpaceLimits[Bound.UPPER]
+          : invertPrice
+          ? tryParseTick(token1, token0, feeAmount, leftRangeTypedValue.toString())
+          : tryParseTick(token0, token1, feeAmount, rightRangeTypedValue.toString()),
+    }
+  }, [
+    existingPosition,
+    feeAmount,
+    invertPrice,
+    leftRangeTypedValue,
+    rightRangeTypedValue,
+    token0,
+    token1,
+    tickSpaceLimits,
+  ])
+
+  const { [Bound.LOWER]: tickLower, [Bound.UPPER]: tickUpper } = ticks || {}
+
+  // specifies whether the lower and upper ticks is at the exteme bounds
+  // 判断价格上下限所在的tick是否为tick轴的最大最小序号
+  const ticksAtLimit = useMemo(
+    () => ({
+      [Bound.LOWER]: feeAmount && tickLower === tickSpaceLimits.LOWER,
+      [Bound.UPPER]: feeAmount && tickUpper === tickSpaceLimits.UPPER,
+    }),
+    [tickSpaceLimits, tickLower, tickUpper, feeAmount]
+  )
+
+  // mark invalid range
+  // 当价格的 Lower >= Upper 判定为非法价格区间
+  const invalidRange = Boolean(typeof tickLower === 'number' && typeof tickUpper === 'number' && tickLower >= tickUpper)
+
+  // always returns the price with 0 as base token
+  // 根据确定的tick序号反推实际的价格
+  // 用户在输入之后，通常价格会自动匹配到最近的tick上，和用户的输入值有偏差
+  const pricesAtTicks = useMemo(() => {
+    return {
+      [Bound.LOWER]: getTickToPrice(token0, token1, ticks[Bound.LOWER]),
+      [Bound.UPPER]: getTickToPrice(token0, token1, ticks[Bound.UPPER]),
+    }
+  }, [token0, token1, ticks])
+  const { [Bound.LOWER]: lowerPrice, [Bound.UPPER]: upperPrice } = pricesAtTicks
+
+  // liquidity range warning
+  // 当前交易价格是否在设定的价格区间外
+  const outOfRange = Boolean(
+    !invalidRange && price && lowerPrice && upperPrice && (price.lessThan(lowerPrice) || price.greaterThan(upperPrice))
+  )
+
+  // amounts
+  // 用户输入的要添加多少token作为流动性
+  const independentAmount: CurrencyAmount<Currency> | undefined = tryParseAmount(
+    typedValue,
+    currencies[independentField]
+  )
+
+  // 自动计算另一种token匹配的数量
+  const dependentAmount: CurrencyAmount<Currency> | undefined = useMemo(() => {
+    // we wrap the currencies just to get the price in terms of the other token
+    const wrappedIndependentAmount = independentAmount?.wrapped
+    const dependentCurrency = dependentField === Field.CURRENCY_B ? currencyB : currencyA
+    if (
+      independentAmount &&
+      wrappedIndependentAmount &&
+      typeof tickLower === 'number' &&
+      typeof tickUpper === 'number' &&
+      poolForPosition
+    ) {
+      // if price is out of range or invalid range - return 0 (single deposit will be independent)
+      if (outOfRange || invalidRange) {
+        return undefined
+      }
+      
+      // 根据输入的token数量创建一个Position实例
+      // 其内部会计算另一种token的数量
+      // @uniswap/v3-sdk/Position
+      const position: Position | undefined = wrappedIndependentAmount.currency.equals(poolForPosition.token0)
+        ? Position.fromAmount0({
+            pool: poolForPosition,
+            tickLower,
+            tickUpper,
+            amount0: independentAmount.quotient,
+            useFullPrecision: true, // we want full precision for the theoretical position
+          })
+        : Position.fromAmount1({
+            pool: poolForPosition,
+            tickLower,
+            tickUpper,
+            amount1: independentAmount.quotient,
+          })
+
+      const dependentTokenAmount = wrappedIndependentAmount.currency.equals(poolForPosition.token0)
+        ? position.amount1
+        : position.amount0
+      return dependentCurrency && CurrencyAmount.fromRawAmount(dependentCurrency, dependentTokenAmount.quotient)
+    }
+
+    return undefined
+  }, [
+    independentAmount,
+    outOfRange,
+    dependentField,
+    currencyB,
+    currencyA,
+    tickLower,
+    tickUpper,
+    poolForPosition,
+    invalidRange,
+  ])
+
+  const parsedAmounts: { [field in Field]: CurrencyAmount<Currency> | undefined } = useMemo(() => {
+    return {
+      [Field.CURRENCY_A]: independentField === Field.CURRENCY_A ? independentAmount : dependentAmount,
+      [Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount,
+    }
+  }, [dependentAmount, independentAmount, independentField])
+
+  // single deposit only if price is out of range
+  // 当前交易价格在区间外,则只能添加单种资产
+  const deposit0Disabled = Boolean(
+    typeof tickUpper === 'number' && poolForPosition && poolForPosition.tickCurrent >= tickUpper
+  )
+  const deposit1Disabled = Boolean(
+    typeof tickLower === 'number' && poolForPosition && poolForPosition.tickCurrent <= tickLower
+  )
+
+  // sorted for token order
+  // 将不能添加流动性的资产映射到UI界面上
+  // 界面上是tokenA tokenB,而上面计算时,采用排序后的 token0, token1
+  const depositADisabled =
+    invalidRange ||
+    Boolean(
+      (deposit0Disabled && poolForPosition && tokenA && poolForPosition.token0.equals(tokenA)) ||
+        (deposit1Disabled && poolForPosition && tokenA && poolForPosition.token1.equals(tokenA))
+    )
+  const depositBDisabled =
+    invalidRange ||
+    Boolean(
+      (deposit0Disabled && poolForPosition && tokenB && poolForPosition.token0.equals(tokenB)) ||
+        (deposit1Disabled && poolForPosition && tokenB && poolForPosition.token1.equals(tokenB))
+    )
+
+  // create position entity based on users selection
+  // 根据用户的选择配置创建Position实例
+  // @uniswap/v3-sdk/Position
+  const position: Position | undefined = useMemo(() => {
+    if (
+      !poolForPosition ||
+      !tokenA ||
+      !tokenB ||
+      typeof tickLower !== 'number' ||
+      typeof tickUpper !== 'number' ||
+      invalidRange
+    ) {
+      return undefined
+    }
+
+    // mark as 0 if disabled because out of range
+    // outOfRange 状态下,某一种资产需要标记为0
+    const amount0 = !deposit0Disabled
+      ? parsedAmounts?.[tokenA.equals(poolForPosition.token0) ? Field.CURRENCY_A : Field.CURRENCY_B]?.quotient
+      : BIG_INT_ZERO
+    const amount1 = !deposit1Disabled
+      ? parsedAmounts?.[tokenA.equals(poolForPosition.token0) ? Field.CURRENCY_B : Field.CURRENCY_A]?.quotient
+      : BIG_INT_ZERO
+
+    if (amount0 !== undefined && amount1 !== undefined) {
+      // 创建Position实例
+      return Position.fromAmounts({
+        pool: poolForPosition,
+        tickLower,
+        tickUpper,
+        amount0,
+        amount1,
+        useFullPrecision: true, // we want full precision for the theoretical position
+      })
+    } else {
+      return undefined
+    }
+  }, [
+    parsedAmounts,
+    poolForPosition,
+    tokenA,
+    tokenB,
+    deposit0Disabled,
+    deposit1Disabled,
+    invalidRange,
+    tickLower,
+    tickUpper,
+  ])
+
+  let errorMessage: string | undefined
+  if (!account) {
+    errorMessage = t`Connect Wallet`
+  }
+
+  if (poolState === PoolState.INVALID) {
+    errorMessage = errorMessage ?? t`Invalid pair`
+  }
+
+  if (invalidPrice) {
+    errorMessage = errorMessage ?? t`Invalid price input`
+  }
+
+  if (
+    (!parsedAmounts[Field.CURRENCY_A] && !depositADisabled) ||
+    (!parsedAmounts[Field.CURRENCY_B] && !depositBDisabled)
+  ) {
+    errorMessage = errorMessage ?? t`Enter an amount`
+  }
+
+  const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
+
+  if (currencyAAmount && currencyBalances?.[Field.CURRENCY_A]?.lessThan(currencyAAmount)) {
+    errorMessage = t`Insufficient ${currencies[Field.CURRENCY_A]?.symbol} balance`
+  }
+
+  if (currencyBAmount && currencyBalances?.[Field.CURRENCY_B]?.lessThan(currencyBAmount)) {
+    errorMessage = t`Insufficient ${currencies[Field.CURRENCY_B]?.symbol} balance`
+  }
+
+  const invalidPool = poolState === PoolState.INVALID
+
+  return {
+    dependentField,
+    currencies,
+    pool,
+    poolState,
+    currencyBalances,
+    parsedAmounts,
+    ticks,
+    price,
+    pricesAtTicks,
+    position,
+    noLiquidity,
+    errorMessage,
+    invalidPool,
+    invalidRange,
+    outOfRange,
+    depositADisabled,
+    depositBDisabled,
+    invertPrice,
+    ticksAtLimit,
+  }
+}
+```
