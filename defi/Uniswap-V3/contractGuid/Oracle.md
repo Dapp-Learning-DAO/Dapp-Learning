@@ -1,5 +1,19 @@
 # Oracle
 
+Oracle 数据使用一个结构体 Observation 来表示：
+```solidity
+struct Observation {
+    // 记录区块的时间戳
+    uint32 blockTimestamp;
+    // tick index 的时间加权累积值
+    int56 tickCumulative;
+    // 价格所在区间的流动性的时间加权累积值
+    uint160 liquidityCumulative;
+    // 是否已经被初始化
+    bool initialized;
+}
+
+```
 
 ## functions
 
@@ -131,3 +145,4 @@ function observeSingle(
 补充
 
 - [关于secondsPerLiquidityCumulativeX128的原理解析](https://www.paradigm.xyz/2021/05/liquidity-mining-on-uniswap-v3/)
+- https://liaoph.com/uniswap-v3-5/
