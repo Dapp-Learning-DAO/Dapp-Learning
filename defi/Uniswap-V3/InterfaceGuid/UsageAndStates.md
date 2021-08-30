@@ -75,5 +75,11 @@ mintV3: {
   - 此时浏览器路由为 `/#/add/ETH`
   - 默认tokenA是ETH，浏览器路由第一个参数是 `/ETH` (只有ETH以别名表示，通常以token地址表示)
   - 当用户选择token时，路由参数会跟随变动，这里选择ETH-HHH作为交易对，路由则变为 `#/add/ETH/0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
+- `useFeeTierDistribution` 会去检索低中高三档费率的Pool是否存在，费率选择的选项会相应的做出可选和不可选的状态变化
+- 用户选择费率 0.3%，路由会添加 `feeAmount` 参数为 3000
+- 此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
+  - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出Pool中所有处于激活状态的poistion
+  - 遍历计算每个position对于tick上的流动性净值的影响，即 tick.liquidtyNet
+  - 生成每个tick上的liquidityNet数量的数组
 
 ## AddLiquidity
