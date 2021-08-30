@@ -17,7 +17,7 @@
 
 项目跟Rebase大学深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
-项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。  
+项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。欢迎参与[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。 
 
 
 技术栈：
@@ -30,11 +30,11 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。
+此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。  
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解以太坊和智能合约的基本原理**
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 以太坊 和 智能合约 的基本原理**
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
@@ -56,7 +56,6 @@
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
-- 《政治经济学》(https://www.marxists.org/subject/economy/index.htm)
 
 **国外大学加密课程**
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
