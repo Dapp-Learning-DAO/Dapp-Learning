@@ -3,7 +3,7 @@ Arbitrum 桥：https://bridge.arbitrum.io/
 
 与optimism差别在于： 交互式证明挑战  
 
-Optimism 的争议解决比 Arbitrum 更依赖于以太坊虚拟机 (EVM)。当有人提交关于 Optimism 的挑战时，整个有问题的交易都通过 EVM 运行。相比之下，Arbitrum 使用链下争议解决流程将争议减少到一笔交易中的一个步骤。然后，协议将这个一步断言（而不是整个交易）发送到 EVM 进行最终验证。因此，从概念上讲，Optimism 的争议解决过程比 Arbitrum 简单得多。  
+Optimism 的争议解决比 Arbitrum 更依赖于以太坊虚拟机 (EVM)。当有人提交关于 Optimism 的挑战时，**整个有问题的交易都通过 EVM 运行**。相比之下，**Arbitrum 使用链下争议解决流程将争议减少到一笔交易中的一个步骤**。然后，协议将这个一步断言（而不是整个交易）发送到 EVM 进行最终验证。因此，从概念上讲，Optimism 的争议解决过程比 Arbitrum 简单得多。  
 
 交互式证明的好处：  
   1. 在乐观情况下效率更高;
@@ -32,3 +32,4 @@ AVM与EVM的不同：
 https://new.qq.com/omn/20210709/20210709A0CL6M00.html 
 
 - https://github.com/dysquard/Arbitrum_Doc_CN/blob/master/2_%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8D%8F%E8%AE%AE/
+- https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc rollup详细解读  
