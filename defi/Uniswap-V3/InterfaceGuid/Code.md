@@ -910,3 +910,117 @@ export default function computeSurroundingTicks(
   return processedTicks;
 }
 ```
+
+### onAdd
+
+发送添加流动性的交易，如果有必要，先创建 Pool 合约
+
+```ts
+// src/pages/AddLiuqidity/index.tsx
+
+async function onAdd() {
+  if (!chainId || !library || !account) return;
+
+  if (!positionManager || !baseCurrency || !quoteCurrency) {
+    return;
+  }
+
+  if (position && account && deadline) {
+    // 交易对中有无ETH, 后面会根据此判断是否需给交易传value值
+    const useNative = baseCurrency.isNative ? baseCurrency : quoteCurrency.isNative ? quoteCurrency : undefined;
+    // 判断池子是否存在，且流动性为0
+    // 区分两种调用入参
+    // @uniswap/v3-sdk/NonfungiblePositionManager
+    //    1. 如果需要创建Pool，首先插入 Manager.createAndInitializePoolIfNecessary 的方法调用
+    //    2. 如果有permit 插入permit的编码
+    //    3. 如果不存在该流动性头寸(position)调用 Manager.mint 函数，添加流动性并创建NFT返回给用户
+    //    4. 如果position已存在，调用 Manager.increaseLiquidity 直接添加流动性
+    //    5. 如果交易对包含ETH，将ETH放在交易的value发送
+    const { calldata, value } =
+      hasExistingPosition && tokenId
+        ? NonfungiblePositionManager.addCallParameters(position, {
+            tokenId,
+            slippageTolerance: allowedSlippage,
+            deadline: deadline.toString(),
+            useNative,
+          })
+        : NonfungiblePositionManager.addCallParameters(position, {
+            slippageTolerance: allowedSlippage,
+            recipient: account,
+            deadline: deadline.toString(),
+            useNative,
+            createPool: noLiquidity,
+          });
+
+    // 组装交易参数
+    let txn: { to: string; data: string; value: string } = {
+      to: NONFUNGIBLE_POSITION_MANAGER_ADDRESSES[chainId],
+      data: calldata,
+      value,
+    };
+
+    if (argentWalletContract) {
+      const amountA = parsedAmounts[Field.CURRENCY_A];
+      const amountB = parsedAmounts[Field.CURRENCY_B];
+      const batch = [
+        ...(amountA && amountA.currency.isToken ? [approveAmountCalldata(amountA, NONFUNGIBLE_POSITION_MANAGER_ADDRESSES[chainId])] : []),
+        ...(amountB && amountB.currency.isToken ? [approveAmountCalldata(amountB, NONFUNGIBLE_POSITION_MANAGER_ADDRESSES[chainId])] : []),
+        {
+          to: txn.to,
+          data: txn.data,
+          value: txn.value,
+        },
+      ];
+      const data = argentWalletContract.interface.encodeFunctionData('wc_multiCall', [batch]);
+      txn = {
+        to: argentWalletContract.address,
+        data,
+        value: '0x0',
+      };
+    }
+
+    // 打开交易进行中的弹窗
+    setAttemptingTxn(true);
+
+    // 交易预执行并预估gas费用
+    library
+      .getSigner()
+      .estimateGas(txn)
+      .then((estimate) => {
+        const newTxn = {
+          ...txn,
+          gasLimit: calculateGasMargin(chainId, estimate),
+        };
+
+        // 真实发送交易
+        return library
+          .getSigner()
+          .sendTransaction(newTxn)
+          .then((response: TransactionResponse) => {
+            setAttemptingTxn(false);
+            addTransaction(response, {
+              summary: noLiquidity
+                ? t`Create pool and add ${baseCurrency?.symbol}/${quoteCurrency?.symbol} V3 liquidity`
+                : t`Add ${baseCurrency?.symbol}/${quoteCurrency?.symbol} V3 liquidity`,
+            });
+            setTxHash(response.hash);
+            ReactGA.event({
+              category: 'Liquidity',
+              action: 'Add',
+              label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/'),
+            });
+          });
+      })
+      .catch((error) => {
+        console.error('Failed to send transaction', error);
+        setAttemptingTxn(false);
+        // we only care if the error is something _other_ than the user rejected the tx
+        if (error?.code !== 4001) {
+          console.error(error);
+        }
+      });
+  } else {
+    return;
+  }
+}
+```

@@ -71,16 +71,29 @@ mintV3: {
 
 ### 使用流程
 
+#### 选择token和费率水平
+
 - 用户在 Pool 页面点击 `New Position` 按钮，进入新建 Position 页面（流动性头寸）
   - 此时浏览器路由为 `/#/add/ETH`
   - 默认 tokenA 是 ETH，浏览器路由第一个参数是 `/ETH` (只有 ETH 以别名表示，通常以 token 地址表示)
   - 当用户选择 token 时，路由参数会跟随变动，这里选择 ETH-HHH 作为交易对，路由则变为 `#/add/ETH/0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - `useFeeTierDistribution` 会去检索低中高三档费率的 Pool 是否存在，费率选择的选项会相应的做出可选和不可选的状态变化
 - 用户选择费率 0.3%，路由会添加 `feeAmount` 参数为 3000
-- 如果选择的费率还未有池子，界面会出现 `Gas 费将比平时高一些` 的警告，这是因为比普通添加流动性多调用了manager合约的 `createPool` 方法，多出的gas费消耗除了部署Pool合约之外，主要还有下列开销
-  - 初始化
-  - 还要初始化Oracle相关的storage存储变量，
-- 此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
+
+#### 创建流动性池子
+
+- 如果选择的费率还未有池子，界面会出现 `Gas 费将比平时高一些` 的警告，这是因为比普通添加流动性多调用了manager合约的 `createAndInitializePoolIfNecessary` 方法，多出的gas费消耗除了部署Pool合约之外，主要还有下列开销
+  - 初始化Pool的slot0插槽变量
+  - 还要初始化Oracle相关的storage存储变量。初始化是必须的，但是创建Pool的用户通常不是Oracle的使用者，所以并不会将65535个存储空间全部初始化，而只初始化1个
+- 初始创建流动性还需要用户输入初始价格
+- 输入价格区间
+- 点击 `Preview` 按钮
+  - 如果是 `OPTIMISM` 和其测试网，需要先点击 `Create` 按钮，单独发一笔交易创建Pool合约
+  - 其他网络则直接 `Preview` 按钮，发送一笔交易同时完成创建和添加流动性
+
+#### 已有流动性池子
+
+- 如果已经有流动性，此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
   - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出 Pool 中所有处于激活状态的 poistion
   - 遍历计算每个 position 对于 tick 上的流动性净值的影响，即 tick.liquidtyNet
   - 生成每个 tick 上的活跃流动性的数量，计算逻辑 [参见下方 :point_down:](#computeLiquidityActive)
