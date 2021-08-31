@@ -916,7 +916,7 @@ export default function computeSurroundingTicks(
 关于每个 tick 上激活状态的流动性数量计算
 
 - Pool 合约保存的 liquidity 变量是当前处于激活状态的 position 的流动性总和，即价格区间包含当前价格的所有流动性
-- 所以当前价格对应 tick 可直接赋值为 `Pool.liquidity`
+- 所以当前价格对应 tick 可直接赋值为合约中的变量 `Pool.liquidity`,即为函数中的 `liquidityActive`
 - `liquidityNet` 是 Pool 合约在每个 tick 上存储的一个用于计算的数据，其主要有 6 种变化的情况，参见下方表格
 - 如果向后（更高价格）遍历
   - 若 `liquidityNet` > 0, 说明该 tick 上以此作为 Lower price 的流动性更多

@@ -5,8 +5,9 @@
 - rinkeby 测试网络
 - V3SwapRouter `0xE592427A0AEce92De3Edee1F18E0157C05861564` 
 - PositionManager `0xC36442b4a4522E871399CD717aBDD847Ab11FE88`
-- HHH-WETH-LPtoken, position id: `5264`, price range: 90.168 - 109.91 (HH per ETH)
-- HHH-WETH-LPtoken, position id: `5266`, price range: 100.45 - 101.06 (HH per ETH)
+- HHH-WETH-Pool `0x2c0bd19fc5f7e8e01530f2822bf1a2fb15d3d70b`
+- HHH-WETH-NFT, position id: `5264`, price range: 90.168 - 109.91 (HH per ETH)
+- HHH-WETH-NFT, position id: `5266`, price range: 100.45 - 101.06 (HH per ETH)
 - 自定义 token HEHE(HH) `0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - 测试网 DAI `0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735`
 
