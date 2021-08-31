@@ -587,7 +587,7 @@ export function useV3DerivedMintInfo(
   const invalidRange = Boolean(typeof tickLower === 'number' && typeof tickUpper === 'number' && tickLower >= tickUpper);
 
   // always returns the price with 0 as base token
-  // 根据确定的tick序号反推实际的价格
+  // 根据确定的tick序号反推实际区间上下限的价格
   // 用户在输入之后，通常价格会自动匹配到最近的tick上，和用户的输入值有偏差
   const pricesAtTicks = useMemo(() => {
     return {
@@ -910,35 +910,3 @@ export default function computeSurroundingTicks(
   return processedTicks;
 }
 ```
-
-#### compute liquidityActive with liquidityNet
-
-关于每个 tick 上激活状态的流动性数量计算
-
-- Pool 合约保存的 liquidity 变量是当前处于激活状态的 position 的流动性总和，即价格区间包含当前价格的所有流动性
-- 所以当前价格对应 tick 可直接赋值为合约中的变量 `Pool.liquidity`,即为函数中的 `liquidityActive`
-- `liquidityNet` 是 Pool 合约在每个 tick 上存储的一个用于计算的数据，其主要有 6 种变化的情况，参见下方表格
-- 如果向后（更高价格）遍历
-  - 若 `liquidityNet` > 0, 说明该 tick 上以此作为 Lower price 的流动性更多
-  - 若 `liquidityNet` < 0, 说明该 tick 上以此作为 Upper price 的流动性更多
-  - 当价格移动到此处，流动性需要做加法
-- 如果向前（更低价格）遍历，由于价格已经穿过了这些tick，其 net 值已经反号
-  - 若 `liquidityNet` > 0, 说明该 tick 上以此作为 Upper price 的流动性更多
-  - 若 `liquidityNet` < 0, 说明该 tick 上以此作为 Lower price 的流动性更多
-  - 当价格移动到此处，流动性需要做减法
-
-流动性的操作对 `liquidityNet` 的影响
-
-| liquidity 操作 | tick 所在位置 | liquidityNet 运算   |
-| -------------- | ------------- | ------------------- |
-| Add            | Lower         | `+= deltaLiquidity` |
-| Add            | Upper         | `-= deltaLiquidity` |
-| Remove         | Lower         | `-= deltaLiquidity` |
-| Remove         | Upper         | `+= deltaLiquidity` |
-
-交易的操作对 `liquidityNet` 的影响
-
-| 价格穿过 tick 的方向 | liquidityNet 运算 |
-| -------------------- | ----------------- |
-| -->                  | 保持不变          |
-| <--                  | `= -liquidityNet` |

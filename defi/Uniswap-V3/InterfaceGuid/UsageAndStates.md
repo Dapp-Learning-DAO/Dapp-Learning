@@ -43,7 +43,7 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
   - 回调函数中会把得到的输入输出量，作为 revert 信息传回
   - 因为 V2 直接可用 x\*y=k 的公式计算，而 V3 的交易过程非常复杂，是分段执行，并且每段的状态都不一样
 
-## CreatePool
+## AddLiquidity
 
 添加流动性
 
@@ -61,25 +61,94 @@ mintV3: {
 
 ### 路由参数
 
-- currencyIDA/B token的地址
+- currencyIDA/B token 的地址
 - feeAmount 费率水平 `feeAmount / 10**6` %, 例如 feeAmount=3000 即表示 0.3%的费率
-- tokenId 流动性position在Manager合约内的tokenID（NFT ID）
+- tokenId 流动性 position 在 Manager 合约内的 tokenID（NFT ID）
 
 ```ts
-`#/add/${currencyIDA}/${currencyIDB}/${feeAmount}/${tokenId}`
+`#/add/${currencyIDA}/${currencyIDB}/${feeAmount}/${tokenId}`;
 ```
 
 ### 使用流程
 
-- 用户在Pool页面点击 `New Position` 按钮，进入新建Position页面（流动性头寸）
+- 用户在 Pool 页面点击 `New Position` 按钮，进入新建 Position 页面（流动性头寸）
   - 此时浏览器路由为 `/#/add/ETH`
-  - 默认tokenA是ETH，浏览器路由第一个参数是 `/ETH` (只有ETH以别名表示，通常以token地址表示)
-  - 当用户选择token时，路由参数会跟随变动，这里选择ETH-HHH作为交易对，路由则变为 `#/add/ETH/0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
-- `useFeeTierDistribution` 会去检索低中高三档费率的Pool是否存在，费率选择的选项会相应的做出可选和不可选的状态变化
+  - 默认 tokenA 是 ETH，浏览器路由第一个参数是 `/ETH` (只有 ETH 以别名表示，通常以 token 地址表示)
+  - 当用户选择 token 时，路由参数会跟随变动，这里选择 ETH-HHH 作为交易对，路由则变为 `#/add/ETH/0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
+- `useFeeTierDistribution` 会去检索低中高三档费率的 Pool 是否存在，费率选择的选项会相应的做出可选和不可选的状态变化
 - 用户选择费率 0.3%，路由会添加 `feeAmount` 参数为 3000
+- 如果选择的费率还未有池子，界面会出现 `Gas 费将比平时高一些` 的警告，这是因为比普通添加流动性多调用了manager合约的 `createPool` 方法，多出的gas费消耗除了部署Pool合约之外，主要还有下列开销
+  - 初始化
+  - 还要初始化Oracle相关的storage存储变量，
 - 此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
-  - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出Pool中所有处于激活状态的poistion
-  - 遍历计算每个position对于tick上的流动性净值的影响，即 tick.liquidtyNet
-  - 生成每个tick上的liquidityNet数量的数组
+  - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出 Pool 中所有处于激活状态的 poistion
+  - 遍历计算每个 position 对于 tick 上的流动性净值的影响，即 tick.liquidtyNet
+  - 生成每个 tick 上的活跃流动性的数量，计算逻辑 [参见下方 :point_down:](#computeLiquidityActive)
+- 此时如果有流动性数据，会自动计算出一个合适的价格区间
+  - 自动计算的区间的逻辑是根据三档费率固定设置的比例
+  - 即自动计算费率只跟你选择的费率等级相关，且是固定值，比较鸡肋……
+
+### computeLiquidityActive
+
+关于每个 tick 上激活状态的流动性数量计算
+
+- Pool 合约保存的 liquidity 变量是当前处于激活状态的 position 的流动性总和，即价格区间包含当前价格的所有流动性
+- 所以当前价格对应 tick 可直接赋值为合约中的变量 `Pool.liquidity`,即为函数中的 `liquidityActive`
+- `liquidityNet` 是 Pool 合约在每个 tick 上存储的一个用于计算的数据，其主要有 6 种变化的情况，参见下方表格
+- 如果向后（更高价格）遍历
+  - 若 `liquidityNet` > 0, 说明该 tick 上以此作为 Lower price 的流动性更多
+  - 若 `liquidityNet` < 0, 说明该 tick 上以此作为 Upper price 的流动性更多
+  - 当价格移动到此处，流动性需要做加法
+- 如果向前（更低价格）遍历，由于价格已经穿过了这些 tick，其 net 值已经反号
+  - 若 `liquidityNet` > 0, 说明该 tick 上以此作为 Upper price 的流动性更多
+  - 若 `liquidityNet` < 0, 说明该 tick 上以此作为 Lower price 的流动性更多
+  - 当价格移动到此处，流动性需要做减法
+
+流动性的操作对 `liquidityNet` 的影响
+
+| liquidity 操作 | tick 所在位置 | liquidityNet 运算   |
+| -------------- | ------------- | ------------------- |
+| Add            | Lower         | `+= deltaLiquidity` |
+| Add            | Upper         | `-= deltaLiquidity` |
+| Remove         | Lower         | `-= deltaLiquidity` |
+| Remove         | Upper         | `+= deltaLiquidity` |
+
+交易的操作对 `liquidityNet` 的影响
+
+| 价格穿过 tick 的方向 | liquidityNet 运算 |
+| -------------------- | ----------------- |
+| -->                  | 保持不变          |
+| <--                  | `= -liquidityNet` |
+
+### ZOOM_LEVELS
+
+根据不同费率设置的三档初始价格区间比例
+
+- `initialLeftprice = initialMin * currentPrice`
+- `initialRightprice = initialMax * currentPrice`
+- 上述是以token1的价格计算，如果是token0则左右参数颠倒
+
+```ts
+const ZOOM_LEVELS: Record<FeeAmount, ZoomLevels> = {
+  [FeeAmount.LOW]: {
+    initialMin: 0.999,
+    initialMax: 1.001,
+    min: 0.00001,
+    max: 1.5,
+  },
+  [FeeAmount.MEDIUM]: {
+    initialMin: 0.5,
+    initialMax: 2,
+    min: 0.00001,
+    max: 20,
+  },
+  [FeeAmount.HIGH]: {
+    initialMin: 0.5,
+    initialMax: 2,
+    min: 0.00001,
+    max: 20,
+  },
+}
+```
 
 ## AddLiquidity
