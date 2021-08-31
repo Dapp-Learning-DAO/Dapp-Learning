@@ -46,7 +46,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 ## SDK
 
-详细内容请戳这里 :point_right: [SDK 导读](./frontGuid/sdk/readme.md)
+详细内容请戳这里 :point_right: [SDK 导读](./frontGuid/sdk/README.md)
 
 ## Graph
 
