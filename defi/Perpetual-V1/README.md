@@ -28,9 +28,15 @@
    （3）永续合约减弱了无风险利率的影响，更好地反应目标价格
    （4）创建永续合约不必再依赖于现货市场
 
+## Perpetual
+   [官网地址](https://perp.exchange/t/BTC:USDC)  
+   与Uniswap一样，交易者可以在无需交易对手的状态下直接使用我们的vAMM进行交易。 vAMM通过恒定乘积设定交易标的的可预测价格，从而保证了链上的流动性。 此外，vAMM还被设计为市场中立且完全抵押的机制。  
+   PERP持有者通过将其拥有的PERP代币放到质押池中，从而成为质押者。作为回报，质押者除了获得质押奖励外，还将获得部分交易手续费的分成。  
 
 
 ## 参考链接
 期货原理：https://www.theblockbeats.com/news/25619
 perpetual: https://zhuanlan.zhihu.com/p/395752324?utm_source=wechat_session&utm_medium=social&utm_oi=42064397991936&utm_campaign=shareopn  
 dehedge: <https://www.dhedge.org/> 
+官网文档：https://docs.perp.fi/v/perpetual-protocol-jian-jie/ 
+deri: https://mp.weixin.qq.com/s/Lffxvqt2lXbfXbMyTP-84w  
