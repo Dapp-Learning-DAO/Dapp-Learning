@@ -146,8 +146,10 @@
 09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+12. [DYDX]()[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 13. [OPYN](https://dodoex.github.io/docs/zh/docs/
+14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
+15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
 
 ## NFT 进阶
 
