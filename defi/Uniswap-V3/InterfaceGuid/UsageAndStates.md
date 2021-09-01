@@ -43,9 +43,27 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
   - 回调函数中会把得到的输入输出量，作为 revert 信息传回
   - 因为 V2 直接可用 x\*y=k 的公式计算，而 V3 的交易过程非常复杂，是分段执行，并且每段的状态都不一样
 
+## PoolList
+
+页面的命名是 Pool 列表，但实际上主要展示的是用户的 position。
+
+### PositionList
+
+根据用户账户地址向 Manager 合约查询他的所有 position
+
+- 调用 Manager 合约的 balanceOf 方法查询用户有多少个 position
+- 调用 Manager 合约的 tokenOfOwnerByIndex 方法查询每个position的tokenId
+- 调用 Manager 合约的 positions getter 方法查询每个position的具体数据
+
+### CollectFee
+
+回收手续费
+
 ## AddLiquidity
 
 添加流动性
+
+详细代码解析请戳这里 :point_right: [AddLiquidity 代码解析](./Code.md#AddLiquidity)
 
 ### init state
 
@@ -71,7 +89,7 @@ mintV3: {
 
 ### 使用流程
 
-#### 选择token和费率水平
+#### 选择 token 和费率水平
 
 - 用户在 Pool 页面点击 `New Position` 按钮，进入新建 Position 页面（流动性头寸）
   - 此时浏览器路由为 `/#/add/ETH`
@@ -82,13 +100,13 @@ mintV3: {
 
 #### 创建流动性池子
 
-- 如果选择的费率还未有池子，界面会出现 `Gas 费将比平时高一些` 的警告，这是因为比普通添加流动性多调用了manager合约的 `createAndInitializePoolIfNecessary` 方法，多出的gas费消耗除了部署Pool合约之外，主要还有下列开销
-  - 初始化Pool的slot0插槽变量
-  - 还要初始化Oracle相关的storage存储变量。初始化是必须的，但是创建Pool的用户通常不是Oracle的使用者，所以并不会将65535个存储空间全部初始化，而只初始化1个
+- 如果选择的费率还未有池子，界面会出现 `Gas 费将比平时高一些` 的警告，这是因为比普通添加流动性多调用了 manager 合约的 `createAndInitializePoolIfNecessary` 方法，多出的 gas 费消耗除了部署 Pool 合约之外，主要还有下列开销
+  - 初始化 Pool 的 slot0 插槽变量
+  - 还要初始化 Oracle 相关的 storage 存储变量。初始化是必须的，但是创建 Pool 的用户通常不是 Oracle 的使用者，所以并不会将 65535 个存储空间全部初始化，而只初始化 1 个
 - 初始创建流动性还需要用户输入初始价格
 - 输入价格区间
 - 点击 `Preview` 按钮
-  - 如果是 `OPTIMISM` 和其测试网，需要先点击 `Create` 按钮，单独发一笔交易创建Pool合约
+  - 如果是 `OPTIMISM` 和其测试网，需要先点击 `Create` 按钮，单独发一笔交易创建 Pool 合约
   - 其他网络则直接 `Preview` 按钮，发送一笔交易同时完成创建和添加流动性
 
 #### 已有流动性池子
@@ -139,7 +157,7 @@ mintV3: {
 
 - `initialLeftprice = initialMin * currentPrice`
 - `initialRightprice = initialMax * currentPrice`
-- 上述是以token1的价格计算，如果是token0则左右参数颠倒
+- 上述是以 token1 的价格计算，如果是 token0 则左右参数颠倒
 
 ```ts
 const ZOOM_LEVELS: Record<FeeAmount, ZoomLevels> = {
@@ -161,7 +179,5 @@ const ZOOM_LEVELS: Record<FeeAmount, ZoomLevels> = {
     min: 0.00001,
     max: 20,
   },
-}
+};
 ```
-
-## AddLiquidity
