@@ -120,11 +120,16 @@
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
 52. [Governace](https://github.com/withtally/safeguard)  
+53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) 
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 进阶任务
 
+**准备工作**：
+  阅读书籍:
+   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
+  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
@@ -142,7 +147,10 @@
 09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+13. [OPYN](https://v2.opyn.co/)
+14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
+15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
 
 ## NFT 进阶
 
@@ -150,6 +158,7 @@
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
 - 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
+- 05. [SocialFi](https://inewsdb.com/%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3/%E7%A4%BE%E4%BA%A4%E4%BB%A3%E5%B9%A3%E4%B8%8D%E6%96%B7%E9%80%B2%E5%8C%96%EF%BC%8C-socialfi-%E6%9C%83%E6%88%90%E7%82%BA-gamefi-%E5%BE%8C%E4%B8%8B%E5%80%8B%E7%86%B1%E9%BB%9E%E5%97%8E%EF%BC%9F/)
 
 ## DAO 进阶
 
