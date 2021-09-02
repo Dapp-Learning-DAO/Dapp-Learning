@@ -109,9 +109,9 @@ V3 的大部分周边合约都继承了一个名为`Multicall`的合约，其中
 
 - 通常 revert 消息可以在 try...catch...语句中捕获，但不包括 `call`, `delegatecall` 等底层方法，所以需要使用操作码来捕获信息
 - revert 信息的读取：
-  - revert的数据大概是这样的：`{Error(string)的二进制码}`4字节 + `data offset` 32字节 + `data length` 32字节 + `string data` + 32字节
-  - 如果返回是revert且带消息，其长度一定大于68 （`result.length < 68` 的情况可以排除）
-  - `result := add(result, 0x04)` 是将返回数据的指针移动4字节，忽略掉 `{Error(string)的二进制码}`，否则无法解析
+  - revert 的数据大概是这样的：`{Error(string)的二进制码}`4 字节 + `data offset` 32 字节 + `data length` 32 字节 + `string data` + 32 字节
+  - 如果返回是 revert 且带消息，其长度一定大于 68 （`result.length < 68` 的情况可以排除）
+  - `result := add(result, 0x04)` 是将返回数据的指针移动 4 字节，忽略掉 `{Error(string)的二进制码}`，否则无法解析
   - 最后使用 `abi.decode` 解析出字符串
 - [revert - solidity document](https://docs.soliditylang.org/en/latest/control-structures.html#revert)
 
@@ -152,9 +152,8 @@ abstract contract Multicall is IMulticall {
 调用 Multicall 合约的方法
 
 - `multicall.callStatic.multicall` 使用 `callStatic` 静态调用 （继承了）`Multicall2` 合约的 `multicall` 方法
-- ethers 合约对象的 callStatic 方法，将会修改合约状态的方法（会产生 gas 费用）当作静态方法调用（不会改变合约状态），callStatic 不会产生 gas 费用，但是会返回 revert 的报错信息
-- V3 中大量使用了这个技巧，使其可以不产生 gas 费的情况下查询一些不能直接获取的状态
-- [ethers.contract.callStatic](https://docs.ethers.io/v5/api/contract/contract/#contract-callStatic)
+- ethers 合约对象的 callStatic 方法，会假装消耗 gas 发送交易，EVM 会当作真实交易执行，把数据返回给调用者，**但是不会改变链上的任何数据**
+- V3 中使用了这个技巧，使其可以不产生 gas 费的情况下查询一些不能直接获取的状态
 
 ```ts
 const DEFAULT_GAS_REQUIRED = 1_000_000;
@@ -170,7 +169,7 @@ async function fetchChunk(
   chunk: Call[],
   blockNumber: number
 ): Promise<{ success: boolean; returnData: string }[]> {
-  console.debug("Fetching chunk", chunk, blockNumber);
+  console.debug('Fetching chunk', chunk, blockNumber);
   try {
     // 这里是V3和V2的主要差别
     // multicall代表调用合约继承了Multicall合约
@@ -186,37 +185,62 @@ async function fetchChunk(
       { blockTag: blockNumber }
     );
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       returnData.forEach(({ gasUsed, returnData, success }, i) => {
-        if (
-          !success &&
-          returnData.length === 2 &&
-          gasUsed.gte(
-            Math.floor((chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED) * 0.95)
-          )
-        ) {
-          console.warn(
-            `A call failed due to requiring ${gasUsed.toString()} vs. allowed ${
-              chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED
-            }`,
-            chunk[i]
-          );
+        if (!success && returnData.length === 2 && gasUsed.gte(Math.floor((chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED) * 0.95))) {
+          console.warn(`A call failed due to requiring ${gasUsed.toString()} vs. allowed ${chunk[i].gasRequired ?? DEFAULT_GAS_REQUIRED}`, chunk[i]);
         }
       });
     }
 
     return returnData;
   } catch (error) {
-    if (
-      error.code === -32000 ||
-      error.message?.indexOf("header not found") !== -1
-    ) {
-      throw new RetryableError(
-        `header not found for block number ${blockNumber}`
-      );
+    if (error.code === -32000 || error.message?.indexOf('header not found') !== -1) {
+      throw new RetryableError(`header not found for block number ${blockNumber}`);
     }
-    console.error("Failed to fetch chunk", error);
+    console.error('Failed to fetch chunk', error);
     throw error;
   }
 }
+```
+
+### callStatic
+
+- `ethers.callStatic` 底层实际上是 `jsonRpcProvider.send('call', args)`, 即 json-rpc 的 `eth_call` 接口
+- `eth_call` 是 EVM 对链上合约发起的 `message call`
+- [message call](https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#message-calls)
+- [ethers.contract.callStatic](https://docs.ethers.io/v5/api/contract/contract/#contract-callStatic)
+- [json-rpc eth_call](https://eth.wiki/json-rpc/API#eth_call)
+
+说明用例
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.8.7;
+
+contract SimpleStorage {
+    uint256 storedData;
+
+    function set(uint256 x) public returns (uint256) {
+        storedData = x;
+        // 用staticCall调用 这里依然会返回计算后的结果
+        // 但是不会改变链上的状态
+        return storedData;
+    }
+
+    function get() public view returns (uint256) {
+        return storedData;
+    }
+}
+```
+
+```ts
+// test file
+it('test ethers.staticCall', async function () {
+  const staticRes = await simpleStorage.callStatic.set(1);
+  // staticCall 的结果应该是改变后的结果
+  expect(staticRes).to.equals(1);
+  // 但实际链上的数据是没有变化的
+  expect(await simpleStorage.get()).to.equal(0);
+});
 ```

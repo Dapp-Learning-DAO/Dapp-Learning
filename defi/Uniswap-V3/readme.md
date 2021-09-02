@@ -62,6 +62,8 @@ Graph 实操详解
 
 ## Interface
 
+详细内容请戳这里 :point_right: [Interface 代码解析](./InterfaceGuid/readme.md)
+
 ## 参考链接
 
 - https://learnblockchain.cn/article/2357
