@@ -71,6 +71,12 @@
 
 详细解析请戳这里 :point_right: [Multicall模块解析](./Multicall.md)
 
+### GraphAPI
+
+Interface中会用到两个Graph的请求
+
+详细解析请戳这里 :point_right: [Graph模块解析](./Graph.md)
+
 ## 相关引用
 
 - UniswapV3Interface 源码地址：https://github.com/Uniswap/uniswap-interface/tree/v4.12.8
