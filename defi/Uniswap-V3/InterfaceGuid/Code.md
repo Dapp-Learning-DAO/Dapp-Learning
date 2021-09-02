@@ -469,19 +469,19 @@ function useV3PositionsFromTokenIds(tokenIds: BigNumber[] | undefined): UseV3Pos
 
 ### useV3PositionFees
 
-通过 `ethers.callStatic` 方法，静态调用(不会真实消耗 gas) Manager 合约的 collect 函数，得到最新的可回收手续费的数量。 
+通过 `ethers.callStatic` 方法，静态调用(不会真实消耗 gas) Manager 合约的 collect 函数，得到最新的可回收手续费的数量。
 
 #### 为何要这样获取
 
-- 从Manager的positions getter函数可以获取到手续费数量的数据
-- 但这个数据不是最新的，因为Manager中的position的手续费只有在用户添加或删除流动性时才会触发去Pool合约中查询最新数据
-- Manager合约和Pool合约都存有position数据，但是Pool合约不会存储用户相关的信息，并且仅限Pool合约所对应的交易对；而Manager中会针对用户存储其所有交易对的全部position信息
+- 从 Manager 的 positions getter 函数可以获取到手续费数量的数据
+- 但这个数据不是最新的，因为 Manager 中的 position 的手续费只有在用户添加或删除流动性时才会触发去 Pool 合约中查询最新数据
+- Manager 合约和 Pool 合约都存有 position 数据，但是 Pool 合约不会存储用户相关的信息，并且仅限 Pool 合约所对应的交易对；而 Manager 中会针对用户存储其所有交易对的全部 position 信息
 
 #### Manager.collect() 函数的内部逻辑
 
 1. Pool.burn 触发 Pool 中的 position 数据更新
 2. Pool.positions getter 函数 拿到最新数据
-3. Pool.collect 回收手续费，当然这里在执行到实际 transfer 转账步骤时会 revert
+3. Pool.collect 回收手续费，当然这里是 message call 可以返回计算后的数据，但不会改变链上的任何状态
 
 我们需要的数据在 transfer 之前就已经拿到
 
@@ -514,8 +514,8 @@ export function useV3PositionFees(
       // Manager.collect
       //  1. Pool.burn 触发Pool中的position数据更新
       //  2. Pool.positions getter 函数 拿到最新数据
-      //  3. Pool.collect 回收手续费，当然这里在执行到实际转账步骤时会revert
-      //  我们需要的数据在transfer之前就已经拿到
+      //  3. Pool.collect 回收手续费，当然这里不会实际转账
+      //  返回的 amount0，amount1 是计算后的值，
       positionManager.callStatic
         .collect(
           {
@@ -1276,6 +1276,90 @@ async function onAdd() {
       });
   } else {
     return;
+  }
+}
+```
+
+## RemoveLiquidity
+
+### useDerivedV3BurnInfo
+
+预估用户要移除的流动性的数量和返回多少token
+
+```ts
+export function useDerivedV3BurnInfo(
+  position?: PositionDetails,
+  asWETH = false
+): {
+  position?: Position
+  liquidityPercentage?: Percent
+  liquidityValue0?: CurrencyAmount<Currency>
+  liquidityValue1?: CurrencyAmount<Currency>
+  feeValue0?: CurrencyAmount<Currency>
+  feeValue1?: CurrencyAmount<Currency>
+  outOfRange: boolean
+  error?: string
+} {
+  const { account } = useActiveWeb3React()
+  const { percent } = useBurnV3State()
+
+  const token0 = useToken(position?.token0)
+  const token1 = useToken(position?.token1)
+
+  const [, pool] = usePool(token0 ?? undefined, token1 ?? undefined, position?.fee)
+
+  const positionSDK = useMemo(
+    () =>
+      pool && position?.liquidity && typeof position?.tickLower === 'number' && typeof position?.tickUpper === 'number'
+        ? new Position({
+            pool,
+            liquidity: position.liquidity.toString(),
+            tickLower: position.tickLower,
+            tickUpper: position.tickUpper,
+          })
+        : undefined,
+    [pool, position]
+  )
+
+  const liquidityPercentage = new Percent(percent, 100)
+
+  const discountedAmount0 = positionSDK
+    ? liquidityPercentage.multiply(positionSDK.amount0.quotient).quotient
+    : undefined
+  const discountedAmount1 = positionSDK
+    ? liquidityPercentage.multiply(positionSDK.amount1.quotient).quotient
+    : undefined
+
+  const liquidityValue0 =
+    token0 && discountedAmount0
+      ? CurrencyAmount.fromRawAmount(asWETH ? token0 : unwrappedToken(token0), discountedAmount0)
+      : undefined
+  const liquidityValue1 =
+    token1 && discountedAmount1
+      ? CurrencyAmount.fromRawAmount(asWETH ? token1 : unwrappedToken(token1), discountedAmount1)
+      : undefined
+
+  const [feeValue0, feeValue1] = useV3PositionFees(pool ?? undefined, position?.tokenId, asWETH)
+
+  const outOfRange =
+    pool && position ? pool.tickCurrent < position.tickLower || pool.tickCurrent > position.tickUpper : false
+
+  let error: string | undefined
+  if (!account) {
+    error = t`Connect Wallet`
+  }
+  if (percent === 0) {
+    error = error ?? t`Enter a percent`
+  }
+  return {
+    position: positionSDK,
+    liquidityPercentage,
+    liquidityValue0,
+    liquidityValue1,
+    feeValue0,
+    feeValue1,
+    outOfRange,
+    error,
   }
 }
 ```

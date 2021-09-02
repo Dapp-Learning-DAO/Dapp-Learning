@@ -57,13 +57,16 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
 
 ### CollectFee
 
-回收手续费
+查询可回收的手续费
 
 - 通过 `ethers.callStatic` 方法，静态调用(不会真实消耗 gas) Manager 合约的 collect 函数，得到最新的可回收手续费的数量。 
   - 从Manager的positions getter函数可以获取到手续费数量的数据
   - 但这个数据不是最新的，因为Manager中的position的手续费只有在用户添加或删除流动性时才会触发去Pool合约中查询最新数据
   - Manager合约和Pool合约都存有position数据，但是Pool合约不会存储用户相关的信息，并且仅限Pool合约所对应的交易对；而Manager中会针对用户存储其所有交易对的全部position信息
-- 
+
+回收手续费
+
+- 这里就是真实的发送交易，触发 `Manager.collect()` 回收手续费，该方法会让 Pool 合约将手续费转给用户
 
 ## AddLiquidity
 
