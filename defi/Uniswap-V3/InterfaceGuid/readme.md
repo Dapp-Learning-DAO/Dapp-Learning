@@ -32,9 +32,40 @@
 
 ### State数据的结构
 
-![状态数据的结构-min](./xmind/State-min.png)
+结构和V2相同，主要交互部分多了三个模块
 
-#### Multicall State 解析
+- 用户交互部分
+  - MintV3
+  - BurnV3
+- GraphAPI 管理Graph的请求
+
+[状态数据的结构](./xmind/State.png)
+
+### 用户使用流程及State的变化
+
+- Swap交易
+- Position列表页
+- 回收手续费
+- AddLiquidity
+- RemoveLiquidity
+
+详细解析请戳这里 :point_right: [V3的用户交互流程及状态变化](./UsageAndStates.md)
+
+### 代码解析
+
+- Swap
+- PoolList
+- CollectFee
+- AddLiquidity
+- RemoveLiquidity
+
+详细解析请戳这里 :point_right: [V3 interface 代码解析](./Code.md)
+
+### 相关辅助数据
+
+请戳这里 :point_right: [辅助数据列表](./InfoList.md)
+
+### Multicall State 解析
 
 主要解析V3与V2的区别
 

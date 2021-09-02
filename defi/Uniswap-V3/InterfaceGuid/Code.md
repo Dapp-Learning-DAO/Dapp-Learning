@@ -1284,7 +1284,7 @@ async function onAdd() {
 
 ### useDerivedV3BurnInfo
 
-预估用户要移除的流动性的数量和返回多少token
+预估用户移除的流动性返回多少token和手续费
 
 ```ts
 export function useDerivedV3BurnInfo(
@@ -1301,13 +1301,16 @@ export function useDerivedV3BurnInfo(
   error?: string
 } {
   const { account } = useActiveWeb3React()
+  // 用户输入要移除的百分比
   const { percent } = useBurnV3State()
 
   const token0 = useToken(position?.token0)
   const token1 = useToken(position?.token1)
 
+  // @uniswap/v3-sdk/Pool 类的实例
   const [, pool] = usePool(token0 ?? undefined, token1 ?? undefined, position?.fee)
 
+  // @uniswap/v3-sdk/Position 类的实例
   const positionSDK = useMemo(
     () =>
       pool && position?.liquidity && typeof position?.tickLower === 'number' && typeof position?.tickUpper === 'number'
@@ -1321,8 +1324,12 @@ export function useDerivedV3BurnInfo(
     [pool, position]
   )
 
+  // 格式化百分比数值
   const liquidityPercentage = new Percent(percent, 100)
 
+  // 根据移除的百分比折算能够得到的token数量
+  // discounted = total * persent
+  // 这里的数字使用 分子/分母 的形式存储，而quotient中存储实际的结果
   const discountedAmount0 = positionSDK
     ? liquidityPercentage.multiply(positionSDK.amount0.quotient).quotient
     : undefined
@@ -1330,6 +1337,7 @@ export function useDerivedV3BurnInfo(
     ? liquidityPercentage.multiply(positionSDK.amount1.quotient).quotient
     : undefined
 
+  // token数量使用 @uniswap/sdk-core/CurrencyAmount 类包装
   const liquidityValue0 =
     token0 && discountedAmount0
       ? CurrencyAmount.fromRawAmount(asWETH ? token0 : unwrappedToken(token0), discountedAmount0)
@@ -1339,6 +1347,8 @@ export function useDerivedV3BurnInfo(
       ? CurrencyAmount.fromRawAmount(asWETH ? token1 : unwrappedToken(token1), discountedAmount1)
       : undefined
 
+  // 获取可回收的手续费数量
+  // 获取过程同回收手续费部分
   const [feeValue0, feeValue1] = useV3PositionFees(pool ?? undefined, position?.tokenId, asWETH)
 
   const outOfRange =
@@ -1363,3 +1373,13 @@ export function useDerivedV3BurnInfo(
   }
 }
 ```
+
+### computeAmountFromLquidity
+
+根据流动性数量和价格区间，计算其可换回的token数量，根据白皮书的公式有三种情况，以token1为例：（`current` 代表当前价格）
+
+- `current < Lower`: 此时token1的数量已经耗尽，所以直接返回0
+- `Lower < current < Upper`: `amount = (current - Lower) * liquidity`
+- `Upper < current`: `amount = (Upper - Lower) * liquidity`
+- 原理参考paco大佬的博客[从token数量计算流动性数量](https://liaoph.com/uniswap-v3-2/#%E4%BB%8E-token-%E6%95%B0%E8%AE%A1%E7%AE%97%E6%B5%81%E5%8A%A8%E6%80%A7-l)
+- 具体代码在 @uniswap/v3-sdk/position.amount1()

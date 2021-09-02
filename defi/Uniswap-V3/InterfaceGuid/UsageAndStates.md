@@ -59,6 +59,10 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
 
 查询可回收的手续费
 
+详细代码解析请戳这里 :point_right: [CollectFee 代码解析](./Code.md#CollectFee)
+
+### 交互流程
+
 - 通过 `ethers.callStatic` 方法，静态调用(不会真实消耗 gas) Manager 合约的 collect 函数，得到最新的可回收手续费的数量。 
   - 从Manager的positions getter函数可以获取到手续费数量的数据
   - 但这个数据不是最新的，因为Manager中的position的手续费只有在用户添加或删除流动性时才会触发去Pool合约中查询最新数据
@@ -190,3 +194,18 @@ const ZOOM_LEVELS: Record<FeeAmount, ZoomLevels> = {
   },
 };
 ```
+
+## RemoveLiquidity
+
+移除流动性头寸(position)
+
+详细代码解析请戳这里 :point_right: [RemoveLiquidity 代码解析](./Code.md#RemoveLiquidity)
+
+### 交互流程
+
+- 用户选择要移除的百分比
+- `useDerivedV3BurnInfo` 预估用户移除的流动性返回多少token和手续费
+  - @uniswap/v3-sdk/Position 可以根据移除的liquidity数量预估返回的token数量
+  - 获取可回收的手续费数量，方法和 [CollectFee](#CollectFee) 一样
+  - 判断是否 outOfRange
+- 确认移除发送交易
