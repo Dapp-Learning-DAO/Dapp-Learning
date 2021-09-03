@@ -203,7 +203,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
   // 默认的中转token
   // 主网有 WETH, DAI, USDC, USDT, COMP, MKR, WBTC
-  // 测试网 只有 WETH 
+  // 测试网 只有 WETH
   const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
 
   const [tokenA, tokenB] = chainId
@@ -284,7 +284,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
 限定使用交易路径的长度(交易对数量)，在交易对中寻找所有可能的交易路径，并进行最优排序，第一个元素为最优的交易路径
 
-- 这是sdk中的方法`@uniswap/sdk/Trade.bestTradeExactOut`
+- 这是sdk中的方法 `@uniswap/sdk/Trade.bestTradeExactOut`
 - 该方法主要接受三个参数：交易对数组， 精确的输出数量，递归深度(交易路径的长度)
 - 遍历交易对数组，然后对每个交易对进行递归查找，找到头尾符合输入输出的路径会排序并插入到结果中
 - 最终返回一个交易路径组成的数组，第一个元素为最优的交易路径
@@ -742,6 +742,8 @@ export function useTransactionAdder(): (
 
 ### TransactionUpdater
 
+监听最近的交易历史，更新交易 state 与 UI
+
 ```ts
 // src/state/transactions/updater.tsx
 export default function Updater(): null {
@@ -757,7 +759,7 @@ export default function Updater(): null {
   // 显示交易确认弹窗的方法
   const addPopup = useAddPopup()
 
-  // 利用useEffect机制监听，一旦有依赖参数变化，触发useEffect方法更新交易记录
+  // 利用 useEffect 机制监听，一旦有依赖参数变化，触发 useEffect 方法更新交易记录
   useEffect(() => {
     if (!chainId || !library || !lastBlockNumber) return
 
@@ -809,7 +811,16 @@ export default function Updater(): null {
             console.error(`failed to check transaction hash: ${hash}`, error)
           })
       })
-  }, [chainId, library, transactions, lastBlockNumber, dispatch, addPopup])
+  }, [
+    // 会在以下状态发生变化时，再次执行上述交易监听请求
+    // 其中，导致更新最多的是 lastBlockNumber
+    chainId,  // 当前 Chain ID
+    library,  // web3 provider
+    transactions,  // 交易记录
+    lastBlockNumber,  // 最新区块
+    dispatch,  // dispatch 函数
+    addPopup  // 添加弹窗函数
+  ])
 
   return null
 }
