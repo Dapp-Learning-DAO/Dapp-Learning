@@ -33,3 +33,6 @@ https://new.qq.com/omn/20210709/20210709A0CL6M00.html
 
 - https://github.com/dysquard/Arbitrum_Doc_CN/blob/master/2_%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8D%8F%E8%AE%AE/
 - https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc rollup详细解读  
+- https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc arbi简介
+- https://mubu.com/app/edit/clb/NIhGqZda80#m 分享
+ 
