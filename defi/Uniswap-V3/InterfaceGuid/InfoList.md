@@ -3,7 +3,7 @@
 ## 演示环境
 
 - rinkeby 测试网络
-- V3SwapRouter `0xE592427A0AEce92De3Edee1F18E0157C05861564` 
+- V3SwapRouter `0xE592427A0AEce92De3Edee1F18E0157C05861564`
 - PositionManager `0xC36442b4a4522E871399CD717aBDD847Ab11FE88`
 - 自定义 token HEHE(HH) `0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - HHH-WETH-Pool `0x2c0bd19fc5f7e8e01530f2822bf1a2fb15d3d70b`
@@ -12,6 +12,49 @@
 - 测试网 DAI `0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735`
 
 ## 相关合约的 Methodid
+
+### PositionManager(NFT/ERC721)
+
+| method name                                                                                     | method id  |
+| ----------------------------------------------------------------------------------------------- | ---------- |
+| DOMAIN_SEPARATOR()                                                                              | 0x3644e515 |
+| PERMIT_TYPEHASH()                                                                               | 0x30adf81f |
+| WETH9()                                                                                         | 0x4aa4a4fc |
+| approve(address,uint256)                                                                        | 0x095ea7b3 |
+| balanceOf(address)                                                                              | 0x70a08231 |
+| baseURI()                                                                                       | 0x6c0360eb |
+| burn(uint256)                                                                                   | 0x42966c68 |
+| collect(tuple(uint256,address,uint128,uint128))                                                 | 0xfc6f7865 |
+| createAndInitializePoolIfNecessary(address,address,uint24,uint160)                              | 0x13ead562 |
+| decreaseLiquidity(tuple(uint256,uint128,uint256,uint256,uint256))                               | 0x0c49ccbe |
+| factory()                                                                                       | 0xc45a0155 |
+| getApproved(uint256)                                                                            | 0x081812fc |
+| increaseLiquidity(tuple(uint256,uint256,uint256,uint256,uint256,uint256))                       | 0x219f5d17 |
+| isApprovedForAll(address,address)                                                               | 0xe985e9c5 |
+| mint(tuple(address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256)) | 0x88316456 |
+| multicall(bytes[])                                                                              | 0xac9650d8 |
+| name()                                                                                          | 0x06fdde03 |
+| ownerOf(uint256)                                                                                | 0x6352211e |
+| permit(address,uint256,uint256,uint8,bytes32,bytes32)                                           | 0x7ac2ff7b |
+| positions(uint256)                                                                              | 0x99fbab88 |
+| refundETH()                                                                                     | 0x12210e8a |
+| safeTransferFrom(address,address,uint256)                                                       | 0x42842e0e |
+| safeTransferFrom(address,address,uint256,bytes)                                                 | 0xb88d4fde |
+| selfPermit(address,uint256,uint256,uint8,bytes32,bytes32)                                       | 0xf3995c67 |
+| selfPermitAllowed(address,uint256,uint256,uint8,bytes32,bytes32)                                | 0x4659a494 |
+| selfPermitAllowedIfNecessary(address,uint256,uint256,uint8,bytes32,bytes32)                     | 0xa4a78f0c |
+| selfPermitIfNecessary(address,uint256,uint256,uint8,bytes32,bytes32)                            | 0xc2e3140a |
+| setApprovalForAll(address,bool)                                                                 | 0xa22cb465 |
+| supportsInterface(bytes4)                                                                       | 0x01ffc9a7 |
+| sweepToken(address,uint256,address)                                                             | 0xdf2ab5bb |
+| symbol()                                                                                        | 0x95d89b41 |
+| tokenByIndex(uint256)                                                                           | 0x4f6ccce7 |
+| tokenOfOwnerByIndex(address,uint256)                                                            | 0x2f745c59 |
+| tokenURI(uint256)                                                                               | 0xc87b56dd |
+| totalSupply()                                                                                   | 0x18160ddd |
+| transferFrom(address,address,uint256)                                                           | 0x23b872dd |
+| uniswapV3MintCallback(uint256,uint256,bytes)                                                    | 0xd3487997 |
+| unwrapWETH9(uint256,address)                                                                    | 0x49404b7c |
 
 ### ERC20
 
