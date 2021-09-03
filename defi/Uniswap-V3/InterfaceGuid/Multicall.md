@@ -237,8 +237,9 @@ contract SimpleStorage {
 ```ts
 // test file
 it('test ethers.staticCall', async function () {
+  // simpleStorage 是一个ethers.Contract 类的实例
   const callStaticRes = await simpleStorage.callStatic.set(1);
-  // staticCall 的结果应该是改变后的结果
+  // callStatic 的结果应该是改变后的结果
   expect(callStaticRes).to.equals(1);
   // 但实际链上的数据是没有变化的
   expect(await simpleStorage.get()).to.equal(0);

@@ -146,6 +146,10 @@ mintV3: {
   - 还要初始化 Oracle 相关的 storage 存储变量。初始化是必须的，但是创建 Pool 的用户通常不是 Oracle 的使用者，所以并不会将 65535 个存储空间全部初始化，而只初始化 1 个
 - 初始创建流动性还需要用户输入初始价格
 - 输入价格区间
+  - 由于V3的价格不是连续的数轴，而是一个个tick组成的离散的点，并且根据费率不同tick之间还会存在tickSpacing间隔
+  - 所以用户输入的数值通常不能正在卡在tick所代表的价格上，每当输入完成，程序会自动匹配最近的tick，然后修改输入值
+  - tick代表的价格是 `sqrt(1.0001) ** i`，i为tick的序号，所以价格是不连续的，离散的点
+  - tick的序号是 `int24` 类型，所以有最大和最小范围 [参见合约导读 TickBitmap](../contractGuid/Tick.md#TickBitmap)
 - 点击 `Preview` 按钮
   - 如果是 `OPTIMISM` 和其测试网，需要先点击 `Create` 按钮，单独发一笔交易创建 Pool 合约
   - 其他网络则直接 `Preview` 按钮，发送一笔交易同时完成创建和添加流动性
@@ -154,7 +158,7 @@ mintV3: {
 
 - 如果已经有流动性，此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
   - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出 Pool 中所有处于激活状态的 poistion
-  - 遍历计算每个 position 对于 tick 上的流动性净值的影响，即 tick.liquidtyNet
+  - 遍历计算每个 tick 上的处于激活状态的流动性总和 `liquidityActive`
   - 生成每个 tick 上的活跃流动性的数量，计算逻辑 [参见下方 :point_down:](#computeLiquidityActive)
 - 此时如果有流动性数据，会自动计算出一个合适的价格区间
   - 自动计算的区间的逻辑是根据三档费率固定设置的比例
