@@ -121,6 +121,7 @@
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
 52. [Governace](https://github.com/withtally/safeguard)  
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) 
+54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
