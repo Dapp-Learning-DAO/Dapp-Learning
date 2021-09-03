@@ -99,11 +99,11 @@ contract Multicall2 {
 
 ### IheritMulticall
 
-V3 的大部分周边合约都继承了一个名为`Multicall`的合约，其中有一个 `multicall(bytes[] calldata data)` 方法
+V3 的大部分周边合约都继承了一个名为`Multicall`的合约，其中有一个 `multicall(bytes[] calldata data)` 方法，所以 Manager 合约本身就是可以被`multicall`方法调用的（单独部署的 Multicall2 合约是为了方便调用非 UniswapV3 的合约，比如 ERC20 的 balanceOf）。
 
 - 这里主要为了实现批量调用的同时，返回其中的 revert 信息
 - V3 合约部分信息没有提供查询方法，比如预估交易进出的数量(可能是因为合约规模太大，已经达到 gas 限制)
-- 链下查询数据，大多使用 call（无 gas 消耗）去调用本该发送交易调用的方法（有 gas 消耗），合约会将执行过程中的状态值作为 revert 信息返回给调用者
+- 支持批量 revert 查询查询
 
 批量捕获 revert
 
@@ -111,7 +111,7 @@ V3 的大部分周边合约都继承了一个名为`Multicall`的合约，其中
 - revert 信息的读取：
   - revert 的数据大概是这样的：`{Error(string)的二进制码}`4 字节 + `data offset` 32 字节 + `data length` 32 字节 + `string data` + 32 字节
   - 如果返回是 revert 且带消息，其长度一定大于 68 （`result.length < 68` 的情况可以排除）
-  - `result := add(result, 0x04)` 是将返回数据的指针移动 4 字节，忽略掉 `{Error(string)的二进制码}`，否则无法解析
+  - `result := add(result, 0x04)` 是将返回内存的指针向右移动 4 字节，忽略掉 `{Error(string)的二进制码}`，否则无法解析
   - 最后使用 `abi.decode` 解析出字符串
 - [revert - solidity document](https://docs.soliditylang.org/en/latest/control-structures.html#revert)
 
@@ -149,11 +149,10 @@ abstract contract Multicall is IMulticall {
 
 ### fetchChunk
 
-调用 Multicall 合约的方法
+调用 Multicall2 合约的 `multicall` 方法
 
-- `multicall.callStatic.multicall` 使用 `callStatic` 静态调用 （继承了）`Multicall2` 合约的 `multicall` 方法
-- ethers 合约对象的 callStatic 方法，会假装消耗 gas 发送交易，EVM 会当作真实交易执行，把数据返回给调用者，**但是不会改变链上的任何数据**
-- V3 中使用了这个技巧，使其可以不产生 gas 费的情况下查询一些不能直接获取的状态
+- 使用 `ethers.Contract.callStatic` 静态调用 （继承了）`Multicall2` 合约的 `multicall` 方法
+- `ethers.callStatic` 的解析 [参见下方 callstatic](#callstatic):point_down:
 
 ```ts
 const DEFAULT_GAS_REQUIRED = 1_000_000;
@@ -207,7 +206,8 @@ async function fetchChunk(
 ### callStatic
 
 - `ethers.callStatic` 底层实际上是 `jsonRpcProvider.send('call', args)`, 即 json-rpc 的 `eth_call` 接口
-- `eth_call` 是 EVM 对链上合约发起的 `message call`
+- `eth_call` 是 EVM 对链上合约发起的 `message call`，会假装消耗 gas 发送交易，EVM 会当作真实交易执行，把数据返回给调用者，**但是不会改变链上的任何数据**
+- V3 中使用了这个技巧，使其可以不产生 gas 费的情况下查询一些不能直接获取的状态，比如预估交易的 tokenIn 或 tokenOut 数量
 - [message call](https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#message-calls)
 - [ethers.contract.callStatic](https://docs.ethers.io/v5/api/contract/contract/#contract-callStatic)
 - [json-rpc eth_call](https://eth.wiki/json-rpc/API#eth_call)
@@ -237,9 +237,9 @@ contract SimpleStorage {
 ```ts
 // test file
 it('test ethers.staticCall', async function () {
-  const staticRes = await simpleStorage.callStatic.set(1);
+  const callStaticRes = await simpleStorage.callStatic.set(1);
   // staticCall 的结果应该是改变后的结果
-  expect(staticRes).to.equals(1);
+  expect(callStaticRes).to.equals(1);
   // 但实际链上的数据是没有变化的
   expect(await simpleStorage.get()).to.equal(0);
 });
