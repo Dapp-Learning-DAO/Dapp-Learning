@@ -34,7 +34,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 3. 部署合约(用于测试graph的简单合约)
 
     ```
-    npx hardhat run ./scripts/deploy.js --network kovan
+    npx hardhat run ./scripts/deploy.js --network ropsten
     ```
 
     输出信息类似如下:
@@ -74,7 +74,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
     ```
 
     - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
-    - Ethereum network 这里选择 kovan
+    - Ethereum network 这里选择 ropsten
     - "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
     - 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可(`./abis/SimpleToken.json`)
     - 如果yarn install 失败(例如网络错误)，可以进入新生成的项目目录，手动安装npm依赖
