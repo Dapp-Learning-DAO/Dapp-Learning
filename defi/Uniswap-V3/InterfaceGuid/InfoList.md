@@ -90,26 +90,24 @@
 | transferFrom       | 0x23b872dd |
 | unpause            | 0x3f4ba83a |
 
-### UniswapV2Router
+### SwapRouter(V3)
 
-| method name                  | method id  |
-| ---------------------------- | ---------- |
-| WETH                         | 0xad5c4648 |
-| addLiquidity                 | 0xe8e33700 |
-| addLiquidityETH              | 0xf305d719 |
-| factory                      | 0xc45a0155 |
-| getAmountIn                  | 0x85f8c259 |
-| getAmountOut                 | 0x054d50d4 |
-| getAmountsIn                 | 0x1f00ca74 |
-| getAmountsOut                | 0xd06ca61f |
-| quote                        | 0xad615dec |
-| removeLiquidity              | 0xbaa2abde |
-| removeLiquidityETH           | 0x02751cec |
-| removeLiquidityETHWithPermit | 0xded9382a |
-| removeLiquidityWithPermit    | 0x2195995c |
-| swapETHForExactTokens        | 0xfb3bdb41 |
-| swapExactETHForTokens        | 0x7ff36ab5 |
-| swapExactTokensForETH        | 0x18cbafe5 |
-| swapExactTokensForTokens     | 0x38ed1739 |
-| swapTokensForExactETH        | 0x4a25d94a |
-| swapTokensForExactTokens     | 0x8803dbee |
+| method name                                                                              | method id  |
+| ---------------------------------------------------------------------------------------- | ---------- |
+| WETH9()                                                                                  | 0x4aa4a4fc |
+| exactInput(tuple(bytes,address,uint256,uint256,uint256))                                 | 0xc04b8d59 |
+| exactInputSingle(tuple(address,address,uint24,address,uint256,uint256,uint256,uint160))  | 0x414bf389 |
+| exactOutput(tuple(bytes,address,uint256,uint256,uint256))                                | 0xf28c0498 |
+| exactOutputSingle(tuple(address,address,uint24,address,uint256,uint256,uint256,uint160)) | 0xdb3e2198 |
+| factory()                                                                                | 0xc45a0155 |
+| multicall(bytes[])                                                                       | 0xac9650d8 |
+| refundETH()                                                                              | 0x12210e8a |
+| selfPermit(address,uint256,uint256,uint8,bytes32,bytes32)                                | 0xf3995c67 |
+| selfPermitAllowed(address,uint256,uint256,uint8,bytes32,bytes32)                         | 0x4659a494 |
+| selfPermitAllowedIfNecessary(address,uint256,uint256,uint8,bytes32,bytes32)              | 0xa4a78f0c |
+| selfPermitIfNecessary(address,uint256,uint256,uint8,bytes32,bytes32)                     | 0xc2e3140a |
+| sweepToken(address,uint256,address)                                                      | 0xdf2ab5bb |
+| sweepTokenWithFee(address,uint256,address,uint256,address)                               | 0xe0e189a0 |
+| uniswapV3SwapCallback(int256,int256,bytes)                                               | 0xfa461e33 |
+| unwrapWETH9(uint256,address)                                                             | 0x49404b7c |
+| unwrapWETH9WithFee(uint256,address,uint256,address)                                      | 0x9b2c0a37 |
