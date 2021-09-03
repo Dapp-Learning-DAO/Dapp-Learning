@@ -126,8 +126,8 @@
 ## 进阶任务
 
 **准备工作**：
-  阅读书籍:
-   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
+  阅读DEFI经典书籍:  
+   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
