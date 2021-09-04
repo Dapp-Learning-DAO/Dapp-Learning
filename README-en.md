@@ -122,7 +122,9 @@ Learn the basic tools and development knowledge of Dapp development through the 
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)
-52. [Governace](https://github.com/withtally/safeguard)   
+52. [Governace](https://github.com/withtally/safeguard)
+53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer)
+54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -144,8 +146,11 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 08. Bancor [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. YFI [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+12. [DYDX](https://dydx.exchange/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+13. [OPYN](https://v2.opyn.co/)
+14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## NFT advanced task
 
