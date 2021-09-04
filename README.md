@@ -20,7 +20,7 @@
 项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。欢迎参与[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。 
 
 
-技术栈：
+技术栈：  
 
 - `web3.js`
 - `ethers.js (hardhat)`
@@ -39,6 +39,7 @@
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
 - solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
 
 **开发工具：**
 
