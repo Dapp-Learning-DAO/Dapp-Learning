@@ -30,7 +30,7 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗。  
+此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗,另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
 
 ## 准备工作 - Preparatory Work
 
@@ -61,6 +61,8 @@
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
+
+
 
 ## 基础任务 - Basic Tasks
 
@@ -127,16 +129,15 @@
 
 ## 进阶任务
 
-**准备工作**：
-  阅读DEFI经典书籍:  
-   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
-  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
+**准备工作**： 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
 
 ## DeFi 进阶
-
+ 建议先阅读DEFI经典书籍:  
+   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
+  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
 01. [UniswapV2](defi/Uniswap-V2/readme.md) 
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -175,38 +176,8 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-- 提交一次PR或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进群。
-- 原则上每周一次开发者沟通会议
-- 采用集市开发方式，任何人都可以提交PR，一个链接，一个文档修改均可，无须task完成100%再提交，开发者会一起帮忙完善项目
-- script脚本目录下测试案例保证能在kovan网调试成功，test目录下测试案例连本地节点调试成功
-- 每个项目readme请加上参考链接这一目录，附上任务的相关参考资料
-- solidity 建议0.6以上版本
+  新人如何参与到我们项目，请参考链接[如何参与](./dao.md)。
 
-刚入手项目，可以有四种方式切入：
-
-1. 可以优化之前的项目代码和readme
-2. 可以认领未完成任务卡（下方有链接的都是未完成任务卡，完成的任务卡请将参考链接放入对应项目readme下）
-3. 可以自由新增任务卡（需附上参考链接）
-4. 进阶项目（DEFI，DAO，NFT，CRYPTO）可以在群里发起开发倡议，小组一起研究  
-
-## DAO组织管理项目
-  1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
-  2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限；
-  3. PR审核者可以发起学习小组；
-  4. PR审核者可以发起提案，决定项目发展规划，获取多数PR审核者同意即可通过提案；
-  5. PR审核者须两周内至少一次PR，否则移除PR审核者权限，降为普通开发者，可以提PR重新加入。
-
-## 小组学习
-  进阶任务如defi，dao, nft项目研究，采用小组学习模式，有以下要求。
- 1. 提交1次PR以上的开发者方可参与小组学习；
- 2. 小组组员需分工明确，每周周例会进行成果分享；
- 3. 原则上小组的子任务研究不超过3个人。  
-
- 小组学习输出成果（参考）：    
- 白皮书/合约/前端/graph： 部署，文档和rebase视频分享
-
-## 常见问题
-  测试币申请，安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
 
 ## 合约参考库及致敬相关项目
 
@@ -220,14 +191,19 @@
 - Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
 - Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
+
+## 常见问题
+  测试币申请，安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+
 ## 社区捐助
 
 欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
-gitcoin grant: [grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
+gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
 
 捐助地址：  
 - 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 Polygon: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://polygonscan.com/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
+- 通过 Arbitrum: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://arbiscan.io/)
 
-捐助资金管理：我们会用多签钱包管理资金（会将资金从主网转入matic网络，在matic网络实现多签钱包管理），并定期按 PR 提交记录分配资金给开发者。同时项目会给PR贡献者发放nft作为纪念奖品，以DAO治理形式管理此开源项目。
+捐助资金管理：后续会用多签钱包管理资金（会将资金从主网转入matic网络，在matic网络实现多签钱包管理），作为DAO治理项目的基金，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
