@@ -63,7 +63,8 @@
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 
-
+## 实操演示项目列表
+  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./dapp-demo.md)
 
 ## 基础任务 - Basic Tasks
 
