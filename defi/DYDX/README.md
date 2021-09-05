@@ -23,3 +23,4 @@
 
 
 ## 参考链接
+https://help.dydx.exchange/en/articles/4320633-why-should-someone-use-the-perpetual-vs-margin  永续跟杠杆差别
