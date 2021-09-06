@@ -16,6 +16,7 @@ NFT 的交易市场:  https://opensea.io/
 跨多个帐户管理其DeFi产品组合: https://app.zerion.io/  
 多合一DeFi 钱包: https://debank.com   
 无许可借贷协议:  https://www.euler.xyz/
+InstaDApp: https://www.fxajax.com/20210626023901.html
 
 ## 作市  
 Polygon 上的 Aave 用户的清算保护工具: https://www.cono.finance/assets  
