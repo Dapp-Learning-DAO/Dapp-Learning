@@ -28,6 +28,37 @@ uniswap-v2-sdk       ------------  v2版本js，提供第三使用使用的sdk
 
 备注：如果不对react熟悉，reducer写法会绕晕你, 请点击 [参见](https://github.com/rebase-network/Dapp-Learning/blob/main/defi/Uniswap-V2/Interface/minimap.md)
 
+### ehterproject 使用案例【如何调用合约】
+~~~
+
+// 合约地址
+const daiAddress = "0xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+//合约abi
+const daiAbi = [
+  // Some details about the token
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+
+  // Get the account balance
+  "function balanceOf(address) view returns (uint)",
+
+  // Send some of your tokens to someone else
+  "function transfer(address to, uint amount)",
+
+  // An event triggered whenever anyone transfers to someone else
+  "event Transfer(address indexed from, address indexed to, uint amount)"
+];
+// provider 通过这里关联你的”小狐狸“
+const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+// 构建合约对象
+const daiContract = new ethers.Contract(daiAddress, daiAbi, provider);
+// 调用合约方法 “balanceOf”
+balance = await daiContract.balanceOf(xxxxx)
+~~~
+
+
 下面我对添加流动性的代码做了拆解
 
 ### ***2.1 如何“添加流动性”***
@@ -49,4 +80,9 @@ uniswap-v2-sdk       ------------  v2版本js，提供第三使用使用的sdk
 > /uniswap-v2-periphery/contracts/UniswapV2Router01.sol  
 > row 59
 
+
+上述合约内容使用   
+estimate = router.estimateGas.addLiquidity  
+其中”estimate“ 是估算gas的方法，估算执行”addLiquidity“ 大概的gas费用  
+> estimate(...args, value ? { value } : {}).then(大概的费用=>{ 真正的调用过程在这里 })
 
