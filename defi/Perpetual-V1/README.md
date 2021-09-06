@@ -87,11 +87,11 @@ PERP资金利率按小时结算，而清算比率被设定为保证金的6.25%�
 
 
 ## 参考链接
-期货原理：https://www.theblockbeats.com/news/25619
-perpetual: https://zhuanlan.zhihu.com/p/395752324?utm_source=wechat_session&utm_medium=social&utm_oi=42064397991936&utm_campaign=shareopn  
-dehedge: <https://www.dhedge.org/> 
-官网文档：https://docs.perp.fi/v/perpetual-protocol-jian-jie/ 
-deri: https://mp.weixin.qq.com/s/Lffxvqt2lXbfXbMyTP-84w  
+期货原理：https://www.theblockbeats.com/news/25619  
+perpetual: https://zhuanlan.zhihu.com/p/395752324?utm_source=wechat_session&utm_medium=social&utm_oi=42064397991936&utm_campaign=shareopn    
+dehedge: <https://www.dhedge.org/>   
+官网文档：https://docs.perp.fi/v/perpetual-protocol-jian-jie/   
+deri: https://mp.weixin.qq.com/s/Lffxvqt2lXbfXbMyTP-84w    
 永续合约：https://zhuanlan.zhihu.com/p/354498449  
-https://zhuanlan.zhihu.com/p/354337880  
-合约算法：https://www.zhihu.com/people/le-zhu-92-74
+https://zhuanlan.zhihu.com/p/354337880    
+合约算法：https://www.zhihu.com/people/le-zhu-92-74  
