@@ -65,7 +65,7 @@
 
 
 **经典网站收藏**  
-- 收录经典的网站: ClassicWebSites.md     
+- [收录经典的网站](./ClassicWebSites.md)     
 可以填加个人认为, 包括 NFT, 以太坊 等有价值的网站
 
 ## 基础任务 - Basic Tasks
