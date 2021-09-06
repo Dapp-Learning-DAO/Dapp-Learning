@@ -66,6 +66,10 @@
 ## 实操演示项目列表
   开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./dapp-demo.md)
 
+**经典网站收藏**  
+- [收录经典的网站](./ClassicWebSites.md)     
+可以填加个人认为, 包括 NFT, 以太坊 等有价值的网站
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
@@ -205,6 +209,6 @@ gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp
 - 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 Polygon: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://polygonscan.com/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
-- 通过 Arbitrum: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://arbiscan.io/)
+- 通过 Arbitrum: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://arbiscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 
 捐助资金管理：后续会用多签钱包管理资金（会将资金从主网转入matic网络，在matic网络实现多签钱包管理），作为DAO治理项目的基金，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
