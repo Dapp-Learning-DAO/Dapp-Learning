@@ -30,7 +30,7 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗,另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
+此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
 
 ## 准备工作 - Preparatory Work
 
@@ -54,7 +54,7 @@
 - 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 
 **推荐阅读**
-- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注不懂经公众号阅读）
+- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注[不懂经](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1)公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
