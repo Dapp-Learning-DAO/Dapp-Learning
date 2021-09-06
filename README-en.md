@@ -43,7 +43,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 - Metamask（Browser wallet plug-in）: <https://www.jianshu.com/p/b5b2c05e9090>
 - Infura（Node service）: <https://infura.io/>
 - Alchemy（Node service）: <https://dashboard.alchemyapi.io/>
-- All tests are connected to the Kovan test network, and Kovan tests ETH application: <https://faucet.kovan.network>,也可自由使用其他测试网络。
+- All tests are connected to the Kovan test network, and Kovan tests ETH application: <https://faucet.kovan.network>,you are also free to use other test networks.
 - Ethereum blockchain browser: <https://kovan.etherscan.io>
 - JSON-PRC interface: <https://eth.wiki/json-rpc/API>
 - Tenderly Contract validation: <https://dashboard.tenderly.co/explorer>
