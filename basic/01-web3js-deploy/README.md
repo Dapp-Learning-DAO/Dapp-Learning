@@ -1,10 +1,13 @@
 ## 前言
 通过本样例代码，使开发者了解合约编译，部署的基本流程，并掌握基本的 web3js 接口使用方法
 
-本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建    
+- 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建    
 https://ithelp.ithome.com.tw/articles/10202794   
 
-为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
+- 为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
+
+- 同时在 BiliBili 上有上传本样例代码的讲解演示:   
+https://www.bilibili.com/video/BV1Y44y1r7E6/
 
 ## 合约功能说明   
 constructor: 构造函数, 用于部署合约时调用, 同时在其中初始化了公共变量 number 的值  
