@@ -85,3 +85,5 @@ Opyn V2的推出，增加了一些额外的功能，如自动行权和闪电造�
 - https://mp.weixin.qq.com/s/pu7IWw5wCJ8SBGXCC2CDig 使用教程
 - https://mp.weixin.qq.com/s/e961fof1OlXdzWdp2OMCAQ v2教程
 - https://medium.com/opyn/a-beginners-guide-to-defi-options-opyn-v2-4d64f91acc84 期权初学者指南
+- https://www.notion.so/af443219baa74d2b9c0471f608b269a3 期权文档  
+
