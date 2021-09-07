@@ -34,7 +34,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 3. 部署合约(用于测试graph的简单合约)
 
     ```
-    npx hardhat run ./scripts/deploy.js --network kovan
+    npx hardhat run ./scripts/deploy.js --network ropsten
     ```
 
     输出信息类似如下:
@@ -74,7 +74,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
     ```
 
     - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
-    - Ethereum network 这里选择 kovan
+    - Ethereum network 这里选择 ropsten
     - "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
     - 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可(`./abis/SimpleToken.json`)
     - 如果yarn install 失败(例如网络错误)，可以进入新生成的项目目录，手动安装npm依赖
@@ -328,11 +328,13 @@ https://github.com/graphprotocol/agora
 Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):
 https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad
 
-## to do
-
-在 thegraph 网站上支持字段过滤  
+## 参考文档  
 https://thegraph.com/  
 https://graphql.cn/learn/
 https://gql-guide.vercel.app/
 https://thegraph.com/docs/graphql-api
-新特性支持
+GraphGen——命令行工具，用于快速生成子图，由一些有 GraphGen 命令注释的 Solidity 接口文件组成。  
+https://medium.com/protean-labs/introducing-graphgen-a-subgraph-generator-for-the-graph-network-836fe0385336  
+
+Matchstick ——是 Limechain 做一个开发的单元测试框架，一个graph模拟节点，用于在沙盒环境中测试子图部署的映射逻辑  
+相关教程：https://limechain.tech/blog/matchstick-what-it-is-and-how-to-use-it/  

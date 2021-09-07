@@ -1,0 +1,25 @@
+{
+  "printWidth": 150,
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tslintIntegration": true,
+  "insertSpaceBeforeFunctionParenthesis": false,
+  "overrides": [
+    {
+      "files": ["*.js", "*.ts"],
+      "options": {
+        "semi": true,
+        "singleQuote": true
+      }
+    },
+    {
+      "files": "*.sol",
+      "options": {
+        "semi": true,
+        "tabWidth": 4
+      }
+    }
+  ]
+}

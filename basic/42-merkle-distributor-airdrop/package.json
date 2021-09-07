@@ -1,0 +1,34 @@
+{
+  "name": "workshop-nft-merkle-drop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "author": "OpenZeppelin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenZeppelin/workshops.git"
+  },
+  "homepage": "https://github.com/OpenZeppelin/workshops#readme",
+  "bugs": {
+    "url": "https://github.com/OpenZeppelin/workshops/issues"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4",
+    "hardhat": "^2.0.10",
+    "hardhat-gas-reporter": "^1.0.4",
+    "keccak256": "^1.0.2",
+    "merkletreejs": "^0.2.13"
+  }
+}
