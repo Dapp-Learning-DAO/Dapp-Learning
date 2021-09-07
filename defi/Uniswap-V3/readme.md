@@ -83,15 +83,20 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 
 ## 参考链接
 
-- https://learnblockchain.cn/article/2357
-- https://learnblockchain.cn/article/2580
-- https://liaoph.com/uniswap-v3-1/
-- https://medium.com/taipei-ethereum-meetup/uniswap-v3-features-explained-in-depth-178cfe45f223
-- https://github.com/GammaStrategies/awesome-uniswap-v3
-- https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg 星想法
-- https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol nft farming
-- https://github.com/omarish/uniswap-v3-deploy-plugin 一键部署 V3
-- https://www.gelato.network/
-- https://www.chainnews.com/articles/715772476688.htm
-- https://arxiv.org/pdf/2106.12033.pdf 流动性策略
-- https://mellowprotocol.medium.com/uniswap-v3-liquidity-providing-101-f1db3822f16d
+uniswap - V3技术白皮书导读:  https://learnblockchain.cn/article/2357  
+如何在合约中集成 Uniswap v3: https://learnblockchain.cn/article/2580  
+Uniswap v3 详解（一）：设计原理:  https://liaoph.com/uniswap-v3-1/  
+Uniswap v3 特性解析: https://medium.com/taipei-ethereum-meetup/uniswap-v3-features-explained-in-depth-178cfe45f223  
+Awesome-Uniswap v3 项目:  https://github.com/GammaStrategies/awesome-uniswap-v3  
+uniswap - V3源代码导读:  https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg  
+nft farming:  https://github.com/spore-engineering/nft-required-liquidity-mining-pool/blob/main/LiquidityFarmingNFT.sol   
+一键部署 V3:  https://github.com/omarish/uniswap-v3-deploy-plugin   
+自动调用合约: https://www.gelato.network/  
+Uniswap V3 LP 无常损失保险协议: https://www.chainnews.com/articles/715772476688.htm  
+流动性策略: https://arxiv.org/pdf/2106.12033.pdf   
+流动性提供: https://mellowprotocol.medium.com/uniswap-v3-liquidity-providing-101-f1db3822f16d  
+Uniswap V3——前端代码解析-part1:  https://www.bilibili.com/video/BV1KQ4y1m7md/  
+Uniswap V3——前端代码解析-part2:  https://www.bilibili.com/video/BV1gb4y1U7S4/  
+Uniswap V3——白皮书解读:  https://www.bilibili.com/video/BV1go4y1X7Kx/   
+Uniswap V3——代码解析 (1): https://www.bilibili.com/video/BV1gL411n7LZ/   
+Uniswap V3——代码解析 (2): https://www.bilibili.com/video/BV1zM4y1N7JW/  
