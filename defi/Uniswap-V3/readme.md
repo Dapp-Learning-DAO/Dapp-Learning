@@ -1,5 +1,12 @@
 # Uniswap V3
+作为 DeFi 的核心项目之一, Uniswap V3 是所有 Defi 开发者必备的研究项目. 
+Uniswap V3 研究小组总结输入了 Uniswap V3 的白皮书分析, 代码逻辑, 前端展示效果等, 并把研究成果分享到 BiliBili 上, 以供后续开发者研究学习.
 
+Uniswap V3——前端代码解析-part1:  https://www.bilibili.com/video/BV1KQ4y1m7md/  
+Uniswap V3——前端代码解析-part2:  https://www.bilibili.com/video/BV1gb4y1U7S4/  
+Uniswap V3——白皮书解读:  https://www.bilibili.com/video/BV1go4y1X7Kx/   
+Uniswap V3——代码解析 (1): https://www.bilibili.com/video/BV1gL411n7LZ/   
+Uniswap V3——代码解析 (2): https://www.bilibili.com/video/BV1zM4y1N7JW/  
 ## Contract
 
 ![合约结构图](./img/640.png)
@@ -95,8 +102,3 @@ nft farming:  https://github.com/spore-engineering/nft-required-liquidity-mining
 Uniswap V3 LP 无常损失保险协议: https://www.chainnews.com/articles/715772476688.htm  
 流动性策略: https://arxiv.org/pdf/2106.12033.pdf   
 流动性提供: https://mellowprotocol.medium.com/uniswap-v3-liquidity-providing-101-f1db3822f16d  
-Uniswap V3——前端代码解析-part1:  https://www.bilibili.com/video/BV1KQ4y1m7md/  
-Uniswap V3——前端代码解析-part2:  https://www.bilibili.com/video/BV1gb4y1U7S4/  
-Uniswap V3——白皮书解读:  https://www.bilibili.com/video/BV1go4y1X7Kx/   
-Uniswap V3——代码解析 (1): https://www.bilibili.com/video/BV1gL411n7LZ/   
-Uniswap V3——代码解析 (2): https://www.bilibili.com/video/BV1zM4y1N7JW/  
