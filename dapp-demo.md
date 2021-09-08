@@ -7,5 +7,6 @@
 | euler |  |
 | volmex |  |
 | visor |  |
+| eth-scaffold | leeduckgo |
 
 
