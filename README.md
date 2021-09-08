@@ -32,8 +32,6 @@
 
 此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
 
-项目基本说明可参考 BiliBili 视频: https://www.bilibili.com/video/BV1Ff4y1b7o7  
-
 ## 准备工作 - Preparatory Work
 
 **阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 以太坊 和 智能合约 的基本原理**
