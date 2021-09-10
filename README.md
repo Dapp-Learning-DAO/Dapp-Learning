@@ -30,7 +30,7 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，欢迎创建 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。 
+此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
 
 ## 准备工作 - Preparatory Work
 
@@ -174,7 +174,10 @@
 - 03. [DAOHaus](https://daohaus.club/) 
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## Crypto 进阶
+## Crypto 进阶  
+请先阅读书籍：
+[《图解密码技术》](https://book.douban.com/subject/26822106/)
+项目列表：
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)

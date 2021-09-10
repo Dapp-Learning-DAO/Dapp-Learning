@@ -27,5 +27,28 @@ const decimals = 18; //精度
 const DAI = new Token(chainId, tokenAddress, decimals);
 ```
 
-+ 2.获取交易对数据
+#### 获取数据
+1.直接获取Token数据
+使用SDK获取
+2.获取交易对数据
+需要客户提供数据基础上获取，多个场景需要
+#### 价格
+1.直接获取价格（交易对的）
+2.间接获取
+3.执行价格（真实价格）
+#### 交易
+1.直接发送交易到Router
+#### 交易对地址
+1.直接获取
+2.create2获取
 
+### 引用范例
+
+#### 概述
+#### Token
+#### Pair
+#### Route
+#### Trade
+#### Fractions
+#### Fetcher
+#### Other Exports 
