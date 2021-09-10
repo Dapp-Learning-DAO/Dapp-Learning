@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 const fs = require("fs");
+require('dotenv').config()
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -13,9 +14,9 @@ task("accounts", "Prints the list of accounts", async () => {
 
 function mnemonic() {
 
- return fs.readFileSync("./sk.txt").toString().trim();
-
-}
+  return process.env.PRIVATE_KEY
+ 
+ }
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -24,7 +25,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.6.0"
+        version: "0.6.12"
       },
       {
         version: "0.8.0",
@@ -46,25 +47,25 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
       mnemonic()
       ],
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],

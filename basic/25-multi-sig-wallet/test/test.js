@@ -51,6 +51,9 @@ describe("MultiSigWallet test",function(){
     const submitTransaction = await multiSigWallet.submitTransaction(hello.address, 0, payload);
     const transactionReceipt = await submitTransaction.wait();
     //console.log("transactionReceipt:",transactionReceipt);
+
+    // 检查结果
+    expect((await hello.balance()).toString()).to.equal("233");
     
     
     // await multiSigWallet.queryFilter("Submission" , transactionReceipt.blockNumber ,transactionReceipt.blockNumber)
