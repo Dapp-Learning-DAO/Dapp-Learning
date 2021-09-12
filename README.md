@@ -30,7 +30,7 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
+此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[新人如何参与](./docs/dao.md)。
 
 ## 准备工作 - Preparatory Work
 
@@ -59,20 +59,13 @@
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
 **国外大学加密课程**
+- [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
-- [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
-
-## 实操演示项目列表
-  开发群定期收集需求，分享经典和最新项目实操演示，欢迎添加你想实操演示的项目，请参考[实操文档](./dapp-demo.md)
-
-**经典网站收藏**  
-- [收录经典的网站](./ClassicWebSites.md)     
-可以填加个人认为, 包括 NFT, 以太坊 等有价值的网站
 
 ## 基础任务 - Basic Tasks
 
-通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
+通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
 
 01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
 02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
@@ -99,8 +92,8 @@
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md)
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
-26. [snapshot](basic/26-snapshot/README.md)
-27. [Quadratic vote](basic/27-quadratic-vote/README.md)
+26. [Quadratic vote](basic/27-quadratic-vote/README.md)
+27. [Arbitrum](https://arbitrum.io/quickstart/)
 28. [optimism layer2](basic/28-optimism-layer2/readme.md)
 29. [matic layer2](basic/29-layer2-matic/readme.md)
 30. [zksync layer2](basic/30-layer2-zksync/readme.md)
@@ -113,7 +106,7 @@
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
 38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I)
-40. [Arbitrum](https://arbitrum.io/quickstart/)
+40. [snapshot](basic/26-snapshot/README.md)
 41. [NFT farming](https://superfarm.com/farms)
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
 43. [front running](https://github.com/Supercycled/cake_sniper)  
@@ -132,12 +125,12 @@
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## 进阶任务
+## 项目任务
 
 **准备工作**： 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
-  开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
+  开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
  建议先阅读DEFI经典书籍:  
@@ -184,7 +177,7 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-  新人如何参与到我们项目，请参考链接[如何参与](./dao.md)。
+  新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
 
 
 ## 合约参考库及致敬相关项目
@@ -200,8 +193,12 @@
 - Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 
+## 实操演示项目列表
+  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
+
 ## 常见问题
-  测试币申请，安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+  测试币申请，安装和使用问题，请参考链接[常见问题](./docs/TROUBLE_SHOOTING.md)  
+
 
 ## 社区捐助
 
