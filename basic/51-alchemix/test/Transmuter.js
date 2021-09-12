@@ -111,7 +111,7 @@ describe('Transmuter contract', function () {
 
   });
 
-  /* it('Distribute', async function () {
+  it('Distribute', async function () {
     await transmuter.distribute(godUser.address,100);
 
     // Check buffered
@@ -188,7 +188,7 @@ describe('Transmuter contract', function () {
     // Check result
     expect((await daiToken.balanceOf(user2.address)).toString()).to.equal("1100");
 
-  });  */
+  });  
 
   it('ForceTransmute', async function () {
     let transmuterUser2 = transmuter.connect(user2);
