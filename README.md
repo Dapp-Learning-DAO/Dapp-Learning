@@ -65,7 +65,7 @@
 
 ## 基础任务 - Basic Tasks
 
-通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。前20个task完成，可以升级关注项目任务。
+通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
 
 01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
 02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
