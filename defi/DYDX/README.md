@@ -23,4 +23,6 @@
 
 
 ## 参考链接
-https://help.dydx.exchange/en/articles/4320633-why-should-someone-use-the-perpetual-vs-margin  永续跟杠杆差别
+- https://help.dydx.exchange/en/articles/4320633-why-should-someone-use-the-perpetual-vs-margin  永续跟杠杆差别
+- https://docs.dydx.community/dydx-governance/jiao-yi-jiao-cheng/ru-he-zai-dydx-shang-kai-kong-dan-zuo-kong/ru-he-zai-dydx-shang-kai-duo-dan-zuo-duo 操作文档  
+
