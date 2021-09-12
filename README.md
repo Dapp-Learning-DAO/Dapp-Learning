@@ -30,7 +30,7 @@
 
 教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
-此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[如何参与](./dao.md)。
+此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[新人如何参与](./docs/dao.md)。
 
 ## 准备工作 - Preparatory Work
 
@@ -62,13 +62,6 @@
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
-
-## 实操演示项目列表
-  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
-
-**经典网站收藏**  
-- [收录经典的网站](./docs/ClassicWebSites.md)     
-可以填加个人认为, 包括 NFT, 以太坊 等有价值的网站
 
 ## 基础任务 - Basic Tasks
 
@@ -137,7 +130,7 @@
 **准备工作**： 
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
-  开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。此部分建议以 submoudle 方式引入。
+  开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
  建议先阅读DEFI经典书籍:  
@@ -200,8 +193,12 @@
 - Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 
 
+## 实操演示项目列表
+  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
+
 ## 常见问题
   测试币申请，安装和使用问题，请参考链接[常见问题](./docs/TROUBLE_SHOOTING.md)  
+
 
 ## 社区捐助
 
