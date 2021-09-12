@@ -64,10 +64,10 @@
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 ## 实操演示项目列表
-  开发群定期收集需求，分享经典和最新项目实操演示，欢迎添加你想实操演示的项目，请参考[实操文档](./dapp-demo.md)
+  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
 
 **经典网站收藏**  
-- [收录经典的网站](./ClassicWebSites.md)     
+- [收录经典的网站](./docs/ClassicWebSites.md)     
 可以填加个人认为, 包括 NFT, 以太坊 等有价值的网站
 
 ## 基础任务 - Basic Tasks
@@ -184,7 +184,7 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与
-  新人如何参与到我们项目，请参考链接[如何参与](./dao.md)。
+  新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
 
 
 ## 合约参考库及致敬相关项目
@@ -201,7 +201,7 @@
 
 
 ## 常见问题
-  测试币申请，安装和使用问题，请参考链接[常见问题](./TROUBLE_SHOOTING.md)  
+  测试币申请，安装和使用问题，请参考链接[常见问题](./docs/TROUBLE_SHOOTING.md)  
 
 ## 社区捐助
 

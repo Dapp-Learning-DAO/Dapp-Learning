@@ -20,6 +20,7 @@ InstaDApp: https://www.fxajax.com/20210626023901.html
 
 ## 作市  
 Polygon 上的 Aave 用户的清算保护工具: https://www.cono.finance/assets  
+AMM 作市相关公式:  https://medium.com/anchordao-lab/automated-market-maker-amm-algorithms-and-its-future-f2d5e6cc624a   
 
 
 ## 链数据  
@@ -28,3 +29,7 @@ Polygon 上的 Aave 用户的清算保护工具: https://www.cono.finance/assets
 
 ## 分析检索  
 内容发现搜索引擎:  https://contentgems.com   
+
+
+## 期权  
+期权小白书: https://www.notion.so/af443219baa74d2b9c0471f608b269a3   
