@@ -11,6 +11,10 @@ Uniswap V2 前端代码解析-part 1:  https://www.bilibili.com/video/BV1Uv411N7
 
 ## SDK
 
+## Design Comments
+
+关于设计的一些思考 [design comments](./design/comments.md)
+
 ## Interface
 
 Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括 token交易,添加和移除流动性等功能。
