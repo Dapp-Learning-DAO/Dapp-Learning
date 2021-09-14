@@ -3,7 +3,7 @@ let solc = require('solc');
 let fs = require('fs');
 
 // Get privatekey from sk.txt
-require('dotenv').config();
+require('dotenv').config('.env.example');
 const privatekey = process.env.PRIVATE_KEY;
 
 // Load contract
