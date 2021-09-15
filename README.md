@@ -43,7 +43,7 @@
 
 **开发工具：**
 
-- metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
+- metamask（浏览器钱包插件）: <https://www.readblocks.com/zh-tw/archives/74853>
 - infura（节点服务）: <https://infura.io/>
 - alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
 - 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
