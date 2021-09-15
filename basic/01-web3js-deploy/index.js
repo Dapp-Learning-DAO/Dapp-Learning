@@ -71,6 +71,8 @@ const Deploy = async () => {
   console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 };
 
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
 Deploy()
   .then(() => process.exit(0))
   .catch((error) => {
