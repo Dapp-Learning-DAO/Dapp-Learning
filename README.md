@@ -39,7 +39,9 @@
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
 - solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- solidity合约审计入门学习思路：<https://blog.csdn.net/qq_40015778/article/details/108703510>
 - 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
+
 
 **开发工具：**
 
