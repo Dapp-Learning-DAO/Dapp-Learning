@@ -31,5 +31,11 @@ AMM 作市相关公式:  https://medium.com/anchordao-lab/automated-market-maker
 内容发现搜索引擎:  https://contentgems.com   
 
 
-## 期权  
+## 金融   
 期权小白书: https://www.notion.so/af443219baa74d2b9c0471f608b269a3   
+链上信用:  https://wiki.arcx.money/token-and-governance/arcx-governance-token-arcx  
+
+
+## Layer2    
+Defi Workshop - 从零搭建自己的Lending Pool:  https://www.bilibili.com/video/BV1Ef4y1w7GX  
+zkSync:  https://wallet.zksync.io/deposit  
