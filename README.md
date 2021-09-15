@@ -58,7 +58,9 @@
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 - [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
-   
+
+**国内DAPP开发课程
+- [熊丽兵老师相关课程](https://ke.qq.com/teacher/3179908031)
 **国外大学加密课程**
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
@@ -160,7 +162,6 @@
 - 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
 - 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
 - 05. [SocialFi](https://inewsdb.com/%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3/%E7%A4%BE%E4%BA%A4%E4%BB%A3%E5%B9%A3%E4%B8%8D%E6%96%B7%E9%80%B2%E5%8C%96%EF%BC%8C-socialfi-%E6%9C%83%E6%88%90%E7%82%BA-gamefi-%E5%BE%8C%E4%B8%8B%E5%80%8B%E7%86%B1%E9%BB%9E%E5%97%8E%EF%BC%9F/)
-- 06. [Awesom NFT Projects](https://thedailyape.notion.site/4aae0799b1f84b21b9e402fb0b489b05?v=baa5e17983ec4b179c0160d8745a1742)
 
 ## DAO 进阶
 
