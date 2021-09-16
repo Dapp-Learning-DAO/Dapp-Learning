@@ -1,0 +1,24 @@
+{
+  "name": "uniswap-flashloan",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/rebase-network/Dapp-Learning/tree/main/basic/20-flash-loan/uniswapv2",
+  "author": "Rebase Team",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.3.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "^5.0.0",
+    "hardhat": "^2.6.4"
+  },
+  "scripts": {
+    "build": "npx hardhat compile",
+    "flatten": "npx hardhat  flatten > ./FullUniswapFlashloaner.sol"
+  }
+}
