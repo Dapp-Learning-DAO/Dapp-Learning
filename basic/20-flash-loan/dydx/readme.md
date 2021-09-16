@@ -111,6 +111,11 @@ interface WETH9 {
 
 DyDx 的闪电贷操作确实比起 Aave 闪电贷要复杂不少，但手续费只需要 `2 wei`，这非常吸引人。
 
+## 案例
+
+合约地址：
+https://kovan.etherscan.io/address/0x3cc064c6a0b8629a05f38bc57b6a290ac9489e38#code
+
 ---
 
 参考：
