@@ -218,7 +218,8 @@ gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp
 - 通过 Polygon: [0x2A6D09B3b11E5455a37F907f2ec885E0Be704779](https://polygonscan.com/address/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779) **polygon网络上我们已生成多签钱包**
 
 捐助资金管理：
-其他网络资金我们都会汇集到polygon网络的多签钱包去。
-多签钱包查看（polygon上的gnosis safe wallet）：
-https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779    
+其他网络资金我们都会汇集到polygon网络的多签钱包去管理。  
+
+多签钱包查看（polygon上的gnosis safe wallet）：  
+https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779      
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
