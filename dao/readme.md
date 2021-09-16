@@ -53,3 +53,5 @@ Wiki：https://en.wikipedia.org/wiki/Decentralized_autonomous_organization
 
 陀螺财经：https://www.tuoluocaijing.cn/kepu/detail-10063012.html
 
+DAO全景式科普：Just DAO It:  https://www.theblockbeats.com/news/25074  
+
