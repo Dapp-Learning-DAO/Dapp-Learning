@@ -7,38 +7,6 @@
 `V1` 只允许在以太币和代币之间进行交换。如果需要进行非 eth 之间的交换，则需要通过 eth 中转。
 我们将尝试了解 `V1` 的经济机制，找出、分解、学习和构建它们的核心机制。
 
-## 代码使用方法
-
-### 安装
-
-```sh
-yarn install
-```
-
-### 编译合约
-
-```sh
-yarn build
-```
-
-或
-
-```sh
-npx hardhat compile
-```
-
-### 运行测试
-
-```sh
-yarn test
-```
-
-或
-
-```sh
-npx hardhat test
-```
-
 ## 经济模型
 
 ### Market makers (做市商)
@@ -417,6 +385,38 @@ removedAmount = reserve * (amountLP / totalAmountLP)
    ```
 
 4. 流动性提供者获得 109.9 个以太币（包括交易费用）和 181.9836 个代币。如您所见，这些数字与存入的数字不同：我们获得了用户交易的 10 个以太币，但必须提供 18.0164 个代币作为交换。但是，该金额包括用户支付给我们的 1% 的费用。由于流动性提供者提供了所有流动性，他们获得了所有费用。
+
+## 代码使用方法
+
+### 安装
+
+```sh
+yarn install
+```
+
+### 编译合约
+
+```sh
+yarn build
+```
+
+或
+
+```sh
+npx hardhat compile
+```
+
+### 运行测试
+
+```sh
+yarn test
+```
+
+或
+
+```sh
+npx hardhat test
+```
 
 ## 可能遇到的问题
 

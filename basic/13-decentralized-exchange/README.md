@@ -8,7 +8,10 @@
 EtherDelta, 详情参见 [./EtherDelta/README.md](./EtherDelta/README.md)
 
 ### uniswap-v1-like
-仿uniV1项目，详情参见 [./uniswap-v1-like/README.md](./uniswap-v1-like/README.md)
+
+仿uniV1项目。由于源项目是用Vyper开发合约，这里会使用 solidity 0.8.0 仿写一个uniswapV1。
+
+详情参见 [./uniswap-v1-like/README.md](./uniswap-v1-like/README.md)
 
 ## 参考链接
 
