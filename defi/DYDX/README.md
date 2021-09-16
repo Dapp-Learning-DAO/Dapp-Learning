@@ -1,5 +1,48 @@
 ## DYDX
 
+dydx 是最早成立并推出可用产品的去中心化期货交易所，为订单簿式Dex，交易者之间进行点对点交易，由做市商和多空双方交易者三方博弈。dydx架设在以太坊二层网络Starkware上，并采用了StarkEx交易引擎，实现了资产的去中心化自托管。dydx能够提供与中心化交易所接近的交易体验，也采用了与Cex相似的运营模式。目前其交易量为在交易挖矿的推动下衍生品Dex中第一。
+
+**特点**
+从交易组织方式看，它采用了订单簿式，由专业做市商进行做市，LP提供部分做市资金。  
+dydx产品体验良好，采用了以太坊二层网络项目Starkware开发的交易引擎StarkEx，实现了去中心化资产的自托管（用户将资金从钱包转到智能合约上进行托管），并且实现了低Gas和高交易速度。  
+
+###
+杠杆倍率：dydx永续合约产品提供了最高25倍的多空两方交易功能，最小杠杆倍率变动为0.01。  
+
+订单簿/AMM:从交易结算形式来看，dydx永续合约是订单簿形式，由做市商提供流动性。
+
+限价/止损：dydx永续合约具备限价单和止损单功能，可以进行限价交易和止损止盈交易。
+
+保证金：BTC和ETH交易对，其最高杠杆倍数为25倍，因此初始保证金要求为4%，维持保证金要求为3%。其他交易对根据其最高杠杆倍率有不同的保证金要求。
+
+强平价格/清算价格：用于清算的标记价格是由Chainlink的二层价格喂送的指数价格。
+
+存款/取款：图2-3左上角显示了账户余额（Account），并有存款（Deposit）和取款（Withdraw）两个按钮，由于产品架设在二层网络StarkWare上，因此在dydx永续合约产品交易，需要存入资金后，在余额范围内进行交易，平仓后资金回到dydx账户内，需要进行取款才能回到交易者的以太坊钱包内。
+
+**资金费率**（１小时费率）：与其他的永续合约一样，dydx永续合约产品有资金费设计，每8小时收取一次，但其资金费率表示为１小时的费率，每８小时收取一次１小时费率（不将１小时费率乘以８），资金费率具体计算方式为：
+
+资金费（Premium）=（Max（0，出价冲击Impact Bit Price-指数价格）-Max（0，指数价格-卖价冲击Impact Ask Price））/指数价格
+
+交易费用：dydx上Maker（挂单者）和Taker（吃单者）费用不同，费率随交易量增大而递减，Maker的费率从0.05%到0,交易量达到10,000,000美元之后费率为0；Taker费率从0.2%到0.05%，交易量达到200,000,000美元后为0.05%。  
+
+Gas费用：由于在二层网络Starkware上运行，交易不需要支付Gas费用，但在存款/取款过程需要支付Gas。
+
+结算速度：实测非常顺滑，这是由于二层网络的性能优势，也由于用户资金已经托管到了StarkEx上。
+
+**二层方案** 
+dydx不仅是架设在二层网络上，而是使用Starkware项目方开发的StarkEx作为V2永续合约产品的交易引擎。
+交易和数据存储的方式分为两种，简单说是“交易数据要不要上链”，Starkware实际上两种都有（StarkNet和StarkEx分别属于这两种）  
+dydx所用的StarkEx产品采取的是数据不上链的方案。  
+Starkware采用的是有效性证明——这种“数据不上链+有效性证明”的方案称为Validium（不同于“数据上链”型的Rollup方案，比如另一知名项目的Arbitrum）。
+dydx不仅是架设在二层网络上，而是使用Starkware项目方开发的StarkEx作为V2永续合约产品的交易引擎。
+
+StarkEx：一种可扩展性引擎，由多个组件组成。
+
+组件：包括StarkEx Service（Stark交易服务）、SHARP、Stark Verifier（Stark验证器）和Stark Contract（Stark合约）等。
+
+
+
+
 ### 保证金交易和杠杆
 
 保证金（Margin）就是一个交易员手上可用的抵押品数量。一般来说，借入资金都需要用其它资产作为抵押，而且使用完之后还必须支付利息。
@@ -22,7 +65,11 @@
 - 适合短期投机
 
 
+
+
 ## 参考链接
 - https://help.dydx.exchange/en/articles/4320633-why-should-someone-use-the-perpetual-vs-margin  永续跟杠杆差别
 - https://docs.dydx.community/dydx-governance/jiao-yi-jiao-cheng/ru-he-zai-dydx-shang-kai-kong-dan-zuo-kong/ru-he-zai-dydx-shang-kai-duo-dan-zuo-duo 操作文档  
+- https://www.chainnews.com/articles/669485806574.htm Validium介绍
+- https://www.chainnews.com/articles/906891466719.htm  全景式解读加密货币衍生品交易赛道  
 
