@@ -24,9 +24,9 @@ module.exports = {
         // 初始化账户给 1000000 eth 默认 100 不够用
         accountsBalance: utils.parseEther("1000000").toString(),
       },
-      // gasPrice 1000 默认 8000000000
+      // gasPrice 1000000000 默认 8000000000
       // 便于计算gas费用
-      gasPrice: 1000,
+      gasPrice: 1000000000,
     },
   },
   solidity: "0.8.4",
