@@ -213,8 +213,11 @@ gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp
 
 捐助地址：  
 - 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
-- 通过 Polygon: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://polygonscan.com/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
 - 通过 Arbitrum: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://arbiscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
+- 通过 Polygon: [0x2A6D09B3b11E5455a37F907f2ec885E0Be704779](https://polygonscan.com/address/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779) **polygon网络上我们已生成多签钱包**
 
-捐助资金管理：后续会用多签钱包管理资金（会将资金从主网转入matic网络，在matic网络实现多签钱包管理），作为DAO治理项目的基金，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
+捐助资金管理：
+其他网络资金我们都会汇集到polygon网络的多签钱包去。
+多签钱包查看（polygon上的gnosis safe wallet）：https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances  
+我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
