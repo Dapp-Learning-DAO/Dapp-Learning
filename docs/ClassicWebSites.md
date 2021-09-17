@@ -42,4 +42,7 @@ zkSync:  https://wallet.zksync.io/deposit
 
 
 ## 数学工具  
-在线数学工具:  https://www.desmos.com/calculator/youuxzbvr7?lang=zh-CN 
+在线数学工具:  https://www.desmos.com/calculator/youuxzbvr7?lang=zh-CN  
+
+## 链上辅助工具  
+资产管理工具(多签钱包):  https://gnosis-safe.io/  
