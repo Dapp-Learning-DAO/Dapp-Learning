@@ -65,9 +65,6 @@
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
-**国内区块链公开课**
-- [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)
-
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
