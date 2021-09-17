@@ -10,7 +10,7 @@
 
 ### uniswap-v1-like
 
-仿uniV1项目。由于源项目是用Vyper开发合约，这里会使用 solidity 0.8.0 仿写一个uniswapV1。
+仿uniV1项目。原项目是用Vyper开发合约，这里会使用 solidity 0.8.0 仿写一个uniswapV1，由浅入深理解uniswap的原理。
 
 [详情参见 uniswap-v1-like :point_right:](./uniswap-v1-like/README.md)
 
