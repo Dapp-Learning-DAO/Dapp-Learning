@@ -1,12 +1,3 @@
----
-title: Uniswap-V2白皮书
-date: 2020-12-02
-categories:
- - Uniswap
-tags:
- - Uniswap
----
-
 > 原文：[Uniswap V2 Whitepaper](https://uniswap.org/whitepaper.pdf)
 
 ## 摘要
