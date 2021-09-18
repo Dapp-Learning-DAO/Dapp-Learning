@@ -1,0 +1,27 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.741ex" height="3.176ex" style="font-size: 15px; vertical-align: -0.838ex;" viewBox="0 -1006.6 5055 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path style="color: #f7f7f7" stroke-width="1" id="E1-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path>
+</defs>
+<g stroke="currentColor" style="color: #f7f7f7" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJMAIN-5B" x="0" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-30" x="278" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-2C" x="779" y="0"></use>
+<g transform="translate(1390,0)">
+ <use xlink:href="#E1-MJMAIN-32" x="0" y="0"></use>
+<g transform="translate(500,412)">
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-31"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-31" x="500" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-32" x="1001" y="0"></use>
+</g>
+</g>
+ <use xlink:href="#E1-MJMAIN-2212" x="3275" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-31" x="4275" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-5D" x="4776" y="0"></use>
+</g>
+</svg>
