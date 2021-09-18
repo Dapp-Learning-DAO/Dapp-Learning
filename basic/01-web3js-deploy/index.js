@@ -53,7 +53,7 @@ const Deploy = async () => {
   // Create Tx
   const deployTx = deployContract.deploy({
     data: bytecode,
-    arguments: [5],
+    arguments: [5],  // Pass arguments to the constructor on deployment(_initialNumber here)
   });
 
   // Sign Tx
