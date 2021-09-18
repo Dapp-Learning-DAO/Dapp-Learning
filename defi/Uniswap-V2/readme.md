@@ -13,7 +13,9 @@ Uniswap V2 前端代码解析-part 1:  https://www.bilibili.com/video/BV1Uv411N7
 
 ## Design Comments
 
-关于设计的一些思考 [design comments](./design/comments.md)
+关于设计的一些思考 [design comments](./design/design-comments.md)
+
+一些动图演示 [graphs](./design/graphs.md)
 
 ## Interface
 
