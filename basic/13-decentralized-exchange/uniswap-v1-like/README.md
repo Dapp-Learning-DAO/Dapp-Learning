@@ -382,6 +382,8 @@ removedAmount = reserve * (amountLP / totalAmountLP)
 
 所以，提供流动性就代表了总是和市场做反向的操作，总是倾向去持有更多的弱势资产（当 ETH 上涨为强势资产，DAI 就是弱势资产）。于是当 ETH 上涨，你的流动性会不断提前抛出 ETH，而拿到更多的 DAI，这些被提前抛出的 ETH 就成了无常损失的来源，即这个时候无常损失可以理解为你在 ETH 上的踏空损失。
 
+如果你想更深入了解无常损失，可以看这篇博文 [淺談無常損失 (Impermanent Loss) 及其避險方式](https://medium.com/@cic.ethan/%E6%B7%BA%E8%AB%87%E7%84%A1%E5%B8%B8%E6%90%8D%E5%A4%B1-impermanent-loss-%E5%8F%8A%E5%85%B6%E9%81%BF%E9%9A%AA%E6%96%B9%E5%BC%8F-2ec23978b767)
+
 ### LP 奖励和无常损失演示
 
 编写一个测试流程，重现增加流动性、交换代币、累计费用和去除流动性的完整流程：
