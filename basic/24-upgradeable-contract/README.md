@@ -36,4 +36,5 @@ controlContract_test.js 在 test 目录, 执行 "npx hardhat test" 的时候就�
 
 
 ## 参考文档  
-https://zhuanlan.zhihu.com/p/34690916  
+如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/34690916> 
+openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>

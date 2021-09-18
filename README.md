@@ -17,7 +17,7 @@
 
 项目跟Rebase大学深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
-项目秉持 [开源大学](https://shimo.im/docs/YTyKvk89dHWrKt86) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。欢迎参与[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。 
+项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。欢迎参与[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。 
 
 项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)
 
