@@ -5,10 +5,14 @@
 待集成 0x & bancor & kyber
 
 ### EtherDelta
-EtherDelta, 详情参见 [./EtherDelta/README.md](./EtherDelta/README.md)
+
+[详情参见 EtherDelta解析和测试 :point_right:](./EtherDelta/README.md)
 
 ### uniswap-v1-like
-仿uniV1项目，详情参见 [./uniswap-v1-like/README.md](./uniswap-v1-like/README.md)
+
+仿uniV1项目。原项目是用Vyper开发合约，这里会使用 solidity 0.8.0 仿写一个uniswapV1，由浅入深理解uniswap的原理。
+
+[详情参见 uniswap-v1-like :point_right:](./uniswap-v1-like/README.md)
 
 ## 参考链接
 
