@@ -39,3 +39,10 @@ AMM 作市相关公式:  https://medium.com/anchordao-lab/automated-market-maker
 ## Layer2    
 Defi Workshop - 从零搭建自己的Lending Pool:  https://www.bilibili.com/video/BV1Ef4y1w7GX  
 zkSync:  https://wallet.zksync.io/deposit  
+
+
+## 数学工具  
+在线数学工具:  https://www.desmos.com/calculator/youuxzbvr7?lang=zh-CN  
+
+## 链上辅助工具  
+资产管理工具(多签钱包):  https://gnosis-safe.io/  
