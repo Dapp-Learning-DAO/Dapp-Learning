@@ -34,7 +34,7 @@ node index.js
 第一步, 我们先进行文件的读取, 把 sol 文件加载为 source 变量 
 ```js
 // Load contract
-const source = fs.readFileSync("Incrementer.sol", "utf8");
+const source = fs.readFileSync("SimpleToken.sol", "utf8");
 ```
 
 2) 进行合约编译    
@@ -44,7 +44,7 @@ const source = fs.readFileSync("Incrementer.sol", "utf8");
 const input = {
   language: "Solidity",
   sources: {
-    "Incrementer.sol": {
+    "SimpleToken.sol": {
       content: source,
     },
   },
@@ -63,14 +63,14 @@ const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
 3) 获取二进制对象  
 在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象, 通过访问对象属性的方式提示 Incrementer 合约对象  
 ```js
-const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
-``` 
+const contractFile = tempFile.contracts["SimpleToken.sol"]["SimpleToken"];
+```
 
 4) 导出对象  
 为例能使其他 js 文件使用 Incrementer 合约对象 , 我们需要对合约对象进行到处
 ```js
 module.exports = contractFile;
-```  
+```
 
 ## index.js 代码逻辑说明  
 1) 编译合约  
@@ -84,7 +84,7 @@ const contractOfIncrementer = require("./compile");
 ```js
 require("dotenv").config();
 const privatekey = process.env.PRIVATE_KEY;
-```     
+```
 
 3) 设置收款账户   
 这里为方便测试, 固定的一个收款账户, 在后续的交易测试中, 会使用这个收款账户进行测试  
@@ -131,7 +131,7 @@ const deployTx = deployContract.deploy({
       data: bytecode,
       arguments: ["DAPPLEARNING","DAPP",0,10000000],
    });
-```  
+```
 
 9) 交易签名 
 如下使用私钥对交易进行签名,
