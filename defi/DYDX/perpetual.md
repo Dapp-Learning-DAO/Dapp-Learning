@@ -15,3 +15,4 @@ https://docs.dydx.exchange/#general
 - https://www.chainnews.com/articles/669485806574.htm Validium介绍
 - https://www.chainnews.com/articles/906891466719.htm  全景式解读加密货币衍生品交易赛道  
 - https://mp.weixin.qq.com/s/VF4JGW-XG3drUAelKbYySA  橙皮书dydx保证金交易原理介绍
+- https://www.chainnews.com/articles/609351382358.htm dydx保证金  
