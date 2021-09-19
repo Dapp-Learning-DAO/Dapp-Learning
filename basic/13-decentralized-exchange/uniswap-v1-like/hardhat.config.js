@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 const { utils } = require("ethers");
+const { GAS_PRICE } = require("./utils")
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -24,9 +25,9 @@ module.exports = {
         // 初始化账户给 1000000 eth 默认 100 不够用
         accountsBalance: utils.parseEther("1000000").toString(),
       },
-      // gasPrice 1000 默认 8000000000
+      // gasPrice 1000000000 默认 8000000000
       // 便于计算gas费用
-      gasPrice: 1000,
+      gasPrice: GAS_PRICE.toNumber(),
     },
   },
   solidity: "0.8.4",

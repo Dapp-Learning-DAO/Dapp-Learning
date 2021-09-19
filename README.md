@@ -39,7 +39,7 @@
 
 - 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
 - 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
-- solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1>
 - 边玩边学solidity:<https://cryptozombies.io/zh/course>
 - 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
 
@@ -60,7 +60,7 @@
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 - [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
-   
+
 **国外大学加密课程**
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
@@ -119,13 +119,13 @@
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 46. [vyper](https://vyper.readthedocs.io/en/stable/)
-47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
+47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/)
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  
 49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
 50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)  
 52. [Governace](https://github.com/withtally/safeguard)  
-53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) 
+53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer)
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba)
 
@@ -133,7 +133,7 @@
 
 ## 项目任务
 
-**准备工作**： 
+**准备工作**：
   此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
@@ -142,7 +142,7 @@
  建议先阅读DEFI经典书籍:  
    [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
-01. [UniswapV2](defi/Uniswap-V2/readme.md) 
+01. [UniswapV2](defi/Uniswap-V2/readme.md)
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -155,8 +155,8 @@
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 13. [OPYN](https://v2.opyn.co/)
-14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
-15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) 
+14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## NFT 进阶
 
@@ -165,13 +165,14 @@
 - 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
 - 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
 - 05. [SocialFi](https://inewsdb.com/%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3/%E7%A4%BE%E4%BA%A4%E4%BB%A3%E5%B9%A3%E4%B8%8D%E6%96%B7%E9%80%B2%E5%8C%96%EF%BC%8C-socialfi-%E6%9C%83%E6%88%90%E7%82%BA-gamefi-%E5%BE%8C%E4%B8%8B%E5%80%8B%E7%86%B1%E9%BB%9E%E5%97%8E%EF%BC%9F/)
-- 06. [Awesom NFT Projects](https://thedailyape.notion.site/4aae0799b1f84b21b9e402fb0b489b05?v=baa5e17983ec4b179c0160d8745a1742)
+- 06. [Awesom NFT Projects](https://thedailyape.notion.site/4aae0799b1f84b21b9e402fb0b489b05?v=baa5e17983ec4b179c0160d8745a1742)  
+- 07. Loot NFT Distribute 
 
 ## DAO 进阶
 
 - 01. [Aragon](dao/Aragon/readme.md)
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. [DAOHaus](https://daohaus.club/) 
+- 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶  
@@ -181,6 +182,7 @@
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
+- 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 如何参与

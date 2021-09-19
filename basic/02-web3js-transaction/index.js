@@ -229,8 +229,7 @@ const Trans = async () => {
     account_from.privateKey
   );
 
-  const receipt = null;
-  receipt = await web3.eth
+  await web3.eth
     .sendSignedTransaction(incrementTransaction.rawTransaction)
     .on('error', console.error);
 };
