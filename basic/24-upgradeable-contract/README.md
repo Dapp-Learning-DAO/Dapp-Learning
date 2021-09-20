@@ -39,6 +39,47 @@ controlContract_test.js 在 test 目录, 执行 "npx hardhat test" 的时候就�
 
 要解决此问题，我们可以在代理合约中使用fallback回退函数。 fallback函数将执行任何请求，将请求重定向到实现合约并返回结果值。这与以前的方法类似，但是这里的代理合约没有接口方法，只有 fallback 回退函数，因此，如果更改合约方法，则无需更改代理地址。
 
+```solidty 
+ // Sample code, do not use in production!  
+    contract TransparentAdminUpgradeableProxy {  
+        address implementation;  
+        address admin;  
+
+        fallback() external payable {  
+            require(msg.sender != admin);  
+            implementation.delegatecall.value(msg.value)(msg.data);  
+        }  
+
+        function upgrade(address newImplementation) external {  
+            if (msg.sender != admin) fallback();  
+            implementation = newImplementation;  
+        }  
+    }  
+```
+### 通用可升级代理
+透明代理的替代，EIP1822定义了通用的可升级代理标准，或简称为“ UUPS”。该标准使用相同的委托调用模式，但是将升级逻辑放在实现合约中，而不是在代理本身中。
+```
+// Sample code, do not use in production!  
+    contract UUPSProxy {  
+        address implementation;  
+
+        fallback() external payable {  
+            implementation.delegatecall.value(msg.value)(msg.data);  
+        }  
+    }  
+
+    abstract contract UUPSProxiable {  
+        address implementation;  
+        address admin;  
+
+        function upgrade(address newImplementation) external {  
+            require(msg.sender == admin);  
+            implementation = newImplementation;  
+        }  
+    }  
+```
+
+
 
 
 ## 参考文档  
@@ -46,4 +87,6 @@ controlContract_test.js 在 test 目录, 执行 "npx hardhat test" 的时候就�
 openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
 proxy升级: https://learnblockchain.cn/article/2758 
 总览： hhttps://www.chainnews.com/articles/042189657582.htm
+知乎 ：https://zhuanlan.zhihu.com/p/40598039
+知乎 ：https://zhuanlan.zhihu.com/p/40598169
 
