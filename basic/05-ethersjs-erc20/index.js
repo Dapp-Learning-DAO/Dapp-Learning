@@ -21,7 +21,10 @@ const providerRPC = {
     chainId: 1287,
   },
 };
-const provider = new ethers.providers.InfuraProvider('kovan'); //Change to correct network
+const provider = new ethers.providers.InfuraProvider(
+  'kovan',
+  process.env.INFURA_ID,
+); //Change to correct network
 
 // Variables
 const account_from = {
@@ -32,7 +35,7 @@ const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
 // Create Wallet
-let wallet = new ethers.Wallet(account_from.privateKey, provider);
+let wallet = new ethers.Wallet(privatekey, provider);
 
 /*
    -- Deploy Contract --

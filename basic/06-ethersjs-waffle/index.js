@@ -11,7 +11,7 @@ const privateKey = process.env.PRIVATE_KEY;
 
 const web3Provider = new ethers.providers.InfuraProvider(
   "kovan",
-  "0aae8358bfe04803b8e75bb4755eaf07"
+  process.env.INFURA_ID,
 );
 
 const wallet = new ethers.Wallet(privateKey, web3Provider);
@@ -31,7 +31,7 @@ async function getGasPrice() {
     return {
       maxFeePerGas: maxFeePerGas,
       maxPriorityFeePerGas: maxPriorityFeePerGas,
-      value: 0.0002e18,
+      // value: 0.0002e18,
     };
   });
 }
@@ -57,16 +57,17 @@ async function deploy() {
     wallet
   );
   token = await simpletoken.deploy("HEHE", "HH", 1, 100000000);
+  await token.wait(),
   tx = await token.transfer(
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     ethers.utils.parseEther("100"),
     option
   );
+  await tx.wait();
+
   console.log(token.address);
 
   console.log(token.deployTransaction.hash);
-
-  await token.deployed();
 
   let bal = await token.balanceOf(wallet.address);
   console.log(bal);
