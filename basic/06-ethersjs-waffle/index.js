@@ -11,7 +11,7 @@ const privateKey = process.env.PRIVATE_KEY;
 
 const web3Provider = new ethers.providers.InfuraProvider(
   "kovan",
-  "0aae8358bfe04803b8e75bb4755eaf07"
+  process.env.INFURA_ID
 );
 
 const wallet = new ethers.Wallet(privateKey, web3Provider);
