@@ -61,10 +61,10 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 5. 开发和部署 subgraph  
   
-    先使用 yarn 在全局安装 Graph CLI
+    先使用 yarn 在全局安装 Graph CLI（注意，此处需安装0.21.0版本，最新版0.22.0无法部署在测试网上）
 
     ```bash
-    yarn global add @graphprotocol/graph-cli
+    yarn global add @graphprotocol/graph-cli@0.21.0
     ```
 
 6. 初始化配置:
