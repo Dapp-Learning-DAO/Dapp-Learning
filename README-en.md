@@ -9,12 +9,12 @@
 
 ## Preface
 
-The Dapp-Learing Project, incubated by Rebase Community, is suitable for developers with certain programming language foundation to start blockchain Dapp development. It allows developers to understand and develop various projects like Defi, NFT, DAO and CRYPTO from a lower level to the higher level step by step.  
+The Dapp-Learing Project, incubated by Rebase Community, is suitable for developers with certain programming language foundation to start blockchain Dapp development. It allows developers to understand and develop various projects like Defi, NFT, DAO and CRYPTO from a lower level to the higher level step by step.
 
 The vision of the project is not only to provide junior developers an executable and simple learning roadmap for blockchain Dapp development, but to give advanced developers a platform to communicate and collaborate.
 Specifically, the project will be deeply combined with Rebase University and a learning group will be set up by community members. Through their division and cooperation, they will be able to study mainstream DAPP projects in depth together and make their own contributions. In addition, through weekly technology sharing workshops, they will have opportunities to share more about technology development and application. After the sharing session, the workshop will be recorded as videos and uploaded to the Rebase Channel in Bili Bili. https://space.bilibili.com/382886213/video
 
-The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. On this basis, community members will manage this open source project with the Dao management pattern. Any member who can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.  
+The philosophy that the project always sticks to is that developers can get access to decentralized education in Open Source University. On this basis, community members will manage this open source project with the Dao management pattern. Any member who can contribute high quality PR three times will become a PR auditor and will be involved in decision-making process for the project development. What‘s more, NFT will be given to all PR contributors as bonus.
 
 
 
@@ -36,7 +36,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 
 - Ethereum Principle Book:<https://ethbook.abyteahead.com/howto.html>
 - Summary of Ethereum development tools:<https://learnblockchain.cn/article/2006>
-- learning solidity <https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- learning solidity <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
 
 **Development tools：**
 
@@ -59,7 +59,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 **Recommended reading**
 
 - 《Sovereign Individuals》
-- The Austrian school of thought is recommended,[Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
+- The Austrian school of thought is recommended,[Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
 - Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 - [《Political Economy》](https://www.marxists.org/subject/economy/index.htm)
 
@@ -111,20 +111,22 @@ Learn the basic tools and development knowledge of Dapp development through the 
 - <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
 40. [Arbitrum](https://arbitrum.io/quickstart/)
 41. [NFT farming](https://superfarm.com/farms)
-42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
-   https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts  
-43. [front running](https://github.com/Supercycled/cake_sniper)  
+42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)
+   https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts
+43. [front running](https://github.com/Supercycled/cake_sniper)
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
 46. [vyper](https://vyper.readthedocs.io/en/stable/)
-47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
-48. state channel  
-49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
-50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
+47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/)
+48. state channel
+49. [sniper](https://github.com/Supercycled/cake_sniper.git)
+50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)
 52. [Governace](https://github.com/withtally/safeguard)
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer)
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
+55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba)
+56. [Liquity](https://github.com/liquity)
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -136,7 +138,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 ## DeFi advanced task
 
-01. [UniswapV2](defi/Uniswap-V2/readme.md) 
+01. [UniswapV2](defi/Uniswap-V2/readme.md)
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. Aave [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -162,7 +164,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 - 01. [Aragon](dao/Aragon/readme.md)
 - 02. Augur [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. [DAOHaus](https://daohaus.club/) 
+- 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto advanced task
@@ -171,7 +173,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## How to participate 
+## How to participate
 
 - Submit a pull request once, or follow the official account 「Rebase community」and contribute a technology sharing once, then add Maintainer WeChat account(yanyanho126) to Apply to join the group.
 - In principle, Attend weekly developer meetings.
@@ -211,7 +213,7 @@ Four ways to quickly participate in the project:
 graph: deployment, document, and rebase video sharing
 ## FaQs
 
-  For installation and use problems, please refer to the link[FaQs](./TROUBLE_SHOOTING.md)  
+  For installation and use problems, please refer to the link[FaQs](./TROUBLE_SHOOTING.md)
 
 ## Contract reference library and related projects
 
