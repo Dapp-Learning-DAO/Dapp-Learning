@@ -82,13 +82,13 @@ ipfs daemon
 ```angular2html
 npx hardhat run scripts/deploy-ipfs.js --network kovan
 ```
-在 console 输出中获得文件地址
+运行结束后，在 console 输出的日志中，最后一行打印出了你上传文件独有的 hash
 ```bash
 > ...
 > IPFS URL of art.jpg is : /ipfs/${FILE_HASH}$
 ```
 3) 对比文件  
-在当前目录下执行如下命令
+在当前目录下执行如下命令，其中 *${FILE_HASH}$* 在第二步中获得
 ```bash
 ipfs cat /ipfs/${FILE_HASH}$ > art2.jpg
 ```
