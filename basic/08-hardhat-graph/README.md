@@ -289,7 +289,7 @@ graph build
 ```
 graph create davekaj/SimpleToken --node http://127.0.0.1:8020
 
-graph deploy davekaj/anbswap --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020
+graph deploy davekaj/SimpleToken --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020
 ```
   
 5) 可以使用GraphQL来进行查询数据。 
