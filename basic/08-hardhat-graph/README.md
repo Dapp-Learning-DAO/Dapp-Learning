@@ -246,9 +246,9 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 1） 搭建graph-node
 出于便捷的考虑，我们使用官方提供的docker compose来进行节点、数据库、IPFS的部署。
 
- - 克隆graph node( https://github.com/graphprotocol/graph-node/ )代码
- - 进入docker 目录
- - 将docker-compose.yml中 ethereum 字段的值改为需要连接链的节点连接信息。
+ - 克隆 graph node( https://github.com/graphprotocol/graph-node/ )代码
+ - 进入 docker 目录
+ - 将 docker-compose.yml 中 ethereum 字段的值改为需要连接链的节点连接信息。
  ```
  graph-node:
     image: graphprotocol/graph-node
@@ -279,7 +279,8 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 docker-compose -f docker-compose.yml up -d
 ```
 
-3) 编译subgraph
+3) 编译subgraph  
+进入subgraph的本地目录运行下列命令
 ```
 graph codegen --output-dir src/types/
 graph build
