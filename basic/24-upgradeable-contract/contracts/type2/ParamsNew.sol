@@ -18,7 +18,9 @@ contract Params is Initializable,OwnableUpgradeable {
     }
 
 
-    function GetUint256Param(string memory _key)public view returns(uint256){
-        return uint256Params[_key];
+   function GetUint256Param(string memory _key)public view returns(uint256){
+        uint256 v = uint256Params[_key];
+        return v+1;
     }
+
 }
