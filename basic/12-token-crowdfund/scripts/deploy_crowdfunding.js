@@ -26,7 +26,15 @@ async function main() {
     //start Project
     await crowdFundingContract.startProject("Buy toys","Buy toys",1,100)
     let allProjects = await crowdFundingContract.returnAllProjects()
-    console.log(JSON.stringify(allProjects))
+
+    const artifact = artifacts.readArtifactSync('Project')
+    let project
+    let details
+    for(let i=0; i<allProjects.length; i++) {
+        project = new ethers.Contract(allProjects[i], artifact.abi, deployer)
+        details = await project.getDetails()
+        console.log(details)
+    }
 
 }
 
