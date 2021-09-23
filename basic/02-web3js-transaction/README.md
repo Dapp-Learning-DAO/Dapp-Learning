@@ -59,7 +59,7 @@ const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
 ``` 
 
 4) 导出对象  
-为例能使其他 js 文件使用 Incrementer 合约对象 , 我们需要对合约对象进行到处
+为了能使其他 js 文件使用 Incrementer 合约对象 , 我们需要对合约对象进行导出
 ```js
 module.exports = contractFile;
 ```  
