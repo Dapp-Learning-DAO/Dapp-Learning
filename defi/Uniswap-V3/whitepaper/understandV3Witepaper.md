@@ -341,7 +341,7 @@ V3 设定的费率等级：
 
 我们不妨将任务拆分开来实现。
 
-### 相同区间position之间的分配
+### 相同区间 position 之间的分配
 
 为了简化问题，我们假设这个池子内所有的流动性价格区间都是 (0, ∞)。
 
@@ -349,7 +349,7 @@ V3 设定的费率等级：
 
 因为流动性头寸可能随时会移除或注入，这个比例是无法保证一直正确的，每次交易都需要遍历计算。
 
-所以我们应该放弃计算流动性大小的比例，转而去计算每单位流动性能够获取的手续费数量。
+所以我们应该放弃计算流动性大小的比例，转而去计算每单位流动性能够获取的手续费数量（即 1 个流动性产生的手续费收益）。
 
 在提供流动性的用户提取手续费的时候，我们是可以获取他提供的流动性数量的，那么只要将其数量和每单位获取的手续费收益相乘，就是他应得的手续费数量。每单位流动性应得的手续费数量只需要用全局的总手续费除以全局的流动性总量即可。
 
@@ -394,7 +394,7 @@ feeGrowthGlobal += delta fee / liquidity
 
 我们需要打破注意力的局限性，把目光移到价格区间之外，会发现有一种变量是不需要遍历计算的： **区间外的手续费**。
 
-如果我们在收取手续费的时候，能知道区间外的手续费数量，不是就能间接知道区间内的手续费了嘛？这里我们依旧以每单位流动性可收取手续费数量作为衡量标准。
+如果我们在收取手续费的时候，能知道区间外的手续费数量，不是就能间接知道区间内的手续费了嘛？这里我们依旧以每单位流动性可收取手续费数量作为累加的增量。
 
 ```math
 feeGrowthInside = feeGrowthGlobal - feeGrowthOutside
@@ -432,8 +432,8 @@ feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_below - feeGrowthOutside_ab
 有了 tick 上的 `feeGrowthOutside` 变量，区间外两边的外侧手续费就能得出了。
 
 ```math
-feeGrowthOutside_below = feeGrowthOutside_a
-feeGrowthOutside_above = feeGrowthOutside_b
+feeGrowthOutside_below = feeGrowthOutside_a // a点所对应的tick的feeGrowthOutside
+feeGrowthOutside_above = feeGrowthOutside_b // b点所对应的tick的feeGrowthOutside
 ```
 
 代入之前的公式
@@ -452,13 +452,13 @@ feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_a - feeGrowthOutside_b
    ```math
    feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_lower - feeGrowthOutside_upper
    ```
-4. 该区间内会存在不同用户注入的不同流动性头寸 `position`，在 `position` 流动性数量发生变化时，累加距离上次变化到现在这段时间的手续费数量 `tokensOwed` （该 positioin 总共可回收的流动性数量）
+4. 该区间内会存在不同用户注入的不同流动性头寸 `position`，在 `position` 流动性数量发生变化时，累加距离上次变化到现在这段时间的手续费数量增量到 `tokensOwed` 变量（该 positioin 总共可回收的流动性数量）
    ```math
    tokensOwed += feeGrowthInside * liquidity_position (position的流动性数量)
    ```
 5. 用户收取手续费，从 `tokensOwed` 中扣除，其他变量不受影响。
 
-> V3 的 position 实际上有两种，一种是 Pool 合约中的，属于底层合约，只要价格区间相同，就是同一种 position；而另一种是 PositionManager 合约中的，属于用户交互合约，该合约的 position 会区分不同用户。这里为了描述逻辑的连贯性并没有对两种 position 做区分。感兴趣的小伙伴可以具体参考合约代码部分的解析。
+> V3 的 position 实际上有两种，一种是 Pool 合约中的（属于底层合约，一般不与用户直接交互），只要价格区间相同，就是同一种 position；而另一种是 PositionManager 合约中的，属于用户交互合约，该合约的 position 会区分不同用户。这里为了描述逻辑的连贯性并没有对两种 position 做区分。感兴趣的小伙伴可以具体参考合约代码部分的解析。
 
 > V2 的手续费计算流程是隐式的，合并在交易和移除流动性的流程中，逻辑比较简单。首先因为所有流动性都有相同的价格区间，再者 V2 没有考虑做市时长的因素，也就是说后注入的流动性会摊薄之前流动性的手续费收益。
 
