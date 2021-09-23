@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "./utils/Initializable.sol";
 import "./utils/OwnableUpgradeable.sol";
 
-contract Params is Initializable,OwnableUpgradeable {
+contract ParamsNew is Initializable,OwnableUpgradeable {
 	function initialize()public initializer{
 		__Context_init_unchained();
 		__Ownable_init_unchained();
@@ -18,7 +18,9 @@ contract Params is Initializable,OwnableUpgradeable {
     }
 
 
-    function GetUint256Param(string memory _key)public view returns(uint256){
-        return uint256Params[_key];
+   function GetUint256Param(string memory _key)public view returns(uint256){
+        uint256 v = uint256Params[_key];
+        return v+1;
     }
+
 }
