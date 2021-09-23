@@ -80,7 +80,7 @@ assembly {
 2. 可以改变同一存储槽中的内容
 delegatecall并不通过变量名称来修改变量值，而是修改变量所在的存储槽。  
 
-在solidity中，内存槽中的0x40位置是和特殊的，因为它存储了指向下一个可用自由内存的指针。每次当你想往内存里存储一个变量时，你都要检查存储在0x40的值。这就是你变量即将存放的位置。现在我们知道了我们要在哪儿存变量，我们就可以使用calldatacopy，把大小为calldatasize的calldata从0开始啊复制到ptr指向的那个位置了。
+在solidity中，内存槽中的0x40位置是很特殊的，因为它存储了指向下一个可用自由内存的指针。每次当你想往内存里存储一个变量时，你都要检查存储在0x40的值。这就是你变量即将存放的位置。现在我们知道了我们要在哪儿存变量，我们就可以使用calldatacopy，把大小为calldatasize的calldata从0开始复制到ptr指向的那个位置了。
 
 ```
 let result := delegatecall(gas, _impl,  ptr, calldatasize, 0, 0)
@@ -194,6 +194,10 @@ implementation: ParamsNew合约地址；
 - 可使用OpenZeppelin插件验证合约是否为可升级合约，以及升级时是否有冲突
 
 
+### 升级到 Gonsis 合约
+
+参考 https://learnblockchain.cn/article/1403   
+调用：proxyadmin.transferProxyAdminOwnership  
 ## 参考文档  
 - 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/- 34690916> 
 - openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
