@@ -148,23 +148,20 @@ contract logic {
 透明代理的替代，EIP1822定义了通用的可升级代理标准，或简称为“ UUPS”。该标准使用相同的委托调用模式，但是将升级逻辑放在实现合约中，而不是在代理本身中。
 ```
 // Sample code, do not use in production!  
-    contract UUPSProxy {  
-        address implementation;  
-
-        fallback() external payable {  
-            implementation.delegatecall.value(msg.value)(msg.data);  
-        }  
+contract UUPSProxy {  
+    address implementation;  
+    fallback() external payable {  
+        implementation.delegatecall.value(msg.value)(msg.data);  
     }  
-
-    abstract contract UUPSProxiable {  
-        address implementation;  
-        address admin;  
-
-        function upgrade(address newImplementation) external {  
-            require(msg.sender == admin);  
-            implementation = newImplementation;  
-        }  
+}  
+abstract contract UUPSProxiable {  
+    address implementation;  
+    address admin;  
+    function upgrade(address newImplementation) external {  
+        require(msg.sender == admin);  
+        implementation = newImplementation;  
     }  
+}  
 ```
 
 
@@ -198,16 +195,16 @@ implementation: ParamsNew合约地址；
 
 
 ## 参考文档  
-如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/34690916> 
-openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
-proxy升级: https://learnblockchain.cn/article/2758 
-总览： hhttps://www.chainnews.com/articles/042189657582.htm
-知乎王大锤：https://zhuanlan.zhihu.com/p/40598039
-知乎王大锤：https://zhuanlan.zhihu.com/p/40598169
-合约代码：https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/tree/master/contracts/proxy
-openzepplin test: https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable
-openzepplin: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies
-testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
-https://www.jianshu.com/p/3fa12d7ed76d
+- 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/- 34690916> 
+- openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
+- proxy升级: https://learnblockchain.cn/article/2758 
+- 总览： https://www.chainnews.com/articles/042189657582.htm
+- 知乎王大锤：https://zhuanlan.zhihu.com/p/40598039
+- 知乎王大锤：https://zhuanlan.zhihu.com/p/40598169
+- 合约代码：https://github.com/OpenZeppelin/- openzeppelin-contracts-upgradeable/tree/master/contracts/proxy
+- openzepplin test: https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable
+- openzepplin: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies
+- testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
+- 原理介绍：https://www.jianshu.com/p/3fa12d7ed76d
 
 
