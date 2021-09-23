@@ -316,7 +316,7 @@ contract EtherDelta {
         require(token != address(0));
         require(
             Token(token).transferFrom(msg.sender, address(this), amount),
-            "Token.transferFrom fiald"
+            "Token.transferFrom failed"
         );
         tokens[token][msg.sender] = SafeMath.add(
             tokens[token][msg.sender],
