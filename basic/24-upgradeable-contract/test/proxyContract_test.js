@@ -82,8 +82,8 @@ describe('proxy contract', function () {
   let log1 = iface1.parseLog(getTransactionReceipt1.logs[0]);
 
   console.log("log1: ", log1.args);
-  //let result = await alice.sendTransaction({to: transparentUpgradeableProxyContract.address, data: dataGet});
- //  console.log("result:", result);
+  let result = await alice.call({to: transparentUpgradeableProxyContract.address, data: dataGet});
+   console.log("result:", result);
   //expect(log1.args[1].to.equal(3));
 
 
