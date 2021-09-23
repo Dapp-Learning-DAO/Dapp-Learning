@@ -42,7 +42,7 @@ describe('proxy contract', function () {
 
     // reverted with reason string : Ownable: caller is not the owner
     // await params.SetUint256Param("1",1);
-    //  console.log(await params.GetUint256Param("1"));
+    // console.log(await params.GetUint256Param("1"));
 
     // Deploy new paramsContract
     let paramsNewContractFactory = await ethers.getContractFactory('ParamsNew');
@@ -57,7 +57,7 @@ describe('proxy contract', function () {
   let iface = new ethers.utils.Interface(ABI);
   let data = iface.encodeFunctionData("SetUint256Param", [ "1", 2 ]);
   let dataGet = iface.encodeFunctionData("GetUint256Param", [ "1" ]);
-  console.log("data: ", data);
+
   let tx = await alice.sendTransaction({to: transparentUpgradeableProxyContract.address, data: data});
   const getTransactionReceipt= await tx.wait();
   
@@ -66,25 +66,33 @@ describe('proxy contract', function () {
   let log = iface1.parseLog(getTransactionReceipt.logs[0]);
 
   console.log("log: ", log.args);
-  //expect(log.args[1].to.equal(2));
 
+  // just some check 
   const value = await params.GetUint256Param("1");
-
   console.log(value)
+
+  // upgrade before 
+  let resultBefore = await alice.call({to: transparentUpgradeableProxyContract.address, data: dataGet});
+  expect(resultBefore).to.equal('0x0000000000000000000000000000000000000000000000000000000000000002');
+
   
   let txUpgrade = await proxyAdminContract.upgrade(transparentUpgradeableProxyContract.address,paramsNew.address );
   let txUpgradeReceipt = await txUpgrade.wait();
   console.log("tx: ",txUpgradeReceipt)
+
+
+  let result = await alice.call({to: transparentUpgradeableProxyContract.address, data: dataGet});
+  expect(result).to.equal('0x0000000000000000000000000000000000000000000000000000000000000003');
+  // more elegant way
+  const paramsNewWithProxy = await paramsNew.attach(transparentUpgradeableProxyContract.address)
+  let result1 = await paramsNewWithProxy.GetUint256Param("1");
+  console.log("result1:", result1);
+  expect(result1).to.equal(3);
+
   let tx1 = await alice.sendTransaction({to: transparentUpgradeableProxyContract.address, data: data});
   const getTransactionReceipt1 = await tx1.wait();
- // console.log("TX1: ", tx1);
 
   let log1 = iface1.parseLog(getTransactionReceipt1.logs[0]);
-
-  console.log("log1: ", log1.args);
-  let result = await alice.call({to: transparentUpgradeableProxyContract.address, data: dataGet});
-   console.log("result:", result);
-  //expect(log1.args[1].to.equal(3));
 
 
   //not change 
