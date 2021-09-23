@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "./utils/Initializable.sol";
 import "./utils/OwnableUpgradeable.sol";
 
-contract Params is Initializable,OwnableUpgradeable {
+contract ParamsNew is Initializable,OwnableUpgradeable {
 	function initialize()public initializer{
 		__Context_init_unchained();
 		__Ownable_init_unchained();
