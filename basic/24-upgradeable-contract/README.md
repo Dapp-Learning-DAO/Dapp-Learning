@@ -169,10 +169,10 @@ abstract contract UUPSProxiable {
 
 #### 首次部署
 需要部署三个合约，分别是逻辑合约，ProxyAdmin，TransparentUpgradeProxy。
-逻辑合约就是我们自己的业务合约，需要满足OpenZeppelin可升级合约的条件。
+逻辑合约就是我们自己的业务合约，需要满足OpenZeppelin可升级合约的条件。代理持有状态，而实现合约提供代码
 1. 业务合约Params部署（先不进行初始化，initialize，本方法对应的code为 0x8129fc1c ）
-2. ProxyAdmin 管理合约部署
-3. TransparentUpgradeableProxy 代理合约，此为用户直接交互的合约地址；
+2. ProxyAdmin 管理合约部署，代理合约的管理员
+3. TransparentUpgradeableProxy 代理合约，此为用户直接交互的合约地址，一直不变；
 部署需要参数，如下:
 - _LOGIC:逻辑合约地址，步骤1；  
 - ADMIN_：管理合约地址，步骤2；
@@ -188,26 +188,27 @@ proxy: TransparentUpgradeableProxy代理合约地址；
 implementation: ParamsNew合约地址；  
 
 **注意事项**
-- 可升级合约的存储不能乱，即：只能新增存储项，不能修改顺序
-- 没有构造函数，使用initialize替代
+- 可升级合约的存储不能乱，即：只能新增存储项，不能修改顺序。这种限制只影响状态变量。你可以随心所欲地改变合约的功能和事件。  
+- 不能有构造函数，使用Initializable 合约替代，通过在方法上添加initializer标签，确保只被初始化一次。
 - 继承的父合约也需要能满足升级，本例中的Ownable采用OwnableUpgradeable，支持升级
 - 可使用OpenZeppelin插件验证合约是否为可升级合约，以及升级时是否有冲突
 
 
 ### 升级到 Gonsis 合约
-
-参考 https://learnblockchain.cn/article/1403   
-调用：proxyadmin.transferProxyAdminOwnership  
+代理的管理员（可以执行升级）是ProxyAdmin合约。 只有ProxyAdmin的所有者可以升级代理。 可以
+调用：proxyadmin.transferOwnership 转移到自己的多签合约地址上。
 ## 参考文档  
-- 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/- 34690916> 
+- 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/34690916> 
 - openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
 - proxy升级: https://learnblockchain.cn/article/2758 
+- gnosis升级： https://learnblockchain.cn/article/1403  
 - 总览： https://www.chainnews.com/articles/042189657582.htm
 - 知乎王大锤：https://zhuanlan.zhihu.com/p/40598039
 - 知乎王大锤：https://zhuanlan.zhihu.com/p/40598169
-- 合约代码：https://github.com/OpenZeppelin/- openzeppelin-contracts-upgradeable/tree/master/contracts/proxy
+- 合约代码：https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/tree/master/contracts/proxy
 - openzepplin test: https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable
 - openzepplin: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies
+- openzepplin: https://blog.openzeppelin.com/proxy-patterns/
 - testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
 - 原理介绍：https://www.jianshu.com/p/3fa12d7ed76d
 

@@ -30,10 +30,17 @@ describe('proxy contract', function () {
     let transparentUpgradeableProxyContractFactory = await ethers.getContractFactory(
       'TransparentUpgradeableProxy'
     );
+    //initialize，本方法对应的code为 0x8129fc1c
     transparentUpgradeableProxyContract = await transparentUpgradeableProxyContractFactory.deploy(params.address, proxyAdminContract.address,"0x8129fc1c" );
     await transparentUpgradeableProxyContract.deployed();
     console.log("transparentUpgradeableProxy  contract address: ", transparentUpgradeableProxyContract.address)
 
+    console.log( await proxyAdminContract.getProxyAdmin(transparentUpgradeableProxyContract.address));
+
+
+
+     
+   
  
 
   });
@@ -98,6 +105,14 @@ describe('proxy contract', function () {
   //not change 
   const value1 = await paramsNew.GetUint256Param("1");
   console.log(value1)
+
+
+
+   // change admin
+   let txxx = await proxyAdminContract.transferOwnership(alice.address);
+   //console.log(await txxx.wait());
+
+
 
   });
 
