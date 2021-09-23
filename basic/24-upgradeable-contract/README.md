@@ -206,6 +206,8 @@ proxy升级: https://learnblockchain.cn/article/2758
 知乎王大锤：https://zhuanlan.zhihu.com/p/40598169
 合约代码：https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/tree/master/contracts/proxy
 openzepplin test: https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable
-
+openzepplin: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies
+testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
+https://www.jianshu.com/p/3fa12d7ed76d
 
 
