@@ -46,7 +46,7 @@ contract CrowdFunding {
     }
 
     /** @dev Function to get all projects' contract addresses.
-      * @return A list of all projects' contract addreses
+      * @return A list of all projects' contract addresses
       */
     function returnAllProjects() external view returns(Project[] memory){
         return projects;

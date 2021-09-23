@@ -28,3 +28,4 @@ https://learnblockchain.cn/article/1496
 https://medium.com/alphawallet/erc875-a-new-standard-for-non-fungible-tokens-and-cheap-atomic-swaps-93ab85b9e7f9  
 https://github.com/AlphaWallet/ERC875-Example-Implementation  
 https://github.com/ethereum/EIPs/tree/master/assets 
+EIP712知乎：https://www.zhihu.com/people/wang-da-chui-82-1/posts

@@ -13,7 +13,7 @@ task("accounts", "Prints the list of accounts", async () => {
 
 function mnemonic() {
 
- return fs.readFileSync("./sk.txt").toString().trim();
+  return process.env.PRIVATE_KEY
 
 }
 
@@ -44,25 +44,25 @@ module.exports = {
       url: "http://localhost:8545",
     },
     // rinkeby: {
-    //   url: "https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+    //   url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
     //   accounts: [
     //   mnemonic()
     //   ],
     // },
     // kovan: {
-    //   url: "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+    //   url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
     //   accounts: [
     //     mnemonic()
     //   ],
     // },
     // mainnet: {
-    //   url: "https://mainnet.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
     //   accounts: [
     //     mnemonic()
     //   ],
     // },
     // ropsten: {
-    //   url: "https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
+    //   url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
     //   accounts: [
     //     mnemonic()
     //   ],

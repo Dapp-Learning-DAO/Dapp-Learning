@@ -11,7 +11,7 @@ describe('Project contract', function () {
   beforeEach(async function () {
     ;[creator, donator1, donator2] = await ethers.getSigners()
     projectContractFactory = await ethers.getContractFactory('Project')
-    const expiretime = parseInt(new Date().getTime() / 1000) + 7 * 24 * 60 * 60
+    const expiretime = parseInt(new Date().getTime() / 1000) + 7 * 24 * 60 * 60  //  项目时间设为7天
 
     projectContract = await projectContractFactory.deploy(
       creator.address,
