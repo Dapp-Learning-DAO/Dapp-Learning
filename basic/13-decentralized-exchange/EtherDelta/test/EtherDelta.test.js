@@ -519,9 +519,9 @@ describe("EtherDelta", () => {
       let expires = await ethers.provider.getBlockNumber();
       expires += expiresIn;
 
-      await etherDelta
-        .connect(user1)
-        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
+      // await etherDelta
+      //   .connect(user1)
+      //   .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
 
       const orderSigned = await signOrder(
         tokenGet,
@@ -533,11 +533,19 @@ describe("EtherDelta", () => {
         user1
       );
 
-      const availableVolume = await etherDelta.availableVolume(orderSigned);
-      expect(availableVolume).to.equal(amountGet);
+      const availableVolume1 = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume1).to.equal(amountGet);
 
-      const amountFilled = await etherDelta.amountFilled(orderSigned);
-      expect(amountFilled).to.equal(toWei(0));
+      const amountFilled1 = await etherDelta.amountFilled(orderSigned);
+      expect(amountFilled1).to.equal(toWei(0));
+
+      await etherDelta.connect(user1).cancelOrder(orderSigned);
+
+      const availableVolume2 = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume2).to.equal(toWei(0));
+
+      const amountFilled2 = await etherDelta.amountFilled(orderSigned);
+      expect(amountFilled2).to.equal(amountGet);
     }
 
     const trades = [
@@ -607,11 +615,19 @@ describe("EtherDelta", () => {
         s: formatBytes32String(0)
       }
 
-      const availableVolume = await etherDelta.availableVolume(orderNotSigned);
-      expect(availableVolume).to.equal(amountGet);
+      const availableVolume1 = await etherDelta.availableVolume(orderNotSigned);
+      expect(availableVolume1).to.equal(amountGet);
 
-      const amountFilled = await etherDelta.amountFilled(orderNotSigned);
-      expect(amountFilled).to.equal(toWei(0));
+      const amountFilled1 = await etherDelta.amountFilled(orderNotSigned);
+      expect(amountFilled1).to.equal(toWei(0));
+
+      await etherDelta.connect(user1).cancelOrder(orderNotSigned);
+
+      const availableVolume2 = await etherDelta.availableVolume(orderNotSigned);
+      expect(availableVolume2).to.equal(toWei(0));
+
+      const amountFilled2 = await etherDelta.amountFilled(orderNotSigned);
+      expect(amountFilled2).to.equal(amountGet);
     }
 
     const trades = [
@@ -700,6 +716,69 @@ describe("EtherDelta", () => {
     for (let i = 0; i < trades.length; i++) {
       const trade = trades[i];
       await testDepletion(
+        trade.expires,
+        trade.orderNonce,
+        trade.tokenGet,
+        trade.tokenGive,
+        trade.amountGet,
+        trade.amountGive,
+        trade.amount,
+        trade.accountLevel
+      );
+    }
+  });
+
+  it("Should do a self trade and check available volume depletion", async () => {
+    await prepareTokens();
+
+    async function testSelfDepletion(
+      expiresIn,
+      orderNonce,
+      tokenGet,
+      tokenGive,
+      amountGet,
+      amountGive,
+      amount
+    ) {
+      let expires = await ethers.provider.getBlockNumber();
+      expires += expiresIn;
+
+      const orderSigned = await signOrder(
+        tokenGet,
+        amountGet,
+        tokenGive,
+        amountGive,
+        expires,
+        orderNonce,
+        user1
+      );
+
+      await etherDelta
+        .connect(user1)
+        .order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
+
+      await etherDelta.connect(user1).trade(orderSigned, amount);
+
+      const availableVolume = await etherDelta.availableVolume(orderSigned);
+      expect(availableVolume).to.equal(amountGet.sub(amount));
+    }
+
+    const trades = [
+      {
+        expires: 1000,
+        orderNonce: 11,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: toWei(50),
+        amountGive: toWei(25),
+        amount: toWei(50).div(2),
+        accountLevel: 0,
+      },
+    ];
+
+    for (let i = 0; i < trades.length; i++) {
+      const trade = trades[i];
+      await testSelfDepletion(
         trade.expires,
         trade.orderNonce,
         trade.tokenGet,
