@@ -1,6 +1,6 @@
 # Dapp Security
 
-## Solidity Security references
+## Solidity security references
 
 - [SWC Registry](https://swcregistry.io/)
 - [Decentralized Application Security Project](https://www.dasp.co/)
