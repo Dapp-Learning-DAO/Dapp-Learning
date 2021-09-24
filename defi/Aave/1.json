@@ -1,0 +1,126 @@
+{
+    "data": {
+      "userReserves": [
+        {
+          "currentATokenBalance": "114180581010952156162",
+          "currentStableDebt": "0",
+          "currentTotalDebt": "0",
+          "currentVariableDebt": "0",
+          "liquidityRate": "6176588991448008032273574",
+          "reserve": {
+            "baseLTVasCollateral": "5000",
+            "id": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf12700xd05e3e715d945b59290df0ae8ef85c1bdb684744",
+            "name": "Wrapped Matic",
+            "pool": {
+              "lendingPool": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf"
+            },
+            "reserveFactor": "2000",
+            "reserveLiquidationThreshold": "6500",
+            "symbol": "WMATIC",
+            "utilizationRate": "0.13563449"
+          },
+          "user": {
+            "id": "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d",
+            "lifetimeRewards": "6698652396450728267",
+            "unclaimedRewards": "225476782501122138"
+          }
+        },
+        {
+          "currentATokenBalance": "0",
+          "currentStableDebt": "0",
+          "currentTotalDebt": "500809160",
+          "currentVariableDebt": "500809160",
+          "liquidityRate": "32081366883218764774768781",
+          "reserve": {
+            "baseLTVasCollateral": "8000",
+            "id": "0x2791bca1f2de4661ed88a30c99a7a9449aa841740xd05e3e715d945b59290df0ae8ef85c1bdb684744",
+            "name": "USD Coin (PoS)",
+            "pool": {
+              "lendingPool": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf"
+            },
+            "reserveFactor": "1000",
+            "reserveLiquidationThreshold": "8500",
+            "symbol": "USDC",
+            "utilizationRate": "0.86773879"
+          },
+          "user": {
+            "id": "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d",
+            "lifetimeRewards": "6698652396450728267",
+            "unclaimedRewards": "225476782501122138"
+          }
+        },
+        {
+          "currentATokenBalance": "1386247575341214922",
+          "currentStableDebt": "0",
+          "currentTotalDebt": "0",
+          "currentVariableDebt": "0",
+          "liquidityRate": "1380796600636019709853880",
+          "reserve": {
+            "baseLTVasCollateral": "8000",
+            "id": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f6190xd05e3e715d945b59290df0ae8ef85c1bdb684744",
+            "name": "Wrapped Ether",
+            "pool": {
+              "lendingPool": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf"
+            },
+            "reserveFactor": "1000",
+            "reserveLiquidationThreshold": "8250",
+            "symbol": "WETH",
+            "utilizationRate": "0.12032986"
+          },
+          "user": {
+            "id": "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d",
+            "lifetimeRewards": "6698652396450728267",
+            "unclaimedRewards": "225476782501122138"
+          }
+        },
+        {
+          "currentATokenBalance": "0",
+          "currentStableDebt": "0",
+          "currentTotalDebt": "0",
+          "currentVariableDebt": "0",
+          "liquidityRate": "28657078168404978864796687",
+          "reserve": {
+            "baseLTVasCollateral": "7500",
+            "id": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a0630xd05e3e715d945b59290df0ae8ef85c1bdb684744",
+            "name": "(PoS) Dai Stablecoin",
+            "pool": {
+              "lendingPool": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf"
+            },
+            "reserveFactor": "1000",
+            "reserveLiquidationThreshold": "8000",
+            "symbol": "DAI",
+            "utilizationRate": "0.78718832"
+          },
+          "user": {
+            "id": "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d",
+            "lifetimeRewards": "6698652396450728267",
+            "unclaimedRewards": "225476782501122138"
+          }
+        },
+        {
+          "currentATokenBalance": "0",
+          "currentStableDebt": "0",
+          "currentTotalDebt": "0",
+          "currentVariableDebt": "0",
+          "liquidityRate": "29841762982231660524766639",
+          "reserve": {
+            "baseLTVasCollateral": "0",
+            "id": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f0xd05e3e715d945b59290df0ae8ef85c1bdb684744",
+            "name": "(PoS) Tether USD",
+            "pool": {
+              "lendingPool": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf"
+            },
+            "reserveFactor": "1000",
+            "reserveLiquidationThreshold": "0",
+            "symbol": "USDT",
+            "utilizationRate": "0.88524521"
+          },
+          "user": {
+            "id": "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d",
+            "lifetimeRewards": "6698652396450728267",
+            "unclaimedRewards": "225476782501122138"
+          }
+        }
+      ]
+    }
+  }
