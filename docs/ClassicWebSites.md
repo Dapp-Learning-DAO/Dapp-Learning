@@ -52,4 +52,5 @@ zkSync:  https://wallet.zksync.io/deposit
 web3 101 种学习路径: https://learn.figment.io/pathways  
 
 ## 合约  
-SMTChecker 检查合约漏洞:  https://learnblockchain.cn/article/3016
+SMTChecker 检查合约漏洞:  https://learnblockchain.cn/article/3016  
+GnosisSafe - 合约结构分析:  https://learnblockchain.cn/article/3028  
