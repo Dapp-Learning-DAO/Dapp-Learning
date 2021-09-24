@@ -12,7 +12,6 @@
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "chai": "^4.3.4",
-    "chai-as-promised": "^7.1.1",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4"
   }

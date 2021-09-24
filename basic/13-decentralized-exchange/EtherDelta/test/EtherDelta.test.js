@@ -1,9 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
 const { expect } = require("chai");
-const chai = require("chai");
-const chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-chai.should();
 
 const fs = require("fs");
 const testAccounts = JSON.parse(fs.readFileSync("./testAccounts.json"));
@@ -838,7 +834,7 @@ describe("EtherDelta", () => {
       }
 
       await etherDelta.connect(user1).order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
-      await expect(etherDelta.connect(user2).trade(orderNotSigned, amount)).to.eventually.rejectedWith(Error);
+      await expect(etherDelta.connect(user2).trade(orderNotSigned, amount)).to.be.reverted;
 
     }
 
