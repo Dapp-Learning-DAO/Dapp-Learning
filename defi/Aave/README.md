@@ -1,7 +1,7 @@
 ## AAVE
 
 
-### 合约部分
+### contract
 ![architecture](./imgs/architecture.png) 
 The LendingPool contract is the main contract of the protocol。
 **LendingPool**
