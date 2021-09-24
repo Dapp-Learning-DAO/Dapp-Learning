@@ -1,4 +1,4 @@
-const ethers = require('ethers');
+const { ethers } = require('ethers');
 const fs = require('fs');
 const contractFile = require('./compile');
 //var sleep = require('sleep');
@@ -22,7 +22,10 @@ const providerRPC = {
     chainId: 1287,
   },
 };
-const provider = new ethers.providers.InfuraProvider('kovan'); //Change to correct network
+const provider = new ethers.providers.InfuraProvider(
+  'kovan',
+  process.env.INFURA_ID
+); //Change to correct network
 
 // Variables
 const account_from = {
@@ -64,13 +67,13 @@ let wallet = new ethers.Wallet(account_from.privateKey, provider);
    -- Deploy Contract --
 */
 // Create Contract Instance with Signer
-//const deployContractIns = new ethers.ContractFactory(abi, bytecode, wallet);
+const deployContractIns = new ethers.ContractFactory(abi, bytecode, wallet);
 
 const Trans = async () => {
   console.log('===============================1. Deploy Contract');
   console.log(`Attempting to deploy from account: ${wallet.address}`);
 
-  // Send Tx (Initial Value set to 5) and Wait for Receipt
+  // Deploy the Contract
   const deployedContract = await deployContractIns.deploy(
     'hello',
     'Dapp',
@@ -140,14 +143,14 @@ const Trans = async () => {
   // Listen to event once
   providerContract.once('Transfer', (from, to, value) => {
     console.log(
-      `I am a once Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
+      `I am a once Event Listener, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
     );
   });
 
-  // Listen to events continuouslly
+  // Listen to events continuously
   providerContract.on('Transfer', (from, to, value) => {
     console.log(
-      `I am a longlive Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
+      `I am a longstanding Event Listener, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
     );
   });
 
@@ -161,7 +164,7 @@ const Trans = async () => {
 
   providerContract.on(filter, (from, to, value) => {
     console.log(
-      `I am a filter Event Listner, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
+      `I am a filter Event Listener, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
     );
   });
 

@@ -66,6 +66,9 @@
 - [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
+**其他加密课程**
+- [Cryptoeconomics - A free, open-source course on the fundamentals of Blockchain protocols](http://cryptoeconomics.study/)
+
 **国内区块链公开课**
 - [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)
 
@@ -128,6 +131,7 @@
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer)
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba)
+56. [IDO](https://github.com/gnosis/ido-contracts)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 

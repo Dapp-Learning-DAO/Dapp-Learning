@@ -103,18 +103,18 @@ contract MembersVote {
         to.transfer(amount);
     }
 
-//For ether returns of proposal investments
-function receive() payable external {
-availableFunds += msg.value;
-}
+    //For ether returns of proposal investments
+    function receive() payable external {
+        availableFunds += msg.value;
+    }
 
-modifier onlyMembers() {
-require(members[msg.sender] == true, 'only members');
-_;
-}
+    modifier onlyMembers() {
+        require(members[msg.sender] == true, 'only members');
+        _;
+    }
 
-modifier onlyOwner() {
-require(msg.sender == owner, 'only owner');
-_;
-}
+    modifier onlyOwner() {
+        require(msg.sender == owner, 'only owner');
+        _;
+    }
 }
