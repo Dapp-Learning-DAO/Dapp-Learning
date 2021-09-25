@@ -507,10 +507,10 @@ tickCumulative += tick_current * (blocktimestamp_current - blocktimestamp_before
 当外部用户使用时，求 t1 到 t2 时间内的时间加权价格 `p(t1,t2)` ，需要计算两个时间点的累计值的差 `a(t1,t2)` 除以时间差。
 
 <!-- $$a_{t1,t2}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=a_{t1,t2}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+<img src="https://render.githubusercontent.com/render/math?math=a_{t1,t2}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;" />
 
 <!-- $$log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;" />
 
 <!-- $$p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
 <img src="https://render.githubusercontent.com/render/math?math=p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
@@ -539,7 +539,7 @@ secondsPerLiquidityCumulative +=  delta_time / 1 {liquidity = 0}
 
 ### Tick 上辅助预言机计算的数据
 
-每个已初始化的 tick 上（有流动性添加的），不光有流动性数量和手续费相关的变量(`liquidityNet`,`liquidityGross`,`feeGrowthOutside`,)，还有三个可用于做市策略。
+每个已初始化的 tick 上（有流动性添加的），不光有流动性数量和手续费相关的变量(`liquidityNet`, `liquidityGross`, `feeGrowthOutside`)，还有三个可用于做市策略。
 
 tick 变量一览：
 
@@ -547,19 +547,19 @@ tick 变量一览：
 | ------ | ------------------------------ | ------------------------------------- |
 | int128 | liquidityNet                   | 流动性数量净含量                      |
 | int128 | liquidityGross                 | 流动性数量总量                        |
-| int256 | feeGrowthOutside0X128          | 以 token0 收取的 outside 的手续费总量    |
-| int256 | feeGrowthOutside1X128          | 以 token1 收取的 outside 的手续费总量    |
+| int256 | feeGrowthOutside0X128          | 以 token0 收取的 outside 的手续费总量 |
+| int256 | feeGrowthOutside1X128          | 以 token1 收取的 outside 的手续费总量 |
 | int256 | secondsOutside                 | 价格在 outside 的总时间               |
 | int256 | tickCumulativeOutside          | 价格在 outside 的 tick 序号累加       |
 | int256 | secondsPerLiquidityOutsideX128 | 价格在 outside 的每单位流动性参与时长 |
 
 outside 的含义参考手续费部分的讲解，这些变量前几个都是手续费部分用到的，最后三个则是预言机相关的数据。
 
-tick辅助预言机的变量的使用方法：
+tick 辅助预言机的变量的使用方法：
 
-1. `secondsOutside`： 用池子创建以来的总时间减去价格区间两边tick上的该变量，就能得出该区间做市的总时长
-2. `tickCumulativeOutside`： 用预言机的 `tickCumulative` 减去价格区间两边tick上的该变量，除以做市时长，就能得出该区间平均的做市价格（tick序号）
-3. `secondsPerLiquidityOutsideX128`： 用预言机的 `secondsPerLiquidityCumulative` 减去价格区间两边tick上的该变量，就是该区间内的每单位流动性的做市时长
+1. `secondsOutside`： 用池子创建以来的总时间减去价格区间两边 tick 上的该变量，就能得出该区间做市的总时长
+2. `tickCumulativeOutside`： 用预言机的 `tickCumulative` 减去价格区间两边 tick 上的该变量，除以做市时长，就能得出该区间平均的做市价格（tick 序号）
+3. `secondsPerLiquidityOutsideX128`： 用预言机的 `secondsPerLiquidityCumulative` 减去价格区间两边 tick 上的该变量，就是该区间内的每单位流动性的做市时长（使用该结果乘以你的流动性数量，得出你的流动性参与的做市时长，这个时长比上 1 的结果，就是你在该区间赚取的手续费比例）。
 
 ## 闪电贷
 
