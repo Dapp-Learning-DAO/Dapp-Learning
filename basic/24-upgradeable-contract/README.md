@@ -211,5 +211,6 @@ implementation: ParamsNew合约地址；
 - openzepplin: https://blog.openzeppelin.com/proxy-patterns/
 - testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
 - 原理介绍：https://www.jianshu.com/p/3fa12d7ed76d
+- compound: 合约升级
 
 
