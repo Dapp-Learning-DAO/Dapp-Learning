@@ -72,9 +72,9 @@
 **国内区块链公开课**
 - [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
 
-**经典网站及 Paper 收录**
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
- 
+欢迎大家添加推荐书籍，请在此文档--[好书推荐](./docs/books)中录入；
+
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。

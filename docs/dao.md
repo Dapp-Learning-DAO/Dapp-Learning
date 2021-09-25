@@ -1,7 +1,7 @@
 ## 如何参与
 - 提交一次PR 或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进开发者群
 - 已在Rebase社区分享过的小伙伴可以直接申请入群
-- 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目
+- 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目, 可在此添加链接和文档[Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
 - 每个项目readme请务必加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本
 - script脚本目录下测试案例保证能在kovan网(建议)调试成功，test目录下测试案例连本地节点调试成功
