@@ -148,7 +148,7 @@ $\ D_t = U_t(SB_t*S_t+VB_t*V_t)(1-R_t) $
 The new Aave AMM Liquidity Pool enables liquidity providers (“LPs”) of Uniswap and Balancer to use their LP tokens as collateral in the Aave Protocol. 
 
 
-## 参考链接
+## reference linking
 - <https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade>
 - <https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol>
 - [V1-whitepaper](https://cryptorating.eu/whitepapers/Aave/Aave_Protocol_Whitepaper_v1_0.pdf)
