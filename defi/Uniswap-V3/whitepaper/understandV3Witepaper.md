@@ -535,7 +535,31 @@ secondsPerLiquidityCumulative +=  delta_time / 1 {liquidity = 0}
 
 这里的具体含义是每单位流动性参与的做市时长，即一段时间内，参与的流动性越多，那么每单位流动性参与的时长越短，因为分摊收益的流动性数量变多了，反之亦然。
 
-其使用方法和价格预言机类似，不再赘述
+其记录机制和价格逻辑一致，不再赘述。这里介绍一下它的用途。
+
+### Tick 上辅助预言机计算的数据
+
+每个已初始化的 tick 上（有流动性添加的），不光有流动性数量和手续费相关的变量(`liquidityNet`,`liquidityGross`,`feeGrowthOutside`,)，还有三个可用于做市策略。
+
+tick 变量一览：
+
+| Type   | Variable Name                  | 含义                                  |
+| ------ | ------------------------------ | ------------------------------------- |
+| int128 | liquidityNet                   | 流动性数量净含量                      |
+| int128 | liquidityGross                 | 流动性数量总量                        |
+| int256 | feeGrowthOutside0X128          | 以 token0 收取的 outside 的手续费总量    |
+| int256 | feeGrowthOutside1X128          | 以 token1 收取的 outside 的手续费总量    |
+| int256 | secondsOutside                 | 价格在 outside 的总时间               |
+| int256 | tickCumulativeOutside          | 价格在 outside 的 tick 序号累加       |
+| int256 | secondsPerLiquidityOutsideX128 | 价格在 outside 的每单位流动性参与时长 |
+
+outside 的含义参考手续费部分的讲解，这些变量前几个都是手续费部分用到的，最后三个则是预言机相关的数据。
+
+tick辅助预言机的变量的使用方法：
+
+1. `secondsOutside`： 用池子创建以来的总时间减去价格区间两边tick上的该变量，就能得出该区间做市的总时长
+2. `tickCumulativeOutside`： 用预言机的 `tickCumulative` 减去价格区间两边tick上的该变量，除以做市时长，就能得出该区间平均的做市价格（tick序号）
+3. `secondsPerLiquidityOutsideX128`： 用预言机的 `secondsPerLiquidityCumulative` 减去价格区间两边tick上的该变量，就是该区间内的每单位流动性的做市时长
 
 ## 闪电贷
 
