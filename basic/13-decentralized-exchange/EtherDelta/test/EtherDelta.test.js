@@ -829,7 +829,7 @@ describe("EtherDelta", () => {
       }
 
       await etherDelta.connect(user1).order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
-      expect(etherDelta.connect(user2).trade(orderNotSigned, amount)).to.be.reverted;
+      await expect(etherDelta.connect(user2).trade(orderNotSigned, amount)).to.be.reverted;
 
     }
 
@@ -932,7 +932,7 @@ describe("EtherDelta", () => {
   it("Should change the account levels address and fail", async () => {
     await prepareTokens();
 
-    expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+    await expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
 
   });
 
