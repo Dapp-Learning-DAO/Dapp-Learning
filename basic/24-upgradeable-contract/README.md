@@ -35,7 +35,7 @@ controlContract_test.js 在 test 目录, 执行 "npx hardhat test" 的时候就�
 第三个用例是 DataContract 合约的部署者赋权给 ControlContract 后, ControlContract 可以调用 DataContract 接口, 这样一来, 当业务逻辑有变动的时候, 只需要重新部署一个新的 ControlContract 合约, 然后进行赋权, 就可以实现合约的升级改造.
 
 ## 方式二 OpenZeppelin Upgrades 合约功能说明  
-方式一如果需要对实现合约方法进行任何更改，那么我们也需要更新代理合约的方法（因为代理合约具有接口方法）。因此，用户同样需要更改代理合约地址。
+方式一如果需要对实现合约方法进行任何更改，那么我们也需要更新代理合约的方法（因为代理合约具有接口方法）。因此，用户同样需要更改代理合约地址。![proxy](./imgs/proxy.png)
 ```solidty 
  // Sample code, do not use in production!  
     contract TransparentAdminUpgradeableProxy {  
@@ -211,5 +211,6 @@ implementation: ParamsNew合约地址；
 - openzepplin: https://blog.openzeppelin.com/proxy-patterns/
 - testcase: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579
 - 原理介绍：https://www.jianshu.com/p/3fa12d7ed76d
+- compound: 合约升级
 
 
