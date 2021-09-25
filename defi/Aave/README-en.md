@@ -10,19 +10,21 @@ The LendingPool contract is the main contract of the protocol。
 
 - function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)
 
-interestRateMode ：Stable: 1, Variable: 2
+  interestRateMode ：Stable: 1, Variable: 2
 
 - function repay(address asset, uint256 amount, uint256 rateMode, address onBehalfOf)
 
 - function setUserUseReserveAsCollateral(address asset, bool useAsCollateral)
 
-- function liquidationCall(address collateral, address debt, address user, uint256 debtToCover, bool receiveAToken)
-  Liquidate positions with a health factor below 1；
+- function liquidationCall(address collateral, address debt, address user, uint256 debtToCover, bool receiveAToken)   
+
+  Liquidate positions with a health factor below 1；  
   Liquidators can only close a certain amount of collateral defined by a close factor. Currently the close factor is 0.5；  
   To check a user's health factor, use getUserAccountData(). 
 
 - function flashLoan(address receiverAddress, address[] calldata assets, uint256[] calldata amounts, uint256[] modes, address onBehalfOf, bytes calldata params, uint16 referralCode)  
-Your contract which receives the flash loaned amounts must conform to the IFlashLoanReceiver 
+
+  Your contract which receives the flash loaned amounts must conform to the IFlashLoanReceiver 
 
 -  function getUserAccountData(address user)
     totalCollateralETH  
@@ -32,7 +34,9 @@ Your contract which receives the flash loaned amounts must conform to the IFlash
     ltv  
     healthFactor
 
+
 **LendingPoolAddressesProvider**
+
 Addresses register of the protocol for a particular market. This contract is immutable and the address will never change
 
 **AToken**
@@ -41,10 +45,12 @@ Addresses register of the protocol for a particular market. This contract is imm
 3.  All interest collected by the aTokens reserves are distributed to aTokens holders directly by continuously increasing their wallet balance.  
 
 - function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
-Allows a user to permit another account (or contract) to use their funds using a signed message. This enables gas-less transactions and single approval/transfer transactions.
+
+  Allows a user to permit another account (or contract) to use their funds using a signed message. This enables gas-less transactions and single approval/transfer transactions.
 
 
 **Debt Tokens**
+
 Debt tokens are interest-accruing tokens that are minted and burned on borrow and repay, representing the debt owed by the token holder. There are 2 types of debt tokens:
 1. Stable debt tokens, representing a debt to the protocol with a stable interest rate
 2. Variable debt tokens, representing a debt to the protocol with a variable interest rate
@@ -81,7 +87,7 @@ maxAmountOfCollateralToLiquidate = (debtAssetPrice * currentATokenBalance * liqu
 
  maximum LTV is calculate as the weighted average of the LTVs of the collateral assets and their value:
 
-LTV（loan to value 最大可借资金）
+LTV（loan to value ）
 MaxLTV = $ {\frac{\sum(TotalCollateral_iin ETH * LTV_i)} {  TotalCollateralinETH} } $
 
 
@@ -92,7 +98,7 @@ $ H_f ={\frac{\sum (Collateral_iinETH * LiquidationThreshold_i)}{TotalBorrowinET
  ![liqudate](./imgs/1.jpeg)
 ​
  
-Liquidation Threshold （清算阈值 如80%开始清算）
+Liquidation Threshold
 LTV < liquidation threshold  （delta is a safety cushion for borrowers.）
 
 liquidation threshold : 50%-85%
