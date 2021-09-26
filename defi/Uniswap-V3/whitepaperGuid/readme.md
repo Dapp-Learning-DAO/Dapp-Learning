@@ -2,7 +2,7 @@
 
 ## 白皮书
 
-白皮书地址：https://uniswap.org/whitepaper-v3.pdf
+- 白皮书地址：https://uniswap.org/whitepaper-v3.pdf
 
 ## 科普文章
 
