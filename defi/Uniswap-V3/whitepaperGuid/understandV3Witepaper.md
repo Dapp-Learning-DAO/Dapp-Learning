@@ -1,6 +1,6 @@
 # Understand UniswapV3 whitepaper
 
-> 关于白皮书的解读，已有很多非常棒的文章，但白皮书中的公式和相关概念还是很艰深难懂的（对于像我学渣来说……），这里我想尝试用比较通俗易懂的方式谈谈对白皮书的理解，希望对大家有帮助。
+> 关于白皮书的解读，已有很多非常棒的文章，但白皮书中的公式和相关概念还是很艰深难懂的（对于像我这种学渣来说……），这里我想尝试用比较通俗易懂的方式谈谈对白皮书的理解，希望对大家有帮助。
 
 ## xy=k
 
@@ -464,7 +464,104 @@ feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_a - feeGrowthOutside_b
 
 ## 预言机
 
-## 闪电贷
+V2 的预言机提供了 TWAP (time-weighted average price 时间加权平均价格)，更新时间是每个区块的第一笔交易的价格，其数值是上一次的数值加上当前价格乘以时间差。
+
+```math
+a(t) = a(t-1) + price * delta_t
+```
+
+外部用户可以通过记录该数值的变化和时间点，获得在一段时间内受短期波动影响较小的时间加权价格。
+
+```math
+p(t1,t2) = (a(t2) - a(t1)) / (t2 - t1)
+```
+
+上述公式得出了在 t1 到 t2 的时间内，预言机提供的时间加权价格。因为其值是经过时间加权的（累加的是价格乘以时间差），所以受短期波动影响较小，这样能有效防止恶意的价格波动。
+
+V2 的预言机在核心合约上只保留最新的一个值，所以如果外部用户想要使用这个预言机，需要自己搭建一套监控和记录的设施，增加了使用者成本。
+
+V3 相比于 V2 的预言机，有以下较大改动：
+
+1. 相比 V2 累加的是价格的加权数值，V3 累加的是价格的 log 值，即 `log(price, 1.0001)`
+2. 在核心合约中增加了存储预言机数值的空间，最大 65536 个数值，至少 9 天的数值，建立监控和记录设施不再是必要条件
+3. 增加关于流动性的预言机数值，记录周期和价格一致（每个区块的第一笔交易），其值是当前激活状态的流动性数量的倒数，即 `1/liquidity`
+
+### 算术平均与几何平均
+
+V2 的方式是直接记录价格的累加值，而使用时再除以时间间隔，这就是一种算术平均 (arithmetic mean)。而 V3 累加的是 `log(price, 1.0001)` 也就是价格的幂，使用时再除以时间间隔，这是几何平均 (geometric mean)。
+
+所以使用 V3 的预言机公式需要改成如下:
+
+`a(t)` 是时间 t 时，预言机记录的值（累加价格的 log 值）。
+
+<!-- $$a_t=\sum_{i=0}^tlog(p_i, 1.0001)$$ -->
+<img src="https://render.githubusercontent.com/render/math?math=a_t=\sum_{i=0}^tlog(p_i, 1.0001)" />
+
+这里的 log 数值后面其实还有一个 `* 1s` 即以每秒作为时间间隔。然而实际情况中，合约中是以区块的时间戳作为标记时间的，所以合约中的代码跟公式不同。每个区块的头一笔交易时更新，此时距离上一次更新时间间隔肯定大于 1s，所以需要将更新值乘以两个区块的时间戳的差。`tickCumulative` 是 tick 序号的累计值，tick 的序号就是 `log(√price, 1.0001)`。
+
+```math
+tickCumulative += tick_current * delta_time
+tickCumulative += tick_current * (blocktimestamp_current - blocktimestamp_before)
+```
+
+当外部用户使用时，求 t1 到 t2 时间内的时间加权价格 `p(t1,t2)` ，需要计算两个时间点的累计值的差 `a(t2) - a(t1)` 除以时间差。
+
+<!-- $$a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}$$ -->
+<img src="https://render.githubusercontent.com/render/math?math=a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+
+<!-- $$log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
+<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+
+<!-- $$p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
+<img src="https://render.githubusercontent.com/render/math?math=p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+
+使用几何平均的原因：
+
+- 因为合约中记录了 tick 序号，序号是整型，且跟价格相关，所以直接计算序号更加节省 gas。（全局变量中存储的不是价格，而是根号价格，如果直接用价格来记录，要多比较复杂的计算）
+- V2 中算数平均价格并不总是倒数关系（以 token1 计价 token0，或反过来），所以需要记录两种价格。V3 中使用几何平均不存在该问题，只需要记录一种价格。
+  - 举个例子，在 V2 中如果 USD/ETH 价格在区块 1 中是 100，在区块 2 中是 300，USD/ETH 的均价是 200 USD/ETH，但是 ETH/USD 的均价是 1/150
+- 几何平均比算数平均能更好的反应真实的价格，受短期波动影响更小。白皮书中的引用提到在几何布朗运动中，算数平均会受到高价格的影响更多。
+
+> 我在 [oracleCompare.ipynb](./oracleCompare.ipynb) 中简单模拟了算数平均和几何平均的预言机机制，实际结果是算数平均受高价影响较大，而几何平均受低价影响较大。
+
+### 流动性预言机
+
+相比于 V2，任何时刻活跃的流动性就是池子内所有流动性数量总和（因为都是全价格区间），V3 有了不同价格区间，所以不同时刻，激活状态的流动性数量并不是池子内的总流动性数量。为了便于外部使用者更好的观测激活流动性的数量，V3 添加了预言机的 `secondsPerLiquidityCumulative` 变量。
+
+```math
+secondsPerLiquidityCumulative +=  delta_time / liquidity {liquidity > 0}
+secondsPerLiquidityCumulative +=  delta_time / 1 {liquidity = 0}
+```
+
+（因为 liquidity 可能为 0，此时除以 1）
+
+这里的具体含义是每单位流动性参与的做市时长，即一段时间内，参与的流动性越多，那么每单位流动性参与的时长越短，因为分摊收益的流动性数量变多了，反之亦然。
+
+其记录机制和价格逻辑一致，不再赘述。这里介绍一下它的用途。
+
+### Tick 上辅助预言机计算的数据
+
+每个已初始化的 tick 上（有流动性添加的），不光有流动性数量和手续费相关的变量(`liquidityNet`, `liquidityGross`, `feeGrowthOutside`)，还有三个可用于做市策略。
+
+tick 变量一览：
+
+| Type   | Variable Name                  | 含义                                  |
+| ------ | ------------------------------ | ------------------------------------- |
+| int128 | liquidityNet                   | 流动性数量净含量                      |
+| int128 | liquidityGross                 | 流动性数量总量                        |
+| int256 | feeGrowthOutside0X128          | 以 token0 收取的 outside 的手续费总量 |
+| int256 | feeGrowthOutside1X128          | 以 token1 收取的 outside 的手续费总量 |
+| int256 | secondsOutside                 | 价格在 outside 的总时间               |
+| int256 | tickCumulativeOutside          | 价格在 outside 的 tick 序号累加       |
+| int256 | secondsPerLiquidityOutsideX128 | 价格在 outside 的每单位流动性参与时长 |
+
+outside 的含义参考手续费部分的讲解，这些变量前几个都是手续费部分用到的，最后三个则是预言机相关的数据。
+
+tick 辅助预言机的变量的使用方法：
+
+1. `secondsOutside`： 用池子创建以来的总时间减去价格区间两边 tick 上的该变量，就能得出该区间做市的总时长
+2. `tickCumulativeOutside`： 用预言机的 `tickCumulative` 减去价格区间两边 tick 上的该变量，除以做市时长，就能得出该区间平均的做市价格（tick 序号）
+3. `secondsPerLiquidityOutsideX128`： 用预言机的 `secondsPerLiquidityCumulative` 减去价格区间两边 tick 上的该变量，就是该区间内的每单位流动性的做市时长（使用该结果乘以你的流动性数量，得出你的流动性参与的做市时长，这个时长比上 1 的结果，就是你在该区间赚取的手续费比例）。
 
 ## 参考的文章
 
