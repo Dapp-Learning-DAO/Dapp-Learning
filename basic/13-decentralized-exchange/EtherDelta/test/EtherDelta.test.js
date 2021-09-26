@@ -810,15 +810,10 @@ describe("EtherDelta", () => {
       tokenGive,
       amountGet,
       amountGive,
-      amount,
-      accountLevel,
-      errorType
+      amount
     ) {
       let expires = await ethers.provider.getBlockNumber();
       expires += expiresIn;
-
-      await accountLevelsTest.setAccountLevel(user1.address, accountLevel);
-      const level = await accountLevelsTest.accountLevel(user1.address);
 
       const orderNotSigned = {
         tokenGet: tokenGet,
@@ -846,9 +841,7 @@ describe("EtherDelta", () => {
         tokenGive: token2.address,
         amountGet: toWei(50),
         amountGive: toWei(25),
-        amount: toWei(51),
-        accountLevel: 0,
-        errorType: 1
+        amount: toWei(51)
       },
       {
         expires: 10,
@@ -857,9 +850,7 @@ describe("EtherDelta", () => {
         tokenGive: token2.address,
         amountGet: toWei(50),
         amountGive: initialBalance21 + 1,
-        amount: toWei(25),
-        accountLevel: 1,
-        errorType: 1
+        amount: toWei(25)
       },
       {
         expires: 10,
@@ -868,9 +859,7 @@ describe("EtherDelta", () => {
         tokenGive: token2.address,
         amountGet: initialBalance12,
         amountGive: BigNumber.from(25),
-        amount: initialBalance12 + 1,
-        accountLevel: 2,
-        errorType: 1
+        amount: initialBalance12 + 1
       },
     ];
 
@@ -885,7 +874,6 @@ describe("EtherDelta", () => {
         trade.amountGive,
         trade.amount,
         trade.accountLevel,
-        trade.errorType
       );
     }
   });
@@ -940,4 +928,20 @@ describe("EtherDelta", () => {
     expect(finalBalance).to.equal(initialBalance.sub(amount));
     expect(finalEthBalance.add(gasFee)).to.equal(initialEthBalance.add(amount));
   });
+
+  it("Should change the account levels address and fail", async () => {
+    await prepareTokens();
+
+    await expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+
+  });
+
+  it("Should change the account levels address and success", async () => {
+    await prepareTokens();
+
+    await etherDelta.connect(owner).changeAccountLevelsAddr(ADDRESS_ZERO);
+    expect(await etherDelta.accountLevelsAddr()).to.equal(ADDRESS_ZERO);
+
+  });
+
 });
