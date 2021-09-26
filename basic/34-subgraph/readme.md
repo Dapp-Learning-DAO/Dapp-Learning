@@ -25,7 +25,8 @@ Curators
 
 
 ## 参考链接
-成本模型：https://github.com/graphprotocol/agora
+- 成本模型：https://github.com/graphprotocol/agora
 openzeppelin: https://blog.openzeppelin.com/subgraphs-announcement/
-整体介绍：https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad
-官方文档：https://thegraph.com/docs/curating
+- 整体介绍：https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad
+- 官方文档：https://thegraph.com/docs/curating
+- 索引文档：https://bihu.com/article/1634618544?i=1xP0&c=1&s=1MCGXe 
