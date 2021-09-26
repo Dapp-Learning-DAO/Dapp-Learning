@@ -504,23 +504,25 @@ tickCumulative += tick_current * delta_time
 tickCumulative += tick_current * (blocktimestamp_current - blocktimestamp_before)
 ```
 
-当外部用户使用时，求 t1 到 t2 时间内的时间加权价格 `p(t1,t2)` ，需要计算两个时间点的累计值的差 `a(t1,t2)` 除以时间差。
+当外部用户使用时，求 t1 到 t2 时间内的时间加权价格 `p(t1,t2)` ，需要计算两个时间点的累计值的差 `a(t2) - a(t1)` 除以时间差。
 
-<!-- $$a_{t1,t2}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=a_{t1,t2}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;" />
+<!-- $$a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}$$ -->
+<img src="https://render.githubusercontent.com/render/math?math=a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
 
 <!-- $$log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;" />
+<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
 
 <!-- $$p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
 <img src="https://render.githubusercontent.com/render/math?math=p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
 
 使用几何平均的原因：
 
-- 几何平均比算数平均能更好的反应真实的价格，受短期波动影响更小
-- 因为合约中记录了 tick 序号，因为序号是整型，且跟价格相关，所以直接计算序号更加节省 gas
+- 因为合约中记录了 tick 序号，序号是整型，且跟价格相关，所以直接计算序号更加节省 gas。（全局变量中存储的不是价格，而是根号价格，如果直接用价格来记录，要多比较复杂的计算）
+- V2 中算数平均价格并不总是倒数关系（以 token1 计价 token0，或反过来），所以需要记录两种价格。V3 中使用几何平均不存在该问题，只需要记录一种价格。
+  - 举个例子，在 V2 中如果 USD/ETH 价格在区块 1 中是 100，在区块 2 中是 300，USD/ETH 的均价是 200 USD/ETH，但是 ETH/USD 的均价是 1/150
+- 几何平均比算数平均能更好的反应真实的价格，受短期波动影响更小。白皮书中的引用提到在几何布朗运动中，算数平均会受到高价格的影响更多。
 
-> 我在 [oracleCompare.ipynb](./oracleCompare.ipynb) 中简单模拟了算数平均和几何平均的预言机机制，实际结果是几何平均相比算数平均对于恶意价格的短期波动，抵抗性更差。个人猜测主要是因为优化 gas 费用的原因。
+> 我在 [oracleCompare.ipynb](./oracleCompare.ipynb) 中简单模拟了算数平均和几何平均的预言机机制，实际结果是算数平均受高价影响较大，而几何平均受低价影响较大。
 
 ### 流动性预言机
 
@@ -560,8 +562,6 @@ tick 辅助预言机的变量的使用方法：
 1. `secondsOutside`： 用池子创建以来的总时间减去价格区间两边 tick 上的该变量，就能得出该区间做市的总时长
 2. `tickCumulativeOutside`： 用预言机的 `tickCumulative` 减去价格区间两边 tick 上的该变量，除以做市时长，就能得出该区间平均的做市价格（tick 序号）
 3. `secondsPerLiquidityOutsideX128`： 用预言机的 `secondsPerLiquidityCumulative` 减去价格区间两边 tick 上的该变量，就是该区间内的每单位流动性的做市时长（使用该结果乘以你的流动性数量，得出你的流动性参与的做市时长，这个时长比上 1 的结果，就是你在该区间赚取的手续费比例）。
-
-## 闪电贷
 
 ## 参考的文章
 
