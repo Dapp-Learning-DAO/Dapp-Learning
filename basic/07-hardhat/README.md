@@ -15,34 +15,41 @@ npx 想要解决的主要问题，就是调用项目内部安装的模块。
 https://www.bilibili.com/video/BV1Pv411s7Nb  
 
 ## 操作步骤
-- 1 创建项目：
-```
-npx hardhat  
+- 1 安装nodejs 并配置cnpm  （略）
+
+
+- 2 安装项目依赖：
+```cnpm install   
 ```
 
-- 2 编译合约
+- 3 配置私钥和网络：
+```rename .env.example .env
+```
+
+- 4 编译合约
 ```
  npx hardhat compile
 ```
 
-- 3 跑测试：(内置节点为Hardhat Network)
+- 5 跑测试：(内置节点为Hardhat Network)
 ```
  npx hardhat test 
 ```
 
-- 4 console.log调试合约:
-合约引入：
-```
-import "hardhat/console.sol";
-```
+- 6 console.log调试合约:
 
-- 5 部署到测试网：
+	合约引入：
+	```
+	import "hardhat/console.sol";
+	```
 
-hardhat.config.js 文件中添加一个network条目
+- 7 部署到测试网：
 
-```
-npx hardhat run scripts/deploy.js --network <network-name>
-```
+	hardhat.config.js 文件中添加一个network条目
+
+	```
+	npx hardhat run scripts/deploy.js --network <network-name>
+	```
 
 ## 参考文档  
 hardhat官方文档: https://hardhat.org/guides/project-setup.html   
