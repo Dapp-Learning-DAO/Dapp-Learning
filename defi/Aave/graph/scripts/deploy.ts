@@ -1,5 +1,7 @@
 import { ethers, run } from 'hardhat';
 import { GraphQLClient, gql } from 'graphql-request'
+import { v1, v2 } from '@aave/protocol-js';
+
 
 async function main() {
   const endpoint = 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic'
@@ -67,6 +69,14 @@ async function main() {
 const userData = await graphQLClient.request(userQuery)
 
 console.log("userData: ", userData);
+
+
+// sdk 
+
+let userAddress = "0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D"；
+
+let userSummary = v2.formatUserSummaryData(poolReservesData, rawUserReserves, userAddress.toLowerCase(), Math.floor(Date.now() / 1000))
+
 
 }
 
