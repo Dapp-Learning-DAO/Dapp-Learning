@@ -23,7 +23,9 @@ https://www.bilibili.com/video/BV1Pv411s7Nb
 ```
 
 - 3 配置私钥和网络：
-```rename .env.example .env
+```
+copy .env.example .env (windows)    /
+cp  .env.example .env (linux)
 ```
 
 - 4 编译合约
