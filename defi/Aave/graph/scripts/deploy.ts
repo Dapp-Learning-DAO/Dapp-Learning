@@ -1,56 +1,81 @@
 import { ethers, run } from 'hardhat';
- import { ApolloClient, InMemoryCache,  gql, HttpLink } from '@apollo/client/core';
-import fetch  from 'node-fetch';
-import { createClient } from 'urql/core';
+import { GraphQLClient, gql } from 'graphql-request'
+
 async function main() {
- // await run('compile');
+  const endpoint = 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic'
 
-  const accounts = await ethers.getSigners();
-  const POOL_ADDRESSES_PROVIDER_ADDRESS = "0xd05e3E715d945B59290df0ae8eF85c1BdB684744";
+  const graphQLClient = new GraphQLClient(endpoint,{ headers: {} })
 
-  const RESERVE_GRAPHQL = `
+  //https://www.npmjs.com/package/graphql-request
+  const reserveQuery = gql`
   {
-      pool (id: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744"){
-        id
-        lendingPool
-       
-      }
+    reserves {
+      name
+     
+     baseLTVasCollateral
+      reserveFactor
+      utilizationRate
+    reserveLiquidationThreshold
+      liquidityRate 
+      variableBorrowRate
+      totalDeposits
+    
+      availableLiquidity
+      totalATokenSupply
+      totalCurrentVariableDebt
     }
+  }
   `
-// const RESERVE_GQL = gql(RESERVE_GRAPHQL);
-const uri = 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic';
+
+  const reserveData = await graphQLClient.request(reserveQuery);
+
+  console.log("reserveData: ", reserveData);
+  const userQuery = gql`
+  {
+    userReserves(where: {user: "xxxxxx"}) {
+      reserve {
+        id
+        symbol
+        pool {
+         lendingPool 
+        }
+        
+        baseLTVasCollateral
+        name
+        reserveFactor
+        reserveLiquidationThreshold
+        utilizationRate
+      }
+      currentVariableDebt
+      currentTotalDebt
+      currentATokenBalance
+      liquidityRate
+      
+      user {
+        id
+        unclaimedRewards
+        lifetimeRewards 
+      }
+      
+      liquidityRate
+      currentATokenBalance
+   }
+  }
+  `
 
 
-const client = createClient({
-  url: uri
-});
+const userData = await graphQLClient.request(userQuery)
 
- //const data = await client.query(tokensQuery).toPromise();
-
-// const client = new ApolloClient({
-//   uri: "https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic",
-//   //uri: "https://api.studio.thegraph.com/query/",
-//   cache: new InMemoryCache()
-// });
-
-
-
-
-// const link = new HttpLink({ uri, fetch });
-
-
-let data = await client.query(
- RESERVE_GRAPHQL).toPromise();
-
-console.log(data);
+console.log("userData: ", userData);
 
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);
     process.exit(1);
   });
+
+
+

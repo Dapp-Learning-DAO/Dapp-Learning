@@ -137,7 +137,43 @@ result is blow ：
 ```
 
 ## calculate the health factor
-calculateHealthFactor
+** userData** 
+```
+{ 
+  userReserves(where: {user: "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d"}) {
+    reserve {
+      id
+      symbol
+      pool {
+       lendingPool 
+      }
+      
+      baseLTVasCollateral
+      name
+      reserveFactor
+      reserveLiquidationThreshold
+      utilizationRate
+      
+    }
+    currentVariableDebt
+    currentTotalDebt
+    currentATokenBalance
+    liquidityRate
+    
+    user {
+      id
+      unclaimedRewards
+      lifetimeRewards
+     
+      
+    }
+    
+    liquidityRate
+    currentATokenBalance
+  }
+}
+```
+
 
 
 ## 操作文档
@@ -153,3 +189,4 @@ calculateHealthFactor
 graph文档： https://docs.aave.com/developers/getting-started/using-graphql
 liquidate: https://medium.com/coinmonks/creating-a-liquidation-script-for-aave-defi-protocol-ef584ad87e8f  
 thegraphapi: https://thegraph.com/docs/developer/querying-from-your-app
+graphgithub :https://github.com/prisma-labs/graphql-request#install  
