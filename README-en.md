@@ -37,6 +37,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 - Ethereum Principle Book:<https://ethbook.abyteahead.com/howto.html>
 - Summary of Ethereum development tools:<https://learnblockchain.cn/article/2006>
 - learning solidity <https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
+- Solidity by Example:<https://solidity-by-example.org/>
 
 **Development tools：**
 
