@@ -153,7 +153,7 @@
 01. [UniswapV2](defi/Uniswap-V2/readme.md)
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+04. Aave
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -182,6 +182,7 @@
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 05. [gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶  
 请先阅读书籍：
