@@ -15,18 +15,25 @@ npx 想要解决的主要问题，就是调用项目内部安装的模块。
 https://www.bilibili.com/video/BV1Pv411s7Nb  
 
 ## 操作步骤
-- 1 安装nodejs 并配置cnpm  （略）
+
+- 1 安装nodejs （略）
 
 
 - 2 安装项目依赖：
-```cnpm install   
+```npm install   
 ```
 
 - 3 配置私钥和网络：
-```
-copy .env.example .env (windows)    /
-cp  .env.example .env (linux)
-```
+
+	windows:
+	```
+	copy .env.example .env 
+	```
+	/ linux:
+	```
+	cp  .env.example .env
+	```
+	添加自己的私钥和地址
 
 - 4 编译合约
 ```
