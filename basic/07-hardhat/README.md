@@ -20,8 +20,10 @@ https://www.bilibili.com/video/BV1Pv411s7Nb
 
 
 - 2 安装项目依赖：
-```npm install   
-```
+
+	```
+	npm install   
+	```
 
 - 3 配置私钥和网络：
 
