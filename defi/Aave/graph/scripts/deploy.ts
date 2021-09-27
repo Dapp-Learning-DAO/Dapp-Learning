@@ -1,7 +1,7 @@
 import { ethers, run } from 'hardhat';
-import { useQuery, gql } from '@apollo/client';
-
-
+ import { ApolloClient, InMemoryCache,  gql, HttpLink } from '@apollo/client/core';
+import fetch  from 'node-fetch';
+import { createClient } from 'urql/core';
 async function main() {
  // await run('compile');
 
@@ -10,22 +10,40 @@ async function main() {
 
   const RESERVE_GRAPHQL = `
   {
-      pool (id: "${POOL_ADDRESSES_PROVIDER_ADDRESS.toLowerCase()}"){
+      pool (id: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744"){
         id
         lendingPool
-        reserves {
-          id
-          underlyingAsset
-          symbol
-          name
-        }
+       
       }
     }
   `
-const RESERVE_GQL = gql(RESERVE_GRAPHQL)
-const { loading, data } = useQuery(RESERVE_GQL,{pollInterval: 6000});
+// const RESERVE_GQL = gql(RESERVE_GRAPHQL);
+const uri = 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic';
+
+
+const client = createClient({
+  url: uri
+});
+
+ //const data = await client.query(tokensQuery).toPromise();
+
+// const client = new ApolloClient({
+//   uri: "https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic",
+//   //uri: "https://api.studio.thegraph.com/query/",
+//   cache: new InMemoryCache()
+// });
+
+
+
+
+// const link = new HttpLink({ uri, fetch });
+
+
+let data = await client.query(
+ RESERVE_GRAPHQL).toPromise();
+
 console.log(data);
-console.log(loading);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

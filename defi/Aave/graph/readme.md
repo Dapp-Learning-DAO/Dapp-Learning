@@ -143,7 +143,7 @@ calculateHealthFactor
 ## 操作文档
 
 ```
-   npx hardhat run scripts/deploy.js --network <network-name>
+   npx hardhat run scripts/deploy.ts --network matic
 ```
 
 

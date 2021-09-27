@@ -21,10 +21,13 @@
     "tsconfig": "^7.0.0",
     "tsconfig-paths": "^3.10.1",
     "typechain": "^4.0.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "@types/react": "17.0.24",
+    "@types/react-dom": "17.0.9",
+    "urql": "2.0.5",
+    "node-fetch": "3.0.0"
   },
   "dependencies": {
-   
     "dotenv": "^10.0.0"
   }
 }
