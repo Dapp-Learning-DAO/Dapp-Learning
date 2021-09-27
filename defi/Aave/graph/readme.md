@@ -140,7 +140,7 @@ result is blow ：
 ** userData** 
 ```
 { 
-  userReserves(where: {user: "0x7ac1f060320e23182a78fdada0a5efa0ecd2bf8d"}) {
+  userReserves(where: {user: "xxxx"}) {
     reserve {
       id
       symbol
