@@ -21,7 +21,7 @@ async function main() {
 
 const lendingPool = await ethers.getContractAt("ILendingPool", "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf");
   
-  let useraccount =  await lendingPool.getUserAccountData("0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D");
+  let useraccount =  await lendingPool.getUserAccountData("xxxx");
 
 
   console.log("userdata: ", useraccount); 
@@ -97,7 +97,7 @@ console.log("userData: ", userData);
 
 // sdk 
 
-let userAddress = "0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D";
+let userAddress = "xxxx";
 }
 
 main()

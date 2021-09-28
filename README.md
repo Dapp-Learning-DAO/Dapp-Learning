@@ -73,7 +73,7 @@
 **国内区块链公开课**
 - [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
 
-欢迎大家添加推荐书籍，请在此文档--[好书推荐](./docs/books)中录入；
+欢迎大家添加推荐书籍，请在此文档--[好书推荐](./docs/books.md)中录入；
 
 
 ## 基础任务 - Basic Tasks
