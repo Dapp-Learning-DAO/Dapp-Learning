@@ -1,0 +1,6 @@
+node_modules
+abi
+cache
+artifacts
+
+.env
