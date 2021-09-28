@@ -137,19 +137,59 @@ result is blow ：
 ```
 
 ## calculate the health factor
-calculateHealthFactor
+** userData** 
+```
+{ 
+  userReserves(where: {user: "xxxx"}) {
+    reserve {
+      id
+      symbol
+      pool {
+       lendingPool 
+      }
+      
+      baseLTVasCollateral
+      name
+      reserveFactor
+      reserveLiquidationThreshold
+      utilizationRate
+      
+    }
+    currentVariableDebt
+    currentTotalDebt
+    currentATokenBalance
+    liquidityRate
+    
+    user {
+      id
+      unclaimedRewards
+      lifetimeRewards
+     
+      
+    }
+    
+    liquidityRate
+    currentATokenBalance
+  }
+}
+```
+
 
 
 ## 操作文档
 
 ```
-   npx hardhat run scripts/deploy.ts --network matic
+   npx hardhat compile --no-typechain (依赖问题，所以跳过)    
+   npx hardhat run scripts/deploy.ts --network matic  
+
 ```
 
 
 ## 参考链接
-合约：https://github.com/aave/protocol-v2/blob/750920303e33b66bc29862ea3b85206dda9ce786/contracts/protocol/libraries/logic/GenericLogic.sol
-清算：https://docs.aave.com/developers/guides/liquidations
-graph文档： https://docs.aave.com/developers/getting-started/using-graphql
-liquidate: https://medium.com/coinmonks/creating-a-liquidation-script-for-aave-defi-protocol-ef584ad87e8f  
-thegraphapi: https://thegraph.com/docs/developer/querying-from-your-app
+- 合约：
+https://github.com/aave/protocol-v2/blob/750920303e33b66bc29862ea3b85206dda9ce786/contracts/protocol/libraries/logic/GenericLogic.sol
+- 清算：https://docs.aave.com/developers/guides/liquidations
+- graph文档： https://docs.aave.com/developers/getting-started/using-graphql
+- liquidate: https://medium.com/coinmonks/creating-a-liquidation-script-for-aave-defi-protocol-ef584ad87e8f  
+- thegraphapi: https://thegraph.com/docs/developer/querying-from-your-app
+- graphgithub :https://github.com/prisma-labs/graphql-request#install  
