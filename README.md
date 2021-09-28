@@ -195,6 +195,11 @@
 ## 如何参与
   新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
 
+## 衍生项目
+- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
+- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
+- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
+
 ## DAO组织管理项目
   1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
   2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限，进入PR审核者群；
