@@ -4,6 +4,30 @@ import { v1, v2 } from '@aave/protocol-js';
 
 
 async function main() {
+
+  let maticConfig = {
+    lendingPoolAddressesProvider: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744",
+   
+  }
+
+  const accounts = await ethers.getSigners();
+
+  console.log(
+    'Deploying contracts with the account:',
+    accounts.map((a) => a.address)
+  );
+
+;
+
+const lendingPool = await ethers.getContractAt("ILendingPool", "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf");
+  
+  let useraccount =  await lendingPool.getUserAccountData("0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D");
+
+
+  console.log("userdata: ", useraccount); 
+  console.log("healthFactor: ", useraccount.healthFactor.toString()); 
+
+
   const endpoint = 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic'
 
   const graphQLClient = new GraphQLClient(endpoint,{ headers: {} })
@@ -73,11 +97,7 @@ console.log("userData: ", userData);
 
 // sdk 
 
-let userAddress = "0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D"；
-
-let userSummary = v2.formatUserSummaryData(poolReservesData, rawUserReserves, userAddress.toLowerCase(), Math.floor(Date.now() / 1000))
-
-
+let userAddress = "0x7AC1f060320e23182A78fDADa0a5efA0ECd2Bf8D";
 }
 
 main()

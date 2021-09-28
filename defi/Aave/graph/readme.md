@@ -179,7 +179,9 @@ result is blow ：
 ## 操作文档
 
 ```
-   npx hardhat run scripts/deploy.ts --network matic
+   npx hardhat compile --no-typechain (依赖问题，所以跳过)    
+   npx hardhat run scripts/deploy.ts --network matic  
+   
 ```
 
 
