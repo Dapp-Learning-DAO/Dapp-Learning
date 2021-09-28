@@ -72,7 +72,7 @@ describe('ERC865 compatible logic', async () => {
     // Sign the message_bytes by alice
     let sig = await alice.signMessage(message_bytes);
 
-    //Swith to charlie
+    //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
     await dTokenCharlie.transferPreSigned(sig, to, amount, fee, nonce);
 
@@ -103,7 +103,7 @@ describe('ERC865 compatible logic', async () => {
     let allowance = 100;
     let fee = 1
 
-    components = [
+    const components = [
       // /* "79250dcf": getApprovePreSignedHash(address,address,uint256,uint256,uint256) */
       Buffer.from('79250dcf', 'hex'),
       formattedAddress(dTokenOwner.address),
@@ -119,7 +119,7 @@ describe('ERC865 compatible logic', async () => {
     // Sign the message_bytes by alice
     let sig = await alice.signMessage(message_bytes);
 
-    //Swith to charlie
+    //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
     await dTokenCharlie.approvePreSigned(sig, bob.address, allowance, fee, nonce);
 
@@ -139,11 +139,11 @@ describe('ERC865 compatible logic', async () => {
     expect(bobAllowance).to.equal(allowance);
   })
 
-  it('Bob tranfer allowed balance from Alice to Charlie (fee=1)', async () => {
+  it('Bob transfer allowed balance from Alice to Charlie (fee=1)', async () => {
     // Transfer 100 tokens from owner to addr1
     await dTokenOwner.transfer(bob.address, 100);
 
-    // //Swith to charlie
+    // //Switch to charlie
     let dTokenAlice = dTokenOwner.connect(alice);
     // Allow bob to transfer 1000 from alice
     await dTokenAlice.approve(bob.address, 1000)
@@ -159,7 +159,7 @@ describe('ERC865 compatible logic', async () => {
     let value = 20;
     let fee = 1
 
-    components = [
+    const components = [
       // /* "a70c41b4": getTransferFromPreSignedHash(address,address,address,uint256,uint256,uint256) */
       Buffer.from('a70c41b4', 'hex'),
       formattedAddress(dTokenOwner.address),
@@ -176,7 +176,7 @@ describe('ERC865 compatible logic', async () => {
     // Sign the message_bytes by bob
     let sig = await bob.signMessage(message_bytes);
 
-    //Swith to charlie
+    //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
     await dTokenCharlie.transferFromPreSigned(sig, alice.address, charlie.address, value, fee, nonce);
 
@@ -196,7 +196,7 @@ describe('ERC865 compatible logic', async () => {
   })
 
   it('Alice decrease Bob allowance by Charlie (fee=1)', async () => {
-    // //Swith to charlie
+    // //Switch to charlie
     const dTokenAlice = dTokenOwner.connect(alice);
     // Allow bob to transfer 1000 from alice
     await dTokenAlice.approve(bob.address, 1000)
@@ -213,7 +213,7 @@ describe('ERC865 compatible logic', async () => {
     let decreaseValue = 100;
     let fee = 1
 
-    components = [
+    const components = [
       // /* "5229c56f": getDecreaseAllowancePreSignedHash(address,address,uint256,uint256,uint256) */
       Buffer.from('5229c56f', 'hex'),
       formattedAddress(dTokenOwner.address),
@@ -229,7 +229,7 @@ describe('ERC865 compatible logic', async () => {
     // Sign the message_bytes by alice
     let sig = await alice.signMessage(message_bytes);
 
-    //Swith to charlie
+    //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
     await dTokenCharlie.decreaseAllowancePreSigned(sig, bob.address, decreaseValue, fee, nonce);
 
