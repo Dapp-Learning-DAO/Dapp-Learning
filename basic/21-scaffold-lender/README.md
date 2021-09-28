@@ -1,10 +1,25 @@
-## 
+# AAVE-Uniswap
 
-## 参考资料 
-- https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
-- https://github.com/austintgriffith/scaffold-eth/tree/unifactory  
-- https://github.com/austintgriffith/scaffold-eth/tree/clr-dev  
-- https://medium.com/dapphub/introducing-ds-math-an-innovative-safe-math-library-d58bc88313da 
-- aave official doc: https://docs.aave.com/developers/the-core-protocol/protocol-overview#main-contracts 
-- aave polygon graph: https://thegraph.com/legacy-explorer/subgraph/aave/aave-v2-matic  
-- 
+## 项目介绍
+
+
+
+## Etherscan verification
+
+
+
+```shell
+hardhat run --network ropsten scripts/deploy.js
+```
+
+Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+
+```shell
+npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+```
+
+
+
+## 参考链接
+- aave-ape medium : https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade
+- hardhat forkmainnet : https://hardhat.org/hardhat-network/guides/mainnet-forking.html
