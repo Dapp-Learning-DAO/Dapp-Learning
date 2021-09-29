@@ -283,7 +283,7 @@ function App (props) {
 
   
   let networkDisplay = ""
-  if (localChainId && selectedChainId && localChainId != selectedChainId) {
+  if (localChainId && selectedChainId && parseInt(localChainId) != parseInt(selectedChainId)) {
     networkDisplay = (
       <div style={{ zIndex: 2, position: 'absolute', right: 0, top: 60, padding: 16 }}>
         <Alert
