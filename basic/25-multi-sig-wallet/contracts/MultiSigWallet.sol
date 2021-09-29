@@ -147,7 +147,6 @@ contract MultiSigWallet {
                 owners.pop();
                 break;
             }
-        owners.pop();
         if (required > owners.length)
             changeRequirement(owners.length);
         emit OwnerRemoval(owner);
