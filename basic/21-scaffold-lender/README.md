@@ -14,9 +14,11 @@ Interacting with Aave starts with the Lending Pool Addresses Provider — this i
 **uniswapv2**
 Interacting with Uniswap V2 all happens through the Uniswap Router02.
 
-We can create a constructor that lets us set the two addresses we need (the AddressesProvider and the Router). Once we then have the addresses and the interfaces, we can create helper functions to instantiate contracts so that we can interact with them, and fetch Aave reserve data from the ProtocolDataProvider
 
 **key point**
+
+We can create a constructor that lets us set the two addresses we need (the AddressesProvider and the Router). Once we then have the addresses and the interfaces, we can create helper functions to instantiate contracts so that we can interact with them, and fetch Aave reserve data from the ProtocolDataProvider.  
+
 Assuming  you have an apeAsset you want to go long and a borrowAsset you want to go short
 this ape function lets a user carry out the following steps in one transaction
 - Calculate the maximum amount the user is able to borrow in the borrowAsset, based on their collateral (this relies on getAvailableBorrowInAsset)
