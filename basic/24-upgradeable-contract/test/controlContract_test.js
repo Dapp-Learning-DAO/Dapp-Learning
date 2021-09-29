@@ -28,15 +28,15 @@ describe('Control contract', function () {
       artifact.abi,
       alice
     );
-    await aliceDataContract.setBlance(alice.address, 100);
+    await aliceDataContract.setBalance(alice.address, 100);
 
     // Check balance
-    expect(await aliceDataContract.getBlance(alice.address)).to.equal(100);
+    expect(await aliceDataContract.getBalance(alice.address)).to.equal(100);
   });
 
   it('Other account cannot set the balance', async function () {
     await expect(
-      controlContract.setBlance(controlContract.address, 100)
+      controlContract.setBalance(controlContract.address, 100)
     ).to.be.revertedWith('Not sufficient permission');
   });
 
@@ -51,10 +51,10 @@ describe('Control contract', function () {
     await aliceDataContract.allowAccess(controlContract.address);
 
     // Control Contract set balance
-    await controlContract.setBlance(controlContract.address, 100);
+    await controlContract.setBalance(controlContract.address, 100);
 
     // Check balance
-    expect(await controlContract.getBlance(controlContract.address)).to.equal(
+    expect(await controlContract.getBalance(controlContract.address)).to.equal(
       100
     );
   });
