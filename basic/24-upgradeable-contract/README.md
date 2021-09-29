@@ -201,6 +201,7 @@ implementation: ParamsNew合约地址；
 - 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/34690916> 
 - openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
 - proxy升级: https://learnblockchain.cn/article/2758 
+- 深度理解delegatecall: https://segmentfault.com/a/1190000015732950  
 - gnosis升级： https://learnblockchain.cn/article/1403  
 - 总览： https://www.chainnews.com/articles/042189657582.htm
 - 知乎王大锤：https://zhuanlan.zhihu.com/p/40598039
