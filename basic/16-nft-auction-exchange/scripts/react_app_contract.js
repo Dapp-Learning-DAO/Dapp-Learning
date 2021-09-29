@@ -29,32 +29,6 @@ const main = async () => {
   fs.writeFileSync(`react-app/src/assetsAuctionStat.js`, assetsAuctionStat);
 
 
-  const [owner] = await ethers.getSigners();
-  // Trans ETH to main accounts
-  let wallet_main = new ethers.Wallet(process.env.PRIVATE_KEY_MAIN);
-  let tx = owner.sendTransaction({
-    to: wallet_main.address,
-    value: ethers.utils.parseEther("10.0")
-  });
-  (await tx).wait()
-
-  // Trans ETH to ALICE accounts
-  let wallet_alice = new ethers.Wallet(process.env.PRIVATE_KEY_ALICE);
-  tx = owner.sendTransaction({
-    to: wallet_alice.address,
-    value: ethers.utils.parseEther("10.0")
-  });
-  (await tx).wait()
-
-  // Trans ETH to BOB accounts
-  let wallet_bob = new ethers.Wallet(process.env.PRIVATE_KEY_BOB);
-  tx = owner.sendTransaction({
-    to: wallet_bob.address,
-    value: ethers.utils.parseEther("10.0")
-  });
-  (await tx).wait()
-
-
   //const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   //const secondContract = await deploy("SecondContract")
 
