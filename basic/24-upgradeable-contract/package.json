@@ -4,7 +4,7 @@
   "description": "区块链信任基础的数据不可修改的特性, 让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改. 一方面正式由于智能合约的不可修改的特性, 因为只要规则确定之后, 没人能够修改它, 大家才能够信任它. 但另一方面, 如果规则的实现有Bug, 可能会造成代币被盗, 或是调用消耗大量的gas. 这时就需要我们去修错误.    这里介绍一种可升级的合约设计模式.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test"
   },
   "keywords": [],
   "author": "",
