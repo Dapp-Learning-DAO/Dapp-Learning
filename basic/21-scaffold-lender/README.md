@@ -33,20 +33,15 @@ This requires the user to have delegated credit to the Aave Ape contract, so tha
 Borrow the amount needed to repay their borrowAsset debt via a flashloan from Aave V2.  
 ## operating steps
 
-
-
 ```shell
-hardhat run --network ropsten scripts/deploy.js
+hardhat run --network kovan scripts/deploy.js
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
-
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
 
 
 
 ## 参考链接
 - aave-ape medium : https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade
 - hardhat forkmainnet : https://hardhat.org/hardhat-network/guides/mainnet-forking.html
+- quick swap: https://github.com/QuickSwap
+- uniswapper : https://azfuller20.medium.com/swap-with-uniswap-wip-f15923349b3d

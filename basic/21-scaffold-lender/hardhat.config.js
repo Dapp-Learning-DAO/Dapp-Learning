@@ -42,17 +42,17 @@ module.exports = {
       url: "http://localhost:8545"
     },
     ropsten: {
-      url: process.env.ROPSTEN_URL || "",
+      url: "https://ropsten.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     kovan: {
-      url: process.env.ROPSTEN_URL || "",
+      url: "https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     main: {
-      url: process.env.ROPSTEN_URL || "",
+      url: "https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
