@@ -15,7 +15,7 @@ const main = async () => {
         "Deploying contracts with the account:",
         deployer.address
     );
-    
+
   let mainnetConfig = {
     lendingPoolAddressesProvider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
     uniswapRouterAddress: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
@@ -36,6 +36,14 @@ const main = async () => {
     chalk.blue("packages/hardhat/artifacts/"),
     "\n\n"
   );
+
+
+  // Lengding pool deposite eth
+
+  // borrow 
+
+  // use aaveape to flashloan to repay borrow
+  
 };
 
 const deploy = async (contractName, _args) => {
