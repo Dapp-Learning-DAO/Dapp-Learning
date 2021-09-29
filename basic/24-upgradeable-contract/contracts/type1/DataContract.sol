@@ -21,11 +21,11 @@ contract DataContract {
         accessAllowed[_addr] = false;
     }
 
-    function setBlance(address _address, uint256 v) public platform {
+    function setBalance(address _address, uint256 v) public platform {
         balanceOf[_address] = v;
     }
 
-    function getBlance(address _address) public view returns (uint256) {
+    function getBalance(address _address) public view returns (uint256) {
         return balanceOf[_address];
     }
 }
