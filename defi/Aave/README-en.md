@@ -2,7 +2,7 @@
 
 
 ### contract
-![architecture](./imgs/architecture.png) 
+![architecture](./image/architecture.png) 
 The LendingPool contract is the main contract of the protocol。
 **LendingPool**
 - function deposit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)
@@ -95,7 +95,7 @@ LiquidationThreshold = $ {\frac{\sum (Collateral_iinETH * LiquidationThreshold_i
 
 $ H_f ={\frac{\sum (Collateral_iinETH * LiquidationThreshold_i)}{TotalBorrowinETH}}  $
 ​
- ![liqudate](./imgs/1.jpeg)
+ ![liqudate](./image/1.jpeg)
 ​
  
 Liquidation Threshold
@@ -111,7 +111,7 @@ The overall risk rating is used to calibrate the Reserve Factor with factors ran
 The less volatile currencies are the stablecoins followed by ETH, they have the highest LTV at 75%, and the highest liquidation threshold at 80%.  
 The most volatile currencies REP and LEND have the lowest LTV at 35% and 40%. The liquidations thresholds are set at 65%
 
-![risk parameter](./imgs/risk.png)
+![risk parameter](./image/risk.png)
 
 
 ### Borrow Interest Rate
@@ -164,3 +164,4 @@ The new Aave AMM Liquidity Pool enables liquidity providers (“LPs”) of Unisw
 - 原理： https://bbs.huaweicloud.com/blogs/detail/243235
 - 原理知乎： https://zhuanlan.zhihu.com/p/351383037
 - comp aave 对比： https://www.mgcj.net/35503.html
+- mediun aave: https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade 

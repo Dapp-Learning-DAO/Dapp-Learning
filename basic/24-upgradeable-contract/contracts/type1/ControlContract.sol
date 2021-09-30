@@ -8,12 +8,12 @@ contract ControlContract {
         dataContract = DataContract(_dataContractAddr);
     }
 
-    function setBlance(address addr, uint256 v) public {
-        dataContract.setBlance(addr,v);
+    function setBalance(address addr, uint256 v) public {
+        dataContract.setBalance(addr,v);
     }
 
-    function getBlance(address addr) public view returns (uint256) {
-        return dataContract.getBlance(addr);
+    function getBalance(address addr) public view returns (uint256) {
+        return dataContract.getBalance(addr);
     }
 
 }
