@@ -5,16 +5,16 @@
 
 ## 方式一合约功能说明
 - DataContract  
-  platform:     权限修饰器, 指定只有拥有权限的用户才能调用此合约  
-  allowAccess:  给其他用户增加权限  
-  denyAccess:   取消其他用户的权限  
-  setBalance:    设置一个用户的余额, 同时这个接口指定了只有拥有权限的用户才能调用此接口  
-  getBalance:    这是一个公共的接口, 任何用户都可以调用此接口
+  - platform:     权限修饰器, 指定只有拥有权限的用户才能调用此合约  
+  - allowAccess:  给其他用户增加权限  
+  - denyAccess:   取消其他用户的权限  
+  - setBalance:    设置一个用户的余额, 同时这个接口指定了只有拥有权限的用户才能调用此接口  
+  - getBalance:    这是一个公共的接口, 任何用户都可以调用此接口
 
 - ControlContract  
-  constructor:  在部署合约的时候需要传入 DataContract 的合约地址进行加载  
-  setBalance:    内部调用 DataContract 合约的 setBalance 接口, 中间可以加入对应的业务逻辑  
-  getBalance:    调用 DataContract 合约的 getBalance 接口获取账户余额
+  - constructor:  在部署合约的时候需要传入 DataContract 的合约地址进行加载  
+  - setBalance:    内部调用 DataContract 合约的 setBalance 接口, 中间可以加入对应的业务逻辑  
+  - getBalance:    调用 DataContract 合约的 getBalance 接口获取账户余额
 
 ## 测试步骤
 - 安装依赖
