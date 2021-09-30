@@ -64,7 +64,7 @@
 
 **国外大学加密课程**
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
-- [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
+- [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 **其他加密课程**
@@ -138,6 +138,7 @@
 56. [IDO](https://github.com/gnosis/ido-contracts)
 57. [Liquity](https://github.com/liquity)
 58. [Auto trigger smart contract](/basic/58-auto-smart-contract/README.md)
+59. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
