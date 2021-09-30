@@ -164,3 +164,4 @@ The new Aave AMM Liquidity Pool enables liquidity providers (“LPs”) of Unisw
 - 原理： https://bbs.huaweicloud.com/blogs/detail/243235
 - 原理知乎： https://zhuanlan.zhihu.com/p/351383037
 - comp aave 对比： https://www.mgcj.net/35503.html
+- mediun aave: https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade 
