@@ -9,7 +9,10 @@ mutation 变更：对数据进行变更，比如增加、删除、修改，CRUD 
 substription 订阅：当数据发生更改，进行消息推送
 
 
+
 ## 参考链接
-https://graphql.cn/learn/ 
-https://chinese.freecodecamp.org/news/a-detailed-guide-to-graphql/
+- graphql官网： https://graphql.cn/learn/ 
+- graphql : https://chinese.freecodecamp.org/news/a-detailed-guide-to-graphql/
+- 官方api介绍：https://thegraph.com/docs/developer/querying-from-your-app 
+- API使用github：https://github.com/prisma-labs/graphql-request
 
