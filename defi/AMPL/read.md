@@ -34,7 +34,8 @@ Rebase比例=(平均价X-目标价1.021)/10
 2. ampl锚定的是2019年一美元的实际购买力，这与一美元是两回事，所以今年1ampl的rebase中间值略微高于1美元了，只要美元不断印，这个中间值就会不断偏移，以后可能是1.1美元、1.5美元
 3. ampl的事情有两个，一是“基本价值粒子”，这个在项目发布就固定了定位，就是2所讲的。另一个就是让人认可这个定位，将ampl用作区块链世界的计量单位，就是捕捉市场对这个定位的共识，这是一个极其困难长期的运营工作。
 
-
+### 合约（todo）
+https://github.com/ampleforth/ampleforth-contracts/blob/master/contracts/UFragments.sol  
 
 ## 参考链接
 - 合约代码：https://etherscan.io/address/0xd0e3f82ab04b983c05263cf3bf52481fbaa435b1#code
@@ -42,4 +43,5 @@ Rebase比例=(平均价X-目标价1.021)/10
 - ampl defi之道概述： https://www.chainnews.com/articles/183882030707.htm
 - 算稳定理： https://www.fxajax.com/20210625234951.html
 - amplforth 知乎: https://zhuanlan.zhihu.com/p/367334785  
+- ok ：https://www.okex.com/academy/zh/20200722-88
 
