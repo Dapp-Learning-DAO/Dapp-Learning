@@ -37,14 +37,15 @@
 
 **阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
-- 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
-- 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
-- Solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1>
-- 边玩边学Solidity:<https://cryptozombies.io/zh/course>
-- Solidity by Example:<https://solidity-by-example.org/>
+- 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
+- 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
+- Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
+- 边玩边学Solidity: <https://cryptozombies.io/zh/course>
+- Solidity by Example: <https://solidity-by-example.org/>
+- Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
 
 **开发工具：**
-- 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
+- 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - infura（节点服务）: <https://infura.io/>
 - alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
