@@ -31,7 +31,7 @@ react 启动的时候会做一些校验, 这些校验会导致 react 启动失�
 在 .sample.env 配置中已经进行了配置, 这里只需要把配置文件复制下即可.  
 ```
 cd react-app
-cp .sample.env .env
+cp .env.example .env
 ```
 
 - 启动前端  
