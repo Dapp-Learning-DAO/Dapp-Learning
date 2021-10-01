@@ -201,6 +201,10 @@
 - [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
 - [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
 
+## 共同维护项目
+
+- [amm-arbitrageur](https://github.com/paco0x/amm-arbitrageur): AMM 套利策略示例
+
 ## DAO组织管理项目
   1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
   2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限，进入PR审核者群；
