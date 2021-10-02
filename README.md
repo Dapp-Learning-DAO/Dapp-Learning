@@ -35,17 +35,17 @@
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 以太坊 和 智能合约 的基本原理**
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
-- 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
-- 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
-- solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1>
-- 边玩边学solidity:<https://cryptozombies.io/zh/course>
-- Solidity by Example:<https://solidity-by-example.org/>
-- 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
+- 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
+- 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
+- Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
+- 边玩边学Solidity: <https://cryptozombies.io/zh/course>
+- Solidity by Example: <https://solidity-by-example.org/>
+- Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
 
 **开发工具：**
-
+- 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - infura（节点服务）: <https://infura.io/>
 - alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
@@ -73,7 +73,7 @@
 **国内区块链公开课**
 - [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
 
-欢迎大家添加推荐书籍，请在此文档--[好书推荐](./docs/books.md)中录入；
+欢迎大家添加推荐书籍，请在此文档[书籍推荐](./docs/books.md)中录入；
 
 
 ## 基础任务 - Basic Tasks
@@ -156,18 +156,20 @@
 01. [UniswapV2](defi/Uniswap-V2/readme.md)
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-04. Aave
+04. [Aave](https://docs.aave.com/portal/) 
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-08. Bancor [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 13. [OPYN](https://v2.opyn.co/)
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+
 
 ## NFT 进阶
 
