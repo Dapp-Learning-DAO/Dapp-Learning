@@ -1,0 +1,2 @@
+## MerkleTree
+此代码片段演示默克尔树的实现机制，阅读代码片段可以理解实现原理。因依赖众多，不可直接执行。若需要获取依赖或是执行测试，请[点我](https://github.com/helloworldcoin/helloworld-blockchain-go/tree/main/crypto)。
