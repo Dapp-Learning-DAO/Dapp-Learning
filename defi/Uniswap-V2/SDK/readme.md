@@ -184,12 +184,12 @@ const pair = getCreate2Address(
 #### 概述
 SDK的依赖是点依赖，就是你如果没有单独安装，则需要单独安装，如果整体安装了，也就不需要了。
 
-1.prevent installation of unused dependencies (e.g. @ethersproject/providers and @ethersproject/contracts, only used in Fetcher)
+1. prevent installation of unused dependencies (e.g. @ethersproject/providers and @ethersproject/contracts, only used in Fetcher)
 
-2.prevent duplicate @ethersproject dependencies with conflicting versions.
+2. prevent duplicate @ethersproject dependencies with conflicting versions.
 简单来看，遇到依赖了yarn装下就行，我是这样理解的。
 
-以下是SDK的关键实体的使用
+以下是SDK的关键实体的使用：
 #### Token
 Token的定义
 ```
