@@ -41,14 +41,376 @@ const DAI = new Token(chainId, tokenAddress, decimals);
 #### 交易对地址
 1.直接获取
 2.create2获取
+```
+import { FACTORY_ADDRESS, INIT_CODE_HASH } from "@uniswap/sdk";
+import { pack, keccak256 } from "@ethersproject/solidity";
+import { getCreate2Address } from "@ethersproject/address";
+
+const token0 = "0xCAFE000000000000000000000000000000000000"; // change me!
+const token1 = "0xF00D000000000000000000000000000000000000"; // change me!
+
+const pair = getCreate2Address(
+  FACTORY_ADDRESS,
+  keccak256(["bytes"], [pack(["address", "address"], [token0, token1])]),
+  INIT_CODE_HASH
+);
+```
 
 ### 引用范例
 
 #### 概述
+SDK的依赖是点依赖，就是你如果没有单独安装，则需要单独安装，如果整体安装了，也就不需要了
+1.prevent installation of unused dependencies (e.g. @ethersproject/providers and @ethersproject/contracts, only used in Fetcher)
+2.prevent duplicate @ethersproject dependencies with conflicting versions
+简单来看，遇到依赖了yarn装下就行，我是这样理解的
+
+以下是SDK的关键实体的使用
 #### Token
+Token的定义
+```
+constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string)
+```
+特定链的特定地址的Token，ERC20
+```
+import { ChainId, Token } from "@uniswap/sdk";
+
+const token = new Token(
+  ChainId.MAINNET,
+  "0xc0FFee0000000000000000000000000000000000",
+  18,
+  "HOT",
+  "Caffeine"
+);
+```
+**核心的属性包括：**
+chainId
+address
+decimals
+symbol
+name
+
+**方法包括**
+equals
+判断是不是一个币
+sortsBefore
+按地址排序下判断相对位置
+
 #### Pair
+交易对实体，代表一个uni交易对，以及对应的每个token的余额
+```
+constructor(tokenAmountA: TokenAmount, tokenAmountB: TokenAmount)
+```
+使用范例
+```
+import { ChainId, Token, TokenAmount, Pair } from "@uniswap/sdk";
+
+const HOT = new Token(
+  ChainId.MAINNET,
+  "0xc0FFee0000000000000000000000000000000000",
+  18,
+  "HOT",
+  "Caffeine"
+);
+const NOT = new Token(
+  ChainId.MAINNET,
+  "0xDeCAf00000000000000000000000000000000000",
+  18,
+  "NOT",
+  "Caffeine"
+);
+
+const pair = new Pair(
+  new TokenAmount(HOT, "2000000000000000000"),
+  new TokenAmount(NOT, "1000000000000000000")
+);
+```
+**关键属性**
+liquidityToken
+token0
+reserve0
+reserve1
+
+**方法**
+reserveOf（返回reserve0或者1余额，看传参）
+getOutputAmount
+getInputAmount
+getLiquidityMinted
+getLiquidityValue
+计算总体流动性
+```
+getLiquidityValue(
+  token: Token,
+  totalSupply: TokenAmount,
+  liquidity: TokenAmount,
+  feeOn: boolean = false,
+  kLast?: BigintIsh
+): TokenAmount
+```
+静态方法：getAddress
+获得交易对方法
+```
+getAddress(tokenA: Token, tokenB: Token): string
+```
+
+
 #### Route
+```
+constructor(pairs: Pair[], input: Token)
+```
+根据输入token和输出token参数，给出input到output的一个或者多个特定uni交易对路径
+例子如下：
+```
+import { ChainId, Token, TokenAmount, Pair, Route } from "@uniswap/sdk";
+
+const HOT = new Token(
+  ChainId.MAINNET,
+  "0xc0FFee0000000000000000000000000000000000",
+  18,
+  "HOT",
+  "Caffeine"
+);
+const NOT = new Token(
+  ChainId.MAINNET,
+  "0xDeCAf00000000000000000000000000000000000",
+  18,
+  "NOT",
+  "Caffeine"
+);
+const HOT_NOT = new Pair(
+  new TokenAmount(HOT, "2000000000000000000"),
+  new TokenAmount(NOT, "1000000000000000000")
+);
+
+const route = new Route([HOT_NOT], NOT);
+```
+**关键属性**
+pairs
+path
+input
+output
+midPrice
 #### Trade
+交易实体代表沿着特定route的一次Tx，包含所有参数信息。
+
+```
+constructor(route: Route, amount: TokenAmount, tradeType: TradeType)
+```
+使用范例
+```
+import {
+  ChainId,
+  Token,
+  TokenAmount,
+  Pair,
+  TradeType,
+  Route,
+} from "@uniswap/sdk";
+
+const HOT = new Token(
+  ChainId.MAINNET,
+  "0xc0FFee0000000000000000000000000000000000",
+  18,
+  "HOT",
+  "Caffeine"
+);
+const NOT = new Token(
+  ChainId.MAINNET,
+  "0xDeCAf00000000000000000000000000000000000",
+  18,
+  "NOT",
+  "Caffeine"
+);
+const HOT_NOT = new Pair(
+  new TokenAmount(HOT, "2000000000000000000"),
+  new TokenAmount(NOT, "1000000000000000000")
+);
+const NOT_TO_HOT = new Route([HOT_NOT], NOT);
+
+const trade = new Trade(
+  NOT_TO_HOT,
+  new TokenAmount(NOT, "1000000000000000"),
+  TradeType.EXACT_INPUT
+);
+```
+**关键属性**
+route
+tradeType
+inputAmount
+outputAmount
+executionPrice
+nextMidPrice
+slippage
+**方法**
+minimumAmountOut（2.04后）
+maximumAmountIn（2.04后）
+
+Static methods:
+bestTradeExactIn
+返回最大值可能
+```
+Trade.bestTradeExactIn(
+    pairs: Pair[],
+    amountIn: TokenAmount,
+    tokenOut: Token,
+    { maxNumResults = 3, maxHops = 3 }: BestTradeOptions = {}): Trade[]
+```
+bestTradeExactOut
+
+
 #### Fractions
+所有并发分式都继承与此,不意味着可以直接使用。
+```
+constructor(numerator: BigintIsh, denominator: BigintIsh = ONE)
+```
+**关键属性**
+都是JSBI
+numerator
+denominator
+quotient
+**方法**
+invert
+add
+subtract
+multiply
+divide
+toSignificant
+toFixed
+
+Percent：格式化百分比
+```
+import { Percent } from "@uniswap/sdk";
+
+const percent = new Percent("60", "100");
+console.log(percent.toSignificant(2)); // 60
+```
+toSignificant
+toFixed
+TokenAmount:返回指定精度余额
+```
+import { Token, TokenAmount } from "@uniswap/sdk";
+
+const FRIED = new Token(
+  ChainId.MAINNET,
+  "0xfa1aFe1000000000000000000000000000000000",
+  18,
+  "FRIED",
+  "Beans"
+);
+
+const tokenAmount = new TokenAmount(FRIED, "3000000000000000000");
+console.log(tokenAmount.toExact()); // 3
+```
+add
+subtract
+toSignificant
+toFixed
+toExact
+
+Price:返回相对价格
+```
+constructor(baseToken: Token, quoteToken: Token, denominator: BigintIsh, numerator: BigintIsh)
+```
+使用范例
+```
+import { ChainId, WETH as WETHs, Token, Price } from "@uniswap/sdk";
+
+const WETH = WETHs[ChainId.MAINNET];
+const ABC = new Token(
+  ChainId.MAINNET,
+  "0xabc0000000000000000000000000000000000000",
+  18,
+  "ABC"
+);
+
+const price = new Price(
+  WETH,
+  ABC,
+  "1000000000000000000",
+  "123000000000000000000"
+);
+console.log(price.toSignificant(3)); // 123
+```
+ XYZ (分子) / an amount of WETH (分母）
+ 
+ 静态方法
+ fromRoute
+ 属性
+ baseToken
+ quoteToken
+ scalar：Fraction
+ raw：Fraction
+ adjusted：Fraction
+ 方法：
+ invert
+ multiply
+ quote
+ toSignificant
+ toFixed
+
 #### Fetcher
+静态方法包含了获取链上交易对和token的实例，不可构造。
+
+fetchTokenData
+```
+async fetchTokenData(
+  chainId: ChainId,
+  address: string,
+  provider = getDefaultProvider(getNetwork(chainId)),
+  symbol?: string,
+  name?: string
+): Promise<Token>
+```
+
+fetchPairData
+```
+async fetchPairData(
+  tokenA: Token,
+  tokenB: Token,
+  provider = getDefaultProvider(getNetwork(tokenA.chainId))
+): Promise<Pair>
+```
+
+
 #### Other Exports 
+1.JSBI
+```
+import { JSBI } from "@uniswap/sdk";
+// import JSBI from 'jsbi'
+```
+2.BigintIsh
+3.ChainId
+```
+import { ChainId } from "@uniswap/sdk";
+// enum ChainId {
+//   MAINNET = 1,
+//   ROPSTEN = 3,
+//   RINKEBY = 4,
+//   GÖRLI = 5,
+//   KOVAN = 42
+// }
+```
+4.TradeType
+```
+import { TradeType } from "@uniswap/sdk";
+// enum TradeType {
+//   EXACT_INPUT,
+//   EXACT_OUTPUT
+// }
+```
+
+5.Rounding
+```
+import { Rounding } from "@uniswap/sdk";
+// enum Rounding {
+//   ROUND_DOWN,
+//   ROUND_HALF_UP,
+//   ROUND_UP
+// }
+```
+6.FACTORY_ADDRESS
+7.INIT_CODE_HASH
+8.MINIMUM_LIQUIDITY
+9.InsufficientReservesError
+10.InsufficientInputAmountError
+11.WETH
+
