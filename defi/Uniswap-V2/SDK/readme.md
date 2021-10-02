@@ -29,13 +29,21 @@ const DAI = new Token(chainId, tokenAddress, decimals);
 
 #### 获取数据
 1.直接获取Token数据
+
 使用SDK获取
+
 2.获取交易对数据
+
 需要客户提供数据基础上获取，多个场景需要
+
 #### 价格
-价格分为Mid Price 和Excution Price
+
+价格分为Mid Price 和Excution Price。
+
 对于Mid Price，是反应一个或多个交易对保有率（ratio of reserves）的价格。
+
 以DAI-WETH为例：
+
 1.直接获取价格（交易对的）
 ```
 import { ChainId, Token, WETH, Fetcher, Route } from "@uniswap/sdk";
@@ -80,7 +88,8 @@ const route = new Route([USDCWETHPair, DAIUSDCPair], WETH[ChainId.MAINNET]);
 console.log(route.midPrice.toSignificant(6)); // 202.081
 console.log(route.midPrice.invert().toSignificant(6)); // 0.00494851
 ```
-对于执行价格（真实价格），作为交易的执行价格，是一个sent比received的比率（he ratio of assets sent/received）
+对于执行价格（真实价格），作为交易的执行价格，是一个sent比received的比率（he ratio of assets sent/received）。
+
 以一个1 WETH for DAI的交易为例：
 ```
 import {
@@ -152,7 +161,9 @@ const trade = new Trade(
 ```
 #### 交易对地址
 1.直接获取
+
 2.create2获取
+
 ```
 import { FACTORY_ADDRESS, INIT_CODE_HASH } from "@uniswap/sdk";
 import { pack, keccak256 } from "@ethersproject/solidity";
