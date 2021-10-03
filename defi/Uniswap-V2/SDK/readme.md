@@ -210,24 +210,18 @@ const token = new Token(
 
 **核心的属性包括：**
 
-chainId
-
-address
-
-decimals
-
-symbol
-
-name
-
++ chainId
++ address
++ decimals
++ symbol
++ name
++ 
 **方法包括**
-equals
 
-判断是不是一个币
-
-sortsBefore
-
-按地址排序下判断相对位置
++ equals
++ 判断是不是一个币
++ sortsBefore
+  按地址排序下判断相对位置
 
 
 #### Pair
@@ -264,28 +258,20 @@ const pair = new Pair(
 
 **关键属性**
 
-liquidityToken
-
-token0
-
-reserve0
-
-reserve1
-
++ liquidityToken
++ token0
++ reserve0
++ reserve1
++ 
 
 **方法**
 
-reserveOf（返回reserve0或者1余额，看传参）
-
-getOutputAmount
-
-getInputAmount
-
-getLiquidityMinted
-
-getLiquidityValue
-
-计算总体流动性
++ reserveOf（返回reserve0或者1余额，看传参）
++ getOutputAmount
++ getInputAmount
++ getLiquidityMinted
++ getLiquidityValue
++ 计算总体流动性
 
 ```
 getLiquidityValue(
@@ -299,7 +285,7 @@ getLiquidityValue(
 
 静态方法：getAddress
 
-获得交易对方法
++ 获得交易对方法
 
 ```
 getAddress(tokenA: Token, tokenB: Token): string
@@ -340,15 +326,11 @@ const route = new Route([HOT_NOT], NOT);
 ```
 **关键属性**
 
-pairs
-
-path
-
-input
-
-output
-
-midPrice
++ pairs
++ path
++ input
++ output
++ midPrice
 
 #### Trade
 交易实体代表沿着特定route的一次Tx，包含所有参数信息。
@@ -396,32 +378,26 @@ const trade = new Trade(
 ```
 **关键属性**
 
-route
-
-tradeType
-
-inputAmount
-
-outputAmount
-
-executionPrice
-
-nextMidPrice
-
-slippage
++ route
++ tradeType
++ inputAmount
++ outputAmount
++ executionPrice
++ nextMidPrice
++ slippage
 
 **方法**
 
-minimumAmountOut（2.04后）
-
-maximumAmountIn（2.04后）
++ minimumAmountOut（2.04后）
++ maximumAmountIn（2.04后）
 
 
 Static methods:
 
-bestTradeExactIn
++ bestTradeExactIn
 
-返回最大值可能
+返回TradeIn方式的最大兑换数量结果（最低手续费），也就是最优兑换路径，包括hop数等，返回数据类型是Trade数组。
+感谢三火check指正~！
 
 ```
 Trade.bestTradeExactIn(
@@ -443,28 +419,20 @@ constructor(numerator: BigintIsh, denominator: BigintIsh = ONE)
 
 都是JSBI
 
-numerator
-
-denominator
-
-quotient
++ numerator
++ denominator
++ quotient
 
 
 **方法**
 
-invert
-
-add
-
-subtract
-
-multiply
-
-divide
-
-toSignificant
-
-toFixed
++ invert
++ add
++ subtract
++ multiply
++ divide
++ toSignificant
++ toFixed
 
 
 Percent：格式化百分比
@@ -474,9 +442,9 @@ import { Percent } from "@uniswap/sdk";
 const percent = new Percent("60", "100");
 console.log(percent.toSignificant(2)); // 60
 ```
-toSignificant
++ toSignificant
 
-toFixed
++ toFixed
 
 TokenAmount:返回指定精度余额
 
@@ -494,16 +462,11 @@ const FRIED = new Token(
 const tokenAmount = new TokenAmount(FRIED, "3000000000000000000");
 console.log(tokenAmount.toExact()); // 3
 ```
-add
-
-subtract
-
-toSignificant
-
-toFixed
-
-toExact
-
++ add
++ subtract
++ toSignificant
++ toFixed
++ toExact
 
 Price:返回相对价格
 ```
@@ -533,31 +496,23 @@ console.log(price.toSignificant(3)); // 123
  
  静态方法
 
- fromRoute
+ + fromRoute
 
  属性
 
- baseToken
-
- quoteToken
-
- scalar：Fraction
-
- raw：Fraction
-
- adjusted：Fraction
-
++ baseToken
++ quoteToken
++ scalar：Fraction
++ raw：Fraction
++ adjusted：Fraction
+  
  方法：
 
- invert
-
- multiply
-
- quote
-
- toSignificant
-
- toFixed
++ invert
++ multiply
++ quote
++ toSignificant
++ toFixed
 
 #### Fetcher
 静态方法包含了获取链上交易对和token的实例，不可构造。
@@ -584,13 +539,13 @@ async fetchPairData(
 
 
 #### Other Exports 
-1.JSBI
++ 1.JSBI
 ```
 import { JSBI } from "@uniswap/sdk";
 // import JSBI from 'jsbi'
 ```
-2.BigintIsh
-3.ChainId
++ 2.BigintIsh
++ 3.ChainId
 ```
 import { ChainId } from "@uniswap/sdk";
 // enum ChainId {
@@ -610,7 +565,7 @@ import { TradeType } from "@uniswap/sdk";
 // }
 ```
 
-5.Rounding
++ 5.Rounding
 ```
 import { Rounding } from "@uniswap/sdk";
 // enum Rounding {
@@ -619,15 +574,9 @@ import { Rounding } from "@uniswap/sdk";
 //   ROUND_UP
 // }
 ```
-6.FACTORY_ADDRESS
-
-7.INIT_CODE_HASH
-
-8.MINIMUM_LIQUIDITY
-
-9.InsufficientReservesError
-
-10.InsufficientInputAmountError
-
-11.WETH
-
++ 6.FACTORY_ADDRESS
++ 7.INIT_CODE_HASH
++ 8.MINIMUM_LIQUIDITY
++ 9.InsufficientReservesError
++ 10.InsufficientInputAmountError
++ 11.WETH
