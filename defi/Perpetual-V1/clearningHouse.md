@@ -38,14 +38,14 @@ Perpetual Protocol 记录 Alice 现在有 1.96 vETH，并且这个vAMM内部的�
 
 3. 如果 David 以100U以2倍杠杆开空仓。David 100u存入valut，
 Perpetual Protocol 将 David 的 -200 vDAI 记入vAMM，作为回报，它根据常数函数 (x*y = k) 计算 Bob 收到的负 vETH 的数量。  
-Perpetual Protocol 记录 Bob 现在已经做空了 2.04 vETH，并且这个vAMM内部的状态现在变成了 102.04 vETH 和 9800 vDAI。
+Perpetual Protocol 记录 David 现在已经做空了 2.04 vETH，并且这个vAMM内部的状态现在变成了 102.04 vETH 和 9800 vDAI。
 
 | 动作 | ETH | USDC | 计算|
 | :-----| :---- | :---- | :---- |
 | Bob开了1.89多仓 | 96.15 | 10400 | 98.04*10200/10400|
 | Alice平了1.96多仓 | 98.11 | 10192 | 96.15*10400/98.115 |
 | Bob平了1.89多仓 | 100 | 10000 | 98.11*10192/100 |
-| David开了1.89多仓 | 102.04  | 9800 | 98.11*10192/9800 |
+| David开了1.89多仓 | 102.04  | 9800 | 100*10000/9800 |
 
 - vault存放真实的usdc，而eth为虚拟出来的（根据K值计算）
 - 做多则eth持仓为正，做空则eth持仓未负。 而池子数量一直为正，池子里为记账符号。
@@ -69,6 +69,14 @@ Perp V1协议赚取的交易费用，50%归Staking持币者，50%归入保险基
 
 ### 代码解析
 核心合约是`clearingHouse`和`AMM`
+几个关键变量：  
+spotprice: 池子两个reserve相除   
+margin:  usdc计（quoteAsset）
+positionNotional:   positionSize* spotPrice
+exchangedPositionSize : (做多正，做空负) 
+做空SwapOutput
+做多SwapInput
+
 用户操作主要跟`clearingHouse`交互  
 
 先看几个event：
@@ -119,15 +127,21 @@ Perp V1协议赚取的交易费用，50%归Staking持币者，50%归入保险基
     /// @param liquidityHistoryIndex
     /// @param blockNumber the block number of the last position
     struct Position {
-        SignedDecimal.signedDecimal size;  //基础资产计价的大小
+        SignedDecimal.signedDecimal size;  //仓位大小
         Decimal.decimal margin;      // 保证金
-        Decimal.decimal openNotional; //名义持仓
-        SignedDecimal.signedDecimal  lastUpdatedCumulativePremiumFraction;  //
+        Decimal.decimal openNotional; //仓位的开仓usec值 ， margin*lever
+        SignedDecimal.signedDecimal  lastUpdatedCumulativePremiumFraction;  //资金费率
         uint256 liquidityHistoryIndex;     // 
         uint256 blockNumber;    //
     }
 ```
+未实现盈亏计算：
+openNotional = margin * lever
+positionNotional = positonSize * price 
 
+unrealizedPnlForLongPosition = positionNotional - openNotional
+
+badDebt = ealizedPnl + realizedFundingPayment + margin；
 ```
  /// @notice This struct is used for avoiding stack too deep error when passing too many var between functions
     struct PositionResp {
@@ -334,7 +348,10 @@ adjustPositionForLiquidityChanged函数主要调用calcPositionAfterLiquidityMig
  if (isNewPosition || (oldPositionSize > 0 ? Side.BUY : Side.SELL) == _side) 
  判断是
 internalIncreasePosition（增加仓位）还是 openReversePosition （）
-
+如果是一个新开仓的仓位或者 老仓位跟新仓位方向一样
+unrealizedPnlForLongPosition = positionNotional - openNotional
+internalIncreasePosition
+计算资金费率和为实现盈亏
 
 
 3. setposition

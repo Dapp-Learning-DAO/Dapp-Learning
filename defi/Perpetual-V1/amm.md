@@ -1,70 +1,129 @@
 
 ## Perpetual V1 
 
-[白皮书](https://www.notion.so/Strike-Protocol-9049cc65e99246d886a230972d0cbd60) 
-### 原理图
-![原理](./imgs/perp.png)
-![合约结构](./imgs/cal.png)
-![合约结构1](./imgs/overview.svg)
+## AMM代码解析
 
-### 核心原理
-在交易环节，以虚拟AMM定价，实际开仓/平仓的资金从资金池（Vault）进出，资金池中仅有USDC一种代币，开仓/平仓仅影响池中USDC数量；
+`IAMM`合约
 
-在清算环节，由Chainlink喂价，保证金率低于6.5%时头寸将被清算，清算后的获利在保险基金与清算人之间分配。保险基金用于弥补行情剧烈波动时，平仓后穿仓的损失；  
+ enum Dir { ADD_TO_AMM, REMOVE_FROM_AMM }
 
-Staking提供者在Perp上不作为流动性提供者，仅仅是保险基金的初始提供者，承担保险基金赔付时的损失风险，同时享有手续费收入。
+// 
+ function swapInput(
+        Dir _dir,
+        Decimal.decimal calldata _quoteAssetAmount,
+        Decimal.decimal calldata _baseAssetAmountLimit
+    ) external returns (Decimal.decimal memory);
 
-**设计方案**
-vAMM使用AMM的x*y=k方式定价，但不实际进行两种货币的兑换，而是由AMM公式提供价格后，从资金池（Vault）进出资金以代替直接从AMM池进出资金，实现单一货币的多/空头寸在Vault的开仓和平仓。
+//
+    function swapOutput(
+        Dir _dir,
+        Decimal.decimal calldata _baseAssetAmount,
+        Decimal.decimal calldata _quoteAssetAmountLimit,
+        bool _skipFluctuationCheck
+    ) external returns (Decimal.decimal memory);
 
-假设Vault中原本有10,000 USDC，并且x=100，k=100*10,000，
-1. Alice用100 U以2倍开多仓后变化如下：
-
-| 动作 | ETH | USDC | 计算|
-| :-----| :---- | :---- | :---- |
-| 初始状态 | 100 | 10000 | - |
-| Alice开了1.96多仓 | 98.04 | 10200 | 100*10000/10200 |
-
-2. 同样，如果此时Bob继续注入100 U以2倍杠杆开多仓后，vAMM公式将自动算出其持有多仓为1.89 ETH；
-
-| 动作 | ETH | USDC | 计算|
-| :-----| :---- | :---- | :---- |
-| Bob开了1.89多仓 | 96.15 | 10400 | 98.04*10200/10400|
-| Alice平了1.96多仓 | 98.11 | 10192 | 96.15*10400/98.115 |
-| Bob平了1.89多仓 | 100 | 10000 | 98.11*10192/100 |
-
-- vault存放真实的usdc，而eth为虚拟出来的（根据K值计算）
-- 从实质上看，按照AMM的含义，后买入者将比先买入者的成本更高，后卖出者将比先卖出者得到更低的对价（换回更少的U），因此Alice获利而Bob损失，这一点在虚拟AMM中也同样体现。
-
-**资金费率**
-Perp上提供的是永续合约，每1小时收取一次资金费，按照加密货币衍生品交易所FTX的规则进行计算，公式如下：
-
-FundingPayment（资金费）=PositionSize（仓位头寸）∗FundingRate（资金费率）
-
-$\ fundingRate = \frac{P_{perp}- P_{index}}{24}$   
-
-问题：都做多怎么办？？
-
-**清算**
-当保证金比例下降到6.25%或以下时，就会发生清算，这一规则即维持保证金（Maintenance Margin）。
-清算由清算人的机器人出发，作为清算的奖励，清算人获得6.25%保证金中的1.25%，其余最高5%保证金存入协议保险基金。
-
-**保险基金**
-Perp V1协议赚取的交易费用，50%归Staking持币者，50%归入保险基金。当系统遭遇清算过程的损失和资金损失等意外损失是，保险基金将作为第一道防线首先支付这些损失。  
-
-### 代码解析
-
-`AMM`合约 
-
-个人持仓
+//
+function migrateLiquidity(Decimal.decimal calldata _liquidityMultiplier, Decimal.decimal calldata _priceLimitRatio)
+        external;
 
 
-#### AMM合约
+// view 方法
+ function calcBaseAssetAfterLiquidityMigration(
+        SignedDecimal.signedDecimal memory _baseAssetAmount,
+        Decimal.decimal memory _fromQuoteReserve,
+        Decimal.decimal memory _fromBaseReserve
+    ) external view returns (SignedDecimal.signedDecimal memory);
 
+    function getInputTwap(Dir _dir, Decimal.decimal calldata _quoteAssetAmount)
+        external
+        view
+        returns (Decimal.decimal memory);
+
+    function getOutputTwap(Dir _dir, Decimal.decimal calldata _baseAssetAmount)
+        external
+        view
+        returns (Decimal.decimal memory);
+
+    function getInputPrice(Dir _dir, Decimal.decimal calldata _quoteAssetAmount)
+        external
+        view
+        returns (Decimal.decimal memory);
+
+    function getOutputPrice(Dir _dir, Decimal.decimal calldata _baseAssetAmount)
+        external
+        view
+        returns (Decimal.decimal memory);
+
+    function getInputPriceWithReserves(
+            Dir _dir,
+            Decimal.decimal memory _quoteAssetAmount,
+            Decimal.decimal memory _quoteAssetPoolAmount,
+            Decimal.decimal memory _baseAssetPoolAmount
+        ) external pure returns (Decimal.decimal memory);
+
+        function getOutputPriceWithReserves(
+            Dir _dir,
+            Decimal.decimal memory _baseAssetAmount,
+            Decimal.decimal memory _quoteAssetPoolAmount,
+            Decimal.decimal memory _baseAssetPoolAmount
+        ) external pure returns (Decimal.decimal memory);
+
+
+event:
+```
+   event SwapInput(Dir dir, uint256 quoteAssetAmount, uint256 baseAssetAmount);
+    event SwapOutput(Dir dir, uint256 quoteAssetAmount, uint256 baseAssetAmount);
+
+    event ReserveSnapshotted(uint256 quoteAssetReserve, uint256 baseAssetReserve, uint256 timestamp);
+    event LiquidityChanged(uint256 quoteReserve, uint256 baseReserve, int256 cumulativeNotional);
+```
+
+
+
+### AMM合约
+1 初始化函数
+```
+  function initialize(
+        uint256 _quoteAssetReserve,
+        uint256 _baseAssetReserve,
+        uint256 _tradeLimitRatio,
+        uint256 _fundingPeriod,
+        IPriceFeed _priceFeed,
+        bytes32 _priceFeedKey,
+        address _quoteAsset,
+        uint256 _fluctuationLimitRatio,
+        uint256 _tollRatio,
+        uint256 _spreadRatio
+    )
+``` 
+
+2. 将usdc转换成eth，考虑滑点。 更新储备并且快照。
+ADD_TO_AMM for long, REMOVE_FROM_AMM for short
+调用getInputPrice
+```
+ function swapInput(
+        Dir _dir,
+        Decimal.decimal calldata _quoteAssetAmount,
+        Decimal.decimal calldata _baseAssetAmountLimit
+    )
+```
+
+3. 将eth换成 usdc ，考虑滑点，更新储备并且快照。
+ADD_TO_AMM for short, REMOVE_FROM_AMM for long
+调用getOutputPrice
+``` 
+function swapOutput(
+        Dir _dir,
+        Decimal.decimal calldata _baseAssetAmount,
+        Decimal.decimal calldata _quoteAssetAmountLimit,
+        bool _skipFluctuationCheck
+    )
+```
 常用方法  
 getOutputPriceWithReserves  ？？？
 getInputPriceWithReserves   ???
-
+getOutputPrice
+getOutputTwap
 
 
 
