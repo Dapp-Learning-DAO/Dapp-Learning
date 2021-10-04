@@ -14,8 +14,6 @@ contract ERC875Token is IERC875 {
     string public name;
     string public symbol;
     uint8 public constant decimals = 0; //no decimals as tickets cannot be split
-    address public result;
-    uint public payAmount;
 
     event Transfer(address indexed _from, address indexed _to, uint256[] tokenIndices);
     event TransferFrom(address indexed _from, address indexed _to, uint _value);
@@ -88,8 +86,6 @@ contract ERC875Token is IERC875 {
             bytes12 prefix = "ERC800-CNID1";
             bytes32 message = encodeMessage(prefix, msg.value, expiry, tokenIndices);
             address seller = ecrecover(message, v, r, s);
-            result = seller;
-            payAmount = msg.value;
         }
 
 
