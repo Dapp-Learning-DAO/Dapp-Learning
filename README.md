@@ -196,16 +196,16 @@
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## DApp 安全开发
-- 01. 常用安全工具
+1. 常用安全工具
  - [Slither](https://github.com/crytic/slither)
  - [Mythril](https://github.com/ConsenSys/mythril)
-- 02. CTF 训练营
+2. CTF 训练营
  - [Ethernaut](https://ethernaut.openzeppelin.com/)
  - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
  - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
-- 03. [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+3. 安全开发实践
+ - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 
-- 04. 安全资源汇总
 ## 如何参与
   新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
 
