@@ -35,16 +35,17 @@
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 以太坊 和 智能合约 的基本原理**
+**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
-- 以太坊原理书：<https://ethbook.abyteahead.com/howto.html>
-- 以太坊开发工具汇总：<https://learnblockchain.cn/article/2006>
-- solidity 学习：<https://www.bilibili.com/video/BV1St411a7Pk?p=1>
-- 边玩边学solidity:<https://cryptozombies.io/zh/course>
-- 以太坊黄皮书： <https://github.com/ethereum/yellowpaper>
+- 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
+- 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
+- Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
+- 边玩边学Solidity: <https://cryptozombies.io/zh/course>
+- Solidity by Example: <https://solidity-by-example.org/>
+- Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
 
 **开发工具：**
-
+- 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - infura（节点服务）: <https://infura.io/>
 - alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
@@ -63,7 +64,7 @@
 
 **国外大学加密课程**
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
-- [Defi Learning by Dan Boneh/Arthur Gervais/Andrew Miller/Christine Parlour/Dawn Song](https://defi-learning.org/)
+- [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 **其他加密课程**
@@ -72,9 +73,9 @@
 **国内区块链公开课**
 - [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
 
-**经典网站及 Paper 收录**
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
- 
+欢迎大家添加推荐书籍，请在此文档[书籍推荐](./docs/books.md)中录入；
+
+
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
@@ -135,6 +136,9 @@
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba)
 56. [IDO](https://github.com/gnosis/ido-contracts)
+57. [Liquity](https://github.com/liquity)
+58. [Auto trigger smart contract](/basic/58-auto-smart-contract/README.md)
+59. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -152,28 +156,26 @@
 01. [UniswapV2](defi/Uniswap-V2/readme.md)
 02. [UniswapV3](defi/Uniswap-V3/readme.md)
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-04. Aave [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+04. [Aave](https://docs.aave.com/portal/) 
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-08. Bancor [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-09. YFI [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. AMPL [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 13. [OPYN](https://v2.opyn.co/)
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+
 
 ## NFT 进阶
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
-- 04. [NFT quick overview](https://andrewsteinwold.substack.com/p/-quick-overview-of-the-nft-ecosystem)
-- 05. [SocialFi](https://inewsdb.com/%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3/%E7%A4%BE%E4%BA%A4%E4%BB%A3%E5%B9%A3%E4%B8%8D%E6%96%B7%E9%80%B2%E5%8C%96%EF%BC%8C-socialfi-%E6%9C%83%E6%88%90%E7%82%BA-gamefi-%E5%BE%8C%E4%B8%8B%E5%80%8B%E7%86%B1%E9%BB%9E%E5%97%8E%EF%BC%9F/)
-- 06. [Awesom NFT Projects](https://thedailyape.notion.site/4aae0799b1f84b21b9e402fb0b489b05?v=baa5e17983ec4b179c0160d8745a1742)  
-- 07. Loot NFT Distribute 
+- 03. Loot NFT Distribute 
 
 ## DAO 进阶
 
@@ -181,6 +183,7 @@
 - 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## Crypto 进阶  
 请先阅读书籍：
@@ -194,6 +197,15 @@
 
 ## 如何参与
   新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
+
+## 衍生项目
+- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
+- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
+- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
+
+## 共同维护项目
+
+- [amm-arbitrageur](https://github.com/paco0x/amm-arbitrageur): AMM 套利策略示例
 
 ## DAO组织管理项目
   1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  

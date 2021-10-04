@@ -791,6 +791,93 @@ describe("EtherDelta", () => {
     }
   });
 
+  it("Should attempt some trades initiated onchain that should fail", async () => {
+    await prepareTokens();
+
+    const [
+      initialFeeBalance1,
+      initialFeeBalance2,
+      initialBalance11,
+      initialBalance12,
+      initialBalance21,
+      initialBalance22,
+    ] = await checkUsersBlance();
+
+    async function testTradeFail(
+      expiresIn,
+      orderNonce,
+      tokenGet,
+      tokenGive,
+      amountGet,
+      amountGive,
+      amount
+    ) {
+      let expires = await ethers.provider.getBlockNumber();
+      expires += expiresIn;
+
+      const orderNotSigned = {
+        tokenGet: tokenGet,
+        amountGet: amountGet,
+        tokenGive: tokenGive,
+        amountGive: amountGive,
+        expires: expires,
+        nonce: orderNonce,
+        user: user1.address,
+        v: 0,
+        r: formatBytes32String(0),
+        s: formatBytes32String(0)
+      }
+
+      await etherDelta.connect(user1).order(tokenGet, amountGet, tokenGive, amountGive, expires, orderNonce);
+      await expect(etherDelta.connect(user2).trade(orderNotSigned, amount)).to.be.reverted;
+
+    }
+
+    const trades = [
+      {
+        expires: 10,
+        orderNonce: 1,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: toWei(50),
+        amountGive: toWei(25),
+        amount: toWei(51)
+      },
+      {
+        expires: 10,
+        orderNonce: 2,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: toWei(50),
+        amountGive: initialBalance21 + 1,
+        amount: toWei(25)
+      },
+      {
+        expires: 10,
+        orderNonce: 3,
+        tokenGet: token1.address,
+        tokenGive: token2.address,
+        amountGet: initialBalance12,
+        amountGive: BigNumber.from(25),
+        amount: initialBalance12 + 1
+      },
+    ];
+
+    for (let i = 0; i < trades.length; i++) {
+      const trade = trades[i];
+      await testTradeFail(
+        trade.expires,
+        trade.orderNonce,
+        trade.tokenGet,
+        trade.tokenGive,
+        trade.amountGet,
+        trade.amountGive,
+        trade.amount,
+        trade.accountLevel,
+      );
+    }
+  });
+
   it("Should do a token withdrawal", async () => {
     await prepareTokens();
 
@@ -841,4 +928,20 @@ describe("EtherDelta", () => {
     expect(finalBalance).to.equal(initialBalance.sub(amount));
     expect(finalEthBalance.add(gasFee)).to.equal(initialEthBalance.add(amount));
   });
+
+  it("Should change the account levels address and fail", async () => {
+    await prepareTokens();
+
+    await expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+
+  });
+
+  it("Should change the account levels address and success", async () => {
+    await prepareTokens();
+
+    await etherDelta.connect(owner).changeAccountLevelsAddr(ADDRESS_ZERO);
+    expect(await etherDelta.accountLevelsAddr()).to.equal(ADDRESS_ZERO);
+
+  });
+
 });
