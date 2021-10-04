@@ -8,18 +8,18 @@ function getPayLoad(contractABI,functionName,param){
     if (functionName != functionABI.name) {
       continue;
     }
-    
+
     //get sigHash of function
     const interface = new ethers.utils.Interface(contractABI);
     const functionSigHash = interface.getSighash(functionName);
     console.log("sign of method:%s is %s",functionName,functionSigHash);
-    
+
     //encode param
     const abiCoder =new ethers.utils.AbiCoder()
     const codeOfParam =  abiCoder.encode(['uint256'],[param])
     console.log("codeOfParam:",codeOfParam);
-    
-    
+
+
     //payload
     const payload = functionSigHash + codeOfParam.substring(2,codeOfParam.length);
     console.log("payload:",functionName,payload);
@@ -31,20 +31,19 @@ describe("MultiSigWallet test",function(){
   it("test function of MultiSigWallet.sol",async function(){
     //测试账号数组
     const [Alice,Bob,David] = await ethers.getSigners();
-    
+
     //部署多签合约`MultiSigWallet.sol`
     const MultiSigWallet = await ethers.getContractFactory("MultiSigWallet");
     const multiSigWallet = await MultiSigWallet.deploy([Alice.address,Bob.address,David.address],2);
     await multiSigWallet.deployed();
     console.log("address of multiSigWallet:",multiSigWallet.address);
-    
+
     //部署交易合约`Hello.sol`,该合约的交易只能由上面的那个合约触发
     const Hello = await ethers.getContractFactory("Hello");
     const hello = await Hello.deploy();
     await hello.deployed();
     console.log("address of hello:",hello.address);
-    
-    
+
     //在多签钱包添加一笔交易
     const tokenArtifact = await hre.artifacts.readArtifact("Hello");
     const payload = getPayLoad(tokenArtifact.abi,"set",233);
@@ -52,31 +51,30 @@ describe("MultiSigWallet test",function(){
     const transactionReceipt = await submitTransaction.wait();
     //console.log("transactionReceipt:",transactionReceipt);
 
-    // 检查结果
-    expect((await hello.balance()).toString()).to.equal("233");
-    
-    
+    // 检查结果（不通过）
+    expect((await hello.balance()).toString()).not.to.equal("233");
+
     // await multiSigWallet.queryFilter("Submission" , transactionReceipt.blockNumber ,transactionReceipt.blockNumber)
     // .then(e => console.log(e)).catch(err =>console.log(err));
-    
-    
+
     //其他参与者同意
-    // await multiSigWallet.connect(Bob).confirmTransaction(Bob.address, 50);
-    
-    
-    
-    
+    const transactionID = await multiSigWallet.transactionCount();
+    await multiSigWallet.connect(Bob).confirmTransaction(transactionReceipt.events[0].args.transactionId);
+
+    // 再次检查结果
+    expect((await hello.balance()).toString()).to.equal("233");
+
     // console.log("abi of hello:",tokenArtifact.abi);
-    
+
     // const data = getPayLoad();
-    
+
   });
 });
 
 
 /**
  * const { expect } = require("chai");
- 
+
  describe("MyToken test",function (){
      it("deploy MyToken and test function", async function() {
  

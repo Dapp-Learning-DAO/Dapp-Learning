@@ -138,6 +138,7 @@
 56. [IDO](https://github.com/gnosis/ido-contracts)
 57. [Liquity](https://github.com/liquity)
 58. [Auto trigger smart contract](/basic/58-auto-smart-contract/README.md)
+59. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/)
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -201,6 +202,10 @@
 - [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
 - [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
 - [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
+
+## 共同维护项目
+
+- [amm-arbitrageur](https://github.com/paco0x/amm-arbitrageur): AMM 套利策略示例
 
 ## DAO组织管理项目
   1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
