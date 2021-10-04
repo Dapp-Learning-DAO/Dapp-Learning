@@ -2,7 +2,7 @@ pragma solidity ^0.4.25;
 
 import "./IERC165.sol";
 
-contract ERC875  is ERC165 {
+contract IERC875  is IERC165 {
     event Transfer(address indexed _from, address indexed _to, uint256[] tokenIndices);
 
     function name() constant public returns (string name);
