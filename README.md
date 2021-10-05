@@ -196,6 +196,17 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
+## DApp 安全开发
+1. 常用安全工具
+ - [Slither](https://github.com/crytic/slither)
+ - [Mythril](https://github.com/ConsenSys/mythril)
+2. CTF 训练营
+ - [Ethernaut](https://ethernaut.openzeppelin.com/)
+ - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
+ - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
+3. 安全开发实践
+ - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+
 ## 如何参与
   新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
 
