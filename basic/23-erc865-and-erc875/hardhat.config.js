@@ -19,11 +19,31 @@ function mnemonic() {
 
 }
 
+function mnemonicAlice() {
+
+  return process.env.PRIVATE_KEY_ALICE
+
+}
+
+const settings = {
+  optimizer: {
+    enabled: true,
+    runs: 200,
+  },
+};
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.4.25",
+  solidity: {
+    compilers: [
+      { version: '0.8.0',  settings },
+      { version: '0.4.25',  settings },
+      { version: '0.6.2', settings },
+      { version: '0.5.16', settings },
+    ],
+  },
   networks: {
     localhost: {
       url: "http://localhost:8545",
@@ -36,7 +56,8 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic()
+      mnemonic(),
+      mnemonicAlice()
       ],
     },
     kovan: {
@@ -57,5 +78,8 @@ module.exports = {
         mnemonic()
       ],
     },
+  },
+  mocha: {
+    timeout: 60000
   }
 };
