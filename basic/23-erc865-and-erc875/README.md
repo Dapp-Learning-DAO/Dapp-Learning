@@ -45,6 +45,9 @@ https://eips.ethereum.org/EIPS/eip-2929
 yarn
 ```
 
+- 配置环境变量 
+把 .env.example 复制为 .env 文件, 然后在其中填入 PRIVATE_KEY, PRIVATE_KEY_ALICE, INFURA_ID
+
 - 测试 ERC865 合约
 ```
 npx hardhat test test/test-ERC865.js 
