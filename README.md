@@ -9,14 +9,6 @@
   <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
 </div>
 
-<div align="center">
-  <h4 align="center">
-    感谢 Dapp Learning 的贡献者们
-  </h4>
-<a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
-</a>
-</div>
 
 ## 序 - Preface
 
@@ -273,3 +265,13 @@ gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp
 https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779      
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
+
+
+<div align="center">
+  <h4 align="center">
+    感谢 Dapp Learning 的贡献者们
+  </h4>
+<a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
+</a>
+</div>
