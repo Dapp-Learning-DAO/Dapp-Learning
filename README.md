@@ -35,7 +35,7 @@
 
 ## 准备工作 - Preparatory Work
 
-**阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
+阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
 - 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
 - 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
@@ -79,6 +79,7 @@
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
+DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)
 
 01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
 02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
