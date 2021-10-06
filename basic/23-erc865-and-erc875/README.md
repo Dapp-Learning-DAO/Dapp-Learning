@@ -55,6 +55,22 @@ npx hardhat test test/test-ERC865.js
 npx hardhat test test/test-EIP712.js 
 ``` 
 
+- 测试 ERC777 合约  
+这里使用 rinkeby 测试网进行测试, 如果使用其他的测试网, 执行测试命令时指定对应的测试网络即可.  
+因为合约部署时需要花费点时间, 可能出现超时的情况, 所以这里单独进行合约部署后再进行测试. 
+```ts
+// 部署 ERC777Token 合约
+npx hardhat run scripts/deploy-ERC777Token.js --network rinkeby 
+
+// 部署 ERC777Sendder 合约
+npx hardhat run scripts/deploy-ERC777Sender.js --network rinkeby
+
+// 测试 ERC777Sendder 合约
+npx hardhat test test/test-ERC777Sender.js --network rinkeby
+``` 
+
+
+
 ## 参考链接
 Props Token Contracts:  https://github.com/propsproject/props-token-distribution    
 Metamask按照EIP-712规范签名完成委托和投票: https://learnblockchain.cn/article/1357    
@@ -64,3 +80,5 @@ ERC875: https://medium.com/alphawallet/erc875-a-new-standard-for-non-fungible-to
 ERC875-Example: https://github.com/AlphaWallet/ERC875-Example-Implementation   
 EIP 库:  https://github.com/ethereum/EIPs/tree/master/assets   
 EIP712知乎：https://www.zhihu.com/people/wang-da-chui-82-1/posts  
+ERC777 样例代码: https://github.com/abcoathup/Simple777Token  
+ERC777 示例教程: https://learnblockchain.cn/2019/09/27/erc777  
