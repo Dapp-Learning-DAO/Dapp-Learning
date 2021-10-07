@@ -28,6 +28,7 @@ EIP-712提出了数据的标准结构和从结构化消息生成散列的定义�
 
 ### ERC777 (todo)
 
+https://zhuanlan.zhihu.com/p/87279316
 ### ERC1155 (todo)
 
 ### EIP-2929（todo）
