@@ -107,5 +107,5 @@ npx hardhat flatten ./contracts/MYERC721.sol > MYERC721.sol
 
 
 ## 参考文档  
-https://docs.ipfs.io/install/command-line/#official-distributions  
-https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&   chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd  
+- https://docs.ipfs.io/install/command-line/#official-distributions  
+- https://mp.weixin.qq.com/s/3DshdSAzifyP9-CQZ-ORfw
