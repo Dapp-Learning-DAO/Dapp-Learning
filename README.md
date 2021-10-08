@@ -45,6 +45,7 @@
 - Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
 
 **开发工具：**
+- 以太坊社区学习工具： <https://ethereum.org/en/developers/learning-tools/>
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - infura（节点服务）: <https://infura.io/>
