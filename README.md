@@ -82,7 +82,7 @@
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
 DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)  
 ⬜ 表示任务未开始  
-➡️ 表示任务正在进行中   
+⌛ 表示任务正在进行中   
 ✅ 表示任务已完成 
 
 01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md) ✅ 
@@ -107,7 +107,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md) ✅
-23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ➡️
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ⌛
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
@@ -117,7 +117,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 30. [zksync layer2](basic/30-layer2-zksync/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
-33. [pooltogether](basic/33-pooltogether/README.md) ➡️
+33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
 35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md) ⬜
 36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
