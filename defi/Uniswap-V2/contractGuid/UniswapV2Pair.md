@@ -230,37 +230,37 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         _update(balance0, balance1, _reserve0, _reserve1);
         emit Swap(msg.sender, amount0In, amount1In, amount0Out, amount1Out, to);
 
-               /**
-
+ /**
  针对K值的校验计算
-
-      转入金额是实际带手续费的， out金额是in去掉手续费后，计算出来的out.
-  正常情况 (举例token0是in token, 1 是 out token)
-     (交易前已经将0 in转入)
+ 
+  转入金额是实际带手续费的，out金额是in去掉手续费后，计算出来的out
+  正常情况 (举例token0是in token, 1是out token, 交易前已经将0 in转入)
   获取之前的流动性 r0,r1
   转出交易金额
   获取交易对中两个地址的余额 b0,b1
-  amount0in = balance0 > _reserve0 - amount0Out ? balance0 - (_reserve0 - amount0Out) : 0;（0是in,0Out=0,所以前面的比较是true,结果是 ）
-  amount0in = b0>r0 结果是 b0-r0,即实际进入金额
+  
+  amount0in = balance0 > _reserve0 - amount0Out ? balance0 - (_reserve0 - amount0Out) : 0;（0是in, 0 Out=0,所以前面的比较是true）
+  amount0in = b0-r0, 即实际进入金额
 
-  amount1In = balance1 > _reserve1 - amount1Out ? balance1 - (_reserve1 - amount1Out) : 0; （1是out）
- 正常是r1-out1=b1 所以走false,
-  amount1In=0;
+  amount1In = balance1 > _reserve1 - amount1Out ? balance1 - (_reserve1 - amount1Out) : 0;（1是out, 正常是 r1-out1=b1 所以走false）
+  amount1In = 0
+  
   一定要这两个其中之一大于0
 
-  校验手续费
- b0a = b0*1000 - amount0in * 3
- b1a = b1*1000 - 0*3
-
- req(b0a*b1a >= r0* r1 * 1000 * 1000)
-
-     r0*r1是上一个k值，
- 公式 (rIn + in * f) * (rOut - out) = rIn * rOut
-       (b0-fee)*(b1) = r0*r1(上一次的k)
-       所以判断条件是(b0-fee)*(b1) >= r0*r1(上一次的k)
-       对比b0a,b1a 实际就是千3的手续费，没法用小数，所以两边都*1000，就可以用3计算
-
-
+ 校验手续费
+ 
+  b0a = b0 * 1000 - amount0in * 3
+  b1a = b1 * 1000 - 0 * 3
+  
+  req(b0a * b1a >= r0 * r1 * 1000 * 1000)
+  r0*r1是上一个k值
+  
+  公式:
+  (rIn + in * fee) * (rOut - out) = rIn * rOut
+  (b0 - fee) * (b1) = r0 * r1 (上一次的k)
+  
+  所以判断条件是 (b0 - fee) * (b1) >= r0 * r1 (上一次的k)
+  对比 b0a,b1a 实际就是千3的手续费，没法用小数，所以两边都*1000，就可以用3计算
  */
     }
     //强制将余额和最后的储备量一样，多出来的转给to
