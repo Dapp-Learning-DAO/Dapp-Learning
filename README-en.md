@@ -38,6 +38,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 - Summary of Ethereum development tools:<https://learnblockchain.cn/article/2006>
 - learning solidity <https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 - Solidity by Example:<https://solidity-by-example.org/>
+- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
 
 **Development tools：**
 
