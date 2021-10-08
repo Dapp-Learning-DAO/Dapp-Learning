@@ -37,3 +37,4 @@ https://medium.com/alphawallet/erc875-a-new-standard-for-non-fungible-tokens-and
 https://github.com/AlphaWallet/ERC875-Example-Implementation  
 https://github.com/ethereum/EIPs/tree/master/assets 
 EIP712知乎：https://www.zhihu.com/people/wang-da-chui-82-1/posts
+EIP712: https://learnblockchain.cn/2019/04/24/token-EIP712
