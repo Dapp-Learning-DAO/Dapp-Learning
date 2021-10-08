@@ -68,7 +68,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 
 Learn the basic tools and development knowledge of Dapp development through the following basic tasks.  
 ⬜ Task Not Start  
-➡️ Task Processing   
+⌛ Task Processing   
 ✅ Task Finish
 
 01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md) ✅ 
@@ -93,7 +93,7 @@ Learn the basic tools and development knowledge of Dapp development through the 
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md) ✅
-23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ➡️
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ⌛
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
@@ -103,7 +103,7 @@ Learn the basic tools and development knowledge of Dapp development through the 
 30. [zksync layer2](basic/30-layer2-zksync/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
-33. [pooltogether](basic/33-pooltogether/README.md) ➡️
+33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
 35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md) ⬜
 36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
