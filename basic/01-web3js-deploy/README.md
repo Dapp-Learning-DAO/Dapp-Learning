@@ -130,7 +130,7 @@ const account_from = {
 ```
 
 9) 部署合约  
-这里使用发送签名后的交易到区块量网络, 同时回去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
+这里使用发送签名后的交易到区块链网络, 同时会去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
 ```js
 const deployReceipt = await web3.eth.sendSignedTransaction(
     deployTransaction.rawTransaction
