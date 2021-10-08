@@ -100,7 +100,7 @@ const Trans = async () => {
     transferTransaction.rawTransaction
   );
 
-  erc20Contract.methods
+  await erc20Contract.methods
     .balanceOf(receiver)
     .call()
     .then((result) => {
