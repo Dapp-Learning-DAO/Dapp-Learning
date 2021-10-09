@@ -35,4 +35,5 @@ https://new.qq.com/omn/20210709/20210709A0CL6M00.html
 - https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc rollup详细解读  
 - https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc arbi简介
 - https://mubu.com/app/edit/clb/NIhGqZda80#m 分享
+- [un.Block 周报](https://zhuanlan.zhihu.com/p/419000613) 有关 Arbitrum 的介绍。介绍了 Aribtrum 和 Optimistic Rollup 的不同，以及 Arbitrum 是如何达成 Layer1 和 Layer2 之间的通信的。
  
