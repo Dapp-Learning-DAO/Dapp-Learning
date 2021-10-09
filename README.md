@@ -30,52 +30,32 @@
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
+## 教程结构    
+教程分为 **基础任务** 和 **项目任务** 两部分
+- 基础任务  
+是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)  
+- 项目任务  
+是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
 
 此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[新人如何参与以及项目治理规则](./docs/dao.md)。
 
 ## 准备工作 - Preparatory Work
+**基础知识预备**   
+- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识, 为后续的进阶、深入学习打下扎实的基础.  
+我们整理了 [基础知识预备](./docs/basic-knowledge.md) 供各位新手小伙伴学习参考
 
-阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
-
-- 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
-- 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
-- Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
-- 边玩边学Solidity: <https://cryptozombies.io/zh/course>
-- Solidity by Example: <https://solidity-by-example.org/>
-- Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
-- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
-
-**开发工具：**
-- 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
-- metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
-- infura（节点服务）: <https://infura.io/>
-- alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
-- 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
-- 以太坊区块链浏览器: <https://kovan.etherscan.io>
-- JSON-PRC接口: <https://eth.wiki/json-rpc/API>
-- tenderly合约验证: <https://dashboard.tenderly.co/explorer>
-- remix本地环境: <https://zhuanlan.zhihu.com/p/38309494>
-- 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
+**开发工具**   
+- 工欲善其事, 必先利其器. 好的开发工具可以很好的辅助开发者学习, 同时大幅提升开发效率.    
+可参考 [开发工具推荐](./docs/develop-tools.md) 查看当下主流的区块链开发工具
 
 **推荐阅读**
-- 《主权个人》（Sovereign Individuals， 尚无中译本，可关注[不懂经](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1)公众号阅读）
-- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
-- 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
-- [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
+- 学习区块链, 不仅要学习其中的技术知识, 更要深入理解隐藏在背后的人文理念, 社会现象, 经济原理等. 我们给各位开发者整理了 [书籍推荐](./docs/books.md) , 在其中列举了各类经典的书籍, 帮助各位开发者深入了解当下区块链潮流背后的原因内涵.   
+欢迎大家添加推荐书籍，请在此文档 [书籍推荐](./docs/books.md) 中录入
 
-**国外大学加密课程**
-- [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
-- [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
-- [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
+**加密课程**  
+- 区块链中涉及到很多密码学相关内容, 我们推荐开发者参考 [加密课程推荐](./docs/crypto-course.md) 学习相关的密码学知识.      
+同时, 其他优质的课程也可提 PR 在此文档中录入
 
-**其他加密课程**
-- [Cryptoeconomics - A free, open-source course on the fundamentals of Blockchain protocols](http://cryptoeconomics.study/)
-
-**国内区块链公开课**
-- [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
-
-欢迎大家添加推荐书籍，请在此文档[书籍推荐](./docs/books.md)中录入；
 
 
 ## 基础任务 - Basic Tasks
@@ -213,16 +193,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 
 ## 如何参与
-  新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
+  新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
 
-## 衍生项目
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
-- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
-- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
-
-## 共同维护项目
-
-- [amm-arbitrageur](https://github.com/paco0x/amm-arbitrageur): AMM 套利策略示例
+## 项目生态    
+Dapp-Learning 有系列衍生项目及共同维护项目, 参考 [相关项目](./docs/relative-projects.md) 详细了解 Dapp-Learning 项目生态.
 
 ## DAO组织管理项目
   1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
@@ -232,25 +206,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
   5. PR审核者须两周内至少一次PR，否则移除PR审核者权限，降为普通开发者，可以提PR重新加入；
   6. 原则上一周一次开发者沟通会议。
 
-## 合约参考库及致敬相关项目
-
-- 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>
-- 合约安全库 - <https://github.com/ConsenSys/smart-contract-best-practices>
-- Dapp 脚手架 - <https://github.com/austintgriffith/scaffold-eth>
-- 合约教程 - <https://github.com/HQ20/contracts>
-- 区块链教程 - <https://learnblockchain.cn/>
-- 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
-- DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
-- Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
-- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
-
-
-## 实操演示项目列表
-  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
-
 ## 常见问题
-  测试币申请，安装和使用问题，请参考链接[常见问题](./docs/TROUBLE_SHOOTING.md)  
-
+  测试币申请，安装和使用问题，请参考链接 [常见问题](./docs/TROUBLE_SHOOTING.md)  
 
 ## 社区捐助
 
