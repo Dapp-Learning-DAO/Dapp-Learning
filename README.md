@@ -44,6 +44,7 @@
 - 边玩边学Solidity: <https://cryptozombies.io/zh/course>
 - Solidity by Example: <https://solidity-by-example.org/>
 - Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
+- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
 
 **开发工具：**
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
