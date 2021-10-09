@@ -47,7 +47,8 @@
 - 工欲善其事, 必先利其器。 好的开发工具可以很好的辅助开发者学习, 同时大幅提升开发效率.    
 可参考 [开发工具推荐](./docs/develop-tools.md) 查看当下主流的区块链开发工具。
 
-**推荐阅读**
+**推荐阅读**  
+
  我们整理了区块链相关的经典书籍，帮助各位开发者深入了解当下区块链背后的人文思潮。
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注[不懂经](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1)公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
