@@ -16,73 +16,63 @@
 
 项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
 
-项目跟Rebase大学深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
+本项目跟[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
-项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。后续会给所有PR贡献者发放nft作为纪念奖品。欢迎参与[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。 
+项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
 
-项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)
+此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。提交一次PR或者在[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)进行一次分享即可加入我们开发者交流群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
+
+
 
 技术栈：  
-
 - `web3.js`
 - `ethers.js (hardhat)`
 - `web3.py (Brownie)`
 - `Java` （可选）
 - `rust` （可选）
 
-教程分为 **基础任务** 和 **项目任务** 两部分，基础任务是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)，项目任务是研究主流 DeFi, NFT, DAO 的典型项目让开发者深入真实项目开发。  
-
-此教程仍在开发中，适合各阶段的开发者，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗，另外，我们会成立研究小组讨论和研究DEFI和DAO项目源码，[新人如何参与以及项目治理规则](./docs/dao.md)。
+## 项目结构    
+项目分为 **基础任务** 和 **项目任务** 两部分
+- **基础任务**  
+是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准，oracle,graph)  
+- **项目任务**  
+是研究主流 DeFi, NFT, DAO 的经典项目让开发者深入真实项目开发，我们会成立学习小组进行任务分工，一起讨论和研究项目源码。
 
 ## 准备工作 - Preparatory Work
+**基础知识预备**   
+- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识, 为后续的进阶、深入学习打下扎实的基础。
+我们整理了 [基础知识预备](./docs/basic-knowledge.md) 供各位新手小伙伴学习参考。
 
-阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
-
-- 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
-- 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
-- Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
-- 边玩边学Solidity: <https://cryptozombies.io/zh/course>
-- Solidity by Example: <https://solidity-by-example.org/>
-- Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
-- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
-
-**开发工具：**
-- 以太坊社区学习工具： <https://ethereum.org/en/developers/learning-tools/>
-- 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
-- metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
-- infura（节点服务）: <https://infura.io/>
-- alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
-- 测试均连接kovan测试网，kovan测试ETH申请: <https://faucet.kovan.network>,也可自由使用其他测试网络。
-- 以太坊区块链浏览器: <https://kovan.etherscan.io>
-- JSON-PRC接口: <https://eth.wiki/json-rpc/API>
-- tenderly合约验证: <https://dashboard.tenderly.co/explorer>
-- remix本地环境: <https://zhuanlan.zhihu.com/p/38309494>
-- 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
+**开发工具**   
+- 工欲善其事, 必先利其器。 好的开发工具可以很好的辅助开发者学习, 同时大幅提升开发效率.    
+可参考 [开发工具推荐](./docs/develop-tools.md) 查看当下主流的区块链开发工具。
 
 **推荐阅读**
+ 我们整理了区块链相关的经典书籍，帮助各位开发者深入了解当下区块链背后的人文思潮。
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注[不懂经](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1)公众号阅读）
 - 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
-- [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
+- [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史   
 
-**国外大学加密课程**
+同时欢迎大家添加推荐书籍，请在此文档 [书籍推荐](./docs/books.md) 中录入
+
+**加密课程**  
+  我们会推荐一些国外顶尖大学和以太坊社区的加密课程，帮助开发者系统性的了解区块链和加密货币。
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
+ 
+其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
 
-**其他加密课程**
-- [Cryptoeconomics - A free, open-source course on the fundamentals of Blockchain protocols](http://cryptoeconomics.study/)
-
-**国内区块链公开课**
-- [北京大学肖臻：《区块链技术与应用》公开课](https://www.bilibili.com/video/BV1Vt411X7JF)  
-
-欢迎大家添加推荐书籍，请在此文档[书籍推荐](./docs/books.md)中录入；
 
 
 ## 基础任务 - Basic Tasks
 
-通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
-DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)  
+通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
+DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)    
+学习并本地运行 前20 个task，可以升级关注**项目任务**。
+欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗
+
 ⬜ 表示任务未开始  
 ⌛ 表示任务正在进行中   
 ✅ 表示任务已完成 
@@ -109,7 +99,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
 21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
 22. [scaffold-zk](basic/22-scaffold-zk/readme.md) ✅
-23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ⌛
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
@@ -202,7 +192,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## DApp 安全开发
+## 智能合约安全
 1. 常用安全工具
  - [Slither](https://github.com/crytic/slither)
  - [Mythril](https://github.com/ConsenSys/mythril)
@@ -213,62 +203,28 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 3. 安全开发实践
  - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 
-## 如何参与
-  新人如何参与到我们项目，请参考链接[如何参与](./docs/dao.md)。
+## 如何参与以及DAO治理
+  新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
 
-## 衍生项目
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
-- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
-- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
-
-## 共同维护项目
-
-- [amm-arbitrageur](https://github.com/paco0x/amm-arbitrageur): AMM 套利策略示例
-
-## DAO组织管理项目
-  1. 贡献过1次PR（或技术分享）以上可以进入开发者群；  
-  2. 贡献过3次高质量PR（或参与3个task的完成）即可给予PR审核者的权限，进入PR审核者群；
-  3. PR审核者可以发起学习小组；
-  4. PR审核者可以发起提案，决定项目发展规划，获取多数PR审核者同意即可通过提案；
-  5. PR审核者须两周内至少一次PR，否则移除PR审核者权限，降为普通开发者，可以提PR重新加入；
-  6. 原则上一周一次开发者沟通会议。
-
-## 合约参考库及致敬相关项目
-
-- 经典合约库 - <https://github.com/OpenZeppelin/openzeppelin-contracts>
-- 合约安全库 - <https://github.com/ConsenSys/smart-contract-best-practices>
-- Dapp 脚手架 - <https://github.com/austintgriffith/scaffold-eth>
-- 合约教程 - <https://github.com/HQ20/contracts>
-- 区块链教程 - <https://learnblockchain.cn/>
-- 密码学课程 - <https://live.csdn.net/list/Kevin_M_00>
-- DeFi 教程 - <https://github.com/OffcierCia/DeFi-Developer-Road-Map>
-- Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
-- Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
-
-
-## 实操演示项目列表
-  开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
+## 项目生态    
+Dapp-Learning 有系列衍生项目及共同维护项目, 参考 [相关项目](./docs/relative-projects.md) 详细了解 Dapp-Learning 项目生态.
 
 ## 常见问题
-  测试币申请，安装和使用问题，请参考链接[常见问题](./docs/TROUBLE_SHOOTING.md)  
-
+  测试币申请，安装和使用问题，请参考链接 [常见问题](./docs/TROUBLE_SHOOTING.md)  
 
 ## 社区捐助
 
 欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
-gitcoin grant地址： [Dapp-Learning grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
+gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
 
-捐助地址：  
-- 通过以太坊主网：[0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://etherscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
-- 通过 zkSync: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://zkscan.io/explorer/accounts/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
-- 通过 Arbitrum: [0x1F7b953113f4dFcBF56a1688529CC812865840e1](https://arbiscan.io/address/0x1F7b953113f4dFcBF56a1688529CC812865840e1)
-- 通过 Polygon: [0x2A6D09B3b11E5455a37F907f2ec885E0Be704779](https://polygonscan.com/address/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779) **polygon网络上我们已生成多签钱包**
+捐助地址：
+- 以太坊主网/zkSync/Arbitrum：
+0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
-捐助资金管理：  
-其他网络资金我们都会汇集到polygon网络的多签钱包去管理。  
+- Polygon[多签钱包](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 
+**polygon网络上我们已生成多签钱包，由核心贡献者管理**
 
-多签钱包查看（polygon上的gnosis safe wallet）：    
-https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779      
+     
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
