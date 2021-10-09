@@ -60,7 +60,7 @@
 
 ## 基础任务 - Basic Tasks
 
-通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。完成20个task，可以升级关注项目任务。
+通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。学习并本地运行 20 个task，可以升级关注项目任务。
 DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)  
 ⬜ 表示任务未开始  
 ⌛ 表示任务正在进行中   
