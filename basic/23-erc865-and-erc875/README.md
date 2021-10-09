@@ -83,6 +83,15 @@ npx hardhat test test/test-ERC1155.js
 
 
 ## 参考链接
+https://github.com/propsproject/props-token-distribution 
+https://learnblockchain.cn/article/1357    
+https://learnblockchain.cn/2019/04/24/token-EIP712  
+https://learnblockchain.cn/article/1496  
+https://medium.com/alphawallet/erc875-a-new-standard-for-non-fungible-tokens-and-cheap-atomic-swaps-93ab85b9e7f9  
+https://github.com/AlphaWallet/ERC875-Example-Implementation  
+https://github.com/ethereum/EIPs/tree/master/assets 
+EIP712知乎：https://www.zhihu.com/people/wang-da-chui-82-1/posts
+EIP712: https://learnblockchain.cn/2019/04/24/token-EIP712
 Props Token Contracts:  https://github.com/propsproject/props-token-distribution    
 Metamask按照EIP-712规范签名完成委托和投票: https://learnblockchain.cn/article/1357    
 为 DApp 编写 EIP712 签名: https://learnblockchain.cn/2019/04/24/token-EIP712  
@@ -97,3 +106,4 @@ ERC777 示例教程: https://learnblockchain.cn/2019/09/27/erc777
 ERC-1155 科普: https://www.chainnews.com/articles/385928537973.htm  
 ERC-1155 样例代码:  https://github.com/enjin/erc-1155   
 EIP-2929 介绍: https://eips.ethereum.org/EIPS/eip-2929  
+
