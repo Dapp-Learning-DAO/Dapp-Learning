@@ -223,10 +223,9 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 - 以太坊主网/zkSync/Arbitrum：
 0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
-- Polygon[多签钱包](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 
-**polygon网络上我们已生成多签钱包，由核心贡献者管理**
+- Polygon[多签钱包](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
-     
+**polygon网络上我们已生成多签钱包，由核心贡献者管理**     
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
