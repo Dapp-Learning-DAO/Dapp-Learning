@@ -1,42 +1,40 @@
-let Web3 = require("web3");
-let solc = require("solc");
-let fs = require("fs");
+let Web3 = require('web3');
+let solc = require('solc');
+let fs = require('fs');
 
 // Get privatekey from sk.txt
-require("dotenv").config();
+require('dotenv').config();
 const privatekey = process.env.PRIVATE_KEY;
 
 // Load contract
-const source = fs.readFileSync("Incrementer.sol", "utf8");
+const source = fs.readFileSync('Incrementer.sol', 'utf8');
 
 // compile solidity
 const input = {
-  language: "Solidity",
+  language: 'Solidity',
   sources: {
-    "Incrementer.sol": {
+    'Incrementer.sol': {
       content: source,
     },
   },
   settings: {
     outputSelection: {
-      "*": {
-        "*": ["*"],
+      '*': {
+        '*': ['*'],
       },
     },
   },
 };
 
 const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
-const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
+const contractFile = tempFile.contracts['Incrementer.sol']['Incrementer'];
 
 // Get bin & abi
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
 // Create web3 with kovan provider，you can fix kovan to other testnet
-const web3 = new Web3(
-  "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07"
-);
+const web3 = new Web3('https://kovan.infura.io/v3/' + process.env.INFURA_ID);
 
 // Create account from privatekey
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
@@ -55,7 +53,7 @@ const Deploy = async () => {
   // Create Tx
   const deployTx = deployContract.deploy({
     data: bytecode,
-    arguments: [5],
+    arguments: [5],  // Pass arguments to the constructor on deployment(_initialNumber here)
   });
 
   // Sign Tx
@@ -73,4 +71,11 @@ const Deploy = async () => {
   console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 };
 
-Deploy();
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+Deploy()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

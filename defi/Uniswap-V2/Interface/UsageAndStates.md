@@ -107,7 +107,7 @@ token 交易界面
 - `useSwapActionHandlers`, `useDerivedSwapInfo`: src/state/swap/hooks.ts
 - `useTradeExactIn`, `useTradeExactOut`, `useAllCommonPairs`: src/hooks/Trades.ts
 
-详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Swap)
+详细代码解析请戳这里 :point_right: [Swap 代码解析](./Code.md#Swap)
 
 ### init state
 
@@ -266,7 +266,7 @@ transactions: {
 - `useTokenAllowance`: src/data/Allowances.ts
 - `useHasPendingApproval`: src/state/transactions/hooks.tsx
 
-详细代码解析请戳这里 :point_right: [Transaction 代码解析](./Code.md#Approve)
+详细代码解析请戳这里 :point_right: [ApproveToken 代码解析](./Code.md#Approve)
 
 ### init state
 
@@ -575,55 +575,55 @@ transactions: {}
 5. 用户点击 `Supply` 按钮添加流动性，点击确认弹窗
 6. `onAdd()` 先预执行交易，再真实发送添加流动性的交易
 
-    - 根据用户设置的滑点百分比计算最少需要添加的token数量(少于这个数量会添加失败)
-    - 分析token种类，包含eth调用router合约的 `addLiquidityETH` ，其他调用 `addLiquidity`
-    - 合成调用参数，token地址需要升序排列
-    - 打开交易进行中的提示弹窗
-    - 将交易记录推入 Transaction State ，监听交易结果
-    - 这里会忽略错误码为4001的交易报错，这代表用户在钱包确认阶段拒绝了交易
+   - 根据用户设置的滑点百分比计算最少需要添加的 token 数量(少于这个数量会添加失败)
+   - 分析 token 种类，包含 eth 调用 router 合约的 `addLiquidityETH` ，其他调用 `addLiquidity`
+   - 合成调用参数，token 地址需要升序排列
+   - 打开交易进行中的提示弹窗
+   - 将交易记录推入 Transaction State ，监听交易结果
+   - 这里会忽略错误码为 4001 的交易报错，这代表用户在钱包确认阶段拒绝了交易
 
-    ```ts
-    transactions: {
-      '4': {
-        '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
-          hash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
-          summary: 'Add 0.102 ETH and 100 HH',
-          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-          addedTime: 1629266981813,
-          lastCheckedBlockNumber: 9135086
-        }
-      }
-    }
-    ```
+   ```ts
+   transactions: {
+     '4': {
+       '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
+         hash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
+         summary: 'Add 0.102 ETH and 100 HH',
+         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+         addedTime: 1629266981813,
+         lastCheckedBlockNumber: 9135086
+       }
+     }
+   }
+   ```
 
 7. 交易确认，用户收到确认提示窗
 
-    ```ts
-    transactions: {
-      '4': {
-        '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
-            hash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
-            summary: 'Add 0.102 ETH and 100 HH',
-            from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-            addedTime: 1629266981813,
-            lastCheckedBlockNumber: 9135086,
-            // 新增交易结果和确认时间戳
-            receipt: {
-              blockHash: '0xb1d4344f79f556848ce4221eb614f3d3e163cfa517ea43a09ea92f4a59c88bc0',
-              blockNumber: 9135087,
-              contractAddress: null,
-              from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-              status: 1,
-              to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-              transactionHash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
-              transactionIndex: 10
-            },
-            confirmedTime: 1629267005284
-          }
-        }
-      }
-    }
-    ```
+   ```ts
+   transactions: {
+     '4': {
+       '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f': {
+           hash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
+           summary: 'Add 0.102 ETH and 100 HH',
+           from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+           addedTime: 1629266981813,
+           lastCheckedBlockNumber: 9135086,
+           // 新增交易结果和确认时间戳
+           receipt: {
+             blockHash: '0xb1d4344f79f556848ce4221eb614f3d3e163cfa517ea43a09ea92f4a59c88bc0',
+             blockNumber: 9135087,
+             contractAddress: null,
+             from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+             status: 1,
+             to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+             transactionHash: '0x618820509d3d93a9fab799322a1671e2efed7c9c0273d673ea834be7f93a721f',
+             transactionIndex: 10
+           },
+           confirmedTime: 1629267005284
+         }
+       }
+     }
+   }
+   ```
 
 ## RemoveLiquidity
 
@@ -651,60 +651,63 @@ transactions: {}
 ### 交互流程
 
 1. 移除流动性在用户输入数据环节和添加流动性不同
-    - 移除有两种模式
-    - Simple mode : 用户直接拖动滑块控制 `typedValue`
-    - Detail mode 有两种种情况：
-        - 用户直接输入移除的流动性数量(这里是`HH:WETH`栏)，`independentField` 变成 `LIQUIDITY`
-        - 用户直接输入要移除的token数量，`independentField` 变成 `CURRENCY_A | CURRENCY_B`
 
-    ```ts
-    // 拖动滑块输入百分比
-    burn: {
-      independentField: 'LIQUIDITY_PERCENT',
-      typedValue: '25'
-    }
-    // 直接输入流动性数量
-    burn: {
-      independentField: 'LIQUIDITY',
-      typedValue: '0.0000000175505'
-    }
-    // 直接输入tokenA数量
-     burn: {
-      independentField: 'CURRENCY_A',
-      typedValue: '10.6'
-    }
-    ```
-2. 输入的变化会触发 `useDerivedBurnInfo` 更新移除流动性的数据，自动计算要移除的百分比，流动性数量，token数量
-    - 过程和添加流动性类似
-    - 主要区别在于区别输入模式不同的三种情况
+   - 移除有两种模式
+   - Simple mode : 用户直接拖动滑块控制 `typedValue`
+   - Detail mode 有两种种情况：
+     - 用户直接输入移除的流动性数量(这里是`HH:WETH`栏)，`independentField` 变成 `LIQUIDITY`
+     - 用户直接输入要移除的 token 数量，`independentField` 变成 `CURRENCY_A | CURRENCY_B`
+
+   ```ts
+   // 拖动滑块输入百分比
+   burn: {
+     independentField: 'LIQUIDITY_PERCENT',
+     typedValue: '25'
+   }
+   // 直接输入流动性数量
+   burn: {
+     independentField: 'LIQUIDITY',
+     typedValue: '0.0000000175505'
+   }
+   // 直接输入tokenA数量
+   burn: {
+     independentField: 'CURRENCY_A',
+     typedValue: '10.6'
+   }
+   ```
+
+2. 输入的变化会触发 `useDerivedBurnInfo` 更新移除流动性的数据，自动计算要移除的百分比，流动性数量，token 数量
+
+   - 过程和添加流动性类似
+   - 主要区别在于区别输入模式不同的三种情况
 
 3. 输入的变化还会导致清空 `signatureData`，这是存储钱包签名的字段，界面会显示两个按钮 `Approve` 和 `Remove`，后者现在是置灰状态
 
 4. 点击`Approve`按钮，调用 `onAttemptToApprove` 生成 v,r,s 签名，存入 `signatureData`，界面显示签名成功状态，此时未发交易
 
-5. 点击`Remove`按钮，调用 `onRemove`，发送移除交易，向Transaction state推送交易记录，并监听结果,过程和添加流动性类似
+5. 点击`Remove`按钮，调用 `onRemove`，发送移除交易，向 Transaction state 推送交易记录，并监听结果,过程和添加流动性类似
 
-    ```ts
-    transactions: {
-      '4': {
-        '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366': {
-          hash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
-          summary: 'Remove 49.5 HH and 0.0506 ETH',
-          from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-          addedTime: 1629279660975,
-          lastCheckedBlockNumber: 9135930,
-          receipt: {
-            blockHash: '0xec98d54353ab2f5985837f26d956cead77917e37904397063a757de960b62463',
-            blockNumber: 9135932,
-            contractAddress: null,
-            from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
-            status: 1,
-            to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-            transactionHash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
-            transactionIndex: 9
-          },
-          confirmedTime: 1629279682092
-        }
-      }
-    }
-    ```
+   ```ts
+   transactions: {
+     '4': {
+       '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366': {
+         hash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
+         summary: 'Remove 49.5 HH and 0.0506 ETH',
+         from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+         addedTime: 1629279660975,
+         lastCheckedBlockNumber: 9135930,
+         receipt: {
+           blockHash: '0xec98d54353ab2f5985837f26d956cead77917e37904397063a757de960b62463',
+           blockNumber: 9135932,
+           contractAddress: null,
+           from: '0xe45d43FEb3F65B4587510A68722450b629154e6f',
+           status: 1,
+           to: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+           transactionHash: '0xc06106f4de3c1192ceccd8fe7692ee48621f87e2d6a37330522546a89c18c366',
+           transactionIndex: 9
+         },
+         confirmedTime: 1629279682092
+       }
+     }
+   }
+   ```

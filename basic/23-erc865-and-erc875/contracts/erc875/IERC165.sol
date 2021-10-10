@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-contract ERC165 {
+contract IERC165 {
     /// @notice Query if a contract implements an interface
     /// @param interfaceID The interface identifier, as specified in ERC-165
     /// @dev Interface identification is specified in ERC-165. This function

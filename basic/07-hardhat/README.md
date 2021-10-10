@@ -11,35 +11,56 @@ Hardhat的很多功能都来自于插件，而作为开发者，你可以自由�
 https://www.ruanyifeng.com/blog/2019/02/npx.html  
 npx 想要解决的主要问题，就是调用项目内部安装的模块。  
 
-## 操作步骤
-- 1 创建项目：
-```
-npx hardhat  
-```
+- ethers.js 和 hardhat 基础使用讲解  
+https://www.bilibili.com/video/BV1Pv411s7Nb  
 
-- 2 编译合约
+## 操作步骤
+
+- 1 安装nodejs （略）
+
+
+- 2 安装项目依赖：
+
+	```
+	npm install   
+	```
+
+- 3 配置私钥和网络：
+
+	windows:
+	```
+	copy .env.example .env 
+	```
+	/ linux:
+	```
+	cp  .env.example .env
+	```
+	添加自己的私钥和地址
+
+- 4 编译合约
 ```
  npx hardhat compile
 ```
 
-- 3 跑测试：(内置节点为Hardhat Network)
+- 5 跑测试：(内置节点为Hardhat Network)
 ```
  npx hardhat test 
 ```
 
-- 4 console.log调试合约:
-合约引入：
-```
-import "hardhat/console.sol";
-```
+- 6 console.log调试合约:
 
-- 5 部署到测试网：
+	合约引入：
+	```
+	import "hardhat/console.sol";
+	```
 
-hardhat.config.js 文件中添加一个network条目
+- 7 部署到测试网：
 
-```
-npx hardhat run scripts/deploy.js --network <network-name>
-```
+	hardhat.config.js 文件中添加一个network条目
+
+	```
+	npx hardhat run scripts/deploy.js --network <network-name>
+	```
 
 ## 参考文档  
 hardhat官方文档: https://hardhat.org/guides/project-setup.html   

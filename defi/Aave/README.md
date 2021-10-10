@@ -1,2 +1,0 @@
-- <https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade>
-- <https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol>

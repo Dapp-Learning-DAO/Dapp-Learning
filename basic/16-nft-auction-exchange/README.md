@@ -7,8 +7,9 @@
 
 ## 操作步骤  
 - 配置私钥  
-在 .env 中放入的 4 个私钥，格式如下:
+在 .env 中放入的 如下配置，格式如下:
 ```
+INFURA_ID=yyyyyyyy
 PRIVATE_KEY_MAIN=xxxxx
 PRIVATE_KEY_ALICE=yyyyy
 PRIVATE_KEY_BOB=ttttt
@@ -25,9 +26,19 @@ ipfs daemon
 npx hardhat run scripts/upload.js --network localhost
 npx hardhat run scripts/react_app_contract.js --network localhost
 
+- 配置参数  
+react 启动的时候会做一些校验, 这些校验会导致 react 启动失败, 所以这里需要进行下配置跳过这些不必要的检查.
+在 .sample.env 配置中已经进行了配置, 这里只需要把配置文件复制下即可.  
+```
+cd react-app
+cp .env.example .env
+```
+
 - 启动前端  
+```
 yarn install
 yarn start
+```
 
 - MetaMask 链接本地节点  
 切换 MetaMask 账户链接网路为 localhost
@@ -51,15 +62,18 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
 使用新的账户, 对 Auction 的图片进行 Bid , 成功购买之后, 可以在 "yourcollectibles" 中查看购买到的资产
 
 
- ## 测试步骤：
- 
-  1. 新建sk-alice.txt, sk-bob.txt文件；存储私钥  
-  
-  2 功能AuctionFixedPrice.sol 定价拍卖    AuctionUnfixedPrice.sol 不定价拍卖。  
-    npx hardhat test   
-   
-  3 script下有相应合约测试代码。  
-    npx hardhat run scripts/auction-fix-price-script.js --network kovan
+ ## 合约测试步骤：
+- 执行单元测试   
+AuctionFixedPrice.sol : 定价拍卖  
+AuctionUnfixedPrice.sol 不定价拍卖
+```
+npx hardhat test
+```
+
+- 执行 script 下的脚本    
+```  
+npx hardhat run scripts/auction-fix-price-script.js --network kovan
+```
 
 
 
@@ -69,6 +83,7 @@ Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就
  https://github.com/ethers-io/ethers.js/issues/368    
  虚拟机节点时间戳问题：
  https://ethereum.stackexchange.com/questions/86633/time-dependent-tests-with-hardhat  
+ Opensea 使用的 Wyvern Protocol: https://github.com/wyvernprotocol/wyvern-v3
 
  https://explorer-mainnet.maticvigil.com/address/0x8d1566569d5b695d44a9a234540f68D393cDC40D/contracts  
  https://github.com/ssteiger/Ethereum-NFT-Store-with-Dutch-Auctions  

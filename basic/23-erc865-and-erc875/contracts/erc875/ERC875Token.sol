@@ -2,7 +2,7 @@ pragma solidity ^0.4.25;
 
 import "./IERC875.sol";
 
-contract ERC875Token is ERC875 {
+contract ERC875Token is IERC875 {
     uint totalTickets;
     mapping(address => uint256[]) inventory;
     uint16 ticketIndex = 0; //to track mapping in tickets
@@ -77,6 +77,17 @@ contract ERC875Token is ERC875 {
         seller.transfer(msg.value);
     }
 
+    function verify(uint256 expiry,
+        uint256[] tokenIndices,
+        uint8 v,
+        bytes32 r,
+        bytes32 s) public payable
+        {
+            bytes12 prefix = "ERC800-CNID1";
+            bytes32 message = encodeMessage(prefix, msg.value, expiry, tokenIndices);
+            address seller = ecrecover(message, v, r, s);
+        }
+
 
     //must also sign in the contractAddress
     //prefix must contain ERC and chain id
@@ -130,6 +141,11 @@ contract ERC875Token is ERC875 {
     function getAmountTransferred() public view returns (uint)
     {
         return numOfTransfers;
+    }
+
+    function supportsInterface(bytes4 interfaceID) external view returns (bool)
+    {
+        return false;
     }
 
     function isContractExpired() public view returns (bool)

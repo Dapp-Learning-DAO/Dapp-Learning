@@ -1,0 +1,16 @@
+{
+  "name": "36-nft-filecoin",
+  "version": "1.0.0",
+  "description": "- <https://www.bilibili.com/video/BV1j5411w7MH> - <https://pinata.cloud/pinmanager> - <https://nft.storage>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "nft.storage": "^3.2.2"
+  },
+  "type": "module"
+}

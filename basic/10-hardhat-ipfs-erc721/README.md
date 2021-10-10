@@ -75,18 +75,22 @@ ipfs daemon
 在浏览器中输入地址 localhost:5001/webui 查看 IPFS 控制台
 
 ## 测试 IPFS 和 ERC721 
-1) 配置私钥
+1) 配置私钥  
 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
 
 2) 执行如下命令  
 ```angular2html
-npx hardhat run scripts/deploy.js --network kovan
+npx hardhat run scripts/deploy-ipfs.js --network kovan
 ```
-
+运行结束后，在 console 输出的日志中，最后一行打印出了你上传文件独有的 hash
+```bash
+> ...
+> IPFS URL of art.jpg is : /ipfs/${FILE_HASH}$
+```
 3) 对比文件  
-在当前目录下执行如下命令
-```angular2html
-ipfs cat /ipfs/QmYZ4YXeF8ph17MDypDu8BnT2mFMM5mdyCVSpuQcajjy3x > art2.jpg
+在当前目录下执行如下命令，其中 *${FILE_HASH}$* 在第二步中获得
+```bash
+ipfs cat /ipfs/${FILE_HASH}$ > art2.jpg
 ```
 
 之后，可以对比下 art.jpg 和 art2.jpg 文件显示的内容是否一致
@@ -103,5 +107,5 @@ npx hardhat flatten ./contracts/MYERC721.sol > MYERC721.sol
 
 
 ## 参考文档  
-https://docs.ipfs.io/install/command-line/#official-distributions  
-https://mp.weixin.qq.com/s?__biz=MzU5NzUwODcyMw==&mid=2247487056&idx=1&sn=d671430080280ddc58517f82ddb943e8&   chksm=fe53194cc924905aca2c26587b19635a7fd55bf00dd6150cdcc8966bc71bbb035e7ea3bb6910&cur_album_id=1540931513159057418&scene=189#rd  
+- https://docs.ipfs.io/install/command-line/#official-distributions  
+- https://mp.weixin.qq.com/s/3DshdSAzifyP9-CQZ-ORfw

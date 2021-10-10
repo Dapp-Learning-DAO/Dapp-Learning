@@ -89,12 +89,6 @@ mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔�
 
 尚未实现的测试事件
 
-- [ ] Should do some trades initiated onchain
-- [ ] Should place an order onchain, check availableVolume and amountFilled, then cancel
-- [ ] Should do a self trade and check available volume depletion
-- [ ] Should attempt some trades initiated onchain that should fail
-- [ ] Should change the account levels address and fail
-- [ ] Should change the account levels address and succeed
 - [ ] Should change the fee account and fail
 - [ ] Should change the fee account and succeed
 - [ ] Should change the make fee and fail

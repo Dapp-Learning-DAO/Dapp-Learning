@@ -11,7 +11,7 @@ const privateKey = process.env.PRIVATE_KEY;
 
 const web3Provider = new ethers.providers.InfuraProvider(
   "kovan",
-  "0aae8358bfe04803b8e75bb4755eaf07"
+  process.env.INFURA_ID
 );
 
 const wallet = new ethers.Wallet(privateKey, web3Provider);
@@ -20,7 +20,7 @@ let address = "0x54A65DB20D7653CE509d3ee42656a8F138037d51";
 
 let bal;
 
-// support eip1159
+// support eip1559
 async function getGasPrice() {
   return await web3Provider.getFeeData().then(async function (res) {
     let maxFeePerGas = res.maxFeePerGas;

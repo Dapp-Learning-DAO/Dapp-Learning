@@ -17,7 +17,7 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Factor
         require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
         require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
         //得到UniswapV2Pair的字节码(可在remix编译页面按钮下 选中pair合约，再点下面的Bytecode复制，文本中的object字段的值就是字节码)
-使用create2创建合约(这没细究，套用格式，包括pairFor)
+        使用create2创建合约(这没细究，套用格式，包括pairFor)
         bytes memory bytecode = type(UniswapV2Pair).creationCode;
         //使用create2创建合约(这没细究，套用格式，包括pairFor)
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
@@ -35,7 +35,7 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Factor
         emit PairCreated(token0, token1, pair, allPairs.length);
     }
     //针对init code hash说明  这个hash是由pair的字节码 keccak256得来的
-//每次使用remix部署的时候，可能会变，所以每次都取到bytecode/object中值进行keccak256,然后替换router中的pairFor中的code
+    //每次使用remix部署的时候，可能会变，所以每次都取到bytecode/object中值进行keccak256,然后替换router中的pairFor中的code
     function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
         pair = address(uint(keccak256(abi.encodePacked(

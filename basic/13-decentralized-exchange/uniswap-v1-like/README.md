@@ -1,43 +1,11 @@
 # uniswap-v1-like
 
-> 仿 uniswap-v1 项目(合约部分)，文档内容和相关代码来自于 Ivan Kuznetsov 的 《Programming DeFi: Uniswap》 系列教程，这里只节选了部分原文，翻译并加入了一点点的个人理解。原教程链接见最下方，强烈建议跟着原教程的步骤撸一遍，风味最佳。
+> 由于源项目是用 Vyper 开发合约，这里会使用 solidity 0.8.0 仿写一个 uniswap-v1 (合约部分)。本文内容和相关代码来自于 Ivan Kuznetsov 的 《Programming DeFi: Uniswap》 系列教程，这里只节选了部分原文，翻译并加入了一点点的个人理解。原教程链接见最下方，强烈建议跟着原教程的步骤撸一遍，风味最佳。
 
 截至 2021 年 6 月，Uniswap 已推出三个版本（`V1`, `V2`, `V3`）。
 
 `V1` 只允许在以太币和代币之间进行交换。如果需要进行非 eth 之间的交换，则需要通过 eth 中转。
 我们将尝试了解 `V1` 的经济机制，找出、分解、学习和构建它们的核心机制。
-
-## 代码使用方法
-
-### 安装
-
-```sh
-yarn install
-```
-
-### 编译合约
-
-```sh
-yarn build
-```
-
-或
-
-```sh
-npx hardhat compile
-```
-
-### 运行测试
-
-```sh
-yarn test
-```
-
-或
-
-```sh
-npx hardhat test
-```
 
 ## 经济模型
 
@@ -112,11 +80,13 @@ x∗y=k
 每一笔交易都会改变两个代币的储备量，无论储备量如何变化， `k` 都应该保持不变。
 
 <!-- $$(x + \Delta x)(y - \Delta y) = xy$$ -->
+
 ![(x + \Delta x)(y - \Delta y) = xy](./images/uniswap-v1-like-math01.png)
 
 这里的意思是用 `Delta x` 数量的`token x` 交换出 `Delta y` 数量的 `token y`。所以计算 `Delta y` 的公式为：
 
 <!-- $$\Delta y = \frac{y \Delta x} {x + \Delta x}$$ -->
+
 ![\Delta y = \frac{y \Delta x} {x + \Delta x}](./images/uniswap-v1-like-math02.png)
 
 请注意，我们现在得到的 `Delta y` 是数量而不是价格。计算数量的方法对应 `Exchange.getAmount()`。
@@ -130,14 +100,14 @@ x∗y=k
 
 ```js
 // getTokenAmount
-await exchange.getTokenAmount(toWei(1)) // 1.998001998001998001
-await exchange.getTokenAmount(toWei(100)) // 181.818181818181818181
-await exchange.getTokenAmount(toWei(1000)) // 1000.0
+await exchange.getTokenAmount(toWei(1)); // 1.998001998001998001
+await exchange.getTokenAmount(toWei(100)); // 181.818181818181818181
+await exchange.getTokenAmount(toWei(1000)); // 1000.0
 
 // getEthAmount
-await exchange.getEthAmount(toWei(2)) // 0.999000999000999
-await exchange.getEthAmount(toWei(100)) // 47.619047619047619047
-await exchange.getEthAmount(toWei(2000)) // 500
+await exchange.getEthAmount(toWei(2)); // 0.999000999000999
+await exchange.getEthAmount(toWei(100)); // 47.619047619047619047
+await exchange.getEthAmount(toWei(2000)); // 500
 ```
 
 如上所示，当我们试图掏空池子的时候，却只得到预期的一半。
@@ -219,7 +189,9 @@ function ethToTokenSwap(uint256 _minTokens) public payable {
 
 将以太币换成代币意味着将一定数量的以太币（存储在 `msg.value` 变量中）发送到可支付的合约函数并获得代币作为回报。请注意，我们需要 `msg.value` 从合约的余额中减去，因为在调用该函数时，发送的以太币已经添加到其余额中。
 
-这里的另一个重要变量是 `__minTokens` ——这是用户想要用以太币换取代币的最小数量。此金额在 UI 中计算，并且始终包括滑点容差；用户同意至少获得那么多但不少于。这是一个非常重要的机制，可以保护用户免受前端机器人的攻击，这些机器人试图拦截他们的交易并修改池余额以获取利润。
+这里的另一个重要变量是 `_minTokens`—— 这是用户想要用以太币换取代币的最小数量。此金额在 UI 中计算,使用用户设置的最大滑点来计算，即用户发送的交易其最小成交量是 `期望的成交量 * (1 - Slippage)` 。这是一个非常重要的机制，可以保护用户免受抢跑机器人(front-running bots)的攻击。
+
+> front-running bots 会在用户订单前面插入一个相同方向的订单，比如当用户想买时，在用户订单前面插入一个同样买入的订单，当 bots 的订单完成后，再执行用户订单，必然会导致用户承受更高的价格，而当用户订单完成后，价格又已上涨，bot 通常会将之前的订单卖出，赚取其中的利差。当用户设置了最小成交量之后，当价格偏差太大，以太坊会停止执行该交易，能有效的避免 front-running bots 攻击
 
 ```solidity
 // 使用token购买eth
@@ -319,7 +291,7 @@ function addLiquidity(uint256 _tokenAmount)
 
         IERC20 token = IERC20(tokenAddress);
         token.transferFrom(msg.sender, address(this), tokenAmount);
-       
+
         // 根据注入的eth流动性 与 合约eth储备量 的比值分发 LP token
         uint256 liquidity = (totalSupply() * msg.value) / ethReserve;
         _mint(msg.sender, liquidity);   //  ERC20._mint() 向流动性提供者发送 LP token
@@ -357,7 +329,7 @@ function getAmount(
 
     // 收取1%的手续费
     // solidity 不支持浮点运算，所以分子和分母同时 × 100
-    uint256 inputAmountWithFee = inputAmount * 99;
+    uint256 inputAmountWithFee = inputAmount * 99;  // 100 - 1 扣除手续费
     uint256 numerator = inputAmountWithFee * outputReserve;
     uint256 denominator = (inputReserve * 100) + inputAmountWithFee;
 
@@ -388,11 +360,29 @@ function removeLiquidity(uint256 _amount)
 ```
 
 当流动性被移除时，它会以以太币和代币的形式返回，当然，它们的数量是平衡的。
-这是造成**无常损失**的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
+这是造成**无常损失**(Impermanence loss)的地方：随着以美元计价的价格变化，储备比率随时间变化。当流动性被移除时，余额可能与流动性存入时的余额不同。这意味着您将获得不同数量的以太币和代币，它们的总价格可能低于您将它们放在钱包中的价格。
 
 ```math
 removedAmount = reserve * (amountLP / totalAmountLP)
 ```
+
+### 理解无常损失
+
+举个栗子：
+
+1. 假定现在 1 ETH 价值 100 DAI, 你添加了 1 ETH 和 100 DAI 流动性, 其资产总价值为 200 DAI `assets = 1 * 100 + 100`
+2. 一段时间后，ETH 价格上涨到 150 DAI, 那么此时池子中两者数量的比例应为 ETH:DAI = 1:1.5 ，因为价格就是两者数量的比值
+3. 然后利用 `x * y = k` 计算两者数量，`k` 是一个恒定的值，所以可以由第 1 步添加时的数值计算 k = 1 \* 100 = 100，然后根据第 2 步已知的比例计算两者数量，ETH 约 0.8165 个， DAI 约 122.47 个，两者的乘积应还是 100 （因为小数点精度的取舍，会有一点误差）
+4. 这个时候你的流动性按照 DAI 来计价是 244.94 `assets = 150 * 0.816 + 122.4`，浮盈 44.94（暂时不考虑手续费的收益），看起来收获颇丰
+5. 但是等一下，如果你一开始并没有添加流动性，而是一直持有 1 ETH 和 100 DAI，然后等到 ETH 价格涨到 150 的时候，你的资产按照 DAI 计价就是 250 了，比第 4 步还要多 5DAI 左右的利润。这部分收益的差距就是无常损失。
+
+为什么会有无常损失？
+
+向市场提供流动性，即成为做市商，实际上是和市场中的用户做对手盘。而 AMM（自动化做市商）是被动的和市场中的用户做对手盘，即当市场中大部分人看好 ETH 后市，用 DAI 买入 ETH，你的流动性池子会被动的增加 DAI 而减少 ETH.
+
+所以，提供流动性就代表了总是和市场做反向的操作，总是倾向去持有更多的弱势资产（当 ETH 上涨为强势资产，DAI 就是弱势资产）。于是当 ETH 上涨，你的流动性会不断提前抛出 ETH，而拿到更多的 DAI，这些被提前抛出的 ETH 就成了无常损失的来源，即这个时候无常损失可以理解为你在 ETH 上的踏空损失。
+
+如果你想更深入了解无常损失，可以看这篇博文 [淺談無常損失 (Impermanent Loss) 及其避險方式](https://medium.com/@cic.ethan/%E6%B7%BA%E8%AB%87%E7%84%A1%E5%B8%B8%E6%90%8D%E5%A4%B1-impermanent-loss-%E5%8F%8A%E5%85%B6%E9%81%BF%E9%9A%AA%E6%96%B9%E5%BC%8F-2ec23978b767)
 
 ### LP 奖励和无常损失演示
 
@@ -401,28 +391,60 @@ removedAmount = reserve * (amountLP / totalAmountLP)
 1. 首先，流动性提供者存入 100 个以太币和 200 个代币。这使得 1 个代币等于 0.5 个以太币，而 1 个以太币等于 2 个代币。
 
    ```js
-   exchange.addLiquidity(toWei(200), { value: toWei(100) })
+   exchange.addLiquidity(toWei(200), { value: toWei(100) });
    ```
 
 2. 用户交换 10 个以太币并期望获得至少 18 个代币。事实上，他们得到了 18.0164 个代币。它包括滑点（交易量相对较大）和 1% 的费用。
 
    ```js
-   exchange.connect(user).ethToTokenSwap(toWei(18), { value: toWei(10) })
+   exchange.connect(user).ethToTokenSwap(toWei(18), { value: toWei(10) });
    ```
 
 3. 流动性提供者然后移除他们的流动性
 
    ```js
-   exchange.removeLiquidity(toWei(100))
+   exchange.removeLiquidity(toWei(100));
    ```
 
 4. 流动性提供者获得 109.9 个以太币（包括交易费用）和 181.9836 个代币。如您所见，这些数字与存入的数字不同：我们获得了用户交易的 10 个以太币，但必须提供 18.0164 个代币作为交换。但是，该金额包括用户支付给我们的 1% 的费用。由于流动性提供者提供了所有流动性，他们获得了所有费用。
+
+## 代码使用方法
+
+### 安装
+
+```sh
+yarn install
+```
+
+### 编译合约
+
+```sh
+yarn build
+```
+
+或
+
+```sh
+npx hardhat compile
+```
+
+### 运行测试
+
+```sh
+yarn test
+```
+
+或
+
+```sh
+npx hardhat test
+```
 
 ## 可能遇到的问题
 
 ### gas 费用测试不通过
 
-如果遇到 gas 费用与预期不一致的情况，请先检查 `hardhat.config.js`。因为 hardhat 的 gasPrice 默认是 8000000000,这里我们设置 1000，便于计算
+如果遇到 gas 费用与预期不一致的情况，请先检查 `hardhat.config.js`。因为 hardhat 的 gasPrice 默认是 8000000000,这里我们设置 1000000000，便于计算
 
 ### 账户余额不足测试不通过
 
@@ -435,7 +457,7 @@ module.exports = {
       accounts: {
         accountsBalance: utils.parseEther("1000000").toString(),
       },
-      gasPrice: 1000,
+      gasPrice: GAS_PRICE.toNumber(),   // GAS_PRICE = BigNumber.from("1000000000")
     },
   },
   solidity: "0.8.4",

@@ -1,0 +1,35 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.18.0",
+    "@graphprotocol/graph-ts": "0.18.0",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/hardhat": "2.3.0",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^14.14.36",
+    "@apollo/client": "3.4.13",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4",
+    "graphql": "^15.6.0",
+    "hardhat": "^2.2.1",
+    "sol-merger": "^3.1.0",
+    "ts-node": "^9.1.1",
+    "tsconfig": "^7.0.0",
+    "tsconfig-paths": "^3.10.1",
+    "typechain": "^4.0.0",
+    "typescript": "^4.2.3",
+    "@types/react": "17.0.24",
+    "@types/react-dom": "17.0.9",
+    "urql": "2.0.5",
+    "node-fetch": "3.0.0",
+    "graphql-request": "3.5.0",
+    "@aave/protocol-js": "4.1.0",
+    "@typechain/ethers-v5": "7.1.2"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
+}

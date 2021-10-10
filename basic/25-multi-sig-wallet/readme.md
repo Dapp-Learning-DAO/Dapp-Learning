@@ -98,6 +98,8 @@ npx hardhat run scripts/deploy.js  --network kovan
 
 
 ## 参考链接
-https://zhuanlan.zhihu.com/p/337823524
-https://github.com/gnosis/MultiSigWallet/tree/master/contracts
-https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c
+https://zhuanlan.zhihu.com/p/337823524  
+https://github.com/gnosis/MultiSigWallet/tree/master/contracts  
+https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c  
+gnosis使用：https://gnosis-safe.io/app/#/welcome  
+gnosis合约：https://polygonscan.com/address/0xa6b71e26c5e0845f74c812102ca7114b6a896ab2#code 

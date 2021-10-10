@@ -78,3 +78,8 @@ sol 的测试文件会报失败。所以，这里我们连接到 infura 进行�
 ```
 truffle test ./test/simpletoken.js --network kovan
 ```
+
+
+## 参考资料
+> https://learnblockchain.cn/docs/solidity/contracts.html
+> https://solidity-cn.readthedocs.io/zh/develop/

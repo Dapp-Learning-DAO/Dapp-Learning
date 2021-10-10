@@ -177,8 +177,8 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           null
         // 比较该交易路径是否可以使用更少的输入数量
         // BETTER_TRADE_LESS_HOPS_THRESHOLD = 50 / 10000 (千五)
-        // 这里是比较 bestTradeSoFar * 100.5% < currentTrade
-        // 由于i是递增的，所以这里 currentTrade 会比 bestTradeSoFar 长度少
+        // 这里是比较 currentTrade * 100.5% < bestTradeSoFar
+        // 由于i是递增的，所以这里 bestTradeSoFar 会比  currentTrade 长度少
         // 这里的阈值应该是考虑交易次数增加的gas费用
         if (isTradeBetter(bestTradeSoFar, currentTrade, BETTER_TRADE_LESS_HOPS_THRESHOLD)) {
           bestTradeSoFar = currentTrade
@@ -203,7 +203,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
   // 默认的中转token
   // 主网有 WETH, DAI, USDC, USDT, COMP, MKR, WBTC
-  // 测试网 只有 WETH 
+  // 测试网 只有 WETH
   const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
 
   const [tokenA, tokenB] = chainId
@@ -225,6 +225,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
       tokenA && tokenB
         ? [
             // the direct pair
+            // 单个交易池，返回两个token本身组成的交易对
             [tokenA, tokenB],
             // tokenA 和其他bases token组成的交易对
             ...bases.map((base): [Token, Token] => [tokenA, base]),
@@ -259,13 +260,16 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const allPairs = usePairs(allPairCombinations)
 
   // only pass along valid pairs, non-duplicated pairs
+  // 校验合法性和去重
   return useMemo(
     () =>
       Object.values(
         allPairs
           // filter out invalid pairs
+          // 交易池子需要存在
           .filter((result): result is [PairState.EXISTS, Pair] => Boolean(result[0] === PairState.EXISTS && result[1]))
           // filter out duplicated pairs
+          // 去重
           .reduce<{ [pairAddress: string]: Pair }>((memo, [, curr]) => {
             memo[curr.liquidityToken.address] = memo[curr.liquidityToken.address] ?? curr
             return memo
@@ -278,9 +282,9 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
 ### bestTradeExactOut
 
-给定一组交易对数组，在其中寻找所有可能的交易路径，并进行最优排序，第一个元素为最优的交易路径
+限定使用交易路径的长度(交易对数量)，在交易对中寻找所有可能的交易路径，并进行最优排序，第一个元素为最优的交易路径
 
-- 这是sdk中的方法`@uniswap/sdk/Trade.bestTradeExactOut`
+- 这是sdk中的方法 `@uniswap/sdk/Trade.bestTradeExactOut`
 - 该方法主要接受三个参数：交易对数组， 精确的输出数量，递归深度(交易路径的长度)
 - 遍历交易对数组，然后对每个交易对进行递归查找，找到头尾符合输入输出的路径会排序并插入到结果中
 - 最终返回一个交易路径组成的数组，第一个元素为最优的交易路径
@@ -738,6 +742,8 @@ export function useTransactionAdder(): (
 
 ### TransactionUpdater
 
+监听最近的交易历史，更新交易 state 与 UI
+
 ```ts
 // src/state/transactions/updater.tsx
 export default function Updater(): null {
@@ -753,7 +759,7 @@ export default function Updater(): null {
   // 显示交易确认弹窗的方法
   const addPopup = useAddPopup()
 
-  // 利用useEffect机制监听，一旦有依赖参数变化，触发useEffect方法更新交易记录
+  // 利用 useEffect 机制监听，一旦有依赖参数变化，触发 useEffect 方法更新交易记录
   useEffect(() => {
     if (!chainId || !library || !lastBlockNumber) return
 
@@ -805,7 +811,16 @@ export default function Updater(): null {
             console.error(`failed to check transaction hash: ${hash}`, error)
           })
       })
-  }, [chainId, library, transactions, lastBlockNumber, dispatch, addPopup])
+  }, [
+    // 会在以下状态发生变化时，再次执行上述交易监听请求
+    // 其中，导致更新最多的是 lastBlockNumber
+    chainId,  // 当前 Chain ID
+    library,  // web3 provider
+    transactions,  // 交易记录
+    lastBlockNumber,  // 最新区块
+    dispatch,  // dispatch 函数
+    addPopup  // 添加弹窗函数
+  ])
 
   return null
 }

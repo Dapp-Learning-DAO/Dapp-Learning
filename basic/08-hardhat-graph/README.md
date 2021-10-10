@@ -15,8 +15,8 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 - Manifest 清单(subgraph.yaml) - 定义配置项
 - Schema 模式(schema.graphql) - 定义数据 , 参考文档 https://graphql.cn/learn/
-- Mapping 映射(mapping.ts) - 定义事件到数据的转换
-
+- Mapping 映射(mapping.ts) - 定义事件到数据的转换 
+   
 
 ## 操作步骤
 
@@ -34,7 +34,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 3. 部署合约(用于测试graph的简单合约)
 
     ```
-    npx hardhat run ./scripts/deploy.js --network kovan
+    npx hardhat run ./scripts/deploy.js --network ropsten
     ```
 
     输出信息类似如下:
@@ -61,10 +61,10 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 5. 开发和部署 subgraph  
   
-    先使用 yarn 在全局安装 Graph CLI
+    先使用 yarn 在全局安装 Graph CLI（注意，此处需安装0.21.0版本，最新版0.22.0无法部署在测试网上）
 
     ```bash
-    yarn global add @graphprotocol/graph-cli
+    yarn global add @graphprotocol/graph-cli@0.21.0
     ```
 
 6. 初始化配置:
@@ -74,7 +74,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
     ```
 
     - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
-    - Ethereum network 这里选择 kovan
+    - Ethereum network 这里选择 ropsten
     - "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
     - 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可(`./abis/SimpleToken.json`)
     - 如果yarn install 失败(例如网络错误)，可以进入新生成的项目目录，手动安装npm依赖
@@ -242,6 +242,62 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 ![query_subgraph](./imgs/query_subgraph.png)
 
+## Graph Node本地搭建
+1） 搭建graph-node
+出于便捷的考虑，我们使用官方提供的docker compose来进行节点、数据库、IPFS的部署。
+
+ - 克隆 graph node( https://github.com/graphprotocol/graph-node/ )代码
+ - 进入 docker 目录
+ - 将 docker-compose.yml 中 ethereum 字段的值改为需要连接链的节点连接信息。
+ ```
+ graph-node:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修改
+      RUST_LOG: info
+ ```
+ >> 注意： graph-node连接的节点需要开启archive模式（启动节点时，添加flag --syncmode full --gcmode archive）。
+
+2） graph-node启动
+
+直接使用docker compose来进行启动
+```
+docker-compose -f docker-compose.yml up -d
+```
+
+3) 编译subgraph  
+进入subgraph的本地目录运行下列命令
+```
+graph codegen --output-dir src/types/
+graph build
+```
+
+4) 部署subgraph
+```
+graph create davekaj/SimpleToken --node http://127.0.0.1:8020
+
+graph deploy davekaj/SimpleToken --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020
+```
+  
+5) 可以使用GraphQL来进行查询数据。 
+
+
+
+
 ## subgraph
 
 subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数据访问模式。开发者可以选择直接使用别人已经部署[17]的 subgraph，或者自己定义并部署 subgraph。
@@ -273,11 +329,13 @@ https://github.com/graphprotocol/agora
 Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):
 https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad
 
-## to do
-
-在 thegraph 网站上支持字段过滤  
+## 参考文档  
 https://thegraph.com/  
 https://graphql.cn/learn/
 https://gql-guide.vercel.app/
 https://thegraph.com/docs/graphql-api
-新特性支持
+GraphGen——命令行工具，用于快速生成子图，由一些有 GraphGen 命令注释的 Solidity 接口文件组成。  
+https://medium.com/protean-labs/introducing-graphgen-a-subgraph-generator-for-the-graph-network-836fe0385336  
+
+Matchstick ——是 Limechain 做一个开发的单元测试框架，一个graph模拟节点，用于在沙盒环境中测试子图部署的映射逻辑  
+相关教程：https://limechain.tech/blog/matchstick-what-it-is-and-how-to-use-it/  
