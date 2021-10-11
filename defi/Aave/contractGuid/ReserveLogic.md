@@ -169,6 +169,29 @@ function _updateIndexes(
 
 ### updateRates
 
+更新利率的方法，稳定利率，浮动利率，每单位流动性收益率
+
+parameters:
+
+- reserve 需要更新的目标资产数据
+- reserveAddress 资产地址
+- aTokenAddress aToken 地址
+- liquidityAdded 增加的流动性数量
+- liquidityTaken 减少的流动性数量
+
+```solidity
+struct UpdateInterestRatesLocalVars {
+  address stableDebtTokenAddress;
+  uint256 availableLiquidity;
+  uint256 totalStableDebt;
+  uint256 newLiquidityRate;
+  uint256 newStableRate;
+  uint256 newVariableRate;
+  uint256 avgStableRate;
+  uint256 totalVariableDebt;
+}
+```
+
 ```solidity
 /**
   * @dev Updates the reserve current stable borrow rate, the current variable borrow rate and the current liquidity rate
@@ -183,20 +206,25 @@ function updateInterestRates(
   uint256 liquidityAdded,
   uint256 liquidityTaken
 ) internal {
+  // 初始化相关变量到缓存
   UpdateInterestRatesLocalVars memory vars;
 
+  // 缓存稳定债务的token地址
   vars.stableDebtTokenAddress = reserve.stableDebtTokenAddress;
 
+  // 缓存债务数量（不包含利息）和平均利率
   (vars.totalStableDebt, vars.avgStableRate) = IStableDebtToken(vars.stableDebtTokenAddress)
     .getTotalSupplyAndAvgRate();
 
   //calculates the total variable debt locally using the scaled total supply instead
   //of totalSupply(), as it's noticeably cheaper. Also, the index has been
   //updated by the previous updateState() call
+  // 债务总量（包含利息） = 债务总量（不含利息） * 利率累计值
   vars.totalVariableDebt = IVariableDebtToken(reserve.variableDebtTokenAddress)
     .scaledTotalSupply()
     .rayMul(reserve.variableBorrowIndex);
 
+  // 更新利率
   (
     vars.newLiquidityRate,
     vars.newStableRate,
@@ -211,6 +239,8 @@ function updateInterestRates(
     vars.avgStableRate,
     reserve.configuration.getReserveFactor()
   );
+
+  // 检查利率数值是否溢出
   require(vars.newLiquidityRate <= type(uint128).max, Errors.RL_LIQUIDITY_RATE_OVERFLOW);
   require(vars.newStableRate <= type(uint128).max, Errors.RL_STABLE_BORROW_RATE_OVERFLOW);
   require(vars.newVariableRate <= type(uint128).max, Errors.RL_VARIABLE_BORROW_RATE_OVERFLOW);
