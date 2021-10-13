@@ -3,4 +3,4 @@
 - <https://curve.fi/files/crypto-pools-paper.pdf>
 - <https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic>
 - curve投票  https://tokenbrice.xyz/crv-wars/#sdvecrv-vs-cvxcrv  
-
+- curve 原理 https://medium.com/@cic.ethan/%E6%B7%BA%E8%AB%87%E7%A9%A9%E5%AE%9A%E5%B9%A3%E4%BA%92%E6%8F%9B%E6%A9%9F%E5%88%B6-%E5%BE%9E-balancer-%E5%88%B0-curve-f638f29b33f9

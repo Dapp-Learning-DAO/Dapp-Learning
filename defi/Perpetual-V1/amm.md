@@ -172,6 +172,59 @@ function getAmmStates(address _amm) external view returns (AmmStates memory) {
 
 ```
 
+**calcPositionAfterLiquidityMigration**
+计算仓位根据流动性变化；
+```
+ function calcPositionAfterLiquidityMigration(
+        IAmm _amm,
+        Position memory _position,
+        uint256 _latestLiquidityIndex
+    ) internal view returns (Position memory) {
+        if (_position.size.toInt() == 0) {
+            _position.liquidityHistoryIndex = _latestLiquidityIndex;
+            return _position;
+        }
+        // get the change in Amm notional value
+        // notionalDelta = current cumulative notional - cumulative notional of last snapshot
+        IAmm.LiquidityChangedSnapshot memory lastSnapshot =
+            _amm.getLiquidityChangedSnapshots(_position.liquidityHistoryIndex);
+        SignedDecimal.signedDecimal memory notionalDelta =
+            _amm.getCumulativeNotional().subD(lastSnapshot.cumulativeNotional);
+        // update the old curve's reserve
+        // by applying notionalDelta to the old curve
+        Decimal.decimal memory updatedOldBaseReserve;
+        Decimal.decimal memory updatedOldQuoteReserve;
+        if (notionalDelta.toInt() != 0) {
+            Decimal.decimal memory baseAssetWorth =
+                _amm.getInputPriceWithReserves(
+                    notionalDelta.toInt() > 0 ? IAmm.Dir.ADD_TO_AMM : IAmm.Dir.REMOVE_FROM_AMM,
+                    notionalDelta.abs(),
+                    lastSnapshot.quoteAssetReserve,
+                    lastSnapshot.baseAssetReserve
+                );
+            updatedOldQuoteReserve = notionalDelta.addD(lastSnapshot.quoteAssetReserve).abs();
+            if (notionalDelta.toInt() > 0) {
+                updatedOldBaseReserve = lastSnapshot.baseAssetReserve.subD(baseAssetWorth);
+            } else {
+                updatedOldBaseReserve = lastSnapshot.baseAssetReserve.addD(baseAssetWorth);
+            }
+        } else {
+            updatedOldQuoteReserve = lastSnapshot.quoteAssetReserve;
+            updatedOldBaseReserve = lastSnapshot.baseAssetReserve;
+        }
+        // calculate the new position size
+        _position.size = _amm.calcBaseAssetAfterLiquidityMigration(
+            _position.size,
+            updatedOldQuoteReserve,
+            updatedOldBaseReserve
+        );
+        _position.liquidityHistoryIndex = _latestLiquidityIndex;
+        return _position;
+    }
+```
+
+
+
 ### 质押
 
 
