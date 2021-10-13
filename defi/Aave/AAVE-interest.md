@@ -63,7 +63,7 @@ Utilisation = 总借款 / (总存款+总借款)
 
 利率随供求关系变化的示意图：
 
-![](/images/aave/capital-utilisation-rate.png)
+![interest vs capital utilisation](./image/capital-utilisation-rate.png)
 
 这个图很清晰的说明了利率的变化:
 1. 当使用率不超过最佳使用率时, 利率 = 基本利率 + 使用率 * slope1-rate
