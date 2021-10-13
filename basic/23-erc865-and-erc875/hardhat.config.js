@@ -13,13 +13,13 @@ task("accounts", "Prints the list of accounts", async () => {
   }
 });
 
-function mnemonic() {
+function PRIVATEKEY() {
 
   return process.env.PRIVATE_KEY;
 
 }
 
-function mnemonicAlice() {
+function PRIVATEKEYAlice() {
 
   return process.env.PRIVATE_KEY_ALICE
 
@@ -56,26 +56,26 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic(),
-      mnemonicAlice()
+        PRIVATEKEY(),
+        PRIVATEKEYAlice()
       ],
     },
     kovan: {
       url: "https://kovan.infura.io/v3/" + + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
   },

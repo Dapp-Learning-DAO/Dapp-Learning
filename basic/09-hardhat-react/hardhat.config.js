@@ -7,7 +7,7 @@ require("./tasks/faucet");
 const fs = require("fs");
 require('dotenv').config()
 
-function mnemonic() {
+function PRIVATEKEY() {
 
   return process.env.PRIVATE_KEY;
  
@@ -27,25 +27,25 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic()
+        PRIVATEKEY()
       ],
     },
     kovan: {
       url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        mnemonic()
+        PRIVATEKEY()
       ],
     },
   }
