@@ -152,8 +152,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  建议先阅读DEFI经典书籍:  
    [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
-01. [UniswapV2](defi/Uniswap-V2/readme.md)
-02. [UniswapV3](defi/Uniswap-V3/readme.md)
+01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
+02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. [Aave](https://docs.aave.com/portal/) 
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -186,7 +186,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## Crypto 进阶  
 请先阅读书籍：
-[《图解密码技术》](https://book.douban.com/subject/26822106/)
+[《图解密码技术》](https://book.douban.com/subject/26822106/)    
 项目列表：
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
