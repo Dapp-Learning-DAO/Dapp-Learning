@@ -26,13 +26,13 @@
 
 然后，发送大额 token (比如 2000 ether) 到交易对，但不调用 `mint()`，而是直接调用 `sync()`，此时池子中 `totalSuppy` 为 1 wei，`reserve0` 和 `reserve1` 分别为 1 wei + 2000 ether
 
-攻击结束，此时流动性单价为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1%20+%202000%20\times%2010^{18})}{1}%20\approx%202000%20\times%2010^{18}" /> ，即约为 `2000 ether`
+攻击结束，此时流动性单价为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1%20%2B%202000%20\times%2010^{18})}{1}%20\approx%202000%20\times%2010^{18}" /> ，即约为 `2000 ether`
 
 换句话说，散户即使只想提供最小单位的 1 wei 流动性，也要付出 2000 ether 的 token，只能望洋兴叹了..
 
 根据白皮书公式 (7)
 
-<img src="https://render.githubusercontent.com/render/math?math=s_{m}%20=%20\frac{\sqrt{k_{2}}%20-%20\sqrt{k_{1}}}{5%20\cdot%20\sqrt{k_{2}}%20+%20\sqrt{k_{1}}}%20\cdot%20s_{1}" />
+<img src="https://render.githubusercontent.com/render/math?math=s_{m}%20=%20\frac{\sqrt{k_{2}}%20-%20\sqrt{k_{1}}}{5%20\cdot%20\sqrt{k_{2}}%20%2B%20\sqrt{k_{1}}}%20\cdot%20s_{1}" />
 
 又有 <img src="https://render.githubusercontent.com/render/math?math=\sqrt{k_{2}}%20\ggg%20\sqrt{k_{1}}" />，且 <img src="https://render.githubusercontent.com/render/math?math=s_{1}" /> 为 1，且计算时整数相除
 
@@ -65,7 +65,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
 
 为了避免攻击者通过 `burn()` 将流动性销毁，导致总流动性不低于 1000 的限制被绕过，代码还会从首次铸币者本应获得的流动性中扣除 1000 ，将其发往 `address(0)` 锁住，以此达成限制
 
-在这种限制下，如果重新执行攻击流程，流动性单价最大值为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1001%20+%202000%20\times%2010^{18})}{1001}%20\approx%202%20\times%2010^{18}" /> ，即约为 `2 ether`
+在这种限制下，如果重新执行攻击流程，流动性单价最大值为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1001%20%2B%202000%20\times%2010^{18})}{1001}%20\approx%202%20\times%2010^{18}" /> ，即约为 `2 ether`
 
 对散户而言，比起 `2000 ethen` 的单价，友好很多，终于可以参与了
 
@@ -231,11 +231,11 @@ Uniswap V2 使用基于时间权重的算数平均数，所以无法像 V1 一�
 
 priceA 算数平均数
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WAM}_{priceA}%20=%20\frac{10200}{1000}%20\times%20\frac{7}{20}%20+%20\frac{10300}{1000}%20\times%20\frac{8}{20}%20+%20\frac{10500}{1000}%20\times%20\frac{5}{20}%20\\%20=%20\frac{10200%20\times%207%20+%2010300%20\times%208%20+%2010500%20\times%205}{1000%20*%2020}%20\end{aligned}" />
+<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WAM}_{priceA}%20=%20\frac{10200}{1000}%20\times%20\frac{7}{20}%20%2B%20\frac{10300}{1000}%20\times%20\frac{8}{20}%20%2B%20\frac{10500}{1000}%20\times%20\frac{5}{20}%20\\%20=%20\frac{10200%20\times%207%20%2B%2010300%20\times%208%20%2B%2010500%20\times%205}{1000%20*%2020}%20\end{aligned}" />
 
 PriceB 调和平均数
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WHM}_{PriceB}%20=%20\frac{1}{\frac{\frac{7}{20}}{\frac{1000}{10200}}%20+%20\frac{\frac{8}{20}}{\frac{1000}{10300}}%20+%20\frac{\frac{5}{20}}{\frac{1000}{10500}}}%20=%20\frac{20}{\frac{7}{\frac{1000}{10200}}%20+%20\frac{8}{\frac{1000}{10300}}%20+%20\frac{5}{\frac{1000}{10500}}}%20\\%20=%20\frac{1000%20*%2020}{10200%20\times%207%20+%2010300%20\times%208%20+%2010500%20\times%205}%20\end{aligned}" />
+<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WHM}_{PriceB}%20=%20\frac{1}{\frac{\frac{7}{20}}{\frac{1000}{10200}}%20%2B%20\frac{\frac{8}{20}}{\frac{1000}{10300}}%20%2B%20\frac{\frac{5}{20}}{\frac{1000}{10500}}}%20=%20\frac{20}{\frac{7}{\frac{1000}{10200}}%20%2B%20\frac{8}{\frac{1000}{10300}}%20%2B%20\frac{5}{\frac{1000}{10500}}}%20\\%20=%20\frac{1000%20*%2020}{10200%20\times%207%20%2B%2010300%20\times%208%20%2B%2010500%20\times%205}%20\end{aligned}" />
 
 
 可见二者互为倒数
@@ -246,9 +246,9 @@ PriceB 调和平均数
 
 当然，假设使用几何平均数，那么存储一个价格足以，例如
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceA}%20=%20\sqrt[7+8+5]{{\frac{10200}{1000}}^7%20\times%20{\frac{10300}{1000}}^8%20\times%20{\frac{10500}{1000}}^5}" />
+<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceA}%20=%20\sqrt[7%2B8%2B5]{{\frac{10200}{1000}}^7%20\times%20{\frac{10300}{1000}}^8%20\times%20{\frac{10500}{1000}}^5}" />
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceB}%20=%20\sqrt[7+8+5]{{\frac{1000}{10200}}^7%20\times%20{\frac{1000}{10300}}^8%20\times%20{\frac{1000}{10500}}^5}" />
+<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceB}%20=%20\sqrt[7%2B8%2B5]{{\frac{1000}{10200}}^7%20\times%20{\frac{1000}{10300}}^8%20\times%20{\frac{1000}{10500}}^5}" />
 
 可见
 
