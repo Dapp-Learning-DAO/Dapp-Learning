@@ -117,6 +117,7 @@ Kleros 为所有问题提供快速、安全、可负担的仲裁。Kleros 是连
 
 可交易平台：Uniswap、Balancer、Bitfinex、虎符
 
+
 **DAOstack**
 
 代币：GEN
@@ -183,3 +184,22 @@ KyberNetwork 是一个具备高流动性的数字资产（各种加密代币，�
 
 Moloch DAO 目标是为以太坊基础设施提供资金支持，并解决生态系统开源开发中的公共问题，该协议可以使投票、成员资格、治理成为可能，代码则是协调机。
 
+**GitcoinDAO**
+
+代币：GTC
+
+项目介绍：
+
+Gitcoin是处于开放网络生态系统中心的builders、creator和协议的社区。 人们来到Gitcoin，是为了发展开放互联网的未来。我们的使命是建立一个开源的、协作的和经济上有能力的互联网。 
+
+可交易平台：Coinbase、Uniswap、币安、KuCoin、Gate等
+
+**DeepDAO**
+
+代币：未发币
+
+项目介绍：
+
+DeepDAO从多个角度打分和分析不同的DAO，值得关注。
+
+可交易平台：
