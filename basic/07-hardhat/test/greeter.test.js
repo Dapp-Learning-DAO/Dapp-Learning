@@ -8,7 +8,7 @@ describe("Greeter", function() {
     await greeter.deployed();
     expect(await greeter.greet()).to.equal("Hello, world!");
 
-    await greeter.setGreeting("Hola, mundo!");
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    await greeter.setGreeting("hello Dapp-Learning!");
+    expect(await greeter.greet()).to.equal("hello Dapp-Learning!");
   });
 });
