@@ -11,7 +11,7 @@ task("accounts", "Prints the list of accounts", async () => {
   }
 });
 
-function PRIVATEKEY() {
+function mnemonic() {
  // return fs.readFileSync("./sk.txt").toString().trim();
  return process.env.PRIVATE_KEY;
  
@@ -37,37 +37,37 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     kovan: {
       url: "https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     matic: {
       url: "https://polygon-mainnet.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07",
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ]
     },
     matic_mumbai: {
       url: "https://polygon-mumbai.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07",
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ]
     },
   }

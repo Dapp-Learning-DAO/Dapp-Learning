@@ -16,7 +16,7 @@ task("accounts", "Prints the list of accounts", async () => {
   }
 });
 
-function PRIVATEKEY() {
+function mnemonic() {
 
   return process.env.PRIVATE_KEY
 
@@ -29,7 +29,7 @@ function PRIVATEKEY() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 const kovanRpcUrl = "https://kovan.infura.io/v3/" + process.env.INFURA_ID
-const privateKey = PRIVATEKEY()
+const privateKey = mnemonic()
 
 module.exports = {
   defaultNetwork: "hardhat",
