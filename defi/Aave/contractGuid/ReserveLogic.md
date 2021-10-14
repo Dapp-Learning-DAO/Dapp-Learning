@@ -167,7 +167,7 @@ function _updateIndexes(
 }
 ```
 
-### updateRates
+### updateInterestRates
 
 更新利率的方法，稳定利率，浮动利率，每单位流动性收益率
 
@@ -224,7 +224,7 @@ function updateInterestRates(
     .scaledTotalSupply()
     .rayMul(reserve.variableBorrowIndex);
 
-  // 更新利率
+  // 更新利率，注意这里返回的是uint256类型
   (
     vars.newLiquidityRate,
     vars.newStableRate,
@@ -245,6 +245,7 @@ function updateInterestRates(
   require(vars.newStableRate <= type(uint128).max, Errors.RL_STABLE_BORROW_RATE_OVERFLOW);
   require(vars.newVariableRate <= type(uint128).max, Errors.RL_VARIABLE_BORROW_RATE_OVERFLOW);
 
+  // 给变量赋值，由于变量是uin128类型，需要转换
   reserve.currentLiquidityRate = uint128(vars.newLiquidityRate);
   reserve.currentStableBorrowRate = uint128(vars.newStableRate);
   reserve.currentVariableBorrowRate = uint128(vars.newVariableRate);
@@ -259,3 +260,7 @@ function updateInterestRates(
   );
 }
 ```
+
+相关代码
+
+- 计算利率的方法 [IReserveInterestRateStrategy.calculateInterestRates()](./ReserveInterestRateStrategy.md#calculateInterestRates)
