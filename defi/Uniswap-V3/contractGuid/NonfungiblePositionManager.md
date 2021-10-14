@@ -30,7 +30,7 @@ Pool在manager中的编号 => position
 mapping(uint256 => Position) private _positions;
 ```
 
-### _nextId,_nextPoolId
+### _nextId, _nextPoolId
 
 自增序号
 
