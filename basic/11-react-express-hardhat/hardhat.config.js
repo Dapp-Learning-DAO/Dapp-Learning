@@ -12,7 +12,7 @@ task('accounts', 'Prints the list of accounts', async () => {
   }
 })
 
-function PRIVATEKEY() {
+function mnemonic() {
   return process.env.PRIVATE_KEY
 }
 
@@ -35,19 +35,19 @@ module.exports = {
     },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [PRIVATEKEY()],
+      accounts: [mnemonic()],
     },
     kovan: {
       url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [PRIVATEKEY()],
+      accounts: [mnemonic()],
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [PRIVATEKEY()],
+      accounts: [mnemonic()],
     },
     ropsten: {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [PRIVATEKEY()],
+      accounts: [mnemonic()],
     },
   },
 }

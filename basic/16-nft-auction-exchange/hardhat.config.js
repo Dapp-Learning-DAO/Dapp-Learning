@@ -14,25 +14,25 @@ task("accounts", "Prints the list of accounts", async () => {
   }
 });
 
-function PRIVATEKEY() {
+function mnemonic() {
 
   return process.env.PRIVATE_KEY_MAIN
 
 }
 
-function PRIVATEKEYAlice() {
+function mnemonicAlice() {
 
   return process.env.PRIVATE_KEY_ALICE
 
 }
 
-function PRIVATEKEYBob() {
+function mnemonicBob() {
 
   return process.env.PRIVATE_KEY_BOB
 
 }
 
-function PRIVATEKEYTest() {
+function mnemonicTest() {
 
   return process.env.PRIVATE_KEY_TEST
 
@@ -67,28 +67,28 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     kovan: {
       url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY(),
-        PRIVATEKEYAlice(),
-        PRIVATEKEYBob(),
-        PRIVATEKEYTest()
+        mnemonic(),
+        mnemonicAlice(),
+        mnemonicBob(),
+        mnemonicTest()
       ],
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-        PRIVATEKEY()
+        mnemonic()
       ],
     },
   }
