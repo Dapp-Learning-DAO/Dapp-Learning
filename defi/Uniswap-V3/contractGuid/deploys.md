@@ -1,7 +1,6 @@
 # Deployment addresses(Kovan)
 
-The latest version of `@uniswap/v3-core`, `@uniswap/v3-periphery` are deployed to Ethereum mainnet and all testnets
-at the same addresses.
+The latest version of `@uniswap/v3-core`, `@uniswap/v3-periphery` are deployed to Ethereum mainnet and all testnets at the same addresses.
 
 The source code is verified with Etherscan on all networks, for all contracts except `UniswapV3Pool`.
 We are working on getting the `UniswapV3Pool` contract verified with Etherscan.
