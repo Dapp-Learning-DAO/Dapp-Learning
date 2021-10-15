@@ -13,8 +13,7 @@ task("accounts", "Prints the list of accounts", async () => {
 
 function mnemonic() {
  // return fs.readFileSync("./sk.txt").toString().trim();
-  const privatekey = process.env.PRIVATE_KEY;
-  return privatekey;
+ return process.env.PRIVATE_KEY;
  
  
 }
