@@ -1,4 +1,4 @@
-# AAVE contract guid
+# AAVE contract guide
 
 ![Protocol Overview](https://files.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-M3C77KySce4HXyLqkEq%2F-MNbklkK7vNPshPbrCZ-%2F-MNbxHseq3eFT7u8gEo3%2Fimage.png?alt=media&token=61a006eb-8d2b-4de6-8498-05fc889feed3)
 
