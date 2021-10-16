@@ -105,7 +105,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
-27. [Arbitrum](https://arbitrum.io/quickstart/) ⬜
+27. [Arbitrum](https://arbitrum.io/quickstart/) ✅
 28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [matic layer2](basic/29-layer2-matic/readme.md) ✅
 30. [zksync layer2](basic/30-layer2-zksync/readme.md) ⬜
@@ -152,8 +152,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  建议先阅读DEFI经典书籍:  
    [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
-01. [UniswapV2](defi/Uniswap-V2/readme.md)
-02. [UniswapV3](defi/Uniswap-V3/readme.md)
+01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
+02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. [Aave](https://docs.aave.com/portal/) 
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -186,7 +186,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## Crypto 进阶  
 请先阅读书籍：
-[《图解密码技术》](https://book.douban.com/subject/26822106/)
+[《图解密码技术》](https://book.douban.com/subject/26822106/)    
 项目列表：
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
