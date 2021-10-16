@@ -28,3 +28,4 @@ U = 借款 /（ 现金 + 借款 ）
 - <https://github.com/codenamejason/compound-supply-examples/tree/master/solidity-examples>
 - <https://learnblockchain.cn/article/1015>
 - <https://github.com/compound-developers/compound-supply-examples>
+- 清算机器人：https://blog.baowebdev.com/2019/11/how-to-build-a-compound-liquidation-bot/
