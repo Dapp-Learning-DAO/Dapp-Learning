@@ -59,10 +59,10 @@ Discord，snapshot，substack，Medium，独立网站，Token分发工具网址�
 感觉discord会沟通更多些
 
 
+##### 其他
+三火分享了一篇较为深入体验的文章，请大家补充参考：https://mp.weixin.qq.com/s/hrIHkQ5yoi1BkzEjfE7Xog(https://mp.weixin.qq.com/s/hrIHkQ5yoi1BkzEjfE7Xog)
+核心是Bankless是如何让人和资本去中心的协作和流动，包括内部的发起提案机制、预算和成本、报价机制等等，以及可能的抽象模型，对未来我们工作方式的可能影响，我们可以探讨下，是否未来有替代公司的可能？哪怕是替代一部分。
 
-
-
-===========
 
 **MakerDAO**
 
@@ -139,6 +139,7 @@ Kleros 为所有问题提供快速、安全、可负担的仲裁。Kleros 是连
 
 可交易平台：Uniswap、Balancer、Bitfinex、虎符
 
+
 **DAOstack**
 
 代币：GEN
@@ -182,7 +183,26 @@ NAX 是星云链的社区及生态治理币，通过公平公开的方法获得�
 
 Moloch DAO 目标是为以太坊基础设施提供资金支持，并解决生态系统开源开发中的公共问题，该协议可以使投票、成员资格、治理成为可能，代码则是协调机。
 
-====
+**GitcoinDAO**
 
-不同的跨链桥所使用的技术都不太相同，比如常见的会采用哈希时间锁、状态通道，或一些偏中心化的解决方案等。这些资产跨链桥对资产的支持也不太相同，所以我们体验了下目前已经上线的跨链桥（连接至 Optimism 或 Arbitrum），包括 **Hop Protocol**、cBridge、**DeGate**、RenBridge 和 **Anyswap**，并整理了这些平台的优缺点和对应的成本估算（按照近期平均的 Gas 成本）。
+代币：GTC
+
+项目介绍：
+
+Gitcoin是处于开放网络生态系统中心的builders、creator和协议的社区。 人们来到Gitcoin，是为了发展开放互联网的未来。我们的使命是建立一个开源的、协作的和经济上有能力的互联网。 
+
+可交易平台：Coinbase、Uniswap、币安、KuCoin、Gate等
+
+**DeepDAO**
+
+代币：未发币
+
+项目介绍：
+
+DeepDAO从多个角度打分和分析不同的DAO，值得关注。
+
+可交易平台：
+>>>>>>> d5435e708da3d2d91aa1be0dad2b6fb44d540e69
+
+**其他**
 另外也有一些Defi类别大家熟知的项目，例如Curve、Sythetix、YFI等等，也是以DAO的形式来发起、治理的。

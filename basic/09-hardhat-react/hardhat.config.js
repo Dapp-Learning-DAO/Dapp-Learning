@@ -27,7 +27,7 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic()
+        mnemonic()
       ],
     },
     kovan: {

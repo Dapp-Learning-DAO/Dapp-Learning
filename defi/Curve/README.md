@@ -1,5 +1,13 @@
-- <https://curve.fi/files/stableswap-paper.pdf>
-- <https://github.com/curvefi/curve-contract/tree/master/contracts>
+# Curve V1
+
+##原理介绍
+
+
+
+##参考链接
+
+- 白皮书  <https://curve.fi/files/stableswap-paper.pdf>
+- github <https://github.com/curvefi/curve-contract/tree/master/contracts>
 - <https://curve.fi/files/crypto-pools-paper.pdf>
 - <https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic>
 - curve投票  https://tokenbrice.xyz/crv-wars/#sdvecrv-vs-cvxcrv  

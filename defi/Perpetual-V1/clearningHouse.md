@@ -15,9 +15,9 @@ Staking提供者在Perp上不作为流动性提供者，仅仅是保险基金的
 **设计方案**
 vAMM使用AMM的x*y=k方式定价，但不实际进行两种货币的兑换，而是由AMM公式提供价格后，从资金池（Vault）进出资金以代替直接从AMM池进出资金，实现单一货币的多/空头寸在Vault的开仓和平仓。
 首先
-假设Vault中原本有10,000 USDC， eth/usdc= 100, 则x=100，k=100 * 10,000， 
+假设Vault中原本有10,000 USDC， eth/usdc= 100, 则x=100，k=100 * 10000， 
 1. Alice用100 U以2倍开多仓后变化如下， 
-Alice将100U存入valut中，Perpetual Protocol 将 Alice 的 1,000 vDAI（100 DAI 的 10 倍杠杆）记入vAMM，作为回报，它根据常数函数 (x*y = k) 计算 Alice 收到的 vETH 数量。
+Alice将100U存入valut中，Perpetual Protocol 将 Alice 的 200 vDAI（100 DAI 的 10 倍杠杆）记入vAMM，作为回报，它根据常数函数 (x*y = k) 计算 Alice 收到的 vETH 数量。
 Perpetual Protocol 记录 Alice 现在有 1.96 vETH，并且这个vAMM内部的状态变成了  98.04  vETH 和 10200 vDAI。
 
 

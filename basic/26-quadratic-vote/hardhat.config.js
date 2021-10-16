@@ -36,7 +36,7 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07", //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic()
+        mnemonic()
       ],
     },
     kovan: {

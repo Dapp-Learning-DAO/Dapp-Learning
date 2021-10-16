@@ -40,11 +40,11 @@
 
 ## 准备工作 - Preparatory Work
 **基础知识预备**   
-- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识, 为后续的进阶、深入学习打下扎实的基础。
-我们整理了 [基础知识预备](./docs/basic-knowledge.md) 供各位新手小伙伴学习参考。
+- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识。  
+可参考 [基础知识预备](./docs/basic-knowledge.md) , 供各位新手小伙伴学习参考。
 
 **开发工具**   
-- 工欲善其事, 必先利其器。 好的开发工具可以很好的辅助开发者学习, 同时大幅提升开发效率.    
+- 工欲善其事, 必先利其器。 请先熟悉基本工具的使用。  
 可参考 [开发工具推荐](./docs/develop-tools.md) 查看当下主流的区块链开发工具。
 
 **推荐阅读**  
@@ -105,7 +105,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
-27. [Arbitrum](https://arbitrum.io/quickstart/) ⬜
+27. [Arbitrum](https://arbitrum.io/quickstart/) ✅
 28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [matic layer2](basic/29-layer2-matic/readme.md) ✅
 30. [zksync layer2](basic/30-layer2-zksync/readme.md) ⬜
@@ -152,8 +152,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  建议先阅读DEFI经典书籍:  
    [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
-01. [UniswapV2](defi/Uniswap-V2/readme.md)
-02. [UniswapV3](defi/Uniswap-V3/readme.md)
+01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
+02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 04. [Aave](https://docs.aave.com/portal/) 
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -186,7 +186,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## Crypto 进阶  
 请先阅读书籍：
-[《图解密码技术》](https://book.douban.com/subject/26822106/)
+[《图解密码技术》](https://book.douban.com/subject/26822106/)    
 项目列表：
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
