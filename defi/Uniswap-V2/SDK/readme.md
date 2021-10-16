@@ -406,7 +406,7 @@ Trade.bestTradeExactIn(
     tokenOut: Token,
     { maxNumResults = 3, maxHops = 3 }: BestTradeOptions = {}): Trade[]
 ```
-bestTradeExactOut
++ bestTradeExactOut
 
 
 #### Fractions

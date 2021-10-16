@@ -1,11 +1,68 @@
-## 原因
-+ DAO崛起的速度越来越快，不仅仅是数量，还有领域也越来越宽广。
-+ 给自己立了一个**Flag**，一周给大家简单分析和推荐一个DAO（2021-10-13开始）。
-+ DAO-list是一个泛泛的列表，先作为开始吧，大家快速的浏览一下这些信息，有些过时的，大家看到了，请帮忙**修改、完善**。
-+ DApp Learning，Do something~
 
 
-**DAO 项目**
+### **DAO 项目**
+
+**Bankless DAO**
+
+代币：BANK
+
+项目介绍：
+
+Bankless是一个使命为去银行化的DAO组织，以Media起家，提供加密社区和行业的最新信息和项目分析为核心价值，后续在核心媒体节点Bankless LLC发起下，成立了DAO，通过无数个小规模的guild（工会）组成，开放式管理，发起提案和协作执行，都在DAO框架内完成，现在已发展为更多元的DAO组织了。
+
+交易平台：Uni, Sushi, Balancer, 0x Protocol, BXC
+
+#### 核心要点分析文档:
+
+[Anounce](./bankless-anouncing.md)
+
+[Genesis proposal](./bankless-genesis-proposal.md)
+
+[Start](./bankless-start.md)
+
+#### 思考/分析/借鉴
+
+对于DApp learning 来说，找到自己合适的路，结合小组自身特点，一步步成为价值闭环的组织，发展壮大，为更多人了解、使用Web3，更多人学习和开发基于Web3的DApp，造福整个社会，提供助力为基础，逐步找到更多可能和路径。
+
+##### 使命：让世界无银行化！
+
+一句话说清楚，配合一个文章讲故事
+
+Going bankless is a journey towards freedom—self-sovereignty. Financial independence.
+
+所有的DAO，都需要讲一个有逻辑，有背景，有方向，有Vision的故事。
+
+关于DAO的未来，或者我们未来的DAO，每个人都可以提出来，兼顾大家，方向正确的Mission来。
+
+##### 影响力：增长
+
+无论是自己产品的用户数量，还是媒体订阅或者各种活动、用户数，都需要增长，这才代表DAO符合社会的需求，在一点点影响和协作起来，这都需要许多许多规划，人才，协作。
+
+##### 价值：让人们变得更好
+
+需要目标、人才和执行，才能逐步透出给组织内部和组织外部，而具体的proposal，是一起确定真的符合Mission：Bankless，才会被社区接受和执行落地，也有许多不确定的尝试，社区秉持开放态度。
+
+##### LLC启示
+
+LLC用三年时间归属25%，社区仍然控制大部分，对于一个DAO的发展来说，是相辅相成，也是非常棒的一次DAO的尝试：用一个公司做基础和链接，用DAO来保持开放和未来。
+
+##### 文档体系
+
+Bankless很复杂，但也有非常健全（相对来说）的文档体系，指导普通人如何了解、加入或者使用。
+
+看下这个文档。。。吓死我了，密密麻麻的link。。。
+
+##### 工具
+
+Discord，snapshot，substack，Medium，独立网站，Token分发工具网址，活动网址
+
+感觉discord会沟通更多些
+
+
+
+
+
+===========
 
 **MakerDAO**
 
@@ -17,17 +74,6 @@ MakerDAO 是以太坊上的去中心化自治组织和智能合约系统，提�
 
 可交易平台：Coinbase、火币、币安、OKEx、Balancer、Bitfinex
 
-
-
-**Yearn.finance**
-
-代币：YFI
-
-项目介绍：
-
-yearn.finance 为贷款平台服务的针对不同产品利润产出数据的聚合平台，它通过重新平衡数据得出合同交易互动中的最高利润产出。
-
-可交易平台：Uniswap、币安、MXC
 
 
 
@@ -42,30 +88,6 @@ Aragon 是以太坊区块链上的一个可以让任何人创建和管理任意�
 Aragon Network 的链上组织将会使用 Aragon Core 进行搭建，它是由一个 Solidity 语言的去中心化自治组织（DAO）和网页端去中心化应用（dApp）组成。一开始，Aragon Core 会专注于资本化的公司类组织，但它的模块化功能也足够适应其他种类的组织。Aragon 代币（ANT）是 Aragon Network 的原生代币，主要用于管理阿拉贡网络、抵押阿拉贡网络成员协议。
 
 可交易平台：Uniswap、Balancer、火币、币安、OKEx、Bitfinex、Bittrex
-
-
-
-**Curve**
-
-代币：CRV
-
-项目介绍：
-
-CurveDAO 基于去中心化自治平台 Aragon 框架创建，将会有质押（Staking）机制，其 CRV 代币主要用于治理和价值增值。CurveDAO 将会通过收取交易费用并执行 CRV 代币回购和销毁。
-
-Curve 计划最初发行 10 亿枚 CRV 代币，并且采用通胀模式，后期代币将增加至 30.3 亿枚。通胀计划的初始通胀率为 59.5%。
-
-可交易平台：币安、火币、OKEx、Uniswap
-
-**Synthetix**
-
-代币：SNX
-
-项目介绍：
-
-Synthetix（旧称：Havven）专为工程师而设计，旨在构建去中心化和无信任网络。Synthetix Network Token（SNX）代币支持多种综合资产，包括：与美元挂钩的法定货币、贵金属、指数甚至其他加密货币。
-
-可交易平台：Uniswap、币安、OKEx、MXC
 
 
 
@@ -152,29 +174,6 @@ NAX 是星云链的社区及生态治理币，通过公平公开的方法获得�
 可交易平台：Gate、MXC
 
 
-
-**DXDao**
-
-代币：DXD
-
-项目介绍：
-
-DXDao 是一个去中心化组织，用于开发，管理和增长 DeFi 协议和产品。DXD 通证持有者可以分配 DXdao 的收入有经济上的主张，它还授予持有者将来在分散应用中使用一套服务和高级功能的权利，例如无 gas 费交易，资产的无偿匿名化，降低了 DEX 协议的交易费用等。
-
-可交易平台：Uniswap、Balancer、虎符
-
-
-
-**Kyber**
-
-代币：KNC
-
-项目介绍：
-
-KyberNetwork 是一个具备高流动性的数字资产（各种加密代币，例如以太币及其 ERC20 代币，比特币和 ZCash 等）即时交易和兑换的去中心化交易平台。为了实现所有用户在不同代币之间的无缝支付，KyberNetwork 将提供丰富的支付 API 以及新一代的合约钱包，来扩展 KyberNetwork 的整体交易能力。
-
-可交易平台：Coinbase、Balancer、火币、币安、OKEx
-
 **MolochDao**
 
 代币：未发币
@@ -183,3 +182,7 @@ KyberNetwork 是一个具备高流动性的数字资产（各种加密代币，�
 
 Moloch DAO 目标是为以太坊基础设施提供资金支持，并解决生态系统开源开发中的公共问题，该协议可以使投票、成员资格、治理成为可能，代码则是协调机。
 
+====
+
+不同的跨链桥所使用的技术都不太相同，比如常见的会采用哈希时间锁、状态通道，或一些偏中心化的解决方案等。这些资产跨链桥对资产的支持也不太相同，所以我们体验了下目前已经上线的跨链桥（连接至 Optimism 或 Arbitrum），包括 **Hop Protocol**、cBridge、**DeGate**、RenBridge 和 **Anyswap**，并整理了这些平台的优缺点和对应的成本估算（按照近期平均的 Gas 成本）。
+另外也有一些Defi类别大家熟知的项目，例如Curve、Sythetix、YFI等等，也是以DAO的形式来发起、治理的。
