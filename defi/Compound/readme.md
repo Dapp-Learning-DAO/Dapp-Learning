@@ -17,7 +17,7 @@ U = 借款 /（ 现金 + 借款 ）
 [GeoGebra](https://www.geogebra.org/) -- 数学作图工具
 
 ## dao治理
-
+  comp治理： https://docs.qq.com/doc/DVHRTcGlld1RNanN0
 ## 参考链接
 
 - <https://learnblockchain.cn/article/1357> 代理投票
