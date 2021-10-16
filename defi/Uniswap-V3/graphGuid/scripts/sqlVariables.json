@@ -1,0 +1,9 @@
+{
+    "_pool_id": "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8",
+    "_depositedToken1_gt": 300,
+    "_owner": "0xb893bd6c547e4def62c6155183af118a95c0c55f",
+    "host": "127.0.0.1",
+    "user": "root",
+    "password": "xxxx",
+    "database": "uniswap_subgraph"
+}

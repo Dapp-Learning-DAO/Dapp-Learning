@@ -23,6 +23,42 @@ Optimism 的争议解决过程比 Arbitrum 更简单、更快捷，因为它只�
 AVM与EVM的不同：
    AVM 既支持执行交易，又支持证明（L1合约相信某个断言是真的）
 
+## 执行测试  
+- 安装依赖  
+```
+yarn
+```
+
+- 配置环境变量  
+复制 .env.example 文件为 .env 文件, 然后配置其中的 PRIVATE_KEY,INFURA_ID 
+
+- 配置 Infura  
+这里我们是通过 Infura 连接到 arbitrum 的测试网络, 但有时候, 对于新出现的测试网络, Infura 会进行限制, 这里需要配置先 Infura, 以允许访问 arbitrum 网路.     
+  - 修改 Plan  
+  在 Infura 上选择 "Ethereum" -> "PLAN" 
+  ![ChangePlan](./images/ChangePlan.png)  
+
+  - 赋权  
+  之后选择 "NETWORK ADD-ONS", 勾选 "Optimistic Ethereum" 和  "Arbitrum Rollup", 然后点击 "UPDATE SUBSCRIPTION"
+  ![ChangePlan](./images/NETWORK-ADD-ONS.png)  
+
+- 转 eth 到 arbitrum 测试网络  
+因为 arbitrum 测试网络对应的是 rinkeby, 所以需要在 rinkeby 测试网络上有测试币 , 可以通过 [rinkeby 测试网](https://faucet.rinkeby.io/) 获取测试币.   
+之后需要把 rinkeby 测试币转移到 arbitrum 二层网络上, 可以通过 [arbitrum bridge](https://bridge.arbitrum.io/) 进行操作, 测试币转移需要等待 10 mins 左右 
+![Transfer-to-arbitrum](./images/transfer-eth.png)   
+
+  测试币转移成功后, 通过 metaMask 可以看到在 arbitrum 上面的余额  
+
+  ![Transfer-result](./images/transfer-result.png)
+
+- 执行测试脚本  
+```
+❯ npx hardhat run scripts/deploy.js --network arbitrum
+Deploying contracts with the account: 0xD95Be34213b53e3eC51091a0c5De07641Fc1728e
+Account balance: 999999998990000000
+Token address: 0x33d269391b364C4fe69f92176D08A5F1B2DF9462
+```
+
 ## 参考链接：
 - https://developer.offchainlabs.com/docs/inside_arbitrum
 - git 代码: https://github.com/OffchainLabs
@@ -35,4 +71,5 @@ https://new.qq.com/omn/20210709/20210709A0CL6M00.html
 - https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc rollup详细解读  
 - https://q6rsx4wom8.feishu.cn/file/boxcnu89en45JWelsoUv8nIwdRc arbi简介
 - https://mubu.com/app/edit/clb/NIhGqZda80#m 分享
+- [un.Block 周报](https://zhuanlan.zhihu.com/p/419000613) 有关 Arbitrum 的介绍。介绍了 Aribtrum 和 Optimistic Rollup 的不同，以及 Arbitrum 是如何达成 Layer1 和 Layer2 之间的通信的。
  

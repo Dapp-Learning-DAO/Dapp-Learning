@@ -38,6 +38,7 @@ This tutorial is still in developing, so you are welcome to create pull request 
 - Summary of Ethereum development tools:<https://learnblockchain.cn/article/2006>
 - learning solidity <https://www.bilibili.com/video/BV1St411a7Pk?p=1> 
 - Solidity by Example:<https://solidity-by-example.org/>
+- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
 
 **Development tools：**
 
@@ -66,69 +67,71 @@ This tutorial is still in developing, so you are welcome to create pull request 
 
 ## Basic Tasks
 
-Learn the basic tools and development knowledge of Dapp development through the following basic tasks.
+Learn the basic tools and development knowledge of Dapp development through the following basic tasks.  
+⬜ Task Not Start  
+⌛ Task Processing   
+✅ Task Finish
 
-01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md)
-02. [use web3.js create transaction](basic/02-web3js-transaction/README.md)
-03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md)
-04. [use truffle](basic/04-web3js-truffle/README.md)
-05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md)
-06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md)
-07. [use hardhat](basic/07-hardhat/README.md)
-08. [graph](basic/08-hardhat-graph/README.md)
-09. [react（metamask)](basic/09-hardhat-react/README.md)
-10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md)
-11. [react + express + hardhat](basic/11-react-express-hardhat/README.md)
-12. [Crowdfund](basic/12-token-crowdfund/README.md)
-13. [decentralized exchange](basic/13-decentralized-exchange/README.md)
-14. [chainlink-api](basic/14-chainlink-price-feed/README.md)
-15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md)
-16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md)
-17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md)
-18. [web3.py](basic/18-web3py/README.md)
-19. [brownie](basic/19-brownie/README.md)
-20. [flash-loan](basic/20-flash-loan/readme.md)
+01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md) ✅ 
+02. [use web3.js create transaction](basic/02-web3js-transaction/README.md) ✅
+03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md) ✅
+04. [use truffle](basic/04-web3js-truffle/README.md) ✅
+05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md) ✅
+06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md) ✅
+07. [use hardhat](basic/07-hardhat/README.md) ✅
+08. [graph](basic/08-hardhat-graph/README.md) ✅
+09. [react（metamask)](basic/09-hardhat-react/README.md) ✅
+10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md) ✅
+11. [react + express + hardhat](basic/11-react-express-hardhat/README.md) ✅
+12. [Crowdfund](basic/12-token-crowdfund/README.md) ✅
+13. [decentralized exchange](basic/13-decentralized-exchange/README.md) ✅
+14. [chainlink-api](basic/14-chainlink-price-feed/README.md) ✅
+15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md) ✅
+16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md) ✅
+17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md) ✅
+18. [web3.py](basic/18-web3py/README.md) ✅
+19. [brownie](basic/19-brownie/README.md) ✅
+20. [flash-loan](basic/20-flash-loan/readme.md) ✅
+21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
+22. [scaffold-zk](basic/22-scaffold-zk/readme.md) ✅
+23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
+24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
+25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
+26. [Quadratic vote](basic/27-quadratic-vote/README.md) ✅
+27. [Arbitrum](https://arbitrum.io/quickstart/) ⬜
+28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
+29. [matic layer2](basic/29-layer2-matic/readme.md) ✅
+30. [zksync layer2](basic/30-layer2-zksync/readme.md) ⬜
+31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
+32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
+33. [pooltogether](basic/33-pooltogether/README.md) ⌛
+34. [subgraph](basic/34-subgraph/readme.md) ⬜
+35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md) ⬜
+36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
+37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
+38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
+39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
+40. [snapshot](basic/26-snapshot/README.md) ⬜
+41. [NFT farming](https://superfarm.com/farms) ⬜
+42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
+43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ⬜
+45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916) ⬜
+46. [vyper](https://vyper.readthedocs.io/en/stable/) ⬜
+47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
+48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
+49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
+50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  ✅
+51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+52. [Governace](https://github.com/withtally/safeguard)  ⬜
+53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ⬜
+54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
+55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
+56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
+57. [Liquity](https://github.com/liquity) ⬜
+58. [Auto trigger smart contract](/basic/58-auto-smart-contract/README.md) ⬜
+59. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 
-21. [scaffold-Lender](basic/21-scaffold-lender/README.md)
-22. [scaffold-zk](basic/22-scaffold-zk/readme.md)
-23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md)
-24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md)
-25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md)
-26. [snapshot](basic/26-snapshot/README.md)
-27. [Quadratic vote](basic/27-quadratic-vote/README.md)
-28. [optimism layer2](basic/28-optimism-layer2/readme.md)
-29. [matic layer2](basic/29-layer2-matic/readme.md)
-30. [zksync layer2](basic/30-layer2-zksync/readme.md)
-31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md)
-32. [chainlink-keeper](basic/32-chainlink-keeper/README.md)
-33. [pooltogether](basic/33-pooltogether/README.md)
-34. [subgraph](basic/34-subgraph/readme.md)
-35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md)
-36. [NFT Filecoin](basic/36-nft-filecoin/README.md)
-37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts)
-38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle)
-39. Ethlend
-- <https://www.youtube.com/watch?v=Pi-Qva6Fg3I>
-- <https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol>
-40. [Arbitrum](https://arbitrum.io/quickstart/)
-41. [NFT farming](https://superfarm.com/farms)
-42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  
-   https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts  
-43. [front running](https://github.com/Supercycled/cake_sniper)  
-44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)
-45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916)
-46. [vyper](https://vyper.readthedocs.io/en/stable/)
-47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) 
-48. state channel  
-49. [sniper](https://github.com/Supercycled/cake_sniper.git)  
-50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  
-51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol)
-52. [Governace](https://github.com/withtally/safeguard)
-53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer)
-54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411)
-55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba)
-56. [IDO](https://github.com/gnosis/ido-contracts)
-57. [Liquity](https://github.com/liquity)
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -147,7 +150,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 05. [SNX](https://github.com/Synthetixio) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-08. Bancor [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. [Bancor](https://bancor.network/) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. YFI [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. AMPL [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -155,6 +158,8 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 13. [OPYN](https://v2.opyn.co/)
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+
 
 ## NFT advanced task
 
