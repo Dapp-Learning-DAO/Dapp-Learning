@@ -21,6 +21,8 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 - flashloan()
 - liquidationCall()
 
+详细内容请戳这里 :point_right: [LendingPool](./LendingPool.md)
+
 #### LendingPoolAddressesProvider
 
 主要的地址存储合约，针对特定的不同市场（不同公链的aave）都有不同的该合约。外部合约调用该合约能得到最新的合约地址（aave其他模块的合约地址）。
@@ -39,9 +41,13 @@ aave中的计息代币，当用户存入抵押资产时获得1：1对应的atoke
 
 aToken 也通过 `permit()` 实现了EIP-2612提案。
 
+详细内容请戳这里 :point_right: [AToken](./AToken.md)
+
 #### Stable and Variable Debt Tokens
 
 当用户从协议中贷出资产，获得 1:1 数量的debt tokens。债务代币的大部分 ERC20 方法都被禁用，因为债务是不可转让。
+
+详细内容请戳这里 :point_right: [DebtToken](./DebtToken.md)
 
 ### Supporting contracts
 
@@ -55,17 +61,11 @@ aToken 也通过 `permit()` 实现了EIP-2612提案。
 
 为 LedingPool 合约提供配置功能。每项配置的改变都会发送事件到链上，任何人可见。
 
-#### Interest Rate Strategy
+#### ReserveInterestRateStrategy
 
-保存计算和更新特定准备金利率所需的信息。
+利率更新策略合约。
 
-对于不同的借贷资产，需要使用不同的利率相关参数，以组建不同的利率模型。
-
-- baseVariableBorrowRate
-- variableRateSlope1
-- variableRateSlope2
-- stableRateSlope1
-- stableRateSlope2
+详细内容请戳这里 :point_right: [ReserveInterestRateStrategy](./ReserveInterestRateStrategy.md)
 
 #### Price Oracle Provider
 

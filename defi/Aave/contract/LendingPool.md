@@ -10,12 +10,13 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 
 ### deposit
 
-存入资产，mint 出相同数量的 aToken 转给调用者（`msg.sender`）。
+存入资产，将**相同数量**的 aToken 转给调用者（`onBehalfOf`，一般是 `msg.sender`）。
 
 **注意：**
 
 1. 存入资产之前需要确保其有足够数量的 `allowance()` ，若不足需要先调用它的 `approve()` 授权给 `LendingPool`
 2. `onBehalfOf` 如果该存入资产是第一次被存入（之前没有人存入过相同的资产），则将用户（onBehalfOf）的配置中该资产自动转换为抵押类型
+3. 转给用户的 aToken 查询余额与 amount 相等，但实际上mint的数量要进行缩放，详见 [aToken.mint](./aToken.md#mint)
 
 | Parameter Name | Type    | Description                                            |
 | -------------- | ------- | ------------------------------------------------------ |
