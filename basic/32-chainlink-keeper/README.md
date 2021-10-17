@@ -21,21 +21,21 @@
 
 - 安装依赖
 
-```bash
-yarn
-```
+  ```bash
+  yarn
+  ```
 
 - 合约编译
 
-```bash
-npx hardhat compile
-```
+  ```bash
+  npx hardhat compile
+  ```
 
 - 执行合约部署
 
-```bash
-npx hardhat run scripts/deployCounter.js --network kovan
-```
+  ```bash
+  npx hardhat run scripts/deployCounter.js --network kovan
+  ```
 
 - 注册 keeper  
   前往 [ChainLink 官网](https://docs.chain.link/docs/chainlink-keepers/register-upkeep/) 上点击 "ChainLink Keeper App", 然后根据提示进行注册即可.  

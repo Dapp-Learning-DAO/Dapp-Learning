@@ -30,9 +30,9 @@ AVM 既支持执行交易，又支持证明（L1 合约相信某个断言是真�
 
 - 安装依赖
 
-```bash
-yarn
-```
+  ```bash
+  yarn
+  ```
 
 - 配置环境变量  
   复制 .env.example 文件为 .env 文件, 然后配置其中的 PRIVATE_KEY,INFURA_ID
@@ -59,12 +59,12 @@ yarn
 
 - 执行测试脚本
 
-```bash
-❯ npx hardhat run scripts/deploy.js --network arbitrum
-Deploying contracts with the account: 0xD95Be34213b53e3eC51091a0c5De07641Fc1728e
-Account balance: 999999998990000000
-Token address: 0x33d269391b364C4fe69f92176D08A5F1B2DF9462
-```
+  ```bash
+  ❯ npx hardhat run scripts/deploy.js --network arbitrum
+  Deploying contracts with the account: 0xD95Be34213b53e3eC51091a0c5De07641Fc1728e
+  Account balance: 999999998990000000
+  Token address: 0x33d269391b364C4fe69f92176D08A5F1B2DF9462
+  ```
 
 ## 参考链接
 
