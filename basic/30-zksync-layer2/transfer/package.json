@@ -1,0 +1,12 @@
+{
+  "name": "zksync-layer2",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Rebase Team",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.7",
+    "zksync": "^0.11.6"
+  }
+}
