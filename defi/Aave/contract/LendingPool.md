@@ -16,7 +16,7 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 
 1. 存入资产之前需要确保其有足够数量的 `allowance()` ，若不足需要先调用它的 `approve()` 授权给 `LendingPool`
 2. `onBehalfOf` 如果该存入资产是第一次被存入（之前没有人存入过相同的资产），则将用户（onBehalfOf）的配置中该资产自动转换为抵押类型
-3. 转给用户的 aToken 查询余额与 amount 相等，但实际上mint的数量要进行缩放，详见 [aToken.mint](./aToken.md#mint)
+3. 转给用户的 aToken 查询余额与 amount 相等，但实际上 mint 的数量要进行缩放，详见 [aToken.mint](./aToken.md#mint)
 
 | Parameter Name | Type    | Description                                            |
 | -------------- | ------- | ------------------------------------------------------ |
@@ -84,6 +84,84 @@ function deposit(
 - [AToken.mint()](./AToken.md###mint)
 
 ### withdraw
+
+赎回 `amount` 数量抵押资产，销毁相应数量的 `aToken`。例如赎回抵押的 100 USDC 资产，则会销毁 100 aUSDC。
+
+| Parameter Name | Type    | Description                                            |
+| -------------- | ------- | ------------------------------------------------------ |
+| asset          | address | 抵押资产的 token 地址                                  |
+| amount         | uint256 | 赎回的数量，如果使用 `type(uint).max` 则会赎回最大数量 |
+| to             | address | 赎回资产的转账的目标地址                               |
+
+```solidity
+/**
+  * @dev Withdraws an `amount` of underlying asset from the reserve, burning the equivalent aTokens owned
+  * E.g. User has 100 aUSDC, calls withdraw() and receives 100 USDC, burning the 100 aUSDC
+  * @param asset The address of the underlying asset to withdraw
+  * @param amount The underlying amount to be withdrawn
+  *   - Send the value type(uint256).max in order to withdraw the whole aToken balance
+  * @param to Address that will receive the underlying, same as msg.sender if the user
+  *   wants to receive it on his own wallet, or a different address if the beneficiary is a
+  *   different wallet
+  * @return The final amount withdrawn
+  **/
+function withdraw(
+  address asset,
+  uint256 amount,
+  address to
+) external override whenNotPaused returns (uint256) {
+  DataTypes.ReserveData storage reserve = _reserves[asset]; // 获取reserve数据
+
+  address aToken = reserve.aTokenAddress; // 获取aToken地址
+
+  uint256 userBalance = IAToken(aToken).balanceOf(msg.sender); // 查询aToken数量，本息总额
+
+  uint256 amountToWithdraw = amount;
+
+  // 如果是 uin256 最大值，赎回用户所有余额
+  if (amount == type(uint256).max) {
+    amountToWithdraw = userBalance;
+  }
+
+  // 验证参数合法性
+  ValidationLogic.validateWithdraw(
+    asset,
+    amountToWithdraw,
+    userBalance,
+    _reserves,
+    _usersConfig[msg.sender],
+    _reservesList,
+    _reservesCount,
+    _addressesProvider.getPriceOracle()
+  );
+
+  // 更新资产的状态变量
+  reserve.updateState();
+
+  // 更新资产的利率模型变量
+  reserve.updateInterestRates(asset, aToken, 0, amountToWithdraw);
+
+  // 如果用户赎回了全部余额，则设置用户的该资产不再是抵押品
+  if (amountToWithdraw == userBalance) {
+    _usersConfig[msg.sender].setUsingAsCollateral(reserve.id, false);
+    emit ReserveUsedAsCollateralDisabled(asset, msg.sender);
+  }
+
+  // aToken.burn()
+  IAToken(aToken).burn(msg.sender, to, amountToWithdraw, reserve.liquidityIndex);
+
+  emit Withdraw(asset, msg.sender, to, amountToWithdraw);
+
+  return amountToWithdraw;
+}
+```
+
+相关代码
+
+- [DataTypes](###DataTypes)
+- [reserve.updateState()](./ReserveLogic.md###updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
+- [AToken.burn()](./AToken.md###burn)
 
 ### borrow
 

@@ -341,7 +341,7 @@ function burn(address user, uint256 amount) external override onlyLendingPool {
 
 ### \_calculateBalanceIncrease-stable
 
-计算用户债务的增长量，返回 债务的本金，债务本息总额（本金+利息），利息数量
+计算用户债务的增长量，返回 缩放数量(债务的在t_0时刻的数量)，债务本息总额，债务增量(前两者的差)
 
 ```solidity
 /**
@@ -358,7 +358,7 @@ function _calculateBalanceIncrease(address user)
     uint256
   )
 {
-  // 获取用户的债务本金数量
+  // 获取用户的债务缩放数量
   // super.balanceOf 是ERC20类的方法
   uint256 previousPrincipalBalance = super.balanceOf(user);
 
@@ -368,9 +368,9 @@ function _calculateBalanceIncrease(address user)
   }
 
   // Calculation of the accrued interest since the last accumulation
-  // 计算债务的利息
-  // balanceOf() 返回的是包含利息的用户债务总额 (DebtToken 重载后的方法)
-  // 利息 = 债务总额 - 本金
+  // 计算债务自上次累计后的增量
+  // balanceOf() 返回的是用户债务本息总额 (DebtToken 重载后的方法)
+  // 债务增量 = 债务总额 - 缩放数量
   uint256 balanceIncrease = balanceOf(user).sub(previousPrincipalBalance);
 
   return (
@@ -385,6 +385,33 @@ function _calculateBalanceIncrease(address user)
 
 - [balanceOf](###balanceOf)
 
+### _mint-stable
+
+内部mint方法，若有激励控制合约，则会按持仓额外奖励
+
+```solidity
+/**
+  * @dev Mints stable debt tokens to an user
+  * @param account The account receiving the debt tokens
+  * @param amount The amount being minted
+  * @param oldTotalSupply the total supply before the minting event
+  **/
+function _mint(
+  address account,
+  uint256 amount,
+  uint256 oldTotalSupply
+) internal {
+  uint256 oldAccountBalance = _balances[account];
+  _balances[account] = oldAccountBalance.add(amount);
+
+  if (address(_incentivesController) != address(0)) {
+    _incentivesController.handleAction(account, oldTotalSupply, oldAccountBalance);
+  }
+}
+```
+
+### _burn-table
+
 ### balanceOf-stable
 
 返回用户的债务总数，包含利息。
@@ -395,20 +422,19 @@ function _calculateBalanceIncrease(address user)
   * @return The accumulated debt of the user
   **/
 function balanceOf(address account) public view virtual override returns (uint256) {
-  // 获取ERC20.balanceOf, 即用户借贷出的本金数量
+  // 获取ERC20.balanceOf, 即用户之前借贷总量（缩放数值）
   uint256 accountBalance = super.balanceOf(account);
-  // 获取用户的固定借贷利率
+  // 获取用户的平均固定利率
   uint256 stableRate = _usersStableRate[account];
-  // 如果没有本金返回0
+  // 如果没有借贷返回0
   if (accountBalance == 0) {
     return 0;
   }
-  // 每单位本金应还款数量 （本金+利息）
+  // 每单位debtToken应还款数量 （本息总额）
   // cumulatedInterest = (1+rate)^time
   uint256 cumulatedInterest =
     MathUtils.calculateCompoundedInterest(stableRate, _timestamps[account]);
-  // 利息总额
-  // 本金 * 每单位本金应还款数量 = 债务总额
+  // 缩放后数量 * 每单位应还款数量 = 债务总额
   return accountBalance.rayMul(cumulatedInterest);
 }
 ```
@@ -441,12 +467,12 @@ function mint(
   }
 
   uint256 previousBalance = super.balanceOf(onBehalfOf);  // 还款人的浮动债务总额
-  uint256 amountScaled = amount.rayDiv(index);  // 该笔贷款的本金数量
-  require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT); // 本金不能为0
+  uint256 amountScaled = amount.rayDiv(index);  // 该笔贷款的缩放到t_0时刻的数量
+  require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
 
   _mint(onBehalfOf, amountScaled);
 
-  emit Transfer(address(0), onBehalfOf, amount);
+  emit Transfer(address(0), onBehalfOf, amount);  // 发送事件仍用缩放前的数量
   emit Mint(user, onBehalfOf, amount, index);
 
   return previousBalance == 0;  // 是否为还款人第一笔贷款
