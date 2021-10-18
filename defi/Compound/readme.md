@@ -17,7 +17,7 @@ U = 借款 /（ 现金 + 借款 ）
 [GeoGebra](https://www.geogebra.org/) -- 数学作图工具
 
 ## dao治理
-
+  comp治理： https://docs.qq.com/doc/DVHRTcGlld1RNanN0
 ## 参考链接
 
 - <https://learnblockchain.cn/article/1357> 代理投票
@@ -28,3 +28,4 @@ U = 借款 /（ 现金 + 借款 ）
 - <https://github.com/codenamejason/compound-supply-examples/tree/master/solidity-examples>
 - <https://learnblockchain.cn/article/1015>
 - <https://github.com/compound-developers/compound-supply-examples>
+- 清算机器人：https://blog.baowebdev.com/2019/11/how-to-build-a-compound-liquidation-bot/
