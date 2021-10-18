@@ -38,6 +38,8 @@
 | \_stableRateSlope1       | R_slope1 (浮动) | ray      |
 | \_stableRateSlope2       | R_slope2 (浮动) | ray      |
 
+针对各个资产的不同利率相关参数详见 [aave borrow interest rate](https://docs.aave.com/risk/liquidity-risk/borrow-interest-rate)
+
 ## methods
 
 ### constructor

@@ -7,7 +7,7 @@
 
 ## EIP20 Methods
 
-虽然 debt tokens 大部分遵循 ERC20 标准，但由于债务的特殊性，没有实现 `transfer()` 和 `allowance()` 。
+虽然 debt tokens 大部分遵循 ERC20 标准，但由于债务的特殊性，没有实现 `transfer()` 和 `allowance()`（这两个方法会直接revert，不会执行） 。
 
 > `balanceOf()` 返回用户的债务数量，包含累计的利息
 
@@ -17,7 +17,7 @@
 
 ### UNDERLYING_ASSET_ADDRESS
 
-返回借出时的数量，不含利息。
+返回借出资产的地址，例如对应 aWETH 的 WETH 地址。
 
 ```solidity
 /**
@@ -43,7 +43,7 @@ function POOL() public view returns (ILendingPool) {
 
 ### approveDelegation
 
-授权给目标地址可代还债务的数量。
+`msg.sender` 授权给目标地址 `delegatee` 债务额度，承诺可代 `delegatee` 偿还一定数量的债务。
 
 ```solidity
 /**
@@ -61,7 +61,7 @@ function approveDelegation(address delegatee, uint256 amount) external override 
 
 ### borrowAllowance
 
-查询目标地址可代还债务的数量
+查询目标地址 `fromUser` 提供给 `toUser` 可代还债务的数量
 
 ```solidity
 /**
@@ -148,12 +148,14 @@ function getSupplyData()
 
 函数中计算了两种固定利率：
 
-- `newStableRate` 池子实时的固定利率
+- `newStableRate` 用户的平均利率（包含当前贷款）
   - 由当前用户借贷后，对用户的利息和债务的加权平均得出
   - `(usersStableRate * currentBalance + amount * rate) / (currentBalance + amount)`
-  - 该值会更新在 `_usersStableRate` 这个 mapping 变量中
+  - 该值会更新在 `_usersStableRate` 这个 mapping 变量中，即每个借贷用户都会单独记录一个该值
+  - 用户的平均利率会用来计算用户当前的债务本息总额，例如 `StableDebtToken.balanceOf()` 会使用该公式来计算
 - `currentAvgStableRate` 池子平均的固定利率，计算逻辑上述一致，但是用的池子的总债务数量计算
   - `(currentAvgStableRate * previousSupply + rate * amount) / (previousSupply + amount)`
+- 上述三个公式在V2白皮书 3.4 Stable Debt
 
 ```solidity
 // 缓存计算结果的结构
@@ -161,8 +163,8 @@ struct MintLocalVars {
   uint256 previousSupply; // 之前的总发行量
   uint256 nextSupply; // 即将更新的总发行量
   uint256 amountInRay;  // 新增数量（单位是ray）
-  uint256 newStableRate;  // 新的固定利率
-  uint256 currentAvgStableRate; // 当前平均的固定利率
+  uint256 newStableRate;  // 平均固定利率（用户）
+  uint256 currentAvgStableRate; // 平均固定利率（池子）
 }
 
 /**
@@ -180,7 +182,7 @@ function mint(
   address user, // 借贷受益人
   address onBehalfOf, // 借贷还款人
   uint256 amount, // 借贷数量
-  uint256 rate  // 借贷利率
+  uint256 rate  // 当前新贷款使用的借贷利率（由利率更新策略模块更新）
 ) external override onlyLendingPool returns (bool) {
   MintLocalVars memory vars;
 
@@ -189,7 +191,7 @@ function mint(
     _decreaseBorrowAllowance(onBehalfOf, user, amount);
   }
 
-  // 获取债务总额（本金+利息），利息总额
+  // 获取债务本息总额（本金+利息），利息总额
   (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(onBehalfOf);
 
   vars.previousSupply = totalSupply(); // 缓存池子债务总额 （本金+利息）
@@ -201,10 +203,10 @@ function mint(
   // 1 ray = 1e27
   vars.amountInRay = amount.wadToRay();
 
-  // 计算新的固定利率（用户的）
+  // 计算固定利率（用户的）
   // 增加后的累计总利息 / 增加后的本金总额
   // (usersStableRate * currentBalance + amount * rate) / (currentBalance + amount)
-  // rate 是池子中的固定利率，由利率更新策略合约更新
+  // rate 这笔新贷款使用的利率，由利率更新策略合约更新
   // _usersStableRate[onBehalfOf] 是针对用户记录的固定利率，和池子中的固定利率可能不同
   vars.newStableRate = _usersStableRate[onBehalfOf]
     .rayMul(currentBalance.wadToRay())
@@ -244,6 +246,7 @@ function mint(
     vars.nextSupply
   );
 
+  // 返回该笔贷款是否是用户的第一笔
   return currentBalance == 0;
 }
 ```
@@ -338,7 +341,7 @@ function burn(address user, uint256 amount) external override onlyLendingPool {
 
 ### \_calculateBalanceIncrease-stable
 
-计算用户债务的增长量，返回 债务的本金，债务总额（本金+利息），利息数量
+计算用户债务的增长量，返回 债务的本金，债务本息总额（本金+利息），利息数量
 
 ```solidity
 /**

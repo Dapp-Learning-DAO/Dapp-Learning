@@ -42,10 +42,12 @@ Reserve 的主要变量
 
 ### liquidityIndex
 
-`liquidity cumulative index` 每单位 liquidity(协议持有的资产，可以理解为向借贷者提供的流动性)，累计收取的利息的时间加权数值。 `R_t` 是总的利率，即固定利率和浮动利率的加权平均。
+`liquidity cumulative index` 每单位 liquidity (用户往协议中注入的抵押资产)，累计收取的利息的时间加权数值。 `R_t` 是总的利率，即固定利率和浮动利率的加权平均。
 
 <!-- ${LI}_t=(1+\Delta{T_{year}}*R_t)*{LI}_{t-1}$ -->
 <img src="https://render.githubusercontent.com/render/math?math={LI}_t=(1%2B\Delta{T_{year}}*R_t)*{LI}_{t-1}" style="display: block;margin: 24px auto;" />
+
+**注意：** liquidty的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./AToken.md#amount%20and%20amountScaled)
 
 ### variableBorrowIndex
 
@@ -58,7 +60,7 @@ Reserve 的主要变量
 
 ### updateState
 
-更新 `liquidity cumulative index` 和 `variable borrow index` 两个变量，若有新增资产，将其中一部分存入准备金库。
+更新 `liquidity cumulative index` 和 `variable borrow index` 两个变量，若有新增资产，将其中一部分存入金库(Treasury)。
 
 ```solidity
 /**
@@ -66,15 +68,15 @@ Reserve 的主要变量
   * @param reserve the reserve object
   **/
 function updateState(DataTypes.ReserveData storage reserve) internal {
-  // 获取浮动利率债务数量（包含利息的）
+  // 获取浮动债务的 scaled 数量，即缩放到 t_0 时刻的总数量
   uint256 scaledVariableDebt =
     IVariableDebtToken(reserve.variableDebtTokenAddress).scaledTotalSupply();
   // 缓存更新之前的值
-  uint256 previousVariableBorrowIndex = reserve.variableBorrowIndex;
-  uint256 previousLiquidityIndex = reserve.liquidityIndex;
-  uint40 lastUpdatedTimestamp = reserve.lastUpdateTimestamp;
+  uint256 previousVariableBorrowIndex = reserve.variableBorrowIndex;  // variable borrow index
+  uint256 previousLiquidityIndex = reserve.liquidityIndex; // liquidity cumulative index
+  uint40 lastUpdatedTimestamp = reserve.lastUpdateTimestamp;  // 池子上次更新的时刻
 
-  // 更新变量
+  // 更新index变量
   (uint256 newLiquidityIndex, uint256 newVariableBorrowIndex) =
     _updateIndexes(
       reserve,
@@ -84,7 +86,7 @@ function updateState(DataTypes.ReserveData storage reserve) internal {
       lastUpdatedTimestamp
     );
 
-  // 若有新增资产将其中一部分存入准备金库
+  // 若有新增资产将其中一部分存入金库
   _mintToTreasury(
     reserve,
     scaledVariableDebt,
@@ -103,9 +105,9 @@ function updateState(DataTypes.ReserveData storage reserve) internal {
 parameters:
 
 - reserve 需要更新的资产数据
-- scaledVariableDebt 计息后的浮动利率债务数量
+- scaledVariableDebt 浮动债务数量（统一缩放到 t_0 时刻）
 - liquidityIndex 每单位流动性的收益时间加权累计值
-- variableBorrowIndex 每单位浮动利率类型债务的利率时间加权累计值
+- variableBorrowIndex 每单位浮动利率类型债务的累计本息总额
 
 ```solidity
 /**
@@ -122,34 +124,36 @@ function _updateIndexes(
   uint256 variableBorrowIndex,
   uint40 timestamp
 ) internal returns (uint256, uint256) {
-  // 缓存流动性收益率
+  // 缓存之前的流动性收益率
   uint256 currentLiquidityRate = reserve.currentLiquidityRate;
 
-  // 缓存流动性收益时间加权累计值
+  // 缓存之前的每单位流动性累计本息总额
   uint256 newLiquidityIndex = liquidityIndex;
-  // 缓存每单位浮动类型债务的利息加权累计值
+  // 缓存每单位浮动利率类型债务的累计本息总额
   uint256 newVariableBorrowIndex = variableBorrowIndex;
 
   //only cumulating if there is any income being produced
-  // 当有收益时，执行累计逻辑
+  // 只有当有收益率时，执行累计逻辑
   if (currentLiquidityRate > 0) {
-    // 时间加权累计收益率（(1+收益率)*时间）线性累加
+    // 累计收益率 通过计算将年化收益率切分成每秒，然后线性累加这段时间的收益率
+    // 1 + ratePerSecond * (delta_t / seconds in a year)
     uint256 cumulatedLiquidityInterest =
       MathUtils.calculateLinearInterest(currentLiquidityRate, timestamp);
-    // 在之前的累计值基础上更新
+    // 更新每单位流动性的本息总额
     newLiquidityIndex = cumulatedLiquidityInterest.rayMul(liquidityIndex);
-    require(newLiquidityIndex <= type(uint128).max, Errors.RL_LIQUIDITY_INDEX_OVERFLOW);
+    require(newLiquidityIndex <= type(uint128).max, Errors.RL_LIQUIDITY_INDEX_OVERFLOW);  // 检查最大值限制
 
-    reserve.liquidityIndex = uint128(newLiquidityIndex);
+    reserve.liquidityIndex = uint128(newLiquidityIndex);  // 由于newLiquidityIndex是uint256，这里要转换
 
     //as the liquidity rate might come only from stable rate loans, we need to ensure
     //that there is actual variable debt before accumulating
-    // 当有浮动类型债务时，更新浮动债务的单位累计利息
+    // 当有浮动类型债务时，更新浮动债务的每单位累计本息总额
     if (scaledVariableDebt != 0) {
-      // 时间加权累计每单位债务的累计利息
-      // 根据每秒的利率和时间间隔秒数，计算复利
+      // 将年化利率切分成每秒，然后以时间差为指数计算复利后的每单位累计本息总额
+      // (1 + ratePerSecond) ^ delta_t
       uint256 cumulatedVariableBorrowInterest =
         MathUtils.calculateCompoundedInterest(reserve.currentVariableBorrowRate, timestamp);
+      // 更新浮动债务的每单位累计本息总额
       newVariableBorrowIndex = cumulatedVariableBorrowInterest.rayMul(variableBorrowIndex);
       require(
         newVariableBorrowIndex <= type(uint128).max,
@@ -226,9 +230,9 @@ function updateInterestRates(
 
   // 更新利率，注意这里返回的是uint256类型
   (
-    vars.newLiquidityRate,
-    vars.newStableRate,
-    vars.newVariableRate
+    vars.newLiquidityRate,  // 每单位liquidity的本息累计总额
+    vars.newStableRate, // 稳定类型债务的最新利率
+    vars.newVariableRate // 浮动类型债务的最新利率
   ) = IReserveInterestRateStrategy(reserve.interestRateStrategyAddress).calculateInterestRates(
     reserveAddress,
     aTokenAddress,

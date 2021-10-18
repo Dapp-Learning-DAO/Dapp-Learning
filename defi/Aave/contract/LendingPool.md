@@ -96,8 +96,10 @@ parameters:
 | asset            | address | 借贷资产的 token 地址                                   |
 | amount           | uint256 | 借贷资产的数量                                          |
 | interestRateMode | uint256 | 借贷利率类型，固定 1，浮动 2                            |
-| onBehalfOf       | address | debtToken 转账地址，即债务承担者，默认填写 `msg.sender` |
+| onBehalfOf       | address | debtToken 转账地址，即债务偿还人，默认填写 `msg.sender` |
 | referralCode     | uint16  | 用于广播的自定义事件代码，当用户直接调用时推荐写 0      |
+
+债务偿还人和债务受益人可以不同，比如抵押资产在冷钱包中，将信用额度转让给热钱包，便于操作。
 
 ```solidity
 /**

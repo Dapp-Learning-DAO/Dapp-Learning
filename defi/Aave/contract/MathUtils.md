@@ -4,7 +4,7 @@
 
 ## SECONDS_PER_YEAR
 
-一年的秒数，忽略闰年。
+一年的秒数，不考虑闰年。
 
 ```solidity
 /// @dev Ignoring leap years
@@ -13,7 +13,7 @@ uint256 internal constant SECONDS_PER_YEAR = 365 days;
 
 ## calculateLinearInterest
 
-线性计算时间间隔内的累计利率。
+根据年化利率，计算一段时间内的线性累计数值。
 
 parameters:
 

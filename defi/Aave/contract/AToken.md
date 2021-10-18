@@ -66,12 +66,7 @@ function initialize(
 
 ### mint
 
-为抵押资产的用户发行 aToken，只能被 `LendingPool` 合约调用，用于管理额外的状态。
-
-数量进行缩放的原因：
-
-- aToken 重载了 ERC20.balanceOf 方法，每次查询余额是包含了累计利息的数量
-- 为了保证本金和累计利息的比例不变，这里要对 amount 进行缩放，实际 mint 的数量是 amountScaled
+为抵押资产的用户发行 aToken，只能被 `LendingPool` 合约调用，用于管理额外的状态。该方法只能被 LendingPool 合约调用。
 
 ```solidity
 /**
@@ -90,7 +85,7 @@ function mint(
   // 这里调用的是 ERC20.balanceOf() 返回的是不计息的数量
   uint256 previousBalance = super.balanceOf(user);
 
-  // index = （本金 + 累计利息） / 本金
+  // index 从池子创建以来 每单位liquidity累计的本息总额
   // amountScaled = mint 数量 / index
   uint256 amountScaled = amount.rayDiv(index);
   require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
@@ -99,13 +94,22 @@ function mint(
   emit Transfer(address(0), user, amount);
   emit Mint(user, amount, index);
 
+  // 返回用户在该抵押品的数量，之前是否为0
   return previousBalance == 0;
 }
 ```
 
+#### amount and amountScaled
+
+- aToken 重载了 ERC20.balanceOf 方法，每次查询余额是包含了累计利息的数量
+- 为了保证本金和累计利息的比例不变，这里要对 amount 进行缩放，实际 mint 的数量是 amountScaled
+- 假设用户在 t_current 时刻存入 amount 数量，那么如果 t_0 时刻（池子创建时）存入了 amountScaled ，通过复利累计本息，直到 t_current 时刻，其数量正好等于 amount
+- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，每单位流动性累计的本息总额
+- amountScaled 就是 aToken 实际记录的数量，由于全部缩放至 t_0 时刻，这样就抹平了不同抵押操作的时间和利率的不同，可以全部统一计算
+
 ### burn
 
-销毁 aToken，转给调用者原资产，即 aToken 对应的抵押资产。销毁的实际数量需要缩放，逻辑和 mint 一致。
+销毁 aToken，转给调用者原资产，即 aToken 对应的抵押资产。销毁的实际数量需要缩放，逻辑和 mint 一致。该方法只能被 LendingPool 合约调用。
 
 ```solidity
 /**
@@ -117,11 +121,11 @@ function mint(
   * @param index The new liquidity index of the reserve
   **/
 function burn(
-  address user,
-  address receiverOfUnderlying,
-  uint256 amount,
-  uint256 index
-) external override onlyLendingPool {
+  address user, // 用户地址
+  address receiverOfUnderlying, // 原资产地址
+  uint256 amount, // 赎回数量
+  uint256 index // reserve.liquidityIndex
+) external override onlyLendingPool { // 只能被 LendingPool 调用
   uint256 amountScaled = amount.rayDiv(index);
   require(amountScaled != 0, Errors.CT_INVALID_BURN_AMOUNT);
   _burn(user, amountScaled);
@@ -135,9 +139,9 @@ function burn(
 
 ### balanceOf
 
-重载了 ERC20.balanceOf 方法，返回的是 本金 + 累计利息 的数量，即用户查询 aToken 数量，总是包含了利息收益。
+重载了 ERC20.balanceOf 方法，返回的是债务本息总额 (本金 + 累计利息) 的数量，即用户查询 aToken 数量，总是包含了利息收益。
 
-`NormalizedIncome` 是 (本金 + 累计利息) / 本金， 用来计算本息总额。
+`NormalizedIncome` 是每单位流动性的累计的本息总额，注意这里需要用 amountScaled 计算，即缩放成 t_0 时刻的数量。
 
 ```solidity
 /**
@@ -151,7 +155,7 @@ function balanceOf(address user)
   override(IncentivizedERC20, IERC20)
   returns (uint256)
 {
-  // 本金 * NormalizedIncome
+  // amountScaled * NormalizedIncome
   return super.balanceOf(user).rayMul(_pool.getReserveNormalizedIncome(_underlyingAsset));
 }
 ```
