@@ -1,6 +1,6 @@
 # Getting Started with Bankless DAO
 
-![img](./pics/1*3jczYY6GadwjyfIXWZPxWg.png)
+![img](./pics/backless-start-04.png)
 
 1. 如果你有[BANK](https://etherscan.io/token/0x2d94aa3e47d9d5024503ca8491fce9a2fb4da198)代币，那是因为你参与了Bankless运动。有关如何申领 Bankless 代币以及谁符合条件的更多详细信息，请访问此处。
 
@@ -36,7 +36,7 @@ PS：最新的加入方法除去持有35000个BANK之外，还有订阅模式，
 
 *注意：BANK 代币是无价值的代币——它们仅用于访问 DAO Discord和在 DAO 提案中投票。*
 
-<img src="./pics/0*_KWxM1LB4vSU2Ivt.png" alt="img" style="zoom: 50%;" />
+<img src="./pics/backless-start-01.png" alt="img" style="zoom: 50%;" />
 
 连接符合条件的钱包后，您可以领取 BANK
 
@@ -44,7 +44,7 @@ PS：最新的加入方法除去持有35000个BANK之外，还有订阅模式，
 
 
 
-<img src="./pics/1*MvT8H6p-ZNxLeBeqto81qg.png" alt="img" style="zoom:67%;" />
+<img src="./pics/backless-start-05.png" alt="img" style="zoom:67%;" />
 
 使用 35000 BANK，discord 成员部分将神奇地向您开放。
 
@@ -54,7 +54,7 @@ PS：最新的加入方法除去持有35000个BANK之外，还有订阅模式，
 
 
 
-<img src="./pics/0*9oyO7ufcDb2tNV7D.png" alt="img" style="zoom:67%;" />
+<img src="./pics/backless-start-03.png" alt="img" style="zoom:67%;" />
 
 加入 discord 后，#intros 频道是你的第一站……不要问 DAO 能为你做什么，而要问你能为 DAO 做什么
 
@@ -62,7 +62,7 @@ PS：最新的加入方法除去持有35000个BANK之外，还有订阅模式，
 
 在claim  BANK 并加入 Discord 之后，您可以对治理提案进行投票。第一个投票项目是由 RSA 和 David Hoffman 提出的创世纪提案。阅读提案并使用 SnapShot 投票赞成或反对。
 
-<img src="./pics/1*jRpYtN6fwyhhRaJy3ldm6g.png" alt="img" style="zoom:67%;" />
+<img src="./pics/backless-start-06.png" alt="img" style="zoom:67%;" />
 
 Should the DAO approve the Bankless DAO Genesis Proposal…YES or NO? [You vote](https://snapshot.org/#/banklessvault.eth/proposal/QmdoixPMMT76vSt6ewkE87JZJywS1piYsGC3nJJpcrPXKS).
 
