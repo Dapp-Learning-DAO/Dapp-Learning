@@ -114,7 +114,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [Merkel-Patricia Tree(MPT)](basic/35-mpt/README.md) ⬜
+35. [Liquity](https://github.com/liquity) ⬜
 36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
@@ -125,7 +125,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ⬜
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916) ⬜
-46. [vyper](https://vyper.readthedocs.io/en/stable/) ⬜
+46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
@@ -136,9 +136,6 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
-57. [Liquity](https://github.com/liquity) ⬜
-58. [Auto trigger smart contract](/basic/58-auto-smart-contract/README.md) ⬜
-59. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 

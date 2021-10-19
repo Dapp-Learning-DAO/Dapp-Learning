@@ -27,8 +27,9 @@ brownie test
 ```
 
 ## 参考链接
-- https://eth-brownie.readthedocs.io/en/stable/toctree.html
-- https://github.com/Uniswap/old-solidity-contracts 
-- https://github.com/Uniswap/uniswap-v1/tree/master/tests
-- https://readthedocs.org/projects/eth-brownie/downloads/pdf/v1.3.1_a/
-- https://zhuanlan.zhihu.com/p/87775743  pytest
+brownie 官网: https://eth-brownie.readthedocs.io/en/stable/toctree.html   
+旧版 Uniswap 合约: https://github.com/Uniswap/old-solidity-contracts   
+Uniswap V1 合约: https://github.com/Uniswap/uniswap-v1/tree/master/tests    
+brownie pdf 文档: https://readthedocs.org/projects/eth-brownie/downloads/pdf/v1.3.1_a/   
+pytest 教程: https://zhuanlan.zhihu.com/p/87775743      
+vyper 官网: https://vyper.readthedocs.io/en/stable    
