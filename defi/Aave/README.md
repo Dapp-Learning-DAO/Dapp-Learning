@@ -1,4 +1,8 @@
 - <https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade>
 - <https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol>
 - [V1-whitepaper](https://cryptorating.eu/whitepapers/Aave/Aave_Protocol_Whitepaper_v1_0.pdf)
+<<<<<<< HEAD
 - [V2-whitepaper](https://cryptorating.eu/whitepapers/Aave/aave-v2-whitepaper.pdf)
+=======
+- [V2-whitepaper](https://cryptorating.eu/whitepapers/Aave/aave-v2-whitepaper.pdf)
+>>>>>>> parent of 54250c26 (AAVE whitepaper V2 analysis as well as the Blibli share link)
