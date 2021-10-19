@@ -2,9 +2,11 @@
 
 ##原理介绍
 
+CurveV1 : https://www.yuque.com/docs/share/888996ac-b60f-4db5-a4a2-d916e9ef8932#%20
+CurveV2 : https://www.yuque.com/docs/share/d902a3d4-f246-420c-b971-6487e38999dc#%20
+CurveDAO: https://www.yuque.com/docs/share/6749f704-793a-48f6-af9f-89aabebb21ac?#%20 
 
-
-##参考链接
+## 参考链接
 
 - 白皮书  <https://curve.fi/files/stableswap-paper.pdf>
 - github <https://github.com/curvefi/curve-contract/tree/master/contracts>
