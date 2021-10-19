@@ -414,7 +414,7 @@ function _mint(
 
 ### balanceOf-stable
 
-返回用户的债务总数，包含利息。
+返回用户的债务总数，包含利息。根据记录的用户平均固定利率和时间来线性的累计利息。
 
 ```solidity
 /**
@@ -443,7 +443,7 @@ function balanceOf(address account) public view virtual override returns (uint25
 
 ### mint-variable
 
-生成浮动利率的 VariableDebtToken 转给借贷还款人。
+生成浮动利率的 VariableDebtToken 转给借贷还款人。实际mint数量是 amountScaled。
 
 ```solidity
 /**
@@ -478,3 +478,59 @@ function mint(
   return previousBalance == 0;  // 是否为还款人第一笔贷款
 }
 ```
+
+### burn-variable
+
+销毁amount数量的VariableDebtToken，实际burn掉amountScaled。只能被 LendingPool 调用。
+
+```solidity
+/**
+  * @dev Burns user variable debt
+  * - Only callable by the LendingPool
+  * @param user The user whose debt is getting burned
+  * @param amount The amount getting burned
+  * @param index The variable debt index of the reserve
+  **/
+function burn(
+  address user,
+  uint256 amount,
+  uint256 index // reserve.variableBorrowIndex
+) external override onlyLendingPool {
+  uint256 amountScaled = amount.rayDiv(index);  // 对数量缩放到t_0时刻
+  require(amountScaled != 0, Errors.CT_INVALID_BURN_AMOUNT);
+
+  _burn(user, amountScaled);  // 销毁 amountScaled 数量
+
+  emit Transfer(user, address(0), amount);  // 广播 amount 数量
+  emit Burn(user, amount, index);
+}
+```
+
+### balanceOf-variable
+
+返回用户当前的浮动类型债务数量。由于浮动利率会经常变化，所以需要利用全局记录的 `variableBorrowIndex` 来对缩放后的token数量还原。
+
+> variable 类型的债务利率不断随着池子的利用率产生变化，所以每个池子会全局记录一个 `variableBorrowIndex` 来实时更新债务和缩放数量的比例；而 stable 类型的债务，对于用户来说，每一笔的债务利率都是固定在初始借贷时刻的，所以只需要以固定利率和时间来线性的计算债务数量；由于用户可能借出多笔不同固定利率的债务，实际计算需要使用加权平均后的固定利率，具体公式在V2白皮书 3.4 Stable Debt
+
+```solidity
+/**
+  * @dev Calculates the accumulated debt balance of the user
+  * @return The debt balance of the user
+  **/
+function balanceOf(address user) public view virtual override returns (uint256) {
+  uint256 scaledBalance = super.balanceOf(user);
+
+  if (scaledBalance == 0) {
+    return 0;
+  }
+
+  // 内部调用了 ReserveLogic 的 getNormalizedDebt 方法
+  // 返回最新的 variableBorrowIndex
+  // scaledBalance * variableBorrowIndex
+  return scaledBalance.rayMul(_pool.getReserveNormalizedVariableDebt(_underlyingAsset));
+}
+```
+
+相关代码
+
+- [getNormalizedDebt](./ReserveLogic.md#getNormalizedDebt)

@@ -345,13 +345,277 @@ function _executeBorrow(ExecuteBorrowParams memory vars) internal {
 
 ### repay
 
+偿还债务，并销毁相应的 debtToken。
+
+parameters:
+
+| Parameter Name | Type    | Description                                  |
+| -------------- | ------- | -------------------------------------------- |
+| asset          | address | 借贷资产的 token 地址                        |
+| amount         | uint256 | 偿还的数量，使用 `uint(-1)` 表示偿还所有债务 |
+| rateMode       | uint256 | 偿还借贷的利率类型，固定 1，浮动 2           |
+| onBehalfOf     | address | 承担债务的用户地址，默认填写 `msg.sender`    |
+
+```solidity
+/**
+  * @notice Repays a borrowed `amount` on a specific reserve, burning the equivalent debt tokens owned
+  * - E.g. User repays 100 USDC, burning 100 variable/stable debt tokens of the `onBehalfOf` address
+  * @param asset The address of the borrowed underlying asset previously borrowed
+  * @param amount The amount to repay
+  * - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`
+  * @param rateMode The interest rate mode at of the debt the user wants to repay: 1 for Stable, 2 for Variable
+  * @param onBehalfOf Address of the user who will get his debt reduced/removed. Should be the address of the
+  * user calling the function if he wants to reduce/remove his own debt, or the address of any other
+  * other borrower whose debt should be removed
+  * @return The final amount repaid
+  **/
+function repay(
+  address asset,
+  uint256 amount,
+  uint256 rateMode,
+  address onBehalfOf
+) external override whenNotPaused returns (uint256) {
+  DataTypes.ReserveData storage reserve = _reserves[asset];
+
+  // 获取偿还人的债务数量，分别调用 stableDectToken 和 variableDebtToken 的 balanceOf 方法
+  (uint256 stableDebt, uint256 variableDebt) = Helpers.getUserCurrentDebt(onBehalfOf, reserve);
+
+  // 获取偿债的类型 固定还是浮动
+  DataTypes.InterestRateMode interestRateMode = DataTypes.InterestRateMode(rateMode);
+
+  ValidationLogic.validateRepay(
+    reserve,
+    amount,
+    interestRateMode,
+    onBehalfOf,
+    stableDebt,
+    variableDebt
+  );
+
+  // 根据偿债类型赋值待还款数量
+  uint256 paybackAmount =
+    interestRateMode == DataTypes.InterestRateMode.STABLE ? stableDebt : variableDebt;
+
+  // 偿债数量 < 待还款数量 调整待还款数量
+  if (amount < paybackAmount) {
+    paybackAmount = amount;
+  }
+
+  // 更新资产状态信息 主要更新利率指数相关变量
+  reserve.updateState();
+
+  // 根据不同类型还款，调用debtToken.burn()
+  // 浮动类型债务需要资产的variableBorrowIndex
+  if (interestRateMode == DataTypes.InterestRateMode.STABLE) {
+    IStableDebtToken(reserve.stableDebtTokenAddress).burn(onBehalfOf, paybackAmount);
+  } else {
+    IVariableDebtToken(reserve.variableDebtTokenAddress).burn(
+      onBehalfOf,
+      paybackAmount,
+      reserve.variableBorrowIndex
+    );
+  }
+
+  address aToken = reserve.aTokenAddress;
+  reserve.updateInterestRates(asset, aToken, paybackAmount, 0);
+
+  if (stableDebt.add(variableDebt).sub(paybackAmount) == 0) {
+    _usersConfig[onBehalfOf].setBorrowing(reserve.id, false);
+  }
+
+  IERC20(asset).safeTransferFrom(msg.sender, aToken, paybackAmount);
+
+  IAToken(aToken).handleRepayment(msg.sender, paybackAmount);
+
+  emit Repay(asset, onBehalfOf, msg.sender, paybackAmount);
+
+  return paybackAmount;
+}
+```
+
+相关代码
+
+- [DataTypes](###DataTypes)
+- [reserve.updateState()](./ReserveLogic.md###updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
+- [StableDebtToken.burn()](./DebtToken.md###burn-stable)
+- [VariableDebtToken.burn()](./DebtToken.md###burn-variable)
+
 ### swapBorrowRateMode
+
+切换用户(`msg.sender`)特定资产的借贷模式，浮动或固定利率。
+
+parameters:
+
+| Parameter Name | Type    | Description                        |
+| -------------- | ------- | ---------------------------------- |
+| asset          | address | 借贷资产的 token 地址              |
+| rateMode       | uint256 | 设置借贷的利率类型，固定 1，浮动 2 |
+
+```solidity
+/**
+  * @dev Allows a borrower to swap his debt between stable and variable mode, or viceversa
+  * @param asset The address of the underlying asset borrowed
+  * @param rateMode The rate mode that the user wants to swap to
+  **/
+function swapBorrowRateMode(address asset, uint256 rateMode) external override whenNotPaused {
+  DataTypes.ReserveData storage reserve = _reserves[asset];
+
+  // 获取偿还人的债务数量，分别调用 stableDectToken 和 variableDebtToken 的 balanceOf 方法
+  (uint256 stableDebt, uint256 variableDebt) = Helpers.getUserCurrentDebt(msg.sender, reserve);
+
+  // 获取偿债的类型 固定还是浮动
+  DataTypes.InterestRateMode interestRateMode = DataTypes.InterestRateMode(rateMode);
+
+  ValidationLogic.validateSwapRateMode(
+    reserve,
+    _usersConfig[msg.sender],
+    stableDebt,
+    variableDebt,
+    interestRateMode
+  );
+
+  // 更新资产状态信息 主要更新利率指数相关变量
+  reserve.updateState();
+
+  // 切换借贷类型，将原类型debtToken burn掉，然后mint出新类型的 debtToken
+  if (interestRateMode == DataTypes.InterestRateMode.STABLE) {
+    IStableDebtToken(reserve.stableDebtTokenAddress).burn(msg.sender, stableDebt);
+    IVariableDebtToken(reserve.variableDebtTokenAddress).mint(
+      msg.sender,
+      msg.sender,
+      stableDebt,
+      reserve.variableBorrowIndex
+    );
+  } else {
+    IVariableDebtToken(reserve.variableDebtTokenAddress).burn(
+      msg.sender,
+      variableDebt,
+      reserve.variableBorrowIndex
+    );
+    IStableDebtToken(reserve.stableDebtTokenAddress).mint(
+      msg.sender,
+      msg.sender,
+      variableDebt,
+      reserve.currentStableBorrowRate
+    );
+  }
+
+  reserve.updateInterestRates(asset, reserve.aTokenAddress, 0, 0);
+
+  emit Swap(asset, msg.sender, rateMode);
+}
+```
 
 ### setUserUseReserveAsCollateral
 
-### flashloan
+设置用户(`msg.sender`)特定资产是否作为抵押品。
+
+parameters:
+
+| Parameter Name  | Type    | Description           |
+| --------------- | ------- | --------------------- |
+| asset           | address | 抵押资产的 token 地址 |
+| useAsCollateral | bool    | true 代表设置为抵押品 |
+
+```solidity
+/**
+  * @dev Allows depositors to enable/disable a specific deposited asset as collateral
+  * @param asset The address of the underlying asset deposited
+  * @param useAsCollateral `true` if the user wants to use the deposit as collateral, `false` otherwise
+  **/
+function setUserUseReserveAsCollateral(address asset, bool useAsCollateral)
+  external
+  override
+  whenNotPaused
+{
+  DataTypes.ReserveData storage reserve = _reserves[asset];
+
+  ValidationLogic.validateSetUseReserveAsCollateral(
+    reserve,
+    asset,
+    useAsCollateral,
+    _reserves,
+    _usersConfig[msg.sender],
+    _reservesList,
+    _reservesCount,
+    _addressesProvider.getPriceOracle()
+  );
+
+  // 将用户设置的bitmap相应的位修改数值 （0 或 1）
+  _usersConfig[msg.sender].setUsingAsCollateral(reserve.id, useAsCollateral);
+
+  if (useAsCollateral) {
+    emit ReserveUsedAsCollateralEnabled(asset, msg.sender);
+  } else {
+    emit ReserveUsedAsCollateralDisabled(asset, msg.sender);
+  }
+}
+```
+
+相关代码
+
+- [UserConfiguration.setUsingAsCollateral](./Configuration.md#setUsingAsCollateral)
 
 ### liquidationCall
+
+清算健康系数低于1的头寸。详情参见 [Liquidations guide](https://docs.aave.com/developers/guides/liquidations)
+
+当借款人的健康系数 `health factor` 低于1时，清算人可以代表借款人偿还部分或全部未偿还的债务，并获得一部分的抵押品作为奖励。
+
+```solidity
+/**
+  * @dev Function to liquidate a non-healthy position collateral-wise, with Health Factor below 1
+  * - The caller (liquidator) covers `debtToCover` amount of debt of the user getting liquidated, and receives
+  *   a proportionally amount of the `collateralAsset` plus a bonus to cover market risk
+  * @param collateralAsset The address of the underlying asset used as collateral, to receive as result of the liquidation
+  * @param debtAsset The address of the underlying borrowed asset to be repaid with the liquidation
+  * @param user The address of the borrower getting liquidated
+  * @param debtToCover The debt amount of borrowed `asset` the liquidator wants to cover
+  * @param receiveAToken `true` if the liquidators wants to receive the collateral aTokens, `false` if he wants
+  * to receive the underlying collateral asset directly
+  **/
+function liquidationCall(
+  address collateralAsset,
+  address debtAsset,
+  address user,
+  uint256 debtToCover,
+  bool receiveAToken
+) external override whenNotPaused {
+  // 获取抵押管理合约地址
+  address collateralManager = _addressesProvider.getLendingPoolCollateralManager();
+
+  // 调用抵押管理合约进行清算，返回处理结果
+  //solium-disable-next-line
+  (bool success, bytes memory result) =
+    collateralManager.delegatecall(
+      abi.encodeWithSignature(
+        'liquidationCall(address,address,address,uint256,bool)',
+        collateralAsset,
+        debtAsset,
+        user,
+        debtToCover,
+        receiveAToken
+      )
+    );
+
+  // 断言执行成功
+  require(success, Errors.LP_LIQUIDATION_CALL_FAILED);
+
+  // 解析执行返回码
+  (uint256 returnCode, string memory returnMessage) = abi.decode(result, (uint256, string));
+
+  // 当返回码不为0，revert返回信息
+  require(returnCode == 0, string(abi.encodePacked(returnMessage)));
+}
+```
+
+相关代码
+
+- [LendingPoolCollateralManager.liquidationCall](./LendingPoolCollateralManager.md#liquidationCall)
+
+### flashloan
+
 
 ## Struct
 

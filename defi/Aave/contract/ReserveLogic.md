@@ -268,3 +268,39 @@ function updateInterestRates(
 相关代码
 
 - 计算利率的方法 [IReserveInterestRateStrategy.calculateInterestRates()](./ReserveInterestRateStrategy.md#calculateInterestRates)
+
+### getNormalizedDebt
+
+查询每单位债务的本息总额（归一化债务数量）。
+
+```solidity
+/**
+  * @dev Returns the ongoing normalized variable debt for the reserve
+  * A value of 1e27 means there is no debt. As time passes, the income is accrued
+  * A value of 2*1e27 means that for each unit of debt, one unit worth of interest has been accumulated
+  * @param reserve The reserve object
+  * @return The normalized variable debt. expressed in ray
+  **/
+function getNormalizedDebt(DataTypes.ReserveData storage reserve)
+  internal
+  view
+  returns (uint256)
+{
+  uint40 timestamp = reserve.lastUpdateTimestamp;
+
+  // 若最近更新在当前区块内，直接返回 variableBorrowIndex
+  //solium-disable-next-line
+  if (timestamp == uint40(block.timestamp)) {
+    //if the index was updated in the same block, no need to perform any calculation
+    return reserve.variableBorrowIndex;
+  }
+
+  // 不在同一区块内，使用复利计算这段时间的增长
+  uint256 cumulated =
+    MathUtils.calculateCompoundedInterest(reserve.currentVariableBorrowRate, timestamp).rayMul(
+      reserve.variableBorrowIndex
+    );
+
+  return cumulated;
+}
+```
