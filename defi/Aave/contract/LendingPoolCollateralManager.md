@@ -59,7 +59,7 @@ function liquidationCall(
 
   LiquidationCallLocalVars memory vars;
 
-  (, , , , vars.healthFactor) = GenericLogic.calculateUserAccountData(
+  (, , , , vars.healthFactor) = GenericLogic.calculateUserAccountData( // 获取被清算人的健康系数
     user,
     _reserves,
     userConfig,
@@ -68,8 +68,12 @@ function liquidationCall(
     _addressesProvider.getPriceOracle()
   );
 
-  (vars.userStableDebt, vars.userVariableDebt) = Helpers.getUserCurrentDebt(user, debtReserve);
+  (vars.userStableDebt, vars.userVariableDebt) = Helpers.getUserCurrentDebt(user, debtReserve); // 获取被清算人的债务数量
 
+  // 验证清算操作的合法性
+  // 1. 健康系数 < 1
+  // 2. 用户在该资产上有抵押且有清算阈值
+  // 3. 用户负债数量不为0
   (vars.errorCode, vars.errorMsg) = ValidationLogic.validateLiquidationCall(
     collateralReserve,
     debtReserve,
@@ -83,21 +87,21 @@ function liquidationCall(
     return (vars.errorCode, vars.errorMsg);
   }
 
-  vars.collateralAtoken = IAToken(collateralReserve.aTokenAddress);
+  vars.collateralAtoken = IAToken(collateralReserve.aTokenAddress); // 获取抵押资产的aToken
 
-  vars.userCollateralBalance = vars.collateralAtoken.balanceOf(user);
+  vars.userCollateralBalance = vars.collateralAtoken.balanceOf(user); // 获取抵押资产的atoken数量
 
-  vars.maxLiquidatableDebt = vars.userStableDebt.add(vars.userVariableDebt).percentMul(
+  vars.maxLiquidatableDebt = vars.userStableDebt.add(vars.userVariableDebt).percentMul( // 计算清算的最大数量：总债务 * close_factor
     LIQUIDATION_CLOSE_FACTOR_PERCENT
   );
 
-  vars.actualDebtToLiquidate = debtToCover > vars.maxLiquidatableDebt
+  vars.actualDebtToLiquidate = debtToCover > vars.maxLiquidatableDebt  // 清算人期望执行的数量不能大于最大清算数量
     ? vars.maxLiquidatableDebt
     : debtToCover;
 
   (
-    vars.maxCollateralToLiquidate,
-    vars.debtAmountNeeded
+    vars.maxCollateralToLiquidate,  // 计算可获得的最大奖励数量
+    vars.debtAmountNeeded // 可清偿的债务数量
   ) = _calculateAvailableCollateralToLiquidate(
     collateralReserve,
     debtReserve,
@@ -111,12 +115,13 @@ function liquidationCall(
   // collateral to cover the actual amount that is being liquidated, hence we liquidate
   // a smaller amount
 
-  if (vars.debtAmountNeeded < vars.actualDebtToLiquidate) {
+  if (vars.debtAmountNeeded < vars.actualDebtToLiquidate) { // 实际执行清算数量不能大于需要被清算的数量
     vars.actualDebtToLiquidate = vars.debtAmountNeeded;
   }
 
   // If the liquidator reclaims the underlying asset, we make sure there is enough available liquidity in the
   // collateral reserve
+  // 如果清算人希望收取原始token资产而非 atoken, 需要保证池子有足够的流动性支付
   if (!receiveAToken) {
     uint256 currentAvailableCollateral =
       IERC20(collateralAsset).balanceOf(address(vars.collateralAtoken));
@@ -128,8 +133,9 @@ function liquidationCall(
     }
   }
 
-  debtReserve.updateState();
+  debtReserve.updateState();  // 触发债务资产更新状态，全局指数等
 
+  // 优先清算浮动利率债务，不足部分以固定利率债务补足
   if (vars.userVariableDebt >= vars.actualDebtToLiquidate) {
     IVariableDebtToken(debtReserve.variableDebtTokenAddress).burn(
       user,
@@ -151,23 +157,23 @@ function liquidationCall(
     );
   }
 
-  debtReserve.updateInterestRates(
+  debtReserve.updateInterestRates(  // 债务资产更新利率数据
     debtAsset,
     debtReserve.aTokenAddress,
     vars.actualDebtToLiquidate,
     0
   );
 
-  if (receiveAToken) {
+  if (receiveAToken) {  // 清算人接受aToken
     vars.liquidatorPreviousATokenBalance = IERC20(vars.collateralAtoken).balanceOf(msg.sender);
-    vars.collateralAtoken.transferOnLiquidation(user, msg.sender, vars.maxCollateralToLiquidate);
+    vars.collateralAtoken.transferOnLiquidation(user, msg.sender, vars.maxCollateralToLiquidate); // 转账aToken
 
-    if (vars.liquidatorPreviousATokenBalance == 0) {
+    if (vars.liquidatorPreviousATokenBalance == 0) {  // 如果清算人的该资产没有抵押余额，需要将其用户配置更改
       DataTypes.UserConfigurationMap storage liquidatorConfig = _usersConfig[msg.sender];
       liquidatorConfig.setUsingAsCollateral(collateralReserve.id, true);
       emit ReserveUsedAsCollateralEnabled(collateralAsset, msg.sender);
     }
-  } else {
+  } else {  // 清算人接受原始token，调用aToken.burn()将原始token转给清算人
     collateralReserve.updateState();
     collateralReserve.updateInterestRates(
       collateralAsset,
@@ -187,13 +193,15 @@ function liquidationCall(
 
   // If the collateral being liquidated is equal to the user balance,
   // we set the currency as not being used as collateral anymore
-  if (vars.maxCollateralToLiquidate == vars.userCollateralBalance) {
+  if (vars.maxCollateralToLiquidate == vars.userCollateralBalance) {  // 被清算人的该资产如果余额为0，则修改其用户配置
     userConfig.setUsingAsCollateral(collateralReserve.id, false);
     emit ReserveUsedAsCollateralDisabled(collateralAsset, user);
   }
 
   // Transfers the debt asset being repaid to the aToken, where the liquidity is kept
-  IERC20(debtAsset).safeTransferFrom(
+  // 从清算人那转入借贷资产的原始token，到借贷资产的 aToken 地址
+  
+  IERC20(debtAsset).safeTransferFrom(  
     msg.sender,
     debtReserve.aTokenAddress,
     vars.actualDebtToLiquidate
@@ -215,7 +223,7 @@ function liquidationCall(
 
 ### \_calculateAvailableCollateralToLiquidate
 
-计算可清算特定抵押品的具体数量。
+计算可清算特定抵押品的具体数量，返回可清算的最大债务数量和可获取的最大奖励数量
 
 **注意：** 该方法需要在检查完清算入参后调用。
 
@@ -227,7 +235,7 @@ struct AvailableCollateralToLiquidateLocalVars {
   uint256 liquidationBonus; // 清算奖励
   uint256 collateralPrice;  // 抵押品资产价格
   uint256 debtAssetPrice; // 借贷资产价格
-  uint256 maxAmountCollateralToLiquidate; // 
+  uint256 maxAmountCollateralToLiquidate; // 最大清算奖励数量
   uint256 debtAssetDecimals;  // 借贷资产的精度
   uint256 collateralDecimals; // 抵押资产的精度
 }
@@ -259,7 +267,7 @@ function _calculateAvailableCollateralToLiquidate(
   uint256 debtToCover,
   uint256 userCollateralBalance
 ) internal view returns (uint256, uint256) {
-  // 该资产可被清算的最大数量，由用户抵押品数量和 close factor 决定 (一般为 0.5，即一次最多清算一半)
+  // 该资产可被清算的最大数量，由用户抵押品数量和 close factor 决定 (0.5，即一次最多清算一半)
   uint256 collateralAmount = 0;
   // 该笔债务需要被清算的最少数量
   uint256 debtAmountNeeded = 0;
@@ -279,8 +287,8 @@ function _calculateAvailableCollateralToLiquidate(
 
   // 下面计算借贷资产能够被清算的最大数量
 
-  // 计算清算人希望清算的数量
-  // debtToCover * debtPrice / collateralPrice
+  // 计算清算该资产能获得的最大奖励数量（部分抵押资产）
+  // debtPrice * debtToCover * liquidationBonus / collateralPrice
   vars.maxAmountCollateralToLiquidate = vars
     .debtAssetPrice
     .mul(debtToCover)
@@ -288,8 +296,10 @@ function _calculateAvailableCollateralToLiquidate(
     .percentMul(vars.liquidationBonus)
     .div(vars.collateralPrice.mul(10**vars.debtAssetDecimals));
 
+  // 如果最大奖励 > 用户的抵押品余额
   if (vars.maxAmountCollateralToLiquidate > userCollateralBalance) {
-    collateralAmount = userCollateralBalance;
+    collateralAmount = userCollateralBalance; // 最大奖励 = 用户该资产余额
+    // 最大清算额度通过最大奖励反推 (collateralAmount / liquidationBonus) * (colleralPrice / debtPrice)
     debtAmountNeeded = vars
       .collateralPrice
       .mul(collateralAmount)
@@ -301,6 +311,111 @@ function _calculateAvailableCollateralToLiquidate(
     debtAmountNeeded = debtToCover;
   }
   return (collateralAmount, debtAmountNeeded);
+}
+```
+
+### calculateUserAccountData
+
+通过资产数据计算用户数据，包括流动性，抵押资产数量，借贷资产数量 （以ETH计价），平均 LTV, 平均清算阈值，健康系数
+
+```solidity
+/**
+  * @dev Calculates the user data across the reserves.
+  * this includes the total liquidity/collateral/borrow balances in ETH,
+  * the average Loan To Value, the average Liquidation Ratio, and the Health factor.
+  * @param user The address of the user
+  * @param reservesData Data of all the reserves
+  * @param userConfig The configuration of the user
+  * @param reserves The list of the available reserves
+  * @param oracle The price oracle address
+  * @return The total collateral and total debt of the user in ETH, the avg ltv, liquidation threshold and the HF
+  **/
+function calculateUserAccountData(
+  address user, // 用户地址
+  mapping(address => DataTypes.ReserveData) storage reservesData, // 资产数据mapping
+  DataTypes.UserConfigurationMap memory userConfig, // 用户配置
+  mapping(uint256 => address) storage reserves, // 资产地址mapping
+  uint256 reservesCount,  // 资产种类总数
+  address oracle  // 预言机地址
+)
+  internal
+  view
+  returns (
+    uint256,
+    uint256,
+    uint256,
+    uint256,
+    uint256
+  )
+{
+  CalculateUserAccountDataVars memory vars;
+
+  if (userConfig.isEmpty()) { // 当用户没有抵押也没有借贷 直接返回0
+    return (0, 0, 0, 0, uint256(-1)); // HF 健康系数 -1
+  }
+  // 遍历所有资产数据 累计计算用户的平均清算阈值和 抵押，借贷资产
+  for (vars.i = 0; vars.i < reservesCount; vars.i++) {
+    if (!userConfig.isUsingAsCollateralOrBorrowing(vars.i)) { // 用户在该资产上没有抵押也没有借贷，跳过
+      continue;
+    }
+
+    vars.currentReserveAddress = reserves[vars.i];  // 缓存当前资产的地址
+    DataTypes.ReserveData storage currentReserve = reservesData[vars.currentReserveAddress];  // 缓存资产数据
+
+    (vars.ltv, vars.liquidationThreshold, , vars.decimals, ) = currentReserve // 获取资产的配置
+      .configuration
+      .getParams();
+
+    vars.tokenUnit = 10**vars.decimals; // 缓存资产的精度换算单位
+    vars.reserveUnitPrice = IPriceOracleGetter(oracle).getAssetPrice(vars.currentReserveAddress); // 获取资产每单位价格
+
+    if (vars.liquidationThreshold != 0 && userConfig.isUsingAsCollateral(vars.i)) { // 如果该资产用作抵押
+      vars.compoundedLiquidityBalance = IERC20(currentReserve.aTokenAddress).balanceOf(user); // 获取对应 aToken 数量
+
+      uint256 liquidityBalanceETH =
+        vars.reserveUnitPrice.mul(vars.compoundedLiquidityBalance).div(vars.tokenUnit); // 计算资产以eth计价的数量
+
+      vars.totalCollateralInETH = vars.totalCollateralInETH.add(liquidityBalanceETH);  // 累计资产价值
+
+      vars.avgLtv = vars.avgLtv.add(liquidityBalanceETH.mul(vars.ltv));  // 累计加权平均 LTV
+      vars.avgLiquidationThreshold = vars.avgLiquidationThreshold.add(  // 累计加权平均清算阈值
+        liquidityBalanceETH.mul(vars.liquidationThreshold)
+      );
+    }
+
+    if (userConfig.isBorrowing(vars.i)) { // 如果该资产作为借贷资产
+      vars.compoundedBorrowBalance = IERC20(currentReserve.stableDebtTokenAddress).balanceOf( // 获取 StableDebtToken 数量
+        user
+      );
+      vars.compoundedBorrowBalance = vars.compoundedBorrowBalance.add(  // 获取 VariableDebtToken 数量
+        IERC20(currentReserve.variableDebtTokenAddress).balanceOf(user)
+      );
+
+      vars.totalDebtInETH = vars.totalDebtInETH.add(  // 计算两种债务的价值总和
+        vars.reserveUnitPrice.mul(vars.compoundedBorrowBalance).div(vars.tokenUnit)
+      );
+    }
+  }
+
+  vars.avgLtv = vars.totalCollateralInETH > 0 ? vars.avgLtv.div(vars.totalCollateralInETH) : 0; // 将累计的 LTV / 总价值 得出平均的 LTV
+  vars.avgLiquidationThreshold = vars.totalCollateralInETH > 0  // 将累计的清算阈值除以总价值
+    ? vars.avgLiquidationThreshold.div(vars.totalCollateralInETH)
+    : 0;
+
+  // 计算 HF 健康系数
+  // totalCollateralInETH * avgLiquidationThreshold / totalDebtInETH
+  vars.healthFactor = calculateHealthFactorFromBalances(
+    vars.totalCollateralInETH,
+    vars.totalDebtInETH,
+    vars.avgLiquidationThreshold
+  );
+  return (
+    vars.totalCollateralInETH,
+    vars.totalDebtInETH,
+    vars.avgLtv,
+    vars.avgLiquidationThreshold,
+    vars.healthFactor
+  );
 }
 ```
 
