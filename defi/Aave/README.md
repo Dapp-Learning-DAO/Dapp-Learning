@@ -2,6 +2,3 @@
 - <https://github.com/austintgriffith/scaffold-eth/blob/lender-swap/packages/hardhat/contracts/AavEth.sol>
 - [V1-whitepaper](https://cryptorating.eu/whitepapers/Aave/Aave_Protocol_Whitepaper_v1_0.pdf)
 - [V2-whitepaper](https://cryptorating.eu/whitepapers/Aave/aave-v2-whitepaper.pdf)
-- [AAVE whitepaper V2分析](https://learnblockchain.cn/article/3099)
-  - 在V2的分析中，主要刨析了V2版本的白皮书部分，侧重点在于AAVE用到的经济学模型上，可用于梳理出AAVE的模型设计。
-  - 对应的B站链接为：https://www.bilibili.com/video/BV1UF411Y7oU?from=search&seid=8719783048220630080&spm_id_from=333.337.0.0
