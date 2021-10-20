@@ -57,9 +57,13 @@ aToken 也通过 `permit()` 实现了EIP-2612提案。
 
 抵押品管理合约，执行具体的清算逻辑。LendingPool合约会通过 `delegatecall` 调用该合约进行清算。
 
+详细内容请戳这里 :point_right: [LendingPoolCollateralManager](./LendingPoolCollateralManager.md)
+
 #### Lending Pool Configurator
 
 为 LedingPool 合约提供配置功能。每项配置的改变都会发送事件到链上，任何人可见。
+
+详细内容请戳这里 :point_right: [Configuration](./Configuration.md)
 
 #### ReserveInterestRateStrategy
 

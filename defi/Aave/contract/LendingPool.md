@@ -18,12 +18,12 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 2. `onBehalfOf` 如果该存入资产是第一次被存入（之前没有人存入过相同的资产），则将用户（onBehalfOf）的配置中该资产自动转换为抵押类型
 3. 转给用户的 aToken 查询余额与 amount 相等，但实际上 mint 的数量要进行缩放，详见 [aToken.mint](./aToken.md#mint)
 
-| Parameter Name | Type    | Description                                            |
-| -------------- | ------- | ------------------------------------------------------ |
-| asset          | address | 抵押资产的 token 地址                                  |
-| amount         | uint256 | 抵押资产的数量                                         |
-| onBehalfOf     | address | aToken 转账的目标地址，即债权人，默认填写 `msg.sender` |
-| referralCode   | uint16  | 用于广播的自定义事件代码，当用户直接调用时推荐写 0     |
+| Parameter Name | Type    | Description                                                |
+| -------------- | ------- | ---------------------------------------------------------- |
+| asset          | address | 抵押资产的 token 地址                                      |
+| amount         | uint256 | 抵押资产的数量                                             |
+| onBehalfOf     | address | aToken 转账的目标地址，即债权人，默认填写 `msg.sender`     |
+| referralCode   | uint16  | 推介码，用于广播的自定义事件代码，当用户直接调用时推荐写 0 |
 
 ```solidity
 /**
@@ -62,7 +62,7 @@ function deposit(
   IERC20(asset).safeTransferFrom(msg.sender, aToken, amount);
 
   // 将 aToken mint给 onBehalfOf 地址（一般是 msg.sender）
-  // isFirstDeposit 代表该资产是否在协议中第一次被存入
+  // isFirstDeposit 代表该资产是否是用户第一次存入或之前抵押余额为0
   bool isFirstDeposit = IAToken(aToken).mint(onBehalfOf, amount, reserve.liquidityIndex);
 
   // 若第一次被存入，默认将用户 onBehalfOf 的配置中相应资产转为可抵押类型
@@ -82,6 +82,7 @@ function deposit(
 - [reserve.updateState()](./ReserveLogic.md###updateState)
 - [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
 - [AToken.mint()](./AToken.md###mint)
+- [Configuration.setUsingAsCollateral()](./Configuration.md###setUsingAsCollateral)
 
 ### withdraw
 
@@ -165,7 +166,7 @@ function withdraw(
 
 ### borrow
 
-选择浮动利率或者固定利率，调用方法后借贷资产转给调用者(`msg.sender`)，债务由 `onBehalfOf` 承担，一般也是 `msg.sender` 。
+选择浮动利率或者固定利率，调用方法后借贷资产转给调用者(`msg.sender`)，债务由 `onBehalfOf` 承担，一般也是 `msg.sender` 。调用者即借款人必须有足够的抵押资产，或被授予了足够的信用额度。
 
 parameters:
 
@@ -316,8 +317,9 @@ function _executeBorrow(ExecuteBorrowParams memory vars) internal {
     vars.releaseUnderlying ? vars.amount : 0 // liquidityTaken
   );
 
+  // 如果releaseUnderlying为true 将借贷资产转给借贷受益人
+  // 在合约中只在LendingPool.borrow() 方法中找到该入参，其值固定为true
   if (vars.releaseUnderlying) {
-    // 将借贷资产转给借贷受益人
     IAToken(vars.aTokenAddress).transferUnderlyingTo(vars.user, vars.amount);
   }
 
@@ -559,9 +561,9 @@ function setUserUseReserveAsCollateral(address asset, bool useAsCollateral)
 
 ### liquidationCall
 
-清算健康系数低于1的头寸。详情参见 [Liquidations guide](https://docs.aave.com/developers/guides/liquidations)
+清算健康系数低于 1 的头寸。详情参见 [Liquidations guide](https://docs.aave.com/developers/guides/liquidations)
 
-当借款人的健康系数 `health factor` 低于1时，清算人可以代表借款人偿还部分或全部未偿还的债务，并获得一部分的抵押品作为奖励。
+当借款人的健康系数 `health factor` 低于 1 时，清算人可以代表借款人偿还部分或全部未偿还的债务，并获得一部分的抵押品作为奖励。
 
 ```solidity
 /**
@@ -616,6 +618,241 @@ function liquidationCall(
 
 ### flashloan
 
+允许池子中的流动性被用于闪电贷。调用合约发送所需的资产和数量调用该接口，在交易结束之前需要归还借贷数量+手续费的资产。
+
+如果交易结束时没有归还足够的资产，则：
+
+- `mode = 0` 时，交易 revert
+- `mode = 1` 时，`onBehalfOf` 地址产生固定利率债务
+- `mode = 2` 时，`onBehalfOf` 地址产生浮动利率债务
+
+parameters:
+
+| Parameter Name  | Type               | Description        |
+| --------------- | ------------------ | ------------------ |
+| receiverAddress | address            | 贷款受益人         |
+| assets          | address[] calldata | 借贷资产地址(数组) |
+| amounts         | unit256[] calldata | 借贷数量地址(数组) |
+| modes           | unit256[] calldata | 借贷模式(数组)     |
+| onBehalfOf      | address            | 贷款还款人         |
+| params          | bytes              | 入参编码           |
+| referralCode    | uint16             | 推介码             |
+
+闪电具体使用方法参考官方的指引文档 [Flash Loans Guides](https://docs.aave.com/developers/guides/flash-loans)
+
+```solidity
+/**
+  * @dev Allows smartcontracts to access the liquidity of the pool within one transaction,
+  * as long as the amount taken plus a fee is returned.
+  * IMPORTANT There are security concerns for developers of flashloan receiver contracts that must be kept into consideration.
+  * For further details please visit https://developers.aave.com
+  * @param receiverAddress The address of the contract receiving the funds, implementing the IFlashLoanReceiver interface
+  * @param assets The addresses of the assets being flash-borrowed
+  * @param amounts The amounts amounts being flash-borrowed
+  * @param modes Types of the debt to open if the flash loan is not returned:
+  *   0 -> Don't open any debt, just revert if funds can't be transferred from the receiver
+  *   1 -> Open debt at stable rate for the value of the amount flash-borrowed to the `onBehalfOf` address
+  *   2 -> Open debt at variable rate for the value of the amount flash-borrowed to the `onBehalfOf` address
+  * @param onBehalfOf The address  that will receive the debt in the case of using on `modes` 1 or 2
+  * @param params Variadic packed params to pass to the receiver as extra information
+  * @param referralCode Code used to register the integrator originating the operation, for potential rewards.
+  *   0 if the action is executed directly by the user, without any middle-man
+  **/
+function flashLoan(
+  address receiverAddress,
+  address[] calldata assets,
+  uint256[] calldata amounts,
+  uint256[] calldata modes,
+  address onBehalfOf,
+  bytes calldata params,
+  uint16 referralCode
+) external override whenNotPaused {
+  FlashLoanLocalVars memory vars;
+
+  ValidationLogic.validateFlashloan(assets, amounts); // 验证资产地址和借贷数量，两个参数（数组）的长度相等
+
+  address[] memory aTokenAddresses = new address[](assets.length);  // 缓存 aToken 地址
+  uint256[] memory premiums = new uint256[](assets.length); // 缓存每笔资产闪电的手续费
+
+  vars.receiver = IFlashLoanReceiver(receiverAddress);  // 闪电贷调用者合约实例（接受贷款的合约）
+
+  for (vars.i = 0; vars.i < assets.length; vars.i++) {  // 遍历缓存aToken地址 和 累加手续费，并先将贷款转给调用者
+    aTokenAddresses[vars.i] = _reserves[assets[vars.i]].aTokenAddress;
+
+    premiums[vars.i] = amounts[vars.i].mul(_flashLoanPremiumTotal).div(10000);  // premium = amount * 9 / 10000
+
+    IAToken(aTokenAddresses[vars.i]).transferUnderlyingTo(receiverAddress, amounts[vars.i]); // 先将贷款转给调用者
+  }
+
+  require(  // 调用回调函数，回调方法必须返回true，否则交易失败
+    vars.receiver.executeOperation(assets, amounts, premiums, msg.sender, params),
+    Errors.LP_INVALID_FLASH_LOAN_EXECUTOR_RETURN
+  );
+
+  for (vars.i = 0; vars.i < assets.length; vars.i++) {  // 遍历入参，执行闪电贷逻辑
+    vars.currentAsset = assets[vars.i];
+    vars.currentAmount = amounts[vars.i];
+    vars.currentPremium = premiums[vars.i];
+    vars.currentATokenAddress = aTokenAddresses[vars.i];
+    vars.currentAmountPlusPremium = vars.currentAmount.add(vars.currentPremium);
+
+    if (DataTypes.InterestRateMode(modes[vars.i]) == DataTypes.InterestRateMode.NONE) { // mode = 0, 代表执行闪电贷
+      // 更新池子状态，增发手续费部分的流动性（对于池子来说，手续费是增加的资产）
+      _reserves[vars.currentAsset].updateState();
+      _reserves[vars.currentAsset].cumulateToLiquidityIndex(
+        IERC20(vars.currentATokenAddress).totalSupply(),
+        vars.currentPremium
+      );
+      _reserves[vars.currentAsset].updateInterestRates(
+        vars.currentAsset,
+        vars.currentATokenAddress,
+        vars.currentAmountPlusPremium,
+        0
+      );
+
+      IERC20(vars.currentAsset).safeTransferFrom( // 从调用者合约转入token （借贷数量+手续费）
+        receiverAddress,
+        vars.currentATokenAddress,
+        vars.currentAmountPlusPremium
+      );
+    } else {  // mode != 0 执行常规借贷逻辑
+      // If the user chose to not return the funds, the system checks if there is enough collateral and
+      // eventually opens a debt position
+      _executeBorrow(
+        ExecuteBorrowParams(
+          vars.currentAsset,
+          msg.sender,
+          onBehalfOf,
+          vars.currentAmount,
+          modes[vars.i],
+          vars.currentATokenAddress,
+          referralCode,
+          false
+        )
+      );
+    }
+    emit FlashLoan(
+      receiverAddress,
+      msg.sender,
+      vars.currentAsset,
+      vars.currentAmount,
+      vars.currentPremium,
+      referralCode
+    );
+  }
+}
+```
+
+闪电贷调用合约示例，主要实现了以下逻辑
+
+- 保证有 `executeOperation` 回调方法，让LendingPool合约回调
+  - 方法内可以写使用贷款的逻辑
+  - 保证每一种资产都授予了LendingPool足够的使用数量（approve），还款金额+手续费
+  - 最后返回 true，代表执行成功，否则闪电贷失败
+- 组装调用 `LendingPool.flashLoan()` 的入参，主要是三个数组入参，资产地址，借贷数量，调用模式
+- [示例github地址](https://github.com/aave/code-examples-protocol/tree/main/V2/Flash%20Loan%20-%20Batch)
+
+
+```solidity
+// SPDX-License-Identifier: agpl-3.0
+pragma solidity 0.6.12;
+
+import { FlashLoanReceiverBase } from "FlashLoanReceiverBase.sol";
+import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "Interfaces.sol";
+import { SafeMath } from "Libraries.sol";
+
+/** 
+    !!!
+    Never keep funds permanently on your FlashLoanReceiverBase contract as they could be 
+    exposed to a 'griefing' attack, where the stored funds are used by an attacker.
+    !!!
+ */
+contract MyV2FlashLoan is FlashLoanReceiverBase {
+    using SafeMath for uint256;
+
+    constructor(ILendingPoolAddressesProvider _addressProvider) FlashLoanReceiverBase(_addressProvider) public {}
+
+    /**
+        This function is called after your contract has received the flash loaned amount
+     */
+    function executeOperation(
+        address[] calldata assets,
+        uint256[] calldata amounts,
+        uint256[] calldata premiums,
+        address initiator,
+        bytes calldata params
+    )
+        external
+        override
+        returns (bool)
+    {
+
+        //
+        // This contract now has the funds requested.
+        // Your logic goes here.
+        //
+
+        // At the end of your logic above, this contract owes
+        // the flashloaned amounts + premiums.
+        // Therefore ensure your contract has enough to repay
+        // these amounts.
+
+        // Approve the LendingPool contract allowance to *pull* the owed amount
+        for (uint i = 0; i < assets.length; i++) {
+            uint amountOwing = amounts[i].add(premiums[i]);
+            IERC20(assets[i]).approve(address(LENDING_POOL), amountOwing);
+        }
+
+        return true;
+    }
+
+    function myFlashLoanCall() public {
+        address receiverAddress = address(this);
+
+        address[] memory assets = new address[](7);
+        assets[0] = address(0xB597cd8D3217ea6477232F9217fa70837ff667Af); // Kovan AAVE
+        assets[1] = address(0x2d12186Fbb9f9a8C28B3FfdD4c42920f8539D738); // Kovan BAT
+        assets[2] = address(0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD); // Kovan DAI
+        assets[3] = address(0x075A36BA8846C6B6F53644fDd3bf17E5151789DC); // Kovan UNI
+        assets[4] = address(0xb7c325266ec274fEb1354021D27FA3E3379D840d); // Kovan YFI
+        assets[5] = address(0xAD5ce863aE3E4E9394Ab43d4ba0D80f419F61789); // Kovan LINK
+        assets[6] = address(0x7FDb81B0b8a010dd4FFc57C3fecbf145BA8Bd947); // Kovan SNX
+
+        uint256[] memory amounts = new uint256[](7);
+        amounts[0] = 1 ether;
+        amounts[1] = 1 ether;
+        amounts[2] = 1 ether;
+        amounts[3] = 1 ether;
+        amounts[4] = 1 ether;
+        amounts[5] = 1 ether;
+        amounts[6] = 1 ether;
+
+        // 0 = no debt, 1 = stable, 2 = variable
+        uint256[] memory modes = new uint256[](7);
+        modes[0] = 0;
+        modes[1] = 0;
+        modes[2] = 0;
+        modes[3] = 0;
+        modes[4] = 0;
+        modes[5] = 0;
+        modes[6] = 0;
+
+        address onBehalfOf = address(this);
+        bytes memory params = "";
+        uint16 referralCode = 0;
+
+        LENDING_POOL.flashLoan(
+            receiverAddress,
+            assets,
+            amounts,
+            modes,
+            onBehalfOf,
+            params,
+            referralCode
+        );
+    }
+}
+```
 
 ## Struct
 
