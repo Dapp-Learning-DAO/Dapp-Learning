@@ -745,13 +745,12 @@ function flashLoan(
 
 闪电贷调用合约示例，主要实现了以下逻辑
 
-- 保证有 `executeOperation` 回调方法，让LendingPool合约回调
+- 保证有 `executeOperation` 回调方法，让 LendingPool 合约回调
   - 方法内可以写使用贷款的逻辑
-  - 保证每一种资产都授予了LendingPool足够的使用数量（approve），还款金额+手续费
+  - 保证每一种资产都授予了 LendingPool 足够的使用数量（approve），还款金额+手续费
   - 最后返回 true，代表执行成功，否则闪电贷失败
 - 组装调用 `LendingPool.flashLoan()` 的入参，主要是三个数组入参，资产地址，借贷数量，调用模式
-- [示例github地址](https://github.com/aave/code-examples-protocol/tree/main/V2/Flash%20Loan%20-%20Batch)
-
+- [示例 github 地址](https://github.com/aave/code-examples-protocol/tree/main/V2/Flash%20Loan%20-%20Batch)
 
 ```solidity
 // SPDX-License-Identifier: agpl-3.0
@@ -761,9 +760,9 @@ import { FlashLoanReceiverBase } from "FlashLoanReceiverBase.sol";
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "Interfaces.sol";
 import { SafeMath } from "Libraries.sol";
 
-/** 
+/**
     !!!
-    Never keep funds permanently on your FlashLoanReceiverBase contract as they could be 
+    Never keep funds permanently on your FlashLoanReceiverBase contract as they could be
     exposed to a 'griefing' attack, where the stored funds are used by an attacker.
     !!!
  */
@@ -851,6 +850,59 @@ contract MyV2FlashLoan is FlashLoanReceiverBase {
             referralCode
         );
     }
+}
+```
+
+### rebalanceStableBorrowRate
+
+将用户的稳定利率再平衡为储备中定义的当前稳定利率。满足条件的用户，被销毁所有固定利率债务，生成同等数量的浮动利率债务。
+
+如果满足以下条件，可以再平衡用户：
+
+1. 使用率 95% 以上 (Utillization > 0.95)
+2. 当前存款 APY 低于 REBALANCE_UP_THRESHOLD \* maxVariableBorrowRate，这意味着已经过多以稳定利率借入而储户收入不足
+
+```solidity
+/**
+* @dev Rebalances the stable interest rate of a user to the current stable rate defined on the reserve.
+* - Users can be rebalanced if the following conditions are satisfied:
+*     1. Usage ratio is above 95%
+*     2. the current deposit APY is below REBALANCE_UP_THRESHOLD * maxVariableBorrowRate, which means that too much has been
+*        borrowed at a stable rate and depositors are not earning enough
+* @param asset The address of the underlying asset borrowed
+* @param user The address of the user to be rebalanced
+**/
+function rebalanceStableBorrowRate(address asset, address user) external override whenNotPaused {
+  DataTypes.ReserveData storage reserve = _reserves[asset];
+
+  IERC20 stableDebtToken = IERC20(reserve.stableDebtTokenAddress);
+  IERC20 variableDebtToken = IERC20(reserve.variableDebtTokenAddress);
+  address aTokenAddress = reserve.aTokenAddress;
+
+  uint256 stableDebt = IERC20(stableDebtToken).balanceOf(user);
+
+  // 这里验证上述两个条件是否满足
+  ValidationLogic.validateRebalanceStableBorrowRate(
+    reserve,
+    asset,
+    stableDebtToken,
+    variableDebtToken,
+    aTokenAddress
+  );
+
+  reserve.updateState();
+
+  IStableDebtToken(address(stableDebtToken)).burn(user, stableDebt);
+  IStableDebtToken(address(stableDebtToken)).mint(
+    user,
+    user,
+    stableDebt,
+    reserve.currentStableBorrowRate
+  );
+
+  reserve.updateInterestRates(asset, aTokenAddress, 0, 0);
+
+  emit RebalanceStableBorrowRate(asset, user);
 }
 ```
 
