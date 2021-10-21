@@ -253,7 +253,7 @@ function mint(
 
 相关代码：
 
-- [\_calculateBalanceIncrease](###_calculateBalanceIncrease-stable)
+- [\_calculateBalanceIncrease](#_calculateBalanceIncrease-stable)
 
 ### burn-stable
 
@@ -337,7 +337,7 @@ function burn(address user, uint256 amount) external override onlyLendingPool {
 
 相关代码：
 
-- [\_calculateBalanceIncrease](###_calculateBalanceIncrease-stable)
+- [\_calculateBalanceIncrease](#_calculateBalanceIncrease-stable)
 
 ### \_calculateBalanceIncrease-stable
 
@@ -383,7 +383,7 @@ function _calculateBalanceIncrease(address user)
 
 相关代码：
 
-- [balanceOf](###balanceOf)
+- [balanceOf](#balanceOf)
 
 ### _mint-stable
 

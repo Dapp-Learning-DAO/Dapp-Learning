@@ -78,11 +78,11 @@ function deposit(
 
 相关代码
 
-- [DataTypes](###DataTypes)
-- [reserve.updateState()](./ReserveLogic.md###updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
-- [AToken.mint()](./AToken.md###mint)
-- [Configuration.setUsingAsCollateral()](./Configuration.md###setUsingAsCollateral)
+- [DataTypes](#DataTypes)
+- [reserve.updateState()](./ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
+- [AToken.mint()](./AToken.md#mint)
+- [Configuration.setUsingAsCollateral()](./Configuration.md#setUsingAsCollateral)
 
 ### withdraw
 
@@ -159,14 +159,14 @@ function withdraw(
 
 相关代码
 
-- [DataTypes](###DataTypes)
-- [reserve.updateState()](./ReserveLogic.md###updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
-- [AToken.burn()](./AToken.md###burn)
+- [DataTypes](#DataTypes)
+- [reserve.updateState()](./ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
+- [AToken.burn()](./AToken.md#burn)
 
 ### borrow
 
-选择浮动利率或者固定利率，调用方法后借贷资产转给调用者(`msg.sender`)，债务由 `onBehalfOf` 承担，一般也是 `msg.sender` 。调用者即借款人必须有足够的抵押资产，或被授予了足够的信用额度。
+选择浮动利率或者固定利率，调用方法后借贷资产转给调用者(`msg.sender`)，债务由 `onBehalfOf` 承担，一般也是 `msg.sender` 。调用者即借款人必须有足够的抵押资产，或被授予了足够的信用额度。信用额度即为 AToken 拥有者对其他用户授予的 allowance 数量。
 
 parameters:
 
@@ -339,11 +339,11 @@ function _executeBorrow(ExecuteBorrowParams memory vars) internal {
 
 相关代码
 
-- [DataTypes](###DataTypes)
-- [reserve.updateState()](./ReserveLogic.md###updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
-- [StableDebtToken.mint()](./DebtToken.md###mint-stable)
-- [VariableDebtToken.mint()](./DebtToken.md###mint-variable)
+- [DataTypes](#DataTypes)
+- [reserve.updateState()](./ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
+- [StableDebtToken.mint()](./DebtToken.md#mint-stable)
+- [VariableDebtToken.mint()](./DebtToken.md#mint-variable)
 
 ### repay
 
@@ -437,11 +437,11 @@ function repay(
 
 相关代码
 
-- [DataTypes](###DataTypes)
-- [reserve.updateState()](./ReserveLogic.md###updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md###updateInterestRates)
-- [StableDebtToken.burn()](./DebtToken.md###burn-stable)
-- [VariableDebtToken.burn()](./DebtToken.md###burn-variable)
+- [DataTypes](#DataTypes)
+- [reserve.updateState()](./ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
+- [StableDebtToken.burn()](./DebtToken.md#burn-stable)
+- [VariableDebtToken.burn()](./DebtToken.md#burn-variable)
 
 ### swapBorrowRateMode
 
