@@ -191,7 +191,7 @@ function mint(
     _decreaseBorrowAllowance(onBehalfOf, user, amount);
   }
 
-  // 获取债务本息总额（本金+利息），利息总额
+  // 获取债务本息总额（本金+利息），缩放数量的增量
   (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(onBehalfOf);
 
   vars.previousSupply = totalSupply(); // 缓存池子债务总额 （本金+利息）
@@ -257,7 +257,7 @@ function mint(
 
 ### burn-stable
 
-销毁债务 token，整体的逻辑是 mint 的逆运算。需要注意的是 `当销毁数量 >= 池子总量` 时，池子和用户的债务都清零，平均利率也清零。
+销毁债务 token，整体的逻辑是 mint 的逆运算。需要注意的是当 `销毁数量 >= 池子总量` 时，池子和用户的债务都清零，平均利率也清零。
 
 ```solidity
 /**
