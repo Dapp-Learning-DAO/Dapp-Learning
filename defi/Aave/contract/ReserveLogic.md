@@ -42,19 +42,21 @@ Reserve 的主要变量
 
 ### liquidityIndex
 
-`liquidity cumulative index` 每单位 liquidity (用户往协议中注入的抵押资产)，累计收取的利息的时间加权数值。 `R_t` 是总的利率，即固定利率和浮动利率的加权平均。
+`liquidity cumulative index` 每单位 liquidity (用户往协议中注入的抵押资产)累计的本息总额。 `R_t` 是总的利率，即固定利率和浮动利率的加权平均。
 
 <!-- ${LI}_t=(1+\Delta{T_{year}}*R_t)*{LI}_{t-1}$ -->
 <img src="https://render.githubusercontent.com/render/math?math={LI}_t=(1%2B\Delta{T_{year}}*R_t)*{LI}_{t-1}" style="display: block;margin: 24px auto;" />
 
-**注意：** liquidty的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./AToken.md#amount%20and%20amountScaled)
+**注意：** liquidty 池子资产流动性的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./AToken.md#amount%20and%20amountScaled)
 
 ### variableBorrowIndex
 
-`variable borrow index` 累计每单位浮动利率类型债务的，浮动利率的时间加权数值。`VR_t` 代表当前的浮动利率.
+`variable borrow index` 累计每单位浮动利率类型债务的本息总额。`VR_t` 代表当前的浮动利率.
 
 <!-- ${VI}_t=(1+\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}$ -->
 <img src="https://render.githubusercontent.com/render/math?math={VI}_t=(1%2B\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}" style="display: block;margin: 24px auto;" />
+
+> 这里没有 StableBorrowIndex, 因为每个用户的固定利率都不同，不是跟随池子的全局变量实时变化，因此每个借贷了固定利率债务的用户都会单独维护一个平均的固定利率变量。 在 StableDebtToken 合约 `mapping(address => uint256) _usersStableRate`
 
 ## methods
 
@@ -216,14 +218,14 @@ function updateInterestRates(
   // 缓存稳定债务的token地址
   vars.stableDebtTokenAddress = reserve.stableDebtTokenAddress;
 
-  // 缓存债务数量（不包含利息）和平均利率
+  // 缓存固定利率债务数量（本息总额）和平均利率（全局）
   (vars.totalStableDebt, vars.avgStableRate) = IStableDebtToken(vars.stableDebtTokenAddress)
     .getTotalSupplyAndAvgRate();
 
   //calculates the total variable debt locally using the scaled total supply instead
   //of totalSupply(), as it's noticeably cheaper. Also, the index has been
   //updated by the previous updateState() call
-  // 债务总量（包含利息） = 债务总量（不含利息） * 利率累计值
+  // 债务总量（本息总额） = 债务总量（不含利息） * 浮动利率指数
   vars.totalVariableDebt = IVariableDebtToken(reserve.variableDebtTokenAddress)
     .scaledTotalSupply()
     .rayMul(reserve.variableBorrowIndex);
