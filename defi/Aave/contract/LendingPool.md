@@ -561,7 +561,7 @@ function setUserUseReserveAsCollateral(address asset, bool useAsCollateral)
 
 ### liquidationCall
 
-清算健康系数低于 1 的头寸。详情参见 [Liquidations guide](https://docs.aave.com/developers/guides/liquidations)
+清算健康系数低于 1 的头寸。
 
 当借款人的健康系数 `health factor` 低于 1 时，清算人可以代表借款人偿还部分或全部未偿还的债务，并获得一部分的抵押品作为奖励。
 
@@ -615,6 +615,100 @@ function liquidationCall(
 相关代码
 
 - [LendingPoolCollateralManager.liquidationCall](./LendingPoolCollateralManager.md#liquidationCall)
+
+#### Liquidation process
+
+详情参见 [Liquidations guide](https://docs.aave.com/developers/guides/liquidations)
+
+0. Prerequisites
+
+   - 确认被清算人健康系数 < 1.
+   - 确认可清算债务数量和用于支付的资产数量
+     - 清算债务不能超过总债务的 50%
+     - `debtToCover` 传入 `uint(-1)` 或 `type(uint).max` 将自动使用可清算的最大数量
+     - 保证充足的可用于支付清算的资产
+   - 确认你将要平仓的抵押资产，即被清算人的抵押资产用于还款后，你将收到其中一部分作为赏金
+   - 确认你要收到的是 aToken 还是原始资产
+
+1. Getting accounts to liquidate
+
+   - On-chain
+     - 监听链上事件
+     - 直接查询 LendingPool 合约接口 `getUserAccountData()`
+   - GraphQL(subgraph)
+     - graph 不提供实时的健康系数计算，可以通过 `Aave.js` package 本地计算
+     - [Aave 官方 subgraph](https://docs.aave.com/developers/getting-started/using-graphql)
+
+2. Executing the liquidation call
+
+   - 使用 `AaveProtocolDataProvider` 合约的 `getUserReserveData()` 接口，或者 subgraph 的 `UserReserve`
+   - 计算最大可清算的数量，总债务的 50%。`debtToCover = (userStableDebt + userVariableDebt) * LiquidationCloseFactorPercent`
+   - 对于每个 `usageAsCollateralEnabled` 属性为 true 的资产，可以由清算奖励比例计算最大的清算数量
+     `maxAmountOfCollateralToLiquidate = (debtAssetPrice * debtToCover * liquidationBonus)/ collateralPrice`
+
+3. Setting up a bot
+
+   - 确保有足够的清算资金
+   - 计算贷款成本和 gas 成本，同时考虑最有利的清算方案
+   - 确认机器人可以获取最新的用户数据
+   - 能应对突发故障或恶意攻击
+
+#### Calculating profitability vs gas cost
+
+1. 检索存储每一个抵押资产相关信息 [地址，精度，清算奖励比例等等](https://docs.aave.com/risk/asset-risk/risk-parameters)
+2. 获取被清算用户的抵押品余额 `aTokenBalance`
+3. 通过 `AaveOracle` 合约 `getAssetPrice` 接口获取资产价格
+4. 最大清算奖励价值 = 抵押品余额(2) \* 清算奖励比例(1) \* 抵押资产的 ETH 价格(3)。注意资产的精度区别，比如 USDC 精度只有 6.
+5. 交易最大成本应该还是 gas 费
+6. 估算利润 = 清算奖励价值(4) - 交易成本(5)
+
+#### Health Factor
+
+`Hf 健康系数 = 用户抵押资产ETH价值 * LiquidationThreshold / 总借贷资产ETH价值`
+
+当 Hf < 1 时用户可以被清算以维持偿债能力
+
+![liquidation process](https://files.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-M51Fy3ipxJS-0euJX3h%2F-Mk1qqmrNtNTqFzc0Eel%2F-Mk1qzfsd56GDwzmytSo%2FRisk%20-%20Alexandra%402x.jpg?alt=media&token=d686b9eb-4145-49ef-a214-123030bbd074)
+
+橙色部分的抵押资产会被以清算奖励折扣卖给清算人，其折扣部分的价值即为清算奖励。在合约中 `liquidationBonus` 是清算奖励比例+1，如 DAI 的清算比例设置为 5%，则合约中 `liquidationBonus = 105%`。
+
+#### Liquidator
+
+清算调用合约示例
+
+```solidity
+pragma solidity ^0.6.6;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./ILendingPoolAddressesProvider.sol";
+import "./ILendingPool.sol";
+
+
+contract Liquidator {
+
+    address constant lendingPoolAddressProvider = INSERT_LENDING_POOL_ADDRESS
+
+    function myLiquidationFunction(
+        address _collateral,
+        address _reserve,
+        address _user,
+        uint256 _purchaseAmount,
+        bool _receiveaToken
+    )
+        external
+    {
+        ILendingPoolAddressesProvider addressProvider = ILendingPoolAddressesProvider(lendingPoolAddressProvider);
+
+        ILendingPool lendingPool = ILendingPool(addressProvider.getLendingPool());
+
+        //  调用前保证LendingPool合约可以转入用于清算债务的资产
+        require(IERC20(_reserve).approve(address(lendingPool), _purchaseAmount), "Approval error");
+
+        // Assumes this contract already has `_purchaseAmount` of `_reserve`.
+        lendingPool.liquidationCall(_collateral, _reserve, _user, _purchaseAmount, _receiveaToken);
+    }
+}
+```
 
 ### flashloan
 

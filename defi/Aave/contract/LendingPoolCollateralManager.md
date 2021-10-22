@@ -121,7 +121,7 @@ function liquidationCall(
 
   // If the liquidator reclaims the underlying asset, we make sure there is enough available liquidity in the
   // collateral reserve
-  // 如果清算人希望收取原始token资产而非 atoken, 需要保证池子有足够的流动性支付
+  // 如果清算人希望收取原始token资产而非 atoken, 需要保证池子有足够的流动性支付(例如token被借贷走，没有足够数量)
   if (!receiveAToken) {
     uint256 currentAvailableCollateral =
       IERC20(collateralAsset).balanceOf(address(vars.collateralAtoken));
@@ -232,10 +232,10 @@ function liquidationCall(
 ```solidity
 struct AvailableCollateralToLiquidateLocalVars {
   uint256 userCompoundedBorrowBalance;  // 被清算人的债务本息总数
-  uint256 liquidationBonus; // 清算奖励
+  uint256 liquidationBonus; // 清算奖励比例 （1+清算奖励百分比）
   uint256 collateralPrice;  // 抵押品资产价格
   uint256 debtAssetPrice; // 借贷资产价格
-  uint256 maxAmountCollateralToLiquidate; // 最大清算奖励数量
+  uint256 maxAmountCollateralToLiquidate; // 最大清算数量（包括获得的奖励）
   uint256 debtAssetDecimals;  // 借贷资产的精度
   uint256 collateralDecimals; // 抵押资产的精度
 }
@@ -287,19 +287,19 @@ function _calculateAvailableCollateralToLiquidate(
 
   // 下面计算借贷资产能够被清算的最大数量
 
-  // 计算清算该资产能获得的最大奖励数量（部分抵押资产）
+  // 计算清算该资产的最大可清算数量，包括能获得的奖励数量
   // debtPrice * debtToCover * liquidationBonus / collateralPrice
   vars.maxAmountCollateralToLiquidate = vars
     .debtAssetPrice
     .mul(debtToCover)
     .mul(10**vars.collateralDecimals)
-    .percentMul(vars.liquidationBonus)
+    .percentMul(vars.liquidationBonus)  //  这里是 (1 + liquidation bonus)%
     .div(vars.collateralPrice.mul(10**vars.debtAssetDecimals));
 
-  // 如果最大奖励 > 用户的抵押品余额
+  // 如果最大清算数量 > 用户的抵押品余额
   if (vars.maxAmountCollateralToLiquidate > userCollateralBalance) {
-    collateralAmount = userCollateralBalance; // 最大奖励 = 用户该资产余额
-    // 最大清算额度通过最大奖励反推 (collateralAmount / liquidationBonus) * (colleralPrice / debtPrice)
+    collateralAmount = userCollateralBalance; // 最大清算数量 = 用户该资产余额
+    // 最大清算额度通过用户余额反推 (collateralAmount / liquidationBonus) * (colleralPrice / debtPrice)
     debtAmountNeeded = vars
       .collateralPrice
       .mul(collateralAmount)
