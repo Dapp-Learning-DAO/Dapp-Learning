@@ -64,7 +64,7 @@
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
- 
+
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
 
 
@@ -200,6 +200,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - [Ethernaut](https://ethernaut.openzeppelin.com/)
  - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
  - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
+ - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 3. 安全开发实践
  - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 
