@@ -35,8 +35,10 @@
 | \_baseVariableBorrowRate | R_base (浮动)   | ray      |
 | \_variableRateSlope1     | R_slope1 (浮动) | ray      |
 | \_variableRateSlope2     | R_slope2 (浮动) | ray      |
-| \_stableRateSlope1       | R_slope1 (浮动) | ray      |
-| \_stableRateSlope2       | R_slope2 (浮动) | ray      |
+| \_stableRateSlope1       | R_slope1 (固定) | ray      |
+| \_stableRateSlope2       | R_slope2 (固定) | ray      |
+
+针对各个资产的不同利率相关参数详见 [aave borrow interest rate](https://docs.aave.com/risk/liquidity-risk/borrow-interest-rate)
 
 ## methods
 
@@ -81,7 +83,7 @@ struct CalcInterestRatesLocalVars {
 }
 ```
 
-根据准备金的状态和配置计算利率。函数返回 流动性回报率，固定利率，浮动利率
+根据池子资产的状态和配置计算利率。函数返回 流动性回报率，固定利率，浮动利率
 
 ```solidity
 /**
