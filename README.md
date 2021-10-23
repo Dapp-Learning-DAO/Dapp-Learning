@@ -203,6 +203,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 3. 安全开发实践
  - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+4. 学习资源合集
+ - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
 
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
