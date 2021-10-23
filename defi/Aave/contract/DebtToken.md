@@ -7,7 +7,7 @@
 
 ## EIP20 Methods
 
-虽然 debt tokens 大部分遵循 ERC20 标准，但由于债务的特殊性，没有实现 `transfer()` 和 `allowance()` 。
+虽然 debt tokens 大部分遵循 ERC20 标准，但由于债务的特殊性，没有实现 `transfer()` 和 `allowance()`（这两个方法会直接revert，不会执行） 。
 
 > `balanceOf()` 返回用户的债务数量，包含累计的利息
 
@@ -17,7 +17,7 @@
 
 ### UNDERLYING_ASSET_ADDRESS
 
-返回借出时的数量，不含利息。
+返回借出资产的地址，例如对应 aWETH 的 WETH 地址。
 
 ```solidity
 /**
@@ -43,7 +43,7 @@ function POOL() public view returns (ILendingPool) {
 
 ### approveDelegation
 
-授权给目标地址可代还债务的数量。
+`msg.sender` 授权给目标地址 `delegatee` 债务额度，承诺可代 `delegatee` 偿还一定数量的债务。
 
 ```solidity
 /**
@@ -61,7 +61,7 @@ function approveDelegation(address delegatee, uint256 amount) external override 
 
 ### borrowAllowance
 
-查询目标地址可代还债务的数量
+查询目标地址 `fromUser` 提供给 `toUser` 可代还债务的数量
 
 ```solidity
 /**
@@ -148,12 +148,14 @@ function getSupplyData()
 
 函数中计算了两种固定利率：
 
-- `newStableRate` 池子实时的固定利率
+- `newStableRate` 用户的平均利率（包含当前贷款）
   - 由当前用户借贷后，对用户的利息和债务的加权平均得出
   - `(usersStableRate * currentBalance + amount * rate) / (currentBalance + amount)`
-  - 该值会更新在 `_usersStableRate` 这个 mapping 变量中
+  - 该值会更新在 `_usersStableRate` 这个 mapping 变量中，即每个借贷用户都会单独记录一个该值
+  - 用户的平均利率会用来计算用户当前的债务本息总额，例如 `StableDebtToken.balanceOf()` 会使用该公式来计算
 - `currentAvgStableRate` 池子平均的固定利率，计算逻辑上述一致，但是用的池子的总债务数量计算
   - `(currentAvgStableRate * previousSupply + rate * amount) / (previousSupply + amount)`
+- 上述三个公式在V2白皮书 3.4 Stable Debt
 
 ```solidity
 // 缓存计算结果的结构
@@ -161,8 +163,8 @@ struct MintLocalVars {
   uint256 previousSupply; // 之前的总发行量
   uint256 nextSupply; // 即将更新的总发行量
   uint256 amountInRay;  // 新增数量（单位是ray）
-  uint256 newStableRate;  // 新的固定利率
-  uint256 currentAvgStableRate; // 当前平均的固定利率
+  uint256 newStableRate;  // 平均固定利率（用户）
+  uint256 currentAvgStableRate; // 平均固定利率（池子）
 }
 
 /**
@@ -180,7 +182,7 @@ function mint(
   address user, // 借贷受益人
   address onBehalfOf, // 借贷还款人
   uint256 amount, // 借贷数量
-  uint256 rate  // 借贷利率
+  uint256 rate  // 当前新贷款使用的借贷利率（由利率更新策略模块更新）
 ) external override onlyLendingPool returns (bool) {
   MintLocalVars memory vars;
 
@@ -189,7 +191,7 @@ function mint(
     _decreaseBorrowAllowance(onBehalfOf, user, amount);
   }
 
-  // 获取债务总额（本金+利息），利息总额
+  // 获取债务本息总额（本金+利息），缩放数量的增量
   (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(onBehalfOf);
 
   vars.previousSupply = totalSupply(); // 缓存池子债务总额 （本金+利息）
@@ -201,10 +203,10 @@ function mint(
   // 1 ray = 1e27
   vars.amountInRay = amount.wadToRay();
 
-  // 计算新的固定利率（用户的）
+  // 计算固定利率（用户的）
   // 增加后的累计总利息 / 增加后的本金总额
   // (usersStableRate * currentBalance + amount * rate) / (currentBalance + amount)
-  // rate 是池子中的固定利率，由利率更新策略合约更新
+  // rate 这笔新贷款使用的利率，由利率更新策略合约更新
   // _usersStableRate[onBehalfOf] 是针对用户记录的固定利率，和池子中的固定利率可能不同
   vars.newStableRate = _usersStableRate[onBehalfOf]
     .rayMul(currentBalance.wadToRay())
@@ -244,17 +246,18 @@ function mint(
     vars.nextSupply
   );
 
+  // 返回该笔贷款是否是用户的第一笔
   return currentBalance == 0;
 }
 ```
 
 相关代码：
 
-- [\_calculateBalanceIncrease](###_calculateBalanceIncrease-stable)
+- [\_calculateBalanceIncrease](#_calculateBalanceIncrease-stable)
 
 ### burn-stable
 
-销毁债务 token，整体的逻辑是 mint 的逆运算。需要注意的是 `当销毁数量 >= 池子总量` 时，池子和用户的债务都清零，平均利率也清零。
+销毁债务 token，整体的逻辑是 mint 的逆运算。需要注意的是当 `销毁数量 >= 池子总量` 时，池子和用户的债务都清零，平均利率也清零。
 
 ```solidity
 /**
@@ -334,11 +337,11 @@ function burn(address user, uint256 amount) external override onlyLendingPool {
 
 相关代码：
 
-- [\_calculateBalanceIncrease](###_calculateBalanceIncrease-stable)
+- [\_calculateBalanceIncrease](#_calculateBalanceIncrease-stable)
 
 ### \_calculateBalanceIncrease-stable
 
-计算用户债务的增长量，返回 债务的本金，债务总额（本金+利息），利息数量
+计算用户债务的增长量，返回 缩放数量(债务的在t_0时刻的数量)，债务本息总额，债务增量(前两者的差)
 
 ```solidity
 /**
@@ -355,7 +358,7 @@ function _calculateBalanceIncrease(address user)
     uint256
   )
 {
-  // 获取用户的债务本金数量
+  // 获取用户的债务缩放数量
   // super.balanceOf 是ERC20类的方法
   uint256 previousPrincipalBalance = super.balanceOf(user);
 
@@ -365,9 +368,9 @@ function _calculateBalanceIncrease(address user)
   }
 
   // Calculation of the accrued interest since the last accumulation
-  // 计算债务的利息
-  // balanceOf() 返回的是包含利息的用户债务总额 (DebtToken 重载后的方法)
-  // 利息 = 债务总额 - 本金
+  // 计算债务自上次累计后的增量
+  // balanceOf() 返回的是用户债务本息总额 (DebtToken 重载后的方法)
+  // 债务增量 = 债务总额 - 缩放数量
   uint256 balanceIncrease = balanceOf(user).sub(previousPrincipalBalance);
 
   return (
@@ -380,11 +383,38 @@ function _calculateBalanceIncrease(address user)
 
 相关代码：
 
-- [balanceOf](###balanceOf)
+- [balanceOf](#balanceOf)
+
+### _mint-stable
+
+内部mint方法，若有激励控制合约，则会按持仓额外奖励
+
+```solidity
+/**
+  * @dev Mints stable debt tokens to an user
+  * @param account The account receiving the debt tokens
+  * @param amount The amount being minted
+  * @param oldTotalSupply the total supply before the minting event
+  **/
+function _mint(
+  address account,
+  uint256 amount,
+  uint256 oldTotalSupply
+) internal {
+  uint256 oldAccountBalance = _balances[account];
+  _balances[account] = oldAccountBalance.add(amount);
+
+  if (address(_incentivesController) != address(0)) {
+    _incentivesController.handleAction(account, oldTotalSupply, oldAccountBalance);
+  }
+}
+```
+
+### _burn-table
 
 ### balanceOf-stable
 
-返回用户的债务总数，包含利息。
+返回用户的债务总数，包含利息。根据记录的用户平均固定利率和时间来线性的累计利息。
 
 ```solidity
 /**
@@ -392,20 +422,19 @@ function _calculateBalanceIncrease(address user)
   * @return The accumulated debt of the user
   **/
 function balanceOf(address account) public view virtual override returns (uint256) {
-  // 获取ERC20.balanceOf, 即用户借贷出的本金数量
+  // 获取ERC20.balanceOf, 即用户之前借贷总量（缩放数值）
   uint256 accountBalance = super.balanceOf(account);
-  // 获取用户的固定借贷利率
+  // 获取用户的平均固定利率
   uint256 stableRate = _usersStableRate[account];
-  // 如果没有本金返回0
+  // 如果没有借贷返回0
   if (accountBalance == 0) {
     return 0;
   }
-  // 每单位本金应还款数量 （本金+利息）
+  // 每单位debtToken应还款数量 （本息总额）
   // cumulatedInterest = (1+rate)^time
   uint256 cumulatedInterest =
     MathUtils.calculateCompoundedInterest(stableRate, _timestamps[account]);
-  // 利息总额
-  // 本金 * 每单位本金应还款数量 = 债务总额
+  // 缩放后数量 * 每单位应还款数量 = 债务总额
   return accountBalance.rayMul(cumulatedInterest);
 }
 ```
@@ -414,7 +443,7 @@ function balanceOf(address account) public view virtual override returns (uint25
 
 ### mint-variable
 
-生成浮动利率的 VariableDebtToken 转给借贷还款人。
+生成浮动利率的 VariableDebtToken 转给借贷还款人。实际mint数量是 amountScaled。
 
 ```solidity
 /**
@@ -438,14 +467,70 @@ function mint(
   }
 
   uint256 previousBalance = super.balanceOf(onBehalfOf);  // 还款人的浮动债务总额
-  uint256 amountScaled = amount.rayDiv(index);  // 该笔贷款的本金数量
-  require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT); // 本金不能为0
+  uint256 amountScaled = amount.rayDiv(index);  // 该笔贷款的缩放到t_0时刻的数量
+  require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
 
   _mint(onBehalfOf, amountScaled);
 
-  emit Transfer(address(0), onBehalfOf, amount);
+  emit Transfer(address(0), onBehalfOf, amount);  // 发送事件仍用缩放前的数量
   emit Mint(user, onBehalfOf, amount, index);
 
   return previousBalance == 0;  // 是否为还款人第一笔贷款
 }
 ```
+
+### burn-variable
+
+销毁amount数量的VariableDebtToken，实际burn掉amountScaled。只能被 LendingPool 调用。
+
+```solidity
+/**
+  * @dev Burns user variable debt
+  * - Only callable by the LendingPool
+  * @param user The user whose debt is getting burned
+  * @param amount The amount getting burned
+  * @param index The variable debt index of the reserve
+  **/
+function burn(
+  address user,
+  uint256 amount,
+  uint256 index // reserve.variableBorrowIndex
+) external override onlyLendingPool {
+  uint256 amountScaled = amount.rayDiv(index);  // 对数量缩放到t_0时刻
+  require(amountScaled != 0, Errors.CT_INVALID_BURN_AMOUNT);
+
+  _burn(user, amountScaled);  // 销毁 amountScaled 数量
+
+  emit Transfer(user, address(0), amount);  // 广播 amount 数量
+  emit Burn(user, amount, index);
+}
+```
+
+### balanceOf-variable
+
+返回用户当前的浮动类型债务数量。由于浮动利率会经常变化，所以需要利用全局记录的 `variableBorrowIndex` 来对缩放后的token数量还原。
+
+> variable 类型的债务利率不断随着池子的利用率产生变化，所以每个池子会全局记录一个 `variableBorrowIndex` 来实时更新债务和缩放数量的比例；而 stable 类型的债务，对于用户来说，每一笔的债务利率都是固定在初始借贷时刻的，所以只需要以固定利率和时间来线性的计算债务数量；由于用户可能借出多笔不同固定利率的债务，实际计算需要使用加权平均后的固定利率，具体公式在V2白皮书 3.4 Stable Debt
+
+```solidity
+/**
+  * @dev Calculates the accumulated debt balance of the user
+  * @return The debt balance of the user
+  **/
+function balanceOf(address user) public view virtual override returns (uint256) {
+  uint256 scaledBalance = super.balanceOf(user);
+
+  if (scaledBalance == 0) {
+    return 0;
+  }
+
+  // 内部调用了 ReserveLogic 的 getNormalizedDebt 方法
+  // 返回最新的 variableBorrowIndex
+  // scaledBalance * variableBorrowIndex
+  return scaledBalance.rayMul(_pool.getReserveNormalizedVariableDebt(_underlyingAsset));
+}
+```
+
+相关代码
+
+- [getNormalizedDebt](./ReserveLogic.md#getNormalizedDebt)
