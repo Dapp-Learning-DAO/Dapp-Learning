@@ -207,6 +207,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 4. 学习资源合集
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
 
+## Cryptocurrency Jobs Websites
+ 推荐一些比较好cryptocurrency jobs网站
+ - https://cryptocurrencyjobs.co/
+ - https://angel.co/jobs
+ - https://www.paradigm.xyz/opportunities/
+
+
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
 
