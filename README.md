@@ -18,7 +18,7 @@
 
 本项目跟[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
-项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
+项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
 
 此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。提交一次PR或者在[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)进行一次分享即可加入我们开发者交流群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
@@ -166,6 +166,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 
 ## NFT 进阶
@@ -206,6 +207,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 4. 学习资源合集
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
 
+## Cryptocurrency Jobs Websites
+ 推荐一些比较好cryptocurrency jobs网站
+ - https://cryptocurrencyjobs.co/
+ - https://angel.co/jobs
+ - https://www.paradigm.xyz/opportunities/
+
+
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
 
@@ -214,7 +222,6 @@ Dapp-Learning 有系列衍生项目及共同维护项目, 参考 [相关项目](
 
 ## 常见问题
   测试币申请，安装和使用问题，请参考链接 [常见问题](./docs/TROUBLE_SHOOTING.md)  
-
 ## 社区捐助
 
 欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
@@ -229,6 +236,11 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 **polygon网络上我们已生成多签钱包，由核心贡献者管理**     
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
+
+## 以太坊基金会赞助项目
+本项目受以太坊基金会赞助，欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
+赞助资金会存放在多签钱包，由核心贡献者共同管理，并奖励给项目的优秀贡献者。欢迎加入我们。
+![ESP02](./docs/imgs/ESP-02.jpg)
 
 
 <div align="center">
