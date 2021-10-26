@@ -247,9 +247,17 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 <br>
 <div align="left" style="padding-bottom: 48px;">
-  <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+  <a href="https://rebase.network/">
+    <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.hiblock.net/">
+    <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://learnblockchain.cn/">
+    <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+  </a>
 </div>
 <br>
 <br>
