@@ -129,7 +129,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  ✅
+50. [solidity security](basic/50-solidity-security/readme.md)  ✅
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
@@ -238,10 +238,29 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
 ## 以太坊基金会赞助项目
+
 本项目受以太坊基金会赞助，欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
 赞助资金会存放在多签钱包，由核心贡献者共同管理，并奖励给项目的优秀贡献者。欢迎加入我们。
 ![ESP02](./docs/imgs/ESP-02.jpg)
 
+## 合作伙伴
+
+<div align="center" style="display: flex; padding-bottom: 48px;">
+  <div style="flex: 1;">
+    <img src="https://rebase.network/wp-content/uploads/2019/07/beepress10-1563189256.png" style="display: block; margin: 10px auto; max-height: 70px;" />
+    <h4 align="center">Rebase社区</h4>
+  </div>
+  <div style="flex: 1;">
+    <img src="https://user-assets.sxlcdn.com/images/189991/Fr0ZE-RXQ05FrvGXAGuK7o0eOV7Q.png?imageMogr2/strip/auto-orient/thumbnail/300x300%3E/format/png" style="display: block; margin: 10px auto; max-height: 70px;" />
+    <h4 align="center">HiBlock社区</h4>
+  </div>
+  <div style="flex: 1;">
+    <img src="./docs/imgs/parteners/learnblockchain-logo.png" style="display: block; margin: 10px auto; max-height: 70px;" />
+    <h4 align="center">登链社区</h4>
+  </div>
+</div>
+
+## 贡献者
 
 <div align="center">
   <h4 align="center">
