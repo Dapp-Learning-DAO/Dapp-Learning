@@ -246,8 +246,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 ## 合作伙伴
 
 <div align="center" style="padding-bottom: 48px;">
-  <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
-  <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+  <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
   <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
 </div>
 
