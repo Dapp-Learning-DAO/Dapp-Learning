@@ -245,11 +245,14 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 ## 合作伙伴
 
-<div align="center" style="padding-bottom: 48px;">
+<br>
+<div align="left" style="padding-bottom: 48px;">
   <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
   <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
   <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
 </div>
+<br>
+<br>
 
 ## 贡献者
 
@@ -257,7 +260,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <h4 align="center">
     感谢 Dapp Learning 的贡献者们
   </h4>
-<a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
-</a>
+  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+    <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
+  </a>
 </div>
