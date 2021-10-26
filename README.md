@@ -245,20 +245,22 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 ## 合作伙伴
 
-<div align="center" style="display: flex; padding-bottom: 48px;">
-  <div style="flex: 1;">
-    <img src="https://rebase.network/wp-content/uploads/2019/07/beepress10-1563189256.png" style="display: block; margin: 10px auto; max-height: 70px;" />
-    <h4 align="center">Rebase社区</h4>
-  </div>
-  <div style="flex: 1;">
-    <img src="https://user-assets.sxlcdn.com/images/189991/Fr0ZE-RXQ05FrvGXAGuK7o0eOV7Q.png?imageMogr2/strip/auto-orient/thumbnail/300x300%3E/format/png" style="display: block; margin: 10px auto; max-height: 70px;" />
-    <h4 align="center">HiBlock社区</h4>
-  </div>
-  <div style="flex: 1;">
-    <img src="./docs/imgs/parteners/learnblockchain-logo.png" style="display: block; margin: 10px auto; max-height: 70px;" />
-    <h4 align="center">登链社区</h4>
-  </div>
-</div>
+<table align="center" style="padding-bottom: 48px;">
+  <tr>
+    <td width="300">
+      <img src="https://rebase.network/wp-content/uploads/2019/07/beepress10-1563189256.png" style="display: block; margin: 10px auto; max-height: 70px;" />
+      <h4 align="center">Rebase社区</h4>
+    </td>
+    <td width="300">
+      <img src="https://user-assets.sxlcdn.com/images/189991/Fr0ZE-RXQ05FrvGXAGuK7o0eOV7Q.png?imageMogr2/strip/auto-orient/thumbnail/300x300%3E/format/png" style="display: block; margin: 10px auto; max-height: 70px;" />
+      <h4 align="center">HiBlock社区</h4>
+    </td>
+    <td width="300">
+      <img src="./docs/imgs/parteners/learnblockchain-logo.png" style="display: block; margin: 10px auto; max-height: 70px;" />
+      <h4 align="center">登链社区</h4>
+    </td>
+  </tr>
+</table>
 
 ## 贡献者
 
