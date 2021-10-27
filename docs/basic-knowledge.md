@@ -3,6 +3,7 @@
 
 - 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
 - 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
+- 以太坊知识库: <https://ethfans.org/wikis/Home>
 - Solidity 学习: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
 - 边玩边学Solidity: <https://cryptozombies.io/zh/course>
 - Solidity by Example: <https://solidity-by-example.org/>

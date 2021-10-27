@@ -129,7 +129,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  ✅
+50. [solidity security](basic/50-solidity-security/readme.md)  ✅
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
@@ -243,12 +243,32 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 赞助资金会存放在多签钱包，由核心贡献者共同管理，并奖励给项目的优秀贡献者。欢迎加入我们。
 ![ESP02](./docs/imgs/ESP-02.jpg)
 
+## 合作伙伴
+
+<br>
+<div align="left" style="padding-bottom: 48px;">
+  <a href="https://rebase.network/">
+    <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.hiblock.net/">
+    <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://learnblockchain.cn/">
+    <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+  </a>
+</div>
+<br>
+<br>
+
+## 贡献者
 
 <div align="center">
   <h4 align="center">
     感谢 Dapp Learning 的贡献者们
   </h4>
-<a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
-</a>
+  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+    <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
+  </a>
 </div>
