@@ -258,6 +258,10 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
   </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://learnblockchain.cn/">
+    <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
+  </a>
 </div>
 <br>
 <br>
