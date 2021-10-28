@@ -79,7 +79,76 @@ sol 的测试文件会报失败。所以，这里我们连接到 infura 进行�
 truffle test ./test/simpletoken.js --network kovan
 ```
 
+## 在本地测试合约
+运行truffle develop，系统会给出10个测试账号，包括钱包地址和私钥。
+```
+$ truffle develop
+Truffle Develop started at http://127.0.0.1:9545/
+
+Accounts:
+(0) 0x9a3f188e2c161ff4482aeb045546644b8d67120b
+(1) 0x5cbbdd0348822e3e1714364d2181685adc0e6d8a
+(2) 0x4b584bc2696c12684ec3368baff27a882b7b2a5e
+(3) 0xa14784c20cbfd1a11bf29275c2f645c504def5ad
+(4) 0x5dce815d7cc51366467537b483e9c67681cb1cb7
+(5) 0x1765e4c4e3f0ddb10f1f99cfaea746ea7917a736
+(6) 0xd885baef12d93f0d8f67c4dbd6150b0841009098
+(7) 0x9de5081329d2795990d701a0baae889322786647
+(8) 0x5e829e607a498a2d9df206f02e9ee8ae9ad4c67c
+(9) 0x29b3614d41ff6a3c8c16871a82d0e407e8a5b225
+
+Private Keys:
+(0) 0a8d9e2a470aedfabe279f16f629c5054a47d69b7d66d17ba65cdd7ca99876e1
+(1) 1920e755c5a37c78e8926559b20df9631f88153a5b1335d2d53bf2dde0da796f
+(2) 394d687218146c92adc5bd46600360bcc42f0a261859b2c79501dea5eb264ffe
+(3) 30f3d558a203da5a9b6d9d194836c2c2b08799e92eb2d9f18ef445878be98c34
+(4) 97bd6ec766613a0235ffb7b4c69bab601702e75b68403842ba21bb5a2bc3786a
+(5) 9372baed783bb62ad3639f10e24fda0580490845735da62666e87353a8625ed0
+(6) 0a8e8fa6e04b3bfb06cb12cc86f3beb168fa4f9e658fd7fb794096af8fa6559e
+(7) 872707416f98cb7d8b3db925e4b4273b77e382753893ee9cf2e19ce89842d12a
+(8) 82daa8ffc47246bbf0cb1bdc574658a98c1571a47bd647b18f7986c63ca47cff
+(9) 040cdda01e0b34c00c39877078af2015bd16125fb4fabf1d7153b679e209409f
+
+```
+选择任意一个私钥，将其放置在truffle-config.js中mnemonic变量中。
+
+例如，原代码是
+- const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
+
+修改后的代码是
+- const mnemonic = "0a8d9e2a470aedfabe279f16f629c5054a47d69b7d66d17ba65cdd7ca99876e1"
+
+接下来配置本地网络参数，将下面network属性中development注释打开，host配置成本地，port配置成truffle develop给出的端口地址，如本例中端口是9545。network_id保留原状。
+```
+     development: {
+       host: "127.0.0.1",
+       port: 9545,
+       network_id: "*"
+     },
+```
+配置好以后即可运行truffle compile进行编译，truffle migrate进行部署，truffle test进行测试。
+测试成功后可以看到
+```
+> Artifacts written to C:\Users\Highland\AppData\Local\Temp\test--33840-ApHyOzehxOdp
+> Compiled successfully using:
+   - solc: 0.8.0+commit.c7dfd78e.Emscripten.clang
+
+
+
+  TestSimpleToken
+    √ testInitialBalanceUsingDeployedContract (1802ms)
+    √ testTransfer (1723ms)
+
+  Contract: SimpleToken
+    √ Should put 100000 to the 0x9A3f188e2C161ff4482AEB045546644B8d67120B (1773ms)
+    √ Transfer 100 to other account (2342ms)
+
+
+  4 passing (32s)
+
+```
 
 ## 参考资料
 > https://learnblockchain.cn/docs/solidity/contracts.html
+
 > https://solidity-cn.readthedocs.io/zh/develop/
