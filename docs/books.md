@@ -1,3 +1,5 @@
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/books-en.md)
+
 ## 书籍推荐   
 文档收录各类经典的书籍, 包括但不限于 "人文"、"经济" 、"社科" 等
  
