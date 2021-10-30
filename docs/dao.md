@@ -1,3 +1,5 @@
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao-en.md)
+
 ## 如何参与
 - 提交一次PR 或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进开发者群
 - 已在Rebase社区分享过的小伙伴可以直接申请入群
