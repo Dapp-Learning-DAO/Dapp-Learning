@@ -1,3 +1,5 @@
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/basic-knowledge-en.md)
+
 ## 基础知识预备   
 阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
