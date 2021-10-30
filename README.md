@@ -129,13 +129,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html)  ✅
+50. [solidity security](basic/50-solidity-security/readme.md)  ✅
 51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
+57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -152,10 +153,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-04. [Aave](https://docs.aave.com/portal/) 
+03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) ⌛
+04. [Aave](https://docs.aave.com/portal/)  ⌛
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](defi/Curve/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+06. [Curve](defi/Curve/README.md) ⌛ 
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 08. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -238,16 +239,40 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
 ## 以太坊基金会赞助项目
-本项目受以太坊基金会赞助，欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
+本项目受以太坊基金会赞助，欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning/status/1451374806859845632)。
 赞助资金会存放在多签钱包，由核心贡献者共同管理，并奖励给项目的优秀贡献者。欢迎加入我们。
 ![ESP02](./docs/imgs/ESP-02.jpg)
 
+## 合作伙伴
+
+<br>
+<div align="left" style="padding-bottom: 48px;">
+  <a href="https://rebase.network/">
+    <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.hiblock.net/">
+    <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://learnblockchain.cn/">
+    <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.ethereum.cn/">
+    <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
+  </a>
+</div>
+<br>
+<br>
+
+## 贡献者
 
 <div align="center">
   <h4 align="center">
     感谢 Dapp Learning 的贡献者们
   </h4>
-<a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
-</a>
+  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+    <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
+  </a>
 </div>

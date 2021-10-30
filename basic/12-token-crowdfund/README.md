@@ -22,7 +22,7 @@ npx hardhat test
 
 - 部署合约
 ```
-npx hardhat run scripts/deploy_crowdfunding.js --network kovan
+npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
 ```
 ## Crowdsale类型
 
