@@ -6,3 +6,4 @@
 
 
 ## 文章推荐
+- [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/)  
