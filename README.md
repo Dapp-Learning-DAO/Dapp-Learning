@@ -246,7 +246,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 ## 合作伙伴
 
 <br>
-<div align="left" style="padding-bottom: 12px;">
+<div align="left" style="padding-bottom: 36px;">
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
   </a>
