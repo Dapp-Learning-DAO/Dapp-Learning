@@ -264,7 +264,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
 </div>
 <div align="left" style="padding-bottom: 48px;">
-  <a href="https://rebase.network/">
+  <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
