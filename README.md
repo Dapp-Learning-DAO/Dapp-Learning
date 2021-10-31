@@ -246,7 +246,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 ## 合作伙伴
 
 <br>
-<div align="left" style="padding-bottom: 36px;">
+<div align="left">
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
   </a>
@@ -263,7 +263,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
   </a>
 </div>
-<div align="left" style="padding-bottom: 48px;">
+<br>
+<div align="left">
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
   </a>
