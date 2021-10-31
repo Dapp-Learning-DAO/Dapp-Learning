@@ -80,13 +80,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ⌛ 表示任务正在进行中  
 ✅ 表示任务已完成
 
-01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md) ✅
-02. [use web3.js create transaction](basic/02-web3js-transaction/README.md) ✅
-03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md) ✅
-04. [use truffle](basic/04-web3js-truffle/README.md) ✅
-05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md) ✅
-06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md) ✅
-07. [use hardhat](basic/07-hardhat/README.md) ✅
+01. [deploy contract with web3.js](basic/01-web3js-deploy/README.md) ✅
+02. [create transaction with web3.js](basic/02-web3js-transaction/README.md) ✅
+03. [call ERC20 contract with web3.js](basic/03-web3js-erc20/README.md) ✅
+04. [truffle](basic/04-web3js-truffle/README.md) ✅
+05. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20/README.md) ✅
+06. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle/README.md) ✅
+07. [hardhat](basic/07-hardhat/README.md) ✅
 08. [graph](basic/08-hardhat-graph/README.md) ✅
 09. [react（metamask)](basic/09-hardhat-react/README.md) ✅
 10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md) ✅
@@ -95,8 +95,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 13. [decentralized exchange](basic/13-decentralized-exchange/README.md) ✅
 14. [chainlink-api](basic/14-chainlink-price-feed/README.md) ✅
 15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md) ✅
-16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md) ✅
-17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md) ✅
+16. [nft auction & exchange](basic/16-nft-auction-exchange/README.md) ✅
+17. [wallet development](basic/17-etherjs-wallet-develop/readme.md) ✅
 18. [web3.py](basic/18-web3py/README.md) ✅
 19. [brownie](basic/19-brownie/README.md) ✅
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
@@ -117,7 +117,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 35. [Liquity](https://github.com/liquity) ⬜
 36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
-38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
+38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
 40. [snapshot](basic/26-snapshot/README.md) ⬜
 41. [NFT farming](https://superfarm.com/farms) ⬜
