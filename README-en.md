@@ -9,15 +9,15 @@
 
 ## Preface
 
-This project is designed for people who have developed some foundational understandings of blockchain DAPP to further their knowledge in **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** a platform for communication and cooperation.
+This project is designed for people who have developed some foundational understandings of blockchain DAPP to further their knowledge in **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
-The project is incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ), where a learning group is established for people to study the mainstream DAPP projects and share their thoughts and comments on weekly basis. The weekly meetup is recorded and uploaded to BIlibili under [the rebase account](https://space.bilibili.com/382886213).
+The project is incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ), where we established a learning group for people to study the mainstream DAPP projects and share their thoughts and comments on weekly basis. The weekly meetup is recorded and uploaded to Bilibili under [the rebase account](https://space.bilibili.com/382886213).
 
-The project adheres to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and will manage itself under DAO governance. Currently we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and we will reward the outstanding contributors of the project. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
+The project adheres to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and will manage itself under DAO governance. Currently we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and we would like to distribute the sponsorship among our contributors to feed the progress of this project. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
-This project is still under development, and we welcome contributors from all background. Feel free to send our team pull requests to set up more new tutorial projects, or improve existing tutorial projects, or even just to fix the minor tpyos ;p.
+This project is still under development, and we welcome contributors from all background. Feel free to send our team pull requests to improve existing tutorial projects, set up more new tutorials, or even just to fix the minor tpyos 🤗.
 
-🤗.Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ), Provide triple quality pull requests - you can be a pull request reviewer, and participate in making decisions about project direction. **Project management rules**, see [how new members participate and project governance rules](./docs/dao.md), welcome to join us if you have the same idea.
+Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you have proven you can provide pull requests with amazing qualitites, you could be promoted a pull request reviewer, participate in making decisions about project direction and make a bigger impact. **Project management rules**, see [how new members participate and project governance rules](./docs/dao.md), welcome to join us if you have the same idea.
 
 Technology Stack：
 - `web3.js`
