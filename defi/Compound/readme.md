@@ -14,6 +14,8 @@ U = 借款 /（ 现金 + 借款 ）
 
 ## 白皮书
 请参考[compound白皮书简述](./whitepaper/Compound白皮书简述.md)  
+- [compound中文白皮书](https://www.chainnews.com/articles/465280458982.htm)
+- [compound英文白皮书](https://compound.finance/documents/Compound.Whitepaper.pdf)
 ## 智能合约
 请参考[智能合约](./contract/Compound合约部署.md)  
 
