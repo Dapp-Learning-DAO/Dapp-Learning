@@ -1,7 +1,7 @@
 # Dapp Security
 
 ## Solidity security references
-
+- [EVM code](https://blog.trustlook.com/understand-evm-bytecode-part-1/)
 - [SWC Registry](https://swcregistry.io/)
 - [Decentralized Application Security Project](https://www.dasp.co/)
 - [Solidity Security Considerations](https://docs.soliditylang.org/en/latest/security-considerations.html)
@@ -16,3 +16,9 @@
 - [EtherHack](https://etherhack.positive.com/#/)
 - [Security Innovation Blockchain CTF](https://blockchain-ctf.securityinnovation.com/)
 - [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/)
+
+
+
+## 攻击事件
+ -wvault: https://zhuanlan.zhihu.com/p/396525700    
+ 
