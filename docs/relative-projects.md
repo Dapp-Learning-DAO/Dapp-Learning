@@ -22,6 +22,6 @@
 - Solidity 入门教程 - <https://github.com/liushooter/learn-blockchain/tree/master/learning-solidity-2018>
 - Awesome Solidity - <https://github.com/bkrem/awesome-solidity>
 - Solidity Learning - <https://github.com/willitscale/learning-solidity>
-
+- BTCstudy - <https://www.btcstudy.org/archives/>
 ## 实操演示项目列表
   开发群定期分享经典项目实操演示，欢迎添加你想实操演示的项目，请参考[文档](./docs/dapp-demo.md)
