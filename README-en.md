@@ -243,7 +243,7 @@ Sponsorship money is deposited in a multi-sign-up wallet, managed jointly by cor
 ## Cooperative partner
 
 <br>
-<div align="left" style="padding-bottom: 48px;">
+<div align="left">
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
   </a>
@@ -259,6 +259,14 @@ Sponsorship money is deposited in a multi-sign-up wallet, managed jointly by cor
   <a href="https://www.ethereum.cn/">
     <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
   </a>
+</div>
+<br>
+<div align="left">
+  &nbsp;
+  <a href="https://thublockchain.org/">
+    <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <br>
 <br>
