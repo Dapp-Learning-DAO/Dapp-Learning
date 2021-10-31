@@ -12,8 +12,13 @@ U = 借款 /（ 现金 + 借款 ）
 借款利率 = 10% + U *30%
 存款利率 = 借款利率* U *（ 1 - S ）
 
-## 分析工具
+## 白皮书
+请参考[compound白皮书简述](./whitepaper/Compound白皮书简述.md)  
+## 智能合约
+请参考[智能合约](./contract/Compound合约部署.md)  
 
+## SDK
+## 分析工具
 [GeoGebra](https://www.geogebra.org/) -- 数学作图工具
 
 ## dao治理

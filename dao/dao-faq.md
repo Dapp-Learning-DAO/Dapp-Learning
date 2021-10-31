@@ -18,4 +18,4 @@
 + 加入
 
 ### 有没有一个文章，汇集目前所有DAO相关的工具信息的？
-+ 请看这里 [](https://medium.com/1kxnetwork/organization-legos-the-state-of-dao-tooling-866b6879e93e)
++ 请看这里 [tools-list](https://medium.com/1kxnetwork/organization-legos-the-state-of-dao-tooling-866b6879e93e)

@@ -49,9 +49,11 @@ DAO，就是**涌现**（Emergence，复杂系统的核心概念之一）在区�
 
 参考资料：
 
-Wiki：https://en.wikipedia.org/wiki/Decentralized_autonomous_organization
+- Wiki：https://en.wikipedia.org/wiki/Decentralized_autonomous_organization
 
-陀螺财经：https://www.tuoluocaijing.cn/kepu/detail-10063012.html
+- 陀螺财经：https://www.tuoluocaijing.cn/kepu/detail-10063012.html
 
-DAO全景式科普：Just DAO It:  https://www.theblockbeats.com/news/25074  
+- DAO全景式科普：Just DAO It:  https://www.theblockbeats.com/news/25074  
+
+- The State of DAO Tooling： https://medium.com/1kxnetwork/organization-legos-the-state-of-dao-tooling-866b6879e93e
 
