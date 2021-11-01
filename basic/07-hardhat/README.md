@@ -117,13 +117,13 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
 
    windows:
 
-   ```
+   ```bash
    copy .env.example .env
    ```
 
-   / linux:
+   linux:
 
-   ```
+   ```bash
    cp  .env.example .env
    ```
 
@@ -210,13 +210,13 @@ npx hardhat accounts
 
 ### console
 
-hardhat的控制台模式，实时与链上交互。默认会启动hardhat内置网络。
+hardhat 的控制台模式，实时与链上交互。默认会启动 hardhat 内置网络。
 
 ```sh
 npx hardhat console
 ```
 
-控制内置ethers和web3库，可以直接使用，无须引入。
+控制内置 ethers 和 web3 库，可以直接使用，无须引入。
 
 ```js
 // hardhat console mode:
@@ -226,7 +226,7 @@ npx hardhat console
 
 ### console.log debug
 
-hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印日志，方便调试和测试。**此方法仅在hardhat内置网络中运行有效。**
+hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印日志，方便调试和测试。**此方法仅在 hardhat 内置网络中运行有效。**
 
 在合约中引入 `hardhat/console.sol` 即可使用：
 
@@ -256,19 +256,19 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 
 1. 编译合约
 
-   ```
+   ```bash
    npx hardhat compile
    ```
 
 2. 批量运行测试脚本
 
-   ```
+   ```bash
    npx hardhat test
    ```
 
 3. 部署到测试网：
 
-   ```
+   ```bash
    npx hardhat run scripts/deploy.js --network <network-name>
    ```
 
@@ -276,7 +276,7 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 
 ## 参考文档
 
-- hardhat 官方文档: https://hardhat.org/guides/project-setup.html
-- hardhat 中文文档: https://learnblockchain.cn/docs/hardhat/getting-started/
-- ethers.js 和 hardhat 基础使用讲解: (https://www.bilibili.com/video/BV1Pv411s7Nb)
-- https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae
+- hardhat 官方文档: <https://hardhat.org/guides/project-setup.html>
+- hardhat 中文文档: <https://learnblockchain.cn/docs/hardhat/getting-started/>
+- ethers.js 和 hardhat 基础使用讲解: <https://www.bilibili.com/video/BV1Pv411s7Nb>
+- <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>

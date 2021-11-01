@@ -929,19 +929,87 @@ describe("EtherDelta", () => {
     expect(finalEthBalance.add(gasFee)).to.equal(initialEthBalance.add(amount));
   });
 
-  it("Should change the account levels address and fail", async () => {
-    await prepareTokens();
+  describe("tests need prepareTokens", () => {
 
-    await expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+    beforeEach(async () => {
+      await prepareTokens()
+    })
 
-  });
+    it("Should change the account levels address and fail", async () => {
+      await expect(etherDelta.connect(user1).changeAccountLevelsAddr(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+    });
 
-  it("Should change the account levels address and success", async () => {
-    await prepareTokens();
+    it("Should change the account levels address and success", async () => {
+      await etherDelta.connect(owner).changeAccountLevelsAddr(ADDRESS_ZERO);
+      expect(await etherDelta.accountLevelsAddr()).to.equal(ADDRESS_ZERO);
 
-    await etherDelta.connect(owner).changeAccountLevelsAddr(ADDRESS_ZERO);
-    expect(await etherDelta.accountLevelsAddr()).to.equal(ADDRESS_ZERO);
+    });
 
-  });
+    it('Should change the fee account and fail', async () => {
+      await expect(etherDelta.connect(user1).changeFeeAccount(ADDRESS_ZERO)).to.be.revertedWith("No permission");
+    });
+
+    it('Should change the fee account and succeed', async () => {
+      await etherDelta.connect(owner).changeFeeAccount(user1.address);
+      expect(await etherDelta.feeAccount()).to.equal(user1.address);
+    });
+
+    it('Should change the make fee and fail', async () => {
+      await expect(etherDelta.connect(user1).changeFeeMake(feeMake)).to.be.revertedWith("No permission");
+    });
+
+    it('Should change the make fee and fail because the make fee can only decrease', async () => {
+      await expect(etherDelta.connect(owner).changeFeeMake(feeMake.mul(2))).to.be.reverted
+    });
+
+    it('Should change the make fee and succeed', async () => {
+      await etherDelta.connect(owner).changeFeeMake(feeMake.div(2))
+      expect(await etherDelta.feeMake()).to.equal(feeMake.div(2))
+    });
+
+    it('Should change the take fee and fail', async () => {
+      await expect(etherDelta.connect(user1).changeFeeTake(feeTake)).to.be.revertedWith('No permission')
+    });
+
+    it('Should change the take fee and fail because the take fee can only decrease', async () => {
+      await expect(etherDelta.connect(owner).changeFeeTake(feeTake.mul(2))).to.be.reverted
+    });
+
+    it('Should change the take fee and fail because the take fee must exceed the rebate fee', async () => {
+      await expect(etherDelta.connect(owner).changeFeeTake(feeRebate.sub(BigNumber.from(1)))).to.be.reverted
+    });
+
+    it('Should change the take fee and succeed', async () => {
+      await etherDelta.connect(owner).changeFeeTake(feeRebate.add(BigNumber.from(2)))
+      expect(await etherDelta.feeTake()).to.be.equal(feeRebate.add(BigNumber.from(2)))
+    });
+
+    it('Should change the rebate fee and fail', async () => {
+      await expect(etherDelta.connect(user1).changeFeeRebate(feeRebate)).to.be.revertedWith('No permission')
+    });
+
+    it('Should change the rebate fee and fail because the rebate fee can only increase', async () => {
+      await expect(etherDelta.connect(owner).changeFeeRebate(feeRebate.div(2))).to.be.reverted
+    });
+
+    it('Should change the rebate fee and fail because the rebate fee must not exceed the take fee', async () => {
+      await expect(etherDelta.connect(owner).changeFeeRebate(feeTake.add(BigNumber.from(1)))).to.be.reverted
+    });
+
+    it('Should change the rebate fee and succeed', async () => {
+      await etherDelta.connect(owner).changeFeeRebate(feeTake.sub(BigNumber.from(1)))
+      expect(await etherDelta.feeRebate()).to.be.equal(feeTake.sub(BigNumber.from(1)))
+    });
+
+    it('Should change the admin account and fail', async () => {
+      await expect(etherDelta.connect(user1).changeAdmin(user1.address)).to.be.revertedWith('No permission')
+    });
+
+    it('Should change the admin account and succeed', async () => {
+      await etherDelta.connect(owner).changeAdmin(user1.address)
+      expect(await etherDelta.admin()).to.be.equal(user1.address)
+    });
+
+  })
 
 });
