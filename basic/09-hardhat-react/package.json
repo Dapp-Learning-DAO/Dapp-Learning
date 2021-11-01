@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "hardhat test"
+    "test": "npx hardhat test"
   },
   "repository": {
     "type": "git",
