@@ -1,6 +1,6 @@
 # LendingPool
 
-AAve 协议最主要的入口合约，大部分情况下，用户与此合约交互。
+Aave 协议最主要的入口合约，大部分情况下，用户与此合约交互。
 
 > deposit, borrow, withdraw 和 repay 方法仅针对 ERC20 类型代币，如果要操作 ETH（原生代币），需要使用 `WETHGateway`
 

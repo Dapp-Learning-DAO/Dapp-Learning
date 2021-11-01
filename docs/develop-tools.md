@@ -1,3 +1,5 @@
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/develop-tools-en.md)
+
 ## 开发工具推荐    
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
