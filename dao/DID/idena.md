@@ -168,3 +168,21 @@ Third, you need to persistently attend the validation session(oops, the most xxx
 ## What is the usage except for gitcoin trust
 
 Honestly, i haven't found one, but i guess it will be as useful as your passport in the web3 world.
+
+
+
+## Useful links
+
+Site FAQ: https://idena.io/?view=faq
+Explorer: https://scan.idena.io/
+Idena Today: https://idena.today/
+Idena Apps: https://idena-apps.org/
+AMA Transcript: https://medium.com/idena/april-22-2020-idena-ama-transcript-cbdfc33fbbdb
+Discord Link: https://discord.gg/96Sw2e6
+Official Telegram: https://t.me/IdenaAnnouncements
+Bitcointalk Forum: https://bitcointalk.org/index.php?topic=5194871.0
+Whitepaper: https://idena.io/IdenaConceptPaper.pdf
+Download node and client: https://idena.io/?view=download#
+Exchange: https://qtrade.io/market/IDNA_BTC
+Pitch Deck: https://idena.io/IdenaPitchDeck.pdf
+
