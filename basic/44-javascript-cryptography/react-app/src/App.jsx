@@ -1,9 +1,8 @@
-import logo from './logo.svg';
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom"; 
-import {  Menu, Row, Col  } from "antd";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { Menu, Row, Col } from "antd";
 import { Form, Input, Button, Radio } from 'antd';
 import React, { useCallback, useEffect, useState } from "react";
-import { Header,AESGCM } from "./components";
+import { Header, AESGCM, RandomNumber, SHA256, SignAndVerify,ECDH } from "./components";
 import "antd/dist/antd.css";
 import './index.css';
 import './App.css';
@@ -21,6 +20,16 @@ function App() {
       <Header />
       <BrowserRouter>
         <Menu style={{ justifyContent: "center", textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
+          <Menu.Item key="/RandomNumber">
+            <Link
+              onClick={() => {
+                setRoute("/RandomNumber");
+              }}
+              to="/RandomNumber"
+            >
+              RandomNumber
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/AES-GCM">
             <Link
               onClick={() => {
@@ -52,20 +61,39 @@ function App() {
             </Link>
           </Menu.Item>
 
+          <Menu.Item key="/ECDH">
+            <Link
+              onClick={() => {
+                setRoute("/ECDH");
+              }}
+              to="/ECDH"
+            >
+              ECDH
+            </Link>
+          </Menu.Item>
+
         </Menu>
 
         <Switch>
+          <Route exact path="/RandomNumber">
+            <RandomNumber />
+          </Route>
+
           <Route exact path="/AES-GCM">
-            <AESGCM/>
+            <AESGCM />
           </Route>
 
           {/* IMPORTANT PLACE */}
           <Route exact path="/SHA-256">
-          
+            <SHA256 />
           </Route>
 
           <Route path="/SignAndVeryify">
-          
+            <SignAndVerify />
+          </Route>
+
+          <Route path="/ECDH">
+            <ECDH />
           </Route>
         </Switch>
       </BrowserRouter>
