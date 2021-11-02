@@ -5,6 +5,16 @@
 
 为方便代码测试, 在 .env 中放入的私钥 和 INFURA_ID，样例文件可参考 .env.example
 
+## 原理解析  
+- Keeper 接口合约  
+ChainLink 自动触发合约调用中涉及到的主要合约为 Keeper 接口合约.  
+在 Keeper 接口合约中需要实现两个接口 checkUpkeep 和 performUpkeep. 其中 checkUpkeep 用于检查是否出发具体的业务逻辑, 当接口返回 true 的时候时候才去触发业务逻辑.  
+performUpkeep 用于执行具体的业务逻辑, 或是调用其他的合约处理业务.
+
+- 场景举例  
+小明实现了 Keeper 接口合约, 名字为 KeeperTask, 其中 checkUpkeep 用于判断小明账户余额是否大于 100, performUpkeep 用于给老婆转账, 设定 Keeper 执行周期为每天 11:00.  
+10.1 号当前, 小明发了工资, 账户收到 1000, Keeper 服务在 11:00 的时候触发, 调用 checkUpkeep 接口, 发现小明账户余额有 1000, 接着 Keeper 调用 performUpkeep 接口, 把小明账户中的钱转给小明的老婆.
+
 ## 合约功能说明
 
 - KeeperCompatibleInterface  
