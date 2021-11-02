@@ -165,7 +165,7 @@ function distributeSupplierComp(address cToken, address supplier) internal {
 
 我没找到其确切公式，不过我们可以自行计算，根据 2021-11-05 和 2022-11-04 的 [流动性投放计划](https://messari.io/asset/compound/profile/supply-schedule) ，简单相除得到通胀系数为 27.34%；和 messari 数据相比，算是大差不差了
 
-![COMP 2021-2022](../images/compound_COMP_2021-2022.png)
+![COMP 2021-2022](../images/COMP_2021-2022.png)
 
 | -| 2021-11-05 | 2022-11-04 | Inflation Rate |
 | :-: | -: | -: | -: |
