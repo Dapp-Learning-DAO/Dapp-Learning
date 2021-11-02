@@ -94,7 +94,7 @@ const deploy = async (contractName, _args = [], overrides = {}, libraries = {}) 
   const contractArtifacts = await ethers.getContractFactory(contractName,{libraries: libraries});
   const deployed = await contractArtifacts.deploy(...contractArgs, overrides);
   const encoded = abiEncodeArgs(deployed, contractArgs);
-  const artifact = artifacts.readArtifactSync(contractName)
+  const artifact = artifacts.readArtifactSync(contractName);
 
   if (contractName.indexOf(":")) {
     contractName = contractName.substring(contractName.lastIndexOf(":") + 1);

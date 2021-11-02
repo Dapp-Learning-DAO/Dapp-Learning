@@ -1,7 +1,7 @@
 ## Express 结合 hardhat
 
 - 配置私钥
-在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+  在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
 
 - 安装依赖
 
@@ -36,14 +36,13 @@ node app.js
 
 ```shell
 cd frontend
-yarn 
+yarn
 yarn start
 ```
 
+## 参考文档
 
-## 参考文档  
-https://github.com/dzzzzzy/Nestjs-Learning    
-https://docs.nestjs.cn/8/firststeps  
-https://github.com/HeyiMaster/nest-starter  nestjs 
-https://www.bilibili.com/video/BV1bQ4y1A77L?p=4  netstjs Bilibili
-  
+- https://github.com/dzzzzzy/Nestjs-Learning  
+- https://docs.nestjs.cn/8/firststeps  
+- https://github.com/HeyiMaster/nest-starter nestjs
+- https://www.bilibili.com/video/BV1bQ4y1A77L?p=4 netstjs Bilibili
