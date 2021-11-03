@@ -14,3 +14,8 @@
 #### DAOSquare
 + 国内较为早期的DAO，孵化器投资类型，目前最大？
 + https://www.daosquare.io/
+
+### Hub
+#### DAOhaus
++ 在DAOhaus里可以使用它其提供的模板和工具，快速建立和启动自己的DAO。
++ https://daohaus.club
