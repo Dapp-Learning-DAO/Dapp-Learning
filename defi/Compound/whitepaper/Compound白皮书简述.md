@@ -1,3 +1,5 @@
+# compound
+
 一千个读者就有一千个哈姆雷特，前有[Keegan小刚](https://learnblockchain.cn/people/96)的五篇长篇巨制分析过Compound这一明星借贷产品，现在再从另一个角度来分析这一产品。
 ![](https://img.learnblockchain.cn/pics/20210727085513.png)
 
@@ -42,6 +44,7 @@ Compound允许用户无摩擦地从协议中借款，使用cTokens作为抵押�
 $$
 Borrowing\ Capacity =\sum{N} \cdot f
 $$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=Borrowing\%20Capacity%20=\sum{N}%20\cdot%20f" /> -->
 
 用户能够借到但不超过他们的借贷能力，而且一个账户不能采取任何会使借贷资产总值超过其借贷能力的行为（例如借贷、转移cToken抵押品或赎回cToken抵押品）；这可以保护协议免受违约风险。
 

@@ -1,7 +1,7 @@
 # Compound 合约部署
 
 最近一直再研究Compound的代码，compound能够经历牛熊成长为借贷龙头，它的合约逻辑代码上面有非常多值得学习的地方。鉴于此前一直只是再看代码，缺少了一步实际跑代码的过程，感觉学习Compound时，始终有点缺憾。故今天就详细记录下Compound合约的部署步骤，以飨读者。
-![image20210829152755784.png](https://img.learnblockchain.cn/attachments/2021/08/V3NfsOOH612b3775496de.png)
+![合约部署](../images/contract-deploy.png)
 
 > 可以点击链接查看原文：https://t.1yb.co/A8CX
 > 也顺便关注我一下：微信号woodward1993, 我的公众号：bug合约写手，涨粉涨粉:)
