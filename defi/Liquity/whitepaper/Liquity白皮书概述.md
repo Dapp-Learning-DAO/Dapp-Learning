@@ -88,7 +88,7 @@ Core Code: packages/contracts/contracts/BorrowerOperations.sol
 
 ## 参考链接 
 - liquity 和maker对比： https://www.chainnews.com/articles/778907264093.htm
-
+- 创始人解答： https://medium.com/liquity/on-price-stability-of-liquity-64ce8420f753  
 - Bingen. (2021,Feb,23). Liquity System Summary. URL: Github:
 https://github.com/liquity/beta/blob/main/README.md#liquidation-and-the-stability-pool
 
