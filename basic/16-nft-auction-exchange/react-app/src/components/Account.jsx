@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "antd";
 import Address from "./Address";
-import Balance from "./Balance";
 import Wallet from "./Wallet";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 
@@ -98,7 +97,7 @@ export default function Account({
     >
       {price}
     </span>
-      <Wallet address={address} provider={userProvider} ensProvider={mainnetProvider} price={price} color={currentTheme == "light" ? "#1890ff" : "#2caad9"} />
+      <Wallet address={address} provider={userProvider} ensProvider={mainnetProvider} price={price} color={currentTheme === "light" ? "#1890ff" : "#2caad9"} />
     </span>
   );
 
