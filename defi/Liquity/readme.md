@@ -14,7 +14,11 @@ Liquity的主要优势包括：
 LQTY是Liquity协议发行的二级代币。它捕获系统产生的费用收入并以此激励早期用户和前端运营商。
 LQTY奖励只会累积发放给稳定提供者，即将LUSD存入稳定池的用户、促成这些存款的前端以及LUSD:ETH Uniswap池的流动性提供者。
 
+## 白皮书介绍
+请参考[白皮书概述](./whitepaper/Liquity白皮书概述.md)  
 
+## 代码解析
+请参考[代码解析](./contract/协议代码库解析.md)  
 ## 参考链接
 - [Liquity 官网](https://www.liquity.org/)
 - [Liquity Github](https://github.com/liquity/)
