@@ -7,7 +7,7 @@ SUSHI 的最大供应量上限为 250,000,000 SUSHI。已经有超过 127,000,00
 ## 治理流程
 SushiSwap 也有一个类似于社区驱动的治理结构的系统。然而，虽然上面列出的平台的投票使用链上投票或链上和链下投票的混合，但 SushiSwap 的治理主要依赖于链下系统。
 
-在这里，投票是在 Snapshot 上进行的——一个去中心化的无气体投票仪表板。提案首先在 SushiSwap 社区论坛上创建以供审议，然后再移至 Snapshot 进行投票。请注意，只有在论坛中获得足够吸引力的提案才能移动到 Snapshot 以进行适当的投票。SushiSwap Snapshot 中使用的投票指标是 Sushipowah。
+在这里，投票是在 Snapshot 上进行的——一个去中心化的无gas投票仪表板。提案首先在 SushiSwap 社区论坛上创建以供审议，然后再移至 Snapshot 进行投票。请注意，只有在论坛中获得足够吸引力的提案才能移动到 Snapshot 以进行适当的投票。SushiSwap Snapshot 中使用的投票指标是 Sushipowah。
 
 要成为合格选民，您必须通过以下任何一种方式持有 SUSHI：
 
