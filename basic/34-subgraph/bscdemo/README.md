@@ -284,7 +284,6 @@ docker-compose up
    yarn && yarn codegen
    ```
 
-   ![image-20211104180150595](/Users/yyhaier/Documents/%E5%85%AC%E5%8F%B8%E9%A1%B9%E7%9B%AE/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAGraph%20Node%E9%80%9A%E8%BF%87%20GraphQL%20%E4%BB%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.assets/image-20211104180150595.png)
 
 3. 分配subgraph 名字
 
@@ -292,7 +291,6 @@ docker-compose up
    yarn create-local
    ```
 
-   ![image-20211104180251303](/Users/yyhaier/Documents/%E5%85%AC%E5%8F%B8%E9%A1%B9%E7%9B%AE/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAGraph%20Node%E9%80%9A%E8%BF%87%20GraphQL%20%E4%BB%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.assets/image-20211104180251303-6020172.png)
 
 4. 本地部署
 
@@ -300,7 +298,7 @@ docker-compose up
    yarn deploy-local
    ```
 
-   ![image-20211104180333944](/Users/yyhaier/Documents/%E5%85%AC%E5%8F%B8%E9%A1%B9%E7%9B%AE/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAGraph%20Node%E9%80%9A%E8%BF%87%20GraphQL%20%E4%BB%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.assets/image-20211104180333944-6020214.png)
+
 
 至此部署完成。
 
@@ -308,11 +306,11 @@ docker-compose up
 
 打开GraphQl图形化界面 “http://127.0.0.1:8000/subgraphs/name/myBSCGraph”
 
-![image-20211104180550974](/Users/yyhaier/Documents/%E5%85%AC%E5%8F%B8%E9%A1%B9%E7%9B%AE/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAGraph%20Node%E9%80%9A%E8%BF%87%20GraphQL%20%E4%BB%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.assets/image-20211104180550974-6020352.png)
+
 
 随机选一组数据进行验证，例如：第[21004](https://testnet.bscscan.com/block/21004)区块
 
-![image-20211104180700191](/Users/yyhaier/Documents/%E5%85%AC%E5%8F%B8%E9%A1%B9%E7%9B%AE/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAGraph%20Node%E9%80%9A%E8%BF%87%20GraphQL%20%E4%BB%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.assets/image-20211104180700191-6020421.png)
+
 
 完成。🎉
 
