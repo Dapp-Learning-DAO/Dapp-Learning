@@ -44,6 +44,26 @@ yarn test
 ```bash
 node index.js
 ```
+## 说明
+- 如果在windows上跑yarn test命令时，要把package.json文件中script脚本中test命令中的export命令修改为set命令，否则会报找不到命令。
+
+修改前：
+
+```
+  "scripts": {
+    "build": "waffle",
+    "test": "export NODE_ENV=test && mocha --timeout 10000"
+  },
+```
+
+修改后：
+
+```
+  "scripts": {
+    "build": "waffle",
+    "test": "set NODE_ENV=test && mocha --timeout 10000"
+  },
+```
 
 ## 参考文档
 

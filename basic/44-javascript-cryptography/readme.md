@@ -1,6 +1,7 @@
 ## 介绍  
 JavaScript 在互联网安全应用中扮演着极其重要的作用, 网页信息的发送, 交互中都使用了 JavaScript 进行加密解密.  
-本 Task 通过页面和文档的方式展示了如何使用 JavaScript 进行加密解密, 希望通过这些展示使各位开发者了解 JavaScript 密码库的使用.
+本 Task 通过页面和文档的方式展示了如何使用 JavaScript 进行加密解密, 希望通过这些展示使各位开发者了解 JavaScript 密码库的使用.  
+内容选自 Medium 上面的文章, 详细介绍请参考 [中文译文](./Doc-Chinese.md) 
 
 ## 操作步骤  
 - 安装依赖  
