@@ -16,8 +16,7 @@ LQTY奖励只会累积发放给稳定提供者，即将LUSD存入稳定池的用
 
 ## 白皮书介绍
 请参考[白皮书概述](./whitepaper/Liquity白皮书概述.md)  
-
-## 代码解析
+## 合约解析
 请参考[代码解析](./contract/协议代码库解析.md)  
 ## 参考链接
 - [Liquity 官网](https://www.liquity.org/)
