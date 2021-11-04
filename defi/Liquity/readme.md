@@ -20,4 +20,5 @@ LQTY奖励只会累积发放给稳定提供者，即将LUSD存入稳定池的用
 - [Liquity Github](https://github.com/liquity/)
 - [Liquity 白皮书](https://docsend.com/view/bwiczmy)
 - [微信公共号](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzkzODI1MTk2MQ==&scene=124#wechat_redirect)
+- [Dune 数据分析](https://dune.xyz/projects/liquity) 
 - [「Rebase 大学」课程：项目解读——去中心化稳定币协议 Liquity](https://www.bilibili.com/video/BV1iV411J7dr)
