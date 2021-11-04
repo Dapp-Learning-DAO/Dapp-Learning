@@ -6,7 +6,7 @@ Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.re
 ## 合约介绍
 
 - contract/SimpleToken.sol  
-  一个标准的 ERC20 合约, 实现了 ERC20 的所有接口, 用户可以使用这个合约进行 ERC20 代币的发放  
+  一个标准的 ERC20 合约, 实现了 ERC20 的所有接口, 用户可以使用这个合约进行 ERC20 代币的发放.
   
 
 ## 脚本介绍
