@@ -38,3 +38,4 @@ Uniswap 持有者如何提交提案？
 ## 参考链接：
 
 - uni gov: https://uniswap.org/blog/uni/ 
+- Building and Running a DAO --a16z： https://future.a16z.com/building-and-running-a-dao-why-governance-matters/
