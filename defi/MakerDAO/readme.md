@@ -22,9 +22,14 @@ MKR是MakerDAO系统的权益代币。MKR的持有人是整个系统中的最后
 
 
 ## 参考链接
-- maker 文档： https://makerdao.com/zh-CN/whitepaper/#%E6%91%98%E8%A6%81
-- makerdao介绍简书：https://www.jianshu.com/p/098ccb4122ef
-- maker清算：https://medium.com/dragonfly-research/- liquidators-the-secret-whales-helping-defi-function-acf132fbea5e 
-- maker 312暴跌： https://medium.com/cortexlabs/- %E5%B8%A6%E4%BD%A0%E6%B7%B1%E5%88%BB%E7%90%86%E8%A7%A3makerdao%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86-%E5%85%A8- %E9%9D%A2%E5%A4%8D%E7%9B%98312%E6%9A%B4%E8%B7%8C%E5%90%8E%E7%9A%84%E6%B8%85%E7%AE%97-%E6%8B%8D%E5%8D%96-%E6%- B2%BB%E7%90%86%E6%9C%BA%E5%88%B6-d4d633512424  
+- maker 文档： 
+https://makerdao.com/zh-CN/whitepaper/#%E6%91%98%E8%A6%81
+- makerdao介绍简书：
+https://www.jianshu.com/p/098ccb4122ef
+- maker清算：
+https://medium.com/dragonfly-research/liquidators-the-secret-whales-helping-defi-function-acf132fbea5e
+
+- maker 312暴跌： 
+https://medium.com/dragonfly-research/daos-ex-machina-an-in-depth-timeline-of-makers-recent-crisis-66d2ae39dd65
 
 
