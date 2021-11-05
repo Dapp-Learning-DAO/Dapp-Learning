@@ -65,11 +65,11 @@ If you have other high-quality course recommendations, we hope you can make a su
 
 Understand the basic tools and development knowledge of developing DAPP through the following basic tasks.
 For DAPP architecture, please refer to the article--[the difference between Web2.0 and Web3.0 applications from the architectural dimension](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0).
-Learn and run the first 20 tasks locally and upgrade to focus on **project tasks** 
+Learn and run the first 20 tasks locally and upgrade to focus on **project tasks**
 You are welcome to PR improvements to existing tutorial projects or to create more tutorial projects
 
-⬜ Task Not Start  
-⌛ Task Processing   
+⬜ Task Not Start
+⌛ Task Processing
 ✅ Task Finish
 
 01. [deploy contract with web3.js](basic/01-web3js-deploy/README.md) ✅
@@ -129,6 +129,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
+58. [web3.0 dapp](basic/59-web3-dapp) ⌛
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -142,7 +143,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 ## DeFi advanced tasks
 The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.
-  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)  
+  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)
   [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
@@ -150,13 +151,13 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 03. [Compound](defi/Compound/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new) ⌛
 04. [Aave](https://docs.aave.com/portal/)  ⌛
 05. [SNX](https://github.com/Synthetixio) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](defi/Curve/README.md) ⌛ 
+06. [Curve](defi/Curve/README.md) ⌛
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 08. [Bancor](https://bancor.network/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 13. [OPYN](https://v2.opyn.co/)
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -167,7 +168,7 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. Loot NFT Distribute 
+- 03. Loot NFT Distribute
 
 ## DAO advanced tasks
 
@@ -187,7 +188,7 @@ Item list:
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## Smart Contract Security 
+## Smart Contract Security
 1. Common safety tools
  - [Slither](https://github.com/crytic/slither)
  - [Mythril](https://github.com/ConsenSys/mythril)
@@ -220,7 +221,7 @@ Please refer to [this link](./docs/TROUBLE_SHOOTING.md) to get some answers on h
 Open source projects are not easy to maintain so we'd love to see you help us thrive through donations. Dapp Learning team adapts the DAO philosophy to manage the project; your generosity would be vested to our community members as funds and/or NFTs based on their quality of contribution.
 
 We have a Gitcoin campaign to sustain the Dapp-Learning efforts:
-Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
+Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 
 And direct donation to our dev team's fund is also appreciated:
 - Ethereum main network/zkSync/Arbitrum：
