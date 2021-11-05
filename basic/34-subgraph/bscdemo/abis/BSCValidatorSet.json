@@ -1,0 +1,924 @@
+[
+    {
+      "type": "event",
+      "name": "batchTransfer",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "batchTransferFailed",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": true
+        },
+        {
+          "type": "string",
+          "name": "reason",
+          "internalType": "string",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "batchTransferLowerFailed",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": true
+        },
+        {
+          "type": "bytes",
+          "name": "reason",
+          "internalType": "bytes",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "deprecatedDeposit",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "directTransfer",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address payable",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "directTransferFail",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address payable",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "failReasonWithStr",
+      "inputs": [
+        {
+          "type": "string",
+          "name": "message",
+          "internalType": "string",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "paramChange",
+      "inputs": [
+        {
+          "type": "string",
+          "name": "key",
+          "internalType": "string",
+          "indexed": false
+        },
+        {
+          "type": "bytes",
+          "name": "value",
+          "internalType": "bytes",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "systemTransfer",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "unexpectedPackage",
+      "inputs": [
+        {
+          "type": "uint8",
+          "name": "channelId",
+          "internalType": "uint8",
+          "indexed": false
+        },
+        {
+          "type": "bytes",
+          "name": "msgBytes",
+          "internalType": "bytes",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorDeposit",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorEmptyJailed",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorFelony",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorJailed",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorMisdemeanor",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "amount",
+          "internalType": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "validatorSetUpdated",
+      "inputs": [],
+      "anonymous": false
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "BIND_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "CODE_OK",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "CROSS_CHAIN_CONTRACT_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "DUSTY_INCOMING",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "ERROR_FAIL_CHECK_VALIDATORS",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "ERROR_FAIL_DECODE",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "ERROR_LEN_OF_VAL_MISMATCH",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "ERROR_RELAYFEE_TOO_LARGE",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint32",
+          "name": "",
+          "internalType": "uint32"
+        }
+      ],
+      "name": "ERROR_UNKNOWN_PACKAGE_TYPE",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "EXPIRE_TIME_SECOND_GAP",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "GOV_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "GOV_HUB_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "INCENTIVIZE_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "bytes",
+          "name": "",
+          "internalType": "bytes"
+        }
+      ],
+      "name": "INIT_VALIDATORSET_BYTES",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "JAIL_MESSAGE_TYPE",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "LIGHT_CLIENT_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "MAX_NUM_OF_VALIDATORS",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "PRECISION",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "RELAYERHUB_CONTRACT_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "SLASH_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "SLASH_CONTRACT_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "STAKING_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "SYSTEM_REWARD_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "TOKEN_HUB_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "TOKEN_MANAGER_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "TRANSFER_IN_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "TRANSFER_OUT_CHANNELID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        }
+      ],
+      "name": "VALIDATORS_UPDATE_MESSAGE_TYPE",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ],
+      "name": "VALIDATOR_CONTRACT_ADDR",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "bool",
+          "name": "",
+          "internalType": "bool"
+        }
+      ],
+      "name": "alreadyInit",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint16",
+          "name": "",
+          "internalType": "uint16"
+        }
+      ],
+      "name": "bscChainID",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address",
+          "name": "consensusAddress",
+          "internalType": "address"
+        },
+        {
+          "type": "address",
+          "name": "feeAddress",
+          "internalType": "address payable"
+        },
+        {
+          "type": "address",
+          "name": "BBCFeeAddress",
+          "internalType": "address"
+        },
+        {
+          "type": "uint64",
+          "name": "votingPower",
+          "internalType": "uint64"
+        },
+        {
+          "type": "bool",
+          "name": "jailed",
+          "internalType": "bool"
+        },
+        {
+          "type": "uint256",
+          "name": "incoming",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "currentValidatorSet",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "currentValidatorSetMap",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "",
+          "internalType": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "payable",
+      "outputs": [],
+      "name": "deposit",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "valAddr",
+          "internalType": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "expireTimeSecondGap",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "felony",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "getIncoming",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "address[]",
+          "name": "",
+          "internalType": "address[]"
+        }
+      ],
+      "name": "getValidators",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "handleAckPackage",
+      "inputs": [
+        {
+          "type": "uint8",
+          "name": "channelId",
+          "internalType": "uint8"
+        },
+        {
+          "type": "bytes",
+          "name": "msgBytes",
+          "internalType": "bytes"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "handleFailAckPackage",
+      "inputs": [
+        {
+          "type": "uint8",
+          "name": "channelId",
+          "internalType": "uint8"
+        },
+        {
+          "type": "bytes",
+          "name": "msgBytes",
+          "internalType": "bytes"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [
+        {
+          "type": "bytes",
+          "name": "responsePayload",
+          "internalType": "bytes"
+        }
+      ],
+      "name": "handleSynPackage",
+      "inputs": [
+        {
+          "type": "uint8",
+          "name": "",
+          "internalType": "uint8"
+        },
+        {
+          "type": "bytes",
+          "name": "msgBytes",
+          "internalType": "bytes"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "init",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "misdemeanor",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "validator",
+          "internalType": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "numOfJailed",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "type": "uint256",
+          "name": "",
+          "internalType": "uint256"
+        }
+      ],
+      "name": "totalInComing",
+      "inputs": []
+    },
+    {
+      "type": "function",
+      "stateMutability": "nonpayable",
+      "outputs": [],
+      "name": "updateParam",
+      "inputs": [
+        {
+          "type": "string",
+          "name": "key",
+          "internalType": "string"
+        },
+        {
+          "type": "bytes",
+          "name": "value",
+          "internalType": "bytes"
+        }
+      ]
+    }
+  ]
