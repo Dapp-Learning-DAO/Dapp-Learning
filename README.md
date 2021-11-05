@@ -141,6 +141,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
+58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -196,6 +197,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
+- 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 智能合约安全
@@ -218,6 +220,12 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
 
+## Hackathons
+ 参与黑客松增加实践经验，可参与有：
+ Gitcoin每季度黑客松
+ - [Gitcoin](https://gitcoin.co/hackathon/)
+ 黑客松模板,ETH
+ - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
