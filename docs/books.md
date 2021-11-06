@@ -21,3 +21,6 @@
 - [从链上声誉体系看Web3劳动力市场](https://www.chainnews.com/articles/558872655992.htm)
 - [Web3堆栈-Multicoin](https://multicoin.capital/2018/07/10/the-web3-stack/)
 - [Web3堆栈2019年版-MultiCoin](https://multicoin.capital/2019/12/13/the-web3-stack-2019-edition/)
+- [张首晟：区块链世界到底是如何形成的](https://mp.weixin.qq.com/s/txbZp8mzBpJz9F1D2tVdBQ)
+- [吴忌寒：算力之美](https://mp.weixin.qq.com/s/n51_E2ZFqB_pjfZxKcE-9A)
+- [V神发表2020年终总结，思考新世界的运转模式](https://mp.weixin.qq.com/s/gVEgIMmar1T1LmK-U18tDw)
