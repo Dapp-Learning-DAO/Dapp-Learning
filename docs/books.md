@@ -7,11 +7,18 @@
 - [《密码朋克--自由与互联网的未来》](https://book.douban.com/subject/27054249/)   
 - [《精通比特币》](https://github.com/inoutcode/bitcoin_book_2nd)
 - [《货币未来》](https://book.douban.com/subject/35178904/)
-- [《英语魔法师之语法俱乐部》](https://book.douban.com/subject/1014914/)
 - [《历代经济变革得失》](https://book.douban.com/subject/24851460/)
 
-## 程序员关爱篇
+## 语言学习篇
+- [《英语魔法师之语法俱乐部》](https://book.douban.com/subject/1014914/)
+- [《赖世雄美语音标》](https://book.douban.com/subject/4201317/)
+- [《Whaddaya Say? Guided Practice in Relaxed Speech, Second Edition》](https://book.douban.com/subject/2401342/)
 
+## 社会科学篇
+-[《乌合之众》](https://book.douban.com/subject/6966569/)
+-[《娱乐至死》](https://book.douban.com/subject/1062193/)
+
+## 程序员关爱篇
 - [《你是你吃出来的》](https://book.douban.com/subject/27590675/)
 - [《豹式健身》](https://book.douban.com/subject/27171491/)
 - [《我们为什么会生病》](https://book.douban.com/subject/30164677/)
