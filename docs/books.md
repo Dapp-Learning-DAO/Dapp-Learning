@@ -24,7 +24,8 @@
 - [《我们为什么会生病》](https://book.douban.com/subject/30164677/)
 
 ## 文章推荐
-- [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/)  
+- [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/) 
+- [赛博空间独立宣言](https://mp.weixin.qq.com/s/wfn9JXiP-XtWWE7AdHiR9A) 
 - [从链上声誉体系看Web3劳动力市场](https://www.chainnews.com/articles/558872655992.htm)
 - [Web3堆栈-Multicoin](https://multicoin.capital/2018/07/10/the-web3-stack/)
 - [Web3堆栈2019年版-MultiCoin](https://multicoin.capital/2019/12/13/the-web3-stack-2019-edition/)
