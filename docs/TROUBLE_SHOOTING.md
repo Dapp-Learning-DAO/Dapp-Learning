@@ -1,3 +1,5 @@
+中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/TROUBLE_SHOOTING-en.md)
+
 ## 常见问题
 
 - 安装前端依赖时，如果在 npm 或者 yarn 修改为国内源之后，依旧出现类似 `getaddrinfo ENOENT raw.githubusercontent.com` 的报错，可以考虑为其设置代理：

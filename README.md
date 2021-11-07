@@ -18,7 +18,8 @@
 
 本项目跟[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
-项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
+项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)。
+项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
 
 此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。提交一次PR或者在[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)进行一次分享即可加入我们开发者交流群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
@@ -66,6 +67,9 @@
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
+我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/s/Y6fYmqrS9SpEw4Nd0ocUzg)    
+对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。    
+
 
 
 
@@ -80,13 +84,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ⌛ 表示任务正在进行中  
 ✅ 表示任务已完成
 
-01. [use web3.js deploy contract](basic/01-web3js-deploy/README.md) ✅
-02. [use web3.js create transaction](basic/02-web3js-transaction/README.md) ✅
-03. [use web3.js call ERC20 contract](basic/03-web3js-erc20/README.md) ✅
-04. [use truffle](basic/04-web3js-truffle/README.md) ✅
-05. [use ethers.js call ERC20 contract](basic/05-ethersjs-erc20/README.md) ✅
-06. [use waffle and ethers.js test contract](basic/06-ethersjs-waffle/README.md) ✅
-07. [use hardhat](basic/07-hardhat/README.md) ✅
+01. [deploy contract with web3.js](basic/01-web3js-deploy/README.md) ✅
+02. [create transaction with web3.js](basic/02-web3js-transaction/README.md) ✅
+03. [call ERC20 contract with web3.js](basic/03-web3js-erc20/README.md) ✅
+04. [truffle](basic/04-web3js-truffle/README.md) ✅
+05. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20/README.md) ✅
+06. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle/README.md) ✅
+07. [hardhat](basic/07-hardhat/README.md) ✅
 08. [graph](basic/08-hardhat-graph/README.md) ✅
 09. [react（metamask)](basic/09-hardhat-react/README.md) ✅
 10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721/README.md) ✅
@@ -95,8 +99,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 13. [decentralized exchange](basic/13-decentralized-exchange/README.md) ✅
 14. [chainlink-api](basic/14-chainlink-price-feed/README.md) ✅
 15. [nft-blindbox-chainlink-vrf](basic/15-nft-blindbox-chainlink-vrf/readme.md) ✅
-16. [nft auction  & exchange](basic/16-nft-auction-exchange/README.md) ✅
-17. [wallet develop](basic/17-etherjs-wallet-develop/readme.md) ✅
+16. [nft auction & exchange](basic/16-nft-auction-exchange/README.md) ✅
+17. [wallet development](basic/17-etherjs-wallet-develop/readme.md) ✅
 18. [web3.py](basic/18-web3py/README.md) ✅
 19. [brownie](basic/19-brownie/README.md) ✅
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
@@ -117,13 +121,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 35. [Liquity](https://github.com/liquity) ⬜
 36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
-38. [Flashbots provider for ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
+38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
 40. [snapshot](basic/26-snapshot/README.md) ⬜
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
-44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ⬜
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
@@ -137,6 +141,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
+58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -192,6 +197,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
+- 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 智能合约安全
@@ -214,6 +220,12 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
 
+## Hackathons
+ 参与黑客松增加实践经验，可参与有：
+ Gitcoin每季度黑客松
+ - [Gitcoin](https://gitcoin.co/hackathon/)
+ 黑客松模板,ETH
+ - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
@@ -246,7 +258,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 ## 合作伙伴
 
 <br>
-<div align="left" style="padding-bottom: 48px;">
+<div align="left">
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
   </a>
@@ -262,6 +274,14 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://www.ethereum.cn/">
     <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
   </a>
+</div>
+<br>
+<div align="left">
+  &nbsp;
+  <a href="https://thublockchain.org/">
+    <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <br>
 <br>

@@ -1,0 +1,19 @@
+{
+  "name": "44-javascript-cryptography",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "yarn workspace react-app start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": {
+    "packages": [
+      "react-app"
+    ]
+  }
+}
