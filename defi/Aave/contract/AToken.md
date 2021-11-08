@@ -85,8 +85,17 @@ function mint(
   // 这里调用的是 ERC20.balanceOf() 返回的是不计息的数量
   uint256 previousBalance = super.balanceOf(user);
 
-  // index 从池子创建以来 每单位liquidity累计的本息总额
-  // amountScaled = mint 数量 / index
+  /* index 从池子创建以来 每单位liquidity累计的本息乘数因子
+   * 比如总本金为 A, 年利率为 m , 复利计算方式, N 年后的总金额 TotalAmount(本金 + 利息总额) = A * (1+m)^N   
+   * 这里 index => (1+m)^N , 上述公式就可以变为 TotalAmount = A * index
+   * 其中 A 就表示为 aToken 的总量, TotalAmount 表示为对应的收益总量
+   */
+
+  /* amountScaled = amount / index
+   * 假设 TotalAmount = A * index 
+   * 现在假设 index 保持不变, ( TotalAmount + amount ) = ( A + X ) * index 要求其中X 的值  
+   * 那么计算可得 X = amount / index  
+   */
   uint256 amountScaled = amount.rayDiv(index);
   require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
   _mint(user, amountScaled);  // ERC20._mint()
@@ -104,7 +113,7 @@ function mint(
 - aToken 重载了 ERC20.balanceOf 方法，每次查询余额是包含了累计利息的数量
 - 为了保证本金和累计利息的比例不变，这里要对 amount 进行缩放，实际 mint 的数量是 amountScaled
 - 假设用户在 t_current 时刻存入 amount 数量，那么如果 t_0 时刻（池子创建时）存入了 amountScaled ，通过复利累计本息，直到 t_current 时刻，其数量正好等于 amount
-- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，每单位流动性累计的本息总额
+- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，每单位流动性累计的本息乘数因子
 - amountScaled 就是 aToken 实际记录的数量，由于全部缩放至 t_0 时刻，这样就抹平了不同抵押操作的时间和利率的不同，可以全部统一计算
 
 ### burn
