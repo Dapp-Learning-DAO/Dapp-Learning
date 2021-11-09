@@ -111,7 +111,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
+28. [Optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
@@ -142,6 +142,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
+
+60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
