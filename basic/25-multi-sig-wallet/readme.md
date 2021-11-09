@@ -103,3 +103,4 @@ https://github.com/gnosis/MultiSigWallet/tree/master/contracts
 https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c  
 gnosis使用：https://gnosis-safe.io/app/#/welcome  
 gnosis合约：https://polygonscan.com/address/0xa6b71e26c5e0845f74c812102ca7114b6a896ab2#code 
+自己构造gnosis多签交易：https://mp.weixin.qq.com/s/qgbTnchCHup24ANprGXH5Q
