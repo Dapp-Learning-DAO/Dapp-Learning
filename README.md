@@ -128,7 +128,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [LP](https://github.com/sushiswap/sushiswap) ⬜
+45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
