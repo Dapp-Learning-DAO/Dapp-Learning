@@ -31,7 +31,7 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 
 存储一个列表，罗列出不同市场的 `LendingPoolAddressesProvider` 合约地址。
 
-#### aToken
+#### AToken
 
 aave 中的计息代币，当用户存入抵押资产时获得 1：1 对应的 atoken（比如存入 100DAI 抵押，获得 100aDai）。aToken 基本参照 ERC20 标准，增加了以下接口：
 
