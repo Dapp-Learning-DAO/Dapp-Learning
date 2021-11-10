@@ -39,7 +39,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 相关辅助数据
 - 相关引用
 
-详细内容请戳这里 :point_right: [UniswapV2 Interface Guid](./Interface/readme.md)
+详细内容请戳这里 :point_right: [UniswapV2 Interface Guide](./Interface/readme.md)
 
 ## 参考链接
 - 如何 Fork uniswap: https://www.youtube.com/watch?v=U3fTTqHy7F4   

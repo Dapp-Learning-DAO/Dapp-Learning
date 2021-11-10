@@ -99,7 +99,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 相关辅助数据
 - 相关引用
 
-详细内容请戳这里 :point_right: [UniswapV3 Interface Guid](./InterfaceGuide/readme.md)
+详细内容请戳这里 :point_right: [UniswapV3 Interface Guide](./InterfaceGuide/readme.md)
 
 ## 参考链接
 
