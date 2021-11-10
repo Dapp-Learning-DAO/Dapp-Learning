@@ -1,4 +1,4 @@
-# uniswapV3 whitepaper guid
+# uniswapV3 whitepaper guide
 
 ## 白皮书
 
