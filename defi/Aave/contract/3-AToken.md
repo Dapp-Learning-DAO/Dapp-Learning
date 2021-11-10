@@ -113,7 +113,7 @@ function mint(
 - aToken 重载了 ERC20.balanceOf 方法，每次查询余额是包含了累计利息的数量
 - 为了保证本金和累计利息的比例不变，这里要对 amount 进行缩放，实际 mint 的数量是 amountScaled
 - 假设用户在 t_current 时刻存入 amount 数量，那么如果 t_0 时刻（池子创建时）存入了 amountScaled ，通过复利累计本息，直到 t_current 时刻，其数量正好等于 amount
-- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，每单位流动性累计的本息乘数因子
+- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，流动性累计的本息乘数因子
 - amountScaled 就是 aToken 实际记录的数量，由于全部缩放至 t_0 时刻，这样就抹平了不同抵押操作的时间和利率的不同，可以全部统一计算
 
 ### burn

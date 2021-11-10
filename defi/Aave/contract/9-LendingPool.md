@@ -58,7 +58,7 @@ function deposit(
   // 更新资产的利率模型变量
   reserve.updateInterestRates(asset, aToken, amount, 0);
 
-  // 将对应的 aToken 转给调用者
+  // 将 amount 数量的 asset 从 msg.sender 转给 aToken
   IERC20(asset).safeTransferFrom(msg.sender, aToken, amount);
 
   // 将 aToken mint给 onBehalfOf 地址（一般是 msg.sender）
