@@ -175,6 +175,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [Set](https://www.tokensets.com/)
+19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
 
 ## NFT 进阶
