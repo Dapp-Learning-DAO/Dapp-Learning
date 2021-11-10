@@ -4,5 +4,10 @@ we built a referral library: Referral Solidity, to help DApp developers to quick
 
 
 
+
+## DEGO Referral
+
+
 ## 参考链接：
 - referral solidity:  https://github.com/thundercore/referral-solidity
+- dego： https://github.com/dego-labs/dego-core/blob/master/contracts/referral/PlayerBook.sol
