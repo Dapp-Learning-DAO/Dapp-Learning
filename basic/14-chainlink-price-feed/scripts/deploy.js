@@ -12,8 +12,6 @@ async function main() {
 
     // PRICE_FEED_CONTRACT 在 kovan 上的合约地址  
     const PRICE_FEED_CONTRACT="0x9326BFA02ADD2366b30bacB125260Af641031331";
-    // Rinkeby
-    const PRICE_FEED_CONTRACT="0x8A753747A1Fa494EC906cE90E9f37563A8AF630e";
 
     // 部署 PriceConsumerV3 合约
     const priceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");
