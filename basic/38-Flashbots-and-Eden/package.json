@@ -1,0 +1,24 @@
+{
+  "name": "38-Flashbots-and-Eden",
+  "version": "1.0.0",
+  "description": "## 参考链接   flashbots github: https://github.com/flashbots/pm#resources   Eden Network 介绍: https://imtoken.fans/t/topic/41713    Eden Network 官方文档: https://docs.edennetwork.io/mechanism   flashbots 介绍: https://www.chainnews.com/zh-hant/articles/008263592610.htm   flashbots 官网文档: https://docs.flashbots.net/new-to-mev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@flashbots/ethers-provider-bundle": "^0.4.2",
+    "dotenv": "^10.0.0",
+    "hardhat": "^2.6.8"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "^5.0.0"
+  }
+}
