@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "nft.storage": "^3.2.2"
+    "json": "^11.0.0",
+    "nft.storage": "^3.2.2",
+    "request": "^2.88.2"
   },
   "type": "module"
 }

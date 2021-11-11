@@ -31,5 +31,6 @@ LQTY的社区发行（在LP激励和社区储备之外）遵循每年减半的�
 - [Liquity Github](https://github.com/liquity/)
 - [Liquity 白皮书](https://docsend.com/view/bwiczmy)
 - [微信公共号](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzkzODI1MTk2MQ==&scene=124#wechat_redirect)
+- [medium文章](https://medium.com/liquity/on-price-stability-of-liquity-64ce8420f753)
 - [Dune 数据分析](https://dune.xyz/projects/liquity) 
 - [「Rebase 大学」课程：项目解读——去中心化稳定币协议 Liquity](https://www.bilibili.com/video/BV1iV411J7dr)

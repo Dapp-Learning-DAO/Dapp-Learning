@@ -1,63 +1,61 @@
-# DAO的自问自答
+## DAO的研究和探索计划
++ 很多朋友说DApp Learning太硬核了，纯技术，无法做更多贡献
++ 其实不然，从11月开始，DL小组推出了 DAO Plan
++ 参与方式：
++ 1.贡献一个链接，简述一个关于DAO的，有价值的内容 [dao-fast-link](dao-fast-link.md)
++ 看到一个，添加一个，很简单
++ 
++ 2.较为深度研究后，添加一个DAO的名称、网站（或DApp网址）、宗旨（概述）[dao-review](DAO-Review/DAO-list.md)
++ 适合有研究劲头的朋友
++ 
++ 3.在FAQ中留下你关于DAO的困惑，或者回答别人的困惑[dao-faq](dao-faq.md)
++ 如果不会贡献，那总有疑问或者诉求吧？
++ 简直是白送pr
 
-来自XStack18(Rebase社区名称：Survivor)
+## DAO小组Plan
 
-DAO是什么？
+##### 1.小组阶段目标
 
-decentralized autonomous organization（DAO）
++ 完善DAO目录下一些基本信息
++ 使命：期待用空闲时间，一起探索，为DAO的当下分布、工具链、经济模型、激励方式、业务选择、资金管理、共识协作、产品研发、价值输出、公司结合等方面，摸索出最佳实践，让世界美好一点！
++ 愿景：为Dl小组自身DAO化，为这个 DAO全链路提供探索，构建工具链，做探路先锋，一起 DAO起来！
++ 模式：每位同学两周提交/完善一个dao信息，或者上述更深入贡献。
++ 沟通：两周一次沟通会
 
-在 **决策机制、资源聚合、利益分配**  做了巨大创新，给到我们未来无限可能。
+##### 2.分工沟通
 
-# 问题回答
++ 在学习DAO的过程中，除去积累一些基本信息外，还要学习他们的：
++ 工具链、经济模型、激励方式、业务选择、资金管理、共识协作、产品研发、价值输出、公司结合
++ 会建立一个表格，来写入我们的可选，以及讨论未来的选择，例如，用什么做一个链上DAO？在哪个链？
 
-## DAO是什么？
+##### 3.正向激励
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/hQOcLbSk4VZUnxOaibgSzIVsDhsnjBQ9qS7gcHT1iccYrxibwU81H6iazHhTXu0G8fsQflicLLvNnpxPD5owptwCPcA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
++ 建立积分表（不公开），规则公开，建立人才/需求表，把上述工作拆分为task，例如工具链，拆分为1000分，则
++ 为工具链贡献大约1/10工作成果的，获得100分，完全人工治理，但依赖多签钱包6人组+DAO小组（目前13人），来确定拆分规则、分数，check和确认工作成果占比。
 
-DAO，去中心自治理组织，有时候叫DAC，是一个由计算机程序把规则编码，从而实现组织成员透明管控，不受中心化影响的组织。一个DAO的财务交易记录和程序规则维护在区块链上，目前这种组织结构的精确的法律状态并不清晰。（最新消息是美国承认DAO是合法公司）
+##### 4.未来探讨
 
-Wiki解释原文：A decentralized autonomous organization (DAO), sometimes called a decentralized autonomous corporation (DAC), is an organization represented by rules encoded as a computer program that is transparent, controlled by the organization members and not influenced by a central government. A DAO's financial transaction record and program rules are maintained on a blockchain. The precise legal status of this type of business organization is unclear.
++ 讨论一下各自想法，大思路一起确认下：
++ 可以法发币，但恪守法规，不是割韭菜思路，是服务于认真做事
++ 可以做产品，为所有其他DAO服务或者其他
++ 可以成立公司，公司是一个支点，是小部分
 
-在探索未来更有效的组织形式上，一方面社会承认个体的崛起，起源于技术和服务赋予个体更多的能力和可能，互联网，文章、文学、视频创作平台，视频会议等的，另一方面，对人才的尊重和重视更加凸显，这方面，可以参考Lindedin的创始人之一，写的联盟（The League）；而DAO，就是技术黑客们，在Code is Law（代码即法律）方面，走的更快更远的一个尝试。
+##### 5.立足产品
 
-DAO，就是**涌现**（Emergence，复杂系统的核心概念之一）在区块链技术基础之上的一个自发组织形式，它的核心有几点：
++ 程序员Geek特性，以及对去中心化的认可，可以让我们有技术，有认知，有理想。
++ 基于此，可以做一个符合web3未来方向，又能脚踏实地的产品
++ 比如为DAO提供一个积分机制，把80%投票权token都fair launch给其他DAO（要讨论）
++ 一起用积分来交换彼此的服务和产品
 
-**决策机制、资源聚合、利益分配**都不同于传统组织形式。
+##### 6.经济模型讨论
 
-1.**摒弃传统**的Board（董事会）或者CEO管理机制决策，由社区高度集体参与+决策思路/结果上链+算法/代码实现规则+紧密结合的技术栈来组成。
-
-这里面，因为社区集体高度参与，决策会更充分，而开源开放的代码，又保障所有决策思路会忠实的变成算法，并由社区的黑客们来编码实现，例如讨论社区投资的下一个标的，是某个代表未来可能的一个Meta World游戏，并且精密控制过程：产出一个里程碑，投放一部分投资，所有投资，都是由社区成员自愿参与，投资的是各自的Token份额，会忠实的回馈给每个人，因为数据上链，无人可篡改。
-
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/hQOcLbSk4VZUnxOaibgSzIVsDhsnjBQ9qft1NW7m40JVhbLaecQnu7SlLzvW1KiaxVn6Oy8hINzVA7nPWsxfjDpQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-
-
-2.**跨越组织边界**，更优的组织人力和各种资源，让全球资源调动起来，分散风险，走向创新，让世界更好一点。
-
-典型的例子是Protocol Labs，这位MIT的毕业生，已经推出了许多改变世界的产品如libp2p，FILE Coin（去中心化存储底层服务），他们的成员，是来自世界各地的黑客、学生、学者等组成；这种组织形式，不仅仅更加优化了全球的人力资源配置，也给所有996的同学们一些Home Office的可能和机会，相对于国外65岁的程序员，国内程序员35岁危机，一直悬在头顶大砍刀，从这个角度看，真是国内程序员福音。
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/hQOcLbSk4VZUnxOaibgSzIVsDhsnjBQ9q1pES1KnuicGNqaYp8SYL8RgtO7Zzq7nwf3Wniak9y6Rw994FCnExO4YA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-
-
-3.**Code is Law**，组织治理避免了繁杂和冗余的传统社会流程，采用代码来治理整个组织过程，包括核心的利益分配等，可能是快速轻装上阵的一种民间组织方式，值得尝试。
-
-传统组织，需要股权证明，期权分配，各种聘用合同，法律合同等的，当然，这里面（DAO）也有一些需要继续探知的风险和改变的缺点；但整体来说，当你有一个idea的时候，你会发现，快速执行，有人愿意支付你10块钱来帮助你买面包，你也愿意付出时间和风险去探索更好未来，承诺未来的收益由Token和代码来互相绑定，那何乐而不为呢？
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/hQOcLbSk4VZUnxOaibgSzIVsDhsnjBQ9qfOC72wfW5yBDKLhh7AQkQH9I2UyhePFpdjNWNl3jiakUjmohhoY7SxA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-
-参考资料：
-
-- Wiki：https://en.wikipedia.org/wiki/Decentralized_autonomous_organization
-
-- 以太坊DAO介绍： https://mp.weixin.qq.com/s/nJya_W6z46uV_g5WR201SQ 
-
-- 陀螺财经：https://www.tuoluocaijing.cn/kepu/detail-10063012.html
-
-- DAO全景式科普：Just DAO It:  https://www.theblockbeats.com/news/25074  
-
-- The State of DAO Tooling： https://medium.com/1kxnetwork/organization-legos-the-state-of-dao-tooling-866b6879e93e
-
-- DAO乐高： https://mp.weixin.qq.com/s/ISUN46wL8GPXGe6Ir4kbDQ
-
++ 用task积分来作为基本流通单位，例如，设立twitter转发一次（100粉丝以上），为一个task分数
++ 积分不同，级别不同；积分在手中会burn，燃烧，级别不同，燃烧速率不同。
++ 创世积分由DAO创立而获得的积分，定量。
++ 积分新增发行，本质是依赖于DAO输出的服务和产品以及未来。
++ 另外积分是白纸，有价值的是个人seal和DAO seal合成之后的铸币。
++ DAO和DAO之间，依赖于共同规则和产品对比，例如都认同5000-6000粉丝twitter转发一次的价值1000积分。
++ 都认同建立一个国家的国际社群并活跃度到30（discord，随便写的数字）的价值也是1000积分
++ 大家对共同的服务一起建立积分平均价。
++ 然后各自之间进行一个汇率设置，需要协商，例如smileDAO是普及牙齿预防的公益DAO，他们的价值是在各国宣传从小刷牙，如果某个DAO叫DL DAO，认可smileDAO价值，愿意通过自己task，为这个愿景做出一些贡献，社区内部讨论后，根据对方发行量，发行规模，进行一次汇率授信，有时间、总额度、积分兑换关系等等。
++ 如果smileDAO发了300万积分，DL DAO授信了100万积分，积分兑换关系为3：1，则DL DAO最多付出33.3万积分，帮助smileDAO做一些任务（间接或者直接，可以拿积分去承认DL DAO积分的DAO换取任务）。

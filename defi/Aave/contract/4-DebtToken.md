@@ -17,7 +17,7 @@
 
 ### UNDERLYING_ASSET_ADDRESS
 
-返回借出资产的地址，例如对应 aWETH 的 WETH 地址。
+返回 aToken 对应的抵押资产地址，例如存入 WETH, 那么生成的 aWETH 对应的资产为 WETH
 
 ```solidity
 /**
@@ -86,7 +86,8 @@ function borrowAllowance(address fromUser, address toUser)
 
 ### getSupplyData
 
-返回债务总数量（不包含利息），债务总数量（包含利息），平均利率，数据更新时间
+返回债务本金（不包含利息），债务本息（包含利息），平均利率，数据更新时间.  
+需要注意的是, 这里所说的 `平均利率 = 池子中贷款总利息 / 池子中的贷款总金额`. 举例来说就是池子中总共有 100$, 用户 A 借了 40$ 利率是 20%, 用户 B 借了 60$ 利率是 30%, 那么 `平均利率 = (40 * 20% + 60 * 30%) / 100 = 26%`  
 
 ```solidity
 /**
@@ -118,11 +119,11 @@ function getSupplyData()
 
 ### getAverageStableRate
 
-返回平均利率
+返回平均稳定利率
 
 ### getUserStableRate
 
-返回用户的利率（债务的固定利率）
+返回用户的稳定利率（债务的固定利率）
 
 ## Variable Debt Methods
 

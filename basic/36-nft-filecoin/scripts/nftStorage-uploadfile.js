@@ -6,7 +6,7 @@ dotenv.config()
 
 const apiKey = process.env.apiKey
 console.log(apiKey)
-const client = new NFTStorage({ token: apiKey })
+const client = new NFTStorage({ token: process.env.NFT_STORAGE_APIKEY })
 
 const data = readFileSync('data/matic.jpeg')
 
