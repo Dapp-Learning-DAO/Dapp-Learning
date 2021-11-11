@@ -9,15 +9,15 @@
 
 ## Preface
 
-This project is designed for people who have developed some foundational understandings of blockchain DAPP to further their knowledge in **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
+We are designed for developers with basic skills to step into blockchain DAPP development, where they can get close to **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
-The project is incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ), where we established a learning group for people to study the mainstream DAPP projects and share their thoughts and comments on weekly basis. The weekly meetup is recorded and uploaded to Bilibili under [the rebase account](https://space.bilibili.com/382886213).
+We, incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ),  are a learning group to study the mainstream DAPP projects and share thoughts and comments every week. Here, each one is charged with specific tasks. The weekly meetups will be recorded and uploaded to  [the rebase account](https://space.bilibili.com/382886213) on Bilibili.
 
-The project adheres to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and will manage itself under DAO governance. Currently we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and we would like to distribute the sponsorship among our contributors to feed the progress of this project. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and the funds will be awarded to whoever makes big contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
-This project is still under development, and we welcome contributors from all background. Feel free to send our team pull requests to improve existing tutorial projects, set up more new tutorials, or even just to fix the minor tpyos 🤗.
+The project is still under development, and contributors are welcomed from all background. Feel free to send us pull requests to improve tutorial projects, set up more new tutorials, or even just to fix the minor tpyos 🤗.
 
-Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you have proven you can provide pull requests with amazing qualitites, you could be promoted a pull request reviewer, participate in making decisions about project direction and make a bigger impact. **Project management rules**, see [how new members participate and project governance rules](./docs/dao.md), welcome to join us if you have the same idea.
+Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
 
 Technology Stack：
 - `web3.js`

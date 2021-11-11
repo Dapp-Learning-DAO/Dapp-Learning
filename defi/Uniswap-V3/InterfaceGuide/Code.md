@@ -236,7 +236,7 @@ export function useAllV3Routes(currencyIn?: Currency, currencyOut?: Currency): {
 
 将传入的 poolkey 数组初始化为一组交易池对象
 
-- `slot0` 参见合约部分的讲解 [Pool slot0](../contractGuid/UniswapV3Pool.md#slot0)
+- `slot0` 参见合约部分的讲解 [Pool slot0](../contractGuide/UniswapV3Pool.md#slot0)
 
 ```ts
 export function usePools(poolKeys: [Currency | undefined, Currency | undefined, FeeAmount | undefined][]): [PoolState, Pool | null][] {

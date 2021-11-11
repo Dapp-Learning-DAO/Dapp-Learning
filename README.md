@@ -111,7 +111,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
+28. [Optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
@@ -128,7 +128,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916) ⬜
+45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
@@ -142,6 +142,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
+
+60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -168,7 +170,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
 12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-13. [OPYN](https://v2.opyn.co/)
+13. [OPYN](https://v2.opyn.co/)⌛
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
