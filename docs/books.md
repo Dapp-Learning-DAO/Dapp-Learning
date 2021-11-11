@@ -15,13 +15,15 @@
 - [《Whaddaya Say? Guided Practice in Relaxed Speech, Second Edition》](https://book.douban.com/subject/2401342/)
 
 ## 社会科学篇
--[《乌合之众》](https://book.douban.com/subject/6966569/)
--[《娱乐至死》](https://book.douban.com/subject/1062193/)
+- [《乌合之众》](https://book.douban.com/subject/6966569/)
+- [《娱乐至死》](https://book.douban.com/subject/1062193/)
+- 
 
 ## 程序员关爱篇
 - [《你是你吃出来的》](https://book.douban.com/subject/27590675/)
 - [《豹式健身》](https://book.douban.com/subject/27171491/)
 - [《我们为什么会生病》](https://book.douban.com/subject/30164677/)
+- [《Mastering Bitcoin》](https://github.com/bitcoinbook/bitcoinbook)
 
 ## 文章推荐
 - [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/) 
