@@ -144,6 +144,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
 
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
+61. [ENS](https://app.ens.domains/) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
@@ -175,6 +176,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [Set](https://www.tokensets.com/)
+19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
 
 ## NFT 进阶
