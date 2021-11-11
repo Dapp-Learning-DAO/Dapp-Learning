@@ -149,7 +149,7 @@ mintV3: {
   - 由于V3的价格不是连续的数轴，而是一个个tick组成的离散的点，并且根据费率不同tick之间还会存在tickSpacing间隔
   - 所以用户输入的数值通常不能正在卡在tick所代表的价格上，每当输入完成，程序会自动匹配最近的tick，然后修改输入值
   - tick代表的价格是 `sqrt(1.0001) ** i`，i为tick的序号，所以价格是不连续的，离散的点
-  - tick的序号是 `int24` 类型，所以有最大和最小范围 [参见合约导读 TickBitmap](../contractGuid/Tick.md#TickBitmap)
+  - tick的序号是 `int24` 类型，所以有最大和最小范围 [参见合约导读 TickBitmap](../contractGuide/Tick.md#TickBitmap)
 - 点击 `Preview` 按钮
   - 如果是 `OPTIMISM` 和其测试网，需要先点击 `Create` 按钮，单独发一笔交易创建 Pool 合约
   - 其他网络则直接 `Preview` 按钮，发送一笔交易同时完成创建和添加流动性
