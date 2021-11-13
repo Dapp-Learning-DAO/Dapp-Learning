@@ -43,7 +43,7 @@ describe("HashedTimelock", function () {
 
     });
 
-    /* it("newContract() should create new contract and store correct details", async function () {
+    it("newContract() should create new contract and store correct details", async function () {
         // Listen to event log
         contractAlice.once('LogHTLCNew', (contractId, sender, receiver, amount, hashlock, timelock) => {
             // Check event value
@@ -85,7 +85,7 @@ describe("HashedTimelock", function () {
                 value: 100,
             }
         )).to.be.revertedWith('timelock time must be in the future');
-      }); */
+      });
 
 
       it('withdraw() should send receiver funds when given the correct secret preimage', async () => {
@@ -96,7 +96,7 @@ describe("HashedTimelock", function () {
             constractIdInHash = contractId
         });
 
-        // Call newContract  
+        // Alice Call newContract 
         const txReceipt = await contractAlice.newContract(
             Bob.address,
             hashPair.hash,
@@ -114,7 +114,5 @@ describe("HashedTimelock", function () {
         // Bob going to do Withdraw 
         contractBob = contractAlice.connect(Bob);
         await contractBob.withdraw(constractIdInHash,hashPair.secret);  
-      })
-
-
+      });
 });
