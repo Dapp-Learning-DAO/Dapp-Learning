@@ -12,9 +12,9 @@
 
 ## 序 - Preface
 
-本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。   
+本项目适合有一定语言基础的开发者入门区块链 DAPP 开发，由浅到深了解和开发 **DeFi, NFT, DAO, CRYPTO** 项目。
 
-项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。   
+项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。
 
 本项目跟[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)深度结合，成立学习小组进行任务分工然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传B站的[Rebase账号](https://space.bilibili.com/382886213)。
 
@@ -25,7 +25,7 @@
 
 
 
-技术栈：  
+技术栈：
 - `web3.js`
 - `ethers.js (hardhat)`
 - `web3.py (Brownie)`
@@ -33,33 +33,33 @@
 - `Rust` （可选）
 - `Go` （可选）
 
-## 项目结构    
+## 项目结构
 项目分为 **基础任务** 和 **项目任务** 两部分
-- **基础任务**  
-是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准, oracle, graph, ipfs)  
-- **项目任务**  
+- **基础任务**
+是熟悉和集成区块链开发所必需的基本工具组件(如ERC标准, oracle, graph, ipfs)
+- **项目任务**
 是研究主流 DeFi, NFT, DAO, CRYPTO 的经典项目让开发者深入真实项目开发，我们会成立学习小组进行任务分工，一起讨论和研究项目源码。
 
 ## 准备工作 - Preparatory Work
-**基础知识预备**   
-- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识。  
+**基础知识预备**
+- 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识。
 可参考 [基础知识预备](./docs/basic-knowledge.md) , 供各位新手小伙伴学习参考。
 
-**开发工具**   
-- 工欲善其事, 必先利其器。 请先熟悉基本工具的使用。  
+**开发工具**
+- 工欲善其事, 必先利其器。 请先熟悉基本工具的使用。
 可参考 [开发工具推荐](./docs/develop-tools.md) 查看当下主流的区块链开发工具。
 
-**推荐阅读**  
+**推荐阅读**
 
  我们整理了区块链相关的经典书籍，帮助各位开发者深入了解当下区块链背后的人文思潮。
 - 《主权个人》（Sovereign Individuals， 尚无中译本，可关注[不懂经](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1)公众号阅读）
-- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)    
+- 推荐了解奥地利学派，[Hayek生平介绍](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ)
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
-- [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史   
+- [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
 
 同时欢迎大家添加推荐书籍，请在此文档 [书籍推荐](./docs/books.md) 中录入
 
-**加密课程**  
+**加密课程**
 
   我们会推荐一些国外顶尖大学和以太坊社区的加密课程，帮助开发者系统性的了解区块链和加密货币。
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
@@ -67,8 +67,8 @@
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
-我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/s/Y6fYmqrS9SpEw4Nd0ocUzg)    
-对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。    
+我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/s/Y6fYmqrS9SpEw4Nd0ocUzg)
+对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。
 
 
 
@@ -76,12 +76,12 @@
 ## 基础任务 - Basic Tasks
 
 通过以下基础任务，了解开发 Dapp 的基本工具和开发知识。
-DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)    
+DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0)
 学习并本地运行 前20 个task，可以升级关注**项目任务**。
 欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗
 
-⬜ 表示任务未开始  
-⌛ 表示任务正在进行中  
+⬜ 表示任务未开始
+⌛ 表示任务正在进行中
 ✅ 表示任务已完成
 
 01. [deploy contract with web3.js](basic/01-web3js-deploy/README.md) ✅
@@ -142,47 +142,50 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
-
-60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜  
-61. [HTLC](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
+60. [web3.0 dapp](basic/59-web3-dapp) ⌛
+61. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜  
+62. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
+63. [ENS](https://app.ens.domains/) ⬜
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 项目任务
 
 **准备工作**：
-  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。  
+  此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。
   可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
- 建议先阅读DEFI经典书籍:  
-  [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)  
-  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)  
+ 建议先阅读DEFI经典书籍:
+  [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
+  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new) ⌛
 04. [Aave](https://docs.aave.com/portal/)  ⌛
 05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](defi/Curve/README.md) ⌛ 
+06. [Curve](defi/Curve/README.md) ⌛
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 08. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 13. [OPYN](https://v2.opyn.co/)⌛
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [Set](https://www.tokensets.com/)
+19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
 
 ## NFT 进阶
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. Loot NFT Distribute 
+- 03. Loot NFT Distribute
 
 ## DAO 进阶
 
@@ -192,9 +195,9 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## Crypto 进阶  
+## Crypto 进阶
 请先阅读书籍：
-[《图解密码技术》](https://book.douban.com/subject/26822106/)    
+[《图解密码技术》](https://book.douban.com/subject/26822106/)
 项目列表：
 - 01.[ECC](./crypto/ECC)
 - 02.[PLONK](./crypto/PLONK)
@@ -231,17 +234,17 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 
 ## 如何参与以及DAO治理
-  新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)  
+  新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)
 
-## 项目生态    
+## 项目生态
 Dapp-Learning 有系列衍生项目及共同维护项目, 参考 [相关项目](./docs/relative-projects.md) 详细了解 Dapp-Learning 项目生态.
 
 ## 常见问题
-  测试币申请，安装和使用问题，请参考链接 [常见问题](./docs/TROUBLE_SHOOTING.md)  
+  测试币申请，安装和使用问题，请参考链接 [常见问题](./docs/TROUBLE_SHOOTING.md)
 ## 社区捐助
 
-欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。  
-gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
+欢迎感兴趣的小伙伴参与共建，开源项目维护不易，我们欢迎捐助。
+gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 
 捐助地址：
 - 以太坊主网/zkSync/Arbitrum：
@@ -249,7 +252,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 - Polygon[多签钱包](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
-**polygon网络上我们已生成多签钱包，由核心贡献者管理**     
+**polygon网络上我们已生成多签钱包，由核心贡献者管理**
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
@@ -283,6 +286,12 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a>
+    <img align="top" src="./docs/imgs/parteners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
