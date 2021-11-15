@@ -7,6 +7,12 @@
 vitalik: https://vitalik.ca/general/2017/11/09/starks_part_1.html
 vitalik: https://vitalik.ca/general/2017/02/01/zk_snarks.html
 
+
+## zkEVM
+介绍： https://hackmd.io/@yezhang/S1_KMMbGt
+Scroll Tech： https://hackmd.io/@yezhang/S1sJ2cEWY
+0x parc: https://0xparc.org/blog/zk-learning-group
+
 ## 参考链接
 - zk workshop: https://www.zkhack.dev/  
 - zkp: https://github.com/appliedzkp
