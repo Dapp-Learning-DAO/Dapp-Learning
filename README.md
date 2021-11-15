@@ -228,10 +228,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://www.paradigm.xyz/opportunities/
 
 ## Hackathons
- 参与黑客松增加实践经验，可参与有：
- Gitcoin每季度黑客松
+ 参与黑客松增加实践经验，可参与有：  
  - [Gitcoin](https://gitcoin.co/hackathon/)
- 黑客松模板,ETH
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 
 ## 如何参与以及DAO治理
