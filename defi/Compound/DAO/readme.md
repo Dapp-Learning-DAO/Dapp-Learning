@@ -1,11 +1,20 @@
-# Compound 
+# Compound Governance
 
-## 代币模型
-Compound 是另一个有效的链上治理生态系统，当用户持有协议的治理代币 COMP 时，它会将用户提升为决策者的角色。
+> The Compound protocol is governed and upgraded by COMP token-holders, using three distinct components; the COMP token, governance module (Governor Bravo), and Timelock. Together, these contracts allow the community to propose, vote, and implement changes through the administrative functions of a cToken or the Comptroller. Proposals can modify system parameters, support new markets, or add entirely new functionality to the protocol.
+
+Compound 治理主要由三部分组成，COMP token ，governance module(Governor Bravo), TimeLock. 社区通投票决定提案是否执行，提案主要的内容是修改协议系统的参数，增加协议的资产类别，或新增协议的功能。
+
+## COMP token
+
+compound的原生token，继承ERC20的token合约，额外增加了投票权委托的相关功能。
+
+当用户持有协议的治理代币 COMP 时，它会将用户提升为决策者的角色。
 **只有 10,000,000 COMP 将永远存在，而超过 5,400,000 COMP 已经分发给 Compound 用户。**
-更具体地说，该协议每天向活跃的贷方和借方分发 2,312 个 COMP 作为奖励。本质上，用户在参与 Compound 生态系统的借贷经济时倾向于累积 COMP 代币。  
+更具体地说，该协议每天向活跃的贷方和借方分发 2,312 个 COMP 作为奖励。本质上，用户在参与 Compound 生态系统的借贷经济时倾向于累积 COMP 代币。
 
 ## 提案流程
+
+![proposal period](https://compound.finance/images/gov_diagram.png)
 
 有趣的是，任何人都可以通过在地址中锁定 100 个 COMP 来自主创建提案以更改协议的某些方面。
 
@@ -13,8 +22,7 @@ Compound 是另一个有效的链上治理生态系统，当用户持有协议�
 
 虽然最初的治理模型于 2020 年 2 月推出，但改进版本于 2021 年 3 月激活。这些改进为链上治理提供了更强大的方法。升级的一部分是决定为选民增加一个投票选项。选民已经可以选择是或否投票。通过升级，选民现在可以选择第三个选项，即弃权。此外，他们可以添加评论来解释支持或拒绝提案的原因。此外，提议者可以调整投票延迟、投票周期和提交阈值等参数。
 
-
-
 ## 参考链接
 
-- 
+- COMPOUND Governance DOC <https://compound.finance/docs/governance>
+- Building a Governance Interface <https://medium.com/compound-finance/building-a-governance-interface-474fc271588c>
