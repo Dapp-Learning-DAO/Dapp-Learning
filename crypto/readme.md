@@ -1,6 +1,7 @@
 # 密码学
 
-
+## 密码学基础
+请完成习题： https://0xparc.notion.site/Prerequisite-understanding-questions-c5ebb77a5cc049f39577ec9a7fb7b22c  
 
 ## 参考链接
 - zk workshop: https://www.zkhack.dev/  

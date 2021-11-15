@@ -3,6 +3,7 @@
 ## 基础知识预备   
 阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book)理解 **以太坊** 的基本原理和 阅读 [Solidity官方文档](https://docs.soliditylang.org/) 熟悉 **Solidity** 智能合约语言
 
+- web3工具集锦：<https://www.useweb3.xyz/>
 - 以太坊原理书: <https://ethbook.abyteahead.com/howto.html>
 - 以太坊黄皮书: <https://github.com/ethereum/yellowpaper>
 - 以太坊知识库: <https://ethfans.org/wikis/Home>
