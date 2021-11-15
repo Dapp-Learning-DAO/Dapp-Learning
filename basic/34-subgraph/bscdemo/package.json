@@ -1,0 +1,16 @@
+{
+  "name": "bscdemo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen --output-dir generated/",
+    "build": "graph build",
+    "create-local": "graph create myBSCGraph --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy myBSCGraph --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020/"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.21.0",
+    "@graphprotocol/graph-ts": "^0.20.0"
+  }
+}

@@ -18,7 +18,7 @@ Uniswap V3 研究小组总结输入了 Uniswap V3 的白皮书分析, 代码逻�
   - 如何理解 V3 白皮书
   - 预言机使用算术平均和几何平均的两种机制对比实验
 
-详细内容请戳这里 :point_right: [白皮书导读](./whitepaperGuid/readme.md)
+详细内容请戳这里 :point_right: [白皮书导读](./whitepaperGuide/readme.md)
 
 ## Contract
 
@@ -38,12 +38,12 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 
 主要代码解析：
 
-- [NonfungiblePositionManager](./contractGuid/NonfungiblePositionManager.md)
-- [SwapRouter](./contractGuid/SwapRouter.md)
-- [UniswapV3Factory](./contractGuid/UniswapV3Factory.md)
-- [UniswapV3Pool](./contractGuid/UniswapV3Pool.md)
-- [Tick](./contractGuid/Tick.md)
-- [Oracle](./contractGuid/Oracle.md)
+- [NonfungiblePositionManager](./contractGuide/NonfungiblePositionManager.md)
+- [SwapRouter](./contractGuide/SwapRouter.md)
+- [UniswapV3Factory](./contractGuide/UniswapV3Factory.md)
+- [UniswapV3Pool](./contractGuide/UniswapV3Pool.md)
+- [Tick](./contractGuide/Tick.md)
+- [Oracle](./contractGuide/Oracle.md)
 
 ### 用户交互流程
 
@@ -62,11 +62,11 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - exactOutput 指定精确输出的交易
 - flash swap 闪电贷交易
 
-详细内容请戳这里 :point_right: [UniswapV3 合约导读](./contractGuid/readme.md)
+详细内容请戳这里 :point_right: [UniswapV3 合约导读](./contractGuide/readme.md)
 
 ## SDK
 
-详细内容请戳这里 :point_right: [SDK 导读](./frontGuid/sdk/README.md)
+详细内容请戳这里 :point_right: [SDK 导读](./frontGuide/sdk/README.md)
 
 ## Graph
 
@@ -78,7 +78,7 @@ Graph 实操详解
 - 通过 TheGraph 查询
 - Node.js 中查询 graph 数据
 
-详细内容请戳这里 :point_right: [Graph 导读](./graphGuid/graphGuid.md)
+详细内容请戳这里 :point_right: [Graph 导读](./graphGuide/graphGuide.md)
 
 ## Interface
 
@@ -99,7 +99,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 相关辅助数据
 - 相关引用
 
-详细内容请戳这里 :point_right: [UniswapV3 Interface Guid](./InterfaceGuid/readme.md)
+详细内容请戳这里 :point_right: [UniswapV3 Interface Guide](./InterfaceGuide/readme.md)
 
 ## 参考链接
 
