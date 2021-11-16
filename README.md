@@ -43,7 +43,8 @@
 ## 准备工作 - Preparatory Work
 **基础知识预备**
 - 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识。
-可参考 [基础知识预备](./docs/basic-knowledge.md) , 供各位新手小伙伴学习参考。
+web3工具集锦：<https://www.useweb3.xyz/>  
+更多资料可参考 [基础知识预备](./docs/basic-knowledge.md) , 供各位新手小伙伴学习参考。
 
 **开发工具**
 - 工欲善其事, 必先利其器。 请先熟悉基本工具的使用。
@@ -227,10 +228,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://www.paradigm.xyz/opportunities/
 
 ## Hackathons
- 参与黑客松增加实践经验，可参与有：
- Gitcoin每季度黑客松
+ 参与黑客松增加实践经验，可参与有：  
  - [Gitcoin](https://gitcoin.co/hackathon/)
- 黑客松模板,ETH
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 
 ## 如何参与以及DAO治理

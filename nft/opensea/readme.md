@@ -1,4 +1,4 @@
-# OpenSea 官网信息
+# OpenSea 
 
 * [opensea文档](https://docs.opensea.io/docs/1-structuring-your-smart-contract)
 * [opensea github](https://github.com/ProjectOpenSea/opensea-creatures)
@@ -6,7 +6,7 @@
 
 
 
-# Wyvern
+## Wyvern
 
 * [WyvernProtocol V3 github](https://github.com/wyvernprotocol/wyvern-v3)
 * [WyvernProtocol V3 Official Website](https://wyvernprotocol.com/docs)
@@ -16,10 +16,10 @@
 
 
 
-# 工作进度
+## 工作进度
 
 - [ ] **processing** -> Protocol translate
 - [ ] Protocol流程图
 - [ ] OpenSea站的工作流程
 
-# 
+## 参考链接 
