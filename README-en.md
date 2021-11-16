@@ -15,7 +15,7 @@ We, incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ
 
 We adhere to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and the funds will be awarded to whoever makes big contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
-The project is still under development, and contributors are welcomed from all background. Feel free to send us pull requests to improve tutorial projects, set up more new tutorials, or even just to fix the minor tpyos 🤗.
+The project is still under development, and contributors are welcomed from all background. Feel free to send us pull requests to improve tutorial projects, set up more new tutorials, or even just to fix the minor typos 🤗.
 
 Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
 
@@ -130,6 +130,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 60. [web3.0 dapp](basic/59-web3-dapp) ⌛
+61. [ENS](https://app.ens.domains/) ⌛
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
