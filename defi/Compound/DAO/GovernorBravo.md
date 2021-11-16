@@ -62,7 +62,7 @@ struct Proposal {
     address proposer;
 
     /// @notice The timestamp that the proposal will be available for execution, set once the vote succeeds
-    /// 距离提案进入待执行队列的剩余时间，一旦提案结束投票阶段，且投票通过，将立即设定该值
+    /// 提案在投票通过后，应在多久内被执行。超过这个时间被视为超时。这个时间用户不需要自己设置，由合约进行设置
     uint eta;
 
     /// @notice the ordered list of target addresses for calls to be made
