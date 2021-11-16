@@ -35,7 +35,7 @@ U = 借款 /（ 现金 + 借款 ）
 
 ## dao 治理
 
-请参考[智能合约](./dao/readme.md)
+请参考[Governance](./dao/readme.md)
 
 ## 参考链接
 

@@ -11,9 +11,7 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 - `Timelock` 用于对投票操作的交易进行队列排序
 - `COMP` 原生治理代币
 
-## State
-
-### GovernorBravoDelegateStorageV1
+## GovernorBravoDelegateStorageV1
 
 Bravo 的存储结构合约，主要定义了 storage 变量
 
@@ -128,13 +126,13 @@ struct Receipt {
 
 ```
 
-### GovernorBravoDelegate
+## GovernorBravoDelegate
 
 Bravo 模块的逻辑合约。功能包括发起提案，接受用户对提案的投票，裁决提案结果，执行提案中的操作。
 
 开头定义了一些对于 storage 变量的限制数值，比如 `MIN_PROPOSAL_THRESHOLD` 和 `MAX_PROPOSAL_THRESHOLD` 定义了 `proposalThreshold` 的最大值和最小值，保证 bravo 模块的初始参数在一个合理的范围内。
 
-#### propose
+### propose
 
 发起新的提案，调用者的被委托投票权数量必须超过 `proposalThreshold`。入参需要提供了该提案将会修改哪些目标合约，及其对应的 value 和 calldata，以数组形式分别传入。另外 signatures 字段提供了将 calldata 加密的功能。
 
@@ -202,12 +200,52 @@ function propose(address[] memory targets, uint[] memory values, string[] memory
 }
 ```
 
-#### queue
+proposal state 提案的 8 种状态：
 
-将投票阶段结束且投票通过的提案的具体操作推入待执行队列。
+- Canceled 提案被取消
+- Pending 提案还在等待期，即处于 created 和 Voting active 之间，时长取决于 votingDelay
+- Active 投票阶段
+- Defeated 投票结束，提案未通过（赞成票 <= 反对票 或 赞成票 < quorumVotes 400,000）
+- Succeeded 投票结束，提案通过，待执行
+- Executed 提案已执行
+- Expired 提案通过，但未执行，并且已过期作废
+- Queued 提案通过，正在待执行队列中
+
+```js
+/**
+    * @notice Gets the state of a proposal
+    * @param proposalId The id of the proposal
+    * @return Proposal state
+    */
+function state(uint proposalId) public view returns (ProposalState) {
+    require(proposalCount >= proposalId && proposalId > initialProposalId, "GovernorBravo::state: invalid proposal id");
+    Proposal storage proposal = proposals[proposalId];
+    if (proposal.canceled) {
+        return ProposalState.Canceled;
+    } else if (block.number <= proposal.startBlock) {
+        return ProposalState.Pending;
+    } else if (block.number <= proposal.endBlock) {
+        return ProposalState.Active;
+    } else if (proposal.forVotes <= proposal.againstVotes || proposal.forVotes < quorumVotes) {
+        return ProposalState.Defeated;
+    } else if (proposal.eta == 0) {
+        return ProposalState.Succeeded;
+    } else if (proposal.executed) {
+        return ProposalState.Executed;
+    } else if (block.timestamp >= add256(proposal.eta, timelock.GRACE_PERIOD())) {
+        return ProposalState.Expired;
+    } else {
+        return ProposalState.Queued;
+    }
+}
+```
+
+### queue
+
+将投票阶段结束且投票通过的提案的具体操作推入待执行队列, 仅限 admin 角色可调用。
 
 1. 提案必须是 Succeeded 状态，即 eta 字段没有被赋值，还是 0
-2. 根据当前 blockNumber + timelock.delay 赋值给 eta 字段，eta 是操作实际可执行的 blockNumber 值
+2. 根据当前 blockNumber + timelock.delay 赋值给 eta 字段，eta 是操作最晚可执行的时间，过期作废
 3. 遍历提案的具体执行操作，将对每个目标合约的操作顺序推入待执行队列
 
 ```js
@@ -232,7 +270,27 @@ function queueOrRevertInternal(address target, uint value, string memory signatu
 }
 ```
 
-#### execute
+TimeLock.queueTransaction
+
+1. 只能 admin 调用
+2. 检查该操作是否已超过 eta 时间，过期作废
+3. 检查通过，将该操作推入队列
+4. 返回操作在队列中的键
+
+```js
+function queueTransaction(address target, uint value, string memory signature, bytes memory data, uint eta) public returns (bytes32) {
+    require(msg.sender == admin, "Timelock::queueTransaction: Call must come from admin.");
+    require(eta >= getBlockTimestamp().add(delay), "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
+
+    bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
+    queuedTransactions[txHash] = true;
+
+    emit QueueTransaction(txHash, target, value, signature, data, eta);
+    return txHash;
+}
+```
+
+### execute
 
 执行提案，仅限 admin 角色可调用
 
@@ -296,13 +354,13 @@ function executeTransaction(address target, uint value, string memory signature,
 }
 ```
 
-#### cancel
+### cancel
 
 ```js
 // TODO:
 ```
 
-#### castVote
+### castVote
 
 选民对提案进行投票，有三种外部接口，内部逻辑调用相同的方法，只是广播事件有所不同。
 
@@ -371,3 +429,9 @@ function castVoteInternal(address voter, uint proposalId, uint8 support) interna
     return votes;
 }
 ```
+
+## 参考链接
+
+- Compound Governance 合约地址 <https://etherscan.io/address/0xc0da02939e1441f497fd74f78ce7decb17b66529>
+- TimeLock 合约地址 <https://etherscan.io/address/0x6d903f6003cca6255d85cca4d3b5e5146dc33925>
+- COMP token 合约地址 <https://etherscan.io/token/0xc00e94cb662c3520282e6f5717214004a7f26888>
