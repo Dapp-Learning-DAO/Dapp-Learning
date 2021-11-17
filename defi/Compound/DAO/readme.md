@@ -39,6 +39,8 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 
 虽然最初的治理模型于 2020 年 2 月推出，但改进版本于 2021 年 3 月激活。这些改进为链上治理提供了更强大的方法。升级的一部分是决定为选民增加一个投票选项。选民已经可以选择是或否投票。通过升级，选民现在可以选择第三个选项，即弃权。此外，他们可以添加评论来解释支持或拒绝提案的原因。此外，提议者可以调整投票延迟、投票周期和提交阈值等参数。
 
+### proposal-process
+
 提案的流程：
 
 1. 发起提案者调用 `GovernorBravoDelegate.propose()` 发起提案 proposal
@@ -51,10 +53,11 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
    - Succeeded 提案通过，待执行
 5. admin 调用 `GovernorBravoDelegate.queue()` 将新提案中的操作推入待执行队列
    - proposal 进入 Queued 状态
-   - 自动赋值 eta 字段，设置操作的过期时间，超过该时间未执行提案自动作废
+   - 自动赋值 eta 字段，设置操作的开始时间, 这之前提案不能被执行
 6. admin 调用 `GovernorBravoDelegate.execute()` 批量执行提案中的操作
    - proposal 进入 Executed 状态
-   - 若时间超过 eta 仍未被执行，proposal 进入 Expired 状态
+   - 若时间超过 `eta + GRACE_PERIOD` 仍未被执行，proposal 进入 Expired 状态；
+   - `GRACE_PERIOD` 固定为 14days，即所有提案在进入可执行队列后未被执行，超过 14 天自动作废
 
 选民投票：
 
@@ -67,6 +70,43 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
      - 代理人使用该签名代持有人投票
      - 代理人一般是 COMP 项目方，这样可以避免让用户承担主网高昂的 gas
      - 注意这里的代理和第 1 步中的不同，1 中是持有人将自己的投票权转交给其他人，在合约中会有记录；而 bysig 的方法是为了让用户节省 gas 参与投票，虽然由代理人操作，但本质上还是持有人自己投票
+
+### proposal-timeline
+
+关于提案从创建到执行的时间轴，其规则的梳理
+
+- 首先是 Pending 状态的时间
+  - 即提案创建后进入 voteActive 状态之前，有一个合约强制的 pending 时间
+  - 这个时间的由 `votingDelay` 变量表示，在 bravo 合约初始化时设定
+  - `MIN_VOTING_DELAY <= votingDelay <= MAX_VOTING_DELAY` 大约介于 1 个区块间隔（13s-15s） 与 40320 个区块间隔 （大约1week） 之间
+- 接着是 Active 状态的时间
+  - 即投票阶段的持续时间
+  - 这段时间长度依旧是合约决定，由 `votingPeriod` 表示，在 bravo 合约初始化时设定
+  - `MIN_VOTING_PERIOD <= votingPeriod <= MAX_VOTING_PERIOD` 大约介于 24h 与 2week 之间
+- 然后待 admin 将提案推入等待队列 `queue()`
+  - 提案最早可执行的时间是调用 queue 方法的时刻 + delay 时间
+  - 即这里必须等待 delay 时间段
+  - `MINIMUM_DELAY <= Timelock.delay <= MAXIMUM_DELAY` 大约介于 2days 与 30days 之间
+- admin 执行提案 `execute()`, 时间轴结束
+
+理论最短和最长时间：
+
+- 以忽略 admin 的 queue 和 execute 操作的时间为前提，决定时间轴长度的实际是 `votingDelay + votingPeriod + Timelock.delay`
+- 最短是 `15s + 24h + 2days` , 大约 3 天
+- 最长是 `1week + 2week + 30days`, 大约 51 天
+
+目前(2021-11-17)链上 bravo 和 Timelock 合约的设定是
+
+- `votingDelay` 13140 blocks 约 2days
+- `votingPeriod` 19710 blocks 约 3days
+- `Timelock.delay` 172800 s = 48 hours =  2days
+
+所以当前理论最短的时间大约是 7days
+
+相关代码参考
+
+- [GovernorBravo.propose()](./GovernorBravo.md#propose)
+- [GovernorBravo.proposal-state](./GovernorBravo.md#proposal-state)
 
 ## 参考链接
 

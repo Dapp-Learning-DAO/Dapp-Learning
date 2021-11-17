@@ -60,7 +60,7 @@ struct Proposal {
     address proposer;
 
     /// @notice The timestamp that the proposal will be available for execution, set once the vote succeeds
-    /// 提案在投票通过后，应在多久内被执行。超过这个时间被视为超时。这个时间用户不需要自己设置，由合约进行设置
+    /// 提案在投票通过后，应在多久之后才能被执行。这个时间用户不需要自己设置，由合约进行设置
     uint eta;
 
     /// @notice the ordered list of target addresses for calls to be made
@@ -171,6 +171,8 @@ function propose(address[] memory targets, uint[] memory values, string[] memory
         require(proposersLatestProposalState != ProposalState.Pending, "GovernorBravo::propose: one live proposal per proposer, found an already pending proposal");
     }
 
+    // 提案的投票开始和结束时间是根据当前时间自动生成的，固这个阶段的时长受到规则的限制
+    // 并不能设置太短或太长
     uint startBlock = add256(block.number, votingDelay);
     uint endBlock = add256(startBlock, votingPeriod);
 
@@ -200,7 +202,9 @@ function propose(address[] memory targets, uint[] memory values, string[] memory
 }
 ```
 
-proposal state 提案的 8 种状态：
+### proposal-state
+
+提案的 8 种状态：
 
 - Canceled 提案被取消
 - Pending 提案还在等待期，即处于 created 和 Voting active 之间，时长取决于 votingDelay
@@ -245,7 +249,7 @@ function state(uint proposalId) public view returns (ProposalState) {
 将投票阶段结束且投票通过的提案的具体操作推入待执行队列, 仅限 admin 角色可调用。
 
 1. 提案必须是 Succeeded 状态，即 eta 字段没有被赋值，还是 0
-2. 根据当前 blockNumber + timelock.delay 赋值给 eta 字段，eta 是操作最晚可执行的时间，过期作废
+2. 根据当前 blockNumber + timelock.delay 赋值给 eta 字段，eta 是操作最早可执行的时间，这之前不能执行
 3. 遍历提案的具体执行操作，将对每个目标合约的操作顺序推入待执行队列
 
 ```js
@@ -273,7 +277,9 @@ function queueOrRevertInternal(address target, uint value, string memory signatu
 TimeLock.queueTransaction
 
 1. 只能 admin 调用
-2. 检查该操作是否已超过 eta 时间，过期作废
+2. 检查 `eta >= blockTimestamp + delay`
+   - 检查 eta 是否有被赋值，因为初始值是 0，如果没有赋值这条件不成立
+   - 当前时间还未超过提案最早的可执行时间，防止提案在进入可执行时间段后，被执行后，再次通过 `TimeLock.queueTransaction` 方法执行操作
 3. 检查通过，将该操作推入队列
 4. 返回操作在队列中的键
 
