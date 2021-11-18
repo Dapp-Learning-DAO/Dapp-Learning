@@ -10,6 +10,11 @@ NFT (Non-Fungible Token)
 1. [SupDuck Hack](https://learnblockchain.cn/article/2939)
 2. [Hashmask Hack](https://learnblockchain.cn/article/2885)
 
+## NFT 查询平台
+https://nonfungible.com
+https://coinmarketcap.com/zh/nfts/
+https://www.feixiaohao.com/concept/41.html
+
 ## 参考链接
 
 - [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
