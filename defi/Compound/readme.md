@@ -37,3 +37,4 @@ U = 借款 /（ 现金 + 借款 ）
 - <https://github.com/compound-developers/compound-supply-examples>
 - 清算机器人：https://blog.baowebdev.com/2019/11/how-to-build-a-compound-liquidation-bot/
 - comp 清算机器人：https://cryptomarketpool.com/compound-finance-liquidation-bot/
+- comp重入攻击： https://mp.weixin.qq.com/s/ht2YskJ9i3yCgY-PLC6vKw  
