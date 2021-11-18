@@ -298,7 +298,7 @@ function queueTransaction(address target, uint value, string memory signature, b
 
 ### execute
 
-执行提案，仅限 admin 角色可调用
+执行提案，任意用户可调用
 
 1. 提案处于 Queued 状态，即完成了排队阶段
 2. 更改提案状态为已执行

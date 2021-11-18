@@ -68,8 +68,38 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
    - `castVoteBySig()` COMP 持有人委托给代理人进行投票。
      - 持有人将 EIP712 标准的消息签名发送给代理人
      - 代理人使用该签名代持有人投票
-     - 代理人一般是 COMP 项目方，这样可以避免让用户承担主网高昂的 gas
+     - 代理人一般是委托给大户，这样可以避免让用户承担主网高昂的 gas
+     - [leaderboard](https://compound.finance/governance/leaderboard?target_network=mainnet)
      - 注意这里的代理和第 1 步中的不同，1 中是持有人将自己的投票权转交给其他人，在合约中会有记录；而 bysig 的方法是为了让用户节省 gas 参与投票，虽然由代理人操作，但本质上还是持有人自己投票
+
+### 实操演示
+
+COMP 提供了 [vote ui 交互界面](https://app.compound.finance/#vote)，可以切换到 Kovan 测试网进行测试操作
+
+1. 点击 `getStart` 按钮，会弹出两种 Choose Delegation Type 方式
+   - Manual voting 用户直接投票
+   - Delegate voting 用户将自己的投票权数量委托给其他人
+   - 选择后会弹出交易确认，这里会调用 `Bravo.delegate()` 将投票权授权给自己或代理人
+2. 当你持有超过 100COMP，可以看到界面上有 `Approve proposal creation` 按钮
+3. 按钮变成 `Create Autonomous Proposal` 创建自治提案（并非正式的提案）
+4. 进入提案内容标记
+   - 标题
+   - 内容
+   - 操作
+     - 操作的目标合约，例如 cDai， GovernorBravoDelegate
+     - 调用的函数
+     - 入参
+5. 提案上链，可以在这里查看事件里包含了提案的标题和描述
+   - 注意这里调用的是 [autonomous-proposals](https://github.com/compound-finance/autonomous-proposals) 仓库中的 `CrowdProposalFactory.sol`
+   - [交易事件](https://kovan.etherscan.io/tx/0xb05437455d5ca3b45de7457ceb747ee308112632fcc54b39a23b4cc95eb0d6d8#eventlog)
+6. 属于你的自治提案合约已创建，当你的合约被委托的投票权超过100,000时，可以发起正式提案。
+   - 作为初始的票，你的100枚COMP会被质押到该合约
+   - 等到该合约被委托投票数超过 65,000 可以调用该合约的 `propose()` 方法向bravo合约发起正式提案
+   - 调用该合约 `vote()` 方法对提案进行投票
+   - 调用该合约 `terminate()` 方法终止该自治提案，返还之前质押的 100COMP
+   - [详见 :point_right:](./CrowdProposal.md)
+
+另外提案列表上有可执行的提案，上面显示 `execute` 按钮，你可以点击并消耗 gas 发起交易，但是最后会失败，因为虽然 bravo 的 execute 方法是 external，但是内部调用的方法会限制只能 admin 调用。
 
 ### proposal-timeline
 
@@ -78,7 +108,7 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 - 首先是 Pending 状态的时间
   - 即提案创建后进入 voteActive 状态之前，有一个合约强制的 pending 时间
   - 这个时间的由 `votingDelay` 变量表示，在 bravo 合约初始化时设定
-  - `MIN_VOTING_DELAY <= votingDelay <= MAX_VOTING_DELAY` 大约介于 1 个区块间隔（13s-15s） 与 40320 个区块间隔 （大约1week） 之间
+  - `MIN_VOTING_DELAY <= votingDelay <= MAX_VOTING_DELAY` 大约介于 1 个区块间隔（13s-15s） 与 40320 个区块间隔 （大约 1week） 之间
 - 接着是 Active 状态的时间
   - 即投票阶段的持续时间
   - 这段时间长度依旧是合约决定，由 `votingPeriod` 表示，在 bravo 合约初始化时设定
@@ -99,9 +129,10 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 
 - `votingDelay` 13140 blocks 约 2days
 - `votingPeriod` 19710 blocks 约 3days
-- `Timelock.delay` 172800 s = 48 hours =  2days
+- `Timelock.delay` 172800 s = 48 hours = 2days
+- 最新调整上述参数的提案是 [COMP-proposal-43](https://compound.finance/governance/proposals/43)
 
-所以当前理论最短的时间大约是 7days
+所以当前最短的时间大约是 7days
 
 相关代码参考
 
