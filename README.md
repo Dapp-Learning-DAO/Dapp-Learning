@@ -210,6 +210,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 - 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
 [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- [MINA](https://minaprotocol.com/) 
+- [ZETH](https://github.com/clearmatics/zeth)
 
 ## 智能合约安全
 1. 常用安全工具
