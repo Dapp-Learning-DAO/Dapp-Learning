@@ -143,7 +143,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
-60. [web3.0 dapp](basic/59-web3-dapp) ⌛
+59. [web3.0 dapp](basic/59-web3-dapp) ⌛
 
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](https://app.ens.domains/) ⬜
