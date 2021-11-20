@@ -15,7 +15,7 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 
 Bravo 的存储结构合约，主要定义了 storage 变量
 
-```js
+```solidity
 /// @notice The delay before voting on a proposal may take place, once proposed, in blocks
 /// 提案成功提交后，延迟多长时间再进入投票进程，最小1s，最大1week
 uint public votingDelay;
@@ -51,7 +51,7 @@ mapping (address => uint) public latestProposalIds;
 
 提案结构
 
-```js
+```solidity
 struct Proposal {
     /// @notice Unique id for looking up a proposal
     uint id;
@@ -146,7 +146,7 @@ propose 的函数主要逻辑：
 6. 存入新提案数据
 7. 返回提案 id
 
-```js
+```solidity
 /**
     * @notice Function used to propose a new proposal. Sender must have delegates above the proposal threshold
     * @param targets Target addresses for proposal calls
@@ -215,7 +215,7 @@ function propose(address[] memory targets, uint[] memory values, string[] memory
 - Expired 提案通过，但未执行，并且已过期作废
 - Queued 提案通过，正在待执行队列中
 
-```js
+```solidity
 /**
     * @notice Gets the state of a proposal
     * @param proposalId The id of the proposal
@@ -252,7 +252,7 @@ function state(uint proposalId) public view returns (ProposalState) {
 2. 根据当前 blockNumber + timelock.delay 赋值给 eta 字段，eta 是操作最早可执行的时间，这之前不能执行
 3. 遍历提案的具体执行操作，将对每个目标合约的操作顺序推入待执行队列
 
-```js
+```solidity
 /**
     * @notice Queues a proposal of state succeeded
     * @param proposalId The id of the proposal to queue
@@ -283,7 +283,7 @@ TimeLock.queueTransaction
 3. 检查通过，将该操作推入队列
 4. 返回操作在队列中的键
 
-```js
+```solidity
 function queueTransaction(address target, uint value, string memory signature, bytes memory data, uint eta) public returns (bytes32) {
     require(msg.sender == admin, "Timelock::queueTransaction: Call must come from admin.");
     require(eta >= getBlockTimestamp().add(delay), "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
@@ -304,7 +304,7 @@ function queueTransaction(address target, uint value, string memory signature, b
 2. 更改提案状态为已执行
 3. 遍历执行提案的操作
 
-```js
+```solidity
 /**
     * @notice Executes a queued proposal if eta has passed
     * @param proposalId The id of the proposal to execute
@@ -330,7 +330,7 @@ TimeLock.executeTransaction
 4. 将带执行的操作移除队列
 5. 对目标合约执行操作
 
-```js
+```solidity
 // timelock.executeTransaction
 function executeTransaction(address target, uint value, string memory signature, bytes memory data, uint eta) public payable returns (bytes memory) {
     require(msg.sender == admin, "Timelock::executeTransaction: Call must come from admin.");
@@ -362,7 +362,7 @@ function executeTransaction(address target, uint value, string memory signature,
 
 ### cancel
 
-```js
+```solidity
 // TODO:
 ```
 
@@ -372,7 +372,7 @@ function executeTransaction(address target, uint value, string memory signature,
 
 external functions:
 
-```js
+```solidity
 /**
     * @notice Cast a vote for a proposal
     * @param proposalId The id of the proposal to vote on
@@ -404,7 +404,7 @@ castVoteInternal 执行投票的内部方法。
 5. 存储选票回执
 6. 返回生效的票数
 
-```js
+```solidity
 /**
     * @notice Internal function that caries out voting logic
     * @param voter The voter that is casting their vote
