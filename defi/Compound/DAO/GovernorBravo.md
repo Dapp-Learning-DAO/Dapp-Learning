@@ -362,8 +362,46 @@ function executeTransaction(address target, uint value, string memory signature,
 
 ### cancel
 
+取消提案。在提案操作被执行之前都可以由提案者调用，或者当提案者的投票权掉到 proposalThreshold 以下，由任意用户调用。
+
+1. 检查提案不处于 Executed 状态
+2. 检查调用者是否为提案人，或者当提案者的投票权掉到 proposalThreshold 以下
+3. 更改提案为 `cancel` 状态
+4. `timelock.cancelTransaction()`
+
 ```solidity
-// TODO:
+/**
+    * @notice Cancels a proposal only if sender is the proposer, or proposer delegates dropped below proposal threshold
+    * @param proposalId The id of the proposal to cancel
+    */
+function cancel(uint proposalId) external {
+    require(state(proposalId) != ProposalState.Executed, "GovernorBravo::cancel: cannot cancel executed proposal");
+
+    Proposal storage proposal = proposals[proposalId];
+    require(msg.sender == proposal.proposer || comp.getPriorVotes(proposal.proposer, sub256(block.number, 1)) < proposalThreshold, "GovernorBravo::cancel: proposer above threshold");
+
+    proposal.canceled = true;
+    for (uint i = 0; i < proposal.targets.length; i++) {
+        timelock.cancelTransaction(proposal.targets[i], proposal.values[i], proposal.signatures[i], proposal.calldatas[i], proposal.eta);
+    }
+
+    emit ProposalCanceled(proposalId);
+}
+```
+
+timelock.cancelTransaction() 将提案从待执行队列中移除。
+
+（这里仅限管理员调用，但如果调用者作为提案人不是管理员，这里就会revert，感觉欠妥）
+
+```solidity
+function cancelTransaction(address target, uint value, string memory signature, bytes memory data, uint eta) public {
+    require(msg.sender == admin, "Timelock::cancelTransaction: Call must come from admin.");
+
+    bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
+    queuedTransactions[txHash] = false;
+
+    emit CancelTransaction(txHash, target, value, signature, data, eta);
+}
 ```
 
 ### castVote

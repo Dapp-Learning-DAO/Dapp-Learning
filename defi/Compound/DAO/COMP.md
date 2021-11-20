@@ -120,3 +120,56 @@ function _writeCheckpoint(address delegatee, uint32 nCheckpoints, uint96 oldVote
     emit DelegateVotesChanged(delegatee, oldVotes, newVotes);
 }
 ```
+
+### getPriorVotes
+
+获取目标用户在特定 `blockNumber` 以前的，被委托的投票权数量。
+
+1. 检查目标用户最新的一次数量记录
+   - 如果记录时间 < 目标时间，返回数量
+2. 检查目标用户第一条记录
+   - 记录时间 > 目标时间， 返回 0
+3. 1，2 都没有匹配结果，则从用户第一条记录到最后一条记录之间，利用索引值遍历结果
+
+```solidity
+/**
+    * @notice Determine the prior number of votes for an account as of a block number
+    * @dev Block number must be a finalized block or else this function will revert to prevent misinformation.
+    * @param account The address of the account to check
+    * @param blockNumber The block number to get the vote balance at
+    * @return The number of votes the account had as of the given block
+    */
+function getPriorVotes(address account, uint blockNumber) public view returns (uint96) {
+    require(blockNumber < block.number, "Comp::getPriorVotes: not yet determined");
+
+    uint32 nCheckpoints = numCheckpoints[account];
+    if (nCheckpoints == 0) {
+        return 0;
+    }
+
+    // First check most recent balance
+    if (checkpoints[account][nCheckpoints - 1].fromBlock <= blockNumber) {
+        return checkpoints[account][nCheckpoints - 1].votes;
+    }
+
+    // Next check implicit zero balance
+    if (checkpoints[account][0].fromBlock > blockNumber) {
+        return 0;
+    }
+
+    uint32 lower = 0;
+    uint32 upper = nCheckpoints - 1;
+    while (upper > lower) {
+        uint32 center = upper - (upper - lower) / 2; // ceil, avoiding overflow
+        Checkpoint memory cp = checkpoints[account][center];
+        if (cp.fromBlock == blockNumber) {
+            return cp.votes;
+        } else if (cp.fromBlock < blockNumber) {
+            lower = center;
+        } else {
+            upper = center - 1;
+        }
+    }
+    return checkpoints[account][lower].votes;
+}
+```

@@ -24,8 +24,8 @@ Bravo 模块，执行具体的投票流程。主要由三部分组成：
 
 其他的依赖合约：
 
-- `Timelock` 用于对投票操作的交易进行队列排序
-- `COMP` 原生治理代币
+- `Timelock` 用于设定提案操作的执行时间，关键变量是 `delay`, 决定了提案通过后，可以执行操作的最早时间
+- `COMP` 原生治理代币，与投票权 1:1 关系
 
 详情参见 :point_right: [GovernorBravo.md](./GovernorBravo.md)
 
