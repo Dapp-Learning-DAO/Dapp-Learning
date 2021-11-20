@@ -10,7 +10,7 @@
 
 由于代币除了本身的 token 属性外，还具有代表投票权的属性，所以转让的方法做了部分修改。在常规的用户余额的增减操作之后，会调用转移投票权的方法 `_moveDelegates()`
 
-```js
+```solidity
 function _transferTokens(address src, address dst, uint96 amount) internal {
     require(src != address(0), "Comp::_transferTokens: cannot transfer from the zero address");
     require(dst != address(0), "Comp::_transferTokens: cannot transfer to the zero address");
@@ -34,7 +34,7 @@ function _transferTokens(address src, address dst, uint96 amount) internal {
 - `delegate()` (msg.sender)直接委托给代理人
 - `delegateBySig()` 委托人提供 vrs 签名，其他人代为操作
 
-```js
+```solidity
 /**
 * @notice Delegate votes from `msg.sender` to `delegatee`
 * @param delegatee The address to delegate votes to
@@ -55,7 +55,7 @@ function delegateBySig(address delegatee, uint nonce, uint expiry, uint8 v, byte
 
 上述两个方法内部都是调用 `_delegate()`
 
-```js
+```solidity
 function _delegate(address delegator, address delegatee) internal {
     address currentDelegate = delegates[delegator];
     uint96 delegatorBalance = balances[delegator];
@@ -72,7 +72,7 @@ function _delegate(address delegator, address delegatee) internal {
 - 减少用户 srcRep 的投票权，增加用户 dstRep 的投票权
 - checkpoints 变量存储了每个用户在投票权发生变化时的投票权数量和区块序号
 
-```js
+```solidity
 function _moveDelegates(address srcRep, address dstRep, uint96 amount) internal {
     if (srcRep != dstRep && amount > 0) {
         if (srcRep != address(0)) {
