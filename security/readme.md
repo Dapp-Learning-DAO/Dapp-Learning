@@ -17,7 +17,7 @@
 - [Security Innovation Blockchain CTF](https://blockchain-ctf.securityinnovation.com/)
 - [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/)
  - [Chain Flag](https://chainflag.org/)
-
+- [paper](https://arxiv.org/pdf/2110.12162.pdf)
 
 ## 攻击事件
  -wvault: https://zhuanlan.zhihu.com/p/396525700    
