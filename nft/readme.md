@@ -10,6 +10,11 @@ NFT (Non-Fungible Token)
 1. [SupDuck Hack](https://learnblockchain.cn/article/2939)
 2. [Hashmask Hack](https://learnblockchain.cn/article/2885)
 
+## NFT 查询平台
+https://nonfungible.com
+https://coinmarketcap.com/zh/nfts/
+https://www.feixiaohao.com/concept/41.html
+
 ## 参考链接
 
 - [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
@@ -20,3 +25,4 @@ NFT (Non-Fungible Token)
 - NFT 去中心化自治组织: https://blog.blackpool.finance/  
 - NFT 游戏: https://axie.substack.com/p/axs-strategic-sale   
 - NFT收藏家6529关于NFT、meme、监管、他的收藏观点: https://twitter.com/punk6529/status/1429399888786333697  
+- mateverse: https://arxiv.org/abs/2110.05352  
