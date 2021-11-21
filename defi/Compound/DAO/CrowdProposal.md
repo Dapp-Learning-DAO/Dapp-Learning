@@ -10,7 +10,7 @@ Compound 自治提案允许任何拥有足够 COMP 股权（目前为 100；可�
 
 自治提案合约的工厂函数，帮助用户部署属于自己的 CrowdProposal 合约。需要用户质押 100COMP，待提案结束后返还。
 
-```js
+```solidity
 /**
 * @notice Create a new crowd proposal
 * @notice Call `Comp.approve(factory_address, compStakeAmount)` before calling this method
@@ -41,7 +41,7 @@ function createCrowdProposal(address[] memory targets,
 
 构造函数，保存提案内容和提案人等信息，将初始质押的100COMP投票权委托给本合约。
 
-```js
+```solidity
 /**
 * @notice Construct crowd proposal
 * @param author_ The crowd proposal author
@@ -85,7 +85,7 @@ constructor(address payable author_,
 
 当该合约被委托数量足够（65000），可以调用该方法，向bravo正式发起提案
 
-```js
+```solidity
 /// @notice Create governance proposal
 function propose() external returns (uint) {
     require(govProposalId == 0, 'CrowdProposal::propose: gov proposal already exists');
@@ -103,7 +103,7 @@ function propose() external returns (uint) {
 
 终止自治提案合约，将质押的100COMP返还创建者
 
-```js
+```solidity
 /// @notice Terminate the crowd proposal, send back staked COMP tokens
 function terminate() external {
     require(msg.sender == author, 'CrowdProposal::terminate: only author can terminate');
@@ -122,7 +122,7 @@ function terminate() external {
 
 调用bravo合约进行提案投票
 
-```js
+```solidity
 /// @notice Vote for the governance proposal with all delegated votes
 function vote() external {
     require(govProposalId > 0, 'CrowdProposal::vote: gov proposal has not been created yet');
