@@ -94,3 +94,4 @@ Vault contract：作为一个存储金库，帮用户托管保证金交易中的
 - https://www.chainnews.com/articles/669485806574.htm Validium介绍
 - https://www.chainnews.com/articles/906891466719.htm  全景式解读加密货币衍生品交易赛道  
 - https://mp.weixin.qq.com/s/VF4JGW-XG3drUAelKbYySA  橙皮书dydx保证金交易原理介绍
+- https://mp.weixin.qq.com/s/Jnm7eOunGyaiGVMPBzz70g stareware介绍

@@ -61,4 +61,5 @@ DAO，就是**涌现**（Emergence，复杂系统的核心概念之一）在区�
 
 - DAO乐高： https://mp.weixin.qq.com/s/ISUN46wL8GPXGe6Ir4kbDQ
 - thedaoist: https://thedaoist.mirror.xyz/FfzZ8NnWdb5ygJu13mLi9PdWoGqaoKSm8mJoRIi3GJI
+- dao tool: https://juicebox.money/#/
 

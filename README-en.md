@@ -107,7 +107,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
 35. [Liquity](https://github.com/liquity) ⬜
-36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
+36. [NFT IPFS](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
