@@ -17,7 +17,7 @@ module.exports = {
     compilers: [
       { version: '0.8.4',  settings },
       { version: '0.7.6',  settings },
-      { version: '0.6.12', settings },
+      { version: '0.6.11', settings },
       { version: '0.5.16', settings },
     ],
   },
