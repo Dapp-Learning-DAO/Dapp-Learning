@@ -1,6 +1,6 @@
 const { bufferToHex, keccak256 } = require('ethereumjs-util');
 
-export default class MerkleTree {
+  class MerkleTree {
   constructor(elements) {
     this.elements = [...elements]
     // Sort elements
@@ -117,3 +117,4 @@ export default class MerkleTree {
     return Buffer.concat([...args].sort(Buffer.compare))
   }
 }
+module.exports = MerkleTree;
