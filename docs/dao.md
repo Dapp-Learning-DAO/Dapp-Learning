@@ -2,6 +2,9 @@
 
 ## 如何参与
 - 提交一次PR 或 关注公众号 「Rebase社区」并贡献一次技术分享，然后添加Maintainer微信yanyanho126申请入群,或直接联系Harry(微信号:ljyxxzj)进开发者群
+	- [提交PR文字教程](https://github.com/BNineCoding/Dapp-Learning/blob/main/docs/Create_DApp-Learning_PR_Tutorial.md)
+	- [提交PR视频教程](https://www.bilibili.com/video/BV1Bq4y1r7dx?spm_id_from=333.999.0.0)
+- 已在Rebase社区分享过的小伙伴可以直接申请入群
 - 欢迎加入我们discord: https://discord.gg/Z7zARtYu
 - 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目, 可在此添加链接和文档[Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
 - 每个项目readme请务必加上参考链接这一目录，附上任务的相关参考资料

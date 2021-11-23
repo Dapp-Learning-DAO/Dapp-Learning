@@ -151,7 +151,7 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
 10) 通过已经部署的合约地址加载合约实例  
 上述, 我们是先构造了一个合约实例, 然后再通过发送合约部署交易, 实现合约实例的上链, 以便后续进行相应的交易操作. 但同时, 我们也可以直接加载一个已经上链的合约实例, 这样就可以直接对合约进行操作, 避免了中间的部署过程  
 ```js
-let incrementer = new web3.eth.Contract(abi, createReceipt.contractAddress);
+let incrementer = new web3.eth.Contract(abi, deployReceipt.contractAddress);
 ```
 
 11) 调用合约只读接口   
