@@ -1,7 +1,8 @@
 # 简介  
 数据存储在 ipfs 上后, 在 Dapp 前端就可以通过 api 进行访问, 达到去中心化的目的. 
 我们可以使用两种方式进行
-
+//todo 
+FileCoin
 ## 测试 nft.storage 流程
 - 账户注册   
 注册https://nft.storage/, 获得 nft.storage API Key, 写入.env

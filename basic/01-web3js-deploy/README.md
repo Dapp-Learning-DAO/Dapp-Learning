@@ -147,3 +147,6 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
   https://www.dappuniversity.com/articles/web3-js-intro
 - 代码参考文档：
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
+- nodejs参考文档：
+  http://nodejs.cn/api/fs.html
+  
