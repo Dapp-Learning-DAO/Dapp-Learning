@@ -18,3 +18,5 @@ Reverse Capture还可以作为一种机制来奖励在早期阶段帮助引导�
 官网文档:  https://docs.pooltogether.com/  
 github 仓库:  https://github.com/pooltogether/documentation/blob/master/resources.md   
 项目介绍:  https://www.chainnews.com/articles/517264806415.htm  
+twitter: https://twitter.com/PoolTogether_  
+medium: https://medium.com/pooltogether  
