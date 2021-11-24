@@ -10,7 +10,8 @@
 
 ### ERC20 merkel airdrop
 
-
+参考1inch，dydx，uniswap都实现merkle空投。 具体原理请参考：
+https://itzone.com.vn/en/article/merkle-airdrop-the-airdrop-solution-for-token-issues/  
 
 
 

@@ -1,13 +1,12 @@
 const MerkleTree = require('./merkle-tree')
 const { BigNumber, utils } = require('ethers')
 
-let tree;
-export default class BalanceTree {
+ class BalanceTree {
 
   constructor(balances) {
     this.tree = new MerkleTree(
       balances.map(({ account, amount }, index) => {
-        return BalanceTree.toNode(index, account, amount)
+        return this.toNode(index, account, amount)
       })
     )
   }
@@ -19,7 +18,7 @@ export default class BalanceTree {
     proof,
     root
   ) {
-    let pair = BalanceTree.toNode(index, account, amount)
+    let pair = this.toNode(index, account, amount)
     for (const item of proof) {
       pair = MerkleTree.combinedHash(pair, item)
     }
@@ -41,7 +40,8 @@ export default class BalanceTree {
 
   // returns the hex bytes32 values of the proof
   getProof(index, account, amount) {
-    return this.tree.getHexProof(BalanceTree.toNode(index, account, amount))
+    return this.tree.getHexProof(this.toNode(index, account, amount))
   }
 
 }
+module.exports = BalanceTree;

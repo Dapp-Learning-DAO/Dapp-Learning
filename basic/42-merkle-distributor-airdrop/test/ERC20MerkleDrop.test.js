@@ -1,8 +1,9 @@
 const { ethers } = require('hardhat');
 const  MerkleTree  = require('./merkle-tree.js');
-const  balanceTree   = require('./balance-tree.js');
+const  BalanceTree   = require('./balance-tree.js');
 const keccak256 = require('keccak256');
 const { expect } = require('chai');
+const fs =require('fs');
 //const tokens = require('./tokens.json');
 
 async function deploy(name, ...params) {
@@ -22,89 +23,80 @@ describe('ERC20MerkleDrop', function () {
    let owner;
    let alice;
    let bob;
-   let merkleTree;
    let  tree;
+   let distributor;
+   let distributorFile;
+   let fileTree;
 
 
   
   // merkleTree = new MerkleTree(Object.entries(tokens).map(token => hashToken(...token)), keccak256, { sortPairs: true });
   console.log("-------1")
- console.log(balanceTree);
+ console.log(BalanceTree);
   describe('Mint all elements', function () {
     before(async function() {
       [owner,alice, bob] = await ethers.getSigners();
        erc20 = await deploy('TestERC20', "AAA token",'AAA', 100000000 );
-      
-      // tree = BalanceTree.default.balanceTree();
-       tree =  BalanceTree.balanceTree([
+       tree =  new BalanceTree([
         { account: alice.address, amount: ethers.BigNumber.from(100) },
         { account: bob.address, amount: ethers.BigNumber.from(101) },
       ])
-      console.log("-------2")
-      this.merkleDistributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
+
+        let json = JSON.parse(fs.readFileSync('./test/erc20.json', { encoding: 'utf8' }))
+
+        if (typeof json !== 'object') throw new Error('Invalid JSON')
+
+            
+       //console.log(JSON.stringify(json));
+
+
+            //---------------
+
+       let balances = new Array();
+       let valid = true
+       for (const [key, value] of Object.entries(json)) {
+    
+        balances.push({ account: key, amount: value});
+      }
+      fileTree = new BalanceTree(balances);
+      //console.log(balances);
+   // })
+    
+
+    // Root
+    const root = fileTree.getHexRoot().toString('hex')
+    console.log('Reconstructed merkle root', root)
+  
+   
+     
+      distributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
+      distributorFile = await deploy("MerkleDistributor", erc20.address, fileTree.getHexRoot());
+
+      await erc20.transfer(distributor.address, 201);
+      await erc20.transfer(distributorFile.address, 1000);
+
     });
 
-    // for (const [tokenId, account] of Object.entries(tokens)) {
-    //   it('element', async function () {
-    //     /**
-    //      * Create merkle proof (anyone with knowledge of the merkle tree)
-    //      */
-    //     const proof = this.merkleTree.getHexProof(hashToken(tokenId, account));
-    //     /**
-    //      * Redeems token using merkle proof (anyone with the proof)
-    //      */
-    //     await expect(this.registry.redeem(account, tokenId, proof))
-    //       .to.emit(this.registry, 'Transfer')
-    //       .withArgs(ethers.constants.AddressZero, account, tokenId);
-    //   });
-    // }
-
     it('successful claim', async () => {
-      const proof0 = tree.getProof(0, alice.address, BigNumber.from(100))
+      const proof0 = tree.getProof(0, alice.address, ethers.BigNumber.from(100))
       await expect(distributor.claim(0, alice.address, 100, proof0))
         .to.emit(distributor, 'Claimed')
         .withArgs(0, alice.address, 100)
-      const proof1 = tree.getProof(1, bob.address, BigNumber.from(101))
-      await expect(distributor.claim(1, wallet1.address, 101, proof1))
+      const proof1 = tree.getProof(1, bob.address, ethers.BigNumber.from(101))
+      await expect(distributor.claim(1, bob.address, 101, proof1))
         .to.emit(distributor, 'Claimed')
         .withArgs(1, bob.address, 101)
     })
 
+    it('file tree claim', async () => {
+      const proof0 = fileTree.getProof(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', ethers.BigNumber.from(1))
+      await expect(distributorFile.claim(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', 1, proof0))
+        .to.emit(distributorFile, 'Claimed')
+        .withArgs(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', 1)
+    })
+
   });
 
-  // describe('Duplicate mint', function () {
-  //   before(async function() {
-  //     this.registry = await deploy('ERC721MerkleDrop', 'Name', 'Symbol', this.merkleTree.getHexRoot());
+  
 
-  //     this.token = {};
-  //     [ this.token.tokenId, this.token.account ] = Object.entries(tokens).find(Boolean);
-  //     this.token.proof = this.merkleTree.getHexProof(hashToken(this.token.tokenId, this.token.account));
-  //   });
-
-  //   it('mint once - success', async function () {
-  //     await expect(this.registry.redeem(this.token.account, this.token.tokenId, this.token.proof))
-  //       .to.emit(this.registry, 'Transfer')
-  //       .withArgs(ethers.constants.AddressZero, this.token.account, this.token.tokenId);
-  //   });
-
-  //   it('mint twice - failure', async function () {
-  //     await expect(this.registry.redeem(this.token.account, this.token.tokenId, this.token.proof))
-  //       .to.be.revertedWith('ERC721: token already minted');
-  //   });
-  // });
-
-  // describe('Frontrun', function () {
-  //   before(async function() {
-  //     this.registry = await deploy('ERC721MerkleDrop', 'Name', 'Symbol', this.merkleTree.getHexRoot());
-
-  //     this.token = {};
-  //     [ this.token.tokenId, this.token.account ] = Object.entries(tokens).find(Boolean);
-  //     this.token.proof = this.merkleTree.getHexProof(hashToken(this.token.tokenId, this.token.account));
-  //   });
-
-  //   it('prevented', async function () {
-  //     await expect(this.registry.redeem(this.accounts[0].address, this.token.tokenId, this.token.proof))
-  //       .to.be.revertedWith('Invalid merkle proof');
-  //   });
-  // });
 });
