@@ -3,6 +3,7 @@ const  MerkleTree  = require('./merkle-tree.js');
 const  BalanceTree   = require('./balance-tree.js');
 const keccak256 = require('keccak256');
 const { expect } = require('chai');
+const fs =require('fs');
 //const tokens = require('./tokens.json');
 
 async function deploy(name, ...params) {
@@ -24,6 +25,8 @@ describe('ERC20MerkleDrop', function () {
    let bob;
    let  tree;
    let distributor;
+   let distributorFile;
+   let fileTree;
 
 
   
@@ -38,10 +41,39 @@ describe('ERC20MerkleDrop', function () {
         { account: alice.address, amount: ethers.BigNumber.from(100) },
         { account: bob.address, amount: ethers.BigNumber.from(101) },
       ])
+
+        let json = JSON.parse(fs.readFileSync('./test/erc20.json', { encoding: 'utf8' }))
+
+        if (typeof json !== 'object') throw new Error('Invalid JSON')
+
+            
+       //console.log(JSON.stringify(json));
+
+
+            //---------------
+
+       let balances = new Array();
+       let valid = true
+       for (const [key, value] of Object.entries(json)) {
+    
+        balances.push({ account: key, amount: value});
+      }
+      fileTree = new BalanceTree(balances);
+      //console.log(balances);
+   // })
+    
+
+    // Root
+    const root = fileTree.getHexRoot().toString('hex')
+    console.log('Reconstructed merkle root', root)
+  
+   
      
       distributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
+      distributorFile = await deploy("MerkleDistributor", erc20.address, fileTree.getHexRoot());
 
       await erc20.transfer(distributor.address, 201);
+      await erc20.transfer(distributorFile.address, 1000);
 
     });
 
@@ -54,6 +86,13 @@ describe('ERC20MerkleDrop', function () {
       await expect(distributor.claim(1, bob.address, 101, proof1))
         .to.emit(distributor, 'Claimed')
         .withArgs(1, bob.address, 101)
+    })
+
+    it('file tree claim', async () => {
+      const proof0 = fileTree.getProof(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', ethers.BigNumber.from(1))
+      await expect(distributorFile.claim(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', 1, proof0))
+        .to.emit(distributorFile, 'Claimed')
+        .withArgs(0, '0xF3c6F5F265F503f53EAD8aae90FC257A5aa49AC1', 1)
     })
 
   });
