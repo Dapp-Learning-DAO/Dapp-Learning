@@ -268,6 +268,17 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
     <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a>
+    <img align="top" src="./docs/imgs/parteners/PKU-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a>
+    <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
+  </a>
 </div>
 <br>
 <br>
