@@ -102,7 +102,9 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         blockTimestampLast = blockTimestamp;
         emit Sync(reserve0, reserve1);
     }
-    // TODO 待完善
+    // 参考白皮书protocol fee解释：https://uniswap.org/whitepaper.pdf
+    //正常每次可以交易收取手续费，但是太耗费gas;所以只在每次添加和移除流动性的时候才进行手续费计算
+    //sm/(sm+ s1) = a(L2-L1)/L2, 增加的流动性份额比例跟手续费的一定比例理论上相等。
     // if fee is on, mint liquidity equivalent to 1/6th of the growth in sqrt(k)
     function _mintFee(uint112 _reserve0, uint112 _reserve1) private returns (bool feeOn) {
         address feeTo = IUniswapV2Factory(factory).feeTo();
