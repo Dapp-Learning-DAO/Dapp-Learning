@@ -21,7 +21,7 @@
 项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)和 [discord](https://discord.gg/Z7zARtYu)。
 项目由来可以阅读Rebase公众号文章[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
 
-此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。提交一次PR或者在[Rebase大学](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ)进行一次分享即可加入我们开发者交流群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
+此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/Z7zARtYu)。提交一次PR或者安排一次分享(https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
 
 
