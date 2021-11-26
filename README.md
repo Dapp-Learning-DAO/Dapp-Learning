@@ -300,7 +300,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a>
+  <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
   </a>
 </div>

@@ -106,7 +106,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [Liquity](https://github.com/liquity) ⬜
+35. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 36. [NFT IPFS](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
@@ -135,7 +135,6 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 62. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
 64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-65. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -169,6 +168,9 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [Set](https://www.tokensets.com/)
+19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+20. [Liquity](defi/Liquity/readme.md)
 
 ## NFT advanced tasks
 
@@ -276,7 +278,7 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a>
+  <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
   </a>
 </div>
