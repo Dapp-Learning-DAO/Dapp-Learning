@@ -70,7 +70,7 @@ Core Code: packages/contracts/contracts/BorrowerOperations.sol
             vars.LUSDFee = _triggerBorrowingFee(contractsCache.troveManager, contractsCache.lusdToken, _LUSDAmount, _maxFeePercentage);
             vars.netDebt = vars.netDebt.add(vars.LUSDFee);
         }
-           // 加入$200的被清算时gas补偿
+           // 加入$200的被清算时gas补偿(LUSD_GAS_COMPENSATION)，这笔钱会计入债务，却打到GasPool池子里
            vars.compositeDebt = _getCompositeDebt(vars.netDebt);
            // 生成新的金库(Trove)节点
            sortedTroves.insert(msg.sender, vars.NICR, _upperHint, _lowerHint);
@@ -128,12 +128,10 @@ Core Code: packages/contracts/contracts/BorrowerOperations.sol
     ```ts
     function repayLUSD(uint _amount, address _upperHint, address _lowerHint) external;
     ```
--   关闭金库，结清债务(总借出的 LUSD 再加上一次性手续费):
+-   关闭金库，结清债务(总借出的 LUSD 再, $200, 加上一次性手续费):
     ```ts
-    function closeTrove() external;
-    // claim
+    function closeTrove() external {};
     ```
--   复原模式时，借贷功能失效
 
 #### 3.2 稳定池(Stability Pool)
 
@@ -217,7 +215,8 @@ Core Code: packages/contracts/contracts/StabilityPool.sol
 
 ---
 
-目的: 增强系统稳定性(1LUSD = 1$)
+目的: [增强系统稳定性(1LUSD = 1$)](https://www.coingecko.com/en/coins/liquity-usd)
+
 Core Code: packages/contracts/contracts/TroveManager.sol
 
 -   赎回原理:
@@ -237,15 +236,15 @@ Core Code: packages/contracts/contracts/TroveManager.sol
 
     -   背景:当前 LUSD 价格为$0.95, 当前基础费率为 1.4%. 套利者准备赎回 150,000 LUSD，当前总 LUSD 供应量为 1000 万. 上一次赎回是 2 小时 前，中间无新的流动性被添加(issued ?)。 δ 衰减因子为 0.94.
 
-    -   首先: 按照衰减公式计算: b(t):=b(t−1)×δ△t =0.014×0.942 =0.01237
+    -   首先: 按照衰减公式计算: b(t):=b(t−1)×δ^△t =0.014×0.94^2 =0.01237
 
-    -   其次: 按照赎回公式算: b(t):=b(t−1)+0.5×m=0.01237+0.5× 150000 =0.01987
+    -   其次: 按照赎回公式算: b(t):=b(t−1)+0.5×m=0.01237+0.5× 150000/10000000 =0.01987
 
     -   再次：套利者获得价值 147,019.44 USD [ = 150, 000 × (1 − 0.01987)] 的 ETH
 
     -   最后: 因为按照当前 LUSD 价格，150,000 LUSD = 142,500 USD, 所以套利者净利润为: $4,519.44
 
--   赎回对象: 为系统判定的风险最高金库
+-   赎回对象: 为系统判定的风险最高金库(即使 ICR>110%)
 
     > Code: packages/contracts/contracts/TroveManager.sol
 
@@ -266,6 +265,9 @@ Core Code: packages/contracts/contracts/TroveManager.sol
             while(currentBorrower != address(0) && totals.remainingLUSD > 0 && _maxIterations > 0){}
             // 计算基础费率
             _updateBaseRateFromRedemption(totals.totalETHDrawn, totals.price, totals.totalLUSDSupplyAtStart);
+
+            // 把赎回费打入LQTY矿池
+            contractsCache.lqtyStaking.increaseF_ETH(totals.ETHFee);
             }
         ```
 
@@ -281,10 +283,10 @@ Core Code: packages/contracts/contracts/TroveManager.sol
 Core Code: packages/contracts/contracts/TroveManager.sol
 
 -   清算对象: 任何抵押率低于 110%的金库
--   清算者: 任何人均可发起清算，清算者将获得交易费补偿（200 LUSD + Trove 抵押品的 0.5%）作为这项服务的奖励。
+-   清算者: 任何人均可发起清算，清算者将获得交易费补偿（200 LUSD + Trove 抵押品 ETH 的 0.5%）作为这项服务的奖励。
 -   清算优先级:
     1. 稳定池清算
-    2. 的金库余下债务，在活跃金库之间基于 ETH 数量进行重新分配
+    2. 金库余下债务，在活跃金库之间基于 ETH 数量进行重新分配
 
 #### 4.1 稳定池处置(Offset undercollateralized Troves against the Stability Pool)
 
@@ -314,7 +316,7 @@ Core Code: packages/contracts/contracts/TroveManager.sol
 #### 4.2 重新分配(Redistribute undercollateralized Troves to other borrowers)
 
 -   分配方法: 把被清算金库的债务(LUSD 和 ETH)，按照活跃金库的 ETH 抵押比例，进行分配
--   举例:
+-   举例: 7/(1.5+4+7)\*4.3 + 7 = 9.408
     ![](../pics/redistribute.png)
 
 #### 4.3 例子
@@ -379,12 +381,15 @@ Core Code: packages/contracts/contracts/TroveManager.sol
 7. 去中心化前端
 
 -   注册前端运营商：https://github.com/liquity/frontend-registry
+
     > Code: packages/contracts/contracts/StabilityPool.sol
+
     ```ts
      function registerFrontEnd(uint _kickbackRate) external override{}
 
      function _setFrontEndTag(address _depositor, address _frontEndTag) internal{}
     ```
+
 -   回扣(kickback)设置: \_kickbackRate, 一次性设置不可更改
 
 8. 结论
