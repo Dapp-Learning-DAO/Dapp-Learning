@@ -1,15 +1,15 @@
 # Subgraph
 
-subgraph 使开发人员能够通过从以太坊和其他区块链提取索引数据来构建可发现的 api。Graph 根据 subgraph 描述(称为子图清单)学习索引数据的内容和方法。
-subgraph 描述定义了感兴趣的智能合约、这些合约中要注意的事件，以及如何将事件数据映射到 Graph 将存储在其数据库中的数据
+subgraph 使开发人员能够通过从以太坊和其他区块链提取索引数据来构建可发现的 api。Graph 根据 subgraph 描述(称为子图清单)学习索引数据的内容和方法。  
+subgraph 描述定义了感兴趣的智能合约、这些合约中要注意的事件，以及如何将事件数据映射到 Graph 将存储在其数据库中的数据。  
 此任务会从 0 搭建 graph 节点。
 
-Subgraph Selection
+Subgraph Selection  
 Subgraph Deployment
 
 ## 介绍
 
-### indexer
+### Indexer
 
 indexer 是 Graph 网络中的节点运营者，质押 GRT 提供索引和查询处理服务。 indexer 赚取查询费用和索引奖励。他们赚取回扣池，该回扣池与所有网络贡献者按他们的工作比例共享，遵循柯布斯-道格拉斯回扣函数。  
 协议中的 GRT 将会有一个冻结期，如果 Indexers 恶意向应用程序提供不正确的数据，或者索引不正确，GRT 可能会被罚没。indexer 也可以从委派者那里获得股份，为网络做出贡献。
