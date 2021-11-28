@@ -1,10 +1,10 @@
 ## charm.fi
 
-Uniswap V3 做市工具
-策略研究：
-分为两种单，基础单和限价单，区别在于做市区间的不同：
-B (base threshold) [X-B, X+B]
-L (limit threshold) [X-R, X], or [X, X+R]
+Uniswap V3 做市工具  
+策略研究：  
+-分为两种单，基础单和限价单，区别在于做市区间的不同：  
+B (base threshold) [X-B, X+B]  
+L (limit threshold) [X-R, X], or [X, X+R]  
 每隔 12 小时，触发 rebalance 函数。
 
 ## 相关依赖
