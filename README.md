@@ -183,6 +183,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 18. [Set](https://www.tokensets.com/)
 19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 20. [Liquity](defi/Liquity/readme.md)
+21. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 
 
 ## NFT 进阶

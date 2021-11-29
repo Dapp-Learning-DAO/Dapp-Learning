@@ -103,5 +103,6 @@ npx hardhat test
 - merkel drop discussion: https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806
 - Evolution of Airdrop： https://medium.com/hackernoon/evolution-of-airdrop-from-common-spam-to-the-merkle-tree-30caa2344170
 - github demo： https://github.com/smartzplatform/constructor-eth-merkle-airdrop
-- uni aridrop :https://github.com/Uniswap/merkle-distributor
+- uni airdrop :https://github.com/Uniswap/merkle-distributor
+- uni airdrop :https://steveng.medium.com/performing-merkle-airdrop-like-uniswap-85e43543a592
 
