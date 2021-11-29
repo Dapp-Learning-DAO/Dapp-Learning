@@ -19,16 +19,16 @@
 分发速率F应该如何定义？即token对于单位LP数量，单位时间的分发速率应该是一个常数，
 
 即分发速率F应该等于单位区块总共分发出的sushiPerBlock数量乘以这个LP资金池的sushi分配额度占据所有池子的分配额度总和的百分比，得到这个池子在这个块应该能分到的sushi总数。然后再除以这个池子中此时的LP总的流动性，得到每一份流动性LPtoken提供者应该在一个区块中分配到sushi数量, 即
-$$
+< img src="https://render.githubusercontent.com/render/math?math=
 f=\frac{sushiPerBlock\times \frac{pool.allocPoint}{totalAllocPoint}}{lpSupply} 
-$$
+>
 
 即：rewardIndex_b = rewardIndex_a + (deltaBlocks * F )
 
 =>
-$$
+< img src="https://render.githubusercontent.com/render/math?math=
 Index(N)=Index(N-1)+\delta N\times \frac{sushiPerBlock}{lpSupply(N-1)} \times\frac{pool.allocPoint}{totalAllocPoint}
-$$
+>
 
 
 > 与compound中的borrowIndex不同的是: 
