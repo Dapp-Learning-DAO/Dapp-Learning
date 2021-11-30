@@ -3,7 +3,7 @@
 
 - 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建    
 https://ithelp.ithome.com.tw/articles/10202794   
-
+ 
 - 为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
 
 - 同时在 BiliBili 上有上传本样例代码的讲解演示:   
