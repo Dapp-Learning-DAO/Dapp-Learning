@@ -13,6 +13,7 @@
 - [第四次转折](http://m.ishare.iask.sina.com.cn/f/9679610.html)
 - [《乌合之众》](https://book.douban.com/subject/6966569/)
 - [《娱乐至死》](https://book.douban.com/subject/1062193/)
+- [《聪明的投资者》](https://book.douban.com/subject/5243775/)
 
 
 ## 文章推荐
