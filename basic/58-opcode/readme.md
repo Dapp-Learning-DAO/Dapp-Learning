@@ -2,7 +2,7 @@
 
 ## Solidity Bytecode and Opcode Basics
 
-简单了解bytecode和opcode。
+简单了解 bytecode 和 opcode。
 
 Solidity Bytecode and Opcode Basics <https://medium.com/@blockchain101/solidity-bytecode-and-opcode-basics-672e9b1a88c2>
 

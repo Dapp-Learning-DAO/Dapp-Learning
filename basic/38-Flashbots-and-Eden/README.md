@@ -1,7 +1,7 @@
 ## Flashbot & Eden
 
-// todo 
-Fix the issue of not work of test code  && split Eden to other directory
+// todo
+Fix the issue of not work of test code && split Eden to other directory
 
 ## 参考链接  
 flashbots github: https://github.com/flashbots/pm#resources  
