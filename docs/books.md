@@ -10,7 +10,7 @@
 - [《货币未来》](https://book.douban.com/subject/35178904/)
 - [《历代经济变革得失》](https://book.douban.com/subject/24851460/)
 - [战争与国家形成：春秋战国与近代早期欧洲之比较](https://book.douban.com/tag/%E8%AE%B8%E7%94%B0%E6%B3%A2)
-- [第四次转折](http://m.ishare.iask.sina.com.cn/f/9679610.html)
+- [《第四次转折》](http://m.ishare.iask.sina.com.cn/f/9679610.html)
 - [《乌合之众》](https://book.douban.com/subject/6966569/)
 - [《娱乐至死》](https://book.douban.com/subject/1062193/)
 
