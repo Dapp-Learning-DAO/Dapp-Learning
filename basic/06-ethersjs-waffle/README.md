@@ -45,6 +45,14 @@ yarn test
 node index.js
 ```
 ## 说明
+在使用命yarn install命令，提示无法找到yarn命令时（比如在VMware上跑），可以尝试执行：
+1. $ sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.rep
+2. $ sudo yum install yarn
+
+之后查看yarn 版本：
+$ yarn --versionyarn --version
+
+
 - 如果在windows上跑yarn test命令时，要把package.json文件中script脚本中test命令中的export命令修改为set命令，否则会报找不到命令。
 
 修改前：
@@ -64,7 +72,8 @@ node index.js
     "test": "set NODE_ENV=test && mocha --timeout 10000"
   },
 ```
-
+  
+  
 ## 参考文档
 
 - waffle 官方文档： <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
