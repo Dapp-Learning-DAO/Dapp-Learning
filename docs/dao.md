@@ -1,7 +1,7 @@
 中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao-en.md)
 
 ## 如何参与
-- 欢迎加入我们discord: https://discord.gg/Z7zARtYu  
+- 欢迎加入我们discord: https://discord.gg/7GegSB2A  
 - 提交一次PR 或 安排贡献一次技术分享即可加入开发群，然后添加Maintainer微信yanyanho126申请入群。
 	- [提交PR文字教程](https://github.com/BNineCoding/Dapp-Learning/blob/main/docs/Create_DApp-Learning_PR_Tutorial.md)
 	- [提交PR视频教程](https://www.bilibili.com/video/BV1Bq4y1r7dx?spm_id_from=333.999.0.0)
