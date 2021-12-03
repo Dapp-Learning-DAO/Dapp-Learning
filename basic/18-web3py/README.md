@@ -49,4 +49,6 @@ python scripts/5_use_openzeppelin_dynamic_mintable_contract.py
 
 ## 参考链接
 https://web3py.readthedocs.io/en/stable/quickstart.html  
-https://github.com/pypa/pipx   
+https://github.com/pypa/pipx  
+## 参考实例
+https://github.com/admanny/pancakeswap_wrapper 基于web3.py实现的pancakeswap_wrapper
