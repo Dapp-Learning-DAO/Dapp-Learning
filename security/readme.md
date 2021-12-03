@@ -20,6 +20,13 @@
  - [Chain Flag](https://chainflag.org/)
 - [paper](https://arxiv.org/pdf/2110.12162.pdf)
 
+## Security analysis tool
+ - 反解析solidity https://www.4byte.directory/
+         https://tx.blocksecteam.com/
+ - ethtx https://www.tofreedom.me/ethtxbscpolygon
+  https://github.com/EthTx/ethtx
+ - 合约审计 https://www.trustlook.com/services/smart.html
+
 ## 攻击事件
  -wvault: https://zhuanlan.zhihu.com/p/396525700    
  
