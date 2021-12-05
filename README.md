@@ -58,7 +58,7 @@ web3工具集锦：<https://www.useweb3.xyz/>
 - 系列文章：[给区块链爱好者的奥派经济学课](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 - [《货币未来》](https://weread.qq.com/web/reader/722328e071f5cee17229964)：你应该了解的货币史
 
-同时欢迎大家添加推荐书籍，请在此文档 [书籍推荐](./docs/books.md) 中录入
+同时欢迎大家添加推荐书籍，请在此文档 [书籍推荐](./docs/books.md) 中录入。
 
 **加密课程**
 
