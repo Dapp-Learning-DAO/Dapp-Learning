@@ -55,3 +55,4 @@ hardhat run --network kovan scripts/deploy.js
 - aave polygon graph: https://thegraph.com/legacy-explorer/subgraph/aave/aave-v2-matic  
 - scaffold chanllenge https://medium.com/@austin_48503/%EF%B8%8Fethereum-dev-speed-run-bd72bcba6a4c
 - scaffold-eth task: https://speedrunethereum.com/ 
+- aave flashloan: https://github.com/johngrantuk/aaveFlashLoan
