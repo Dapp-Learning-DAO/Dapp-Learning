@@ -24,8 +24,7 @@
 此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交一次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
 <details>
-<summary>Official links</summary>
-<br />
+<summary>Official links: </summary>
 
 - [Github](https://github.com/rebase-network/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
@@ -41,13 +40,18 @@
 
 </details>
 
-技术栈：
+<details>
+<summary>技术栈: </summary>
+
 - `web3.js`
 - `ethers.js (hardhat)`
 - `web3.py (Brownie)`
 - `Java` （可选）
 - `Rust` （可选）
 - `Go` （可选）
+
+</details>
+
 
 ## 项目结构
 项目分为 **基础任务** 和 **项目任务** 两部分
