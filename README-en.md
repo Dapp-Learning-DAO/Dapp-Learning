@@ -46,7 +46,7 @@ Join our developer communication group by submitting PR or sharing at [rebase un
 - `Rust` (Optional)
 - `Go` (Optional)
 
-</detials>
+</details>
 
 ## Project structure
 The project is divided into two parts: **Basic task** and **Project task**
