@@ -87,12 +87,7 @@ npx snarkjs zkey contribute circuit_0000.zkey circuit_final.zkey
 npx snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
 ```
 
-- 创建 input.json
-  创建 input.json 文件, 文件内容如下
-
-```sh
-vim input.json
-```
+- 创建 input.json 文件, 文件内容如下
 
 ```json
 {"a": 3, "b": 11}
