@@ -120,5 +120,6 @@ npx hardhat test
 
 ## 参考资料
 
-[二次方投票和二次方资助](https://www.matataki.io/p/6113)  
-[视频](https://www.bilibili.com/video/BV1Y5411w77b/)
+- [二次方投票和二次方资助](https://www.matataki.io/p/6113)  
+- [视频](https://www.bilibili.com/video/BV1Y5411w77b/)
+- [gitcoin](https://gitcoin.co/blog/gitcoin-grants-quadratic-funding-for-the-world/)
