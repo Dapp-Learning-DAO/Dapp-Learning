@@ -86,10 +86,15 @@ ipfs daemon
 
 ## 测试 IPFS 和 ERC721
 
-1. 配置私钥  
+1. 安装相关依赖
+
+    ```bash
+    yarn install 或者 npm install
+    ```
+2. 配置私钥  
    在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
 
-2. 执行如下命令
+3. 执行如下命令
 
 ```angular2html
 npx hardhat run scripts/deploy-ipfs.js --network kovan
@@ -102,7 +107,7 @@ npx hardhat run scripts/deploy-ipfs.js --network kovan
 > IPFS URL of art.jpg is : /ipfs/${FILE_HASH}$
 ```
 
-3. 对比文件  
+4. 对比文件  
    在当前目录下执行如下命令，其中 _${FILE_HASH}$_ 在第二步中获得
 
 ```bash
