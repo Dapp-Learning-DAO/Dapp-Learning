@@ -28,7 +28,7 @@ Join our developer communication group by submitting PR or sharing at [rebase un
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/382886213)
-- [notion](https://spiny-satin-068.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
+- [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
 - [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 - [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
