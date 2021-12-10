@@ -132,7 +132,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [Optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
+28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
@@ -144,7 +144,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
-40. [snapshot](basic/26-snapshot/README.md) ⬜
+40. [snapshot](basic/40-snapshot/README.md) ⌛
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
