@@ -1,3 +1,4 @@
+
 ## 概念介绍  
 在公共领域的治理中，需要投票决定资金的使用，进而决定哪些项目获得优先的资助。例如，一个城市在修公园、修医院、修路等项目中分配预算，或一个由社区和机构共同资助的公链生态基金在钱包、开发者工具、文档编辑、黑客马拉松、社区播客、隐私协议等项目中分配预算。  
 投票通常有两种方式：“一人一票”和“一块钱一票”。 
@@ -120,5 +121,6 @@ npx hardhat test
 
 ## 参考资料
 
-[二次方投票和二次方资助](https://www.matataki.io/p/6113)  
-[视频](https://www.bilibili.com/video/BV1Y5411w77b/)
+- [二次方投票和二次方资助](https://www.matataki.io/p/6113)  
+- [视频](https://www.bilibili.com/video/BV1Y5411w77b/)
+- [gitcoin](https://gitcoin.co/blog/gitcoin-grants-quadratic-funding-for-the-world/)

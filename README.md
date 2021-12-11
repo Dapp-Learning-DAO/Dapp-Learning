@@ -130,7 +130,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
-26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
+26. [Quadratic vote & Gitcoin](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
 28. [Optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
