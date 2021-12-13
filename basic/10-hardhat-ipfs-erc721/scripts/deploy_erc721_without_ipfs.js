@@ -22,13 +22,13 @@ async function main() {
     );
 
     const contractfactory = await ethers.getContractFactory("MYERC721");
-    const myerc721Ins = await contractfactory.deploy("MYERC721","TEST","");
+    const myerc721Ins = await contractfactory.deploy("DLWM","DL","http://XX.XX.XX.XX/WaterMargin/");
 
     console.log("ERC721 address:", myerc721Ins.address);
 
 
     // 定义 tokenurl 
-    const tokenurl = "tokenurl"
+    //const tokenurl = "http://XX.XX.XX.XX/WaterMargin/12.jpg"
 
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {
@@ -45,7 +45,7 @@ async function main() {
 
 
     // 调用 mintWithTokenURI
-    myerc721Ins.mintWithTokenURI(deployer.address, tokenurl)
+    myerc721Ins.mint(deployer.address)
 
 }
 
