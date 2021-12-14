@@ -140,7 +140,9 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
 
 ## 参考文档
 - Web3js官方文档：
-  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html  
+  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html
+- Web3js中文文档(1.2.6):
+  https://learnblockchain.cn/docs/web3.js/web3-eth-contract.html
 - 样例代码参考如下链接 
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
 - Web3js使用参考文档:  
