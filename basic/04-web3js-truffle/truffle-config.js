@@ -1,7 +1,7 @@
 const fs = require('fs')
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
-const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
+const mnemonic = fs.readFileSync('./env').toString().trim()
 
 module.exports = {
   // Uncommenting the defaults below
