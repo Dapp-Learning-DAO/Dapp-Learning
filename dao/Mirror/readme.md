@@ -23,3 +23,7 @@
 + github :[Mirror](https://github.com/mirror-xyz)
 + Use the community framework: degen
 + ...
+
+
+Reference article:
+[Zhihu](https://zhuanlan.zhihu.com/p/425322365)
