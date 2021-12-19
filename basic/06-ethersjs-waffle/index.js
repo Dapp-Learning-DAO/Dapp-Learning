@@ -58,7 +58,7 @@ async function deploy() {
   token = await simpletoken.deploy("HEHE", "HH", 1, 100000000);
   tx = await token.transfer(
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-    100,
+    ethers.utils.parseEther("0.00000000001"),
     option
   );
   console.log(token.address);

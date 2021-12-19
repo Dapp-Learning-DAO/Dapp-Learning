@@ -27,19 +27,27 @@ Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.re
 yarn install
 ```
 
-- 2 编译合约：
+- 2 编译合约
 
 ```bash
 yarn build
 ```
 
-- 3 执行测试
+- 3 配置环境变量
+
+```bash
+cp .env.example .env
+
+## 然后修改 .env ，在其中配置 PRIVATE_KEY 和 INFURA_ID
+```
+
+- 4 执行测试
 
 ```bash
 yarn test
 ```
 
-- 4 测试 index.js
+- 5 测试 index.js
 
 ```bash
 node index.js
