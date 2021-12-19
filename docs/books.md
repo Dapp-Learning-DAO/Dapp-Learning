@@ -27,6 +27,7 @@
 - [V神发表2020年终总结，思考新世界的运转模式](https://mp.weixin.qq.com/s/gVEgIMmar1T1LmK-U18tDw)
 - [开源社区的暗面](https://mp.weixin.qq.com/s/2kYb93_V3TMdgKFAV3HG4Q)
 - [打造受欢迎的社区](https://opensource.guide/zh-hans/building-community/)
+- [公司形式：从实体官僚到算法信任](https://mirror.xyz/0xf67Bd51BAF48C05A53af61aF66DB86ADd7A825C0/bYzwwnUL3i2gY6ygakX8FJFwcGSm9uNU4JZ_Y9G8zNE)
 ## 英语提高篇
 - [《英语魔法师之语法俱乐部》](https://book.douban.com/subject/1014914/)
 - [《赖世雄美语音标》](https://book.douban.com/subject/4201317/)
