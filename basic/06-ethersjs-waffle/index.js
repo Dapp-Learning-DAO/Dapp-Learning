@@ -31,7 +31,6 @@ async function getGasPrice() {
     return {
       maxFeePerGas: maxFeePerGas,
       maxPriorityFeePerGas: maxPriorityFeePerGas,
-      value: 0.0002e18,
     };
   });
 }
@@ -59,7 +58,7 @@ async function deploy() {
   token = await simpletoken.deploy("HEHE", "HH", 1, 100000000);
   tx = await token.transfer(
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-    ethers.utils.parseEther("100"),
+    100,
     option
   );
   console.log(token.address);
@@ -69,7 +68,7 @@ async function deploy() {
   await token.deployed();
 
   let bal = await token.balanceOf(wallet.address);
-  console.log(bal);
+  console.log(bal.toString());
 }
 
 deploy();
