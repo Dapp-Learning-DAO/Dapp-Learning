@@ -18,10 +18,10 @@
 
 本项目会成立学习小组进行任务分工，然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传[Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)和 [Bilibili](https://space.bilibili.com/382886213) 。
 
-项目秉持 [开源大学](https://github.com/rebase-network/Rebase-University) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的推特 [Dapp-Learning twitter](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)。
+项目秉持 [开源大学](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的[推特](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)。
 项目由来可以阅读[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
 
-此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交一次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，贡献三次高质量PR即可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
+此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
 <details>
 <summary>Official links: </summary>
@@ -168,7 +168,9 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 61. [ENS](https://app.ens.domains/) ⬜
 63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
 64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
-65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) ✅
+65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
+66. [Kleros](https://kleros.io/) 
+67. [Go-Ethereum Code Analysis](https://geth.ethereum.org/) 
 
 欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 

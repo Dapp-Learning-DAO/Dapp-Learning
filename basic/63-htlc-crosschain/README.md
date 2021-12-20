@@ -153,3 +153,5 @@ npx hardhat test/HashedTimelock.js
 - 哈希时间锁详解: <https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/>
 - 哈希时间锁原理: <https://learnblockchain.cn/article/2152>
 - 哈希时间锁代码样例: <https://github.com/chatch/hashed-timelock-contract-ethereum/blob/master/test/htlcERC20.js>
+- 跨链技术介绍：https://medium.com/electron-labs/what-is-bdlc-and-how-it-works-5716fbbacde8
+- 轻客户端介绍： https://blog.ethereum.org/2015/01/10/light-clients-proof-stake/
