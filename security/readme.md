@@ -8,7 +8,6 @@
 - [Ethereum Smart Contract Security Best Practices](https://consensys.github.io/smart-contract-best-practices/)
 - [Examples of Solidity security issues](https://github.com/crytic/not-so-smart-contracts)
 - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
-- [chainflag](https://chainflag.org/challenges)
 
 ## Solidity security wargame
 
@@ -17,8 +16,11 @@
 - [EtherHack](https://etherhack.positive.com/#/)
 - [Security Innovation Blockchain CTF](https://blockchain-ctf.securityinnovation.com/)
 - [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/)
- - [Chain Flag](https://chainflag.org/)
-- [paper](https://arxiv.org/pdf/2110.12162.pdf)
+- [ChainFlag](https://chainflag.org/)
+
+## Paper
+- [Diving Into Blockchain’s Weaknesses:
+An Empirical Study of Blockchain System Vulnerabilities](https://arxiv.org/pdf/2110.12162.pdf)
 
 ## Security analysis tool
  - 反解析solidity https://www.4byte.directory/
