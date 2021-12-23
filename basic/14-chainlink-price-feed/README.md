@@ -82,11 +82,11 @@ Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证呃�
    ```
 
 3. 使用小狐狸向合约转账 Link token 作为调用随机函数的费用。在 kovan 网络下，合约每次调用随机函数花费 0.1Link，转账适量即可。
-4. 将打印出来的合约部署地址，贴到测试脚本中，运行测试脚本
+4. 将打印出来的合约部署地址，添加到 .env 文件中，运行测试脚本
 
    ```js
-   // ./test/RandomNumberConsumer.test.js
-   const addr = 'xxxx'; // <--- you need fill this
+   // .env
+   RandomNumberConsumer_ADDRESS=xxxx; // <--- you need fill this
    ```
 
    运行测试脚本

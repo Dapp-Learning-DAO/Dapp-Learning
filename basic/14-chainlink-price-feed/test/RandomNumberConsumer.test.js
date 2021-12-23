@@ -5,9 +5,9 @@ require('dotenv').config();
 const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${process.env.INFURA_ID}`);
 const { abi: RandomNumberConsumerABI } = require('../artifacts/contracts/RandomNumberConsumer.sol/RandomNumberConsumer.json');
 
-const addr = ''; // <--- you need fill this
+const addr = process.env.RandomNumberConsumer_ADDRESS; // <--- you need fill this
 if (!addr) {
-  console.log('Please set the contract address in addr.');
+  console.log('Please set the contract address in .env file.');
   return;
 }
 let randomNumberConsumer, user1;
