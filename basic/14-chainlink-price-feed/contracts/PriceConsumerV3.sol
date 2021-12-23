@@ -1,6 +1,7 @@
-pragma solidity ^0.6.6;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract PriceConsumerV3 {
 
@@ -11,8 +12,8 @@ contract PriceConsumerV3 {
      * Aggregator: ETH/USD
      * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
      */
-    constructor(address _priceFeed) public {
-        priceFeed = AggregatorV3Interface(_priceFeed);
+    constructor() {
+        priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
     }
 
     /**
