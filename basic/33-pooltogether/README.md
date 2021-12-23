@@ -23,5 +23,3 @@ github 仓库:  https://github.com/pooltogether/documentation/blob/master/resour
 项目介绍:  https://www.chainnews.com/articles/517264806415.htm  
 twitter: https://twitter.com/PoolTogether_  
 medium: https://medium.com/pooltogether  
-Discord: https://t.co/qAQbalbLER
-Telegram: https://t.co/7VuLCu8unu
