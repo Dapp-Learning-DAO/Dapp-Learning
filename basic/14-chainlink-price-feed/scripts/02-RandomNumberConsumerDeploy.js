@@ -14,7 +14,7 @@ async function main() {
   console.log('----------------------------------------------------');
   console.log('RandomNumberConsumer address:', instance.address);
   console.log('Now you need transfer Link token to this contract address.')
-  console.log('Then run the test script file.')
+  console.log('Then add address to .env file, and run the test script file.')
 
 }
 

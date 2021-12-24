@@ -19,7 +19,10 @@ contract RandomNumberConsumer is VRFConsumerBase {
     uint256 internal fee;
     
     uint256 public randomResult;
-    
+
+    event RequestId(address, bytes32);
+    event FulfillRandomness(bytes32, uint256);
+
     /**
      * Constructor inherits VRFConsumerBase
      * 
@@ -44,7 +47,9 @@ contract RandomNumberConsumer is VRFConsumerBase {
      */
     function getRandomNumber() public returns (bytes32 requestId) {
         require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
-        return requestRandomness(keyHash, fee);
+        requestId = requestRandomness(keyHash, fee);
+        emit RequestId(msg.sender, requestId);
+        return requestId;
     }
 
     /**
@@ -52,6 +57,9 @@ contract RandomNumberConsumer is VRFConsumerBase {
      */
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
         randomResult = randomness;
+        emit FulfillRandomness(requestId, randomness);
+        // If your fulfillRandomness function uses more than 200k gas, the transaction will fail.
+        // do something you want, like mint NFT...
     }
 
     // function withdrawLink() external {} - Implement a withdraw function to avoid locking your LINK in the contract
