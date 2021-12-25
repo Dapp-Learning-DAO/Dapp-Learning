@@ -10,7 +10,12 @@ Agora 全称 Agora Space, 希望创建无需 gas、多链、支持多平台的�
 
 ## Agora 有哪些功能
 
-Agora 目前开发出第一个工具: https://alpha.guild.xyz/ ，用来创建一个 guild，并可以指定哪些地址有资格加入，目前支持 8 个条件:
+Agora 目前开发出第一个工具: https://alpha.guild.xyz/ ，用来创建一个 guild:
+
+![](imgs/create-guild.png)
+
+
+并可以指定哪些地址有资格加入，目前支持 8 个条件:
 
 ![](imgs/guild-requirements.png)
 
