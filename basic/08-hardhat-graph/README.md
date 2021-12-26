@@ -57,18 +57,26 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
     输入你的项目名称(例如 TEST01)，以下称之为 `<SUBGRAPH_NAME>`，点击 continue 按钮，之后会跳转到 subgraph 的项目主页
 
+    注：最新版的 Graph CLI 仅支持在 mainnet 和 rinkeby 上部署，若要在其他网络上使用，需要使用 Github 账户登录后在 Hosted Service 上创建和部署
+
 5. 开发和部署 subgraph
 
-    先使用 yarn 在全局安装 Graph CLI（注意，此处需安装 0.21.0 版本，最新版 0.22.0 无法部署在测试网上）
+    先使用 yarn 在全局安装 Graph CLI
 
     ```bash
-    yarn global add @graphprotocol/graph-cli@0.21.0
+    yarn global add @graphprotocol/graph-cli
     ```
 
 6. 初始化配置:
 
     ```bash
     graph init --studio <SUBGRAPH_NAME>
+    ```
+
+    若使用 Hosted Service，则初始化命令如下：
+
+    ```bash
+    graph init --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>
     ```
 
     - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
@@ -199,6 +207,12 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
       graph auth --studio <DEPLOY KEY>
       ```
 
+      若使用 Hosted Service，则初始化命令如下：
+
+      ```bash
+      graph auth --product hosted-service <ACCESS_TOKEN>
+      ```
+
     - 进入 subgraph 的本地目录
 
       ```bash
@@ -215,6 +229,12 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
       ```bash
       graph deploy --studio <SUBGRAPH_NAME>
+      ```
+
+      若使用 Hosted Service，则初始化命令如下：
+
+      ```bash
+      graph deploy --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>
       ```
 
       - 这里必须输入 `Version Label` , 比如`0.0.1`， 否则会报错提示 `You must provide a version label.`
@@ -238,7 +258,6 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 注意：如果是最新的mac（big sur系统）,在安装docker的时候，不能使用brew cask install docker命令，具体原因参考链接：https://www.jianshu.com/p/50037be9c00d
 
-
 ```yaml
 graph-node:
    image: graphprotocol/graph-node
@@ -257,7 +276,7 @@ graph-node:
      postgres_pass: let-me-in
      postgres_db: graph-node
      ipfs: 'ipfs:5001'
-     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修（如果是本地可以不需要修改）
+     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修改（如果是本地可以不需要修改）
      RUST_LOG: info
 ```
 
@@ -272,16 +291,17 @@ docker-compose -f docker-compose.yml up -d
 ```
 
 3. 编译 subgraph  
-   进入 subgraph 的本地目录运行下列命令
-   
-   由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network rinkeby
-因此，此处修改subgraph.yaml,修改内容不下：
+    进入 subgraph 的本地目录运行下列命令
+
+    由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network rinkeby
+
+    因此，此处修改subgraph.yaml，修改内容如下：
 
 ```bash
 dataSources:
   - kind: ethereum/contract
     name: SimpleToken
-    network: rinkeby  #此处需修为mainnet
+    network: rinkeby
     
 ```
 
