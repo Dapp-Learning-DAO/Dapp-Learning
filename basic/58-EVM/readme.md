@@ -30,6 +30,8 @@ value是账户信息（使用递归RLP编码）
 每个以太坊区块都有自己独立的交易树。一个区块包含许多交易。开采的区块永远不会更新；交易在区块中的位置永远不会改变。
 ![](./img/transactionTree.png)
 
+### SPV 
+
 ### 数据库选型
 以太坊的 Rust 客户端 Parity 使用 Rocksdb。而以太坊的 Go、C++ 和 Python 客户端都使用 leveldb。
 ethereumjs可以查看leveldb.
