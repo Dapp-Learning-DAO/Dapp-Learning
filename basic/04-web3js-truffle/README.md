@@ -48,7 +48,7 @@ truffle test
 ```
 
 这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
-执行 "truffle test ./test/simpletoken.js"
+执行 "truffle test ./test/simpletoken.js"。如果truffle test执行过程中出现：Could not find a compiler version matching 0.8.2等信息，但是查看truffle compile --list，发现truffle在此范内，尝试使用sudo truffle test，可能是由于权限的原因导致，具体是哪个文件的权限，暂时不可知。
 
 3. 编译合约
 
