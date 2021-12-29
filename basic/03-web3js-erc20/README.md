@@ -61,22 +61,22 @@ const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
 ```
 
 3) 获取二进制对象  
-在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象, 通过访问对象属性的方式提示 Incrementer 合约对象  
+在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象, 通过访问对象属性的方式提示 SimpleToken 合约对象  
 ```js
 const contractFile = tempFile.contracts["SimpleToken.sol"]["SimpleToken"];
 ```
 
 4) 导出对象  
-为了能使其他 js 文件使用 Incrementer 合约对象 , 我们需要对合约对象进行导出
+为了能使其他 js 文件使用 SimpleToken 合约对象 , 我们需要对合约对象进行导出
 ```js
 module.exports = contractFile;
 ```
 
 ## index.js 代码逻辑说明  
 1) 编译合约  
-导入 compile 文件中的 Incrementer 合约对象 
+导入 compile 文件中的 SimpleToken 合约对象 
 ```js
-const contractOfIncrementer = require("./compile");
+const contractFile = require("./compile");
 ```
 
 2) 读取私钥  
