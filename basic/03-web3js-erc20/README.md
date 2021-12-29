@@ -38,7 +38,7 @@ const source = fs.readFileSync("SimpleToken.sol", "utf8");
 ```
 
 2) 进行合约编译    
-这里进行编译动作. 把 sol 源码编译为 solidity 对象. 这里需要注意的是不同的 sol 源码版本, 编译的方式可能稍有不同, 这里因为 "Incrementer.sol" 对应的是 sol 是 0.8.0 版本, 所以我们可以使用如下的方式进行编译 
+这里进行编译动作. 把 sol 源码编译为 solidity 对象. 这里需要注意的是不同的 sol 源码版本, 编译的方式可能稍有不同, 这里因为 "SimpleToken.sol" 对应的是 sol 是 0.8.0 版本, 所以我们可以使用如下的方式进行编译 
 ```js 
 // compile solidity
 const input = {
@@ -112,7 +112,7 @@ const account_from = {
 ```
 
 6) 获取 abi 和 bin  
-在部署合约的过程中, 我们会用到两个重要的参数, 合约对应的 bytecode 和 abi. 在步骤 1 的时候, 我们导入了编译后的 Incrementer 合约对象, 通过这个对象, 我们可以获取的合约对应的 bytecode 和 abi  
+在部署合约的过程中, 我们会用到两个重要的参数, 合约对应的 bytecode 和 abi. 在步骤 1 的时候, 我们导入了编译后的 SimpleToken 合约对象, 通过这个对象, 我们可以获取的合约对应的 bytecode 和 abi  
 ```js
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;

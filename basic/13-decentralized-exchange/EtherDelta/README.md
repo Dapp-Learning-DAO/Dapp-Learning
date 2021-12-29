@@ -86,24 +86,7 @@ mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔�
 ### 测试流程补全
 
 目前只实现了核心功能的测试，还有部分测试流程未升级，老测试文件参见 `./backup/test.old.js`
-
-尚未实现的测试事件
-
-- [ ] Should change the fee account and fail
-- [ ] Should change the fee account and succeed
-- [ ] Should change the make fee and fail
-- [ ] Should change the make fee and fail because the make fee can only decrease
-- [ ] Should change the make fee and succeed
-- [ ] Should change the take fee and fail
-- [ ] Should change the take fee and fail because the take fee can only decrease
-- [ ] Should change the take fee and fail because the take fee must exceed the rebate fee
-- [ ] Should change the take fee and succeed
-- [ ] Should change the rebate fee and fail
-- [ ] Should change the rebate fee and fail because the rebate fee can only increase
-- [ ] Should change the rebate fee and fail because the rebate fee must not exceed the take fee
-- [ ] Should change the rebate fee and succeed
-- [ ] Should change the admin account and fail
-- [ ] Should change the admin account and succeed
+**老版测试文件部分测试有误，建议以当前测试文件为准**
 
 ## 参考链接
 

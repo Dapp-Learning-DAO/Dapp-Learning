@@ -1,8 +1,18 @@
 {
-  "name": "DappLearn",
+  "name": "Dapp-Learning",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "This project is designed for people who have developed some foundational understandings of blockchain DAPP to further their knowledge in DeFi, NFT, DAO, CRYPTO projects.",
+  "author": "Dapp-Learning",
+  "keywords": [
+    "dapp",
+    "blockchain",
+    "ethereum",
+    "web3",
+    "Crypto",
+    "Solidity",
+    "Defi",
+    "DAO"
+  ],
   "license": "ISC",
   "dependencies": {
     "prettier": "^2.0.5"

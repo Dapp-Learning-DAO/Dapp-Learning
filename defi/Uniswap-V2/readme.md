@@ -8,6 +8,10 @@ Uniswap V2 前端代码解析-part 1:  https://www.bilibili.com/video/BV1Uv411N7
 # Uniswap V2
 
 ## Contract
+主要合约 :
+- `UniswapV2Router02`: 路由合约，负责跟用户交互；
+- `UniswapFactory`: 工厂合约，常见pair(即pool);
+- `UniswapPari`: 具体交易对合约，负责实际交易。
 
 ## SDK
 
@@ -35,7 +39,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 相关辅助数据
 - 相关引用
 
-详细内容请戳这里 :point_right: [UniswapV2 Interface Guid](./Interface/readme.md)
+详细内容请戳这里 :point_right: [UniswapV2 Interface Guide](./Interface/readme.md)
 
 ## 参考链接
 - 如何 Fork uniswap: https://www.youtube.com/watch?v=U3fTTqHy7F4   
@@ -44,3 +48,4 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 手把手教你开发去中心化交易所:  <https://www.bilibili.com/video/BV1jk4y1y7t9?p=1>  
 - 将UniswapV2部署到所有区块链—去中心化交易所Uniswap多链部署教学视频:  <https://www.bilibili.com/video/BV1ph411e7bT?p=1>  
 - V2交易界面: https://app.uniswap.org/#/swap?use=V2  
+- starli: https://learnblockchain.cn/article/1480

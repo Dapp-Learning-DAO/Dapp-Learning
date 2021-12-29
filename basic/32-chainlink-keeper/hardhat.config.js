@@ -12,9 +12,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 function mnemonic() {
-
-  return process.env.PRIVATE_KEY
- 
+  return process.env.PRIVATE_KEY;
  }
 
 // You need to export an object to set up your config
@@ -47,7 +45,7 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
-      mnemonic()
+        mnemonic()
       ],
     },
     kovan: {

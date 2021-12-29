@@ -292,3 +292,4 @@ SELECT DISTINCT(tablename) FROM pg_catalog.pg_tables
 - https://app.flipsidecrypto.com/velocity
 
 - https://glassnode.com/
+- 视频： https://ournetwork.mirror.xyz/gP16wLY-9BA1E_ZuOSv1EUAgYGfK9mELNza8cfgMWPQ 
