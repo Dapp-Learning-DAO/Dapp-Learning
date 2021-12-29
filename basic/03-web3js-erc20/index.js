@@ -8,7 +8,7 @@ const privatekey = process.env.PRIVATE_KEY;
    -- Define Provider & Variables --
 */
 
-const receiver = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
+const receiver = '0x43022a160cA0fc107328C2685679B6CF3Ef57e7a';
 
 // Provider
 const web3 = new Web3(
