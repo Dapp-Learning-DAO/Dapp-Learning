@@ -239,6 +239,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 1. 常用安全工具
  - [Slither](https://github.com/crytic/slither)
  - [Mythril](https://github.com/ConsenSys/mythril)
+ - [Securify](https://github.com/eth-sri/securify2)
 2. CTF 训练营
  - [Ethernaut](https://ethernaut.openzeppelin.com/)
  - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
