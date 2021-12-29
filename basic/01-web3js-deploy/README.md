@@ -4,8 +4,6 @@
 - 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建    
 https://ithelp.ithome.com.tw/articles/10202794   
 
-- 为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
-
 - 同时在 BiliBili 上有上传本样例代码的讲解演示:   
 https://www.bilibili.com/video/BV1Y44y1r7E6/
 
@@ -21,7 +19,16 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 npm install
 ```
 
-2) 执行 index.js
+2) 配置 .env
+```
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3） 执行 index.js
 ```
 node index.js
 ```

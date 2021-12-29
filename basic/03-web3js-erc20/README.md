@@ -1,7 +1,5 @@
 ## 前言  
 本样例演示了 ERC20 合约的基本调用, 让开发者了解 ERC20 合约的基本接口
-
-为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
 ## SimpleToken 合约功能说明   
 - IERC20
 totalSupply:  获取该合约内总的 ERC20 Token 总量  
@@ -17,14 +15,21 @@ symbol:       返回 Token 的符号
 decimals:     返回 Token 所支持的精度  
 
 ## 测试流程
-1. 安装依赖
-
+1. 安装依赖  
 ```
 npm install
 ```
 
-2. 执行测试
+2. 配置 .env  
+```
+cp .env.example .env
 
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3. 执行测试  
 ```
 node index.js
 ```
@@ -177,14 +182,12 @@ erc20Contract.methods.balanceOf(receiver).call().then((result)=>{
       console.log(`The balance of receiver is ${result}`);
    })
 ```
-## 参考文档
 
-mocha 测试框架：
-http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
-https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95
-
-infura 不支持 sendTransaciton,只支持 sendRawTransaction:
-
-Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。我之前提供的示例也可以在 infura 中运行 :)
-
+## 
+## 参考文档  
+- mocha 测试框架： http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
+https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
+- infura 不支持 sendTransaciton,只支持 sendRawTransaction:  
+Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。
+infura 不支持 eth_sendTransaction 的说明:   
 https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura
