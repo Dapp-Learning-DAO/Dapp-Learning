@@ -79,13 +79,15 @@ describe("AuctionFixedPrice contract", function() {
         const endTime = timestamp + 3600*1000;
         await auctionContract.createTokenAuction(myerc721.address, erc721Id, hardhatToken.address, 100, endTime);
 
+        var auctionDetails = await auctionContract.tokenToAuction(myerc721.address, erc721Id);
+
         let tokenAlice = hardhatToken.connect(Alice)
         await tokenAlice.approve(auctionContract.address, 1000);
         let allow = await  hardhatToken.allowance(Alice.address, auctionContract.address);
         console.log("alice allowans ", allow.toNumber());
 
         let auctionFixedPriceAlice = auctionContract.connect(Alice);
-        await auctionFixedPriceAlice.purchaseNFTToken(myerc721.address, erc721Id);
+        await auctionFixedPriceAlice.purchaseNFTToken(myerc721.address, erc721Id, auctionDetails.price);
 
         let erc721IdOwner = await  myerc721.ownerOf(erc721Id);
         console.log(erc721IdOwner)

@@ -47,9 +47,11 @@ contract AuctionFixedPrice is IERC721Receiver {
     /**
        Purchaser buy the NFT Token when the auction duration is not over the limit
     */
-    function purchaseNFTToken(address _nft, uint256 _tokenId) external {
+    function purchaseNFTToken(address _nft, uint256 _tokenId, uint256 _price) external {
         auctionDetails storage auction = tokenToAuction[_nft][_tokenId];
         require(auction.duration > block.timestamp, "Deadline already passed");
+        //Fix the bug, when the user makes a purchase, someone may add gas to complete the transaction, and then place an order at a high price
+        require(_price == auction.price, "invalid price");
      //   require(auction.seller == msg.sender);
         require(auction.isActive);
         auction.isActive = false;
