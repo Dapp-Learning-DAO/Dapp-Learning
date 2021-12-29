@@ -89,7 +89,7 @@ const abi = contractFile.abi;
 这里我们使用 kovan 测试网络. 如果没有 kovan 网络的测试币, 可以切换到其他的测试网络. 
 同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档 
 ```js
-// Create web3 with kovan provider，you can fix kovan to other testnet
+// Create web3 with kovan provider，you can change kovan to other testnet
 const web3 = new Web3(
   "https://kovan.infura.io/v3/" + process.env.INFURA_ID
 );
@@ -147,7 +147,9 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
 
 ## 参考文档
 - Web3js官方文档：
-  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html  
+  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html
+- Web3js中文文档(1.2.6):
+  https://learnblockchain.cn/docs/web3.js/web3-eth-contract.html
 - 样例代码参考如下链接 
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
 - Web3js使用参考文档:  

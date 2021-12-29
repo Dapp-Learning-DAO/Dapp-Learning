@@ -280,3 +280,4 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 - hardhat 中文文档: <https://learnblockchain.cn/docs/hardhat/getting-started/>
 - ethers.js 和 hardhat 基础使用讲解: <https://www.bilibili.com/video/BV1Pv411s7Nb>
 - <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>
+- erc20 openzepplin介绍: <https://segmentfault.com/a/1190000015400380>

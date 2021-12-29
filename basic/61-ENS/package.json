@@ -1,0 +1,12 @@
+{
+  "name": "61-ENS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test-ethers": "node src/ethers-ens/index.js"
+  },
+  "devDependencies": {
+    "ethers": "^5.5.2"
+  }
+}

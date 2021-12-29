@@ -15,6 +15,8 @@ https://nonfungible.com
 https://coinmarketcap.com/zh/nfts/
 https://www.feixiaohao.com/concept/41.html
 
+https://ftx.us/nfts
+
 ## 参考链接
 
 - [Tools](https://mp.weixin.qq.com/s/DrLCx2L7PgjsAWoYnF8Ysw)
@@ -26,3 +28,5 @@ https://www.feixiaohao.com/concept/41.html
 - NFT 游戏: https://axie.substack.com/p/axs-strategic-sale   
 - NFT收藏家6529关于NFT、meme、监管、他的收藏观点: https://twitter.com/punk6529/status/1429399888786333697  
 - mateverse: https://arxiv.org/abs/2110.05352  
+- [从0到1: 精通 NFT](https://www.yuque.com/books/share/a8a2de86-76de-4531-8486-ac3d40944557)
+
