@@ -190,5 +190,5 @@ infura 不支持 eth_sendTransaction 的说明:
 https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura 
 
 ## 参考文档  
-- mocha 测试框架： http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
-https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
+- Mocha 实例教程: http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html    
+- Mocha 技术笔记:  https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
