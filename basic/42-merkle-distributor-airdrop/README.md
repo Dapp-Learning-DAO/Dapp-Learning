@@ -105,6 +105,7 @@ npx hardhat test
 
 ## 参考链接
 
+- https://github.com/Anish-Agnihotri/merkle-airdrop-starter
 - https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts
 - https://github.com/miguelmota/merkletreejs
 - erc20 merkel drop: https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol
