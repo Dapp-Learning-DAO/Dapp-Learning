@@ -183,11 +183,12 @@ erc20Contract.methods.balanceOf(receiver).call().then((result)=>{
    })
 ```
 
-## 
+## 特别说明  
+infura 不支持 sendTransaciton,只支持 sendRawTransaction:  
+Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。
+infura 不支持 eth_sendTransaction 的说明:   
+https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura 
+
 ## 参考文档  
 - mocha 测试框架： http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
 https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
-- infura 不支持 sendTransaciton,只支持 sendRawTransaction:  
-Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。
-infura 不支持 eth_sendTransaction 的说明:   
-https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura
