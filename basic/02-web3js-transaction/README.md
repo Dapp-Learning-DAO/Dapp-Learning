@@ -1,8 +1,6 @@
 ## 前言
 通过本样例代码，开发者了解到如何对交易进行签名，发送，接收交易回执，验证交易执行结果。同时，样例也提供了事件监听的逻辑代码，开发者可以了解如何对一个事件进行一次或多次监听
 
-为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
-
 ## 合约功能说明   
 constructor: 构造函数, 用于部署合约时调用, 同时在其中初始化了公共变量 number 的值  
 increment:   增值函数, 根据传入的数值 ( _value ), 对公共变量 number 进行增值 ( number + _value )   
@@ -15,7 +13,16 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 npm install
 ```
 
-2) 执行 index.js 脚本
+2) 配置 .env
+```
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3) 执行 index.js 脚本
 ```
 node index.js
 ```

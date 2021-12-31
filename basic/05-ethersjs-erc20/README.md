@@ -2,16 +2,13 @@
 本样例演示了使用 ethers.js 调用 ERC20 合约的开发流程
 
 ## 代码逻辑
-1) 私钥获取  
-为方便获取，在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
-
-2) ERC20 合约部署  
+1) ERC20 合约部署  
 通过 deploy.js 进行部署，样例中链接的测试网为 Kovan, 对应需要使用有 Ether 的账户进行发送
 
-3) 合约调用  
+2) 合约调用  
 调用 erc20 的 transfer, balanceof 接口, 验证合约部署结果
 
-4) 事件监听   
+3) 事件监听   
 之后使用 providerContract.once 和 providerContract.on 对 Transfer 事件进行一次和多次的监听
 
 
@@ -21,7 +18,16 @@
 npm install
 ```
 
-2) 执行测试
+2) 配置 .env  
+```
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3) 执行测试
 ```
 node index.js
 ```

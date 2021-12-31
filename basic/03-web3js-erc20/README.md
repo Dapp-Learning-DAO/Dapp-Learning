@@ -1,7 +1,5 @@
 ## 前言  
 本样例演示了 ERC20 合约的基本调用, 让开发者了解 ERC20 合约的基本接口
-
-为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
 ## SimpleToken 合约功能说明   
 - IERC20
 totalSupply:  获取该合约内总的 ERC20 Token 总量  
@@ -17,14 +15,21 @@ symbol:       返回 Token 的符号
 decimals:     返回 Token 所支持的精度  
 
 ## 测试流程
-1. 安装依赖
-
+1. 安装依赖  
 ```
 npm install
 ```
 
-2. 执行测试
+2. 配置 .env  
+```
+cp .env.example .env
 
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3. 执行测试  
 ```
 node index.js
 ```
@@ -61,22 +66,22 @@ const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
 ```
 
 3) 获取二进制对象  
-在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象, 通过访问对象属性的方式提示 Incrementer 合约对象  
+在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象, 通过访问对象属性的方式提示 SimpleToken 合约对象  
 ```js
 const contractFile = tempFile.contracts["SimpleToken.sol"]["SimpleToken"];
 ```
 
 4) 导出对象  
-为了能使其他 js 文件使用 Incrementer 合约对象 , 我们需要对合约对象进行导出
+为了能使其他 js 文件使用 SimpleToken 合约对象 , 我们需要对合约对象进行导出
 ```js
 module.exports = contractFile;
 ```
 
 ## index.js 代码逻辑说明  
 1) 编译合约  
-导入 compile 文件中的 Incrementer 合约对象 
+导入 compile 文件中的 SimpleToken 合约对象 
 ```js
-const contractOfIncrementer = require("./compile");
+const contractFile = require("./compile");
 ```
 
 2) 读取私钥  
@@ -177,14 +182,13 @@ erc20Contract.methods.balanceOf(receiver).call().then((result)=>{
       console.log(`The balance of receiver is ${result}`);
    })
 ```
-## 参考文档
 
-mocha 测试框架：
-http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
-https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95
+## 特别说明  
+infura 不支持 sendTransaciton,只支持 sendRawTransaction:  
+Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。
+infura 不支持 eth_sendTransaction 的说明:   
+https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura 
 
-infura 不支持 sendTransaciton,只支持 sendRawTransaction:
-
-Infura 不会触发 eth_sendTransaction 方法，因为此方法需要 ethereum 节点中未被锁定的账户。我之前提供的示例也可以在 infura 中运行 :)
-
-https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransaction-does-not-exist-is-not-available-on-infura
+## 参考文档  
+- Mocha 实例教程: http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html    
+- Mocha 技术笔记:  https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
