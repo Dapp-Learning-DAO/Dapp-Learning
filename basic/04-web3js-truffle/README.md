@@ -35,14 +35,12 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 
 ## 测试流程
 
-1. 安装 truffle
-
+1. 安装 truffle  
 ```bash
 npm install -g truffle
 ```
 
-2. 测试合约
-
+2. 测试合约  
 ```bash
 truffle test
 ```
@@ -50,8 +48,7 @@ truffle test
 这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
 执行 "truffle test ./test/simpletoken.js"
 
-3. 编译合约
-
+3. 编译合约  
 ```bash
 truffle compile
 ```
@@ -171,7 +168,5 @@ Private Keys:
 ```
 
 ## 参考资料
-
-- <https://learnblockchain.cn/docs/solidity/contracts.html>
-
-- <https://solidity-cn.readthedocs.io/zh/develop/>
+- solidity 合约: https://learnblockchain.cn/docs/solidity/contracts.html  
+- solidity 相关工具: https://solidity-cn.readthedocs.io/zh/develop/ 

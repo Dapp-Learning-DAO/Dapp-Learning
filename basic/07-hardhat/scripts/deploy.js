@@ -16,6 +16,9 @@ async function main() {
   const token = await Token.deploy('DappLearning', 'DL', 1, 100000000);
 
   console.log('Token address:', token.address);
+
+  let balance = await token.balanceOf(deployer.address);
+  console.log(balance.toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
