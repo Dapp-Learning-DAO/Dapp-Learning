@@ -2,7 +2,7 @@ let Web3 = require('web3');
 let solc = require('solc');
 let fs = require('fs');
 
-// Get privatekey from .env file
+// Get privatekey from environment
 require('dotenv').config();
 const privatekey = process.env.PRIVATE_KEY;
 
