@@ -192,3 +192,7 @@ https://ethereum.stackexchange.com/questions/70853/the-method-eth-sendtransactio
 ## 参考文档  
 - Mocha 实例教程: http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html    
 - Mocha 技术笔记:  https://pcaaron.github.io/pages/fe/block/improve4.html#%E8%B7%91%E6%B5%8B%E8%AF%95   
+<<<<<<< HEAD
+=======
+- ERC20 接口及合约说明：https://docs.openzeppelin.com/contracts/2.x/api/token/erc20
+>>>>>>> 7faac802 (sync with upstream)
