@@ -7,7 +7,7 @@
 + https://forefront.gitbook.io/forefront/incentives/content
 
 ## Open Dashboard
-+ All data is clear and transparency.
++ All data are clear and transparent.
 + https://www.forefront.club/dashboard
 
 ## Video from KOL
