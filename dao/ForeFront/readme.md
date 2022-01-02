@@ -1,5 +1,5 @@
 # One of three entrance and media-DAO
-+ As we know,BanklessDAO、Forefront、MediaDAO, holds the main entrance of the Media.
++ As we know,BanklessDAO、Forefront、MediaDAO, holds the main entrance of the Web3 Media.
 + let's see what they are.
 
 ## Incentive to write
