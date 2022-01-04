@@ -21,7 +21,7 @@
   开启一个 Hash 时间锁, 同时存入 ETH, 付款人各自在不同的链上调用, \_receiver 需要传入收款人的地址.
 
 ```solidity
- /**
+    /**
      * @dev Sender sets up a new hash time lock contract depositing the ETH and
      * providing the reciever lock terms.
      *
@@ -81,7 +81,7 @@ function newContract(address payable _receiver, bytes32 _hashlock, uint _timeloc
   收款人调用. 传入 contractID 和 Hash 对应的原始值后面, 收款人就可以收到对应的款项.
 
 ```solidity
-/**
+    /**
      * @dev Called by the receiver once they know the preimage of the hashlock.
      * This will transfer the locked funds to their address.
      *
@@ -109,7 +109,7 @@ function withdraw(bytes32 _contractId, bytes32 _preimage)
   付款人调用. 当收款人在规定的时间内没有调用 withdraw 提取款项时, 收款人可以调用这个 refund 方法把款项取回.
 
 ```solidity
-/**
+    /**
      * @dev Called by the sender if there was no withdraw AND the time lock has
      * expired. This will refund the contract amount.
      *
