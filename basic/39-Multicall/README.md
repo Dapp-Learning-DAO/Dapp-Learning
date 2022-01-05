@@ -15,7 +15,7 @@ call：通过合约ContractAddres.call(编码后的方法名和参数），返�
 delegatecall ：设计是为了调用其它合约的API用的,类似于 Copy了API合约的API函数到**本地合约**执行，会修改调用者合约的状态变量。
 
 staticcall： Since byzantium staticcall can be used as well. This is basically the same as call, but will revert if the called function modifies the state in any way
-
+eth.call方法可以在本地节点执行方法；
 
 
 ## Multicall.js
@@ -29,7 +29,9 @@ staticcall： Since byzantium staticcall can be used as well. This is basically 
  - Get new block updates
 
 
+
 ## 参考链接
 - github 仓库地址: https://github.com/ETHLend/Microstaking/blob/master/contracts/StakingContract.sol  
 - index finance: https://github.com/indexed-finance/dividends/tree/master/contracts
 - Solidity Call函数: https://www.jianshu.com/p/a5c97d0d7cae
+- https://zhuanlan.zhihu.com/p/35292014
