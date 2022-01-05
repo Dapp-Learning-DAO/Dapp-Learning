@@ -113,7 +113,7 @@ positionNotional = positonSize * price
 
 unrealizedPnlForLongPosition = positionNotional - openNotional
 
-badDebt = ealizedPnl + realizedFundingPayment + margin；
+badDebt = realizedPnl + realizedFundingPayment + margin；
 
 仓位数据结构
 ```

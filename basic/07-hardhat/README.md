@@ -20,6 +20,11 @@ Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务
 
 ## 项目结构和配置 hardhat
 
+```sh
+npm install --save-dev hardhat  // 安装hardhat
+npx hardhat                     // 创建hardhat项目
+```
+
 ### 项目结构
 
 一个标准的使用 hardhat 构建的项目通常是这样的：
