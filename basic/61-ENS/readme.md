@@ -37,7 +37,16 @@ ENS主要有两个组件：
    - ENS 注册表是 ENS 系统中的核心合约，所有的 ENS 查询都从注册表开始。注册表负责管理域名列表，记录每个域名的所有者、解析器和 TTL ，并允许域名的所有者对这些数据进行更改
 3. 使用 [resolver 接口](https://github.com/ensdomains/resolvers/blob/master/contracts/Resolver.sol) ，在第 2 步返回的解析器地址上调用 `addr()` ，并将第1步输出的哈希作为参数传递。
 
+## 测试步骤  
+- 安装依赖  
+```
+yarn
+```
 
+- 执行测试脚本  
+```
+node src/ethers-ens/index.js
+```
 
 ## 参考链接
 
