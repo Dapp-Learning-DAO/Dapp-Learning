@@ -23,7 +23,9 @@ def main():
     tx_hash = my_contract.constructor(100 * 10**18).transact({'from': w3.eth.accounts[3]})
 
     # 建立合约的第二种方法
-    contract_data = my_contract.constructor(100 * 10**18).buildTransaction()
+    contract_data = my_contract.constructor(100 * 10**18).buildTransaction({
+      "gasPrice": w3.eth.gas_price, 
+    })
     tx_hash2 = w3.eth.send_transaction(contract_data)
 
     # 2.3 查看交易状态等，返回中会包括合约创建者地址，合约地址等关键信息

@@ -117,7 +117,7 @@ const abi = contractOfIncrementer.abi;
 ```
 
 6) 构造合约实例 
-在步骤 3 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
+在步骤 5 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
 ```js
 // Create contract instance
   const deployContract = new web3.eth.Contract(abi);
