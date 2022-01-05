@@ -4,22 +4,60 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+const { createWatcher } = require("@makerdao/multicall");
 
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+    const MKR_TOKEN = '0xaaf64bfcc32d0f15873a02163e7e500671a4ffcd';
+    const MKR_WHALE = '0xdb33dfd3d61308c33c63209845dad3e6bfb2c674';
+    const MKR_FISH = '0x2dfcedcb401557354d0cf174876ab17bfd6f4efd';
+    // Preset can be 'mainnet', 'kovan', 'rinkeby', 'goerli' or 'xdai'
+    const config = {
+      rpcUrl: 'https://kovan.infura.io',
+      multicallAddress: '0xc49ab4d7de648a97592ed3d18720e00356b4a806'
+    };
+    // Create watcher
+    const watcher = createWatcher(
+      [
+        {
+          target: MKR_TOKEN,
+          call: ['balanceOf(address)(uint256)', MKR_WHALE],
+          returns: [['BALANCE_OF_MKR_WHALE', val => val / 10 ** 18]]
+        }
+      ],
+      config
+    );
+    
+    console.log("---------------");
+    // Subscribe to state updates
+    watcher.subscribe(update => {
+    console.log(`Update: ${update.type} = ${update.value}`);
+    });
+    
+    // Subscribe to batched state updates
+    watcher.batch().subscribe(updates => {
+      // Handle batched updates here
+      // Updates are returned as { type, value } objects, e.g:
+      // { type: 'BALANCE_OF_MKR_WHALE', value: 70000 }
+    });
+    
+    // Subscribe to new block number updates
+    watcher.onNewBlock(blockNumber => {
+      console.log('New block:', blockNumber);
+    });
+    
+    // Start the watcher polling
+    watcher.start();
+   
+   function sleep (time) {
+      return new Promise((resolve) => setTimeout(resolve, time));
 
-  // We get the contract to deploy
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  
+  }
 
-  await greeter.deployed();
+  await sleep(3000);
+  
 
-  console.log("Greeter deployed to:", greeter.address);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
