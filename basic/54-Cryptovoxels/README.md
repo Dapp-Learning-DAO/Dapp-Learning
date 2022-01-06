@@ -1,4 +1,4 @@
-# cryptovoxels 网站功能
+# cryptovoxels 网站功能(TO DELETE))
 
 1. 首页或 Explore
    是简介和 cryptovoxels 的入口, 点击 play 进入 cryptovoxels
