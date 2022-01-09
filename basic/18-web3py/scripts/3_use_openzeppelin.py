@@ -35,7 +35,9 @@ def main():
     # 使用buildTransaction会生成一个字典，包括多个字段，
     # 其中'data' 中包括基于该函数的ABI和函数名及函数参数生成相应的二进制数据
     # 与使用Contract.encodeABI是一样的结果
-    transaction_data = contract.functions.name().buildTransaction()
+    transaction_data = contract.functions.name().buildTransaction({
+      "gasPrice": w3.eth.gas_price, 
+    })
     encoded_function_bytecode = contract.encodeABI(fn_name='name', args=None)
 
     assert transaction_data['data'] == encoded_function_bytecode

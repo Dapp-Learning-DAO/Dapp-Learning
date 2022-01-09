@@ -117,7 +117,7 @@ const abi = contractOfIncrementer.abi;
 ```
 
 6) 构造合约实例 
-在步骤 3 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
+在步骤 5 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
 ```js
 // Create contract instance
   const deployContract = new web3.eth.Contract(abi);
@@ -195,7 +195,7 @@ const resetcReceipt = await web3.eth.sendSignedTransaction(
 
 14) 监听事件  
 在合约接口调用中, 除了接口返回的结果外, 唯一能获取接口处理中间信息的方法便是 "事件" .  
-在接口中, 通过出发一个事件, 然后在外部捕获区块产生的事件, 就可以获取相应的内部信息  
+在接口中, 通过触发一个事件, 然后在外部捕获区块产生的事件, 就可以获取相应的内部信息  
 - 一次性事件监听器  
 如下, 在合约实例上调用 once 接口, 传入监听的事件为 "Increment",  就生成了一个一次性的事件监听器. 当有 "Increment" 触发时, 就会打印相应的提示信息 
 ```js
