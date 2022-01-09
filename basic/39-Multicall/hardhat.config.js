@@ -21,6 +21,9 @@ module.exports = {
   networks: {
     hardhat: {
     },
+    kovan: {
+      url: `https://kovan.infura.io/v3/${process.env.INFURA_ID}`,
+    },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
     },
