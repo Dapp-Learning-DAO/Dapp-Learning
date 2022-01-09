@@ -213,6 +213,9 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 03. Loot NFT Distribute
+- 04. [Rarible](https://docs.rarible.org/overview/union/)
+- 05. [Zora](https://docs.zora.co/)
+- 06. [Alchemy](https://www.alchemy.com/nft-api)
 
 ## DAO 进阶
 
