@@ -150,7 +150,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
-58. [Ethereum Virtual Machine Opcodes](basic/58-opcode/readme.md) ⌛
+58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
 60. [web3.0 dapp](basic/59-web3-dapp) ⌛
 61. [ENS](https://app.ens.domains/) ⌛
 62. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
