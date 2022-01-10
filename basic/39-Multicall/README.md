@@ -1,7 +1,9 @@
-# Multicall  
-我们在获取合约中数组时一般是采用的遍历的方法, 这个好像没什么太大问题. 但是如果提供节点服务的供应商对访问有限速, 那这种遍历的方法就挺蛋疼的.  
-使用 multicall 合约, 可以聚合来自多个合约的调用结果, 减少需要发送的单独的JSON RPC请求的数量（如果使用像Infura这样的远程节点, 特别有用）, 同时也提供了保证, 所有返回的值都来自同一个区块（像原子读取).
-下面将将介绍两种 multicall JS 库, Multicall.js 和  indexed-finance-multicall.js
+# Multicall 
+Multicall aggregates results from multiple contract constant function calls.
+This reduces the number of separate JSON RPC requests that need to be sent (especially useful if using remote nodes like Infura), while also providing the guarantee that all values returned are from the same block (like an atomic read) and returning the block number the values are from (giving them important context so that results from old blocks can be ignored if they're from an out-of-date node).
+
+This smart contract is intended to be used with Multicall.js in front-end dapps.
+
 
 ## 合约调用方法
 合约之间的调用有 2 种方式： 底层的 call 方式和 new 合约的方式   
