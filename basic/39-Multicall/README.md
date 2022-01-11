@@ -1,14 +1,17 @@
 # Multicall 
-Multicall aggregates results from multiple contract constant function calls.
+Multicall aggregates results from multiple contract **constant function calls**.
 This reduces the number of separate JSON RPC requests that need to be sent (especially useful if using remote nodes like Infura), while also providing the guarantee that all values returned are from the same block (like an atomic read) and returning the block number the values are from (giving them important context so that results from old blocks can be ignored if they're from an out-of-date node).
 
-This smart contract is intended to be used with Multicall.js in front-end dapps.
+This smart contract is intended to be used with **Multicall.js** in front-end dapps
 
 
 ## 合约调用方法
 合约之间的调用有 2 种方式： 底层的 call 方式和 new 合约的方式   
+
 call：通过合约 ContractAddres.call(编码后的方法名和参数），返回调用是否成功，以及返回值 data   
+
 delegatecall ：设计是为了调用其它合约的 API 用的,类似于 Copy 了 API 合约的 API 函数到**本地合约**执行，会修改调用者合约的状态变量。   
+
 staticcall： Since byzantium staticcall can be used as well. This is basically the same as call, but will revert if the called function modifies the state in any way
 eth.call 方法可以在本地节点执行方法；
 
