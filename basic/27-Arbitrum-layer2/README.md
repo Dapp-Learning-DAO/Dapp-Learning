@@ -26,6 +26,22 @@ Optimism 的争议解决过程比 Arbitrum 更简单、更快捷，因为它只�
 AVM 与 EVM 的不同：
 AVM 既支持执行交易，又支持证明（L1 合约相信某个断言是真的）
 
+## 开发
+### L1 to L2 messaging
+https://github.com/OffchainLabs/arbitrum-tutorials/tree/master/packages/greeter
+### L2 to L1 messaging
+https://github.com/OffchainLabs/arbitrum-tutorials/tree/master/packages/outbox-execute
+
+### Gotchas
+Block Numbers: Arbitrum vs. Ethereum
+一个以太坊block可能包含多个arbi的多个block
+blocktimestamp使用的是layer1的；
+
+一些常用地址：
+https://developer.offchainlabs.com/docs/useful_addresses
+
+
+
 ## 执行测试
 
 - 安装依赖

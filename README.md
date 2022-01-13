@@ -139,7 +139,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
+35. [StarkNet](https://starkware.co/starknet/) ⬜
+欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 36. [NFT FileCoin](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
@@ -169,12 +170,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
 64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
-66. [Kleros](https://kleros.io/) 
-67. [Go-Ethereum Code Analysis](https://geth.ethereum.org/)  
-68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)   
-69. [Tenderly](https://dashboard.tenderly.co/explorer)  
+66. [Kleros](https://kleros.io/)
+67. [Go-Ethereum Code Analysis](https://geth.ethereum.org/) 
+68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
+69. [Decentralized OTC](https://github.com/DOTCPro)  
+70. [Tenderly](https://dashboard.tenderly.co/explorer)  
+71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 
-欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
 ## 项目任务
 
