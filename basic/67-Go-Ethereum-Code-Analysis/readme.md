@@ -4,6 +4,7 @@
 ## 白皮书
 https://godorz.info/2021/10/ethereum-yellow-paper/
 https://mirror.xyz/0x56706F118e42AE069F20c5636141B844D1324AE1/Muq3LyriRK731jEj4jz3halgSu8BIlag4_637-hkeEg
+
 ## 共识算法
 
 ## 网络模块
@@ -15,3 +16,4 @@ https://mirror.xyz/0x56706F118e42AE069F20c5636141B844D1324AE1/Muq3LyriRK731jEj4j
 
 
 ## 参考链接
+laizy以太坊源码解析： https://github.com/laizy/ethereum-review
