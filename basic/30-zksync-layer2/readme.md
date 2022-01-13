@@ -2,6 +2,13 @@
 
 [主页](https://github.com/matter-labs/zksync)
 
+## ZK-Rollup
+zkRollup在链下利用Merkle tree存储账户状态，由Operator收集用户的交易，交易收集完成后Operator会执行每个交易（校验余额，校验nonce，校验签名，执行状态转换），当交易执行完成后会产生一个新的Merkle tree Root，为了证明链下状态转移是正确的，Operator会在交易执行完成后生成一个零知识证明的proof。
+Operator执行交易后本地的merkle tree root会由prev state root转换成post state root。  
+![zkrollup](./imgs/zkrollup.png)
+
+
+
 ## 基本架构
 
 zkSync 的基本组成有：
@@ -24,10 +31,10 @@ Server application 的职能主要有：
 
 ## 参考链接
 
-https://zhuanlan.zhihu.com/p/363029544
+- 一文读懂 Layer2 方案 zkSync 基本原理https://zhuanlan.zhihu.com/p/363029544
 
-https://www.jianshu.com/u/ac3aed07477e
+- zksync 源码分析： https://www.jianshu.com/u/ac3aed07477e
 
-https://zhuanlan.zhihu.com/p/343212894
+- 李星L2 - zkSync源代码导读： https://zhuanlan.zhihu.com/p/343212894
 
-https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
+-  以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
