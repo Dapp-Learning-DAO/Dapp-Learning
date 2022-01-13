@@ -50,7 +50,7 @@ performUpkeep 用于执行具体的业务逻辑, 或是调用其他的合约处�
 - 注册 keeper  
   前往 [ChainLink 官网](https://docs.chain.link/docs/chainlink-keepers/register-upkeep/) 上点击 "ChainLink Keeper App", 然后根据提示进行注册即可.  
   这里需要注意的是, 运行 keeper 最少需要注入 75 的 LinK 测试币
-  ![keeper](./images/keeper.png)
+  <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/32-chainlink-keeper/keeper.png?raw=true" /></center>
 
 - 检查结果  
   keeper 运行一段时间后, 就可以检查结果. 执行如下脚本, 检查输出是否正确

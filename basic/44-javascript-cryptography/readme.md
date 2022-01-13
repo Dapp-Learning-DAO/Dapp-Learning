@@ -22,7 +22,7 @@ yarn start
 
 > 点击 RandomNumber 标签页, 然后点击 "Generate Random Number" 按钮, 就可以看到生成的随机数
 
-![随机数生成](./images/RandomNumber.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/44-javascript-cryptography/RandomNumber.png?raw=true" /></center>
 
 - AES-GCM 算法  
   点击 AES-GCM 标签页
@@ -31,7 +31,7 @@ yarn start
 > 2) 点击 "Encrypt"
 > 3) 点击 "Decrypt"
 
-![随机数生成](./images/AES-GCM.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/44-javascript-cryptography/AES-GCM.png?raw=true" /></center>
 
 - SHA-256  
   点击 SHA-256 标签页
@@ -39,7 +39,7 @@ yarn start
 > 1) 在 "Message" 输入框中输入原始信息
 > 2) 点击 "Hashing the message"
 
-![随机数生成](./images/SHA-256.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/44-javascript-cryptography/SHA-256.png?raw=true" /></center>
 
 - Sign && Verify  
   点击 SignAndVeryify 标签页
@@ -49,7 +49,7 @@ yarn start
 > 3) 点击 "Sign Message"
 > 4) 点击 "Verify Result"
 
-![随机数生成](./images/SignAndVerify.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/44-javascript-cryptography/SignAndVerify.png?raw=true" /></center>
 
 - ECDH  
   点击 ECDH 标签页
@@ -58,7 +58,7 @@ yarn start
 > 2) 点击 "Generate Bob Public Key"
 > 3) 点击 "Compute And Verify Key"
 
-![随机数生成](./images/ECDH.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/44-javascript-cryptography/ECDH.png?raw=true" /></center>
 
 ## 参考文档
 
