@@ -25,7 +25,7 @@ node scripts/nftStorage-uploadfile
 
 - 在 infura 上创建 ipfs 工程  
   登陆 infura, 然后进入 Dashboard, 之后在 "IPFS" 标签页中创建 IPFS 工程
-  ![./images/ipfs-infura.png](./images/ipfs-infura.png)
+  <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/36-nft-ipfs/ipfs-infura.png?raw=true" /></center>
 
 - 获取 "PROJECT ID" 和 "PROJECT SECRET"  
   点击刚才创建的 IPFS 工程, 然后获取其中的 "PROJECT ID" 和 "PROJECT SECRET"
