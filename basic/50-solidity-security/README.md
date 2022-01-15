@@ -7,7 +7,7 @@
 
 Mythril 是一个以太坊官方推荐的智能合约安全分析工具，使用符合执行来检测智能合约中的各种安全漏洞，在 Remix、Truffle 等 IDE 里都有集成。
 其包含的安全分析模型如下,具体可参考 [链接](https://learnblockchain.cn/article/1283)  
-![安全分析模型](./images/securityModule.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/securityModule.png?raw=true" /></center>
 
 - 安装 ( docker 方式 )
 
@@ -97,7 +97,7 @@ slither Suicidal.sol --solc /usr/bin/solc-v0.5.13
 ```
 
 输入结果如下
-![安全分析模型](./images/slither.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/slither.png?raw=true" /></center>
 
 ## MythX
 
@@ -105,7 +105,7 @@ mythX 是一个付费工具, 支持命令行, vscode 插件等形式进行分析
 可参考 [官网](https://docs.mythx.io/) 操作指导进行操作.  
 进行正确配置后, 就可以进行 solidity 文件漏洞扫描了, 这里以 vscode 为例, 扫描结果如下.  
 总的来说, 毕竟是付费的, 体验还是很不错的 ^\_^
-![安全分析模型](./images/scanResult.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/scanResult.png?raw=true" /></center>
 
 ## Solgraph
 

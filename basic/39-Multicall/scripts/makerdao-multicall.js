@@ -43,6 +43,8 @@ const config = {
 
   watcher.batch().subscribe((updates) => {
     // Handle batched updates here
+    // Updates are returned as { type, value } objects, e.g:
+    // { type: 'BALANCE_OF_MKR_WHALE', value: 70000 }
   });
 
   watcher.onNewBlock((blockNumber) => {
