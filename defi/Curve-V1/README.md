@@ -17,4 +17,5 @@
 - <https://github.com/curvefi/curve-crypto-contract/tree/master/contracts/matic>
 - curve投票  https://tokenbrice.xyz/crv-wars/#sdvecrv-vs-cvxcrv  
 - imtoken介绍：https://imtoken.fans/t/topic/16656/4
+- Curve帝国编年简史：资本永不眠: https://mirror.xyz/cryptolunatic.eth/uKjxSopOVcMFyvttJWDcCKkfu-Jp_iaEXxDNql2vf6w
 
