@@ -8,7 +8,7 @@ Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接
 - URI ETH 跨链  
 Optimism 测试网络链接的是 kovan 网, 在 Optimistic 测试网路上进行交易前, 需要把 kovan 网络的 ETH 经过跨链桥跨到 optimism. 
 访问 Optimism 的 gateway, 选择 "Deposite" , 在其中输入跨链的 ETH 数量   
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/balance.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/deposite.png?raw=true" /></center>
 
 
 - 等待资产跨链成功  
