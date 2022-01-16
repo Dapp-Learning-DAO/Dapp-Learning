@@ -8,16 +8,17 @@ Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接
 - URI ETH 跨链  
 Optimism 测试网络链接的是 kovan 网, 在 Optimistic 测试网路上进行交易前, 需要把 kovan 网络的 ETH 经过跨链桥跨到 optimism. 
 访问 Optimism 的 gateway, 选择 "Deposite" , 在其中输入跨链的 ETH 数量   
-![](./imags/deposite.png)  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/balance.png?raw=true" /></center>
+
 
 - 等待资产跨链成功  
 需要等待 5 分钟左右才能完成 ETH 的跨链转移.  
 跨链成功后, 会出现如下提示  
-![](./imags/deposite_success.png)   
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/deposite_success.png?raw=true" /></center>
 
 - 查看余额  
 ETH 转移成功后, 可以从 metaMask 查看 Optimism 网络上的余额  
-![](./imags/balance.png)   
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/balance.png?raw=true" /></center> 
 
 - 安装依赖  
 ```bash
