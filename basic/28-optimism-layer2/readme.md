@@ -51,3 +51,4 @@ optimism 官方 github: https://github.com/ethereum-optimism/optimism-tutorial
 Optimistic Rollup 合约介绍:  https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 Optimism Rollup原理解析: https://zhuanlan.zhihu.com/p/350541979  
 Optimism 跨链桥: https://gateway.optimism.io/  
+Optimism Kovan proxy 合约: https://kovan.etherscan.io/address/0x22f24361d548e5faafb36d1437839f080363982b#code  
