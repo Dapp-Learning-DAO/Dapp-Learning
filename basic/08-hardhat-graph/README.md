@@ -53,7 +53,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
     如果没有 The Graph 的账户，可以直接连接钱包注册，账户名即为钱包地址，以下称之为 `<THEGRAPH_USERNAME>`。
 
     批准钱包签名之后，会跳转到 `My Subgraphs` 面板，点击 `Create a Subgraph` 按钮。
-    ![create_subgraph_btn](./imgs/create_subgraph_btn.png)
+    <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/08-hardhat-graph/create_subgraph_btn.png?raw=true" /></center>
 
     输入你的项目名称(例如 TEST01)，以下称之为 `<SUBGRAPH_NAME>`，点击 continue 按钮，之后会跳转到 subgraph 的项目主页
 
@@ -198,8 +198,8 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 9. 授权和部署 Subgraph
 
-    首先获取你的 `<DEPLOY KEY>`，在你的 subgraph 项目主页可以找到：
-    ![auth_deploy_key](./imgs/auth_deploy_key.png)
+    首先获取你的 `<DEPLOY KEY>`，在你的 subgraph 项目主页可以找到：  
+    <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/08-hardhat-graph/auth_deploy_key.png?raw=true" /></center>
 
     - 授权
 
@@ -245,7 +245,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
 这里已经预生成了一个示例请求，点击播放按钮即可请求数据。至此 subgraph 部署成功
 
-![query_subgraph](./imgs/query_subgraph.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/08-hardhat-graph/query_subgraph.png?raw=true" /></center>
 
 ## Graph Node 本地搭建
 
