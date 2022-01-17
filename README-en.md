@@ -19,13 +19,34 @@ The project is still under development, and contributors are welcomed from all b
 
 Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
 
-Technology Stack：
+<details>
+<summary>Official links</summary>
+
+- [Github](https://github.com/rebase-network/Dapp-Learning)
+- [Twitter](https://twitter.com/Dapp_Learning)
+- [discord](https://discord.gg/cRYNYXqPeR)
+- [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
+- Wechat Official Account: Dapp Learning
+- [Bilibili](https://space.bilibili.com/382886213)
+- [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
+- [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
+- [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
+- [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
+- [linktr](https://linktr.ee/dapplearning)
+
+</details>
+
+<details>
+<summary>Technology Stack: </summary>
+
 - `web3.js`
 - `ethers.js (Hardhat)`
 - `web3.py (Brownie)`
 - `Java` (Optional)
 - `Rust` (Optional)
 - `Go` (Optional)
+
+</details>
 
 ## Project structure
 The project is divided into two parts: **Basic task** and **Project task**
@@ -99,7 +120,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
+28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
@@ -111,7 +132,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
-40. [snapshot](basic/26-snapshot/README.md) ⬜
+40. [snapshot](basic/40-snapshot/README.md) ⌛
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜

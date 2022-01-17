@@ -1,5 +1,5 @@
 # DAO 项目研究
-
+dao详细资料：https://www.bitmmp.com/index.php/topic,503649.msg503954.html#msg503954  
 - Gnosis Safe - 多签钱包，通常用于管理社区的资金。
 - Snapshot - 链下投票平台，用于简单的基于代币治理。
 - Discourse - 论坛，通常用于讨论治理提议。

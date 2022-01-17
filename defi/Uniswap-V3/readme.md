@@ -44,6 +44,7 @@ Uniswap v3 在代码层面的架构和 v2 基本保持一致，将合约分成�
 - [UniswapV3Pool](./contractGuide/UniswapV3Pool.md)
 - [Tick](./contractGuide/Tick.md)
 - [Oracle](./contractGuide/Oracle.md)
+- [源码编程技巧学习](./contractGuide/programmingSkills.md)
 
 ### 用户交互流程
 
@@ -116,3 +117,4 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 流动性策略: https://arxiv.org/pdf/2106.12033.pdf
 - 流动性提供: https://mellowprotocol.medium.com/uniswap-v3-liquidity-providing-101-f1db3822f16d
 - 做市策略： https://zhuanlan.zhihu.com/p/390751130
+- 做市工具： https://twitter.com/Chris_Defi/status/1466437832516456460?s=09

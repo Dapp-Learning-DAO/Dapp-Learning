@@ -10,6 +10,7 @@
 - 以太坊区块链浏览器: <https://kovan.etherscan.io>
 - JSON-PRC接口: <https://eth.wiki/json-rpc/API>
 - tenderly合约验证: <https://dashboard.tenderly.co/explorer>
+- ethtx交易分析工具: <https://ethtx.info>
 - remix本地环境: <https://zhuanlan.zhihu.com/p/38309494>
 - 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 - 以太兼容链网络列表(可方便添加到metamask)：<https://chainlist.org/>

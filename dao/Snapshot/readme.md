@@ -20,3 +20,42 @@
 
 ### And do we have other choices?
 + Mostly the DAOs and the Communities will use snapshot or build themself.
++ We are in a progress to exploring the governernce of the Open Community, till now, we have much more ways to make a common view with many pepoles.
++ It seems the way to vote the proposals in community, is a good way.
+
+
+## Project setup
+
+```
+yarn
+```
+
+### Compiles and hot-reloads for development
+
+```
+yarn dev
+```
+
+### Compiles and minifies for production
+
+```
+yarn build
+```
+
+### Lints and fixes files
+
+```
+yarn run lint
+```
+
+### Development Guide
+
+Use `http://localhost:3000/#/fabien.eth` for testing your code.
+
+By default your instance will connect to the hub at `https://testnet.snapshot.org`. To change that (or other values) you can create a `.env.local` and overwrite the values from `.env`.
+
+## License
+
+Snapshot is open-sourced software licensed under the © [MIT license](LICENSE).
+
+

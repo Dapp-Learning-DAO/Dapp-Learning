@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^4.2.0",
+    "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.3.0",
     "ethereumjs-tx": "^2.1.2",
     "ethers": "^5.1.4",

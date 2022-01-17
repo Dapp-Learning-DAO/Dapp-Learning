@@ -45,5 +45,9 @@ module.exports = {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
     },
+    matic: {
+      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.PROJECT_ID,
+      accounts: [mnemonic()]
+    },
   },
 };
