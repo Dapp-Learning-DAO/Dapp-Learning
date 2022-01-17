@@ -176,9 +176,17 @@ contract EtherDelta {
     uint256 public feeMake; //percentage times (1 ether)
     uint256 public feeTake; //percentage times (1 ether)
     uint256 public feeRebate; //percentage times (1 ether)
-    mapping(address => mapping(address => uint256)) public tokens; //mapping of token addresses to mapping of account balances (token=0 means Ether)
-    mapping(address => mapping(bytes32 => bool)) public orders; //mapping of user accounts to mapping of order hashes to booleans (true = submitted by user, equivalent to offchain signature)
-    mapping(address => mapping(bytes32 => uint256)) public orderFills; //mapping of user accounts to mapping of order hashes to uints (amount of order that has been filled)
+
+    // mapping of token addresses to mapping of account balances (token=0 means Ether)
+    mapping(address => mapping(address => uint256)) public tokens; 
+
+    // mapping of user accounts to mapping of order hashes to booleans 
+    // (true = submitted by user, equivalent to offchain signature)
+    mapping(address => mapping(bytes32 => bool)) public orders; 
+
+    // mapping of user accounts to mapping of order hashes to uints 
+    // (amount of order that has been filled)
+    mapping(address => mapping(bytes32 => uint256)) public orderFills; 
 
     // 订单信息入参struct
     struct OrderSigned {
