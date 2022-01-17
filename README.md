@@ -139,8 +139,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [StarkNet](https://starkware.co/starknet/) ⬜
-欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
+35. [StarkNet](basic/35-starkNet/readme.md) ⌛
 36. [NFT FileCoin](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
