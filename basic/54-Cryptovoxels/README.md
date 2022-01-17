@@ -1,4 +1,4 @@
-# cryptovoxels 网站功能(TO DELETE))
+## cryptovoxels 网站功能(TO DELETE))
 
 1. 首页或 Explore
    是简介和 cryptovoxels 的入口, 点击 play 进入 cryptovoxels
@@ -12,40 +12,40 @@
    论坛
 6. wiki 地址: <https://wiki.cryptovoxels.com/>
 
-# cryptovoxels 的主要元素
+## cryptovoxels 的主要元素
 
-## parcel
+### parcel
 
 parcel 是 cryptovoxels 的主体结构, parcel 被官方创造出来, 定期在 opensea 进行拍卖. parcel 是含有权限控制的空间, 可设置能私人访问, 或特定玩家访问.
 与之对应的是 Spaces, Spaces 是个虚拟的空间, 它不在 cryptovoxels 宇宙中.
 除了权限控制, 拥有 parcel 才能使用 The Grid 脚本系统.
 
-## Feature
+### Feature
 
 parcel 里包含 feature, 比如:
 button, nft-image, video 等.
 
-## Player
+### Player
 
 类似 Roblox 中的 Character
 
-# cryptovoxels 的 vox 脚本系统
+## cryptovoxels 的 vox 脚本系统
 
 主要为 Feature 提供功能支持, 比如支持 button 点击的行为等.
 
-## vox 的脚本
+### vox 的脚本
 
 类似 roblox 的 client script, 运行在本地.参考https://wiki.cryptovoxels.com/en/Scripting/Scripting.
 
-## The Grid
+### The Grid
 
 类似 roblox 的 server script, 运行在服务器, 参考https://wiki.cryptovoxels.com/en/Scripting/TheGrid.
 
-# cryptovoxels 代码库的分析
+## cryptovoxels 代码库的分析
 
 cryptovoxels 代码库和实际并不相符, 但是通过分析其代码库, 可以看到他大概的技术链构成.
 
-## construct:https://github.com/cryptovoxels/construct
+### construct: https://github.com/cryptovoxels/construct
 
 cryptovoxels 的展示模板
 
@@ -57,7 +57,7 @@ npm start
 报错 TS7016, 将 tsconfig.json 中的"noImplicitAny"改为 false.
 再次运行 npm start, 会看到一个渲染出来最基本的场景和块, 可以使用 wasd 建控制方向.
 
-## contract(https://github.com/cryptovoxels/contracts)
+### contract(https://github.com/cryptovoxels/contracts)
 
 区块链合约, 其中包括
 
@@ -70,11 +70,11 @@ npm start
 3. Color
    ERC20, Parcel 的颜色
 
-## parcel-market-subgraph
+### parcel-market-subgraph
 
 监听 cryptovoxels 的 opensea 市场交易事件
 
-## maps:https://github.com/cryptovoxels/maps
+### maps: https://github.com/cryptovoxels/maps
 
 为 cryptovoxels 的预览小地图和全景图, 提供切片.
 map-server-production.js 为服务脚本
