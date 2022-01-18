@@ -81,12 +81,12 @@ end
 - `%builtins pedersen range_check` 引入两个内建函数
 - `@storage_var` 声明 storage 变量
   - `balance.read()` 读取变量值
-  - `balance.write(newValue)` 将 newValue 值写入balance
+  - `balance.write(newValue)` 将 newValue 值写入 balance
   - 部署合约时，所有 storage 变量都将初始化为 0
 - `@external` 外部调用方法
 - `func increase_balance{pedersen_ptr：HashBuiltin*}`
-   - 大括号内为声明的隐式参数 `Implicit arguments`
-   - 隐式参数会自动向函数添加参数和返回值，而不用显示的在return语句中添加返回值
+  - 大括号内为声明的隐式参数 `Implicit arguments`
+  - 隐式参数会自动向函数添加参数和返回值，而不用显式的在 return 语句中添加返回值
 - `let (res) = ..` 声明局部变量
 
 ### 部署合约
@@ -131,7 +131,7 @@ Contract address: 0x032e72fd53f838b7d4479fe38e4e33a8e95e06b3afaa197995e0046db2f5
 Transaction hash: 0x139207f26d5e14507f62ff0f2eb68dcff43c107f1ee0a75489e8def0fbcc5bd
 ```
 
-查询交易信息， `TRANSACTION_HASH` 替换为你的交易hash
+查询交易信息， `TRANSACTION_HASH` 替换为你的交易 hash
 
 ```sh
 starknet tx_status --hash TRANSACTION_HASH
@@ -171,7 +171,6 @@ starknet call \
 ```sh
 1234
 ```
-
 
 ## reference
 
