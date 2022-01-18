@@ -21,8 +21,8 @@ const config: HardhatUserConfig = {
     }
   },
   mocha: {
-    // starknetNetwork: "devnet"
-    starknetNetwork: "alpha"
+    starknetNetwork: "devnet"   // 本地 starknet-dev-net 网络
+    // starknetNetwork: "alpha" // starknet alpha-goerli 测试网络
   }
 };
 
