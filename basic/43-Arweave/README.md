@@ -62,3 +62,4 @@
 
 
 ### Reference: [Arwiki](https://arwiki.wiki/#/en/main)
+### 其他参考：[Arweave：一场永久存储的实验](https://mp.weixin.qq.com/s/6Hg35NGXITo2V99tfpXYlQ)
