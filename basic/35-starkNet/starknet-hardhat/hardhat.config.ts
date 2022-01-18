@@ -6,10 +6,11 @@ import "@shardlabs/starknet-hardhat-plugin";
  */
 const config: HardhatUserConfig = {
   cairo: {
-    version: "0.6.2" // alternatively choose one of the two venv options below
+    // version: "0.6.2", // alternatively choose one of the two venv options below
 
     // uses (my-venv) defined by `python -m venv path/to/my-venv`
     // venv: "path/to/my-venv"
+    venv: "/home/usr/cairo_venv" // <-- put your dir
     
     // uses the currently active Python environment (hopefully with available Starknet commands!) 
     // venv: "active"

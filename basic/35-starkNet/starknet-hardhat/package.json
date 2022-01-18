@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "compile": "npx hardhat starknet-compile",
     "test": "npx hardhat test"
   },
   "author": "",

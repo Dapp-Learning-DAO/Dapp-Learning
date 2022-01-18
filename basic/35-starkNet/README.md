@@ -176,3 +176,5 @@ starknet call \
 
 - official website <https://starkware.co/starknet/>
 - develop docs <https://starknet.io/docs/index.html>
+- blockscan <https://voyager.online/>
+- StarkNet AMM demo <https://amm-demo.starknet.starkware.co/swap>
