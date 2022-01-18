@@ -10,7 +10,7 @@ async function main() {
     const [owner] = await ethers.getSigners();
 
     // kovan proxy contract address is 0x22F24361D548e5FaAfb36d1437839f080363982B
-    const artifactL1ChugSplashProxy = artifacts.readArtifactSync("L1ChugSplashProxy");
+    const artifactL1ChugSplashProxy = artifacts.readArtifactSync("DepositeProxy");
     const l1ChugSplashProxy = new ethers.Contract("0x22F24361D548e5FaAfb36d1437839f080363982B", artifactL1ChugSplashProxy.abi , owner );
 
 

@@ -36,13 +36,22 @@ Account balance: 1500000000000000000
 Token address: 0x0d29e73F0b1AE67e28495880636e2407e41480F2
 ```
 
-- 脚本 ETH 跨链  
+- 脚本 ETH 跨链到 Optimism 网络    
 上面除来可以通过 Optimism 的界面进行跨梁外, 还可以通过调用合约的方式进行 ETH 跨链  
 调用如下脚本, 通过调用合约的方式进行 ETH 跨链
 ```
-npx hardhat run scripts/deposit_eth.js --network kovan
+npx hardhat run scripts/deposit-eth.js --network kovan
 
 ## 调用结束后, 等待大约 5 分钟, 就可以发现 metaMask 上, Optimism 网络上账户余额增加了 0.0001 ETH
+```
+
+- 脚本 ETH 跨链到 Kovan 网络    
+跨链到 Optimism 链上的 ETH 还可以跨回 Kovan 链. 
+调用如下脚本, 通过调用合约的方式进行 ETH 跨链
+```
+npx hardhat run scripts/withdraw-eth.js --network optimism
+
+## 调用结束后, 等待大约 5 分钟, 就可以发现 metaMask 上, kovan 网络上账户余额增加了 0.0001 ETH
 ```
 
 
@@ -51,4 +60,5 @@ optimism 官方 github: https://github.com/ethereum-optimism/optimism-tutorial
 Optimistic Rollup 合约介绍:  https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 Optimism Rollup原理解析: https://zhuanlan.zhihu.com/p/350541979  
 Optimism 跨链桥: https://gateway.optimism.io/  
-Optimism Kovan proxy 合约: https://kovan.etherscan.io/address/0x22f24361d548e5faafb36d1437839f080363982b#code  
+Optimism Kovan deposite proxy 合约: https://kovan.etherscan.io/address/0x22f24361d548e5faafb36d1437839f080363982b#code  
+Optimism Kovan withdraw proxy 合约: https://kovan-optimistic.etherscan.io/address/0x4200000000000000000000000000000000000010   
