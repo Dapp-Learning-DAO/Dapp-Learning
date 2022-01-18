@@ -76,7 +76,8 @@ npx hardhat test ./test/...
 
 ## to-do
 
-- 使用hardhat部署到测试网，一直连接超时
+- 使用 hardhat 部署到测试网，一直连接超时
+- 使用 hardhat verify 在区块链浏览器上做源码认证
 
 ## reference
 
