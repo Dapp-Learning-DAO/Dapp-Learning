@@ -34,7 +34,7 @@
 ### More
 + [http API](https://docs.arweave.org/developers/server/http-api)
 
-## Upload tool arkb
+## Deploy tool arkb
 + 
 ```
 npm install -g arkb
