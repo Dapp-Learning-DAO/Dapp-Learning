@@ -15,6 +15,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "arweave": "^1.10.22",
     "prettier": "^2.0.5"
   }
 }
