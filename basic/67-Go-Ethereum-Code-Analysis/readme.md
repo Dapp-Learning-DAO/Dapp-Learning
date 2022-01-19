@@ -5,6 +5,15 @@
 https://godorz.info/2021/10/ethereum-yellow-paper/
 https://mirror.xyz/0x56706F118e42AE069F20c5636141B844D1324AE1/Muq3LyriRK731jEj4jz3halgSu8BIlag4_637-hkeEg
 
+## 黄皮书
+ECC related:\
+https://github.com/QuarkChain/pyquarkchain/blob/af1dd06a50d918aaf45569d9b0f54f5ecceb6afe/quarkchain/experimental/elliptic.py \
+https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/crypto/ECC \
+Useful links:\
+https://godorz.info/2021/10/ethereum-yellow-paper/ \
+https://learnblockchain.cn/article/2725 \
+https://learnblockchain.cn/article/2817
+
 ## 共识算法
 
 ## 网络模块
