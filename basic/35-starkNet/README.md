@@ -1,4 +1,4 @@
-# starkNet
+# StarkNet
 
 ## intro
 
