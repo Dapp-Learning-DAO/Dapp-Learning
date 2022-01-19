@@ -1,5 +1,6 @@
 ## Dev preparation
-
++ It is a preparation doc for your developing of Arweave.
++ Some acknowledgments you should know.
 ### Create a AR wallet
 + get Chrome extension [here](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc)
 + [More help](https://docs.arweave.org/info/wallets/arweave-web-extension-wallet)
@@ -7,7 +8,7 @@
 ## Http
 ### Config
 + The default port is 1984.
-+  http://159.65.213.43:1984/info， 或者 https://arweave.net/info.
++  http://159.65.213.43:1984/info， or https://arweave.net/info.
 + curl --request GET \
   --url 'https://arweave.net/info'
 ### Language
