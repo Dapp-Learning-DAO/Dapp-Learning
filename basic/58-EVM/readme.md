@@ -3,7 +3,8 @@
 ## 以太坊存储模型
 [以太坊存储](./store.md)
 以太坊是一个基于交易的“状态”机器.
-三棵树： 交易树，状态树和收据树。![图](./img/storage.jpg)
+三棵树： 交易树，状态树和收据树。
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/storage.jpg?raw=true" /></center>
 账户余额等数据并不直接存储在以太坊区块链的区块中。只有交易树、状态树和收据树的根节点哈希直接存储在区块链中。
 存储树（保存所有智能合约数据）的根节点哈希实际上指向状态树，而状态树又指向区块链。
 **永久存储和临时存储**
@@ -18,17 +19,17 @@ value是账户信息（使用递归RLP编码）
 - storageRoot
 - codeHash
 2. 状态树的根节点（给定时间点整个状态树的散列）用作状态树的安全唯一标识符；状态树的根节点在密码学上依赖于所有内部状态树数据。
-![](./img/stateTree.jpg)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/stateTree.jpg?raw=true" /></center>
 
 
 ### 存储树 -- 合约数据所在位置
 每个以太坊账户都有自己的存储树。存储树根节点的 256 位散列作为 storageRoot 值存储在全局状态树中.
 每个以太坊账户都有自己的存储树。存储树根节点的 256 位散列作为 storageRoot 值存储在全局状态树中
-![](./img/storeTree.jpg)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/storeTree.png?raw=true" /></center>
 
 ### 交易树 -- 每个区块一个
 每个以太坊区块都有自己独立的交易树。一个区块包含许多交易。开采的区块永远不会更新；交易在区块中的位置永远不会改变。
-![](./img/transactionTree.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/transactionTree.png?raw=true" /></center>
 
 ### SPV 
 

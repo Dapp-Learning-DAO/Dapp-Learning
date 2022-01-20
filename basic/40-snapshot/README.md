@@ -13,7 +13,7 @@
 - 作为一个 off-chain 的治理工具，用户使用 Snapshot 进行签名投票和社区提案而无需要消耗 GAS 费。
 - 不同于 Aragon 的从创建到治理全覆盖，Snapshot 目前仅提供提案和投票这两项功能，它更倾向于是一个治理投票的平台型工具，而不是一个提供搭建、治理投票、质押、链上法庭等复杂功能的平台。
 - 用户绑定钱包中的**相应代币数量决定投票权重**，根据以太坊区块快照，提案和投票是存储在 IPFS 上的签名消息。
-- ![SNAPSHOT](img/snapshot.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/snapshot.png?raw=true" /></center>
 
 ## 创建空间并发起提案
 Snapshot中的空间也就是各个项目进行提案的场所，下面对创建空间以及发起提案的流程进行简单介绍。(更详细的信息请看[官方文档](https://docs.snapshot.org/))
@@ -22,22 +22,22 @@ Snapshot虽然是一个链下治理平台，但必须拥有ENS域名才能创建
 
 2. 将ENS域名链接到Snapshot  
 首先点击创建空间，然后输入你的域名得到ipfs的记录地址，最后在ENS中添加该记录。
-![create a space](img/create_a_space.png)
-![get record](img/get_record.png)
-![add record](img/add_record.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/create_a_space.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/get_record.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/add_record.png?raw=true" /></center>
 
 3. 设置你的空间  
 添加ENS记录是一个链上操作过程，等待交易确认后才可以进行Snapshot空间的设置。  
 下面是进行Snapshot空间设置的页面，包括Profile填写项目基本信息，Strategie选择投票策略等等设置选项，此外还可以通过添加Plugins为提案增加新特性。最后记得点击保存来提交修改。
-![setting page1](img/setting_page1.png)
-![setting page2](img/setting_page2.png)
-![setting page3](img/setting_page3.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/setting_page1.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/setting_page2.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/setting_page3.png?raw=true" /></center>
 
 4. 发起提案  
 以刚刚创建的空间为例，首先搜索到该空间，然后点击加入，如果满足该空间设置的要求就可以发起提案了。发起一个提案主要就是填写提案内容、设置选项、设置起始和结束日期。
-![search](img/search.png)
-![space](img/space.png)
-![new proposal](img/new_proposal.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/search.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/space.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/40-snapshot/new_proposal.png?raw=true" /></center>
 
 ## 其他
 

@@ -9,6 +9,7 @@ VRF 为链上安全可验证随机数, 用于安全的生成随机数, 具体可
 - 获取 test Link  
 每次去 ChainLink 请求 VRF 随机数时, 都需要消耗 Link 币, 所以在测试前需要申请 Link 测试币. 以 Kovan 测试网为例, 前往 [Request testnet LINK](https://faucets.chain.link/kovan?_ga=2.35440098.2104755910.1637393798-1377742816.1635817935) , 然后 "Netwrok" 选择 "Ethereum Kovan", "Testnet account address" 输入 .env 文件中 PRIVATE_KEY 对应的账户地址 
 ![](./images/chainlink.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/15-nft-blindbox-chainlink-vrf/chainlink.png?raw=true" /></center>
 
 - 安装依赖
 ```
