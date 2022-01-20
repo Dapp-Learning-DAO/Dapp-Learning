@@ -49,3 +49,4 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - 将UniswapV2部署到所有区块链—去中心化交易所Uniswap多链部署教学视频:  <https://www.bilibili.com/video/BV1ph411e7bT?p=1>  
 - V2交易界面: https://app.uniswap.org/#/swap?use=V2  
 - starli: https://learnblockchain.cn/article/1480
+- 代码解析: https://ethereum.org/vi/developers/tutorials/uniswap-v2-annotated-code/
