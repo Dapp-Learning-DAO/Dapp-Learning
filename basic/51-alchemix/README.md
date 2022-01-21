@@ -1,6 +1,6 @@
 ## 介绍
 
-Alchemix 是一个允许创造合成资产代币 al-token（这些代币表示存款的未来收益）的 DeFi 协议. Alchemix 可以让用户近乎及时取回部分临时质押的稳定币的代币价值, 解决质押资产流动性的问题. 此协议承载了一类强大的新品种 DeFi 原型, 同时提供给用户和开发者无数的应用和全新的工具.
+Alchemix 是一个允许创造合成资产代币 al-token（这些代币表示存款的未来收益）的 DeFi 协议. Alchemix 可以让用户近乎即时取回部分临时质押的稳定币的代币价值, 解决质押资产流动性的问题. 此协议承载了一类强大的新品种 DeFi 原型, 同时提供给用户和开发者无数的应用和全新的工具.
 
 Alchemix 主打具有竞争力的高收益率, 用户可以用从越来越多的高收益策略中进行选择以偿还债务: 并且没有清算风险, 无论发生什么情况, Alchemix 都不会清算用户的存款, 并且用户将拥有完整的访问权限; 低维护成本, 用户提取自己的美元之后允许自己偿还贷款.
 
@@ -23,7 +23,7 @@ PS: 为方便代码测试, 请在 .env 中放入的私钥 和 INFURA_ID，样例
   用户 A 存入 60 alUSD 的时候, Transmuter 发现从 Yearn 收入 10 Dai 的收益到用户 A 存入 60 alUSD 这段时间内, Transmuter 中没有用户质押 alUSD, 那么从 Yearn 收益的 10 Dai 不会分配给任何用户.
 
 - 场景 4: alUSD 转换  
-  用户 A 在 Transmuter 中存入了 60 alUSD 后过了-个月时间, Yearn 又产生了 80 Dai 的收益. 当 Yearn 把这 80 Dai 的收益存入 Transmuter 的时候, 发现 Transmuter 中质押了 60 alUSD, 那么每一份 alUSD 可以获得 profit = 80 / 60 = 1.33 , 那么用户 A 所获的的收益是 1.33 \* 60 = 80 > 60 , 此时 Transmuter 会把用户 A 的收益设置为 60, 等同于用户质押的 alUSD 数量. 然后记录用户 A 可转换的 alUSD 数量为 60, 即 transferAmount = 60. 此时用户 A 才可以用 alUSD 去兑换 Dai , 可兑换的最大数量为 60
+  用户 A 在 Transmuter 中存入了 60 alUSD 后过了一个月时间, Yearn 又产生了 80 Dai 的收益. 当 Yearn 把这 80 Dai 的收益存入 Transmuter 的时候, 发现 Transmuter 中质押了 60 alUSD, 那么每一份 alUSD 可以获得 profit = 80 / 60 = 1.33 , 那么用户 A 所获的的收益是 1.33 \* 60 = 80 > 60 , 此时 Transmuter 会把用户 A 的收益设置为 60, 等同于用户质押的 alUSD 数量. 然后记录用户 A 可转换的 alUSD 数量为 60, 即 transferAmount = 60. 此时用户 A 才可以用 alUSD 去兑换 Dai , 可兑换的最大数量为 60
 
 ## 主要合约及函数功能说明
 
@@ -31,7 +31,7 @@ PS: 为方便代码测试, 请在 .env 中放入的私钥 和 INFURA_ID，样例
 
 主逻辑合约, 也是用户交互的主合约. 用户存入稳当代币到这个合约后, 可以进行后续的操作.
 
-- constructor(IMintableERC20 \_token,IMintableERC20 \_xtoken,address \_governance,address \_sentinel)
+- constructor(IMintableERC20 \_token, IMintableERC20 \_xtoken,address \_governance, address \_sentinel)
 
   - \_token 为用户存入的资产 Token , 比如 daiToken
   - \_xtoken 为生成合成资产的 Token 地址, 这里对应为 alUSD

@@ -3,7 +3,7 @@ const { BigNumber } = require("@ethersproject/bignumber");
 
 describe("Freelancer", function() {
   it("Freelancer Test", async function() {
-    const [Alice,Bob] = await ethers.getSigners();
+    const [Alice, Bob] = await ethers.getSigners();
 
     const freelancerFactory = await ethers.getContractFactory("Freelancer");
     const freelancerContractAlice = await freelancerFactory.deploy();
@@ -11,7 +11,7 @@ describe("Freelancer", function() {
     await freelancerContractAlice.deployed();
     
     // Programmer add task
-    await freelancerContractAlice.addSchedule("DSP","Design Phase",ethers.utils.parseEther("0.25"));
+    await freelancerContractAlice.addSchedule("DSP", "Design Phase", ethers.utils.parseEther("0.25"));
 
     // Client accept the project
     let freelancerContractBob = freelancerContractAlice.connect(Bob);

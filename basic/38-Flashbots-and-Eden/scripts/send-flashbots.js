@@ -7,9 +7,8 @@ const { ethers } = require('hardhat');
 const { FlashbotsBundleProvider } = require('@flashbots/ethers-provider-bundle');
 require('dotenv').config();
 
-
-function getPayLoad(contractABI,functionName,param,paramType){
-  for(let i=0;i<contractABI.length;i++){
+function getPayLoad(contractABI, functionName, param, paramType){
+  for(let i = 0; i < contractABI.length; i++){
     const functionABI = contractABI[i];
     if (functionName != functionABI.name) {
       continue;
@@ -18,17 +17,16 @@ function getPayLoad(contractABI,functionName,param,paramType){
     //get sigHash of function
     const interface = new ethers.utils.Interface(contractABI);
     const functionSigHash = interface.getSighash(functionName);
-    console.log("sign of method:%s is %s",functionName,functionSigHash);
+    console.log("sign of method:%s is %s", functionName, functionSigHash);
 
     //encode param
-    const abiCoder =new ethers.utils.AbiCoder()
-    const codeOfParam =  abiCoder.encode(paramType,[param])
-    console.log("codeOfParam:",codeOfParam);
-
+    const abiCoder = new ethers.utils.AbiCoder()
+    const codeOfParam = abiCoder.encode(paramType, [param])
+    console.log("codeOfParam:", codeOfParam);
 
     //payload
-    const payload = functionSigHash + codeOfParam.substring(2,codeOfParam.length);
-    console.log("payload:",functionName,payload);
+    const payload = functionSigHash + codeOfParam.substring(2, codeOfParam.length);
+    console.log("payload:", functionName, payload);
     return payload;
   }
 }
@@ -41,37 +39,35 @@ async function main() {
   console.log("Contract address:" , greeter.address); */
 
   // Config provider, the default is 
-  const provider = new ethers.providers.JsonRpcProvider({ url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID },5)
+  const provider = new ethers.providers.JsonRpcProvider({ url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID }, 5)
   //const provider = new ethers.getDefaultProvider("goerli");
   // Standard json rpc provider directly from ethers.js. For example you can use Infura, Alchemy, or your own node.
-
-  const authSigner = new ethers.Wallet(process.env.PRIVATE_KEY,provider);
 
   // Singer
   const signerWallet = new ethers.Wallet(process.env.PRIVATE_KEY,provider);
 
-  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, authSigner);
+  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, signerWallet);
   // Flashbots provider requires passing in a standard provider and an auth signer
 
   // Get the playload
   const greeterArtifact = await hre.artifacts.readArtifact("Greeter");
-  const contractPayload = getPayLoad(greeterArtifact.abi,"setGreeting","Hello Girls",['string']);
+  const contractPayload = getPayLoad(greeterArtifact.abi, "setGreeting", "Hello Girls", ['string']);
   
   const currentBlock = await provider.getBlockNumber();
   const targetBlockNumber = currentBlock + 2;
 
-  console.log("Current block Number: ",currentBlock);
+  console.log("Current block Number: ", currentBlock);
 
   let userNonce = await signerWallet.getTransactionCount();
 
-  console.log("userNonce: ",userNonce)
+  console.log("userNonce: ", userNonce)
 
   // Config the transaction
   const contractTransaction = {
-    to: '0x87eCbC961193e833cB70B97E98053a76Ae458B94',
+    to: '0x87eCbC961193e833cB70B97E98053a76Ae458B94',  // Existing Greeter contract's address on goerli
     gasPrice: 200,
     data: contractPayload,
-    nonce: 15
+    nonce: userNonce
   }
 
   const signedBundle = await flashbotsProvider.signBundle([
