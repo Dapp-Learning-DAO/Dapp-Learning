@@ -29,7 +29,8 @@ Multicall.js 库具有以下这些特点:
 与常规 Muticall 合约调用不同，indexed-finance multicall 不用依赖链上已经部署成功的 multicall 合约，而是将 muticall 请求放到了待部署合约的 constructor 中，通过假部署的方式，拿到链上查询的结果。  
 indexed-finance multicall 的“骚操作”： 
 1. constructor中进行 muticall 请求
-2. 利用 `assembly` 修改evm的返回数据，将本来为 revert 的信息，替换为muticall请求结果
+2. 利用 `assembly` 修改evm的返回数据，替换为muticall请求结果
+   - 使用 `eth_call` 执行交易，在EVM中会先执行，再回退交易状态
 
 ```solidity
 contract MultiCall {
