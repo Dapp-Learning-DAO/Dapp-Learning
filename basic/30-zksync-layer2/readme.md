@@ -4,9 +4,7 @@ zkSync是一种无需信任的协议，用于在以太坊上进行可扩展的�
 ## ZK-Rollup
 zkRollup在链下利用Merkle tree存储账户状态，由Operator收集用户的交易，交易收集完成后Operator会执行每个交易（校验余额，校验nonce，校验签名，执行状态转换），当交易执行完成后会产生一个新的Merkle tree Root，为了证明链下状态转移是正确的，Operator会在交易执行完成后生成一个零知识证明的proof。
 Operator执行交易后本地的merkle tree root会由prev state root转换成post state root。  
-![zkrollup](./imgs/zkrollup.png)
-
-
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zkrollup.png?raw=true" /></center>
 
 ## 基本架构
 
