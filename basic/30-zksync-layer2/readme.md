@@ -52,7 +52,6 @@ Server application 的职能主要有：
 yarn
 ``` 
 
-<<<<<<< HEAD
 - 配置环境变量  
 ```shell
 cp .env.example .env
