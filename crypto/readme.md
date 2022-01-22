@@ -24,3 +24,4 @@ https://blog.goodaudience.com/understanding-zero-knowledge-proofs-through-simple
 - 笔记： https://www.yuque.com/u428635/scg32w/edmn74#a8ffe0d3
 - stark： https://aszepieniec.github.io/stark-anatomy/
 - readpaper： https://readpaper.com/
+- Cryptograph course by Dr. Julian Hosp <https://www.youtube.com/watch?v=GGILQcO843s&list=PLE4V3KXzxPRQYUil17HB6XcIu-JMebD7n>

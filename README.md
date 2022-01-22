@@ -139,8 +139,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [StarkNet](https://starkware.co/starknet/) ⬜
-欢迎提交 PR，[添加新的基础任务或者更新上面的任务](https://github.com/rebase-network/Dapp-Learning/issues/new)
+35. [StarkNet](basic/35-starkNet/readme.md) ⌛
 36. [NFT FileCoin](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
@@ -186,9 +185,15 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
- 建议先阅读DEFI经典书籍:
+ **建议先阅读DEFI经典书籍:**
   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
+  **DEFI学习路线图：**
+交易 -> 借贷 ->衍生品
+可以参考我们学习小组的学习路线图，配合视频学习更佳：
+- 交易： uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
+- 借贷： Aave -> Compound -> Liquity -> Euler
+- 衍生品： SNX -> YFI -> Perpetual 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) ✅
