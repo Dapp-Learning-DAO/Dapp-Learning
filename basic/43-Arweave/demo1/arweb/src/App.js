@@ -1,3 +1,5 @@
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import './App.css';
 import 'antd/dist/antd.css';
 import { Button, message } from "antd";
@@ -50,17 +52,33 @@ function getWallet(){
   console.log("I am here")
 }
 
+
+
 function App() {
+
+  const handleMake = async () => {
+    // fetchWalkerName(walkerID).then(setWalker).catch(showAppMsg)
+    console.log("here now")
+  }
+  function clickme(){
+    console.log("click me now")
+  }
+
+  const handleBattle = () => {}
+
+
   return (
     <div className="App">
       <div className="App-header">
           Arweave Demo 1
-          <Button onClick={getWallet()}>{my_wallet ? "Wallet OK" : "No Wallet"}</Button><br /> 
-          <Button onClick={generate_new_key()}>Generate a new Wallet</Button><br /> 
+          {/* <Button onClick={getWallet()}>{my_wallet ? "Wallet OK" : "No Wallet"}</Button><br />  */}
+          {/* <Button onClick={generate_new_key()}>Generate a new Wallet</Button><br />  */}
+          <Button onClick={() => clickme()}>Test click</Button><br /> 
+          <Button onClick={handleMake}>Test click</Button><br /> 
       </div>
     </div>
   );
-  
+
 }
 
 export default App;
