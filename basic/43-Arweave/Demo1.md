@@ -10,7 +10,11 @@
 ```
 npm install --save arweave
 ```
-+ todo
+### Create a wallet
++ see demo1 directory code in app.js
++ ![Create new wallet](https://tva1.sinaimg.cn/large/008i3skNly1gynisetm5hj320c0l4gvk.jpg)
+### Get wallet balance
++ ![Get balance](https://tva1.sinaimg.cn/large/008i3skNly1gynitjgdbsj325y0u0q82.jpg)
 
 ## reference
 + [Another demo](https://6yojw3s5gaznngox2twvxiqb5xqp7ezxymhz3agfc7yq7pitmwbq.arweave.net/9hybbl0wMtaZ19TtW6IB7eD_kzfDD52AxRfxD70TZYM)
