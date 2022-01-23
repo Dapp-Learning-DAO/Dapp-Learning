@@ -98,8 +98,8 @@ function App() {
         <Button onClick={handleGetWallet}>{myWallet ? "Wallet OK" : "No Wallet"}</Button><br />
         <Button onClick={handleGetWallet}>Generate a new Wallet</Button><br />
         <Button onClick={() => get_address_balance()}>get a Wallet balance</Button><br />
-        <Button type="primary" onClick={() => openNotification('bottomRight')}></Button>
-        <i id="walletAddress"></i>
+        <Button type="primary" onClick={() => openNotification('bottomRight')}>Show message</Button>
+        <i id="walletAddress">No address</i>
       </div>
     </div>
   );
