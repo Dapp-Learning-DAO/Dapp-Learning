@@ -30,8 +30,10 @@
 [挖矿社区](https://discord.gg/GHB4fxVv8B)
 [社区Twitter](https://twitter.com/onlyarweave)
 
-### Todo
+### Demo list(pls add demo here)
++ Some basic develope information [Dev.md](Dev.md)
 + 一个基础的Arweave的开发案例
++ [Demo1-Upload a file to Arweave to permanently store it online](Demo1.md)
 
 ### 应用场景
 + ArConnect：一种简单而安全的方式来管理您的 Arweave 资产并与 dApp 连接
@@ -62,3 +64,4 @@
 
 
 ### Reference: [Arwiki](https://arwiki.wiki/#/en/main)
+### 其他参考：[Arweave：一场永久存储的实验](https://mp.weixin.qq.com/s/6Hg35NGXITo2V99tfpXYlQ)
