@@ -55,7 +55,7 @@ Types of singularities: 左边是带奇点的曲线，右边是自相交的曲�
 1. **closure**: 对于 G 中的元素 a 和 b, a + b 也是 G 中的元素;
 2. **associativity**: (a+b)+c=a+(b+c);
 3. **identity element**: 单位元 0 ， a+0=0+a;
-4. **inverse**: 每个元素都有一个逆元素，即对于 G 中的元素 a 都存在一个元素 b, a + b = 0;
+4. **inverse**: 每个元素都有一个逆元，即对于 G 中的元素 a 都存在一个元素 b, a + b = 0;
 
 我们附加了一条特性
 
@@ -67,10 +67,10 @@ Types of singularities: 左边是带奇点的曲线，右边是自相交的曲�
 
 - 元素是椭圆曲线上的点
 - identity element 是无穷远的 0 点(point at infinity 0)
-- 对于点 P ，inverse (逆元素) 是关于 x 轴对称的点
+- 对于点 P ，inverse (逆元) 是关于 x 轴对称的点
 - addition 加法的规则：一条直线与椭圆曲线相交的三个非 0 的点 P, Q, R 他们的和是 0 点，即 P+Q+R=0
   - P+Q=-R
-  - -R 是 R 的逆元素
+  - -R 是 R 的逆元
   - 即 P+Q 等于 R 相对于 x 轴对称的点
 
 ![Draw the line through  and . The line intersects a third point . The point symmetric to it, , is the result of .](https://andrea.corbellini.name/images/point-addition.png)
@@ -80,7 +80,7 @@ P+Q=-R
 直线与椭圆曲线相交有三种特殊情况
 
 1. P=0 or Q=0. 我们不可能在 xy 坐标上标出 0 点(无穷远)，所以也无法画出这条线。但我们可以将 0 点定义为 identity element (单位元)，即 P+0=P and 0+Q=Q
-2. P=-Q. P 和 Q 关于 x 轴对称，此时直线将于 x 轴垂直，与椭圆曲线没有第三个交点 R，则 Q 是 P 的逆元素，即 P+Q=0
+2. P=-Q. P 和 Q 关于 x 轴对称，此时直线将于 x 轴垂直，与椭圆曲线没有第三个交点 R，则 Q 是 P 的逆元，即 P+Q=0
 3. P=Q. Q 无限接近 P 点，直线是椭圆曲线的切线,P+Q=P+P=-R
 
 ![As the two points become closer together, the line passing through them becomes tangent to the curve.](https://andrea.corbellini.name/images/animation-point-doubling.gif)
@@ -195,28 +195,208 @@ def double_and_add(n, x):
     return result
 ```
 
-假定 翻倍 doubling 和 加法 adding 操作都是 O(1), 那么这个算法将是 O(log(n)) (如果我们考虑n的位数，将是 O(k))
+假定 翻倍 doubling 和 加法 adding 操作都是 O(1), 那么这个算法将是 O(log(n)) (如果我们考虑 n 的位数，将是 O(k))
 
 ## The field of integers modulo p
 
-## 椭圆曲线的点相加定理
+首先，有限域是具有有限个元素的集合。有限域的一个例子是模 p 的整数集合，其中 p 是素数。它通常表示为 Z/p、GF(p) 或 Fp。我们将使用后一种表示法。
 
-由方程 y² = x³+ax+b 所描述的曲线就叫做椭圆曲线 ，椭圆曲线相对于 x 轴对称，随着 a、b 取值的不同，方程对应不同的曲线。比特币使用的曲线方程是 y² = x³+7，这条曲线被命名为 secp256k1。
+在有限域中，我们有两种二元运算：addition(+), multiplication(·)。两种运算都符合 closed, associative and commutative 特性。
 
-下面就描述一下什么是椭圆曲线的点相加定理。
+举例说明，对于 F23 (mod 23 的有限域)
+
+- Addition: (18+9) mod 23 = 4
+- Subtraction: (7-14) mod 23 = 16
+- Multiplication: 4·7 mod 23 = 5
+- Additive inverse: -5 mod 23 = 18
+  - (5+(-5)) mod 23 = (5+18) mod 23 = 0
+- Multiplicative inverse: 9^-1 mod 23 = 18
+  - 9·9^-1 mod 23 = 9·18 mod 23 = 1
+
+**p 必须是素数！**
+
+整数模 4 的集合不是一个域：2 没有乘法逆元（即方程 2⋅x mod 4=1 没有解）。
+
+### Division modulo p
+
+在 Fp 中的除法模运算即为求出一个元素的乘法逆元，然后执行乘法运算。
+
+x/y = x·y^-1
+
+根据拓展欧几里得算法 [extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm) , 求出一个元素的乘法逆元的复杂度将是 O(log(p)) (如果考虑二进制位数将是 O(k))。
+
+给定 n 和 p，求 n 在 Fp 中的乘法逆元，即当 n · n^-1 mod p = 1 时，求 n^-1
+
+上述条件可以改写为 n · x - p · y = 1, 其中 y 为 n // p (商) ， x % p 即为 n^-1 (x 有可能比 p 大，固结果还要取模)
+
+Computing the multiplicative inverse Python implementation
+
+- `extended_euclidean_algorithm(a, b)`
+  - 根据拓展欧几里得算法，返回 GCD (最大公约数), x, y
+  - 使用辗转相除法，当余数 r 为 0 时终止循环
+  - 返回结果满足 a \* x + b \* y = GCD
+- `inverse_of(n, p)` 求 n 在 Fp 中的乘法逆元
+  - 当 gcd = 1 时，乘法逆元即为 x % p
+  - 否则 n 在 Fp 中不存在乘法逆元
+
+```python
+def extended_euclidean_algorithm(a, b):
+    """
+    Returns a three-tuple (gcd, x, y) such that
+    a * x + b * y == gcd, where gcd is the greatest
+    common divisor of a and b.
+
+    This function implements the extended Euclidean
+    algorithm and runs in O(log b) in the worst case.
+    """
+    s, old_s = 0, 1
+    t, old_t = 1, 0
+    r, old_r = b, a
+
+    while r != 0:
+        quotient = old_r // r
+        old_r, r = r, old_r - quotient * r
+        old_s, s = s, old_s - quotient * s
+        old_t, t = t, old_t - quotient * t
+
+    return old_r, old_s, old_t
+
+
+def inverse_of(n, p):
+    """
+    Returns the multiplicative inverse of
+    n modulo p.
+
+    This function returns an integer m such that
+    (n * m) % p == 1.
+    """
+    gcd, x, y = extended_euclidean_algorithm(n, p)
+    assert (n * x + p * y) % p == gcd
+
+    if gcd != 1:
+        # Either n is 0, or p is not a prime number.
+        raise ValueError(
+            '{} has no multiplicative inverse '
+            'modulo {}'.format(n, p))
+    else:
+        return x % p
+```
+
+## Elliptic curves in Fp
+
+对椭圆曲线取模，公式将变成如下形式
+
+<!-- $\{(x, y) \in (\mathbb{F}_p)^2 | y^2 \equiv x^3 + ax + b \pmod{p}, 4a^3 + 27b^2 \ne 0\}\cup\{0\}$ -->
+<img src="https://render.githubusercontent.com/render/math?math=\{(x, y) \in (\mathbb{F}_p)^2 | y^2 \equiv x^3 %2B ax %2B b \pmod{p}, 4a^3 %2B 27b^2 \ne 0\}\cup\{0\}" />
+
+0 点仍然是无穷远点，a, b 是 Fp 中的整数。
+
+![(x,y) in Fp^2](https://andrea.corbellini.name/images/elliptic-curves-mod-p.png)
+
+(上图中 p = 19,97,127,487。可以对于每个 x 值，最多存在两个点，每个点关于 y=p/2 上下对称)
+
+![singular curve](https://andrea.corbellini.name/images/singular-mod-p.png)
+
+(y^2= x^3 (mod 29)) 不是一个有效的椭圆曲线，包含了 0 点 (0,0)
+
+在有限域 Fp 中，椭圆曲线仍然形成一个阿贝尔群。
+
+### Point addition
+
+我们之前已经讨论过在椭圆曲线上 P+Q+R=0 的定义，三个点都在实属域 R 中。那么在有限域 Fp 中，将满足以下等式
+
+<!-- $ax + by + c \equiv 0 \pmod{p}$ -->
+<img src="https://render.githubusercontent.com/render/math?math=ax %2B by %2B c \equiv 0 \pmod{p}" />
+
+![addition in Fp](https://andrea.corbellini.name/images/point-addition-mod-p.png)
+
+(curve y^2=x^3-x+3 (mod 127), P=(16,20) and Q=(41,120))
+
+Fp 中的加法属性
+
+- Q + 0 = 0 + Q = Q (单位元的定义)
+- 给定非零点 Q，其逆元 -Q 是横坐标相同，但纵坐标关于 y=p/2 横线对称的点，即 -Q=(2, -5 mod 29) = (2, 24)
+- P+(-P)=0
+
+### Algebraic sum
+
+将上述图形方法转为代数算法来计算 P+Q=-R
+
+直接将实数域的公式增加 mod p
+
+<!-- $x_R= (m^2 - x_P - x_Q) mod p$ -->
+<img src="https://render.githubusercontent.com/render/math?math=x_R= (m^2 - x_P - x_Q) mod p" />
+
+<!-- $y_R= [y_P + m(x_R - x_P)] mod p$ -->
+<img src="https://render.githubusercontent.com/render/math?math=y_R= [y_P %2B m(x_R - x_P)] mod p" />
+
+or
+
+<!-- $y_R= [y_P + m(x_R - x_P)] mod p$ -->
+<img src="https://render.githubusercontent.com/render/math?math=y_R= [y_Q %2B m(x_R - x_Q)] mod p" />
+
+对于斜率 m，当 xP != xQ
+
+<!-- $m = (y_P - y_Q)*(x_P - x_Q)^{-1} mod p$ -->
+<img src="https://render.githubusercontent.com/render/math?math=m = (y_P - y_Q)*(x_P - x_Q)^{-1} mod p" />
+
+当 xP = xQ
+
+<!-- $m = (3 x_P^2 + a)(2 y_P)^{-1} \bmod{p}$ -->
+<img src="https://render.githubusercontent.com/render/math?math=m = (3 x_P^2 %2B a)(2 y_P)^{-1} \bmod{p}" />
+
+### The order of an elliptic curve group
+
+对于 Fp 的阶数 order (元素个数)，当 p 是一个很大的素数时，要计算 order 数量将会很困难， O(p)
+
+### Scalar multiplication and cyclic subgroups
+
+对于椭圆曲线 y^2=x^3+2x+3 (mod 97) 和点 P=(3,6)，P 只需要与自己相加 5 次即可回到初始点。
+
+![just five distinct points](https://andrea.corbellini.name/images/cyclic-subgroup.png)
+
+- 0P=0
+- 1P=(3,6)
+- 2P=(80,100)
+- 3P=(80,87)
+- 4P=(3,91)
+- 5P=0
+- ...
+
+P 的倍数只有 5 个，且是循环出现的，于是我们可以重写一下结果：
+
+- 5kP=0
+- (5k+1)P=P
+- (5k+2)P=2P
+- (5k+3)P=3P
+- (5k+4)P=4P
+
+P 的倍数组成的集合是椭圆曲线在 Fp 有限域中的循环子群。 (the set of the multiples of is a cyclic subgroup of the group formed by the elliptic curve.)
+
+在该循环子群中，点 P 为称作生成元 或 基点 (generator or base point)。
+
+循环子群是 ECC 和其他密码系统的基础。
+
+### Subgroup order
+
+如何计算子群的阶数？
+
+- order 阶数即为群中元素的个数，对于上述循环子群，order of P 即为满足 nP=0 的最小正整数。
+- 根据拉格朗日定理 [Lagrange's theorem](<https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)>)， order of P 子群的阶数是父群的阶数的除数
+  - 换言之，椭圆曲线包含 N 个点，其循环子群包含 n 个点，则 n 是 N 的除数
+
+结合上述两条信息，计算子群阶数的步骤如下：
+
+1. 计算椭圆曲线包含的元素个数 N 使用 [Schoof's algorithm](https://en.wikipedia.org/wiki/Schoof%27s_algorithm)
+2. 找出所有 N 的除数
+3. 对每个 N 的除数 n，计算 nP
+4. 满足 nP=0 条件的最小的正整数，即为子群的阶数 order of the subgroup
+
+举个例子，在 y^2=(x^3-x+3) mod 37 中，总的点个数 N = 42，可能的 order n=1,2,3,6,7,14,21,42. 给定点 P=（2,3）,我们可以尝试计算 P,2P,3P,6P,7P, 一直到 7P=0，因此由 P 点作为基点的循环子群，其阶数(order of P) n=7
 
 ## 优化点相加运算过程
 
 已知比特币的私钥 x ，要运算公钥 X，就需要用到点相加定理。具体做法就是选定一个点 P，那么 `X=x*P`。x 是一个 32 字节的整数，所以很可能是一个非常大的数，但是运算 `x*P` 的时候我们可以找到优化的点相加的运算过程。
-
-例如，我们要运算 `10*P` ，直观上我们会认为要进行 9 次点相加运算，但是实际上只需要 4 次，这是因为点相加满足 `n*P+r*P = (n+r)*P` 。所以，运算 `10*P` 的最快方式是分解为下面四步：
-
-```math
-P+P = 2*P
-2*P+2*P = 4*P
-4*P+4*P = 8*P
-2*P+8*P = 10*P
-```
 
 而对于 `x*P`，我们可以推导出这样的结论，对于任意的私钥 x，要运算出公钥 X，最多只需要进行 510 步的点相加运算，所以对于计算机来说并不是一个很大的计算任务。比特币对于 P 的取值是有明确规定的，在 secp256k1 曲线上， P 点的 x 坐标 和 y 坐标分别为：
 
