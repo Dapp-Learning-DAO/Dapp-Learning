@@ -87,7 +87,7 @@ P+Q=-R
 
 可以到这里尝试自己修改参数，观察曲线和直线交点的变化 [HTML5/JavaScript visual tool](https://andrea.corbellini.name/ecc/interactive/reals-add.html)
 
-## Algebraic addition
+### Algebraic addition
 
 为了精确计算点的加法，我们需要把上述几何方法转换为代数算法。
 
@@ -98,7 +98,7 @@ P=(xP, yP)
 Q=(xQ, yQ)
 ```
 
-## xP!=xQ
+### xP!=xQ
 
 首先考虑 xP != xQ 的情况，直线的斜率 m 为
 
@@ -143,7 +143,7 @@ xR 和 yR 的公式保持不变，我们将 P=Q=(1,2) 代入公式验证
 
 (1,2)+(1,2)=2(1,2)=(-1,-4)
 
-## Scalar multiplication
+### Scalar multiplication
 
 上述加法运算中，当 P=Q 时，P+P=2P，我们可以将其定义为 **scalar multiplication** 标量乘法。
 
