@@ -289,7 +289,7 @@ def inverse_of(n, p):
 <!-- $\{(x, y) \in (\mathbb{F}_p)^2 | y^2 \equiv x^3 + ax + b \pmod{p}, 4a^3 + 27b^2 \ne 0\}\cup\{0\}$ -->
 <img src="https://render.githubusercontent.com/render/math?math=\{(x, y) \in (\mathbb{F}_p)^2 | y^2 \equiv x^3 %2B ax %2B b \pmod{p}, 4a^3 %2B 27b^2 \ne 0\}\cup\{0\}" />
 
-0 点仍然是无穷远点，a, b 是 Fp 中的整数。
+0 点仍然是无穷远点，(x, y) 是 Fp 中的整数。
 
 ![(x,y) in Fp^2](https://andrea.corbellini.name/images/elliptic-curves-mod-p.png)
 
