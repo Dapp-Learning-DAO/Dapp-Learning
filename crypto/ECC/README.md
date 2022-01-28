@@ -427,8 +427,6 @@ discrete logarithm problem 被认为是很困难的，这一特性同样被运�
 
 所不同的是，ECC 使用更少位数的 k 就能达到相同安全级别。
 
-## ECDH and ECDSA
-
 ### Domain parameters
 
 我们的椭圆曲线算法将在有限域上的椭圆曲线的循环子群中工作。因此，我们的算法将需要以下参数
@@ -439,25 +437,152 @@ discrete logarithm problem 被认为是很困难的，这一特性同样被运�
 - 循环子群的阶数 n.
 - 循环子群的辅因子 h.
 
+### Random curves
+
+尽管椭圆曲线加密大部分是安全的，但仍有一些是比较弱的，会有安全隐患。如何才能保证一条椭圆曲线是安全的呢？
+
+为了解决这个问题，我们使用种子 S 进行 hash 去生成系数 a, b, 或者基点 G，甚至全部用种子随机生成。
+
+![A simple sketch of how a random curve is generated from a seed](https://andrea.corbellini.name/images/random-parameters-generation.png)
+
+(A simple sketch of how a random curve is generated from a seed: the hash of a random number is used to calculate different parameters of the curve.)
+
+!["hard" problem: hash inversion](https://andrea.corbellini.name/images/seed-inversion.png)
+
+(If we wanted to cheat and try to construct a seed from the domain parameters, we would have to solve a "hard" problem: hash inversion.)
+
+参数由随机种子生成的曲线，称之为 **verifiably random**
+
+## Elliptic Curve Cryptography
+
+定义公私钥对
+
+1. private key 是从 [1, n-1] (n 是子群的阶数) 中选取的整数 `d`
+2. public key 是点 `H = dG` (G 是子群的基点)
+
+如果我们知道私钥 d 和 基点 G 找到公钥 H 0 是很容易的，但是反过来，已知 H 和 G，要找到私钥 d 是很困难的。
+
+### Encryption with ECDH
+
+ECDH 是椭圆曲线 [Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) 算法的变体。它实际上是一种密钥协商协议 [key-agreement protocol](https://en.wikipedia.org/wiki/Key-agreement_protocol)，而不是一种加密算法。ECDH 定义了如何在各方之间生成和交换密钥。如何使用这些密钥实际加密数据取决于我们。
+
+Alice 和 Bob 想要隐私且安全的交换信息，不被第三方看到内容：
+
+1. Alice 和 Bob 创建各自的公私钥对。Alice 的私钥 dA 公钥 HA = dA\*G，Bob 的是 dB 和 HB = dB \* G。 两人使用同一条曲线的同一个有限域（系数和生成元相同）
+2. Alice 和 Bob 互相交换公钥 HA 和 HB ，第三方可见公钥，但无法知道两人的私钥。
+3. Alice 计算出消息 S = dA\*HB , Bob 也计算出消息 S = dB\*HA， 两人会得到相同的结果
+
+<!-- $S = d_A H_B = d_A (d_B G) = d_B (d_A G) = d_B H_A$ -->
+<img src="https://render.githubusercontent.com/render/math?math=S =d_AH_B=d_A(d_BG)=d_B(d_AG)=d_BH_A" />
+
+原理在于两人用自己的私钥乘以对方的公钥，其结果都是 dA\*dB\*G , 但第三方只知道公钥，就无法得到信息。
+
+![Diffie-Hellman key exchange](https://andrea.corbellini.name/images/ecdh.png)
+
+现在 Alice 和 Bob 已经获得了共享秘密 S ，他们可以通过对称加密交换数据。
+
+[ECDH demo](https://github.com/andreacorbellini/ecc/blob/master/scripts/ecdhe.py)
+
+### Ephemeral ECDH
+
+ECDHE 中的“E”代表“Ephemeral”，指的是交换的密钥是临时的，而不是静态的。 例如，在 TLS 中使用 ECDHE，在建立连接时，客户端和服务器都会即时生成它们的公钥-私钥对。然后使用 TLS 证书对密钥进行签名（用于身份验证）并在各方之间进行交换。
+
+### Signing with ECDSA
+
+ECDH 不能体现所有权，即 Alice 签名的消息，只有 Bob 可以验证，第三方无法验证真伪。
+
+ECDSA 可以实现这一场景，它是 DSA [Digital Signature Algorithm](https://en.wikipedia.org/wiki/Digital_Signature_Algorithm) 的一种变体。
+
+ECSDA 处理消息的 hash 而不是消息本身，hash 函数由我们自己选择。hash 会被截断，与 n (子群的阶数)的位数相同，截断后的 hash 应是一个整数，用 `z` 表示。
+
+Alice 为消息签名所执行的算法如下：
+
+1. 从 [1, n-1] (n 是子群的阶数) 中选取随机的整数 `k`
+2. 计算点 P=kG (G 是子群的基点)
+3. 计算 r = xP mod n (xP 是 P 点横坐标)
+4. 如果 r 是 0，返回第 1 步
+5. 计算 s = k^-1(z + r\*dA) mod n (dA 是 Alice 的私钥, k^-1 是 k 在 k mod n 中的乘法逆元)
+6. 如果 s 是 0，返回第 1 步
+
+最终 (r, s) 对就是签名
+
+![ECDSA sign](https://andrea.corbellini.name/images/ecdsa.png)
+
+Alice 使用她的私钥 dA 和随机 k 对哈希 z 进行签名。 Bob 使用 Alice 的公钥 HA 验证消息是否已正确签名。
+
+再次强调，n 需要是素数，否则无法求 k^-1。
+
+### Verifying signatures
+
+为了验证签名，我们需要 Alice 的公钥 HA、（截断的）hash `z`，还有签名 (r,s)。
+
+1. 计算整数 u1 = s^-1 \* z mod n
+2. 计算整数 u2 = s^-1 \* r mod n
+3. 计算点 P = u1\*G + u2\*HA
+
+当 r == xP mod n 时，签名有效。
+
+### Correctness of the algorithm
+
+算法的逻辑看起来不明显
+
+P = u1\*G + u2\*HA
+
+公钥的定义是 HA=dA\*G (dA 是私钥)
+
+```math
+P = u1*G + u2*HA
+  = u1*G + u2*dA*G
+  = (u1 + u2*dA)*G
+```
+
+再将u1 和u2 的定义代入
+
+```math
+P = (u1 + u2*dA)*G
+  = (s^-1*z + s^-1*r*dA)*G
+  = s^-1(z + r*dA)*G
+```
+
+这里我们为了简洁省略了“mod n”，并且因为 G 生成的循环子群具有 n 阶，因此“mod n”是多余的。
+
+之前我们定义了 s = k^-1(z + r\*dA) mod n， 两边乘以 k 再除以 s 则
+
+k = s^-1(z + r\*dA) mod n
+
+代入 P 的表达式
+
+```math
+P = s^-1(z + r*dA)*G = k*G
+```
+
+这与签名时第2步相同，即如果 xP mod n 与 r 相同，则说明签名有效。
+
+### Playing with ECDSA
+
+[a Python script for signature generation and verification](https://github.com/andreacorbellini/ecc/blob/master/scripts/ecdsa.py)
 
 
-## 优化点相加运算过程
+### The importance of k
 
-已知比特币的私钥 x ，要运算公钥 X，就需要用到点相加定理。具体做法就是选定一个点 P，那么 `X=x*P`。x 是一个 32 字节的整数，所以很可能是一个非常大的数，但是运算 `x*P` 的时候我们可以找到优化的点相加的运算过程。
+在生成 ECDSA 签名时，将秘密 k 保密很重要。如果我们对所有签名使用相同的 k，或者如果我们的随机数生成器在某种程度上是可预测的，那么攻击者将能够找到私钥！
 
-而对于 `x*P`，我们可以推导出这样的结论，对于任意的私钥 x，要运算出公钥 X，最多只需要进行 510 步的点相加运算，所以对于计算机来说并不是一个很大的计算任务。比特币对于 P 的取值是有明确规定的，在 secp256k1 曲线上， P 点的 x 坐标 和 y 坐标分别为：
+著名的 PlayStation 3 事故 [This is the kind of mistake made by Sony a few years ago](http://www.bbc.com/news/technology-12116051)。索尼的ECDSA签名算法使用的时静态的 k，即每次的k值都相同，导致攻击者很容易就能破解私钥。
 
-x 坐标：
-55066263022277343669578718895168534326250603453777594175500187360389116729240
+攻击者只需要购买两个游戏，然后提取他们的 hash (z1, z2) 和 签名 (r1,s1),(r2,s2)
 
-y 坐标：
-32670510020758816978083085130507043184471273380659243275938904335757337482424
+1. 首先 r1 = r2 ,因为 r = xP mod n , P = kG ,如果k值不变， r也不会变
+2. (s1 - s2) mod n = k^-1(z1 - z2) mod n
+3. 两边同时乘以 k ， k(s1 - s2) mod n = (z1 - z2) mod n
+4. k = (z1 - z2)(s1 - s2)^-1 mod n
 
-x 和 P 以及椭圆曲线确定之后，就可以运算 X 了。X 是椭圆曲线上的一个点，这样比特币公钥就是这个点的 x 和 y 坐标值拼接起来的整数。
-优化椭圆曲线模型
-现在遗留的问题是由于 x 取值的可能性很多，那么 `x*P` 得到的点的 x 和 y 值很可能不能被保存成一个标准的 512 bit 的公钥，所以就要对我们的椭圆曲线模型做一下优化。
+最后通过k计算私钥 dS
 
-优化方案是把椭圆曲线定义在一个有限域内，目的是要确保只有整数点，并且每个点的横纵坐标值都不会过大。具体实现请看
+s = k^-1 (z + r\*dS) mod n
+
+dS = r^-1 (s\*k - z) mod n
+
+## 其他 ECDSA 实现
 
 - [ecc-secp256k1.py](./ecc_secp256k1.py)
 - [elliptic.py](./elliptic.py)
@@ -474,6 +599,7 @@ CFLAGS=-I/opt/homebrew/opt/gmp/include LDFLAGS=-L/opt/homebrew/opt/gmp/lib pytho
 - [Elliptic Curve Cryptography: finite fields and discrete logarithms](https://andrea.corbellini.name/2015/05/23/elliptic-curve-cryptography-finite-fields-and-discrete-logarithms/)
 - [Elliptic Curve Cryptography: ECDH and ECDSA](https://andrea.corbellini.name/2015/05/30/elliptic-curve-cryptography-ecdh-and-ecdsa/)
 - [Elliptic Curve Cryptography: breaking security and a comparison with RSA](https://andrea.corbellini.name/2015/06/08/elliptic-curve-cryptography-breaking-security-and-a-comparison-with-rsa/)
+- [github andreacorbellini/ecc](https://github.com/andreacorbellini/ecc)
 - [ecdsa-math](https://happypeter.github.io/binfo/ecdsa-math.html)
 - <https://hackernoon.com/what-is-the-math-behind-elliptic-curve-cryptography-f61b25253da3>
 - <https://www.youtube.com/watch?v=iB3HcPgm_FI>
