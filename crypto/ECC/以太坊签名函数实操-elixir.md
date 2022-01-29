@@ -1,4 +1,4 @@
-**关于函数式编程：**
+# 以太坊签名函数实操
 
 > 函数式编程是有别于传统的面对对象范式的编程范式，函数式方向是目前编程语言发展的大方向，所有新设计的编程语言都或多或少的引入了函数式编程功能。
 >
@@ -12,13 +12,13 @@
 
 > [理解以太坊合约数据读取过程 | 函数式与区块链（二）](http://mp.weixin.qq.com/s?__biz=MzI0NTM0MzE5Mw==&mid=2247485420&idx=1&sn=1149067c6a0bfb13bde552bb5721eefd&chksm=e94eb15ade39384c9e68e2bd6bf321640b5da57eefc828ff92b24669fe6e4aa93468464f74e3&scene=21#wechat_redirect)
 >
-> [太上中的基因设计与Binary | 函数式与区块链（一）](http://mp.weixin.qq.com/s?__biz=MzI0NTM0MzE5Mw==&mid=2247485413&idx=1&sn=80b72e45f31d71ab0e564004f5a5fb06&chksm=e94eb153de3938451126266b8bc2213f34ebf7af35993b2f1c93666e5cde9512ea97397331c5&scene=21#wechat_redirect)
+> [太上中的基因设计与 Binary | 函数式与区块链（一）](http://mp.weixin.qq.com/s?__biz=MzI0NTM0MzE5Mw==&mid=2247485413&idx=1&sn=80b72e45f31d71ab0e564004f5a5fb06&chksm=e94eb153de3938451126266b8bc2213f34ebf7af35993b2f1c93666e5cde9512ea97397331c5&scene=21#wechat_redirect)
 
 本篇描述 Elixir 与 Rust 两种函数式编程语言下 ECDSA 算法下使用 Secp256k1 签名的过程。
 
 本文侧重相关库的使用，相关原理解析可见：
 
-> 一个数字引发的探索——ECDSA解析：
+> 一个数字引发的探索——ECDSA 解析：
 >
 > https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/articles/3_features/36_cryptographic/ecdsa_analysis.html?highlight=v%20r%20s
 >
@@ -129,13 +129,13 @@ fn do_verify<C: Verification>(secp: &Secp256k1<C>, digest: &[u8], sig: Vec<u8>, 
 
 ## 压缩的签名
 
-通过压缩签名算法（sign_compact），会生成v, r, s。r 和 s 拼凑起来是签名本体，v 的全称是 Recovery ID，起到从签名中恢复公钥的作用。
+通过压缩签名算法（sign_compact），会生成 v, r, s。r 和 s 拼凑起来是签名本体，v 的全称是 Recovery ID，起到从签名中恢复公钥的作用。
 
-> 对比比特币签名，以太坊的签名格式是`r+s+v`。 r 和 s 是ECDSA签名的原始输出，而末尾的一个字节为 recovery id 值，但在以太坊中用`V`表示，v 值为1或者0。recovery id 简称 recid，表示从内容和签名中成功恢复出公钥时需要查找的次数（因为根据`r`值在椭圆曲线中查找符合要求的坐标点可能有多个），但在比特币下最多需要查找两次。这样在签名校验恢复公钥时，不需要遍历查找，一次便可找准公钥，加速签名校验速度。
+> 对比比特币签名，以太坊的签名格式是`r+s+v`。 r 和 s 是 ECDSA 签名的原始输出，而末尾的一个字节为 recovery id 值，但在以太坊中用`V`表示，v 值为 1 或者 0。recovery id 简称 recid，表示从内容和签名中成功恢复出公钥时需要查找的次数（因为根据`r`值在椭圆曲线中查找符合要求的坐标点可能有多个），但在比特币下最多需要查找两次。这样在签名校验恢复公钥时，不需要遍历查找，一次便可找准公钥，加速签名校验速度。
 >
 > —— https://learnblockchain.cn/books/geth/part3/sign-and-valid.html
 
-压缩签名的长度是 r 和 s 各是 32 字节，v 是1字节，总共是65字节。
+压缩签名的长度是 r 和 s 各是 32 字节，v 是 1 字节，总共是 65 字节。
 
 ### Elixir 中的实现
 
@@ -246,17 +246,3 @@ fn main(){
     recover(digest, sig_compact, recovery_id);
 }
 ```
-
-最后——**关于太上：**
-
-> 太上是笔者团队近期实践的一个函数式+区块链的项目。
->
-> 太上炼金炉在不改变原有 NFT 合约的基础上，通过附加「存证合约」，赋予 NFT 组合、拆解、生命周期、权益绑定等能力，锻造 NFT +，创造无限创新玩法与想象空间。
->
-> **项目地址：**https://github.com/WeLightProject/Tai-Shang
->
-> **愿景0x01：**助力所有 NFT 及其相关项目，让其具备无限商业想象空间与无限玩法。
->
-> **愿景0x02：**成为下一代区块链基础设施
->
-> 太上是本系列用以探讨函数式编程的第一个项目。
