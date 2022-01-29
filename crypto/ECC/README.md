@@ -105,7 +105,7 @@ Q=(xQ, yQ)
 <!-- $m = \frac{y_P - y_Q}{x_P - x_Q}$ -->
 <img src="https://render.githubusercontent.com/render/math?math=m = \frac{y_P - y_Q}{x_P - x_Q}" />
 
-联立直线和椭圆方程，则 R 的坐标可以如下计算 (?? xR 的公式推导还没有想明白 ??)
+R 的坐标可以如下计算
 
 <!-- $x_R= m^2 - x_P - x_Q$ -->
 <img src="https://render.githubusercontent.com/render/math?math=x_R= m^2 - x_P - x_Q" />
@@ -117,6 +117,40 @@ Q=(xQ, yQ)
 
 <!-- $y_Q= y_P + m(x_R - x_Q)$ -->
 <img src="https://render.githubusercontent.com/render/math?math=y_R= y_Q %2B m(x_R - x_Q)" />
+
+推导过程如下(感谢 kaiji 的补充)：
+
+代入 Q 点和 P 点到椭圆曲线
+
+<!-- $y_Q^2=x_Q^3+ax_Q+b$ -->
+<img src="https://render.githubusercontent.com/render/math?math=y_Q^2=x_Q^3%2Bax_Q%2Bb" />
+
+<!-- $y_R^2=x_R^3+ax_R+b$ -->
+<img src="https://render.githubusercontent.com/render/math?math=y_R^2=x_R^3%2Bax_R%2Bb" />
+
+将上述两个等式相减
+
+<!-- $(y_Q+y_R)(y_Q-y_R)=(x_Q-x_R)(x_Q^2+x_Qx_R+x_R^2+a)$ -->
+<img src="https://render.githubusercontent.com/render/math?math=(y_Q%2By_R)(y_Q-y_R)=(x_Q-x_R)(x_Q^2%2Bx_Qx_R%2Bx_R^2%2Ba)" />
+
+将 yQ - yR 替换为 m(xQ-xR),等式两边消去 (yQ+yR)
+
+<!-- $m(y_Q+y_R)=x_Q^2+x_Qx_R+x_R^2+a$ -->
+<img src="https://render.githubusercontent.com/render/math?math=m(y_Q%2By_R)=x_Q^2%2Bx_Qx_R%2Bx_R^2%2Ba" />
+
+同理可得
+
+<!-- $m(y_P+y_R)=x_P^2+x_Px_R+x_R^2+a$ -->
+<img src="https://render.githubusercontent.com/render/math?math=m(y_P%2By_R)=x_P^2%2Bx_Px_R%2Bx_R^2%2Ba" />
+
+将上述两个等式相减
+
+$m(y_P-y_Q)=(x_P+x_Q)(x_P-x_Q)+x_R(x_P-x_Q)$
+<img src="https://render.githubusercontent.com/render/math?math=m(y_P-y_Q)=(x_P%2Bx_Q)(x_P-x_Q)%2Bx_R(x_P-x_Q)" />
+
+两边同时除以 (xP-xQ)
+
+$x_R=m^2-x_P-x_Q$
 
 计算出 R 点之后，进而得出关于 x 轴对称点 -R，即为 P+Q 的结果
 
@@ -438,8 +472,6 @@ discrete logarithm problem 被认为是很困难的，这一特性同样被运�
 - 循环子群的基点 G 作为生成元.
 - 循环子群的阶数 n.
 - 循环子群的辅因子 h.
-
-
 
 ## 优化点相加运算过程
 
