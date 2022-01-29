@@ -48,6 +48,7 @@ Solidity Bytecode and Opcode Basics <https://medium.com/@blockchain101/solidity-
 
 Openzeppelin blog 的系列文章，非常棒的科普文。学习笔记参见 :point_right: [DeconstructingSolidityContract.md](./DeconstructingSolidityContract.md)
 
+
 ## 参考链接
 
 - ethervm.io <https://ethervm.io/>

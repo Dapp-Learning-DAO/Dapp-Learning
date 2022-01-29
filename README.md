@@ -88,7 +88,7 @@ web3工具集锦：<https://www.useweb3.xyz/>
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
-我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/s/Y6fYmqrS9SpEw4Nd0ocUzg)
+我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298#wechat_redirect)
 对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。
 
 
@@ -132,7 +132,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote & Gitcoin](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
+28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
@@ -143,7 +143,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 36. [NFT FileCoin](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
-39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
+39. [Multicall](https://github.com/makerdao/multicall.js) ✅
 40. [snapshot](basic/40-snapshot/README.md) ⌛
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
@@ -185,9 +185,15 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
   开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
- 建议先阅读DEFI经典书籍:
+ **建议先阅读DEFI经典书籍:**
   [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
   [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
+  **DEFI学习路线图：**
+交易 -> 借贷 ->衍生品
+可以参考我们学习小组的学习路线图，配合视频学习更佳：
+- 交易： uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
+- 借贷： Aave -> Compound -> Liquity -> Euler
+- 衍生品： SNX -> YFI -> Perpetual 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Compound](defi/Compound/readme.md) ✅
