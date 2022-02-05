@@ -13,7 +13,11 @@
 ### ERC20 merkel airdrop
 
 参考 1inch，dydx，uniswap 都实现 merkle 空投。 具体原理请参考：
-https://itzone.com.vn/en/article/merkle-airdrop-the-airdrop-solution-for-token-issues/
+https://itzone.com.vn/en/article/merkle-airdrop-the-airdrop-solution-for-token-issues/  
+
+### 抢红包    
+本样例演示了抢红包合约的功能, 在节假日的时候可以部署相应的合约进行红包发放.
+对应合约路径为 contracts/redpacket
 
 ## 合约功能说明
 
@@ -90,7 +94,7 @@ await expect(this.registry.redeem(this.token.account, this.token.tokenId, this.t
 ```
 
 ## 测试流程
-
+### Merkle airdrop  
 - 安装依赖
 
 ```bash
@@ -102,6 +106,46 @@ yarn
 ```bash
 npx hardhat test
 ```
+
+### 抢红包  
+- 配置环境环境变量  
+```shell
+cp .env.exmpale .env
+
+## 在 .env 文件中配置 PRIVATE_KEY, INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
+## 其中 TARGET_ACCOUNT 为可以领取红包的账户地址 
+```
+
+- 安装依赖  
+```shell
+yarn
+```
+
+- 部署 ERC20 合约  
+```shell
+npx hardhat run scripts/redpacket/1-deploySimpleToken --network kovan
+```
+
+- 部署 RedPacket 合约  
+```shell
+npx hardhat run scripts/redpacket/2-deployHappyRedPacket --network kovan 
+```
+
+- 创建 红包  
+修改  scripts/redpacket/3-createRedPacket 文件中的 "HappyRedPacketAddress" 和 "SimpleTokenAddress" 地址为上面输出的地址, 然后执行下面的命令
+```shell
+npx hardhat run scripts/redpacket/3-createRedPacket --network kovan 
+```
+
+- 进行签名   
+```shell
+npx hardhat run scripts/redpacket/4-signMessage
+
+## 得到的输出 "Sign Message:" 即为领取红包时需要输入的签名信息，防止恶意领取
+```
+
+- 领取红包  
+在 Etherscan 上验证合约后，即可通过 Etherscan 调用 claim 方法进行领取  
 
 ## 参考链接
 
