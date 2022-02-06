@@ -113,8 +113,12 @@ npx hardhat test
 cp .env.exmpale .env
 
 ## 在 .env 文件中配置 PRIVATE_KEY, INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
-## 其中 TARGET_ACCOUNT 为可以领取红包的账户地址 
+## 比如有一个账户 A , 那么 PRIVATE_KEY 为账户 A 对应的 PRIVATE_KEY， TARGET_ACCOUNT 为账户 A 对应的账户地址 
 ```
+
+- 配置 redpacketAddressList 
+因为红包领取时会进行 Merkle 校验, 所以需要在 Merkle List 中配置对应的账户地址.  
+修改 scripts/redpacket/redpacketAddressList.json 文件，在其中加入上一步操作中 "TARGET_ACCOUNT" 的值.  
 
 - 安装依赖  
 ```shell
@@ -122,30 +126,47 @@ yarn
 ```
 
 - 部署 ERC20 合约  
+执行如下命令，然后获取输出的 "Token address" 值
 ```shell
-npx hardhat run scripts/redpacket/1-deploySimpleToken --network kovan
+npx hardhat run scripts/redpacket/1-deploySimpleToken.js --network kovan
+
+## 输入信息如下: 
+Deploying contracts with the account: 0x3238f24e7C752398872B768Ace7dd63c54CfEFEc
+Account balance: 796474026501725149
+Token address: 0xdc6999dC3f818B4f74550569CCC7C82091cA419F
+1000000000
 ```
 
 - 部署 RedPacket 合约  
+执行如下命令，然后获取输出的 "RedPacket address" 值
 ```shell
-npx hardhat run scripts/redpacket/2-deployHappyRedPacket --network kovan 
+npx hardhat run scripts/redpacket/2-deployHappyRedPacket.js --network kovan 
+
+## 输出信息如下:
+Deploying contracts with the account: 0x3238f24e7C752398872B768Ace7dd63c54CfEFEc
+Account balance: 783625061469463255
+RedPacket address: 0x6F35e57a7421F5b04DDb47b67453A5a5Be32e58B
 ```
 
-- 创建 红包  
-修改  scripts/redpacket/3-createRedPacket 文件中的 "HappyRedPacketAddress" 和 "SimpleTokenAddress" 地址为上面输出的地址, 然后执行下面的命令
+- 创建红包  
+修改  scripts/redpacket/3-createRedPacket.js 文件中的 "HappyRedPacketAddress" 和 "SimpleTokenAddress" 地址为上面输出的地址, 然后执行下面的命令, 获取输出的 "RedpacketId"
 ```shell
-npx hardhat run scripts/redpacket/3-createRedPacket --network kovan 
+npx hardhat run scripts/redpacket/3-createRedPacket.js --network kovan 
+
+## 输出值  
+Approve Successfully
+merkleTree Root: 0x5cc6f1ff34a2c6f871d40cdc4559468f96a7ec06d7bf6ab0f9b5aeccc9b33154
+CreationSuccess Event, total: 10000   RedpacketId: 0x45eb11e56a1b699f5e99bd16785c84b73a8257c712e0d1f31306ab1e3423b2e0  
+Create Red Packet successfully
 ```
 
-- 进行签名   
+- 领取红包 
+修改 "4-claimRedpacket.js" 文件中的 "HappyRedPacketAddress" 和 "redpacketID" 值为上面的输出值, 然后执行下面的命令进行红包的 claim 
 ```shell
-npx hardhat run scripts/redpacket/4-signMessage
+npx hardhat run scripts/redpacket/4-claimRedpacket.js --network kovan
 
 ## 得到的输出 "Sign Message:" 即为领取红包时需要输入的签名信息，防止恶意领取
 ```
-
-- 领取红包  
-在 Etherscan 上验证合约后，即可通过 Etherscan 调用 claim 方法进行领取  
 
 ## 参考链接
 

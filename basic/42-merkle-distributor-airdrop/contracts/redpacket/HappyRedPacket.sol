@@ -14,6 +14,7 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 contract HappyRedPacket is Initializable {
     using SafeMath for uint256;
@@ -21,7 +22,7 @@ contract HappyRedPacket is Initializable {
     struct RedPacket {
         Packed packed;
         mapping(address => uint256) claimed_list;
-        address public_key;
+        bytes32 merkleroot;
         address creator;
     }
 
@@ -68,7 +69,7 @@ contract HappyRedPacket is Initializable {
 
     // Inits a red packet instance
     // _token_type: 0 - ETH  1 - ERC20
-    function create_red_packet (address _public_key, uint _number, bool _ifrandom, uint _duration, 
+    function create_red_packet (bytes32 _merkleroot, uint _number, bool _ifrandom, uint _duration, 
                                 bytes32 _seed, string memory _message, string memory _name,
                                 uint _token_type, address _token_addr, uint _total_tokens) 
     public payable {
@@ -97,7 +98,7 @@ contract HappyRedPacket is Initializable {
             RedPacket storage redp = redpacket_by_id[_id];
             redp.packed.packed1 = wrap1(received_amount, _duration);
             redp.packed.packed2 = wrap2(_token_addr, _number, _token_type, _random_type);
-            redp.public_key = _public_key;
+            redp.merkleroot = _merkleroot;
             redp.creator = msg.sender;
         }
         {
@@ -110,7 +111,7 @@ contract HappyRedPacket is Initializable {
     }
 
     // It takes the signed msg.sender message as verification passcode
-    function claim(bytes32 id, bytes memory signedMsg, address payable recipient) 
+    function claim(bytes32 id, bytes32[] memory proof, address payable recipient) 
     public returns (uint claimed) {
 
         RedPacket storage rp = redpacket_by_id[id];
@@ -121,8 +122,8 @@ contract HappyRedPacket is Initializable {
         uint claimed_number = unbox(packed.packed2, 224, 15);
         require (claimed_number < total_number, "Out of stock");
         
-        address public_key = rp.public_key;
-        require(_verify(signedMsg, public_key), "Verification failed");
+        bytes32 merkleroot = rp.merkleroot;
+        require(MerkleProof.verify(proof, merkleroot, _leaf(msg.sender)), 'Verification failed');
 
         uint256 claimed_tokens;
         uint256 token_type = unbox(packed.packed2, 254, 1);
@@ -159,14 +160,6 @@ contract HappyRedPacket is Initializable {
         return claimed_tokens;
     }
 
-    // as a workaround for "CompilerError: Stack too deep, try removing local variables"
-    function _verify(bytes memory signedMsg, address public_key) private view returns (bool verified) {
-        bytes memory prefix = "\x19Ethereum Signed Message:\n20";
-        bytes32 prefixedHash = keccak256(abi.encodePacked(prefix, msg.sender));
-        address calculated_public_key = ECDSA.recover(prefixedHash, signedMsg);
-        return (calculated_public_key == public_key);
-    }
-
     // Returns 1. remaining value 2. total number of red packets 3. claimed number of red packets
     function check_availability(bytes32 id) external view returns ( address token_address, uint balance, uint total, 
                                                                     uint claimed, bool expired, uint256 claimed_amount) {
@@ -180,6 +173,10 @@ contract HappyRedPacket is Initializable {
             block.timestamp > unbox(packed.packed1, 224, 32), 
             rp.claimed_list[msg.sender]
         );
+    }
+
+    function _leaf(address account) internal pure returns (bytes32){
+        return keccak256(abi.encodePacked(account));
     }
 
     function refund(bytes32 id) public {

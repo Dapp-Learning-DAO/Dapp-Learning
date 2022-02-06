@@ -17,44 +17,17 @@ async function main() {
   const [deployer] = await ethers.getSigners();
 
   const HappyRedPacketAddress = "0xE9c061465E9eaF01D1c8F9Dfc2487Db31a053bb0";
-  const SimpleTokenAddress = "0xdc6999dC3f818B4f74550569CCC7C82091cA419F";
-  
   const redPacket = await ethers.getContractAt("HappyRedPacket", HappyRedPacketAddress, deployer);
-  const simpleToken = await ethers.getContractAt("SimpleToken", SimpleTokenAddress, deployer);
-
-  let tx = await simpleToken.approve(redPacket.address,ethers.utils.parseEther("100"));
-  await tx.wait()
-
-  console.log("Approve Successfully");
+  const redpacketID = "0x45eb11e56a1b699f5e99bd16785c84b73a8257c712e0d1f31306ab1e3423b2e0"
   
   merkleTree = new MerkleTree(addresList.map(address => hashToken(address)), keccak256, { sortPairs: true });
-  merkleTreeRoot = merkleTree.getHexRoot();
-  console.log("merkleTree Root:",merkleTreeRoot);
+  let proof = merkleTree.getHexProof(hashToken(deployer.address));
+  console.log("merkleTree proof: ",proof);
 
-  // create_red_packet
-  let creationParams = {
-    merkleroot: merkleTreeRoot,
-    number: 3,
-    ifrandom: true,
-    duration: 2**30,
-    seed: ethers.utils.formatBytes32String('lajsdklfjaskldfhaikl'),
-    message: 'Hi',
-    name: 'cache',
-    token_type: 1,
-    token_addr: SimpleTokenAddress,
-    total_tokens: 10000,
-  };
-
-  redPacket.once('CreationSuccess', ( total,  id,  name,  message,  creator,  creation_time,  token_address,  number,  ifrandom,  duration) => {
-    console.log(
-      `CreationSuccess Event, total: ${total}   RedpacketId: ${id}  `
-    );
-  });
-
-  let createRedPacketRecipt  = await redPacket.create_red_packet(...Object.values(creationParams));
+  let createRedPacketRecipt  = await redPacket.claim(redpacketID,proof,deployer.address);
   await createRedPacketRecipt.wait();
 
-  console.log("Create Red Packet successfully");
+  console.log("Claim Red Packet successfully");
 }
 
 // We recommend this pattern to be able to use async/await everywhere
