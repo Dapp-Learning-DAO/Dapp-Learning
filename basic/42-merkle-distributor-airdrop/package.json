@@ -19,15 +19,19 @@
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
-    "@openzeppelin/contracts": "4.1.0",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "ethereumjs-util": "^7.0.4",
+    "@openzeppelin/contracts": "4.1.0",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
+    "ethereumjs-util": "^7.0.4",
     "ethers": "^5.1.4",
     "hardhat": "^2.6.8",
     "hardhat-gas-reporter": "^1.0.4",
     "keccak256": "^1.0.2",
     "merkletreejs": "^0.2.13"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "web3": "^1.4.0"
   }
 }
