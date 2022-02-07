@@ -64,7 +64,7 @@ contract HappyRedPacket is Initializable {
     uint256 constant MASK = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
 
     function initialize() public initializer {
-        seed = keccak256(abi.encodePacked("Former NBA Commissioner David St", block.timestamp, msg.sender));
+        seed = keccak256(abi.encodePacked("Dapp Learning Redpacket", block.timestamp, msg.sender));
     }
 
     // Inits a red packet instance
