@@ -7,27 +7,47 @@ const { ethers } = require('hardhat');
 require('dotenv').config();
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
-const addresList = require('./redpacketAddressList.json');
+const { readRedpacketDeployment } = require('../../utils');
 
 function hashToken(account) {
-  return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex')
+  return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex');
 }
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
+  const [deployer, user1, user2] = await ethers.getSigners();
+  const deployment = readRedpacketDeployment();
 
-  const HappyRedPacketAddress = "0xE9c061465E9eaF01D1c8F9Dfc2487Db31a053bb0";
-  const redPacket = await ethers.getContractAt("HappyRedPacket", HappyRedPacketAddress, deployer);
-  const redpacketID = "0x45eb11e56a1b699f5e99bd16785c84b73a8257c712e0d1f31306ab1e3423b2e0"
+  const HappyRedPacketAddress = deployment.redPacketAddress;
+  const redpacketID = deployment.redPacketID;
+  const simpleToken = await ethers.getContractAt('SimpleToken', deployment.simpleTokenAddress, deployer);
+  const redPacket = await ethers.getContractAt('HappyRedPacket', HappyRedPacketAddress, deployer);
+
+  merkleTree = new MerkleTree(
+    [deployer, user1, user2].map((user) => hashToken(user.address)),
+    keccak256,
+    { sortPairs: true }
+  );
+
+  async function cliamRedPacket(user) {
+    let proof = merkleTree.getHexProof(hashToken(user.address));
+    // console.log('merkleTree proof: ', proof);
+
+    const balanceBefore = await simpleToken.balanceOf(user.address);
+
+    let createRedPacketRecipt = await redPacket.connect(user).claim(redpacketID, proof, user.address);
+    await createRedPacketRecipt.wait();
+
+    const balanceAfter = await simpleToken.balanceOf(user.address);
+    console.log(`user ${user.address} has claimd ${balanceAfter.sub(balanceBefore)}`);
+  }
+
+  console.log("\n=========Begin to claim Red Packet=========\n")
   
-  merkleTree = new MerkleTree(addresList.map(address => hashToken(address)), keccak256, { sortPairs: true });
-  let proof = merkleTree.getHexProof(hashToken(deployer.address));
-  console.log("merkleTree proof: ",proof);
+  await cliamRedPacket(deployer);
+  await cliamRedPacket(user1);
+  await cliamRedPacket(user2);
 
-  let createRedPacketRecipt  = await redPacket.claim(redpacketID,proof,deployer.address);
-  await createRedPacketRecipt.wait();
-
-  console.log("Claim Red Packet successfully");
+  console.log('\n=========Claim Red Packet successfully=========\n');
 }
 
 // We recommend this pattern to be able to use async/await everywhere

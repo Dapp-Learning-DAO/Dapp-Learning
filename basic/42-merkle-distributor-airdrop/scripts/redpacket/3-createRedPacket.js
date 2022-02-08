@@ -7,54 +7,75 @@ const { ethers } = require('hardhat');
 require('dotenv').config();
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
-const addresList = require('./redpacketAddressList.json');
+const { readRedpacketDeployment, saveRedpacketDeployment } = require('../../utils');
 
 function hashToken(account) {
-  return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex')
+  return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex');
+}
+
+// sleep function
+let endSleep = false;
+async function sleep() {
+  for (let i = 0; i < 500; i++) {
+    if (endSleep) break;
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 500);
+    });
+  }
+  if (!endSleep) console.log(`\nhad slept too long, but no result...`);
 }
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
+  const [deployer, user1, user2] = await ethers.getSigners();
+  const deployment = readRedpacketDeployment();
 
-  const HappyRedPacketAddress = "0xE9c061465E9eaF01D1c8F9Dfc2487Db31a053bb0";
-  const SimpleTokenAddress = "0xdc6999dC3f818B4f74550569CCC7C82091cA419F";
-  
-  const redPacket = await ethers.getContractAt("HappyRedPacket", HappyRedPacketAddress, deployer);
-  const simpleToken = await ethers.getContractAt("SimpleToken", SimpleTokenAddress, deployer);
+  const HappyRedPacketAddress = deployment.redPacketAddress;
+  const SimpleTokenAddress = deployment.simpleTokenAddress;
 
-  let tx = await simpleToken.approve(redPacket.address,ethers.utils.parseEther("100"));
-  await tx.wait()
+  const redPacket = await ethers.getContractAt('HappyRedPacket', HappyRedPacketAddress, deployer);
+  const simpleToken = await ethers.getContractAt('SimpleToken', SimpleTokenAddress, deployer);
 
-  console.log("Approve Successfully");
-  
-  merkleTree = new MerkleTree(addresList.map(address => hashToken(address)), keccak256, { sortPairs: true });
+  let tx = await simpleToken.approve(redPacket.address, ethers.utils.parseEther('100'));
+  await tx.wait();
+
+  console.log('Approve Successfully');
+
+  merkleTree = new MerkleTree(
+    [deployer, user1, user2].map((user) => hashToken(user.address)),
+    keccak256,
+    { sortPairs: true }
+  );
   merkleTreeRoot = merkleTree.getHexRoot();
-  console.log("merkleTree Root:",merkleTreeRoot);
+  console.log('merkleTree Root:', merkleTreeRoot);
 
   // create_red_packet
   let creationParams = {
     merkleroot: merkleTreeRoot,
     number: 3,
     ifrandom: true,
-    duration: 2**30,
+    duration: 2 ** 30,
     seed: ethers.utils.formatBytes32String('lajsdklfjaskldfhaikl'),
     message: 'Hi',
     name: 'cache',
     token_type: 1,
     token_addr: SimpleTokenAddress,
-    total_tokens: 10000,
+    total_tokens: ethers.utils.parseEther('100'),
   };
 
-  redPacket.once('CreationSuccess', ( total,  id,  name,  message,  creator,  creation_time,  token_address,  number,  ifrandom,  duration) => {
-    console.log(
-      `CreationSuccess Event, total: ${total}   RedpacketId: ${id}  `
-    );
+  redPacket.once('CreationSuccess', (total, id, name, message, creator, creation_time, token_address, number, ifrandom, duration) => {
+    endSleep = true;
+    saveRedpacketDeployment({ redPacketID: id, redPacketTotal: total.toString() });
+    console.log(`CreationSuccess Event, total: ${total.toString()}\tRedpacketId: ${id}  `);
   });
 
-  let createRedPacketRecipt  = await redPacket.create_red_packet(...Object.values(creationParams));
+  let createRedPacketRecipt = await redPacket.create_red_packet(...Object.values(creationParams));
   await createRedPacketRecipt.wait();
 
-  console.log("Create Red Packet successfully");
+  console.log('Create Red Packet successfully');
+
+  await sleep();
 }
 
 // We recommend this pattern to be able to use async/await everywhere
