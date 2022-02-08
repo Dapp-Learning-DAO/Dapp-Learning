@@ -14,7 +14,7 @@ async function main() {
   // console.log('Account balance:', (await deployer.getBalance()).toString());
 
   const Token = await ethers.getContractFactory('SimpleToken');
-  const token = await Token.deploy('DappLearning', 'DL', 1, ethers.utils.parseEther("1000000"));
+  const token = await Token.deploy('DappLearning', 'DL', 18, 1000000);
   await token.deployed();
 
   console.log('Token address:', token.address);
