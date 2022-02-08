@@ -1,0 +1,5 @@
+.env
+node_modules/
+
+# redpack contract address
+scripts/redpacket/deployment.json
