@@ -11,7 +11,7 @@ const settings = {
 };
 
 function mnemonic() {
-  return process.env.PRIVATE_KEY;
+  return [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY1, process.env.PRIVATE_KEY2];
 }
 
 /**
@@ -37,23 +37,23 @@ module.exports = {
     },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: mnemonic(),
     },
     kovan: {
       url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: mnemonic(),
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: mnemonic(),
     },
     ropsten: {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: mnemonic(),
     },
     matic: {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.PROJECT_ID,
-      accounts: [mnemonic()]
+      accounts: mnemonic()
     },
   },
   gasReporter: {
