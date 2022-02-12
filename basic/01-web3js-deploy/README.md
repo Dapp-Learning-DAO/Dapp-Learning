@@ -25,9 +25,10 @@ npm install
 ```
 cp .env.example .env
 
-## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+## 修改 .env 中的 INFURA_ID ， PRIVATE_KEY 和 TEST_NET 为实际的值  
 PRIVATE_KEY=xxxxxxxxxxxxxxxx
 INFURA_ID=yyyyyyyy
+TEST_NET=zzzzzz
 ```
 
 3） 执行 index.js
@@ -91,9 +92,9 @@ const abi = contractFile.abi;
 这里我们使用 kovan 测试网络. 如果没有 kovan 网络的测试币, 可以切换到其他的测试网络. 
 同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档 
 ```js
-// Create web3 with kovan provider，you can change kovan to other testnet
+// Create web3 with custom test net provider，you can change test net in .env file with the key TEST_NET
 const web3 = new Web3(
-  "https://kovan.infura.io/v3/" + process.env.INFURA_ID
+  `https://${process.env.TEST_NET}.infura.io/v3/` + process.env.INFURA_ID
 );
 ```
 

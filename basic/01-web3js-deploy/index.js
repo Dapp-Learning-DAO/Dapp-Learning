@@ -33,8 +33,8 @@ const contractFile = tempFile.contracts['Incrementer.sol']['Incrementer'];
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
-// Create web3 with kovan provider，you can change kovan to other testnet
-const web3 = new Web3('https://kovan.infura.io/v3/' + process.env.INFURA_ID);
+// Create web3 with custom test net provider，you can change test net in .env file with the key TEST_NET
+const web3 = new Web3(`https://${process.env.TEST_NET}.infura.io/v3/` + process.env.INFURA_ID);
 
 // Create account from privatekey
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
@@ -69,8 +69,8 @@ const Deploy = async () => {
     deployTransaction.rawTransaction
   );
  
-  // Your deployed contrac can be viewed at: https://kovan.etherscan.io/address/${deployReceipt.contractAddress}
-  // You can change kovan in above url to your selected testnet. 
+  // Your deployed contrac can be viewed at: https://${process.env.TEST_NET}.etherscan.io/address/${deployReceipt.contractAddress}
+  // You can change test net in above url to your selected testnet. 
   console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 };
 
