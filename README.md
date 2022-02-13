@@ -88,7 +88,7 @@ web3工具集锦：<https://www.useweb3.xyz/>
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
-我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/s/Y6fYmqrS9SpEw4Nd0ocUzg)
+我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298#wechat_redirect)
 对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。
 
 
@@ -154,8 +154,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](basic/50-solidity-security/readme.md)  ✅
-51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+50. [solidity security](basic/50-solidity-security/readme.md)  ✅  
+51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
@@ -165,8 +165,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
 59. [web3.0 dapp](basic/59-web3-dapp) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
-61. [ENS](https://app.ens.domains/) ⬜
-63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
+61. [ENS](https://app.ens.domains/) ✅
+63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ✅
 64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
 66. [Kleros](https://kleros.io/)
@@ -174,7 +174,6 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Tenderly](https://dashboard.tenderly.co/explorer)  
-71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 
 
 ## 项目任务
@@ -220,7 +219,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 18. [Set](https://www.tokensets.com/)
 19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 20. [Liquity](defi/Liquity/readme.md)
-21. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
+21. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)  
+22. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 
 
 ## NFT 进阶
