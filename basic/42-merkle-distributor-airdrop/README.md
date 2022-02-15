@@ -178,6 +178,12 @@
   ## 得到的输出 "Sign Message:" 即为领取红包时需要输入的签名信息，防止恶意领取
   ```
 
+### Merkle Tree python example
+
+简单的 Merkle Tree python实现，便于理解原理
+
+- [merkle-tree.ipynb](./merkle-tree.ipynb)
+
 ## 参考链接
 
 - <https://github.com/Anish-Agnihotri/merkle-airdrop-starter>
