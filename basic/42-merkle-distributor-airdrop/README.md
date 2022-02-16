@@ -120,7 +120,7 @@
   ```shell
   cp .env.exmpale .env
 
-  ## 在 .env 文件中配置 PRIVATE_KEY, INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
+  ## 在 .env 文件中配置 PRIVATE_KEY, PRIVATE_KEY1, PRIVATE_KEY2,INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
   ## 比如有一个账户 A , 那么 PRIVATE_KEY 为账户 A 对应的 PRIVATE_KEY， TARGET_ACCOUNT 为账户 A 对应的账户地址
   ## 模拟多人抢红包，需要配置三个私钥
   ```
@@ -157,8 +157,6 @@
   ```
 
 - 创建红包  
-  修改 scripts/redpacket/3-createRedPacket.js 文件中的 "HappyRedPacketAddress" 和 "SimpleTokenAddress" 地址为上面输出的地址, 然后执行下面的命令, 获取输出的 "RedpacketId"
-
   ```shell
   npx hardhat run scripts/redpacket/3-createRedPacket.js --network kovan
 
@@ -170,8 +168,6 @@
   ```
 
 - 领取红包
-  修改 "4-claimRedpacket.js" 文件中的 "HappyRedPacketAddress" 和 "redpacketID" 值为上面的输出值, 然后执行下面的命令进行红包的 claim
-
   ```shell
   npx hardhat run scripts/redpacket/4-claimRedpacket.js --network kovan
 
