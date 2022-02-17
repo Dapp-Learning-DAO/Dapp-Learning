@@ -108,7 +108,9 @@ solidity的版本升级为0.8.10，核心几个的Math都已经重写，大部�
 类似于uniswap，有一个单独的periphery 仓库。此外，deploy好像也是一个单独的仓库，在安装`aave-v3-core`依赖时，会安装一个`@aave/deploy-v3`的包，但这个包目前找不到，issue在此：https://github.com/aave/aave-v3-core/issues/625
 
 4. 协议变更
-如果要fork AAVE v3的同学注意了，这个协议好像类似于 `uniswap`，具体可以去研究一下: https://github.com/aave/aave-v3-core/blob/master/LICENSE.md
+如果要fork AAVE v3的同学注意了，这个协议好像类似于 `uniswap v3`的协议，具体可以去研究一下: https://github.com/aave/aave-v3-core/blob/master/LICENSE.md
+
+(注: 不过好像大家fork的都是compound，很少有项目fork AAVE ^_^)
 
 
 5. 核心架构上变动不多
