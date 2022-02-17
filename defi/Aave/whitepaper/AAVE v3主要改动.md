@@ -101,11 +101,11 @@ solidity的版本升级为0.8.10，核心几个的Math都已经重写，大部�
 2. 命名改变
 例如：
 - deposit命名为supply
-- LendingPool.sol 命名为Pool.sol, 等
-- 核心借贷逻辑全部移到 library 目录中
+- LendingPool.sol 命名为 Pool.sol, 等
+- 核心业务逻辑全部移到 libraries/logic 目录中 (之前只有利率计算, validation的逻辑在 libraries/logic 目录中，包括新增的 emode，isolation，bridge)
 
-3. 外围功能单独repo
-类似于uniswap，有一个单独的periphery 仓库。此外，deploy好像也是一个单独的仓库，在安装`aave-v3-core`依赖时，会安装一个`@aave/deploy-v3`的包，但这个包目前找不到，issue在此：https://github.com/aave/aave-v3-core/issues/625
+3. 外围功能单独 repo
+类似于uniswap，有一个单独的 periphery 仓库。此外，deployment 好像也是一个单独的仓库，在安装`aave-v3-core`依赖时，会安装一个`@aave/deploy-v3`的包，但这个包目前找不到，issue在此：https://github.com/aave/aave-v3-core/issues/625
 
 4. 协议变更
 如果要fork AAVE v3的同学注意了，这个协议好像类似于 `uniswap v3`的协议，具体可以去研究一下: https://github.com/aave/aave-v3-core/blob/master/LICENSE.md
