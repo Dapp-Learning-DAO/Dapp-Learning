@@ -1,8 +1,6 @@
 ## 前言
 通过本样例代码，开发者了解到如何对交易进行签名，发送，接收交易回执，验证交易执行结果。同时，样例也提供了事件监听的逻辑代码，开发者可以了解如何对一个事件进行一次或多次监听
 
-为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
-
 ## 合约功能说明   
 constructor: 构造函数, 用于部署合约时调用, 同时在其中初始化了公共变量 number 的值  
 increment:   增值函数, 根据传入的数值 ( _value ), 对公共变量 number 进行增值 ( number + _value )   
@@ -15,7 +13,16 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 npm install
 ```
 
-2) 执行 index.js 脚本
+2) 配置 .env
+```
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3) 执行 index.js 脚本
 ```
 node index.js
 ```
@@ -110,7 +117,7 @@ const abi = contractOfIncrementer.abi;
 ```
 
 6) 构造合约实例 
-在步骤 3 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
+在步骤 5 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
 ```js
 // Create contract instance
   const deployContract = new web3.eth.Contract(abi);
@@ -151,7 +158,7 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
 10) 通过已经部署的合约地址加载合约实例  
 上述, 我们是先构造了一个合约实例, 然后再通过发送合约部署交易, 实现合约实例的上链, 以便后续进行相应的交易操作. 但同时, 我们也可以直接加载一个已经上链的合约实例, 这样就可以直接对合约进行操作, 避免了中间的部署过程  
 ```js
-let incrementer = new web3.eth.Contract(abi, createReceipt.contractAddress);
+let incrementer = new web3.eth.Contract(abi, deployReceipt.contractAddress);
 ```
 
 11) 调用合约只读接口   
@@ -188,7 +195,7 @@ const resetcReceipt = await web3.eth.sendSignedTransaction(
 
 14) 监听事件  
 在合约接口调用中, 除了接口返回的结果外, 唯一能获取接口处理中间信息的方法便是 "事件" .  
-在接口中, 通过出发一个事件, 然后在外部捕获区块产生的事件, 就可以获取相应的内部信息  
+在接口中, 通过触发一个事件, 然后在外部捕获区块产生的事件, 就可以获取相应的内部信息  
 - 一次性事件监听器  
 如下, 在合约实例上调用 once 接口, 传入监听的事件为 "Increment",  就生成了一个一次性的事件监听器. 当有 "Increment" 触发时, 就会打印相应的提示信息 
 ```js

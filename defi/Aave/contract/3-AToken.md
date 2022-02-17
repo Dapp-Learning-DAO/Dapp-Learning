@@ -1,0 +1,170 @@
+# AToken
+
+## methods
+
+### initiallize
+
+```solidity
+/**
+  * @dev Initializes the aToken
+  * @param pool The address of the lending pool where this aToken will be used
+  * @param treasury The address of the Aave treasury, receiving the fees on this aToken
+  * @param underlyingAsset The address of the underlying asset of this aToken (E.g. WETH for aWETH)
+  * @param incentivesController The smart contract managing potential incentives distribution
+  * @param aTokenDecimals The decimals of the aToken, same as the underlying asset's
+  * @param aTokenName The name of the aToken
+  * @param aTokenSymbol The symbol of the aToken
+  */
+function initialize(
+  ILendingPool pool,  // LendingPool address
+  address treasury,   // 金库地址
+  address underlyingAsset,  // 抵押资产地址
+  IAaveIncentivesController incentivesController, // 激励控制合约
+  uint8 aTokenDecimals, // aToken 的精度
+  string calldata aTokenName, // aToken name
+  string calldata aTokenSymbol, // aToken Symbol
+  bytes calldata params // 入参
+) external override initializer {
+  uint256 chainId;
+
+  //solium-disable-next-line
+  assembly {
+    chainId := chainid()  // 获取chainID
+  }
+
+  DOMAIN_SEPARATOR = keccak256(
+    abi.encode(
+      EIP712_DOMAIN,
+      keccak256(bytes(aTokenName)),
+      keccak256(EIP712_REVISION),
+      chainId,
+      address(this)
+    )
+  );
+
+  _setName(aTokenName);
+  _setSymbol(aTokenSymbol);
+  _setDecimals(aTokenDecimals);
+
+  _pool = pool;
+  _treasury = treasury;
+  _underlyingAsset = underlyingAsset;
+  _incentivesController = incentivesController;
+
+  emit Initialized(
+    underlyingAsset,
+    address(pool),
+    treasury,
+    address(incentivesController),
+    aTokenDecimals,
+    aTokenName,
+    aTokenSymbol,
+    params
+  );
+}
+```
+
+### mint
+
+为抵押资产的用户发行 aToken，只能被 `LendingPool` 合约调用，用于管理额外的状态。该方法只能被 LendingPool 合约调用。
+
+```solidity
+/**
+  * @dev Mints `amount` aTokens to `user`
+  * - Only callable by the LendingPool, as extra state updates there need to be managed
+  * @param user The address receiving the minted tokens
+  * @param amount The amount of tokens getting minted
+  * @param index The new liquidity index of the reserve
+  * @return `true` if the the previous balance of the user was 0
+  */
+function mint(
+  address user,   // aToken接收者
+  uint256 amount, // 数量
+  uint256 index   // 数量缩放比例，一般传入 reserve.liquidityIndex
+) external override onlyLendingPool returns (bool) {
+  // 这里调用的是 ERC20.balanceOf() 返回的是不计息的数量
+  uint256 previousBalance = super.balanceOf(user);
+
+  /* index 从池子创建以来 每单位liquidity累计的本息乘数因子
+   * 比如总本金为 A, 年利率为 m , 复利计算方式, N 年后的总金额 TotalAmount(本金 + 利息总额) = A * (1+m)^N   
+   * 这里 index => (1+m)^N , 上述公式就可以变为 TotalAmount = A * index
+   * 其中 A 就表示为 aToken 的总量, TotalAmount 表示为对应的收益总量
+   */
+
+  /* amountScaled = amount / index
+   * 假设 TotalAmount = A * index 
+   * 现在假设 index 保持不变, ( TotalAmount + amount ) = ( A + X ) * index 要求其中X 的值  
+   * 那么计算可得 X = amount / index  
+   */
+  uint256 amountScaled = amount.rayDiv(index);
+  require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
+  _mint(user, amountScaled);  // ERC20._mint()
+
+  emit Transfer(address(0), user, amount);
+  emit Mint(user, amount, index);
+
+  // 返回用户在该抵押品的数量，之前是否为0
+  return previousBalance == 0;
+}
+```
+
+#### amount and amountScaled
+
+- aToken 重载了 ERC20.balanceOf 方法，每次查询余额是包含了累计利息的数量
+- 为了保证本金和累计利息的比例不变，这里要对 amount 进行缩放，实际 mint 的数量是 amountScaled
+- 假设用户在 t_current 时刻存入 amount 数量，那么如果 t_0 时刻（池子创建时）存入了 amountScaled ，通过复利累计本息，直到 t_current 时刻，其数量正好等于 amount
+- 即 `amount = amountScaled * index`，这里的 index 记录的就是 t_0 时刻到当前 t_current 时刻，流动性累计的本息乘数因子
+- amountScaled 就是 aToken 实际记录的数量，由于全部缩放至 t_0 时刻，这样就抹平了不同抵押操作的时间和利率的不同，可以全部统一计算
+
+### burn
+
+销毁 aToken，转给调用者原资产，即 aToken 对应的抵押资产。销毁的实际数量需要缩放，逻辑和 mint 一致。该方法只能被 LendingPool 合约调用。
+
+```solidity
+/**
+  * @dev Burns aTokens from `user` and sends the equivalent amount of underlying to `receiverOfUnderlying`
+  * - Only callable by the LendingPool, as extra state updates there need to be managed
+  * @param user The owner of the aTokens, getting them burned
+  * @param receiverOfUnderlying The address that will receive the underlying
+  * @param amount The amount being burned
+  * @param index The new liquidity index of the reserve
+  **/
+function burn(
+  address user, // 用户地址
+  address receiverOfUnderlying, // 原资产地址
+  uint256 amount, // 赎回数量
+  uint256 index // reserve.liquidityIndex
+) external override onlyLendingPool { // 只能被 LendingPool 调用
+  uint256 amountScaled = amount.rayDiv(index);
+  require(amountScaled != 0, Errors.CT_INVALID_BURN_AMOUNT);
+  _burn(user, amountScaled);
+
+  IERC20(_underlyingAsset).safeTransfer(receiverOfUnderlying, amount);
+
+  emit Transfer(user, address(0), amount);
+  emit Burn(user, receiverOfUnderlying, amount, index);
+}
+```
+
+### balanceOf
+
+重载了 ERC20.balanceOf 方法，返回的是债务本息总额 (本金 + 累计利息) 的数量，即用户查询 aToken 数量，总是包含了利息收益。
+
+`NormalizedIncome` 是每单位流动性的累计的本息总额，注意这里需要用 amountScaled 计算，即缩放成 t_0 时刻的数量。
+
+```solidity
+/**
+  * @dev Calculates the balance of the user: principal balance + interest generated by the principal
+  * @param user The user whose balance is calculated
+  * @return The balance of the user
+  **/
+function balanceOf(address user)
+  public
+  view
+  override(IncentivizedERC20, IERC20)
+  returns (uint256)
+{
+  // amountScaled * NormalizedIncome
+  return super.balanceOf(user).rayMul(_pool.getReserveNormalizedIncome(_underlyingAsset));
+}
+```

@@ -50,3 +50,4 @@ npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
 - https://medium.com/extropy-io/crowdsales-on-ethereum-with-openzeppelin-57bbdea95390  
 - https://www.programmersought.com/article/1396206575/  
 - https://github.com/OpenZeppelin/openzeppelin-contracts/tree/release-v2.3.0/contracts/crowdsale
+- 线性解锁： https://cloud.tencent.com/developer/article/1182701

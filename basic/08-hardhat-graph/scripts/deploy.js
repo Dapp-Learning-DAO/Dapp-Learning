@@ -23,14 +23,16 @@ async function main() {
     
     const receiver = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
     console.log("Transfer 50 to receiver ",receiver);
-    await token.transfer(receiver, 50);
+    let transferReceipt = await token.transfer(receiver, 50);
+    await transferReceipt.wait();
 
     // Check the balance of receiver
     console.log("Account balance of receiver is: ", (await token.balanceOf(receiver)).toString());
 
 
     // approve transfer to receiver
-    await token.approve(receiver, 1000);
+    let approveRecipt = await token.approve(receiver, 1000);
+    await approveRecipt.wait();
     console.log(`allowance of ${deployer.address} to ${receiver} is `, (await token.allowance(deployer.address,receiver)).toString());
 }
 

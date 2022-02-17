@@ -279,6 +279,7 @@ SELECT DISTINCT(tablename) FROM pg_catalog.pg_tables
 ## 参考链接
 
 - 视频：https://www.bilibili.com/video/BV1ZK4y137Ce
+
 - nansen说明书： https://github.com/rebase-network/Dapp-Learning-Arsenal/blob/main/papers/7-tool/nansen中文说明书.pdf
 
 - https://qiita.com/shooter/items/3b66fc6400bc49854ffe
@@ -292,3 +293,13 @@ SELECT DISTINCT(tablename) FROM pg_catalog.pg_tables
 - https://app.flipsidecrypto.com/velocity
 
 - https://glassnode.com/
+
+- 视频： https://ournetwork.mirror.xyz/gP16wLY-9BA1E_ZuOSv1EUAgYGfK9mELNza8cfgMWPQ 
+
+- Dune Youtube channel: <https://www.youtube.com/channel/UCPrm9d2hLd_YxSExH7oRyAg>
+
+- Dune docs: <https://docs.dune.xyz/>
+
+- Dune abstractions 常用查询语句: <https://github.com/duneanalytics/abstractions>
+
+- PostgreSQL freeCodeCamp教程: <https://www.youtube.com/watch?v=qw--VYLpxG4>
