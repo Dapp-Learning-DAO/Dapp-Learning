@@ -1,6 +1,7 @@
 require('@nomiclabs/hardhat-waffle');
 require('@nomiclabs/hardhat-ethers');
 require('hardhat-gas-reporter');
+require("@nomiclabs/hardhat-etherscan");
 require('dotenv').config();
 
 const settings = {
@@ -25,6 +26,9 @@ module.exports = {
       { version: '0.6.11', settings },
       { version: '0.5.16', settings },
     ],
+  },
+  etherscan: {
+    apiKey: "939NEFMUQ7F3TJ7BR343RKQDU3UX8Y9AEZ"
   },
   networks: {
     localhost: {
@@ -60,5 +64,8 @@ module.exports = {
     currency: 'USD',
     coinmarketcap: process.env.COINMARKETCAP,
     gasPrice: 200,
+  },
+  mocha: {
+    timeout: 20000
   },
 };
