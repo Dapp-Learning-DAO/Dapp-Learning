@@ -91,6 +91,9 @@ https://gov.silo.finance/t/proposal-silo-stablecoin/170
 # 参考资料
 
 官网: https://www.silo.finance/
+
 github: https://github.com/silo-finance
+
 medium: https://medium.com/silo-protocol/
+
 介绍: https://medium.com/silo-protocol/introducing-silo-secure-money-markets-for-all-crypto-assets-73cecc479fa6
