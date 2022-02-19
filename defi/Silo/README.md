@@ -76,7 +76,7 @@ Token地址: https://etherscan.io/token/0x6f80310CA7F2C654691D1383149Fa1A57d8AB1
 
 # 路线图
 
-![silo-roadmap](./images/silo-roadmap.png)
+![silo-roadmap](https://776318507-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FUGrWaE3fhxC8AsolAgPJ%2Fuploads%2FECaQoX46146UbOAPjKb3%2FRoadmap%20v0205a.png?alt=media&token=d0bbfc55-6186-4f76-b77e-53452b5c636d)
 
 # Silo 稳定币
 
