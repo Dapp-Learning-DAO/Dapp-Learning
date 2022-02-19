@@ -154,7 +154,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](basic/50-solidity-security/readme.md)  ✅  
+50. [solidity security](basic/50-solidity-security/README.md)  ✅  
 51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
