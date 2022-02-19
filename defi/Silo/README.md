@@ -14,7 +14,9 @@ silo 是一个无许可的借贷协议，可以使用任意资产借贷另一种
 **安全性**
 ![silo-isolate](https://miro.medium.com/max/1400/1*7MFa-SS0P-90hK0_MusqLQ.png)
 silo协议通过设计降低了风险。它实现了孤立的货币市场——我们称之为silo——每个silo仅由两种资产组成，即桥梁资产和独特的代币。通过将任何资产的风险隔离到特定的silo，新的和高风险资产可以立即用于借贷市场，而不会对其他silo中持有的资产造成系统性风险。
-**高效的**
+
+**高效率**
+
 ![silo-effect](https://miro.medium.com/max/1400/1*0MTmbsVtswOkyeJXtRaDeQ.png)
 该协议仅对代币资产实施一个Silo。这种设计将流动性集中在单个池中，并允许将任何代币用作抵押品来借入其他代币。
 
@@ -69,7 +71,7 @@ Token地址: https://etherscan.io/token/0x6f80310CA7F2C654691D1383149Fa1A57d8AB1
 
 # 路线图
 
-![silo-roadmap](../image/silo-roadmap.png)
+![silo-roadmap](./images/silo-roadmap.png)
 
 # Silo 稳定币
 
