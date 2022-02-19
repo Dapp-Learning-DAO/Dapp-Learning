@@ -9,10 +9,10 @@
 **/
 
 pragma solidity >= 0.8.0;
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "../lib/IERC20.sol";
+import "../lib/SafeERC20.sol";
+import "../lib/Initializable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
@@ -111,7 +111,7 @@ contract HappyRedPacket is Initializable {
     }
 
     // It takes the signed msg.sender message as verification passcode
-    function claim(bytes32 id, bytes32[] memory proof, address payable recipient) 
+    function claim(bytes32 id, bytes32[] memory proof) 
     public returns (uint claimed) {
 
         RedPacket storage rp = redpacket_by_id[id];
@@ -129,19 +129,28 @@ contract HappyRedPacket is Initializable {
         uint256 token_type = unbox(packed.packed2, 254, 1);
         uint256 ifrandom = unbox(packed.packed2, 255, 1);
         uint256 remaining_tokens = unbox(packed.packed1, 128, 96);
+        // get token decimal
+        address token_address = address(uint160(unbox(packed.packed2, 64, 160)));
+        uint minium_value = 10**(IERC20(token_address).decimals() - 1);
+
         if (ifrandom == 1) {
             if (total_number - claimed_number == 1)
                 claimed_tokens = remaining_tokens;
-            else 
-                claimed_tokens = random(seed, nonce) % SafeMath.div(SafeMath.mul(remaining_tokens, 2), total_number - claimed_number);
-            if (claimed_tokens == 0) 
-                claimed_tokens = 1;
+            else{
+                // reserve minium amount => (total_number - claimed_number) * 0.1
+                uint reserve_amount = (total_number - claimed_number) * minium_value;
+                uint distribute_tokens = remaining_tokens - reserve_amount;
+                claimed_tokens = random(seed, nonce) % SafeMath.div(SafeMath.mul(distribute_tokens, 2), total_number - claimed_number);
+                // minium claimed_tokens for user is 0.1 ; and round the claimed_tokens to decimal 0.1
+                claimed_tokens = claimed_tokens < minium_value ? minium_value : (claimed_tokens - (claimed_tokens % minium_value));
+            }
         } else {
             if (total_number - claimed_number == 1) 
                 claimed_tokens = remaining_tokens;
             else
                 claimed_tokens = SafeMath.div(remaining_tokens, (total_number - claimed_number));
         }
+
         rp.packed.packed1 = rewriteBox(packed.packed1, 128, 96, remaining_tokens - claimed_tokens);
 
         // Penalize greedy attackers by placing duplication check at the very last
@@ -152,11 +161,11 @@ contract HappyRedPacket is Initializable {
 
         // Transfer the red packet after state changing
         if (token_type == 0)
-            recipient.transfer(claimed_tokens);
+            payable(msg.sender).transfer(claimed_tokens);
         else if (token_type == 1)
-            transfer_token(address(uint160(unbox(packed.packed2, 64, 160))), recipient, claimed_tokens);
+            transfer_token(token_address, msg.sender, claimed_tokens);
         // Claim success event
-        emit ClaimSuccess(id, recipient, claimed_tokens, address(uint160(unbox(packed.packed2, 64, 160))));
+        emit ClaimSuccess(id, msg.sender, claimed_tokens, token_address);
         return claimed_tokens;
     }
 
