@@ -12,19 +12,24 @@ silo 是一个无许可的借贷协议，可以使用任意资产借贷另一种
 目前的借贷协议，AAVE Compound，都是共享资金池。这种设计，一旦资金池中有一种资产出现问题，就会给整个借贷池带来巨大的风险。因此，共享资金池大部分都仅支持很少的几种资产，牺牲可扩展性为代价来提高效率。
 
 **安全性**
+
 ![silo-isolate](https://miro.medium.com/max/1400/1*7MFa-SS0P-90hK0_MusqLQ.png)
+
 silo协议通过设计降低了风险。它实现了孤立的货币市场——我们称之为silo——每个silo仅由两种资产组成，即桥梁资产和独特的代币。通过将任何资产的风险隔离到特定的silo，新的和高风险资产可以立即用于借贷市场，而不会对其他silo中持有的资产造成系统性风险。
 
 **高效率**
 
 ![silo-effect](https://miro.medium.com/max/1400/1*0MTmbsVtswOkyeJXtRaDeQ.png)
+
 该协议仅对代币资产实施一个Silo。这种设计将流动性集中在单个池中，并允许将任何代币用作抵押品来借入其他代币。
 
 ## 名词解释
 Silo: Silo 是一个孤立的货币市场，仅支持两种资产，即桥梁资产（例如 ETH）和独特的代币。创建时，所有 Silo 共享配置的参数。
+
 ![silo](https://miro.medium.com/max/1400/1*yq6Zek7_TI1wQA0l7MPttg.png)
 
 桥接资产: 桥接资产（例如 ETH）连接协议中的所有 Silo。对于一个抵押代币借入另一个代币，该过程需要创建两个头寸，两者都以 ETH 计价，因此它们大致相互抵消。用户对 ETH 的敞口被最小化，但多头和空头的敞口被最大化。
+
 ![silo-bridge](https://miro.medium.com/max/1400/1*uuB5UGPlFhzWo4pE1tZlGQ.png)
 
 抵押因素: SILO提供与 Uniswap 等 AMM 上的流动性提供者 (LP) 池类似的风险隔离。与 Uniswap v1 类似，每个 Silo v1 具有相同的贷款价值 (LTV)、清算阈值、清算惩罚和预言机参数。和 Uniswap 一样，可以为任何资产创建 Silo。用户最多可以借入其抵押品价值的 50%。当债务头寸达到抵押品的62.5%时，抵押品将被清算。这种高清算门槛降低了在清算事件期间任何SILO抵押不足的风险。所有因素都可以在SILO上进行调整。
