@@ -8,6 +8,7 @@ StarkNet 是一个无需许可的去中心化 ZK-Rollup，作为以太坊上的 
 
 StarkNet 将 Cairo 编程语言用于其基础设施和编写 StarkNet 合约。
 
+
 ## Setting up the environment
 
 具体安装可以查看官方文档，这里以 Linux 环境为例 (Mac M1 芯片安装一直存在问题)
@@ -177,7 +178,7 @@ starknet call \
 - starknet 合约语法解析
 
 ## reference
-
+- notion资料：https://doffice.notion.site/8becdf2c9365490e9b45c7e84f4f6113?v=9cc4feafb4244d3999cad0c464783897 
 - official website <https://starkware.co/starknet/>
 - develop docs <https://starknet.io/docs/index.html>
 - blockscan <https://voyager.online/>
