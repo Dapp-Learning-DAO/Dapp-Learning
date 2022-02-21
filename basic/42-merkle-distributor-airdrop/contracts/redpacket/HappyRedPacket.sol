@@ -79,7 +79,7 @@ contract HappyRedPacket is Initializable {
         require(_number < 256, "At most 255 recipients");
         require(_token_type == 0 || _token_type == 1, "Unrecognizable token type");
 
-        // require minum 0.1 for each user
+        // require minium 0.1 for each user
         uint minium_tokens_for_each = 10**(IERC20(_token_addr).decimals() - 1);
         uint minium_total_tokens = minium_tokens_for_each * _number;
         require(_total_tokens > minium_total_tokens , "At least 0.1 for each user");
