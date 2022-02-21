@@ -16,12 +16,8 @@ PS: pipx 安装成功后, 需要重启终端命令行窗口
 pipx install eth-brownie
 ``` 
 
-## 进入目录
-```
-cd Brownie
-```
-
 ## 编译合约 
+
 ```
 brownie compile
 ```

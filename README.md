@@ -185,11 +185,17 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## DeFi 进阶
  **建议先阅读DEFI经典书籍:**
-  [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
-  [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
+  - [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf) 
+
+  - [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
+
+
   **DEFI学习路线图：**
-交易 -> 借贷 ->衍生品
-可以参考我们学习小组的学习路线图，配合视频学习更佳：
+
+交易 -> 借贷 ->衍生品  
+  
+可以参考我们学习小组的学习路线图，配合视频学习更佳：  
+
 - 交易： uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
 - 借贷： Aave -> Compound -> Liquity -> Euler
 - 衍生品： SNX -> YFI -> Perpetual 

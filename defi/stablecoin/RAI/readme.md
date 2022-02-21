@@ -31,3 +31,4 @@ medium :https://medium.com/reflexer-labs/stability-without-pegs-8c6a1cbc7fbd
 - 一文读懂新型算法稳定币三杰Fei、Float、Reflexer： https://www.blockvalue.com/blockchain/20210323845831.html
 - 看Reflexer如何将PID控制理论应用于加密货币: https://xw.qq.com/partner/hwbrowser/20210412A0AYVE/20210412A0AYVE00?ADTAG=hwb&pgv_ref=hwb&appid=hwbrowser&ctype=news
 - Advanced DeFi Management: https://defisaver.com/
+- 特里芬难题: https://wisburg.com/articles/194355
