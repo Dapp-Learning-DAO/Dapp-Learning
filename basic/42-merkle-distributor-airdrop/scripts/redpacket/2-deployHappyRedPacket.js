@@ -21,6 +21,7 @@ async function main() {
 
   // Init red packet
   let initRecipt = await redPacket.initialize({
+    // sometimes it will be fail if not
     gasLimit: 1483507
   });
   await initRecipt.wait();
