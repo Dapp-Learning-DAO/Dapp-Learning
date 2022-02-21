@@ -20,7 +20,9 @@ async function main() {
   console.log('RedPacket address:', redPacket.address);
 
   // Init red packet
-  let initRecipt = await redPacket.initialize();
+  let initRecipt = await redPacket.initialize({
+    gasLimit: 1483507
+  });
   await initRecipt.wait();
 
   // save contract address to file
