@@ -70,7 +70,10 @@ async function main() {
     console.log(`CreationSuccess Event, total: ${total.toString()}\tRedpacketId: ${id}  `);
   });
 
-  let createRedPacketRecipt = await redPacket.create_red_packet(...Object.values(creationParams));
+  let createRedPacketRecipt = await redPacket.create_red_packet(...Object.values(creationParams),{
+    // sometimes it will be fail if not specify the gasLimit
+    gasLimit: 1483507
+  });
   await createRedPacketRecipt.wait();
 
   console.log('Create Red Packet successfully');
