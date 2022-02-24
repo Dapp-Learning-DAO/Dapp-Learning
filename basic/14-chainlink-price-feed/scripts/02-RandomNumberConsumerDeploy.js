@@ -1,5 +1,6 @@
 const hre = require('hardhat');
 require('@nomiclabs/hardhat-web3');
+require('dotenv').config();
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -8,7 +9,7 @@ async function main() {
 
   // 部署 RandomNumberConsumer 合约
   const RandomNumberConsumer = await ethers.getContractFactory('RandomNumberConsumer');
-  const instance = await RandomNumberConsumer.deploy();
+  const instance = await RandomNumberConsumer.deploy(process.env.SubscriptionId);
   await instance.deployed();
 
   console.log('----------------------------------------------------');

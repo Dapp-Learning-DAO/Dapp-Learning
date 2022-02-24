@@ -2,6 +2,7 @@ require("@nomiclabs/hardhat-waffle")
 require("@nomiclabs/hardhat-ethers")
 require("@nomiclabs/hardhat-web3")
 require("@nomiclabs/hardhat-truffle5")
+require("@nomiclabs/hardhat-etherscan");
 require("hardhat-deploy")
 const fs = require("fs");
 require('dotenv').config()
@@ -28,8 +29,6 @@ function mnemonic() {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-const kovanRpcUrl = "https://kovan.infura.io/v3/" + process.env.INFURA_ID
-const privateKey = mnemonic()
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -41,10 +40,13 @@ module.exports = {
       // }
     },
     kovan: {
-      url: kovanRpcUrl,
-      accounts: [privateKey],
-      saveDeployments: true
-    }
+      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [mnemonic()],
+    },
+    rinkeby: {
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [mnemonic()],
+    },
   },
   namedAccounts: {
     deployer: {
@@ -62,8 +64,11 @@ module.exports = {
       }
     ]
   },
+  etherscan: {
+    apiKey: "HT789QWQ9RXQQ86K3HP4EAVTEWYVKKPPJ9"
+  },
   mocha: {
-    timeout: 600000
+    timeout: 6000000000000000
   }
 }
 
