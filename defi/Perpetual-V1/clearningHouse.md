@@ -83,9 +83,6 @@ ClearingHouse 合约则复杂些，其管理着所有⽤户的持仓状态。对
 - closePosition：平仓
 - addMargin：增加保证⾦
 - removeMargin：移除保证⾦
-- openPositionWithReferral：带推荐码的开仓
-- closePositionWithReferral：带推荐码的平仓
-- adjustPosition：调整仓位
 - liquidate：清算
 
 个人持仓
@@ -98,15 +95,45 @@ ClearingHouse 合约则复杂些，其管理着所有⽤户的持仓状态。对
     /// @param liquidityHistoryIndex
     /// @param blockNumber the block number of the last position
     struct Position {
-        SignedDecimal.signedDecimal size;  //仓位大小
-        Decimal.decimal margin;      // 保证金
-        Decimal.decimal openNotional; //仓位的开仓usdc值 ， margin*lever
+        SignedDecimal.signedDecimal size;  //仓位大小，以baseToken计
+        Decimal.decimal margin;      // 保证金，quoteToken计
+        Decimal.decimal openNotional; //仓位的开仓usdc值quoteAsset ， margin*lever
         SignedDecimal.signedDecimal  lastUpdatedCumulativePremiumFraction;  //资金费率
         uint256 liquidityHistoryIndex;     // 流动性指数
         uint256 blockNumber;    // 块高
     }
     
 ```
+
+```
+struct PositionResp {
+        Position position;
+        // the quote asset amount trader will send if open position, will receive if close
+        Decimal.decimal exchangedQuoteAssetAmount;
+        // if realizedPnl + realizedFundingPayment + margin is negative, it's the abs value of it
+        Decimal.decimal badDebt;
+        // the base asset amount trader will receive if open position, will send if close
+        SignedDecimal.signedDecimal exchangedPositionSize;
+        // funding payment incurred during this position response
+        SignedDecimal.signedDecimal fundingPayment;
+        // realizedPnl = unrealizedPnl * closedRatio
+        SignedDecimal.signedDecimal realizedPnl;
+        // positive = trader transfer margin to vault, negative = trader receive margin from vault
+        // it's 0 when internalReducePosition, its addedMargin when internalIncreasePosition
+        // it's min(0, oldPosition + realizedFundingPayment + realizedPnl) when internalClosePosition
+        SignedDecimal.signedDecimal marginToVault;
+        // unrealized pnl after open position
+        SignedDecimal.signedDecimal unrealizedPnlAfter;
+    }
+
+```
+
+**可配置参数**
+initMarginRatio
+maintenanceMarginRatio
+liquidationFeeRatio
+
+
 未实现盈亏计算：
 openNotional = margin * lever
 positionNotional = positonSize * price 
@@ -179,6 +206,7 @@ badDebt = realizedPnl + realizedFundingPayment + margin；
 **addMargin**
 增加保证金以提高保证金率：
 将保证⾦追加到持仓单的 margin 字段⾥并更新持仓状态。之后将⽤户的资产划转到该合约中。
+无须做其他检查
 ```
  function addMargin(IAmm _amm, Decimal.decimal calldata _addedMargin) external whenNotPaused() nonReentrant() {
         // check condition
@@ -194,153 +222,96 @@ badDebt = realizedPnl + realizedFundingPayment + margin；
         emit MarginChanged(trader, address(_amm), int256(_addedMargin.toUint()), 0);
     }
 ```
-
-其中主要调用了 adjustPositionForLiquidityChanged 函数获取仓位信息，而此函数主要调用 calcPositionAfterLiquidityMigration 函数；
-adjustPositionForLiquidityChanged具体逻辑：
-1. 获取个人的unadjustedPosition;
-```
- Position memory unadjustedPosition = getUnadjustedPosition(_amm, _trader);
-```
-2. 根据上一次的流动性参数latestLiquidityIndex。
-
-```
-uint256 latestLiquidityIndex = _amm.getLiquidityHistoryLength().sub(1);
-```
-3. 计算调整后的仓位：
-```
-Position memory adjustedPosition =
-            calcPositionAfterLiquidityMigration(_amm, unadjustedPosition, latestLiquidityIndex);
-```
-通过 calcPositionAfterLiquidityMigration(_amm, unadjustedPosition, latestLiquidityIndex)  计算出新的postion仓位数据；
- 
- ```
- function calcPositionAfterLiquidityMigration(
-        IAmm _amm,
-        Position memory _position,
-        uint256 _latestLiquidityIndex
-    ) internal view returns (Position memory) {
-        if (_position.size.toInt() == 0) {
-            _position.liquidityHistoryIndex = _latestLiquidityIndex;
-            return _position;
-        }
-        // get the change in Amm notional value
-        // notionalDelta = current cumulative notional - cumulative notional of last snapshot  ???
-        IAmm.LiquidityChangedSnapshot memory lastSnapshot =
-            _amm.getLiquidityChangedSnapshots(_position.liquidityHistoryIndex);
-            // 即delta usdc值    cumulativeNotional = cumulativeNotional.addD(_quoteAssetAmount); 
-            // 真对一个区块有多笔交易的情况？？？
-        SignedDecimal.signedDecimal memory notionalDelta =
-            _amm.getCumulativeNotional().subD(lastSnapshot.cumulativeNotional);
-        // update the old curve's reserve
-        // by applying notionalDelta to the old curve
-        Decimal.decimal memory updatedOldBaseReserve;
-        Decimal.decimal memory updatedOldQuoteReserve;
-        if (notionalDelta.toInt() != 0) {
-            Decimal.decimal memory baseAssetWorth =
-                _amm.getInputPriceWithReserves(
-                    notionalDelta.toInt() > 0 ? IAmm.Dir.ADD_TO_AMM : IAmm.Dir.REMOVE_FROM_AMM,
-                    notionalDelta.abs(),
-                    lastSnapshot.quoteAssetReserve,
-                    lastSnapshot.baseAssetReserve
-                );
-                //cumulativeNotional 跟quoteAssetReserve的区别
-            updatedOldQuoteReserve = notionalDelta.addD(lastSnapshot.quoteAssetReserve).abs();
-            if (notionalDelta.toInt() > 0) {
-                // 减少amm中的usdc储备
-                updatedOldBaseReserve = lastSnapshot.baseAssetReserve.subD(baseAssetWorth);
-            } else {
-                updatedOldBaseReserve = lastSnapshot.baseAssetReserve.addD(baseAssetWorth);
-            }
-        } 
-        // 只有一笔交易
-        else {
-            updatedOldQuoteReserve = lastSnapshot.quoteAssetReserve;
-            updatedOldBaseReserve = lastSnapshot.baseAssetReserve;
-        }
-        // calculate the new position size
-        _position.size = _amm.calcBaseAssetAfterLiquidityMigration(
-            // 仓位eth的多少 _baseAssetAmount
-            _position.size,
-            updatedOldQuoteReserve,
-            updatedOldBaseReserve
-        );
-        _position.liquidityHistoryIndex = _latestLiquidityIndex;
-        return _position;
-    }
-
- ```
-
-其中
-- 首先根据notionalDelta和快照中池子Reserve算出eth的
-- 更新updatedOldQuoteReserve和updatedOldBaseReserve。
-- 主要调用amm的calcBaseAssetAfterLiquidityMigration方法；
-
-
-
-4. setPosition 函数。以及发出仓位调整事件：
-``` 
-   emit PositionAdjusted(
-            address(_amm),
-            _trader,
-            adjustedPosition.size.toInt(),
-            unadjustedPosition.liquidityHistoryIndex,
-            adjustedPosition.liquidityHistoryIndex
-        );
-```
-
- 
-
-
-
+        
 **removeMargin**
 移除保证⾦则会判断其维持保证⾦是否⾜够，如果不⾜则不给移除。转账时，如果当前合约余额充⾜，则从当前合
 约转给⽤户；如果当前合约余额不⾜，则不⾜的部分会从保险基⾦中提取给到⽤户。
-
+步骤：1 获取仓位，计算资金费率，检查是否有坏帐；
+     2 检查保证金率MarginRatio是否大于初始保证金率；计算名义持仓的方式，有三种： twap,现价，或预言机价格；
+     
 
 **openPosition**
 开仓函数
-开仓时，会调⽤ Amm 的 swapInput() 进⾏虚拟兑换；平仓时，则调⽤ Amm 的 swapOutput()。另外，开仓和平
-仓时都会收取交易⼿续费，⼿续费会分为两部分，⼀部分会转⼊保险基⾦，即 InsuranceFund 合约，另⼀部分则
-会转⼊⼿续费池 feePool，其实现为 StakingReserve 合约。
+1 开同向仓位 internalIncreasePosition
+   - 仓位大小：_quoteAssetAmount.mulD(_leverage)
+   - swapInput讲usdc换成eth
+   - 计算资金费率；calcRemainMarginWithFundingPayment
+   - 获取新的名义持仓，计算未结盈亏（池子现价计算）；getPositionNotionalAndUnrealizedPnl
+   - 更新用户仓位
+   - 同向不用检查保证金率
+  
+2 开反向仓位 openReversePosition
+- 先计算未结盈亏unrealizedPnl；
+- 比较oldPositionNotional旧名义仓位跟开仓名义仓位（_quoteAssetAmount.mulD(_leverage)）
+-  如果oldPositionNotional大于openNotional：
+   先获取此仓位exchangedPositionSize，根据realizedPnl = unrealizedPnl * closedRatio计算盈亏； 再计算fundingfee； 根据老仓位的正负计算remainOpenNotional，更新仓位
+-  如果如果oldPositionNotional小于openNotional：
+   则先内部关仓，再看仓位， closeAndOpenReversePosition；
+   剩余openNotional: 
+    _quoteAssetAmount.mulD(_leverage).subD(closePositionResp.exchangedQuoteAssetAmount);
 
 
+开仓时，会调⽤ Amm 的 swapInput() 进⾏虚拟兑换；平仓时，则调⽤ Amm 的 swapOutput()。另外，开仓和平仓时都会收取交易⼿续费，⼿续费会分为两部分，⼀部分会转⼊保险基⾦，即 InsuranceFund 合约，另⼀部分则会转⼊⼿续费池 feePool，其实现为 StakingReserve 合约。
+
+swapInput:
+( // for amm.swapInput, the direction is in quote asset, from the perspective of Amm)
+看quotetoken的进出，以池子的视角；
 ```
- function openPosition(
-        // amm address
+ function swapInput(
         IAmm _amm,
-        //  side: Long or short, 0 or 1 respectively  0 做多， 1做空
         Side _side,
-        //保证金 usdc
-        Decimal.decimal memory _quoteAssetAmount,
-        //杠杆
-        Decimal.decimal memory _leverage,
-        // 收到最少的eth
-        Decimal.decimal memory _baseAssetAmountLimit
-    )
+        Decimal.decimal memory _inputAmount,
+        Decimal.decimal memory _minOutputAmount,
+        bool _canOverFluctuationLimit
+    ) internal returns (SignedDecimal.signedDecimal memory) {
+        // for amm.swapInput, the direction is in quote asset, from the perspective of Amm
+        IAmm.Dir dir = (_side == Side.BUY) ? IAmm.Dir.ADD_TO_AMM : IAmm.Dir.REMOVE_FROM_AMM;
+        SignedDecimal.signedDecimal memory outputAmount =
+            MixedDecimal.fromDecimal(_amm.swapInput(dir, _inputAmount, _minOutputAmount, _canOverFluctuationLimit));
+        if (IAmm.Dir.REMOVE_FROM_AMM == dir) {
+            return outputAmount.mulScalar(-1);
+        }
+        return outputAmount;
+    }
 ```
+swapinput逻辑:  将quoteToken换成baseToken；
+注意，quoteAssetAmount永远为正，根据多空不同，如果多，usdc进池子，计算eth， 如果空，则计算输出为quoteAssetAmount的usdc，需要多少eth；
+- getInputPrice(_dirOfQuote, _quoteAssetAmount);
+- getInputPriceWithReserves(
+        Dir _dirOfQuote,
+        Decimal.decimal memory _quoteAssetAmount,
+        Decimal.decimal memory _quoteAssetPoolAmount,
+        Decimal.decimal memory _baseAssetPoolAmount）
+
+
+
+**closePosition**
+swapOutput
+(for amm.swapOutput, the direction is in base asset, from the perspective of Amm,
+ if it is long position, close a position means short it(which means base dir is ADD_TO_AMM) and vice versa 跟初始方向的值相同；)
+
+- isOverFluctuationLimit检查价格波动
+- 检查部分平仓还是全部平仓partialLiquidationRatio
+  1. 全部平仓internalClosePosition
+  2. getPositionNotionalAndUnrealizedPnl计算未结盈亏
+  3. calcRemainMarginWithFundingPayment计算资金费率
+  4. 根据_amm.swapOutput计算quoteAssetAmount，计算盈余
+      - 根据getOutputPrice函数，getOutputPriceWithReserves函数
+
+  swapOutput：将baseToken换成quoteToken；如果做多，则池子baseToken增加，输出quoteToken;
+              如果做空，则池子baseToken减少，输入quoteToken, 计算平掉次空仓需要的eth；
+
+  
+  **liquidate**
+
+  - 1 getMarginRatio检查负债率，
+  计算负债率：MixedDecimal.fromDecimal(remainMargin).subD(badDebt).divD(_positionNotional);
+  - 2  如果保证金率大于liquidationFeeRatio，部分清算
+       如果保证金率小于 liquidationFeeRatio，调用internalClosePosition内部关仓，并且会跟amm做一次交易；保证金改为负数；
+
+
  
- 1. 开仓函数第一个主要函数是：
-  adjustPositionForLiquidityChanged 调整用户仓位 
-  逻辑： 获取个人的unadjustedPosition， 根据上一次的流动性参数latestLiquidityIndex。
   
-  
-2.  根据流动性算出新仓位后
-根据
- if (isNewPosition || (oldPositionSize > 0 ? Side.BUY : Side.SELL) == _side) 
- 判断是
-internalIncreasePosition（增加仓位）还是 openReversePosition （）
-如果是一个新开仓的仓位或者 老仓位跟新仓位方向一样
-unrealizedPnlForLongPosition = positionNotional - openNotional
-internalIncreasePosition
-计算资金费率和为实现盈亏
-
-
-3. setposition
-
-4. 实际转账
- transfer the actual token between trader and vault
-
-
 
  获取仓位资产的数量
 
@@ -399,10 +370,6 @@ options: the options for ethers.js, since openPosition() costs significant gas, 
         }
     }
 ``` 
-
-
-
-### 质押
 
 
 ## 参考链接
