@@ -25,7 +25,7 @@ https://learnblockchain.cn/article/2817
 ## 账本管理
 
 ## EIP协议相关改进
-- [EIP2929和EIP2930带来的AccessList访问机制](EIP/eip2929andeip2930.md)
+- [EIP2929和EIP2930带来的AccessList访问机制](EIP/accesslist.md)
 
 
 ## 参考链接
