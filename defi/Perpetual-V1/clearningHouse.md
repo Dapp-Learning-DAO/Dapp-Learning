@@ -309,7 +309,13 @@ swapOutput
   - 2  如果保证金率大于liquidationFeeRatio，部分清算
        如果保证金率小于 liquidationFeeRatio，调用internalClosePosition内部关仓，并且会跟amm做一次交易；保证金改为负数；
 
-
+  **funding fee**
+  // funding payment = premium fraction * position
+  // eg. if alice takes 10 long position, totalPositionSize = 10
+  // if premiumFraction is positive: long pay short, amm get positive funding payment
+  // if premiumFraction is negative: short pay long, amm get negative funding payment
+  // if totalPositionSize.side * premiumFraction > 0, funding payment is positive which meansprofit
+  可参看amm的settleFunding函数；一小时收取一次；
  
   
 
@@ -372,6 +378,10 @@ options: the options for ethers.js, since openPosition() costs significant gas, 
 ``` 
 
 
+
+
 ## 参考链接
 - 头等仓：https://mp.weixin.qq.com/s/Oq7g3_AjRP4Of__K9Gp_bw
 - perp: https://medium.com/perpetual-protocol/a-deep-dive-into-our-virtual-amm-vamm-40345c522eeb
+- 资金费率：https://medium.com/derivadex/funding-rates-under-the-hood-352e6be83ab
+- perp资金费率：https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e
