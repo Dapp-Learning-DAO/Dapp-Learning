@@ -9,23 +9,44 @@
 
 ## Preface
 
-This project is designed for people who have developed some foundational understandings of blockchain DAPP to further their knowledge in **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
+We are designed for developers with basic skills to step into blockchain DAPP development, where they can get close to **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
-The project is incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ), where we established a learning group for people to study the mainstream DAPP projects and share their thoughts and comments on weekly basis. The weekly meetup is recorded and uploaded to Bilibili under [the rebase account](https://space.bilibili.com/382886213).
+We, incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ),  are a learning group to study the mainstream DAPP projects and share thoughts and comments every week. Here, each one is charged with specific tasks. The weekly meetups will be recorded and uploaded to  [the rebase account](https://space.bilibili.com/382886213) on Bilibili.
 
-The project adheres to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and will manage itself under DAO governance. Currently we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and we would like to distribute the sponsorship among our contributors to feed the progress of this project. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and the funds will be awarded to whoever makes big contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
-This project is still under development, and we welcome contributors from all background. Feel free to send our team pull requests to improve existing tutorial projects, set up more new tutorials, or even just to fix the minor tpyos 🤗.
+The project is still under development, and contributors are welcomed from all background. Feel free to send us pull requests to improve tutorial projects, set up more new tutorials, or even just to fix the minor typos 🤗.
 
-Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you have proven you can provide pull requests with amazing qualitites, you could be promoted a pull request reviewer, participate in making decisions about project direction and make a bigger impact. **Project management rules**, see [how new members participate and project governance rules](./docs/dao.md), welcome to join us if you have the same idea.
+Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
 
-Technology Stack：
+<details>
+<summary>Official links</summary>
+
+- [Github](https://github.com/rebase-network/Dapp-Learning)
+- [Twitter](https://twitter.com/Dapp_Learning)
+- [discord](https://discord.gg/cRYNYXqPeR)
+- [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
+- Wechat Official Account: Dapp Learning
+- [Bilibili](https://space.bilibili.com/382886213)
+- [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
+- [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
+- [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
+- [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
+- [linktr](https://linktr.ee/dapplearning)
+
+</details>
+
+<details>
+<summary>Technology Stack: </summary>
+
 - `web3.js`
 - `ethers.js (Hardhat)`
 - `web3.py (Brownie)`
 - `Java` (Optional)
 - `Rust` (Optional)
 - `Go` (Optional)
+
+</details>
 
 ## Project structure
 The project is divided into two parts: **Basic task** and **Project task**
@@ -65,11 +86,11 @@ If you have other high-quality course recommendations, we hope you can make a su
 
 Understand the basic tools and development knowledge of developing DAPP through the following basic tasks.
 For DAPP architecture, please refer to the article--[the difference between Web2.0 and Web3.0 applications from the architectural dimension](https://zhuanlan.zhihu.com/p/414635679?utm_source=wechat_session&utm_medium=social&utm_oi=778564687968092160&s_r=0).
-Learn and run the first 20 tasks locally and upgrade to focus on **project tasks** 
+Learn and run the first 20 tasks locally and upgrade to focus on **project tasks**
 You are welcome to PR improvements to existing tutorial projects or to create more tutorial projects
 
-⬜ Task Not Start  
-⌛ Task Processing   
+⬜ Task Not Start
+⌛ Task Processing
 ✅ Task Finish
 
 01. [deploy contract with web3.js](basic/01-web3js-deploy/README.md) ✅
@@ -99,19 +120,19 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
 26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [optimism layer2](basic/28-Optimism-layer2/readme.md) ⬜
+28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
 30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [Liquity](https://github.com/liquity) ⬜
-36. [NFT Filecoin](basic/36-nft-filecoin/README.md) ✅
+35. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
+36. [NFT IPFS](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
 39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
-40. [snapshot](basic/26-snapshot/README.md) ⬜
+40. [snapshot](basic/40-snapshot/README.md) ⌛
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
@@ -129,6 +150,12 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
+58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
+60. [web3.0 dapp](basic/59-web3-dapp) ⌛
+61. [ENS](https://app.ens.domains/) ⌛
+62. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
+63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
+64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -142,7 +169,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 ## DeFi advanced tasks
 The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.
-  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)  
+  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)
   [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
@@ -150,24 +177,27 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 03. [Compound](defi/Compound/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new) ⌛
 04. [Aave](https://docs.aave.com/portal/)  ⌛
 05. [SNX](https://github.com/Synthetixio) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](defi/Curve/README.md) ⌛ 
+06. [Curve](defi/Curve/README.md) ⌛
 07. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 08. [Bancor](https://bancor.network/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
-12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)  
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 13. [OPYN](https://v2.opyn.co/)
 14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [Set](https://www.tokensets.com/)
+19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+20. [Liquity](defi/Liquity/readme.md)
 
 ## NFT advanced tasks
 
 - 01. [OpenSea](nft/opensea/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 - 02. [aavegotchi](https://aavegotchi.com/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 03. Loot NFT Distribute 
+- 03. Loot NFT Distribute
 
 ## DAO advanced tasks
 
@@ -187,7 +217,7 @@ Item list:
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 
-## Smart Contract Security 
+## Smart Contract Security
 1. Common safety tools
  - [Slither](https://github.com/crytic/slither)
  - [Mythril](https://github.com/ConsenSys/mythril)
@@ -220,7 +250,7 @@ Please refer to [this link](./docs/TROUBLE_SHOOTING.md) to get some answers on h
 Open source projects are not easy to maintain so we'd love to see you help us thrive through donations. Dapp Learning team adapts the DAO philosophy to manage the project; your generosity would be vested to our community members as funds and/or NFTs based on their quality of contribution.
 
 We have a Gitcoin campaign to sustain the Dapp-Learning efforts:
-Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)    
+Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 
 And direct donation to our dev team's fund is also appreciated:
 - Ethereum main network/zkSync/Arbitrum：
@@ -261,6 +291,17 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
     <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a>
+    <img align="top" src="./docs/imgs/parteners/PKU-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://btcu.tech/">
+    <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
+  </a>
 </div>
 <br>
 <br>

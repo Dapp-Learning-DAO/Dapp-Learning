@@ -1,10 +1,14 @@
 ## 前言
 通过本样例代码，使开发者了解合约编译，部署的基本流程，并掌握基本的 web3js 接口使用方法
 
-- 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建    
-https://ithelp.ithome.com.tw/articles/10202794   
+- 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建
+https://ithelp.ithome.com.tw/articles/10202794 在成功创建 Infura Project 后，可以获取相应的PROJECT ID
 
-- 为方便代码测试, 在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取, 样例文件可参考 .env.example  
+- 本样例中，需要自己来生成私钥。可通过多种方式来生成私钥。常见的方式是通过Metamask。可参考《精通以太坊》或其他文档安装： https://www.bookstack.cn/read/ethereum_book-zh/spilt.4.77adf5064f4455e8.md  安装完成后，连接到Kovan测试网络，点击账户详情-导出私钥，获得创建的测试账号的私钥PRIVATE_KEY。
+
+- 给Kovan测试网络中的测试账号充值。上一步开立的账号中，余额为0， 可通过faucets来充值： https://faucets.chain.link/kovan  每次冲入0.1Eth。
+ 
+- 为方便代码测试, 在 .env 中放入私钥和Infura Project ID，格式为 "PRIVATE_KEY=xxxx" "INFURA_ID=yyyyyyyy", index.js代码会自动从中读取, 样例文件可参考 .env.example  
 
 - 同时在 BiliBili 上有上传本样例代码的讲解演示:   
 https://www.bilibili.com/video/BV1Y44y1r7E6/
@@ -21,7 +25,16 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 npm install
 ```
 
-2) 执行 index.js
+2) 配置 .env
+```
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值  
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+3） 执行 index.js
 ```
 node index.js
 ```
@@ -82,7 +95,7 @@ const abi = contractFile.abi;
 这里我们使用 kovan 测试网络. 如果没有 kovan 网络的测试币, 可以切换到其他的测试网络. 
 同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档 
 ```js
-// Create web3 with kovan provider，you can fix kovan to other testnet
+// Create web3 with kovan provider，you can change kovan to other testnet
 const web3 = new Web3(
   "https://kovan.infura.io/v3/" + process.env.INFURA_ID
 );
@@ -140,10 +153,15 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
 
 ## 参考文档
 - Web3js官方文档：
-  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html  
+  https://web3js.readthedocs.io/en/v1.2.11/getting-started.html
+- Web3js中文文档(1.2.6):
+  https://learnblockchain.cn/docs/web3.js/web3-eth-contract.html
 - 样例代码参考如下链接 
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
 - Web3js使用参考文档:  
   https://www.dappuniversity.com/articles/web3-js-intro
 - 代码参考文档：
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
+- nodejs参考文档：
+  http://nodejs.cn/api/fs.html
+  

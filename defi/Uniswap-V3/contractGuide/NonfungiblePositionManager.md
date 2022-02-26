@@ -197,7 +197,7 @@ function createAndInitializePoolIfNecessary(
 
 ### mint
 
-Manager 铸造代表流动性头寸的ERC721代笔返回给用户
+Manager 铸造代表流动性头寸的ERC721代币返回给用户
 
 ```solidity
 /// @inheritdoc INonfungiblePositionManager

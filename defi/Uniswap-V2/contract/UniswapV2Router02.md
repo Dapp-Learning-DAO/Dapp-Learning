@@ -258,7 +258,7 @@ library UniswapV2Library {
 (uint amount0, uint amount1) = IUniswapV2Pair(pair).burn(to);
 ```
 由于转账扣手续费，例10%，在pair->router的时候，实际router只得到90个
-在removeLiquidityETH是直接只用amount0，即100，实际就不够了
+在removeLiquidityETH是直接使用amount0，即100，实际就不够了
 
 ```
 TransferHelper.safeTransfer(token, to, amount0);

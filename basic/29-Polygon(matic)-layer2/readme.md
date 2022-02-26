@@ -8,9 +8,7 @@ Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-
 
 当谈到 Polygon 的架构时，我们需要关注的主要要点是它被刻意地设计成通用和抽象的。这允许其他希望扩展的应用程序选择最适合其需求的扩展解决方案。
 
-<center>
-    <img src="./img/matic.jpeg" alt="matic.jpeg" style="zoom:75%;" />
-</center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/29-Polygon(matic)-layer2/matic.jpeg?raw=true" /></center>
 
 <br/>
 <br/>

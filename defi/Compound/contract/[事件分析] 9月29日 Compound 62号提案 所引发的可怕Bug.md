@@ -251,6 +251,8 @@ Compound的`distributeSupplierComp()`函数中的奖励计算原理与之类似,
 
 但在`if`语句中,少了一个等号`=`,由于`supplyIndex = comInitialIndex = 1e36`并不符合判断条件`supplyIndex > comInitialIndex`, `supplierIndex`没有被初始化为`1e36`,其值依然为`0`
 
+[Compund github 仓库中关于此处的提交修改](https://github.com/compound-finance/compound-protocol/commit/fcf067f6fa50a93ff9125f5f0abae0ae98d1e8b0#diff-8ef9294768226293f278525b40998f11db7ee32464279f47ca7ad35294bb6a3fL1217)
+
 ![image](../images/if.png)
 
 所以最终的奖励计算变成了

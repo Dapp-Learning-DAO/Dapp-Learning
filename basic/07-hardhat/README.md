@@ -20,6 +20,11 @@ Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务
 
 ## 项目结构和配置 hardhat
 
+```sh
+npm install --save-dev hardhat  // 安装hardhat
+npx hardhat                     // 创建hardhat项目
+```
+
 ### 项目结构
 
 一个标准的使用 hardhat 构建的项目通常是这样的：
@@ -280,3 +285,4 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 - hardhat 中文文档: <https://learnblockchain.cn/docs/hardhat/getting-started/>
 - ethers.js 和 hardhat 基础使用讲解: <https://www.bilibili.com/video/BV1Pv411s7Nb>
 - <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>
+- erc20 openzepplin介绍: <https://segmentfault.com/a/1190000015400380>
