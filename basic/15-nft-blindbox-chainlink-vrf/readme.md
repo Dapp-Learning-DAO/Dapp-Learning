@@ -44,45 +44,15 @@ INFURA_ID=yyyyyyyy
 npx hardhat run scripts/deploy.js --network rinkeby
 ```
 
-- 部署测试合约
+- 获取随机数  
 ```
-npx hardhat run scripts/deploy.js --network rinkeby
+npx hardhat run scripts/random-number-vrf.js --network rinkeby
 ```
 
-## 脚本逻辑  
-```js
-    /**
-       * Constructor inherits VRFConsumerBase
-       *
-       * Network: kovan
-       * Chainlink VRF Coordinator address: 0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9
-       * LINK token address:                0xa36085F69e2889c224210F603D836748e7dC0088
-       * Key Hash: 0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4
-       */
-    const Coordinator = "0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9";
-    const LINK = "0xa36085F69e2889c224210F603D836748e7dC0088";
-    const KeyHash = "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
-    
-    // 部署 DungeonsAndDragonsCharacter 合约
-    const dnd = await Dnd.deploy(Coordinator, LINK, KeyHash);
-
-    await dnd.deployed();
-
-    console.log("dnd deployed to:", dnd.address);
-    
-    /** 在测试开始之前，我们已经在 "aucets.chain.link" 上申请了 test Link 币, 当在合约中调用 requestRandomness 去向 chainLink 申请随机数时，
-    *   合约需要向 ChainLink 支付 Link 币, 所以在这里我们向新部署的合约转账部分 test Link 币, 合约调用 requestRandomness 时就可以支付 Link 币
-    */
-    const token = await hre.ethers.getContractAt("LinkTokenInterface", LINK);
-    var exp = ethers.BigNumber.from("10").pow(18);
-    await token.transfer(dnd.address, ethers.BigNumber.from("3").mul(exp));
-    const bal =  await token.balanceOf(dnd.address);
-    console.log("dnd link balance : ", bal.toString());
-    
-    // 获取 VRF 随机树
-    const tx = await dnd.requestNewRandomCharacter(77, "The Chainlink Knight");
+- 生成随机  Character  
 ```
- 
+npx hardhat run scripts/transaction.js --network rinkeby
+``` 
 
 ## 参考链接
 github 样例代码:  https://github.com/PatrickAlphaC/dungeons-and-dragons-nft  
