@@ -2,14 +2,17 @@ const hre = require('hardhat');
 require('@nomiclabs/hardhat-web3');
 const { BigNumber } = require('ethers');
 require('dotenv').config();
+const { readDeployment } = require('./utils');
 
 async function main() {
   const provider = new ethers.providers.WebSocketProvider(`wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_ID}`);
   const { abi: RandomNumberConsumerABI } = require('../artifacts/contracts/RandomNumberConsumer.sol/RandomNumberConsumer.json');
 
-  const addr = process.env.RandomNumberConsumer_ADDRESS; // <--- you need fill it in .env file
+  const deployment = readDeployment();
+  const addr = deployment.RandomNumberConsumerAddress;
+
   if (!addr) {
-    console.log('Please set the contract address in .env file.');
+    console.log('Please deploy contract RandomNumberConsumer first');
     return;
   }
 
@@ -66,7 +69,7 @@ async function main() {
     // wait for the result event
     for (let i = 0; i < 500; i++) {
       if (random0Res) break;
-      console.log("Please be patient, it will take sometime to get the result")
+      console.log(`${i}: Please be patient, it will take a little long time to get the result`)
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve();

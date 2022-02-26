@@ -1,6 +1,8 @@
 const hre = require('hardhat');
 require('@nomiclabs/hardhat-web3');
 require('dotenv').config();
+const { saveDeployment } = require('./utils');
+
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -14,9 +16,11 @@ async function main() {
 
   console.log('----------------------------------------------------');
   console.log('RandomNumberConsumer address:', instance.address);
-  console.log('Now you need transfer Link token to this contract address.')
-  console.log('Then add address to .env file, and run the test script file.')
 
+  // save contract address to file
+  saveDeployment({
+    RandomNumberConsumerAddress: instance.address,
+  });
 }
 
 // We recommend this pattern to be able to use async/await everywhere

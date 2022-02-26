@@ -16,9 +16,37 @@ VRF 为链上安全可验证随机数, 用于安全的生成随机数, 具体可
 npm install 
 ```
 
-- 测试合约
+- 创建 ChainLink SubscriptionID  
+登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击 "Create Subscription" 创建 SubscriptionID , 之后可以在 "My Subscriptions" 中看到创建的 SubscriptionID
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkVRF.png?raw=true" /></center> 
+
+
+- 保存 SubscriptionID  
+将上一步创建的 SubscriptionID 保存到 .env 文件中 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/SubscriptionID.png?raw=true" /></center>
+
+```sh
+## .env
+SubscriptionId=ddddd
 ```
-npx hardhat run script/deploy.js --network kovan
+
+- 配置环境变量  
+在 .env 文件中放入私钥, infura 节点 id 
+
+```sh
+## .env
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+- 部署测试合约
+```
+npx hardhat run scripts/deploy.js --network rinkeby
+```
+
+- 部署测试合约
+```
+npx hardhat run scripts/deploy.js --network rinkeby
 ```
 
 ## 脚本逻辑  

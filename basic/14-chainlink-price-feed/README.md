@@ -93,24 +93,17 @@ SubscriptionId=ddddd
    npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network rinkeby
    ```
 
-4. 将打印出来的合约部署地址，添加到 .env 文件中，运行测试脚本
-
-   ```js
-   // .env
-   RandomNumberConsumer_ADDRESS=xxxx; // <--- you need fill this
-   ```
-
-5. 获取 ChainLink 币  
+4. 获取 ChainLink 币  
 登陆 [ChainLink Faucet](https://faucets.chain.link/) , 在, 获取 ChainLink 币用于后续的 RandomNumberConsume , 其中 Network 选择 rinkeby, "Testnet account address" 输入合约 owner 的账户地址
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkFaucet.png?raw=true" /></center>   
 
 
-6. 赋权合约消费 ChainLink 币以进行随机数获取    
+5. 赋权合约消费 ChainLink 币以进行随机数获取    
 登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击其中的 SubscriptionID 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ClickSubscriptionID.png?raw=true" /></center>  
 
 
-之后在新出现的页面中, 进行 "Add Funds" 和 "Add consumer". 其中 "Add Funds" 为存入 ChainLink 币的数量, "Add consumer" 需要填入部署成功的 RandomNumberConsumer 合约地址, 即为 .env 文件中 RandomNumberConsumer_ADDRESS 的值 
+之后在新出现的页面中, 进行 "Add Funds" 和 "Add consumer". 其中 "Add Funds" 为存入 ChainLink 币的数量, "Add consumer" 需要填入部署成功的 RandomNumberConsumer 合约地址, 即为步骤 3中打印出来的合约地址 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/AddFundsAddCustomer.png?raw=true" /></center>   
 
 
