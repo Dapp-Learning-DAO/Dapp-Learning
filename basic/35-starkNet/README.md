@@ -49,6 +49,8 @@ StarkNet 将 Cairo 编程语言用于其基础设施和编写 StarkNet 合约。
 # Declare this file as a StarkNet contract and set the required
 # builtins.
 %lang starknet
+
+#%builtins directive is no longer required in StarkNet contracts since v0.7
 %builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
@@ -79,7 +81,7 @@ end
 ```
 
 - `%lang starknet` 声明该文件为 StarkNet contract, 需要使用 `starknet-compile` 命令来编译，而非 `cairo-compile`
-- `%builtins pedersen range_check` 引入两个内建函数
+- `%builtins pedersen range_check` 引入两个内建函数（%builtins 指令自v0.7起不再使用）
 - `@storage_var` 声明 storage 变量
   - `balance.read()` 读取变量值
   - `balance.write(newValue)` 将 newValue 值写入 balance

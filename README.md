@@ -267,6 +267,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 4. 学习资源合集
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
+ - [Immunefi 学习资源](https://immunefi.com/learn/)
 
 ## Cryptocurrency Jobs Websites
  推荐一些比较好cryptocurrency jobs网站
@@ -278,6 +279,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  参与黑客松增加实践经验，可参与有：  
  - [Gitcoin](https://gitcoin.co/hackathon/)
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
+ - [Immunefi 漏洞赏金平台](https://immunefi.com/)
 
 ## 如何参与以及DAO治理
   新人如何参与到我们项目，请参考链接 [如何参与](./docs/dao.md)
