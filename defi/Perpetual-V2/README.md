@@ -15,7 +15,8 @@ Perp V2在Uniswap V3上以v-Token创建池子，比如vUSDC/vETH，v-token是Per
 若LP向清算所（Clearing House）提供1,000 USDC进行做市，则Leveraged LPs功能可以在10倍范围内添加vUSDC，这10,000 vUSDC就成为LP可以在系统内放置流动性的总额度（也称为“信用”），LP可以将其添加到相应资产和区间上，比如可以分为5,000 vUSDC和价值5,000 vUSDC的vETH，添加到相应流动性池中。（按oracle价格兑换）
 在LP确定了对相应资产的分配额度后，系统铸造相应v-token，按照上述例子，系统铸造5,000 vUSDC和价值5,000 vUSDC的2 vETH（按照ETH价格2,500美金计算），LP可以按照自己的做市策略将这些v-token分配到Uniswap V3上的相应区间。
 
-
+**技术文档**
+https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub
 
 ##参考链接
 curie: https://www.chainnews.com/articles/065325628807.htm
