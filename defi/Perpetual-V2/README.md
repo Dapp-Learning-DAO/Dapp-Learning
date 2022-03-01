@@ -19,8 +19,10 @@ Perp V2在Uniswap V3上以v-Token创建池子，比如vUSDC/vETH，v-token是Per
 https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub
 
 ##参考链接
-curie: https://www.chainnews.com/articles/065325628807.htm
-原理： https://www.fxfrank.com/blockchain/62786.html
-Perp V2 Technical Details: https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub  
-A Complete Guide to Perpetual Protocol V2:https://blocmates.com/blogmates/perpetualprotocol/
+- curie: https://www.chainnews.com/articles/065325628807.htm
+- 原理： https://www.fxfrank.com/blockchain/62786.html
+- Perp V2 Technical Details: https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub  
+- A Complete Guide to Perpetual Protocol V2: https://blocmates.com/blogmates/perpetualprotocol/
+- Perpetual Protocol v2: https://blog.perp.fi/perpetual-protocol-v2-is-live-on-optimism-mainnet-5b9520bc02a2
+- LP做市：https://perp.com/lp
 
