@@ -25,7 +25,7 @@
 
 (1) 是合约文件
 
-(2) 环境变量，保存 INFURA_API_KEY、DEPLOYMENT_ACCOUNT_KEY 这些变量
+(2) 环境变量，保存 INFURA_API_KEY、PRIVATE_KEY 这些变量
 
 (3) 是 truffle 的配置文件
 
@@ -133,7 +133,7 @@ flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比�
 
 ```js
 INFURA_API_KEY = "API_KEY"
-DEPLOYMENT_ACCOUNT_KEY = "地址私钥"
+PRIVATE_KEY = "地址私钥"
 ```
 
 运行 `truffle migrate --network kovan --reset --skip-dry-run`，给 Flashloan 合约的构造函数传递的 lendingPoolProvider 是`0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5`。
