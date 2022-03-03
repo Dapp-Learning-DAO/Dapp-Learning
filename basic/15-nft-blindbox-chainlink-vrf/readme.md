@@ -16,45 +16,43 @@ VRF 为链上安全可验证随机数, 用于安全的生成随机数, 具体可
 npm install 
 ```
 
-- 测试合约
-```
-npx hardhat run script/deploy.js --network kovan
+- 创建 ChainLink SubscriptionID  
+登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击 "Create Subscription" 创建 SubscriptionID , 之后可以在 "My Subscriptions" 中看到创建的 SubscriptionID
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkVRF.png?raw=true" /></center> 
+
+
+- 保存 SubscriptionID  
+将上一步创建的 SubscriptionID 保存到 .env 文件中 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/SubscriptionID.png?raw=true" /></center>
+
+```sh
+## .env
+SubscriptionId=ddddd
 ```
 
-## 脚本逻辑  
-```js
-    /**
-       * Constructor inherits VRFConsumerBase
-       *
-       * Network: kovan
-       * Chainlink VRF Coordinator address: 0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9
-       * LINK token address:                0xa36085F69e2889c224210F603D836748e7dC0088
-       * Key Hash: 0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4
-       */
-    const Coordinator = "0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9";
-    const LINK = "0xa36085F69e2889c224210F603D836748e7dC0088";
-    const KeyHash = "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
-    
-    // 部署 DungeonsAndDragonsCharacter 合约
-    const dnd = await Dnd.deploy(Coordinator, LINK, KeyHash);
+- 配置环境变量  
+在 .env 文件中放入私钥, infura 节点 id 
 
-    await dnd.deployed();
-
-    console.log("dnd deployed to:", dnd.address);
-    
-    /** 在测试开始之前，我们已经在 "aucets.chain.link" 上申请了 test Link 币, 当在合约中调用 requestRandomness 去向 chainLink 申请随机数时，
-    *   合约需要向 ChainLink 支付 Link 币, 所以在这里我们向新部署的合约转账部分 test Link 币, 合约调用 requestRandomness 时就可以支付 Link 币
-    */
-    const token = await hre.ethers.getContractAt("LinkTokenInterface", LINK);
-    var exp = ethers.BigNumber.from("10").pow(18);
-    await token.transfer(dnd.address, ethers.BigNumber.from("3").mul(exp));
-    const bal =  await token.balanceOf(dnd.address);
-    console.log("dnd link balance : ", bal.toString());
-    
-    // 获取 VRF 随机树
-    const tx = await dnd.requestNewRandomCharacter(77, "The Chainlink Knight");
+```sh
+## .env
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
 ```
- 
+
+- 部署测试合约
+```
+npx hardhat run scripts/deploy.js --network rinkeby
+```
+
+- 获取随机数  
+```
+npx hardhat run scripts/random-number-vrf.js --network rinkeby
+```
+
+- 生成随机  Character  
+```
+npx hardhat run scripts/transaction.js --network rinkeby
+``` 
 
 ## 参考链接
 github 样例代码:  https://github.com/PatrickAlphaC/dungeons-and-dragons-nft  

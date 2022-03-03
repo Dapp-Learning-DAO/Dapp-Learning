@@ -1,4 +1,4 @@
-# 喂价预言机
+# 喂价 和 随机数 预言机
 
 区块链是非常安全可靠的价值交换网络，但却无法安全防篡改地获取链下数据或将数据发送至链下系统。使用 Chainlink 预言机喂价, 通过预言机网络在链上直接获取实时金融市场价格数据
 
@@ -73,29 +73,59 @@ Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证的�
 
 ### 操作流程
 
-1. 在 kovan 测试网络环境下，将 Link token (测试代币)添加到小狐狸钱包，初始会自动发放 10 个测试代币，token address：
-   `0xa36085F69e2889c224210F603D836748e7dC0088`
-2. 运行部署脚本部署合约
+1. 创建 ChainLink SubscriptionID  
+登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击 "Create Subscription" 创建 SubscriptionID , 之后可以在 "My Subscriptions" 中看到创建的 SubscriptionID
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkVRF.png?raw=true" /></center> 
+
+
+2. 保存 SubscriptionID  
+将上一步创建的 SubscriptionID 保存到 .env 文件中 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/SubscriptionID.png?raw=true" /></center>
+
+```sh
+## .env
+SubscriptionId=ddddd
+```
+
+3. 运行部署脚本部署合约
 
    ```sh
-   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network kovan
+   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network rinkeby
    ```
 
-3. 使用小狐狸向合约转账 Link token 作为调用随机函数的费用。在 kovan 网络下，合约每次调用随机函数花费 0.1Link，转账适量即可。
-4. 将打印出来的合约部署地址，添加到 .env 文件中，运行测试脚本
+4. 获取 ChainLink 币  
+登陆 [ChainLink Faucet](https://faucets.chain.link/) , 在, 获取 ChainLink 币用于后续的 RandomNumberConsume , 其中 Network 选择 rinkeby, "Testnet account address" 输入合约 owner 的账户地址
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkFaucet.png?raw=true" /></center>   
 
-   ```js
-   // .env
-   RandomNumberConsumer_ADDRESS=xxxx; // <--- you need fill this
-   ```
 
-   运行测试脚本
+5. 赋权合约消费 ChainLink 币以进行随机数获取    
+登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击其中的 SubscriptionID 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ClickSubscriptionID.png?raw=true" /></center>  
+
+
+之后在新出现的页面中, 进行 "Add Funds" 和 "Add consumer". 其中 "Add Funds" 为存入 ChainLink 币的数量, "Add consumer" 需要填入部署成功的 RandomNumberConsumer 合约地址, 即为步骤 3中打印出来的合约地址 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/AddFundsAddCustomer.png?raw=true" /></center>   
+
+
+6. 运行测试脚本  
 
    ```sh
-   npx hardhat test ./test/RandomNumberConsumer.test.js --network kovan
+   npx hardhat run  scripts/03-RandomNumberConsumer --network rinkeby
    ```
 
-   结果可能需要等待 2 到 3 分钟，可以看到两次获取的随机数值不同
+   结果可能需要等待 2 到 3 分钟，可以看到 ChainLink 返回的两个随机值
+
+   ```sh
+   ❯ npx hardhat run scripts/03-RandomNumberConsumer.js --network rinkeby
+   Listen on random number call...
+   Listen on random number result...
+   first transaction hash: 0xb822b742836e3e028102b938ff9b52f5c31ecbf00a663b4865c50f83d141c441
+   event RequestId(address,uint256)
+   random0 requestID:  BigNumber { value: "68813323376039607636454911576409413136200025762802867082556497319163019860937" }
+   event FulfillRandomness(uint256,uint256[])
+   args[0] : BigNumber { value: "68813323376039607636454911576409413136200025762802867082556497319163019860937" }
+   random0Res:  21345191237588857524675400331731955708910062406377169110385405370996391926856,49611358654743768743671276783545638722996121599596073254340228099561828202433
+   ```
 
 ## todo
 

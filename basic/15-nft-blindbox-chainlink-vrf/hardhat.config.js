@@ -1,6 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
 const fs = require("fs");
-require('dotenv').config()
+require('dotenv').config();
+require('hardhat-contract-sizer');
+require("@nomiclabs/hardhat-etherscan");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -28,10 +30,10 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.3"
+        version: "0.6.6"
       },
       {
-        version: "0.6.6",
+        version: "0.8.7",
         settings: {}
       }
     ]
@@ -70,5 +72,8 @@ module.exports = {
         mnemonic()
       ],
     },
+  },
+  etherscan: {
+    apiKey: "1324"
   }
 };
