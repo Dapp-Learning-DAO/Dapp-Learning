@@ -4,8 +4,15 @@
 
 ## 操作流程
 
-- 配置私钥  
-  在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+- 配置 .env
+
+```sh
+cp .env.example .env
+
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
 
 - 安装依赖
 

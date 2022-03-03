@@ -39,13 +39,22 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 ```bash
 npm install -g truffle
 ```
-
 如果下载速度过慢，可配置taobao的镜像地址来进行加速。
 ```
 npm config set registry http://registry.npm.taobao.org
-```
+```  
 
-2. 测试合约  
+2. 配置 .env
+
+   ```sh
+   cp .env.example .env
+
+   ## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
+   PRIVATE_KEY=xxxxxxxxxxxxxxxx
+   INFURA_ID=yyyyyyyy
+   ```
+
+3. 测试合约  
 ```bash
 truffle test
 ```
@@ -53,7 +62,7 @@ truffle test
 这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
 执行 "truffle test ./test/simpletoken.js"
 
-3. 编译合约  
+4. 编译合约  
 ```bash
 truffle compile
 ```
@@ -66,7 +75,7 @@ Compiling .\contracts\SimpleToken.sol...
 Writing artifacts to .\build\contracts
 ```
 
-4. 部署合约
+5. 部署合约
 
 在 truffle-config.js 里面，可以配置 truffle 使用的以太网络，其中就包括 truffle test 使用的 "test" 网络。
 这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 kovan 进行 truffle 合约部署
