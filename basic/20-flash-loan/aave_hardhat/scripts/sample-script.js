@@ -12,6 +12,11 @@ async function main() {
   // If this script is run directly using `node` you may want to call compile
   // manually to make sure everything is compiled
   // await hre.run('compile');
+  console.log(hre.hardhatArguments.network, hre.network);
+
+  if (hre.hardhatArguments.network === 'localhost') {
+    throw console.error('This script should not be run on the local network');
+  }
 
   // We get the contract to deploy
   const Greeter = await hre.ethers.getContractFactory("Greeter");
