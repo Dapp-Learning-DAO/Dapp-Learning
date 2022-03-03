@@ -6,10 +6,11 @@ import "./AaveUniswapBase.sol";
 
 contract AaveApe is AaveUniswapBase {
 
+   event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount, uint256 interestRateMode);
+
   constructor(address lendingPoolAddressesProviderAddress, address uniswapRouterAddress) AaveUniswapBase(lendingPoolAddressesProviderAddress, uniswapRouterAddress) public {}
 
-  event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount, uint256 interestRateMode);
-
+ 
   // Gets the amount available to borrow for a given address for a given asset
   function getAvailableBorrowInAsset(address borrowAsset, address ape) public view returns (uint256) {
     ( ,,uint256 availableBorrowsETH,,,) = LENDING_POOL().getUserAccountData(ape);
