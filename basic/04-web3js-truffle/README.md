@@ -39,6 +39,10 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 ```bash
 npm install -g truffle
 ```
+如果下载速度过慢，可配置taobao的镜像地址来进行加速。
+```
+npm config set registry http://registry.npm.taobao.org
+```  
 
 2. 配置 .env
 

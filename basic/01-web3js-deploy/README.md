@@ -3,6 +3,10 @@
 
 - 本样例发送交易到 Infura , 需要创建相应的 Infura Project, 可以参考如下资料进行创建
 https://ithelp.ithome.com.tw/articles/10202794 在成功创建 Infura Project 后，可以获取相应的PROJECT ID
+
+- 本样例中，需要自己来生成私钥。可通过多种方式来生成私钥。常见的方式是通过Metamask。可参考《精通以太坊》或其他文档安装： https://www.bookstack.cn/read/ethereum_book-zh/spilt.4.77adf5064f4455e8.md  安装完成后，连接到Kovan测试网络，点击账户详情-导出私钥，获得创建的测试账号的私钥PRIVATE_KEY。
+
+- 给Kovan测试网络中的测试账号充值。上一步开立的账号中，余额为0， 可通过faucets来充值： https://faucets.chain.link/kovan  每次冲入0.1Eth。
  
 - 为方便代码测试, 在 .env 中放入私钥和Infura Project ID，格式为 "PRIVATE_KEY=xxxx" "INFURA_ID=yyyyyyyy", index.js代码会自动从中读取, 样例文件可参考 .env.example  
 
@@ -36,7 +40,7 @@ node index.js
 ```
 ## index.js 代码逻辑说明  
 1) 读取私钥  
-处于安全考虑, 私钥没有进行硬编码, 而是通过环境变量的方式进行获取. 启动测试时, dotenv 插件自动读取 .env 配置文件中的配置项, 然后加载为环境变量, 之后在代码中可以通过 process.env 读取私钥 ( 也包括其他环境变量 )    
+出于安全考虑, 私钥没有进行硬编码, 而是通过环境变量的方式进行获取. 启动测试时, dotenv 插件自动读取 .env 配置文件中的配置项, 然后加载为环境变量, 之后在代码中可以通过 process.env 读取私钥 ( 也包括其他环境变量 )    
 ```js
 require("dotenv").config();
 const privatekey = process.env.PRIVATE_KEY;
