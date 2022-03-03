@@ -19,15 +19,20 @@ const main = async () => {
   let mainnetConfig = {
     lendingPoolAddressesProvider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
     uniswapRouterAddress: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+  }  
+  let maticConfig = {
+    lendingPoolAddressesProvider: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744",
+    //sushi
+    uniswapRouterAddress: "0x1b02da8cb0d097eb8d57a175b88c7d8b47997506"
   }
 
   // Kovan Aave has a dedicated mock Uniswap contract... https://kovan.etherscan.io/address/0xC18451d36aA370fDACe8d45839bF975F48f7AEa1#readContract
   let kovanConfig = {
-    lendingPoolAddressesProvider: "0x88757f2f99175387ab4c6a4b3067c77a695b0349",
+    lendingPoolAddressesProvider: "0x652B2937Efd0B5beA1c8d54293FC1289672AFC6b",
     uniswapRouterAddress: "0xfcd87315f0e4067070ade8682fcdbc3006631441"
   }
 
-  let deployConfig = (process.env.HARDHAT_NETWORK === 'kovan' || config.defaultNetwork === 'kovan') ? kovanConfig : mainnetConfig
+  let deployConfig = (process.env.HARDHAT_NETWORK === 'kovan' || config.defaultNetwork === 'matic') ? maticConfig:kovanConfig 
 
   const aaveApe = await deploy("AaveApe",[deployConfig.lendingPoolAddressesProvider, deployConfig.uniswapRouterAddress])
 
