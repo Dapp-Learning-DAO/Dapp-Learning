@@ -106,6 +106,31 @@ main = async () => {
   console.log('debtBalanceBefore: ', debtBalanceBefore.toString());
 
   // todo  get fee by graph 
+// ```
+// {
+//   users (where: {id: "XXX"}) {
+  
+ 
+//   borrowHistory (orderBy: timestamp) { 
+//     amount 
+//     borrowRate
+//     timestamp
+//     variableTokenDebt
+//   }
+    
+//     repayHistory (orderBy: timestamp){ 
+//        amount 
+//     timestamp
+  
+//   }
+// }
+// }
+  
+// ```
+// debetNow  - [sum(borrow) - sum(repay)]  计算支付利息
+// 参考https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Aave/graph/scripts/calculate.ts
+
+  
 };
 
 main()
