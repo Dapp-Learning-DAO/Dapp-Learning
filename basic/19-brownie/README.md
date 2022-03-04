@@ -69,6 +69,11 @@ brownie compile
 brownie test 
 ```
 
+## 执行脚本
+```
+brownie run *.py --network kovan
+```
+
 ## 参考链接
 brownie 官网: https://eth-brownie.readthedocs.io/en/stable/toctree.html   
 旧版 Uniswap 合约: https://github.com/Uniswap/old-solidity-contracts   
