@@ -160,10 +160,10 @@ function getAmount(
     return (inputAmount * outputReserve) / (inputReserve + inputAmount);
 }
 
-// 传入token数量得到能够换取的eth数量
+// 传入eth数量得到能够换取的token数量
 function getTokenAmount(uint256 _ethSold) public view returns (uint256)
 
-// 传入eth数量得到能够换取的token数量
+// 传入token数量得到能够换取的eth数量
 function getEthAmount(uint256 _tokenSold) public view returns (uint256)
 ```
 
