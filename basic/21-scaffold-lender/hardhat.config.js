@@ -57,11 +57,9 @@ module.exports = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     matic: {
-      url: "https://polygon-mainnet.infura.io/v3/" + process.env.INFURA_ID,
+      url: "https://polygon-mainnet.g.alchemy.com/v2/" + process.env.INFURA_ID,
       accounts:
       process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      gas: 15000000,
-      gasPrice: 31
     },
     matic_mumbai: {
       url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,

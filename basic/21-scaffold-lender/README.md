@@ -36,7 +36,15 @@ Borrow the amount needed to repay their borrowAsset debt via a flashloan from Aa
 ## operating steps
 
 ```shell
-hardhat run --network kovan scripts/deploy.js
+// depoly aaveape
+hardhat run --network matic scripts/deploy.js   
+
+// contract verify
+npx hardhat verify --network matic 0xddb2d92d5a0EDcb03c013322c7BAe92734AA4597 "0xd05e3E715d945B59290df0ae8eF85c1BdB684744" "0x1b02da8cb0d097eb8d57a175b88c7d8b47997506"
+
+// open maxposition on aave
+hardhat run --network matic scripts/loan.js   
+
 ```
 
 
