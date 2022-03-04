@@ -125,7 +125,8 @@ main = async () => {
   let debtBalanceAfter = await debtToken.balanceOf(userAddress);
   console.log('debtBalanceAfter: ', debtBalanceAfter.toString());
 
-  // await withdrawEthInAave(lendingpool.address, userAddress, aBalanceAfter)
+  await aToken.approve(wethGatewayAddress,ethers.constants.MaxUint256 )
+  await withdrawEthInAave(lendingpool.address, userAddress, aBalanceAfter)
 };
 
 main()
