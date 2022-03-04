@@ -32,11 +32,12 @@ const main = async () => {
     uniswapRouterAddress: "0xfcd87315f0e4067070ade8682fcdbc3006631441"
   }
 
-  let deployConfig = (process.env.HARDHAT_NETWORK === 'kovan' || config.defaultNetwork === 'matic') ? maticConfig:kovanConfig 
-
+  let deployConfig = maticConfig 
+  console.log("lendingPoolAddressesProvider ", deployConfig.lendingPoolAddressesProvider)
+ 
   const aaveApe = await deploy("AaveApe",[deployConfig.lendingPoolAddressesProvider, deployConfig.uniswapRouterAddress])
-
-  console.log(
+  
+ console.log(
     " 💾  Artifacts (address, abi, and args) saved to: ",
     chalk.blue("packages/hardhat/artifacts/"),
     "\n\n"
