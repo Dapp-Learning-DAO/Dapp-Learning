@@ -173,6 +173,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Tenderly](https://dashboard.tenderly.co/explorer)  
+71. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 
 
 ## 项目任务
