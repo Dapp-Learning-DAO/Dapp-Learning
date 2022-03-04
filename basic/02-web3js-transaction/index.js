@@ -10,8 +10,7 @@ const privatekey = process.env.PRIVATE_KEY;
 */
 // Provider
 const providerRPC = {
-  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
-  moonbase: 'https://rpc.testnet.moonbeam.network',
+  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
 

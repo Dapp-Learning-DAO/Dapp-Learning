@@ -6,6 +6,13 @@ ENS（Ethereum Name Service）是以太坊域名服务，是一个基于以太�
 
 ENS的工作是将可读的域名（比如"alice.eth"）解析为计算机可以识别的标识符，如以太坊地址、内容的散列、元数据等。ENS还支持"反向解析"，这使得将元数据(如规范化域名或接口描述)与以太坊地址相关联成为可能
 
+### ENS tools
+
+- supportENS.sol
+- push2ENS.sol
+
+Refer to https://github.com/alexvansande/ENSTools
+
 ### 使用流程
 
 ENS JavaScript 库：

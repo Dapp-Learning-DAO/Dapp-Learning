@@ -27,9 +27,12 @@ contract AaveUniswapBase {
 
   bytes32 public constant PROTOCOL_DATA_PROVIDER_LOOKUP = 0x0100000000000000000000000000000000000000000000000000000000000000;
 
+  //address public immutable _lendingPoolAddress =0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe; 
   function LENDING_POOL() public view returns (ILendingPool) {
     address _lendingPoolAddress = ADDRESSES_PROVIDER.getLendingPool();
     return ILendingPool(_lendingPoolAddress);
+
+    //return ILendingPool(_lendingPoolAddress);
   }
 
   function getPriceOracle() internal view returns (IPriceOracleGetter) {

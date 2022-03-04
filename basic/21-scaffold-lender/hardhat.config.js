@@ -13,7 +13,7 @@ const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 //
 // Select the network you want to deploy to here:
 //
-const defaultNetwork = "localhost";
+const defaultNetwork = "matic";
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -53,6 +53,18 @@ module.exports = {
     },
     main: {
       url: "https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    matic: {
+      url: "https://polygon-mainnet.infura.io/v3/" + process.env.INFURA_ID,
+      accounts:
+      process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gas: 15000000,
+      gasPrice: 31
+    },
+    matic_mumbai: {
+      url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
