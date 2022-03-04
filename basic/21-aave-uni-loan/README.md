@@ -32,7 +32,8 @@ This requires the user to have delegated credit to the Aave Ape contract, so tha
 
 
 **unwindApe**
-Borrow the amount needed to repay their borrowAsset debt via a flashloan from Aave V2.  
+Borrow the amount needed to repay their borrowAsset debt via a flashloan from Aave V2.   
+For more detail , please visit [aave-ape](https://azfuller20.medium.com/aave-ape-with-%EF%B8%8F-scaffold-eth-c687874c079e )
 ## operating steps
 
 ```shell
