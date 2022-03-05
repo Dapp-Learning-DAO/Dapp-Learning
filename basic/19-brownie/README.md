@@ -46,21 +46,9 @@ npm install -g ganache-cli
 ganache-cli
 ``` 
 
-## 创建空的 brownie 项目并初始化
-```sh
-mkdir brownie_test
-cd brownie_test
-brownie init
-```
-
-## 复制合约及测试脚本  
-```sh
-cp -r ../contracts/* contracts/
-cp -r ../tests/* tests
-``` 
-
 ## 编译合约 
 ```
+cd brownie_test
 brownie compile
 ```
 
