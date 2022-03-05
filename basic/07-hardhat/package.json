@@ -16,7 +16,7 @@
     "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.7",
-    "hardhat": "^2.6.4",
+    "hardhat": "^2.9.0",
     "sol-merger": "^3.1.0"
   },
   "dependencies": {

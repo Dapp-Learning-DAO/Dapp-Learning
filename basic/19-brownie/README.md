@@ -3,26 +3,63 @@
 的test进行了重新编写，并且加入了详细的注释
 
 ## 安装 Brownie 
-- 安装 pipx 
-``` 
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
+- 安装依赖 Brownie
+```sh
+pip3 install eth-brownie
 ``` 
 
-PS: pipx 安装成功后, 需要重启终端命令行窗口  
+在终端中运行brownie，应该可以看到类似下面这样的输出：
+```sh
+Brownie v1.13.0 - Python development framework for Ethereum
+Usage:  brownie &lt;command> [&lt;args>...] [options &lt;args>]
 
-- 安装 brownie  
+Commands:
+
+  init               Initialize a new brownie project
+  bake               Initialize from a brownie-mix template
+  pm                 Install and manage external packages
+  compile            Compile the contract source files
+  console            Load the console
+  test               Run test cases in the tests/ folder
+  run                Run a script in the scripts/ folder
+  accounts           Manage local accounts
+  networks           Manage network settings
+  gui                Load the GUI to view opcodes and test coverage
+  analyze            Find security vulnerabilities using the MythX API
+
+Options:
+
+  --help -h          Display this message
+  --version          Show version and exit
+
+Type 'brownie &lt;command> --help' for specific options and more information about
+each command.
 ```
-pipx install eth-brownie
+
+## 安装 Ganache
+```sh
+npm install -g ganache-cli
+```
+## 启动 Ganache  
+开启单独的一个窗口, 在其中启动 Ganache 
+```sh
+ganache-cli
 ``` 
 
-- 安装依赖
+## 创建空的 brownie 项目并初始化
+```sh
+mkdir brownie_test
+cd brownie_test
+brownie init
 ```
-pip install requirement.txt
+
+## 复制合约及测试脚本  
+```sh
+cp -r ../contracts/* contracts/
+cp -r ../tests/* tests
 ``` 
 
 ## 编译合约 
-
 ```
 brownie compile
 ```

@@ -57,7 +57,9 @@ module.exports = {
     // rinkeby 测试网络
     rinkeby: {
       // 请将 INFURA_ID 替换成你自己的
-      url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
+      // url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+
       // 填写测试账户的私钥，可填写多个
       accounts: [privateKey1, privateKey2, ...]
     }
