@@ -124,7 +124,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 18. [web3.py](basic/18-web3py/README.md) ✅
 19. [brownie](basic/19-brownie/README.md) ✅
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
-21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
+21. [aave-uni-lender](basic/21-aave-uni-loan/README.md) ✅
 22. [zk-snarkjs](basic/22-zk-snarkjs/readme.md) ✅
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
@@ -169,7 +169,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
 66. [Kleros](https://kleros.io/)
-67. [Go-Ethereum Code Analysis](https://geth.ethereum.org/) 
+67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md) 
 68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Tenderly](https://dashboard.tenderly.co/explorer)  
