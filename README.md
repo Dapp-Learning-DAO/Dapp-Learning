@@ -133,7 +133,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
 28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
-30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
+30. [zksync layer2](basic/30-zksync-layer2/readme.md) ✅
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
