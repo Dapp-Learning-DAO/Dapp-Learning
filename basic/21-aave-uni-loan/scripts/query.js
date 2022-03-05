@@ -107,24 +107,24 @@ main = async () => {
 
   // todo  get fee by graph 
 // ```
-// {
-//   users (where: {id: "XXX"}) {
+{
+  users (where: {id: "XXX"}) {
   
  
-//   borrowHistory (orderBy: timestamp) { 
-//     amount 
-//     borrowRate
-//     timestamp
-//     variableTokenDebt
-//   }
+  borrowHistory (orderBy: timestamp) { 
+    amount 
+    borrowRate
+    timestamp
+    variableTokenDebt
+  }
     
-//     repayHistory (orderBy: timestamp){ 
-//        amount 
-//     timestamp
+    repayHistory (orderBy: timestamp){ 
+       amount 
+    timestamp
   
-//   }
-// }
-// }
+  }
+}
+}
   
 // ```
 // debetNow  - [sum(borrow) - sum(repay)]  计算支付利息
@@ -141,7 +141,4 @@ main()
   });
 
 
-  19519327207+30213257800
-
-  19519327207
-  20000
+ 
