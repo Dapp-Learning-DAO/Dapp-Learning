@@ -31,7 +31,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          'https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          'https://ropsten.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
       gas: 3000000,
@@ -41,7 +41,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          'https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          'https://kovan.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
     },
@@ -49,7 +49,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          'https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
       gas: 3000000,

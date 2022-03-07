@@ -55,7 +55,7 @@ contract AaveApe is AaveUniswapBase {
       path[0] = borrowAsset;
       path[1] = apeAsset;
 
-      uint[] memory amounts = UNISWAP_ROUTER.swapExactTokensForTokens(borrowAmount, 0, path, address(this), block.timestamp + 5);
+      uint[] memory amounts = UNISWAP_ROUTER.swapExactTokensForTokens(borrowAmount, 0, path, address(this), block.timestamp + 50);
 
       // get the output amount, approve the Lending Pool to move that amount of erc20 & deposit
       uint outputAmount = amounts[amounts.length - 1];
@@ -97,7 +97,7 @@ contract AaveApe is AaveUniswapBase {
     address[] memory path = new address[](2);
     path[0] = fromAsset;
     path[1] = toAsset;
-
+// todo
     return UNISWAP_ROUTER.swapTokensForExactTokens(amountOut, amountInMax, path, address(this), block.timestamp + 5);
   }
 
