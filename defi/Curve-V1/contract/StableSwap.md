@@ -21,6 +21,10 @@ curve v1 核心公式
 <!-- $An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}$ -->
 <img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" />
 
+### curve v1 flow
+
+下图是 StableSwap 的主要业务流程图
+
 ![curve v1 flow](https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/images/defi/Curve-v1/contract/curve-v1-flow.png)
 
 ### pool-templates
