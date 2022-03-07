@@ -1,4 +1,4 @@
-# Curve v1 StableSwap code review
+# Curve v1 StableSwap code learning
 
 curve v1 通过实现 StableSwap 恒等式的交易池，达到比恒定乘积(Uniswap)交易池更高效低滑点的效果。适合相互之间价格稳定的交易对，比如两个稳定币(DAI-USDC)或同一锚定标的的资产(ETH-sETH synthetic ETH)。
 
