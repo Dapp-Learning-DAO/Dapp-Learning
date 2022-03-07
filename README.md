@@ -171,7 +171,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
 66. [Kleros](https://kleros.io/)
 67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md) 
-68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  ✅
+68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land/README.md)  ✅
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 
