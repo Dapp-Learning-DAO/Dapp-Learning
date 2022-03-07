@@ -17,6 +17,9 @@ async function main() {
     case "kovan":
       lendingPoolProviderAddr = "0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5";
       break
+    case "matic":
+      lendingPoolProviderAddr = "0x87A5b1cD19fC93dfeb177CCEc3686a48c53D65Ec";
+      break
     default:
       throw console.error(`Are you deploying to the correct network? (network selected: ${network})`)
   }
@@ -27,35 +30,6 @@ async function main() {
   await flashloan.deployed();
 
   console.log("Flashloan deployed to:", flashloan.address);
-
-  // const [deployer] = await ethers.getSigners();
-
-  // console.log(
-  //   "Deploying contracts with the account:",
-  //   deployer.address
-  // );
-
-  // console.log("Account balance:", (await deployer.getBalance()).toString());
-
-  // //deploy Crowdfunding
-  // const crowdFundingContractFactory = await ethers.getContractFactory("CrowdFunding");
-  // const crowdFundingContract = await crowdFundingContractFactory.deploy();
-  // await crowdFundingContract.deployed()
-
-  // console.log("CrowdFundingContract address:", crowdFundingContract.address);
-
-  // //start Project
-  // await crowdFundingContract.startProject("Buy toys", "Buy toys", 1, 100)
-  // let allProjects = await crowdFundingContract.returnAllProjects()
-
-  // const artifact = artifacts.readArtifactSync('Project')
-  // let project
-  // let details
-  // for (let i = 0; i < allProjects.length; i++) {
-  //   project = new ethers.Contract(allProjects[i], artifact.abi, deployer)
-  //   details = await project.getDetails()
-  //   console.log(details)
-  // }
 
 }
 

@@ -1,35 +1,19 @@
- 
-## 安装和设置
-
-我们需要全局安装 truffle，了解 node 的人不会陌生
-
-`npm install -g truffle@latest`
-
-安装完之后，开始第 2 步
-
-## 安装 aave flashloan-box
-
-`truffle unbox aave/flashloan-box`
-
-这个过程中需要特殊的上网技巧，下载完 flashloan-box， 我们会得到 1 个完整的基于 Truffle 框架的合约代码。
-
-```
-├── README.md
-├── contracts (1)
-├── env (2)
-├── migrations
-├── node_modules
-├── package.json
-└── truffle-config.js (3)
-```
-
-(1) 是合约文件
-
-(2) 环境变量，保存 INFURA_API_KEY、PRIVATE_KEY 这些变量
-
-(3) 是 truffle 的配置文件
-
 ## 闪电贷智能合约
+
+## 操作步骤
+
+### 配置私钥
+
+在 .env 中放入的 如下配置，格式如下:
+
+```
+INFURA_ID = ""
+PRIVATE_KEY = "1111111111111111111111111111111111111111111111111111111111111111"
+FLASHLOAN_ADDRESS= ""
+YOUR_WALLET_ADDRESS= ""
+```
+
+## 闪电贷智能合约部分代码逻辑说明
 
 来看下 `contracts/Flashloan.sol`
 
@@ -114,11 +98,8 @@ flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比�
 
 ## 编译合约
 
-运行 `truffle compile`，将编译合约，我们把 Solidity 的版本设定为`0.6.12`，成功后的提示是：
-
-```
-> Compiled successfully using:
-   - solc: 0.6.12+commit.27d51765.Emscripten.clang
+```bash
+npx hardhat compile
 ```
 
 ## 获取测试币
@@ -132,32 +113,36 @@ flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比�
 我们在 `env` 文件中配置好 infura 的 api key 以及 0x505A51009FdA1A20131C87c34Cfad6FDe6B82A36 对应的私钥
 
 ```js
-INFURA_API_KEY = "API_KEY"
-PRIVATE_KEY = "地址私钥"
+INFURA_ID = 'API_KEY';
+PRIVATE_KEY = '地址私钥';
 ```
 
-运行 `truffle migrate --network kovan --reset --skip-dry-run`，给 Flashloan 合约的构造函数传递的 lendingPoolProvider 是`0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5`。
+运行 `npx hardhat run scripts/deploy_aave_flashloan.js --network kovan`，给 Flashloan 合约的构造函数传递的 lendingPoolProvider 是`0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5`。
 
 ```js
-// migrations/2_deploy_contracts.js
+// scripts/deploy_aave_flashloan.js
 
 let lendingPoolProviderAddr;
+let network = hre.hardhatArguments.network;
 
 switch (network) {
-  case "mainnet":
-    lendingPoolProviderAddr = "0x24a42fD28C976A61Df5D00D0599C34c4f90748c8";
-    break
-  case "kovan":
-    lendingPoolProviderAddr = "0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5";
-    break
+  case 'ropsten':
+    lendingPoolProviderAddr = '0x1c8756FD2B28e9426CDBDcC7E3c4d64fa9A54728';
+    break;
+  case 'kovan':
+    lendingPoolProviderAddr = '0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5';
+    break;
+  case 'matic':
+    lendingPoolProviderAddr = '0x87A5b1cD19fC93dfeb177CCEc3686a48c53D65Ec';
+    break;
   default:
-    throw Error(``)
+    throw console.error(`Are you deploying to the correct network? (network selected: ${network})`);
 }
 
-await deployer.deploy(Flashloan, lendingPoolProviderAddr)
+await deployer.deploy(Flashloan, lendingPoolProviderAddr);
 ```
 
-部署好后，合约地址是 [0x3cC064c6A0b8629A05f38Bc57b6A290AC9489E38](https://kovan.etherscan.io/address/0x3cC064c6A0b8629A05f38Bc57b6A290AC9489E38#code)。
+部署好后，在`kovan`合约地址是 [0x3cC064c6A0b8629A05f38Bc57b6A290AC9489E38](https://kovan.etherscan.io/address/0x3cC064c6A0b8629A05f38Bc57b6A290AC9489E38#code)。
 
 ## 发起闪电贷
 

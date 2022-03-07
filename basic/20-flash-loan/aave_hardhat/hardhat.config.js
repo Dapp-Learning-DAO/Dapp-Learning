@@ -63,5 +63,9 @@ module.exports = {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
     },
+    matic: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [mnemonic()]
+    }
   },
 };
