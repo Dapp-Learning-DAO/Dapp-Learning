@@ -94,7 +94,7 @@ PRECISION: constant(uint256) = 10 ** 18  # 计算资产数量时需要统一到�
 
 MAX_ADMIN_FEE: constant(uint256) = 10 * 10 ** 9 # 管理员手续费率的最大值，设置费率不能超过此值 10%
 MAX_FEE: constant(uint256) = 5 * 10 ** 9 # 手续费率的最大值，设置费率不能超过此值 5%
-MAX_A: constant(uint256) = 10 ** 6 # A 系数的最大值，当前3pool A = 2000
+MAX_A: constant(uint256) = 10 ** 6 # A 系数的最大值，当前3pool A = 5000
 MAX_A_CHANGE: constant(uint256) = 10 # 规定每次对A的调整不能超过原有值的倍数范围 即 1/10 * A <= A' <= 10*A
 
 ADMIN_ACTIONS_DELAY: constant(uint256) = 3 * 86400 # 配置更改的延迟生效时间
@@ -105,6 +105,8 @@ KILL_DEADLINE_DT: constant(uint256) = 2 * 30 * 86400 # 部署合约多久后才�
 ```
 
 ### variables
+
+- 注意 `A` 的值是 `A*N_COINS`, 因为涉及 A 的计算部分都有 N，所以直接将乘积作为 A 值
 
 ```python
 coins: public(address[N_COINS]) # 资产 token 地址数组
@@ -717,7 +719,7 @@ def _get_D(_xp: uint256[N_COINS], _amp: uint256) -> uint256:
         D_P: uint256 = D
         for _x in _xp:
             D_P = D_P * D / (_x * N_COINS)  # If division by 0, this will be borked: only withdrawal will work. And that is good
-            # 只有当移除流动性时才有可能 _x 为0，这时程序会崩溃，这也是期望的结果
+            ·
             # 添加流动性，池内的xp值不可能为0
         Dprev = D
         D = (Ann * S / A_PRECISION + D_P * N_COINS) * D / ((Ann - A_PRECISION) * D / A_PRECISION + (N_COINS + 1) * D_P)
@@ -798,11 +800,13 @@ def _get_y(i: int128, j: int128, x: uint256, _xp: uint256[N_COINS]) -> uint256:
     A: uint256 = self._A()
     D: uint256 = self._get_D(_xp, A)
     Ann: uint256 = A * N_COINS
-    c: uint256 = D
+    c: uint256 = D      # c 提前乘以D
     S: uint256 = 0
     _x: uint256 = 0
     y_prev: uint256 = 0
 
+    # for 排除 i == j 的情况，即排除输出资产的xp
+    # c将被乘以 N-1 次 D
     for _i in range(N_COINS):
         if _i == i:
             _x = x
@@ -812,9 +816,10 @@ def _get_y(i: int128, j: int128, x: uint256, _xp: uint256[N_COINS]) -> uint256:
             continue
         S += _x
         c = c * D / (_x * N_COINS)
+    # for循环之后，c中含有 D^N ，而根据公式，还需要乘以一次 D
     c = c * D * A_PRECISION / (Ann * N_COINS)
     b: uint256 = S + D * A_PRECISION / Ann  # - D
-    y: uint256 = D
+    y: uint256 = D      # 牛顿法的初值设为 D
     for _i in range(255):
         y_prev = y
         y = (y*y + c) / (2 * y + b - D)
@@ -851,7 +856,11 @@ def _get_y_D(A: uint256, i: int128, _xp: uint256[N_COINS], D: uint256) -> uint25
 
 #### calc_withdraw_one_coin
 
-计算移除流动性只赎回单一资产。
+指定移除流动性 LP token 的数量，计算只赎回单一资产的数量。
+
+1. 根据 `_token_amount` 和 `total_supply` 的比例，同比计算不考虑手续费的 D 值
+2. 根据新的 D 值计算此次移除，产生的交易量，收取手续费
+3. 根据扣除手续费新的数量，计算实际的 D 值
 
 ```python
 @view
@@ -883,11 +892,11 @@ def _calc_withdraw_one_coin(_token_amount: uint256, i: int128) -> (uint256, uint
             dx_expected = xp[j] * D1 / D0 - new_y
         else:
             dx_expected = xp[j] - xp[j] * D1 / D0
-        # 将每种资产对应扣除手续费
+        # 每种资产对应扣除手续费
         xp_reduced[j] -= fee * dx_expected / FEE_DENOMINATOR
 
     # 使用扣除手续费的xp计算 y，进而得出dy
-    dy: uint256 = xp_reduced[i] - self._get_y_D(amp, i, xp_reduced, D1)
+    dy: uint256 = xp_reduced[i] - self.get_y_D(amp, i, xp_reduced, D1)
     precisions: uint256[N_COINS] = PRECISION_MUL
     dy = (dy - 1) / precisions[i]  # Withdraw less to account for rounding errors
     dy_0: uint256 = (xp[i] - new_y) / precisions[i]  # w/o fees
@@ -1017,7 +1026,7 @@ def stop_ramp_A():
 fee 和 admin fee 的调整
 
 1. 管理员提交调整方案 `commit_new_fee()`
-   - 如果期间有其他呆执行的方案，将不能提交
+   - 如果期间有其他待执行的方案，将不能提交
    - `assert self.admin_actions_deadline == 0`
    - 自动设置最早执行时间为 `block.timestamp + ADMIN_ACTIONS_DELAY`
    - ADMIN_ACTIONS_DELAY = 3 \* 86400 s 即等待期 3 天
@@ -1153,7 +1162,7 @@ def donate_admin_fees():
 - `kill_me()` 我杀我自己
 - `unkill_me()` 诶，我又不杀了
 
-当 `is_killed` 为true时，合约不能运行下列方法：
+当 `is_killed` 为 true 时，合约不能运行下列方法：
 
 - `add_liquidity()`
 - `exchange()`
