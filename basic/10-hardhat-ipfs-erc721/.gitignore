@@ -3,3 +3,6 @@ node_modules
 #Hardhat files
 cache
 artifacts
+
+#flatten sol
+MYERC721.sol
