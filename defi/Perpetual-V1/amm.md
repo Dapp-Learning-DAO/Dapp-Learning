@@ -8,7 +8,7 @@
 // 交易方向：  
  enum Dir { ADD_TO_AMM, REMOVE_FROM_AMM }
 
-// 开仓时将quoteAsset（usdc）转换成 baseAsset（eth）
+// ADD_TO_AMM, 开仓时将quoteAsset（usdc）转换成 baseAsset（eth）
 ```
  function swapInput(
         Dir _dir,
@@ -16,7 +16,7 @@
         Decimal.decimal calldata _baseAssetAmountLimit
     ) external returns (Decimal.decimal memory);
 ```
-// 关仓时候将baseAsset（eth）转换成 quoteAsset（usdc）
+//ADD_TO_AMM 关仓时候将baseAsset（eth）转换成 quoteAsset（usdc）
     function swapOutput(
         Dir _dir,
         Decimal.decimal calldata _baseAssetAmount,
@@ -29,7 +29,7 @@
 //功能： 获取池子当前的现货价格； reserveA/reserveB
 - function getSpotPrice() external view returns (Decimal.decimal memory);
 
-//功能： 获取池子当前的现货价格；
+//功能： 获取池子当前的现货TWAP价格；
 - function getInputTwap(Dir _dir, Decimal.decimal calldata _quoteAssetAmount)
         external
         view
@@ -63,15 +63,9 @@
 -  function calcTwap(TwapPriceCalcParams memory _params, uint256 _interval)
 
 
-//根据TWAP价格用usdc换取eth，
+
 //计算持仓价值用positionNotional， 以及未实现盈利unrealizedPnl。
 //（unrealizedPnlForLongPosition = positionNotional - openNotional）
-- function  getInputTwap(Dir _dirOfQuote, Decimal.decimal memory _quoteAssetAmount)
-
-//根据TWAP价格用eth换取usdc
-- function  getOutputTwap(Dir _dirOfBase, Decimal.decimal memory _baseAssetAmount)
-        public
-
 ```
 
 
