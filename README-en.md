@@ -306,6 +306,28 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 <br>
 <br>
 
+## Sponsor partner
+
+<br>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.nervos.org/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://web3q.io/home.w3q/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/planckeropencommunity/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+  </a>
+</div>
+<br>
+
 ## Contributors
 
 <div align="center">
