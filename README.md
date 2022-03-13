@@ -352,6 +352,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 ## 赞助伙伴
 
+感谢以下组织对本开源项目的无偿捐助。
+
 <br>
 <div align="left">
   <a href="https://snzholding.com/">
