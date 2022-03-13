@@ -316,18 +316,15 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
