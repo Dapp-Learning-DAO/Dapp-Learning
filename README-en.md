@@ -308,6 +308,8 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 ## Sponsor partner
 
+Shout out to the following organizations for their unconditional donations to us/the open source project.
+
 <br>
 <div align="left">
   <a href="https://snzholding.com/">
