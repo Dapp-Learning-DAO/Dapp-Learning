@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-require("@nomiclabs/hardhat-web3")
+require("@nomiclabs/hardhat-web3");
 
 async function main() {
 
