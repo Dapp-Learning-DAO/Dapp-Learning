@@ -350,6 +350,34 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 <br>
 <br>
 
+## 赞助伙伴
+
+<br>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.nervos.org/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://web3q.io/home.w3q/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/planckeropencommunity/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+  </a>
+</div>
+<br>
+
 ## 贡献者
 
 <div align="center">
