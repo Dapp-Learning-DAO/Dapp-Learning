@@ -1,6 +1,50 @@
-# web3.js 和 ehterjs 的区别
+## 前言
 
-### connect 到 provider 上
+通过本样例代码，开发者了解到web3.js 和 ehterjs 的区别
+
+项目里主要针对 `连接到etherum `，`获取账户`，`部署合约`，`调用合约方法`这些业务做了示例演示。
+
+
+
+## 测试流程
+
+1. 安装依赖
+
+```
+yarn install
+```
+
+
+
+2. 执行 compile.js 脚本
+
+```
+yarn compile
+```
+
+
+
+3. 启动本地测试网络
+
+```
+yarn chain
+```
+
+
+
+4. 测试脚本
+
+```
+yarn test
+```
+
+
+
+## 示例说明
+
+
+
+### 1、connect 到 etherum上
 
 ```js
 // web3.js
@@ -14,9 +58,9 @@ const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
 ```
 
-### 获取账户上
 
-用 web3 来和合约交互，需要 abi, 部署合约的地址，一个用来交易的地址。
+
+### 2、获取账户上
 
 ```js
 // ethers
@@ -28,7 +72,9 @@ const web3 = new Web3('http://127.0.0.1:8545');
 const accounts2 = await web3.eth.getAccounts();
 ```
 
-### 发布合约上
+
+
+### 3、发布合约上
 
 ```js
 // using ethers
@@ -62,9 +108,11 @@ const contractInstance = await tx.send({
 console.log('Contract deployed at address:', contractInstance.options.address);
 ```
 
-### 调用合约方法上：
 
-#### 非交易类型的：
+
+### 4、调用合约方法上：
+
+#### 调用非交易类型的方法：
 
 ```js
 // Web3.js
@@ -78,7 +126,7 @@ let currentValue = await readContract.currentValue();
 console.log('Incrementer Contract currentValue:', currentValue.toString());
 ```
 
-#### 调用一个交易类型的方法：
+#### 调用交易类型的方法：
 
 ```js
 // Web3.js
@@ -104,5 +152,15 @@ currentValue = await readContract.currentValue();
 console.log('Incrementer Contract currentValue:', currentValue.toString());
 ```
 
-参考链接：
-1、https://github.com/adrianmcli/web3-vs-ethers
+
+
+
+
+## 参考资料
+
+[1 - web3-vs-ethers](https://github.com/adrianmcli/web3-vs-ethers)
+
+[2 - web3js文档](https://web3js.readthedocs.io/en/v1.2.11/index.html)
+
+[3 - ethers 文档](https://docs.ethers.io/v5/)
+
