@@ -28,7 +28,7 @@ cp env.example.py env.py
 
 ## 交易所接口  
 以 okx 为例， 查看 [okx 官网 API](https://www.okx.com/docs-v5/zh/#rest-api) 文档，看到 "REST API" 中的各类接口介绍。
-
+ <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/trade/okxAPI.png?raw=true" /></center>  
 
 - 获取 ccxt 中对交易所封装后的接口  
 执行如下命令，会在当前目录下生成 "attr.txt" 文件，其中列举了 ccxt 对 okx 封装后的所有接口
@@ -55,7 +55,9 @@ privateGetAccountAccountPositionRisk
 
 - 根据官方 API 文档查找对应接口  
 在 [官方 API 文档](https://www.okx.com/docs-v5/zh/#rest-api-trade-place-order) 中找到下单部分，可以看到 HTTP 请求的接口名字为 trade ( 最后一个单词 )。然后在 attr.txt 中搜索关键字 "trade" ，就可以看到对应带有 "trade" 名称的接口，根据接口名称就可以找到我们需要的接口。如果有 API 相关问题，可以添加官方 QQ 后请求技术支持
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/trade/create_order.png?raw=true" /></center> 
 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/trade/search_order.png?raw=true" /></center> 
 
 - 调用 API 接口  
 执行 trades.py ，会打印出最新的 "CRV-USDT" 现货 K 线数据。   
@@ -67,7 +69,7 @@ python trades.py
 - 获取 instId  
 查看官方的交易接口，可以发现大部分接口都需要传入一个重要的参数 "instId"，这个参数就是交易对 ID。   
 进入官方的交易页面，打开浏览器的调试模式，然后进行操作，就可以看到页面发送的 HTTP 请求消息中传入的 instId  
-
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/trade/get_Instid.png?raw=true" /></center> 
 
 ## 参考文档 
 pandas 官网: https://pandas.pydata.org/  
