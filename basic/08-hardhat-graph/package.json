@@ -9,6 +9,10 @@
     "ethers": "^5.1.4",
     "hardhat": "^2.2.1"
   },
+  "scripts": {
+    "chain": "hardhat node",
+    "deploy": "npx hardhat run ./scripts/deploy.js"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.2",
     "dotenv": "^10.0.0"
