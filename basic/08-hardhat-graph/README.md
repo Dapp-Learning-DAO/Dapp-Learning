@@ -352,7 +352,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 - Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):  
   <https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad>
 
-## 参考文档
+其他相关参考文档：
 
 - https://thegraph.com/  
 - https://graphql.cn/learn/
