@@ -129,7 +129,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
-26. [Quadratic vote & Gitcoin](basic/26-quadratic-vote/README.md) ✅
+26. [Quadratic vote & Gitcoin](basic/26-quadratic-vote%26gitcoin/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
 28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
@@ -201,26 +201,27 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 衍生品： SNX -> YFI -> Perpetual 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-03. [Compound](defi/Compound/readme.md) ✅
-04. [Aave](https://docs.aave.com/portal/)  ✅
-05. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-06. [Curve](defi/Curve/README.md) ⌛
-07. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-08. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+03. [Curve](defi/Curve/README.md) ⌛
+04. [Compound](defi/Compound/readme.md) ✅
+05. [Aave](https://docs.aave.com/portal/)  ✅
+06. [Liquity](defi/Liquity/readme.md) ⌛
+07. [Euler](defi/Euler/readme.md) ⌛
+08. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-12. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-13. [OPYN](https://v2.opyn.co/)⌛
-14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-18. [Set](https://www.tokensets.com/)
-19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
-20. [Liquity](defi/Liquity/readme.md)
-21. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)  
-22. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+11. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+12. [OPYN](https://v2.opyn.co/)⌛
+13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)  
+16. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+20. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+21. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+22. [Set](https://www.tokensets.com/)
+23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
 
 ## NFT 进阶
@@ -348,6 +349,36 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
 </div>
 <br>
+<br>
+
+## 赞助伙伴
+
+感谢以下组织对本开源项目的无偿捐助。
+
+<br>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.nervos.org/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://web3q.io/home.w3q/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/planckeropencommunity/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+  </a>
+</div>
 <br>
 
 ## 贡献者

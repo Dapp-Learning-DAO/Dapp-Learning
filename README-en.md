@@ -118,7 +118,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
-26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
+26. [Quadratic vote](basic/26-quadratic-vote%26gitcoin/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
 28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
@@ -151,11 +151,11 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
-60. [web3.0 dapp](basic/59-web3-dapp) ⌛
-61. [ENS](https://app.ens.domains/) ⌛
-62. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
-63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+59. [web3.0 dapp](basic/59-web3-dapp) ⌛
+60. [ENS](https://app.ens.domains/) ⌛
+61. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
+62. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
+63. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -304,6 +304,36 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   </a>
 </div>
 <br>
+<br>
+
+## Sponsor partner
+
+Shout out to the following organizations for their unconditional donations to us/the open source project.
+
+<br>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.nervos.org/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://web3q.io/home.w3q/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/planckeropencommunity/">
+    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+  </a>
+</div>
 <br>
 
 ## Contributors
