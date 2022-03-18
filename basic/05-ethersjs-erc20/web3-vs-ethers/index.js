@@ -6,7 +6,7 @@ const abi = contracts[CONTRACT_NAME].abi;
 const bytecode = contracts[CONTRACT_NAME].evm.bytecode.object;
 const gasLimit = 5000000;
 const gasPrice = '20000000000'; // default gas price in wei, 20 gwei in this case
-let contractAddress = '0xb24e870C592213B955bc2714A94c8b5D2FB31081'; // todo fill the contract address, depends on your local chain
+let contractAddress = ''; // todo fill the contract address, depends on your local chain
 
 // 1-connecting to Ethereum
 // using ethers
@@ -16,18 +16,19 @@ const signer = provider.getSigner();
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 // or
 // const web3 = new Web3('http://localhost:8545');
+console.log('===================== Connect to Ethereum success  =====================');
 
 // 2-fetching accounts
 async function getAccounts() {
   // using ethers
   const accounts1 = await provider.listAccounts();
-  console.log(accounts1);
+  console.log('ethers fetch accounts = ', accounts1);
 
   // using web3
   const accounts2 = await web3.eth.getAccounts();
-  console.log(accounts2);
+  console.log('web3 fetch accounts = ', accounts2);
 }
-// getAccounts();
+getAccounts();
 
 //3-deploy contract
 function deployContract() {
@@ -37,6 +38,7 @@ function deployContract() {
     const contractInstance = await factory.deploy(0);
     const tx = await contractInstance.deployTransaction.wait();
     console.log(tx);
+    contractAddress = contractInstance.address;
     console.log('Contract deployed at address:', contractInstance.address); // instance with the new contract address
   }
   deployByEthers();
@@ -66,7 +68,7 @@ function deployContract() {
   }
   deployByWeb3();
 }
-// deployContract();
+deployContract();
 
 // 4-call contract methods
 function callContractMethods() {
@@ -103,4 +105,4 @@ function callContractMethods() {
   }
   callByWeb3();
 }
-callContractMethods();
+// callContractMethods();
