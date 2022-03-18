@@ -113,37 +113,37 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 18. [web3.py](basic/18-web3py/README.md) ✅
 19. [brownie](basic/19-brownie/README.md) ✅
 20. [flash-loan](basic/20-flash-loan/readme.md) ✅
-21. [scaffold-Lender](basic/21-scaffold-lender/README.md) ✅
+21. [aave-uni-lender](basic/21-aave-uni-loan/README.md) ✅
 22. [zk-snarkjs](basic/22-zk-snarkjs/readme.md) ✅
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875/README.md) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract/README.md) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet/readme.md) ✅
-26. [Quadratic vote](basic/26-quadratic-vote/README.md) ✅
+26. [Quadratic vote & Gitcoin](basic/26-quadratic-vote/README.md) ✅
 27. [Arbitrum layer2](basic/27-Arbitrum-layer2/README.md) ✅
-28. [optimism layer2](basic/28-optimism-layer2/readme.md) ⬜
+28. [Optimism layer2](basic/28-optimism-layer2/readme.md) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2/readme.md) ✅
-30. [zksync layer2](basic/30-zksync-layer2/readme.md) ⬜
+30. [zksync layer2](basic/30-zksync-layer2/readme.md) ✅
 31. [duneanalytics & nansen](basic/31-dune-analytics-nansen/readme.md) ⬜
 32. [chainlink-keeper](basic/32-chainlink-keeper/README.md) ✅
 33. [pooltogether](basic/33-pooltogether/README.md) ⌛
 34. [subgraph](basic/34-subgraph/readme.md) ⬜
-35. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
-36. [NFT IPFS](basic/36-nft-ipfs/README.md) ✅
+35. [StarkNet](basic/35-starkNet/README.md) ⌛
+36. [NFT FileCoin](basic/36-nft-ipfs/README.md) ✅
 37. [Charm.fi](https://github.com/charmfinance/alpha-vaults-contracts) ✅
 38. [Flashbots provider with ethers.js](https://github.com/flashbots/ethers-provider-flashbots-bundle) ⬜
-39. [Ethlend](https://www.youtube.com/watch?v=Pi-Qva6Fg3I) ⬜
+39. [Multicall](https://github.com/makerdao/multicall.js) ✅
 40. [snapshot](basic/40-snapshot/README.md) ⌛
 41. [NFT farming](https://superfarm.com/farms) ⬜
 42. [merkle-distributor airdrop](https://github.com/Uniswap/merkle-distributor/blob/master/contracts/MerkleDistributor.sol)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
-44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ⬜
-45. [proxy contract](https://zhuanlan.zhihu.com/p/34690916) ⬜
+44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
+45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](basic/50-solidity-security/readme.md)  ✅
-51. [alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+50. [solidity security](basic/50-solidity-security/README.md)  ✅  
+51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
@@ -151,11 +151,18 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
-60. [web3.0 dapp](basic/59-web3-dapp) ⌛
-61. [ENS](https://app.ens.domains/) ⌛
-62. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
-63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ⬜
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+59. [web3.0 dapp](basic/59-web3-dapp) ⌛
+60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
+61. [ENS](https://app.ens.domains/) ✅
+63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ✅
+64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
+65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
+66. [Kleros](https://kleros.io/)
+67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md) 
+68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
+69. [Decentralized OTC](https://github.com/DOTCPro)  
+70. [Tenderly](https://dashboard.tenderly.co/explorer)  
+71. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
