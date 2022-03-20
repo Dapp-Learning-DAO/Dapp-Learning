@@ -334,7 +334,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 4. 通过@derivedFrom 建立关系  
    通过@derivedFrom 字段在实体上定义反向查询，这样就在实体上创建了一个虚拟字段，使它可以被查询，但不能通过映射 API 手动设置。实际上，这是从另一个实体上定义的关系中衍生出来的。这样的关系，对存储关系的两者意义不大，如果只存储一方而派生另一方，则索引和查询性能都会更好。
 
-## 参考链接
+## 参考文档
 
 官方文档：
 
@@ -353,7 +353,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 - Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):  
   <https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad>
 
-## 参考文档
+其他相关参考文档：
 
 - https://thegraph.com/  
 - https://graphql.cn/learn/
