@@ -15,7 +15,7 @@ if (!addr) {
 
 let iface;
 
-describe('RandomNumberConsumer', function () {
+describe('flashloan test', function () {
   beforeEach(async function () {
     iface = new ethers.Contract(addr, FlashloanABI, wallet);
   });

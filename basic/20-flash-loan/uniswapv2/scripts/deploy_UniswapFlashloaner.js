@@ -1,7 +1,10 @@
-async function main() {
-  // const UniswapFlashloaner = await ethers.getContractFactory("UniswapFlashloaner");
+const hre = require("hardhat");
+const { getAddrs } = require('../utils/index');
 
-  // const uniFlashloaner = await UniswapFlashloaner.deploy();
+async function main() {
+  const UniswapFlashloaner = await ethers.getContractFactory("UniswapFlashloaner");
+
+  const uniFlashloaner = await UniswapFlashloaner.deploy(...getAddrs());
 
   console.log("contract deployed to:", uniFlashloaner.address);
 }

@@ -45,7 +45,7 @@ contract UniswapFlashloaner is IUniswapV2Callee {
     address immutable factory;
     IWETH immutable WETH; // weth 地址
 
-    address public WETHAddr = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    // address public WETHAddr = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
     // address public WETHAddr = 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619 //in matic
 
     /**
@@ -56,7 +56,8 @@ contract UniswapFlashloaner is IUniswapV2Callee {
     constructor(address _factory, address _factoryV1, address router) public {
         factoryV1 = IUniswapV1Factory(_factoryV1);
         factory = _factory;
-        WETH = IWETH(WETHAddr);
+        // WETH = IWETH(WETHAddr);
+        WETH = IWETH(router);
     }
 
     // needs to accept ETH from any V1 exchange and WETH. ideally this could be enforced, as in the router,
