@@ -182,6 +182,50 @@ Private Keys:
 
 ```
 
+## 使用 Truffle Dashboard 工具
+
+Truffle 从 v5.5.0 版本开始添加了 [Truffle Dashboard](https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard) 工具，这个工具可以让开发者不用将私钥信息写入文本文件，而是通过 MetaMask 钱包来跟区块链交互，有利于降低私钥信息外泄的风险。
+
+#### 启动 Truffle Dashboard
+
+如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本
+
+```bash
+> npm uninstall -g truffle
+> npm install -g truffle
+```
+
+然后启用 dashboard 服务
+
+```bash
+> truffle dashboard
+```
+
+启用 dashboard 后会弹出一个浏览器窗口，接着需在此窗口中连接 MetaMask 并确认连接的网络
+
+![connection](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-connect.png)
+![confirm network](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-confirm.png)
+
+dashboard 默认运行在 http://localhost:24012, 若不小心关闭了之前弹出的窗口，可以通过这个地址重新进入 dashboard
+
+#### 使用 Truffle Dashboard
+
+dashboard 服务开启之后，truffle 会内置一个名为 dashboard 的网络。我们后续的部署和脚本运行都可以使用这个网络，例如
+
+```bash
+> truffle migrate --network dashboard
+> truffle console --network dashboard
+```
+
+这样 truffle 发出的 RPC request 都会通过 dashboard 转发给 MetaMask。开发者通过与 MetaMask 交互来发送交易。
+
+值得一提的是，对于发送的交易信息，开发者可以在 dashboard 中确认交易信息的细节，再决定是否继续执行
+
+![](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-transaction.png)
+
+
+
 ## 参考资料
 - solidity 合约: https://learnblockchain.cn/docs/solidity/contracts.html  
 - solidity 相关工具: https://solidity-cn.readthedocs.io/zh/develop/ 
+- Truffle Dashborad: https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard
