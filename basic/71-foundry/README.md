@@ -80,7 +80,14 @@ contract ContractTest is DSTest {
 
 用 `forge test` 进行测试
 
-![test output](img/test.png)
+```
+[⠔] Compiling...
+[⠘] Compiling 3 files with 0.8.10
+Compiler run successful
+
+Running 1 test for ContractTest.json:ContractTest
+[PASS] testExample() (gas: 120)
+```
 
 forge 会搜索 src 下的所有合约，寻找含有以 test 开头函数的合约作为测试合约，对于每个测试合约：
 
