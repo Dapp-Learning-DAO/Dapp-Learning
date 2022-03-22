@@ -174,7 +174,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land/README.md)  ✅
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
-71. [Using Foundry in a Hardhat project](basic/71-use-foundry-in-hardhat/README.md)
+71. [Foundry](basic/71-foundry/README.md)
 
 
 ## 项目任务

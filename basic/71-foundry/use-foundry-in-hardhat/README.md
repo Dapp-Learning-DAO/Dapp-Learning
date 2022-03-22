@@ -99,7 +99,15 @@ contract GreeterTest is DSTest {
 > forge test --root .
 ```
 
-![forge test](img/forge_test.png)
+```
+[⠔] Compiling...
+[⠔] Compiling 3 files with 0.8.13
+Compiler run successful
+
+Running 2 tests for GreeterTest.json:GreeterTest
+[PASS] testGreet() (gas: 9778)
+[PASS] testSetGreeting(string) (runs: 256, μ: 49910, ~: 52812)
+```
 
 想更省事的话，可以将该命令写入 `package.json` 里
 
