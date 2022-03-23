@@ -1,9 +1,9 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/relative-projects-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/relative-projects-en.md)
 
 ## 衍生项目
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
-- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
-- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
+- [Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal): 项目军火库，不错的链接，文档，pdf，xmind大文件都可以放在此项目，新人不知道放链接到Dapp-Learning哪里，也可以直接放此项目，后续有小伙伴收录进Dapp-Learning。
+- [Dapp-Learning-Sourcecred](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Sourcecred): 项目贡献榜，记录开发者贡献值，以及分发奖励，dao治理项目的工具之一。
+- [Dapp-Learning-MOH](https://github.com/Dapp-Learning-DAO/Dapp-Learning-MOH) : 项目荣誉勋章，给每位参与者发放nft纪念。
 
 ## 共同维护项目
 

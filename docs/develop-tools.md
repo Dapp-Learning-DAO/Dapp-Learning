@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/develop-tools-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/develop-tools-en.md)
 
 ## 开发工具推荐    
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>

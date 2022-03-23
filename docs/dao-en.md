@@ -3,7 +3,7 @@
 	- [Submit a PR text tutorial](https://github.com/BNineCoding/Dapp-Learning/blob/main/docs/Create_DApp-Learning_PR_Tutorial-en.md)
 	- [Submit a PR video tutorial](https://www.bilibili.com/video/BV1Bq4y1r7dx?spm_id_from=333.999.0.0)
 - Friends who share in the Rebase community can directly apply to join the group
-- Using the market development method, anyone can submit PR,**Modify only one reference link or document to join the group**, There is no need to complete the task 100% before submitting, Developers work together to help improve the project, You can add links and documentation here[Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
+- Using the market development method, anyone can submit PR,**Modify only one reference link or document to join the group**, There is no need to complete the task 100% before submitting, Developers work together to help improve the project, You can add links and documentation here[Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal)  
 - For each project readme, please be sure to add the directory of reference links and attach the relevant references of the task
 - solidity Version 0.6 or later is recommended
 - The test cases under the script directory can be successfully debugged on the Kovan network (recommended), and the test cases under the test directory can be successfully debugged even on the local node
