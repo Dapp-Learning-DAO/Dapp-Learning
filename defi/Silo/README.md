@@ -12,13 +12,13 @@ silo 是一个无许可的借贷协议，可以使用任意资产借贷另一种
 
 目前的借贷协议，AAVE Compound，都是共享资金池。这种设计，一旦资金池中有一种资产出现问题，就会给整个借贷池带来巨大的风险。因此，共享资金池大部分都仅支持很少的几种资产，牺牲可扩展性为代价来提高效率。
 
-**安全性**
+### 安全性
 
 ![silo-isolate](https://miro.medium.com/max/1400/1*7MFa-SS0P-90hK0_MusqLQ.png)
 
 silo 协议通过设计降低了风险。它实现了孤立的货币市场——我们称之为 silo——每个 silo 仅由两种资产组成，即桥梁资产和独特的代币。通过将任何资产的风险隔离到特定的 silo，新的和高风险资产可以立即用于借贷市场，而不会对其他 silo 中持有的资产造成系统性风险。
 
-**高效率**
+### 高效率
 
 ![silo-effect](https://miro.medium.com/max/1400/1*0MTmbsVtswOkyeJXtRaDeQ.png)
 
