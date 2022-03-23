@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/README-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-en.md)
 
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
@@ -26,7 +26,7 @@
 <details>
 <summary>Official links: </summary>
 
-- [Github](https://github.com/rebase-network/Dapp-Learning)
+- [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
 - [discord](https://discord.gg/cRYNYXqPeR)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
@@ -153,7 +153,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](basic/50-solidity-security/README.md)  ✅  
+50. [solidity security](basic/50-solidity-security/README.md)  ✅
 51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
@@ -165,14 +165,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 59. [web3.0 dapp](basic/59-web3-dapp) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](https://app.ens.domains/) ✅
-62. [Tenderly](https://dashboard.tenderly.co/explorer) 
+62. [Tenderly](https://dashboard.tenderly.co/explorer)
 63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ✅
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
-65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
+64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+65. [ZK-NFT](https://github.com/kevinz917/zk-NFT)
 66. [Kleros](https://kleros.io/)
-67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md) 
+67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md)
 68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land/README.md)  ✅
-69. [Decentralized OTC](https://github.com/DOTCPro)  
+69. [Decentralized OTC](https://github.com/DOTCPro)
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 71. [Foundry](basic/71-foundry/README.md)
 
@@ -186,20 +186,20 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## DeFi 进阶
  **建议先阅读DEFI经典书籍:**
-  - [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf) 
+  - [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
 
-  - [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
+  - [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
 
 
   **DEFI学习路线图：**
 
-交易 -> 借贷 ->衍生品  
-  
-可以参考我们学习小组的学习路线图，配合视频学习更佳：  
+交易 -> 借贷 ->衍生品
+
+可以参考我们学习小组的学习路线图，配合视频学习更佳：
 
 - 交易： uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
 - 借贷： Aave -> Compound -> Liquity -> Euler
-- 衍生品： SNX -> YFI -> Perpetual 
+- 衍生品： SNX -> YFI -> Perpetual
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Curve](defi/Curve/README.md) ⌛
@@ -207,14 +207,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 05. [Aave](https://docs.aave.com/portal/)  ✅
 06. [Liquity](defi/Liquity/readme.md) ⌛
 07. [Euler](defi/Euler/readme.md) ⌛
-08. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+11. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)  
+15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 16. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -224,11 +224,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
-
 ## NFT 进阶
 
-- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. Loot NFT Distribute
 - 04. [Rarible](https://docs.rarible.org/overview/union/)
 - 05. [Zora](https://docs.zora.co/)
@@ -237,10 +236,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ## DAO 进阶
 
 - 01. [Aragon](dao/Aragon/readme.md)
-- 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 02. Augur [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
-- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
 请先阅读书籍：
@@ -251,8 +250,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 - 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
-[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- [MINA](https://minaprotocol.com/) 
+[👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- [MINA](https://minaprotocol.com/)
 - [ZETH](https://github.com/clearmatics/zeth)
 
 ## 智能合约安全
@@ -278,7 +277,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://www.paradigm.xyz/opportunities/
 
 ## Hackathons
- 参与黑客松增加实践经验，可参与有：  
+ 参与黑客松增加实践经验，可参与有：
  - [Gitcoin](https://gitcoin.co/hackathon/)
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
  - [Immunefi 漏洞赏金平台](https://immunefi.com/)
