@@ -17,12 +17,12 @@ We adhere to the concept of [open source university](https://github.com/rebase-n
 
 The project is still under development, and contributors are welcomed from all background. Feel free to send us pull requests to improve tutorial projects, set up more new tutorials, or even just to fix the minor typos 🤗.
 
-Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
+Join our developer communication group by submitting PR or sharing at [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ). Once you submit three PRs, you will be promoted to a pull request reviewer, participating in making decisions about project future directions. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value.
 
 <details>
 <summary>Official links</summary>
 
-- [Github](https://github.com/rebase-network/Dapp-Learning)
+- [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
 - [discord](https://discord.gg/cRYNYXqPeR)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
@@ -142,7 +142,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-50. [solidity security](basic/50-solidity-security/README.md)  ✅  
+50. [solidity security](basic/50-solidity-security/README.md)  ✅
 51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](https://github.com/jacksonng77/freelancer) ✅
@@ -155,18 +155,18 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](https://app.ens.domains/) ✅
 63. [HTLC-crosschain](https://yuanxuxu.com/2020/08/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%B7%A8%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81/) ✅
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜ 
-65. [ZK-NFT](https://github.com/kevinz917/zk-NFT) 
+64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+65. [ZK-NFT](https://github.com/kevinz917/zk-NFT)
 66. [Kleros](https://kleros.io/)
-67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md) 
-68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)  
-69. [Decentralized OTC](https://github.com/DOTCPro)  
-70. [Tenderly](https://dashboard.tenderly.co/explorer)  
+67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md)
+68. [Config discord with Collab.land](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough)
+69. [Decentralized OTC](https://github.com/DOTCPro)
+70. [Tenderly](https://dashboard.tenderly.co/explorer)
 71. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 
 
 
-Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Advanced task
 
@@ -182,38 +182,38 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-03. [Compound](defi/Compound/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new) ⌛
+03. [Compound](defi/Compound/readme.md) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new) ⌛
 04. [Aave](https://docs.aave.com/portal/)  ⌛
-05. [SNX](https://github.com/Synthetixio) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+05. [SNX](https://github.com/Synthetixio) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 06. [Curve](defi/Curve/README.md) ⌛
-07. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-08. [Bancor](https://bancor.network/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+07. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+08. [Bancor](https://bancor.network/) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+10. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+12. [DYDX](https://dydx.exchange/)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 13. [OPYN](https://v2.opyn.co/)
-14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+14. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+15. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+16. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+17. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 18. [Set](https://www.tokensets.com/)
 19. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 20. [Liquity](defi/Liquity/readme.md)
 
 ## NFT advanced tasks
 
-- 01. [OpenSea](nft/opensea/readme.md) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 02. [aavegotchi](https://aavegotchi.com/) [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 01. [OpenSea](nft/opensea/readme.md) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 02. [aavegotchi](https://aavegotchi.com/) [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. Loot NFT Distribute
 
 ## DAO advanced tasks
 
 - 01. [Aragon](dao/Aragon/readme.md)
-- 02. Augur [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 02. Augur [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
-- 04. [DAOstack](https://daostack.io/)  [👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 04. [DAOstack](https://daostack.io/)  [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Crypto advanced tasks
 Please read the book first:
@@ -223,7 +223,7 @@ Item list:
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
-[👉 Pick up this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Smart Contract Security
 1. Common safety tools

@@ -1,5 +1,0 @@
-- [Liquity's Website](https://www.liquity.org/)
-- [Liquity's Github](https://github.com/liquity)
-- [Liquity's whitepaper](https://docsend.com/view/bwiczmy)
-- [Liquity's documents](https://docs.liquity.org/)
-- Liquity 微信公共号: Liquity Community

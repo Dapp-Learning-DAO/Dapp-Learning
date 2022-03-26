@@ -4,7 +4,7 @@ This is a text tutorial, video tutorial can be transferred[Create PR Video Tutor
 
 ### 0. Open github project
 
-https://github.com/rebase-network/Dapp-Learning
+https://github.com/Dapp-Learning-DAO/Dapp-Learning
 
 ### 1. Click on the top right Fork
 
@@ -109,7 +109,7 @@ It can be found that the current directory is all our own links, and there is no
 
 We then identify an upstream repository that will be synchronized to the fork remote and execute the command:
 
->>>  git remote add upstream https://github.com/rebase-network/Dapp-Learning.git
+>>>  git remote add upstream https://github.com/Dapp-Learning-DAO/Dapp-Learning.git
 
 After executing, we check the remote library information again and execute the command:
 
