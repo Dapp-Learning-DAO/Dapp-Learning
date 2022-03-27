@@ -4,7 +4,7 @@
     "test": "npx hardhat test"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.0.0",
+    "@openzeppelin/contracts": "^4.0.0",
     "dotenv": "^10.0.0"
   },
   "devDependencies": {
