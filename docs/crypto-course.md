@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/crypto-course-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/crypto-course-en.md)
 
 **以太坊社区加密课程**
 - [Cryptoeconomics - A free, open-source course on the fundamentals of Blockchain protocols](http://cryptoeconomics.study/)

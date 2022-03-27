@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/README-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-en.md)
 
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
@@ -26,7 +26,7 @@
 <details>
 <summary>Official links: </summary>
 
-- [Github](https://github.com/rebase-network/Dapp-Learning)
+- [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
 - [discord](https://discord.gg/cRYNYXqPeR)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
@@ -64,6 +64,7 @@
 **基础知识预备**
 - 进入正式的 Dapp 开发学习前, 建议新手开发者学习 以太坊 及 Solidity 相关的基本知识。
 更多资料可参考 [基础知识预备](./docs/basic-knowledge.md) , 供各位新手小伙伴学习参考。
+- 开发者进入web3技能描述大全 https://www.devpill.me/
 
 **开发工具**
 - 工欲善其事, 必先利其器。 请先熟悉基本工具的使用。
@@ -125,7 +126,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 19. [brownie](basic/19-brownie) ✅
 20. [flash-loan](basic/20-flash-loan) ✅
 21. [aave-uni-lender](basic/21-aave-uni-loan) ✅
-22. [zk-snarkjs](basic/22-zk-snarkjs/readme.md) ✅
+22. [zk-snarkjs](basic/22-zk-snarkjs) ✅
 23. [ERC865 & ERC875](basic/23-erc865-and-erc875) ✅
 24. [Upgradeable-contract](basic/24-upgradeable-contract) ✅
 25. [multi-sig-wallet](basic/25-multi-sig-wallet) ✅
@@ -174,6 +175,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land)  ✅
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
+71. [Foundry](basic/71-foundry/README.md)
 
 
 ## 项目任务
@@ -185,20 +187,20 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 ## DeFi 进阶
  **建议先阅读DEFI经典书籍:**
-  - [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf) 
+  - [How to DeFi](https://assets.coingecko.com/books/how-to-defi/How_to_DeFi_Chinese.pdf)
 
-  - [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)   
+  - [How to DeFi:Advanced](https://nigdaemon.gitbook.io/how-to-defi-advanced-zhogn-wen-b/)
 
 
   **DEFI学习路线图：**
 
-交易 -> 借贷 ->衍生品  
-  
-可以参考我们学习小组的学习路线图，配合视频学习更佳：  
+交易 -> 借贷 ->衍生品
+
+可以参考我们学习小组的学习路线图，配合视频学习更佳：
 
 - 交易： uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
 - 借贷： Aave -> Compound -> Liquity -> Euler
-- 衍生品： SNX -> YFI -> Perpetual 
+- 衍生品： SNX -> YFI -> Perpetual
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Curve](defi/Curve/README.md) ⌛
@@ -206,28 +208,27 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 05. [Aave](https://docs.aave.com/portal/)  ✅
 06. [Liquity](defi/Liquity/readme.md) ⌛
 07. [Euler](defi/Euler/readme.md) ⌛
-08. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-11. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+08. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+11. [Sushi](https://docs.sushi.com/)[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)  
+15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 16. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-18. [DODO](https://dodoex.github.io/docs/zh/docs/DODO-Economics-102) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 20. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 21. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 
-
 ## NFT 进阶
 
-- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 01. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 02. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. Loot NFT Distribute
 - 04. [Rarible](https://docs.rarible.org/overview/union/)
 - 05. [Zora](https://docs.zora.co/)
@@ -236,10 +237,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ## DAO 进阶
 
 - 01. [Aragon](dao/Aragon/readme.md)
-- 02. Augur [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 02. Augur [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
-- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+- 04. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 05. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Crypto 进阶
 请先阅读书籍：
@@ -250,8 +251,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
 - 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
-[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-- [MINA](https://minaprotocol.com/) 
+[👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- [MINA](https://minaprotocol.com/)
 - [ZETH](https://github.com/clearmatics/zeth)
 
 ## 智能合约安全
@@ -277,7 +278,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
  - https://www.paradigm.xyz/opportunities/
 
 ## Hackathons
- 参与黑客松增加实践经验，可参与有：  
+ 参与黑客松增加实践经验，可参与有：
  - [Gitcoin](https://gitcoin.co/hackathon/)
  - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
  - [Immunefi 漏洞赏金平台](https://immunefi.com/)

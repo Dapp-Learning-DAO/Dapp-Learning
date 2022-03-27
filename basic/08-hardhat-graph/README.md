@@ -113,34 +113,34 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
       import { BigInt } from '@graphprotocol/graph-ts';
       import { SimpleToken, Transfer, Approval } from '../generated/SimpleToken/SimpleToken';
       import { TransferEntity, ApprovalEntity } from '../generated/schema';
-
+  
       export function handleTransfer(event: Transfer): void {
         // Entities can be loaded from the store using a string ID; this ID
         // needs to be unique across all entities of the same type
         let entity = TransferEntity.load(event.transaction.from.toHex());
-
+  
         // Entities only exist after they have been saved to the store;
         // `null` checks allow to create entities on demand
         if (entity == null) {
           entity = new TransferEntity(event.transaction.from.toHex());
         }
-
+  
         // BigInt and BigDecimal math are supported
         entity.value = event.params.value;
-
+  
         // Entity fields can be set based on event parameters
         entity.from = event.params.from;
         entity.to = event.params.to;
-
+  
         // Entities can be written to the store with `.save()`
         entity.save();
-
+  
         // Note: If a handler doesn't require existing field values, it is faster
         // _not_ to load the entity from the store. Instead, create it fresh with
         // `new Entity(...)`, set the fields that should be updated and save the
         // entity back to the store. Fields that were not set or unset remain
         // unchanged, allowing for partial updates to be applied.
-
+  
         // It is also possible to access smart contracts from mappings. For
         // example, the contract that has emitted the event can be connected to
         // with:
@@ -159,25 +159,25 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
         // - contract.transfer(...)
         // - contract.allowance(...)
       }
-
+  
       export function handleApproval(event: Approval): void {
         // Entities can be loaded from the store using a string ID; this ID
         // needs to be unique across all entities of the same type
         let entity = ApprovalEntity.load(event.transaction.from.toHex());
-
+  
         // Entities only exist after they have been saved to the store;
         // `null` checks allow to create entities on demand
         if (entity == null) {
           entity = new ApprovalEntity(event.transaction.from.toHex());
         }
-
+  
         // BigInt and BigDecimal math are supported
         entity.value = event.params.value;
-
+  
         // Entity fields can be set based on event parameters
         entity.owner = event.params.owner;
         entity.spender = event.params.spender;
-
+  
         // Entities can be written to the store with `.save()`
         entity.save();
       }
@@ -276,11 +276,12 @@ graph-node:
      postgres_pass: let-me-in
      postgres_db: graph-node
      ipfs: 'ipfs:5001'
-     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修改（如果是本地可以不需要修改）
+     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处的mainnet需要和subgraph.yml里network对应上
+     # ethereum: 'dev:https://rinkeby.infura.io/v3/INFURA_ID' # 也可以连测试网络
      RUST_LOG: info
 ```
 
-> > 注意： graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
+> 注意： graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
 
 2. graph-node 启动
 

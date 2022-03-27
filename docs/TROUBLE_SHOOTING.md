@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/TROUBLE_SHOOTING-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/TROUBLE_SHOOTING-en.md)
 
 ## 常见问题
 

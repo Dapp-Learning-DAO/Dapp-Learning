@@ -13,7 +13,7 @@ async function main() {
   console.log('Account balance:', (await deployer.getBalance()).toString());
 
   const Token = await ethers.getContractFactory('SimpleToken');
-  const token = await Token.deploy('KY-TEST', 'KYT', 1, 100000000);
+  const token = await Token.deploy('HHToken', 'HHT', 1, 100000000);
 
   console.log('Contract address:', token.address);
 
