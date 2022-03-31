@@ -113,34 +113,34 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
       import { BigInt } from '@graphprotocol/graph-ts';
       import { SimpleToken, Transfer, Approval } from '../generated/SimpleToken/SimpleToken';
       import { TransferEntity, ApprovalEntity } from '../generated/schema';
-
+  
       export function handleTransfer(event: Transfer): void {
         // Entities can be loaded from the store using a string ID; this ID
         // needs to be unique across all entities of the same type
         let entity = TransferEntity.load(event.transaction.from.toHex());
-
+  
         // Entities only exist after they have been saved to the store;
         // `null` checks allow to create entities on demand
         if (entity == null) {
           entity = new TransferEntity(event.transaction.from.toHex());
         }
-
+  
         // BigInt and BigDecimal math are supported
         entity.value = event.params.value;
-
+  
         // Entity fields can be set based on event parameters
         entity.from = event.params.from;
         entity.to = event.params.to;
-
+  
         // Entities can be written to the store with `.save()`
         entity.save();
-
+  
         // Note: If a handler doesn't require existing field values, it is faster
         // _not_ to load the entity from the store. Instead, create it fresh with
         // `new Entity(...)`, set the fields that should be updated and save the
         // entity back to the store. Fields that were not set or unset remain
         // unchanged, allowing for partial updates to be applied.
-
+  
         // It is also possible to access smart contracts from mappings. For
         // example, the contract that has emitted the event can be connected to
         // with:
@@ -159,25 +159,25 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
         // - contract.transfer(...)
         // - contract.allowance(...)
       }
-
+  
       export function handleApproval(event: Approval): void {
         // Entities can be loaded from the store using a string ID; this ID
         // needs to be unique across all entities of the same type
         let entity = ApprovalEntity.load(event.transaction.from.toHex());
-
+  
         // Entities only exist after they have been saved to the store;
         // `null` checks allow to create entities on demand
         if (entity == null) {
           entity = new ApprovalEntity(event.transaction.from.toHex());
         }
-
+  
         // BigInt and BigDecimal math are supported
         entity.value = event.params.value;
-
+  
         // Entity fields can be set based on event parameters
         entity.owner = event.params.owner;
         entity.spender = event.params.spender;
-
+  
         // Entities can be written to the store with `.save()`
         entity.save();
       }
@@ -276,11 +276,12 @@ graph-node:
      postgres_pass: let-me-in
      postgres_db: graph-node
      ipfs: 'ipfs:5001'
-     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处需修改（如果是本地可以不需要修改）
+     ethereum: 'mainnet:http://127.0.0.1:8545'  #此处的mainnet需要和subgraph.yml里network对应上
+     # ethereum: 'dev:https://rinkeby.infura.io/v3/INFURA_ID' # 也可以连测试网络
      RUST_LOG: info
 ```
 
-> > 注意： graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
+> 注意： graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
 
 2. graph-node 启动
 
@@ -333,7 +334,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 4. 通过@derivedFrom 建立关系  
    通过@derivedFrom 字段在实体上定义反向查询，这样就在实体上创建了一个虚拟字段，使它可以被查询，但不能通过映射 API 手动设置。实际上，这是从另一个实体上定义的关系中衍生出来的。这样的关系，对存储关系的两者意义不大，如果只存储一方而派生另一方，则索引和查询性能都会更好。
 
-## 参考链接
+## 参考文档
 
 官方文档：
 
@@ -352,7 +353,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 - Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):  
   <https://wavefive.notion.site/The-Graph-Protocol-Indexer-Subgraph-Selection-Guide-725f6e575f6e4024ad7e50f2f4e9bbad>
 
-## 参考文档
+其他相关参考文档：
 
 - https://thegraph.com/  
 - https://graphql.cn/learn/

@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dapp-demo-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dapp-demo-en.md)
 
 ## 期望实操演示项目:  
 | 项目 |    认领人 |

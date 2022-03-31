@@ -1,7 +1,7 @@
 ## Derivative project
-- [Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal): Project Arsenal, Good links, documents, PDF, XMIND large files can be put in this project, Newcomers don't know where to put the link in the DAPP learning project, you can also put this project directly, there are small partners to collect in the follow-up
-- [Dapp-Learning-Sourcecred](https://github.com/rebase-network/Dapp-Learning-Sourcecred): Project contribution list, Recording developer contributions, as well as distributing rewards, is one of the DAO governance project tools
-- [Dapp-Learning-MOH](https://github.com/rebase-network/Dapp-Learning-MOH): Project Medal of Honor，each participant was given an NFT souvenir.
+- [Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal): Project Arsenal, Good links, documents, PDF, XMIND large files can be put in this project, Newcomers don't know where to put the link in the DAPP learning project, you can also put this project directly, there are small partners to collect in the follow-up
+- [Dapp-Learning-Sourcecred](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Sourcecred): Project contribution list, Recording developer contributions, as well as distributing rewards, is one of the DAO governance project tools
+- [Dapp-Learning-MOH](https://github.com/Dapp-Learning-DAO/Dapp-Learning-MOH): Project Medal of Honor，each participant was given an NFT souvenir.
 
 ## Maintenance items together
 

@@ -4,7 +4,7 @@
 
 ### 0. 打开项目github 
 
-https://github.com/rebase-network/Dapp-Learning
+https://github.com/Dapp-Learning-DAO/Dapp-Learning
 
 ### 1. 点击右上角 Fork
 
@@ -109,7 +109,7 @@ Github 网站提供了便捷的同步方式，你可以直接点击 `Fetch upstr
 
 接着我们确定一个将被同步给 fork 远程的上游仓库，执行命令：
 
->>>  git remote add upstream https://github.com/rebase-network/Dapp-Learning.git
+>>>  git remote add upstream https://github.com/Dapp-Learning-DAO/Dapp-Learning.git
 
 执行完毕后我们再次查看远程库信息，执行命令：
 

@@ -2,27 +2,23 @@ require('@nomiclabs/hardhat-waffle');
 const fs = require('fs');
 require('dotenv').config();
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task('accounts', 'Prints the list of accounts', async () => {
-  const accounts = await ethers.getSigners();
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const defaultNetwork = 'localhost';
 
-  for (const account of accounts) {
-    console.log(account.address);
+function mnemonic() {
+  try {
+    return fs.readFileSync('./mnemonic.txt').toString().trim();
+  } catch (e) {
+    if (defaultNetwork !== 'localhost') {
+      console.log('☢️ WARNING: No mnemonic file created for a deploy account.');
+    }
   }
-});
+}
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
-
-function mnemonic() {
-  return process.env.PRIVATE_KEY;
-}
-
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
 module.exports = {
+  defaultNetwork,
   solidity: '0.8.0',
   networks: {
     localhost: {
@@ -35,19 +31,31 @@ module.exports = {
     },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: {
+        mnemonic: mnemonic(),
+      },
     },
     kovan: {
       url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: [PRIVATE_KEY],
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: [PRIVATE_KEY],
     },
     ropsten: {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+      accounts: [PRIVATE_KEY],
     },
   },
 };
+
+// This is a sample Hardhat task. To learn how to create your own go to
+// https://hardhat.org/guides/create-task.html
+task('accounts', 'Prints the list of accounts', async () => {
+  const accounts = await ethers.getSigners();
+
+  for (const account of accounts) {
+    console.log(account.address);
+  }
+});
