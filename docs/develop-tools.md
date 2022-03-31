@@ -12,8 +12,8 @@
 - tenderly合约验证: <https://dashboard.tenderly.co/explorer>
 - ethtx交易分析工具: <https://ethtx.info>
 - remix本地环境: <https://zhuanlan.zhihu.com/p/38309494>
+- remix 在线IDE <https://remix.ethereum.org/>  remix 中文镜像 <http://remix.zhiguxingtu.com/>
 - 代码美化工具: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
 - 以太兼容链网络列表(可方便添加到metamask)：<https://chainlist.org/>
 - Layer2生态项目发展状态跟踪：<https://l2beat.com/>
 - 以太虚拟机指令手册：<https://ethervm.io/>
-
