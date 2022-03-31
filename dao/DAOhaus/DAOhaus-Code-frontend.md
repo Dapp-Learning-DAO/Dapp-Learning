@@ -143,15 +143,15 @@ setupTests.js
 + 
 ### 调用智能合约
 + 这里主要分析调用Moloch智能合约的过程，入口和返回参数等。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
++ [欢迎认领~！issue留言即可！](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/99)
 ### 新建DAO
 + 这里完整跟进一个建立新DAO的过程。
 + 新建DAO核心是合约参数传递给Moloch线上合约，然后运行，生成新建DAO的配置数据，写入链上，并且发行新建DAOToken的过程。
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
++ [欢迎认领~！issue留言即可！](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/99)
 
 ### 插件系统
 + 这里分析几个插件系统运作机制：snapshot proposals、Token supply、discord消息三个，如果有新力量加入，欢迎分享、分担一部分分析工作，欢迎认领~！
-+ [欢迎认领~！issue留言即可！](https://github.com/rebase-network/Dapp-Learning/issues/99)
++ [欢迎认领~！issue留言即可！](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/99)
 
 ### 其他
 + DAOhaus is a no code platform for Moloch DAOs. index.html的meta content标签内容。

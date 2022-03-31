@@ -297,3 +297,7 @@ cast send <contract-address> <func-sig> <args> --rpc-url <your_rpc_url> --privat
 
 - [ds-test](https://github.com/dapphub/ds-test/blob/master/src/test.sol)
 - [The Foundry Book](https://onbjerg.github.io/foundry-book/index.html)
+- [rebase code day Reference PPT](https://learnblockchain.cn/article/3749)
+- [rebase code day Reference code base](https://github.com/bixia/solidity-dev)
+- [Video: Intro to Foundry](https://www.youtube.com/watch?v=fNMfMxGxeag)
+

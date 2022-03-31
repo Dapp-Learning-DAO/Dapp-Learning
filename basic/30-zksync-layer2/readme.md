@@ -82,7 +82,7 @@ ZKSync 协议介绍: https://www.jianshu.com/p/8821f1e63dc9
 zkSync rinkeby scan: https://rinkeby.zkscan.io/  
 NFT 上传: https://app.pinata.cloud/  
 zigzag 介绍:  https://docs.zigzag.exchange/  
-文读懂 Layer2 方案 zkSync 基本原理https://zhuanlan.zhihu.com/p/363029544   
+一文读懂 Layer2 方案 zkSync 基本原理：https://zhuanlan.zhihu.com/p/363029544
 zksync 源码分析： https://www.jianshu.com/u/ac3aed07477e  
 李星L2 - zkSync源代码导读： https://zhuanlan.zhihu.com/p/343212894  
-以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/  
+以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
