@@ -2,7 +2,7 @@
   "name": "uniswap-flashloan",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "https://github.com/rebase-network/Dapp-Learning/tree/main/basic/20-flash-loan/uniswapv2",
+  "repository": "https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/20-flash-loan/uniswapv2",
   "author": "Rebase Team",
   "license": "BSD-3-Clause",
   "dependencies": {

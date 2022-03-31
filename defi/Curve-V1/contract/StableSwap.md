@@ -74,7 +74,7 @@ Metapools 元池因为是某个资产和 base pool 类型的 lp token 组成交�
 
 ### constans
 
-合约中的不变量
+合约中的常量
 
 - `RATES` 是一组乘数，和 `balances` 相乘后，将精度统一到 1e36，最后和 `PRECISION` 相除，结果将统一成 1e18 精度
 - fee 以 1e10 为 100%
@@ -94,7 +94,7 @@ PRECISION: constant(uint256) = 10 ** 18  # 计算资产数量时需要统一到�
 
 MAX_ADMIN_FEE: constant(uint256) = 10 * 10 ** 9 # 管理员手续费率的最大值，设置费率不能超过此值 10%
 MAX_FEE: constant(uint256) = 5 * 10 ** 9 # 手续费率的最大值，设置费率不能超过此值 5%
-MAX_A: constant(uint256) = 10 ** 6 # A 系数的最大值，当前3pool A = 5000
+MAX_A: constant(uint256) = 10 ** 6 # A 系数的最大值，当前3pool A = 2000
 MAX_A_CHANGE: constant(uint256) = 10 # 规定每次对A的调整不能超过原有值的倍数范围 即 1/10 * A <= A' <= 10*A
 
 ADMIN_ACTIONS_DELAY: constant(uint256) = 3 * 86400 # 配置更改的延迟生效时间
@@ -106,7 +106,7 @@ KILL_DEADLINE_DT: constant(uint256) = 2 * 30 * 86400 # 部署合约多久后才�
 
 ### variables
 
-- 注意 `A` 的值是 `A*N_COINS`, 因为涉及 A 的计算部分都有 N，所以直接将乘积作为 A 值
+- 注意 `A` 的值是 `A*N_COINS**(N_COINS-1)`, 因为涉及 A 的计算部分都有 N**(N-1)，所以直接将乘积作为 A 值
 
 ```python
 coins: public(address[N_COINS]) # 资产 token 地址数组
@@ -240,7 +240,11 @@ def _xp_mem(_balances: uint256[N_COINS]) -> uint256[N_COINS]:
 
 #### virtual_price
 
-`p_virtual = D / lp_totalSupply`
+`virtual_price = D / lp_totalSupply`
+
+- D 的单位与 DAI 相似，精度 1e18
+- 当价格处于平衡点，D = n * 每个资产的总价值
+- 此时D就是整个池子资产组合的总(虚拟)价值
 
 ```python
 @view
@@ -254,9 +258,6 @@ def get_virtual_price() -> uint256:
     D: uint256 = self._get_D(self._xp(), self._A())
     # D is in the units similar to DAI (e.g. converted to precision 1e18)
     # When balanced, D = n * x_u - total virtual value of the portfolio
-    # D 的单位与 DAI 相似，精度 1e18
-    # 当价格处于平衡点，D = n * 每个资产以u计算的总价值
-    # 此时D就是整个池子资产组合的总(虚拟)价值
     token_supply: uint256 = ERC20(self.lp_token).totalSupply()
     return D * PRECISION / token_supply
 ```
@@ -322,7 +323,13 @@ def calc_token_amount(_amounts: uint256[N_COINS], _is_deposit: bool) -> uint256:
 - 如果不考虑手续费影响，lp token 数量与 D 值同步
 - 如果添加流动性的资产比例，不会改变当前价格，其过程也不会发生交易，因此就不会产生手续费
 
-admin_fee 是一个百分比，含义是协议将手续手续中的一定比例，作为协议费用。收取的协议费(admin fee) 的资产仍然会计入 balances 字段，但是不会计入 lp token 数量。
+admin_fee 是一个百分比，当前是 50%，含义是协议将手续手续中的一定比例，作为协议费用。收取的协议费(admin fee) 的资产不会计入 balances 字段，所以 `ERC20.balanceOf(this) - self.balance` 将是现阶段可收取的 `admin_fee`。
+
+关于 `N_COINS / (4 * (N_COINS - 1))`
+
+- 不平衡的添加流动性时，会针对不平衡的部分收取交易手续费，但因为用户只存入了输入token，并没有提出输出 token，该交易并不完整，所以需要让手续费乘以一个减小系数
+- 当 N = 2 时，该系数将是最高的 1/2
+- 当 N 非常大，该系数将无限趋近于 1/4
 
 ```python
 @external
@@ -367,7 +374,9 @@ def add_liquidity(_amounts: uint256[N_COINS], _min_mint_amount: uint256) -> uint
     if token_supply > 0:
         # Only account for fees if we are not the first to deposit
         # 初次添加流动性不会收取手续费，换言之，后续的添加都会收取
-        # ?? N_COINS / (4 * (N_COINS - 1)) ??
+        # N_COINS / (4 * (N_COINS - 1)) 的意义是可以根据N来调节手续费
+        # 当 N = 2 时，该系数将是最高的 1/2
+        # 当 N 非常大，该系数将无限趋近于 1/4
         fee: uint256 = self.fee * N_COINS / (4 * (N_COINS - 1))
         admin_fee: uint256 = self.admin_fee
         for i in range(N_COINS):
@@ -471,8 +480,7 @@ def exchange(i: int128, j: int128, _dx: uint256, _min_dy: uint256) -> uint256:
     self.balances[i] = old_balances[i] + _dx
     # When rounding errors happen, we undercharge admin fee in favor of LP
     # 当舍入错误发生，协议将不收取协议费来支持流动性的发展
-    # ?? 没有看到 undercharge 的逻辑 ??
-    # 猜测是 / FEE_DENOMINATOR 时，会将小于 FEE_DENOMINATOR 的数量舍入，所以认为这部分是少收了协议费
+    # 除以 FEE_DENOMINATOR 时，会将小于 FEE_DENOMINATOR 的数量舍入，所以认为这部分是少收了协议费
     #
     # 输出资产的数量 减去实际输出给用户的数量(fee会保留在合约中)， 再扣除协议费数量
     # 值得注意的是，这里 balance - dy 已经将交易手续费fee留给了 lp 提供者
@@ -515,7 +523,7 @@ def exchange(i: int128, j: int128, _dx: uint256, _min_dy: uint256) -> uint256:
 
 移除流动性，传入要移除的 lp token 数量 `_amount` ，最小赎回资产数量数组 `_min_amounts`，转给调用者的资产数量将按照池子当前的资产比分配，返回赎回的资产数量数组。
 
-由于期间没有发生资产的转换(exchange)，**该方法不收取手续费**。
+由于该方法将保持池子内现有的资产比例，不会引起价格改变，**该方法不收取手续费**。
 
 ```python
 @external
@@ -563,25 +571,22 @@ def remove_liquidity(_amount: uint256, _min_amounts: uint256[N_COINS]) -> uint25
 
 (不平衡的)移除流动性，传入要赎回的资产数量数组 `_amounts`, 最大能销毁的 lp token 数量 `_max_burn_amount`，转给调用者的资产数量将按照入参分配，返回实际销毁掉的 lp token 数量。
 
-由于期间发生资产的转换(exchange)，**该方法要收取手续费**。
+由于其中包含引起不平衡的流动性，导致池子内资产数量比例发生变化，进而导致价格改变，**该方法要收取手续费**。
 
 1. 根据传入 token 数量，计算 D 的减量 delta D1
    - 不考虑手续费的影响
 2. 考虑手续费的影响，计算 D 的减量 delta D2
-   - 先算出不考虑手续费时，每个资产的变化数量(difference_balance)
+   - 先算出不考虑手续费时，流动性中引起资产不平衡的数量(difference_balance)
    - 根据费率分别计算每个资产的手续费
    - `fee_i = fee_rate * difference_balance`
    - 将资产数量减去手续费的数量，然后重新计算考虑手续费影响的 D 值，进而得到 `delta D2`
+   - 由于余额部分已经扣除了手续费，所以根据 `new_balance` 计算 D 值会略少于真实的 D 值，这部分将导致销毁更多的 LP token
+   - 即，该函数将保证用户赎回资产的数量和 `_amounts` 保持一致，但会多销毁 LP token，作为手续费
 3. 根据 delta D2 与 D 的比例，同比计算减少 lp token 数量
    - `burn_amount = (delta D2 / D) * totalSupply`
    - `assert burn_amount != 0`
    - `assert burn_amount <= _max_burn_amount`
 4. 将资产按照入参的数量转给用户，销毁用户的 lp token，最后返回实际 burn 数量
-
-为何不直接从 `_amounts` 中扣除 fee，再计算新的 D？
-
-- 用户的不平衡 remove 行为，让池子的资产比例发生变化，某些资产减少，某些资产增加，可以认为其过程中发生了交易(exchange)
-- `_amounts` 中并所有资产都参与了交易，必然有一部分没有参与交易，所以不能直接以 `_amounts` 的数量来计算手续费
 
 ```python
 @external
@@ -605,7 +610,7 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
     # 计算移除指定资产数量后的 D 值
     D1: uint256 = self._get_D_mem(new_balances, amp)
 
-    # ?? N_COINS / (4 * (N_COINS - 1)) ??
+    # N_COINS / (4 * (N_COINS - 1)) 的含义参照前文描述
     fee: uint256 = self.fee * N_COINS / (4 * (N_COINS - 1))
     admin_fee: uint256 = self.admin_fee
     fees: uint256[N_COINS] = empty(uint256[N_COINS])
@@ -618,8 +623,12 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
         else:
             difference = new_balance - ideal_balance
         fees[i] = fee * difference / FEE_DENOMINATOR
+        # 全局balances只减去 admin_fee 部分
+        # 而用于后续计算 D 值的 new_balances 将扣除完整的手续费
         self.balances[i] = new_balance - (fees[i] * admin_fee / FEE_DENOMINATOR)
         new_balances[i] = new_balance - fees[i]
+    # D2 将比实际的 D 值略小，因为扣除了手续费的价值
+    # 后续将导致多销毁调用者的 LP token
     D2: uint256 = self._get_D_mem(new_balances, amp)
 
     lp_token: address = self.lp_token
@@ -652,9 +661,10 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
 
 #### D
 
-由于智能合约中不能直接解方程，curve 在合约中使用了[牛顿法](https://en.wikipedia.org/wiki/Newton%27s_method)迭代求近似解。
+由于 curve 的平衡方程，无法直接写出 D 的解析式，curve 在合约中使用了[牛顿法](https://en.wikipedia.org/wiki/Newton%27s_method)迭代求近似解。
 
 <!-- $x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$ -->
+
 <img src="https://render.githubusercontent.com/render/math?math=x_{n%2B1}=x_n-\frac{f(x_n)}{f'(x_n)}" />
 
 简单理解牛顿法就是利用上述公式，不断迭代 `x_n+1` 的值，使其越来越逼近真实的解
@@ -670,7 +680,7 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
 
 2. `D_new = D - f(D)/f'(D)`
 
-    <!-- $D_{new}=D-\frac{An^n\sum x_i + D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}}{1-An^n-(n+1)\frac{D^n}{n^n\prod x_i}}$ -->
+   <!-- $D_{new}=D-\frac{An^n\sum x_i + D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}}{1-An^n-(n+1)\frac{D^n}{n^n\prod x_i}}$ -->
    <img src="https://render.githubusercontent.com/render/math?math=D_{new}=D-\frac{An^n\sum x_i%2BD-ADn^n-\frac{D^{n%2B1}}{n^n\prod x_i}}{1-An^n-(n%2B1)\frac{D^n}{n^n\prod x_i}}" />
 
 3. 最终变成代码中的形态
@@ -719,7 +729,8 @@ def _get_D(_xp: uint256[N_COINS], _amp: uint256) -> uint256:
         D_P: uint256 = D
         for _x in _xp:
             D_P = D_P * D / (_x * N_COINS)  # If division by 0, this will be borked: only withdrawal will work. And that is good
-            ·
+            # 只有当移除流动性时才有可能 _x 为0，这时程序会崩溃
+            # 只能平衡的移除流动性, remove_liquidity 不会调用牛顿法求解，这也是期望的结果
             # 添加流动性，池内的xp值不可能为0
         Dprev = D
         D = (Ann * S / A_PRECISION + D_P * N_COINS) * D / ((Ann - A_PRECISION) * D / A_PRECISION + (N_COINS + 1) * D_P)
@@ -750,6 +761,7 @@ def _get_D_mem(_balances: uint256[N_COINS], _amp: uint256) -> uint256:
 与计算 D 一样，这里也使用了牛顿法计算 y, 即 `x_j`，其 `f(x_j)` 推导过程如下：
 
 <!-- $An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}$ -->
+
 <img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" />
 
 1. 设 `sum'`, `prod'` 分别为排除输出资产数量的累加和累乘结果
@@ -757,7 +769,7 @@ def _get_D_mem(_balances: uint256[N_COINS], _amp: uint256) -> uint256:
    - `prod' = prod(x) / x_j`
 2. 核心公式除以 `A*n**n`
 
-   <!-- $x_j\sum x_i+\frac{D}{An^n}-D=\frac{D^{n+1}}{An^nn^n\prod x_i}$ -->
+   <!-- $\sum{x_i}+\frac{D}{An^n}-D=\frac{D^{n+1}}{An^nn^n\prod x_i}$ -->
     <img src="https://render.githubusercontent.com/render/math?math=\sum x_i%2B\frac{D}{An^n}-D=\frac{D^{n%2B1}}{An^nn^n\prod x_i}" />
 
 3. 乘以 `x_j`，并代入 `sum'` 和 `prod'`
@@ -892,7 +904,7 @@ def _calc_withdraw_one_coin(_token_amount: uint256, i: int128) -> (uint256, uint
             dx_expected = xp[j] * D1 / D0 - new_y
         else:
             dx_expected = xp[j] - xp[j] * D1 / D0
-        # 每种资产对应扣除手续费
+        # 在输出资产上扣除手续费
         xp_reduced[j] -= fee * dx_expected / FEE_DENOMINATOR
 
     # 使用扣除手续费的xp计算 y，进而得出dy

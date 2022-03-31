@@ -1,5 +1,14 @@
 {
-  "name": "hardhat-project",
+  "name": "aave-flashloan",
+  "description": "A truffle box containing all you need to get started with developing flash loans",
+  "version": "0.1.0",
+  "author": "Rebase Team",
+  "license": "BSD-3-Clause",
+  "contributors": [
+    "David Truong <david@aave.com>"
+  ],
+  "homepage": "",
+  "repository": "https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/20-flash-loan/aave",
   "scripts": {
     "test": "npx hardhat test"
   },

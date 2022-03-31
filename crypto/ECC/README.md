@@ -145,12 +145,13 @@ R 的坐标可以如下计算
 
 将上述两个等式相减
 
-$m(y_P-y_Q)=(x_P+x_Q)(x_P-x_Q)+x_R(x_P-x_Q)$
+<!-- $m(y_P-y_Q)=(x_P+x_Q)(x_P-x_Q)+x_R(x_P-x_Q)$ -->
 <img src="https://render.githubusercontent.com/render/math?math=m(y_P-y_Q)=(x_P%2Bx_Q)(x_P-x_Q)%2Bx_R(x_P-x_Q)" />
 
 两边同时除以 (xP-xQ)
 
-$x_R=m^2-x_P-x_Q$
+<!-- $x_R=m^2-x_P-x_Q$ -->
+<img src="https://render.githubusercontent.com/render/math?math=x_R=m^2-x_P-x_Q" />
 
 计算出 R 点之后，进而得出关于 x 轴对称点 -R，即为 P+Q 的结果
 

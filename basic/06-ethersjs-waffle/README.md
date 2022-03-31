@@ -1,6 +1,6 @@
 ## 前言
 
-Waffle 是一款适配 ehter.js 的智能合约测试库。本样例演示了使用 Waffle 进行测试的基本流程及使用方法.  
+Waffle 是一款适配 ethers.js 的智能合约测试库。本样例演示了使用 Waffle 进行测试的基本流程及使用方法.  
 Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html) , 对于不熟悉 Waffle 测试框架的开发者, 可以根据本样例进行基础的操作, 阅读样例代码, 形成初步的流程概念, 之后再参考官网进行更加深入的了解.
 
 ## 合约介绍
@@ -86,7 +86,7 @@ $ yarn --versionyarn --version
 
 - waffle 官方文档： <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
 
-- ehterjs 官方文档： <https://docs.ethers.io/v4/api-providers.html>  
+- ethers.js 官方文档： <https://docs.ethers.io/v4/api-providers.html>  
 <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
 
 - 中文文档： <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
