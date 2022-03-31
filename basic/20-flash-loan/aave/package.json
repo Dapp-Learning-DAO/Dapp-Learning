@@ -8,7 +8,7 @@
     "David Truong <david@aave.com>"
   ],
   "homepage": "",
-  "repository": "https://github.com/rebase-network/Dapp-Learning/tree/main/basic/20-flash-loan/aave",
+  "repository": "https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/20-flash-loan/aave",
   "dependencies": {
     "truffle-flattener": "^1.5.0"
   },

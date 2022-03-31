@@ -26,7 +26,7 @@ uniswap-v2-sdk       ------------  v2版本js，提供第三使用使用的sdk
 1. react如何同合约交互（目的：学习代码写法）
 2. v2里每个动作的拆解（目的：学习代码写法，学习业务逻辑）
 
-备注：如果不对react熟悉，reducer写法会绕晕你, 请点击 [参见](https://github.com/rebase-network/Dapp-Learning/blob/main/defi/Uniswap-V2/Interface/minimap.md)
+备注：如果不对react熟悉，reducer写法会绕晕你, 请点击 [参见](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Uniswap-V2/Interface/minimap.md)
 
 ### ehterproject 使用案例【如何调用合约】
 ~~~

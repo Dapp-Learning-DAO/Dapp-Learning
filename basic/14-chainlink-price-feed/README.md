@@ -17,7 +17,7 @@ INFURA_ID = yyyyyyyy;
 ### 安装依赖
 
 ```sh
-yarn
+yarn install
 ```
 
 ### 执行测试脚本
@@ -38,10 +38,19 @@ const aggregatorV3InterfaceABI = require('@chainlink/contracts/abi/v0.8/Aggregat
 
 const addr = '0x9326BFA02ADD2366b30bacB125260Af641031331';
 const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, provider);
-priceFeed.latestRoundData().then((roundData) => {
-  // Do something with roundData
-  console.log('Latest Round Data', roundData);
-});
+
+async function test() {
+  const roundData = await priceFeed.latestRoundData();
+  console.log("Latest Round Data", roundData);
+  const price = roundData[1];
+  const decimal = await priceFeed.decimals();
+  console.log("decimal = ", decimal);
+
+  console.log("eth's price = ", price.toNumber() / 10 ** decimal + "USD");
+}
+
+test();
+
 ```
 
 返回数据格式如下：
@@ -63,7 +72,9 @@ Latest Round Data [
 
 - 完整示例看这里 [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
 
-## Chainlink VRF
+
+
+### Chainlink VRF
 
 Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证的随机性来源。作为防篡改随机数生成器，为依赖不可预测结果的任何应用程序构建构建智能合约。
 
