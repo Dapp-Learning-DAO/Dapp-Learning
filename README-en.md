@@ -269,38 +269,38 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 <br>
 <div align="left">
   <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/partner/rebase-logo.png" />
+    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/partner/Hiblock-logo.png" />
+    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
-    <img align="top" src="./docs/imgs/partner/learnblockchain-logo.png" />
+    <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/partner/ECN-logo.png" />
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
 <div align="left">
   &nbsp;
   <a href="https://thublockchain.org/">
-    <img align="top" src="./docs/imgs/partner/THUBA-logo.png" />
+    <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a>
-    <img align="top" src="./docs/imgs/partner/PKU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://btcu.tech/">
-    <img align="top" src="./docs/imgs/partner/BTCU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
 </div>
 <br>
