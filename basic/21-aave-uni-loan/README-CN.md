@@ -53,7 +53,7 @@ cp .env.example .env
 - 部署合约  
 ```shell
 // depoly aaveape
-hardhat run scripts/deploy.js --network    
+hardhat run scripts/deploy.js --network  matic
 ```
 
 - 验证合约  
