@@ -315,38 +315,38 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 <br>
 <div align="left">
   <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
+    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
-    <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+    <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
 <div align="left">
   &nbsp;
   <a href="https://thublockchain.org/">
-    <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
+    <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a>
-    <img align="top" src="./docs/imgs/parteners/PKU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://btcu.tech/">
-    <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
 </div>
 <br>
@@ -359,26 +359,34 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 <br>
 <div align="left">
   <a href="https://snzholding.com/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.nervos.org/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
+</div>
+<div align="left">
+  <a href="https://degate.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <br>
 
