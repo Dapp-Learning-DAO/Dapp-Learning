@@ -1,15 +1,18 @@
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 
-import "./lib/DydxFlashloanBase.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import './lib/DydxFlashloanBase.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 
 interface WETH9 {
     function deposit() external payable;
-    function withdraw(uint wad) external;
+
+    function withdraw(uint256 wad) external;
 }
 
 contract DydxFlashloaner is DydxFlashloanBase {
+    using SafeMath for uint256;
     address public owner;
 
     address public dydxSoloMarginAddr = 0x1E0447b19BB6EcFdAe1e4AE1694b0C3659614e4e;
@@ -43,19 +46,17 @@ contract DydxFlashloaner is DydxFlashloanBase {
         WETH9(kovanWETHAddr).deposit{value: balOfLoanedToken.add(2)};
         uint256 newBal = IERC20(mcd.token).balanceOf(address(this));
 
-        require(
-            newBal >= mcd.repayAmount,
-            "Not enough funds to repay dydx loan!"
-        );
-
+        require(newBal >= mcd.repayAmount, 'Not enough funds to repay dydx loan!');
     }
 
     // _solo  = dydxAddr
     // _token = WETHAddr
     // _amount 借贷数量
-    function initiateFlashLoan(address _solo, address _token, uint256 _amount)
-        external
-    {
+    function initiateFlashLoan(
+        address _solo,
+        address _token,
+        uint256 _amount
+    ) external {
         ISoloMargin solo = ISoloMargin(_solo);
 
         // Get marketId from token address

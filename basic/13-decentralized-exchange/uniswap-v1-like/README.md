@@ -183,7 +183,7 @@ function ethToTokenSwap(uint256 _minTokens) public payable {
 
     require(tokensBought >= _minTokens, "insufficient output amount");
 
-    IERC20(tokenAddress).transfer(msg.value, tokensBought);
+    IERC20(tokenAddress).transfer(msg.sender, tokensBought);
 }
 ```
 
