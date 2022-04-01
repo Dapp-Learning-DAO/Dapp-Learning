@@ -3,6 +3,9 @@
 ## 开发工具推荐    
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
+- Hardhat“安全帽”是针对专业人员的以太坊开发环境  https://hardhat.org/
+- Waffle 智能合约最先进的测试版块 https://getwaffle.io/
+- scaffold-eth (ETH + Hardhat + React)：构建由智能合约驱动的去中心化应用程序所需的常用框架 
 - infura（节点服务）: <https://infura.io/>
 - alchemy（节点服务）: <https://dashboard.alchemyapi.io/>
 - 以太节点服务列表：<https://ethereumnodes.com/>
