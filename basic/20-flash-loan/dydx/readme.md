@@ -1,5 +1,5 @@
-# DyDx 闪电贷
-
+# DyDx 闪电贷  
+## 简介    
 **DyDx 本身并不具备闪电贷功能**，但是，你可以通过对 `SoloMargin` 合约执行一系列操作来实现类似的行为，这是一个隐藏功能。为了在 DyDx 上进行闪电贷，我们需要：
 
 - 借入一定数量的 token
@@ -17,8 +17,8 @@ DAI = 0x6B175474E89094C44Da98b954EedeAC495271d0F
 SAI = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359
 ```
 
-## 初始化闪电贷
-
+## 合约功能解析  
+### initiateFlashLoan 接口  
 想要 DyDx 实现闪电贷功能，合约需要继承 `DydxFlashloanBase`，并实现两个功能：
 
 1. 一个入口函数，你可以调用该函数来初始化闪电贷，我们起名为 `initiateFlashLoan`。
@@ -63,7 +63,7 @@ function initiateFlashLoan(address _solo, address _token, uint256 _amount) exter
 
 5. 执行还款操作 `initiateFlashLoan` 的代码基本固定不变。
 
-## 套利逻辑
+### callFunction 回调接口  
 
 ```js
 function callFunction(
@@ -103,27 +103,33 @@ interface WETH9 {
 }
 ```
 
-`DydxFlashloanBase.sol` 的源码来自 https://github.com/studydefi/money-legos/tree/master/src/dydx 。
+## 操作步骤  
+- 安装依赖  
+```shell
+yarn
+```
 
-## 注意
+- 部署合约  
+```shell
+npx hardhat run scripts/deploy.js --network kovan
+```
 
-在部署好合约后，需要往合约地址充入一定的 WETH，闪电贷才能成功，至于 eth 跟 weth 如何互相转化，查看下 https://kovan.etherscan.io/address/0xd0A1E359811322d97991E03f863a0C30C2cF029C#writeContract 就懂了。
+- 进行闪电贷  
+```shell
+npx hardhat run scripts/dydxFlashloaner.js --network kovan
+```
 
+## 补充说明
+在部署好合约后，需要往合约地址充入一定的 WETH，闪电贷才能成功，至于 eth 跟 weth 如何互相转化，查看下 https://kovan.etherscan.io/address/0xd0A1E359811322d97991E03f863a0C30C2cF029C#writeContract 就懂了。   
 DyDx 的闪电贷操作确实比起 Aave 闪电贷要复杂不少，但手续费只需要 `2 wei`，这非常吸引人。
 
-## 案例
+## 参考资料  
 
-合约地址：
-https://kovan.etherscan.io/address/0x3cc064c6a0b8629a05f38bc57b6a290ac9489e38#code
+- dydx.exchange: https://help.dydx.exchange/en/articles/3724602-flash-loans    
 
----
+- DyDx Flash Loan： https://www.youtube.com/watch?v=HKx89FhZNls  
 
-参考：
+- solo-operations： https://legacy-docs.dydx.exchange/#solo-protocol   
 
-https://help.dydx.exchange/en/articles/3724602-flash-loans
-
-https://money-legos.studydefi.com/#/dydx
-
-https://www.youtube.com/watch?v=HKx89FhZNls
-
-https://legacy-docs.dydx.exchange/#solo-protocol
+- DydxFlashloanBase.sol 的源码: https://github.com/studydefi/money-legos/tree/master/src/dydx  
+- 案例: https://kovan.etherscan.io/address/0x3cc064c6a0b8629a05f38bc57b6a290ac9489e38#code   
