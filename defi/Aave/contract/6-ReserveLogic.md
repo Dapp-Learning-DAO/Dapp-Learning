@@ -47,7 +47,7 @@ Reserve 的主要变量
 <!-- ${LI}_t=(1+\Delta{T_{year}}*R_t)*{LI}_{t-1}$ -->
 <img src="https://render.githubusercontent.com/render/math?math={LI}_t=(1%2B\Delta{T_{year}}*R_t)*{LI}_{t-1}" style="display: block;margin: 24px auto;" />
 
-**注意：** liquidty 池子资产流动性的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./AToken.md#amount%20and%20amountScaled)
+**注意：** liquidty 池子资产流动性的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./3-AToken.md#amount%20and%20amountScaled)
 
 ### variableBorrowIndex
 
@@ -269,7 +269,7 @@ function updateInterestRates(
 
 相关代码
 
-- 计算利率的方法 [IReserveInterestRateStrategy.calculateInterestRates()](./ReserveInterestRateStrategy.md#calculateInterestRates)
+- 计算利率的方法 [IReserveInterestRateStrategy.calculateInterestRates()](./7-DefaultReserveInterestRateStrategy.md#calculateInterestRates)
 
 ### getNormalizedDebt
 
