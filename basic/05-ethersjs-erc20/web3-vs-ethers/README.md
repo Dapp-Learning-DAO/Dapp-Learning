@@ -154,6 +154,75 @@ console.log('Incrementer Contract currentValue:', currentValue.toString());
 
 
 
+#### 查询event事件
+
+```js
+// etherjs写法
+const readContract = new ethers.Contract(contractAddress, abi, provider);
+// filters里传入的参数只能是indexed的参数
+const filter = readContract.filters.Bid(null, utils.hexlify(BigNumber.from(auction.recordId)));
+// 过滤区块
+const logsFrom = await readContract.queryFilter(filter, 0, "latest");
+logsFrom.forEach(item => console.log(items.args));
+
+// web3的写法
+const web3 = new Web3(provider);
+const contractInstance = new web3.eth.Contract(abi, contractAddress);
+const logs = await contractInstance.getPastEvents('Descrement', {
+  filter: {},
+  fromBlock: 0,
+});
+
+logs.forEach((item) => {
+  console.log('Descrement Event:', item); // same results as the optional callback above
+});
+```
+
+
+
+#### 订阅event事件
+
+```js
+
+const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+// http provider不支持订阅
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
+
+  // using ethers
+  async function subByEthers() {
+    const readContract = new ethers.Contract(contractAddress, abi, provider);
+    let filterForm = readContract.filters.Increment();
+    readContract.on(filterForm, (amount, event) => {
+      console.log('Increment events:', event);
+    });
+  }
+  subByEthers();
+
+  
+  // using web3
+  async function subByWeb3() {
+    const contractInstance = new web3.eth.Contract(abi, contractAddress);
+    contractInstance.events
+      .Descrement({
+        fromBlock: 0,
+      })
+      .on('data', (event) => {
+        console.log('Descrement Event:', event); // same results as the optional callback above
+      })
+      .on('error', function (error, receipt) {
+        console.error('Descrement Event error:', error);
+      });
+  }
+  subByWeb3();
+}
+
+const server = http.createServer(() => {});
+server.listen(8002);
+
+```
+
+
+
 
 
 ## 参考资料
