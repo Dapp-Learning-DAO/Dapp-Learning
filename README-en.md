@@ -172,7 +172,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 ## Advanced task
 
 **The preparatory work**:
-  For developers with a certain foundation, this part selects mainstream high-quality projects for source code analysis and code review
+  For developers with a certain foundation, this part selects mainstream high-quality projects for source code analysis and code review.
   The project can be deployed to the test network collaboratively and shared with the Rebase community as a basis. Large DEFI projects are novel and large in content, so we suggest a division of labor and cooperation, such as one person to read the white paper, one person to be responsible for the front end, one person to be responsible for the contract, and one person to be responsible for data presentation.
   Developers can initiate project research initiatives, form groups, and collaborate within development groups. This section is recommended as a submodule introduction.
 
