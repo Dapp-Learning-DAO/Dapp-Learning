@@ -1,28 +1,37 @@
-const { expect } = require('chai');
-const { hasRegexChars } = require('prettier');
 const { ethers } = require("hardhat");
-require('dotenv').config();
+const flashLoanAddress = require("../FlashLoanAddress.json");
 
-const provider = new ethers.providers.WebSocketProvider(`wss://kovan.infura.io/ws/v3/${process.env.INFURA_ID}`);
-const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const { abi: FlashloanABI } = require('../artifacts/contracts/Flashloan.sol/Flashloan.json');
-
-const addr = process.env.FLASHLOAN_ADDRESS; // <--- you need fill it in .env file
-if (!addr) {
-  console.log('Please set the contract address in .env file.');
-  return;
-}
-
-let iface;
-
+let wallet;
+let flashLoan;
+    
 describe('flashloan test', function () {
   beforeEach(async function () {
-    iface = new ethers.Contract(addr, FlashloanABI, wallet);
+    [wallet] = await ethers.getSigners();
+    const artifactFlashLoan = artifacts.readArtifactSync("Flashloan");
+    flashLoan = new ethers.Contract(flashLoanAddress.address, artifactFlashLoan.abi , wallet);
   });
 
   it('start flashloan', async function () {
-    let res = await iface.flashloan(process.env.YOUR_WALLET_ADDRESS, { gasPrice: 10000000, gasLimit: 25000 });
+
+    // Ether amount to send
+    let amountInEther = '0.02'
+    // Create a transaction object
+    let transferTX = {
+      // transfer ether to flashLoanAddress to pay for flashloan fee
+      to: flashLoanAddress.address,
+      // Convert currency unit from ether to wei
+      value: ethers.utils.parseEther(amountInEther)
+    }
+
+    // Send a transaction
+    let recipt = await wallet.sendTransaction(transferTX)
+    await recipt.wait()
+
+    let asset = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" 
+    // do flashloan
+    let res = await flashLoan.flashloan(asset,{ gasLimit: 250000 });
     await res.wait()
+    console.log(`Flashloan successfully, please check tx hash ${res.hash} for more details `)
   })
 
 });
