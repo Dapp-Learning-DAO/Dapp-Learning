@@ -80,7 +80,7 @@ flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比�
 yarn
 ```
 
-- 配置私钥
+- 配置环境变量  
 ```shell
 cp .env.example .env
 # 在 .env 中配置  INFURA_ID , PRIVATE_KEY

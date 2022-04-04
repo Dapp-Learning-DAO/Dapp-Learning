@@ -109,6 +109,12 @@ interface WETH9 {
 yarn
 ```
 
+- 配置环境变量  
+```shell
+cp .env.example .env
+# 在 .env 中配置  INFURA_ID , PRIVATE_KEY
+```
+
 - 部署合约  
 ```shell
 npx hardhat run scripts/deploy.js --network kovan
