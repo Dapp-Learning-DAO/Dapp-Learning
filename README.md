@@ -224,6 +224,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 21. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+24. [Element](https://app.element.fi/fixedrates)
 
 ## NFT 进阶
 

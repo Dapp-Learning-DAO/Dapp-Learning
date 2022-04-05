@@ -50,3 +50,4 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - V2交易界面: https://app.uniswap.org/#/swap?use=V2  
 - starli: https://learnblockchain.cn/article/1480
 - 代码解析: https://ethereum.org/vi/developers/tutorials/uniswap-v2-annotated-code/
+- 交易滑点：https://blog.csdn.net/SierraW/article/details/118543720  
