@@ -42,11 +42,10 @@ const getAddrs = () => {
     throw console.error(`Are you deploying to the correct network? (network selected: ${network})`)
   }
 
-  return [IUniswapV1Factory[network], UniswapV2Factory[network] || UniswapV2Factory['others'], WETHAddr[network]]
+  return [UniswapV2Factory[network] || UniswapV2Factory['others'], IUniswapV1Factory[network],WETHAddr[network]]
 }
 
 const getTokenAddress = network => (tokenSymbol) => {
-  console.log(network);
   // let network = hre.hardhatArguments.network;
   if (tokenSymbol === 'ETH') {
     return '0x0000000000000000000000000000000000000000'
