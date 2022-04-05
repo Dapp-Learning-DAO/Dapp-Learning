@@ -59,7 +59,7 @@ async function main() {
       OVERRIDES)
   
   await pair_res.wait()
-  console.log("Uniswap V2 flashSwap successfully");
+  console.log(`Uniswap V2 flashSwap successfully, please check tx hash ${pair_res.hash} for more details `)
 
 };
 
