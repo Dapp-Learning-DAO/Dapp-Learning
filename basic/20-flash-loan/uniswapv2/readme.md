@@ -14,21 +14,13 @@ falsh swap 的实现原理是：
 
 在 flashswap 中，用户可以不需要预先支付 token 就可以得到想要的 token，这部分需要支付的 token 只需要在回调函数中转回给合约即可。在 flashswap 完成后 AMM 池中的价格会发生改变（如果使用同币种还债则价格不会改变）。flash swap 可以用来进行 AMM 之间套利，借贷平台清算等操作。
 
-flashswap 类似于一个功能更强的闪电贷，一个接口即可完成借贷和交易的操作。关于 flash swap 的更多内容，可以参考 [官方文档](https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps)。
-
----
-
-参考：
-
-https://liaoph.com/uniswap-v3-6/
+flashswap 类似于一个功能更强的闪电贷，一个接口即可完成借贷和交易的操作。关于 flash swap 的更多内容，可以参考 [官方文档](https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps)。  
 
 
-https://github.com/Austin-Williams/uniswap-flash-swapper
 
-https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps
-
-https://uniswap.org/docs/v2/smart-contract-integration/using-flash-swaps/
-
-https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/examples/ExampleFlashSwap.sol
-
-https://juejin.cn/post/6878116429590167565
+参考：  
+- 闪电贷详解：https://liaoph.com/uniswap-v3-6/   
+- uniswap-flash-swapper： https://github.com/Austin-Williams/uniswap-flash-swapper    
+- Flash Swaps： https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps     
+- FlashSwap Example: https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/examples/ExampleFlashSwap.sol     
+- 基于UniswapV2闪电贷的OneSwap套利指南: https://juejin.cn/post/6878116429590167565  

@@ -1,6 +1,7 @@
 require('@nomiclabs/hardhat-waffle');
 const { BigNumber } = require('@ethersproject/bignumber');
-const { use, expect } = require('chai');
+const axios = require('axios')
+require("dotenv").config();
 
 let exp = BigNumber.from("10").pow(18);
 let exp1 = BigNumber.from("10").pow(27);
@@ -58,12 +59,129 @@ const getDebtToken = async (_asset, _interestRateMode, erc20 = false) => {
 };
 
 
+const getCurrentDebt = async (debtToken,userAddress) => { 
+  return await debtToken.balanceOf(userAddress);
+};
+
+
+const querySql = `
+        query($id: String!){
+        users (where: {id: $id}) {
+            borrowHistory (orderBy: timestamp) { 
+                amount 
+                reserve{
+                    symbol
+                    decimals
+                    underlyingAsset
+                    vToken{
+                        id
+                    }
+                }
+                userReserve{
+                    currentTotalDebt
+                }
+                
+            }
+
+            repayHistory (orderBy: timestamp){ 
+                amount 
+                reserve{
+                    symbol
+                    decimals
+                }
+            }
+        }
+        }
+      `
+
+
+const url = {
+  matic: 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic',
+  mainnet: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v2',
+}
+
+const getInterest = async (url, graphQuery,variables,interestRateMode) => { 
+  let axiosResult = await axios.post(url, {
+    query: graphQuery,
+    variables
+  })
+
+  let users = axiosResult.data.data.users[0]
+  // 遍历 borrow 记录
+  total_borrow = {}
+  for(index in users.borrowHistory){
+    let borrowRecord = users.borrowHistory[index]
+    let symbol = borrowRecord["reserve"]["symbol"]
+    let decimals = borrowRecord["reserve"]["decimals"]
+    let vToken = borrowRecord["reserve"]["vToken"]["id"]
+    let underlyingAsset = borrowRecord["reserve"]["underlyingAsset"]
+    let currentTotalDebt = borrowRecord["userReserve"]["currentTotalDebt"]
+
+    if(!total_borrow[symbol]){
+      total_borrow[symbol] = {"amount": 0}
+    }
+
+    if(!total_borrow[symbol]["decimals"]){
+      total_borrow[symbol]["decimals"] = decimals
+    }
+
+    if(!total_borrow[symbol]["vToken"]){
+      total_borrow[symbol]["vToken"] = vToken
+    }
+
+    if(!total_borrow[symbol]["underlyingAsset"]){
+      total_borrow[symbol]["underlyingAsset"] = underlyingAsset
+    }
+     
+    if(!total_borrow[symbol]["currentTotalDebt"]){
+      total_borrow[symbol]["currentTotalDebt"] = currentTotalDebt
+    }
+
+    total_borrow[symbol]["amount"] += parseInt(borrowRecord['amount'])
+  }
+
+  // 遍历 repay 记录
+  let total_repay = {}
+  for(index in users.repayHistory){
+    let repayRecord = users.repayHistory[index]
+    let symbol = repayRecord["reserve"]["symbol"]
+    
+    if(!total_repay[symbol]){
+      total_repay[symbol] = {"amount": 0}
+    }
+
+    total_repay[symbol]["amount"] += parseInt(repayRecord['amount'])
+  }
+  
+
+  // 计算 interest
+  tota_interest = {}
+  for(const symbol of Object.keys(total_borrow)){
+      let currentDebt = 0
+      if(total_borrow[symbol]["currentTotalDebt"] != 0){
+        let currentDebtToken = await getDebtToken(total_borrow[symbol]["underlyingAsset"],interestRateMode,false)
+        currentDebt = parseInt(await getCurrentDebt(currentDebtToken,variables.id))
+
+        // let stableDebtToken = await getDebtToken(total_borrow[symbol]["underlyingAsset"],1,false)
+        // stableDebt = await getCurrentDebt(stableDebtToken,variables.id)
+        // console.log("Stable Debt: ",stableDebt)
+      }
+
+    tota_interest[symbol] = (total_repay[symbol]["amount"] + currentDebt - total_borrow[symbol]["amount"]) / 10 ** total_borrow[symbol]["decimals"]
+  
+  }
+
+  return tota_interest
+};
+
+
 main = async () => {
   const [deployer] = await ethers.getSigners();
-  let  fish = "XXX"
-  let userAddress = deployer.address;
-   console.log(userAddress);
-   const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
+  let fish = process.env.TARGET_ADDRESS.toLowerCase()
+  console.log(fish)
+  
+
+  const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
 
   const lendingPool = await getLendingPool();
   console.log('lendingPool:', lendingPool.address);
@@ -98,39 +216,25 @@ main = async () => {
   let debtToken = await getDebtToken(usdcAddress, interestRateMode, true);
   // console.log("debtToken: ", debtToken)
  
-  let aBalanceBefore = await aToken.balanceOf(fish);
-  console.log('aBalanceBefore: ', aBalanceBefore.toString());
-  let aBalancebtcBefore = await aTokenbtc.balanceOf(fish);
-  console.log('aBalancebtcBefore: ', aBalancebtcBefore.toString());
-  let debtBalanceBefore = await debtToken.balanceOf(fish);
-  console.log('debtBalanceBefore: ', debtBalanceBefore.toString());
+  // let aBalanceBefore = await aToken.balanceOf(fish);
+  // console.log('aBalanceBefore: ', aBalanceBefore.toString());
+  // let aBalancebtcBefore = await aTokenbtc.balanceOf(fish);
+  // console.log('aBalancebtcBefore: ', aBalancebtcBefore.toString());
+  // let debtBalanceBefore = await debtToken.balanceOf(fish);
+  // console.log('debtBalanceBefore: ', debtBalanceBefore.toString());
 
-  // todo  get fee by graph 
-// ```
-{
-  users (where: {id: "XXX"}) {
-  
- 
-  borrowHistory (orderBy: timestamp) { 
-    amount 
-    borrowRate
-    timestamp
-    variableTokenDebt
-  }
-    
-    repayHistory (orderBy: timestamp){ 
-       amount 
-    timestamp
-  
-  }
-}
-}
-  
+
 // ```
 // debetNow  - [sum(borrow) - sum(repay)]  计算支付利息
 // 参考https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Aave/graph/scripts/calculate.ts
 
-  
+  // Get historical interes
+  const variables = {
+    'id': fish
+  };
+
+  let interest = await getInterest(url.matic,querySql,variables)
+  console.log("current total interest: ",interest)
 };
 
 main()

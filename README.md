@@ -16,9 +16,9 @@
 
 项目愿景是给**初级开发者**一个可执行且最简的区块链 **Dapp** 学习路线图，给**进阶开发者**一个可以交流和协作的平台。
 
-本项目会成立学习小组进行任务分工，然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传[Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)和 [Bilibili](https://space.bilibili.com/382886213) 。
+本项目会成立学习小组进行任务分工，然后一起研究主流dapp项目，每周进行技术分享，输出成果会作为视频上传[Youtube](https://www.youtube.com/c/DappLearning/videos)和 [Bilibili](https://space.bilibili.com/382886213) 。
 
-项目秉持 [开源大学](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的[推特](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)。
+项目秉持 [开源大学](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的[推特](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/c/DappLearning/videos)。
 项目由来可以阅读[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)。
 
 此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
@@ -176,6 +176,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 69. [Decentralized OTC](https://github.com/DOTCPro)  
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 71. [Foundry](basic/71-foundry/README.md)
+72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 
 
 ## 项目任务
@@ -316,38 +317,38 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 <br>
 <div align="left">
   <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/parteners/rebase-logo.png" />
+    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/parteners/Hiblock-logo.png" />
+    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
-    <img align="top" src="./docs/imgs/parteners/learnblockchain-logo.png" />
+    <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/parteners/ECN-logo.png" />
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
 <div align="left">
   &nbsp;
   <a href="https://thublockchain.org/">
-    <img align="top" src="./docs/imgs/parteners/THUBA-logo.png" />
+    <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a>
-    <img align="top" src="./docs/imgs/parteners/PKU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://btcu.tech/">
-    <img align="top" src="./docs/imgs/parteners/BTCU-logo.png" />
+    <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
 </div>
 <br>
@@ -360,26 +361,34 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 <br>
 <div align="left">
   <a href="https://snzholding.com/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/SNZ-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.nervos.org/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/nervos-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/Web3Q-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
-    <img align="top" src="./docs/imgs/sponsor-parteners/plancker-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
+</div>
+<div align="left">
+  <a href="https://degate.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <br>
 

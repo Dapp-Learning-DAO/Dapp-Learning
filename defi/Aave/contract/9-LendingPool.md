@@ -16,7 +16,7 @@ Aave 协议最主要的入口合约，大部分情况下，用户与此合约交
 
 1. 存入资产之前需要确保其有足够数量的 `allowance()` ，若不足需要先调用它的 `approve()` 授权给 `LendingPool`
 2. `onBehalfOf` 如果该存入资产是第一次被存入（之前没有人存入过相同的资产），则将用户（onBehalfOf）的配置中该资产自动转换为抵押类型
-3. 转给用户的 aToken 查询余额与 amount 相等，但实际上 mint 的数量要进行缩放，详见 [aToken.mint](./aToken.md#mint)
+3. 转给用户的 aToken 查询余额与 amount 相等，但实际上 mint 的数量要进行缩放，详见 [aToken.mint](./3-aToken.md#mint)
 
 | Parameter Name | Type    | Description                                                |
 | -------------- | ------- | ---------------------------------------------------------- |
@@ -58,7 +58,7 @@ function deposit(
   // 更新资产的利率模型变量
   reserve.updateInterestRates(asset, aToken, amount, 0);
 
-  // 将 amount 数量的 asset 从 msg.sender 转给 aToken
+  // 把你的资产传给协议
   IERC20(asset).safeTransferFrom(msg.sender, aToken, amount);
 
   // 将 aToken mint给 onBehalfOf 地址（一般是 msg.sender）
@@ -79,10 +79,10 @@ function deposit(
 相关代码
 
 - [DataTypes](#DataTypes)
-- [reserve.updateState()](./ReserveLogic.md#updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
-- [AToken.mint()](./AToken.md#mint)
-- [Configuration.setUsingAsCollateral()](./Configuration.md#setUsingAsCollateral)
+- [reserve.updateState()](./6-ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./6-ReserveLogic.md#updateInterestRates)
+- [AToken.mint()](./3-AToken.md#mint)
+- [Configuration.setUsingAsCollateral()](./2-Configuration.md#setUsingAsCollateral)
 
 ### withdraw
 
@@ -160,9 +160,9 @@ function withdraw(
 相关代码
 
 - [DataTypes](#DataTypes)
-- [reserve.updateState()](./ReserveLogic.md#updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
-- [AToken.burn()](./AToken.md#burn)
+- [reserve.updateState()](./6-ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./6-ReserveLogic.md#updateInterestRates)
+- [AToken.burn()](./3-AToken.md#burn)
 
 ### borrow
 
@@ -340,10 +340,10 @@ function _executeBorrow(ExecuteBorrowParams memory vars) internal {
 相关代码
 
 - [DataTypes](#DataTypes)
-- [reserve.updateState()](./ReserveLogic.md#updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
-- [StableDebtToken.mint()](./DebtToken.md#mint-stable)
-- [VariableDebtToken.mint()](./DebtToken.md#mint-variable)
+- [reserve.updateState()](./6-ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./6-ReserveLogic.md#updateInterestRates)
+- [StableDebtToken.mint()](./4-DebtToken.md#mint-stable)
+- [VariableDebtToken.mint()](./4-DebtToken.md#mint-variable)
 
 ### repay
 
@@ -438,10 +438,10 @@ function repay(
 相关代码
 
 - [DataTypes](#DataTypes)
-- [reserve.updateState()](./ReserveLogic.md#updateState)
-- [reserve.updateInterestRates()](./ReserveLogic.md#updateInterestRates)
-- [StableDebtToken.burn()](./DebtToken.md#burn-stable)
-- [VariableDebtToken.burn()](./DebtToken.md#burn-variable)
+- [reserve.updateState()](./6-ReserveLogic.md#updateState)
+- [reserve.updateInterestRates()](./6-ReserveLogic.md#updateInterestRates)
+- [StableDebtToken.burn()](./4-DebtToken.md#burn-stable)
+- [VariableDebtToken.burn()](./4-DebtToken.md#burn-variable)
 
 ### swapBorrowRateMode
 
@@ -557,7 +557,7 @@ function setUserUseReserveAsCollateral(address asset, bool useAsCollateral)
 
 相关代码
 
-- [UserConfiguration.setUsingAsCollateral](./Configuration.md#setUsingAsCollateral)
+- [UserConfiguration.setUsingAsCollateral](./2-Configuration.md#setUsingAsCollateral)
 
 ### liquidationCall
 
@@ -614,7 +614,7 @@ function liquidationCall(
 
 相关代码
 
-- [LendingPoolCollateralManager.liquidationCall](./LendingPoolCollateralManager.md#liquidationCall)
+- [LendingPoolCollateralManager.liquidationCall](./8-LendingPoolCollateralManager.md#liquidationCall)
 
 #### Liquidation process
 
