@@ -131,8 +131,22 @@ contract UniswapFlashloaner is IUniswapV2Callee {
 
         // do actions here
         if (amountToken > 0) {
+            // token.approve(address(exchangeV1), amountToken);
+            // uint256 amountReceived = exchangeV1.tokenToEthSwapInput(amountToken, minETH, type(uint256).max);
+            // uint256 amountRequired = UniswapV2Library.getAmountsIn(factory, amountToken, path)[0];
+            // assert(amountReceived > amountRequired); // fail if we didn't get enough ETH back to repay our flash loan
+            // WETH.deposit{value: amountRequired}();
+            // assert(WETH.transfer(msg.sender, amountRequired)); // return WETH to V2 pair
+            // (bool success, ) = sender.call{value: amountReceived - amountRequired}(new bytes(0)); // keep the rest! (ETH)
+            // assert(success);
             token.transfer(msg.sender, amountToken); // return tokens to V2 pair
         } else {
+            // WETH.withdraw(amountETH);
+            // uint256 amountReceived = exchangeV1.ethToTokenSwapInput{value: amountETH}(minTokens, type(uint256).max);
+            // uint256 amountRequired = UniswapV2Library.getAmountsIn(factory, amountETH, path)[0];
+            // assert(amountReceived > amountRequired); // fail if we didn't get enough tokens back to repay our flash loan
+            // assert(token.transfer(msg.sender, amountRequired)); // return tokens to V2 pair
+            // assert(token.transfer(sender, amountReceived - amountRequired));
             WETH.transfer(msg.sender, amountETH); // return WETH to V2 pair
         }
     }
