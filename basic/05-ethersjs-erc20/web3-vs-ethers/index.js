@@ -8,7 +8,7 @@ const abi = contracts[CONTRACT_NAME].abi;
 const bytecode = contracts[CONTRACT_NAME].evm.bytecode.object;
 const gasLimit = 5000000;
 const gasPrice = '20000000000'; // default gas price in wei, 20 gwei in this case
-let contractAddress = '0x20794325a13b4115435E0fFa92Ce671Ee439aA91'; // todo fill the contract address, depends on your local chain
+let contractAddress = ''; // todo fill the contract address, depends on your local chain
 
 // 1-connecting to Ethereum
 // using ethers
