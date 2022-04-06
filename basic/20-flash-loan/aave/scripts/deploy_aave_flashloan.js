@@ -4,6 +4,7 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+const fs = require("fs");
 
 async function main() {
 
@@ -24,12 +25,20 @@ async function main() {
       throw console.error(`Are you deploying to the correct network? (network selected: ${network})`)
   }
 
+
   const flashloanFactory = await ethers.getContractFactory("Flashloan");
   const flashloan = await flashloanFactory.deploy(lendingPoolProviderAddr);
 
   await flashloan.deployed();
 
   console.log("Flashloan deployed to:", flashloan.address);
+
+  // Writer Contract address to file
+  const flashLoanAddressFile = __dirname + "/../FlashLoanAddress.json";
+  fs.writeFileSync(
+    flashLoanAddressFile,
+    JSON.stringify({ address: flashloan.address }, undefined, 2)
+  );
 
 }
 

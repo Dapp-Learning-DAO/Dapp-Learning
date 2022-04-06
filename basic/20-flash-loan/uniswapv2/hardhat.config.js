@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config()
+require("@nomiclabs/hardhat-etherscan");
 
 const INFURA_ID = process.env.INFURA_ID;
 const privateKey = process.env.PRIVATE_KEY;
@@ -29,6 +30,11 @@ module.exports = {
       accounts: [privateKey]
     },
     hardhat: {}
+  },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: "1234"
   },
   solidity: {
     version: "0.8.0",
