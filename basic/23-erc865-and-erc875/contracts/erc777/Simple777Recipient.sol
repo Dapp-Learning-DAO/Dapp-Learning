@@ -1,7 +1,8 @@
-pragma solidity ^0.6.2;
+// pragma solidity ^0.6.2;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC777/IERC777.sol";
-import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
+import "@openzeppelin/contracts/utils/introspection/IERC1820Registry.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
 /**
@@ -9,18 +10,30 @@ import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
  * @dev Very simple ERC777 Recipient
  */
 contract Simple777Recipient is IERC777Recipient {
-
-    IERC1820Registry private _erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
-    bytes32 constant private TOKENS_RECIPIENT_INTERFACE_HASH = keccak256("ERC777TokensRecipient");
+    IERC1820Registry private _erc1820 =
+        IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
+    bytes32 private constant TOKENS_RECIPIENT_INTERFACE_HASH =
+        keccak256("ERC777TokensRecipient");
 
     IERC777 private _token;
 
-    event DoneStuff(address operator, address from, address to, uint256 amount, bytes userData, bytes operatorData);
+    event DoneStuff(
+        address operator,
+        address from,
+        address to,
+        uint256 amount,
+        bytes userData,
+        bytes operatorData
+    );
 
-    constructor (address token) public {
+    constructor(address token) public {
         _token = IERC777(token);
 
-        _erc1820.setInterfaceImplementer(address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this));
+        _erc1820.setInterfaceImplementer(
+            address(this),
+            TOKENS_RECIPIENT_INTERFACE_HASH,
+            address(this)
+        );
     }
 
     function tokensReceived(
@@ -31,7 +44,10 @@ contract Simple777Recipient is IERC777Recipient {
         bytes calldata userData,
         bytes calldata operatorData
     ) external override {
-        require(msg.sender == address(_token), "Simple777Recipient: Invalid token");
+        require(
+            msg.sender == address(_token),
+            "Simple777Recipient: Invalid token"
+        );
 
         // do stuff
         emit DoneStuff(operator, from, to, amount, userData, operatorData);
