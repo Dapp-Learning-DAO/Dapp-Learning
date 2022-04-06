@@ -4,7 +4,8 @@ const Web3 = require('web3');
 const contracts = require('./deployed/contract.json');
 const CONTRACT_NAME = 'Incrementer';
 const abi = contracts[CONTRACT_NAME].abi;
-let contractAddress = '0x20794325a13b4115435E0fFa92Ce671Ee439aA91';
+let contractAddress = ''; // todo fill the contract address, depends on your local chain
+
 
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 // using web3
