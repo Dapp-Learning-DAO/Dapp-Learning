@@ -11,6 +11,8 @@ contract Flashloan is FlashLoanReceiverBase {
     // address public kovanDaiAddr = 0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD;
     // address public kovanAaveLendingPoolAddr = 0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5;
     using SafeMath for uint256;
+    event TotalDebt( uint256 totalDebt);
+
 
     constructor(address _addressProvider) FlashLoanReceiverBase(_addressProvider) public {}
 
@@ -33,6 +35,7 @@ contract Flashloan is FlashLoanReceiverBase {
         //
 
         uint totalDebt = _amount.add(_fee);
+        emit TotalDebt(totalDebt);
         transferFundsBackToPoolInternal(_reserve, totalDebt);
     }
 
