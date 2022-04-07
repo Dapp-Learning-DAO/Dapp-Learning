@@ -180,6 +180,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 71. [Foundry](basic/71-foundry/README.md)
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
+74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 
 ## 项目任务
 
