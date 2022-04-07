@@ -1,4 +1,4 @@
-## Uniswap Flashswap
+# Uniswap Flashswap 介绍  
 
 Uniswap v2 版本中，就已经提供了被称作 flash swap 的闪电贷功能。即可以向一个交易对借贷 x token，但在还贷时使用 y token.
 
@@ -17,10 +17,32 @@ falsh swap 的实现原理是：
 flashswap 类似于一个功能更强的闪电贷，一个接口即可完成借贷和交易的操作。关于 flash swap 的更多内容，可以参考 [官方文档](https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps)。  
 
 
+## 操作步骤  
+- 安装依赖  
+```shell
+yarn
+```
+
+- 配置环境变量  
+```shell
+cp .env.example .env
+# 在 .env 中配置  INFURA_ID , PRIVATE_KEY
+```
+
+- 部署合约  
+```shell
+npx hardhat run scripts/deploy_UniswapFlashloaner.js --network kovan
+```
+
+- 执行闪电贷  
+```shell
+npx hardhat run scripts/flashloan_test.js --network kovan
+```
 
 参考：  
 - 闪电贷详解：https://liaoph.com/uniswap-v3-6/   
 - uniswap-flash-swapper： https://github.com/Austin-Williams/uniswap-flash-swapper    
 - Flash Swaps： https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/using-flash-swaps     
 - FlashSwap Example: https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/examples/ExampleFlashSwap.sol     
-- 基于UniswapV2闪电贷的OneSwap套利指南: https://juejin.cn/post/6878116429590167565  
+- 基于UniswapV2闪电贷的OneSwap套利指南: https://juejin.cn/post/6878116429590167565   
+- 获取 kovan Dai Token: https://docs.alchemist.wtf/copper/auction-creators/getting-test-tokens-for-balancer-lbps-on-the-kovan-testnet  

@@ -6,6 +6,7 @@
   "author": "Rebase Team",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.0.3",
     "@openzeppelin/contracts": "^4.0.0",
     "dotenv": "^8.2.0"
   },
