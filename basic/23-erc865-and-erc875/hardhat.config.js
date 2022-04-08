@@ -1,30 +1,14 @@
 require('@nomiclabs/hardhat-waffle');
-const fs = require('fs');
 require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task('accounts', 'Prints the list of accounts', async () => {
   const accounts = await ethers.getSigners();
-
   for (const account of accounts) {
     console.log(account.address);
   }
 });
-
-// 加载本地privateKeys到harhat本地测试网络
-function loadTestAccounts() {
-  const privateKyes = JSON.parse(fs.readFileSync('./testAccounts.json'));
-  return privateKyes.map((_privateKey, index) => ({
-    mnemonic: _privateKey,
-    privateKey: _privateKey,
-    initialIndex: index,
-    // path: 'm/44'/60'/0'/0'
-    count: 20,
-    accountsBalance: '100000000000000000000000000',
-    balance: '100000000000000000000000000',
-  }));
-}
 
 function mnemonic() {
   return process.env.PRIVATE_KEY;
@@ -56,7 +40,10 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      accounts: loadTestAccounts(),
+      accounts: {
+        // mnemonic: 'test test test test test test test test test test test junk', //助记池 BIP39 定义的 12 或 24 个单词的助记词。默认值：""
+        // count: 3,
+      },
     },
     localhost: {
       url: 'http://localhost:8545',

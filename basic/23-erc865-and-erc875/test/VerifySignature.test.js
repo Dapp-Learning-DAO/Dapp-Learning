@@ -2,7 +2,6 @@ require('@nomiclabs/hardhat-waffle');
 const { expect } = require('chai');
 const fs = require('fs');
 const { ethers } = require('hardhat');
-const testAccounts = JSON.parse(fs.readFileSync('./testAccounts.json'));
 
 const {
   encrypt,
@@ -14,7 +13,14 @@ const {
 } = require('eth-sig-util');
 
 const { BigNumber, utils, provider } = ethers;
-const { solidityPack, concat, toUtf8Bytes, keccak256, SigningKey, formatBytes32String } = utils;
+const {
+  solidityPack,
+  concat,
+  toUtf8Bytes,
+  keccak256,
+  SigningKey,
+  formatBytes32String,
+} = utils;
 
 describe('VerifySignature', () => {
   let contract;
@@ -35,7 +41,10 @@ describe('VerifySignature', () => {
     // const hashedMessage = `0x${Buffer.from(message, 'utf8').toString('hex')}`;
     console.log(`hashedMessage = `, hashedMessage);
 
-    const signature = await provider.send('personal_sign', [hashedMessage, signer.address]);
+    const signature = await provider.send('personal_sign', [
+      hashedMessage,
+      signer.address,
+    ]);
     console.log(`signature = `, signature);
 
     const jsRecoveredAddr = recoverPersonalSignature({
@@ -43,22 +52,36 @@ describe('VerifySignature', () => {
       sig: signature,
     });
     console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(await signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      jsRecoveredAddr.toUpperCase()
+    );
 
     const contractRecoveredResult = await contract.verify(message, signature);
     console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      contractRecoveredResult.toUpperCase()
+    );
   });
 
   it('personal_sign_data', async () => {
     const [signer] = await ethers.getSigners();
     console.log('signer address = ', signer.address);
     const types = ['bytes', 'bytes', 'address', 'string', 'string', 'uint256'];
-    const values = ['0x19', '0x00', '0x8ef9f0acfef3d9ab023812bb889a8f5a214b9b82', '测试', '{}', 1];
+    const values = [
+      '0x19',
+      '0x00',
+      '0x8ef9f0acfef3d9ab023812bb889a8f5a214b9b82',
+      '测试',
+      '{}',
+      1,
+    ];
     const hashedMessage = utils.solidityKeccak256(types, values);
     console.log(`hashedMessage = `, hashedMessage);
 
-    const signature = await provider.send('personal_sign', [hashedMessage, signer.address]);
+    const signature = await provider.send('personal_sign', [
+      hashedMessage,
+      signer.address,
+    ]);
     console.log(`signature = `, signature);
 
     const jsRecoveredAddr = recoverPersonalSignature({
@@ -66,16 +89,26 @@ describe('VerifySignature', () => {
       sig: signature,
     });
     console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(await signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      jsRecoveredAddr.toUpperCase()
+    );
 
-    const contractRecoveredResult = await contract.verify2(hashedMessage, signature);
+    const contractRecoveredResult = await contract.verify2(
+      hashedMessage,
+      signature
+    );
     console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      contractRecoveredResult.toUpperCase()
+    );
   });
 
   it('struct_sign_typed_data_v1', async () => {
     const [signer] = await ethers.getSigners();
-    signer.privateKey = '10645fd201fc751be73c2d5219a2cd738418f2b15b90d1ea5fa2f422951af7a3';
+
+    // 这里我们的私钥，是通过`npx hardhat node`来得到的。
+    signer.privateKey =
+      '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
     console.log('signer address = ', signer.address);
     const msgParams = [
       {
@@ -90,7 +123,9 @@ describe('VerifySignature', () => {
       },
     ];
     const privateKey1Buffer = Buffer.from(signer.privateKey, 'hex');
-    const signature = signTypedDataLegacy(privateKey1Buffer, { data: msgParams });
+    const signature = signTypedDataLegacy(privateKey1Buffer, {
+      data: msgParams,
+    });
 
     // 如果是metmask插件，可以调用下面的方法
     // const signature = await provider.send('eth_signTypedData', [msgParams, signer.address]);
@@ -99,7 +134,9 @@ describe('VerifySignature', () => {
       sig: signature,
     });
     console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+    expect(signer.address.toUpperCase()).to.equal(
+      jsRecoveredAddr.toUpperCase()
+    );
   });
 
   it('struct_sign_typed_data_v3', async () => {
@@ -141,22 +178,38 @@ describe('VerifySignature', () => {
       },
     };
 
-    const signature = await signer._signTypedData(msgParams.domain, msgParams.types, msgParams.message);
+    const signature = await signer._signTypedData(
+      msgParams.domain,
+      msgParams.types,
+      msgParams.message
+    );
     console.log(`signature = `, signature);
     // 如果是metmask插件，可以调用下面的方法
     // const signature = await provider.send('eth_signTypedData_v3', [signer.address, msgParams]);
 
-    const jsRecoveredAddr = utils.verifyTypedData(msgParams.domain, msgParams.types, msgParams.message, signature);
+    const jsRecoveredAddr = utils.verifyTypedData(
+      msgParams.domain,
+      msgParams.types,
+      msgParams.message,
+      signature
+    );
     // const jsRecoveredAddr = recoverTypedSignature({
     //   data: msgParams,
     //   sig: signature,
     // });
     console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+    expect(signer.address.toUpperCase()).to.equal(
+      jsRecoveredAddr.toUpperCase()
+    );
 
-    const contractRecoveredResult = await contract.verify3(msgParams.message, signature);
+    const contractRecoveredResult = await contract.verify3(
+      msgParams.message,
+      signature
+    );
     console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      contractRecoveredResult.toUpperCase()
+    );
   });
 
   it('struct_sign_typed_data_v4', async () => {
@@ -206,18 +259,34 @@ describe('VerifySignature', () => {
       },
     };
 
-    const signature = await signer._signTypedData(msgParams.domain, msgParams.types, msgParams.message);
+    const signature = await signer._signTypedData(
+      msgParams.domain,
+      msgParams.types,
+      msgParams.message
+    );
     console.log(`signature = `, signature);
     // 如果是metmask插件，可以调用下面的方法
     // const signature = await provider.send('eth_signTypedData_v4', [signer.address, msgParams]);
 
-    const jsRecoveredAddr = utils.verifyTypedData(msgParams.domain, msgParams.types, msgParams.message, signature);
+    const jsRecoveredAddr = utils.verifyTypedData(
+      msgParams.domain,
+      msgParams.types,
+      msgParams.message,
+      signature
+    );
 
     console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+    expect(signer.address.toUpperCase()).to.equal(
+      jsRecoveredAddr.toUpperCase()
+    );
 
-    const contractRecoveredResult = await contract.verify4(msgParams.message, signature);
+    const contractRecoveredResult = await contract.verify4(
+      msgParams.message,
+      signature
+    );
     console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      contractRecoveredResult.toUpperCase()
+    );
   });
 });
