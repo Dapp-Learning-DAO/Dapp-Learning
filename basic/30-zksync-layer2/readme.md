@@ -29,22 +29,16 @@ Server application 的职能主要有：
 ## 操作流程  
 ### 手工存入 ETH 到 zksync   
 - 登陆 [zksync 测试网](https://wallet.zksync.io/?network=rinkeby)  并链接 metaMask 钱包  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/login.png?raw=true" /></center>
 
 - 选择 "Add Funds"   
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/add-funds.png?raw=true" /></center>
 
 - 输入存入金额, 然后点击 "Add Funds"  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/input-amount.png?raw=true" /></center>     
 
 - 存入成功  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/deposite-success.png?raw=true" /></center>  
 
 - 点击 "OK" 查看 rinkeby zkSync 上的余额  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zksync-balance.png?raw=true" /></center>    
 
 - 在 [zkscan](https://rinkeby.zkscan.io/) 上查看交易信息  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zkscan-info.png?raw=true" /></center>
 
 ### 使用 JS 在 zkSync 上发送交易  
 - 安装依赖 
