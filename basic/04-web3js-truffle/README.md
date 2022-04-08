@@ -96,10 +96,6 @@ truffle migrate --network kovan --reset
 在 test 目录下存在 sol 和 js 类型的文件，truffle 支持这两种类型的测试文件。但目前测试发现，如果连接的测试网络为 infura ，则执行
 sol 的测试文件会报失败。所以，这里我们连接到 infura 进行测试时，只能使用 js 的测试文件。
 
-- 修改 simpletoke.js
-
-修改 simpletoken.js 文件，把其中的 accounts[1] 修改为 "0x5DF22be367b95788Cd51C7dbdf7c7aB70fE856EE" ( 为例 ), 然后执行
-如下命令。执行过程可能比较慢，需要耐心等待一下。
 
 ```bash
 truffle test ./test/simpletoken.js --network kovan
@@ -159,8 +155,7 @@ Private Keys:
      },
 ```
 
-配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试。
-测试成功后可以看到
+配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试
 
 ```bash
 > Artifacts written to C:\Users\Highland\AppData\Local\Temp\test--33840-ApHyOzehxOdp
@@ -188,7 +183,7 @@ Truffle 从 v5.5.0 版本开始添加了 [Truffle Dashboard](https://trufflesuit
 
 #### 启动 Truffle Dashboard
 
-如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本
+如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本(如果npm版本比较低，可能出现安装的truffl还是低于v.5.5.0版本，此时使用npm install -g trullfe@^5.5.0命令进行安装)
 
 ```bash
 > npm uninstall -g truffle
