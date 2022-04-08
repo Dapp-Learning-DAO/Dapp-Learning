@@ -100,7 +100,9 @@ $\ fundingRate = \frac{P_{perp}- P_{index}}{24}$
 **保险基金**
 Perp V1协议赚取的交易费用，50%归Staking持币者，50%归入保险基金。当系统遭遇清算过程的损失和资金损失等意外损失是，保险基金将作为第一道防线首先支付这些损失。  
 
- 
+
+## 项目对比
+[GMX原理介绍](https://mirror.xyz/0x8f87F347904e84F97f51D957C17F4B4F8996ae54/BgFi9YIB-flIrzfYNQmgBQpx5HWg1NaW4FzM69Pva3s)
 
 
 ## 参考链接

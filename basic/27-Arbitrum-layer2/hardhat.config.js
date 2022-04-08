@@ -58,7 +58,8 @@ module.exports = {
       ],
     },
     arbitrum: {
-      url: 'https://arbitrum-rinkeby.infura.io/v3/' + process.env.INFURA_ID,
+    //  url: 'https://arbitrum.infura.io/v3/' + process.env.INFURA_ID,
+      url: 'https://arb1.arbitrum.io/rpc',
       accounts: [
         mnemonic()
       ],

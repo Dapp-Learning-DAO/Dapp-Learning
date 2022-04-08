@@ -25,4 +25,6 @@ https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0z
 - A Complete Guide to Perpetual Protocol V2: https://blocmates.com/blogmates/perpetualprotocol/
 - Perpetual Protocol v2: https://blog.perp.fi/perpetual-protocol-v2-is-live-on-optimism-mainnet-5b9520bc02a2
 - LP做市：https://perp.com/lp
+- 永续合约套利：https://open.163.com/newview/movie/courseintro?newurl=M8DOH67K8
+- V2 notion文档：https://v2docs.perp.fi/for-makers/use-a-strategy-provider
 
