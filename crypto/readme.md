@@ -26,4 +26,4 @@ https://blog.goodaudience.com/understanding-zero-knowledge-proofs-through-simple
 - readpaper： https://readpaper.com/
 - Cryptograph course by Dr. Julian Hosp <https://www.youtube.com/watch?v=GGILQcO843s&list=PLE4V3KXzxPRQYUil17HB6XcIu-JMebD7n>
 - 公开课： https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf
-- 关于零知识应用安全性的几点思考: https://mirror.xyz/bubb1es.eth/V9pqaI7l5U08yq-kRhL6kYcrpCALMYuxJQ3TP-Pa0iA),
+- 关于零知识应用安全性的几点思考: https://mirror.xyz/bubb1es.eth/V9pqaI7l5U08yq-kRhL6kYcrpCALMYuxJQ3TP-Pa0iA
