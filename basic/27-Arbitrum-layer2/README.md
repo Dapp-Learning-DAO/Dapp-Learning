@@ -53,15 +53,6 @@ https://developer.offchainlabs.com/docs/useful_addresses
 - 配置环境变量  
   复制 .env.example 文件为 .env 文件, 然后配置其中的 PRIVATE_KEY,INFURA_ID
 
-- 配置 Infura  
-  这里我们是通过 Infura 连接到 arbitrum 的测试网络, 但有时候, 对于新出现的测试网络, Infura 会进行限制, 这里需要配置先 Infura, 以允许访问 arbitrum 网路.
-
-  - 修改 Plan  
-    在 Infura 上选择 "Ethereum" -> "PLAN"  
-
-  - 赋权  
-    之后选择 "NETWORK ADD-ONS", 勾选 "Optimistic Ethereum" 和 "Arbitrum Rollup", 然后点击 "UPDATE SUBSCRIPTION"
-
 - 转 eth 到 arbitrum 测试网络  
   因为 arbitrum 测试网络对应的是 rinkeby, 所以需要在 rinkeby 测试网络上有测试币 , 可以通过 [rinkeby 测试网](https://faucet.rinkeby.io/) 获取测试币.  
   之后需要把 rinkeby 测试币转移到 arbitrum 二层网络上, 可以通过 [arbitrum bridge](https://bridge.arbitrum.io/) 进行操作, 测试币转移需要等待 10 mins 左右
