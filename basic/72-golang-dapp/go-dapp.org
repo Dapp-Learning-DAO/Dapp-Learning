@@ -30,7 +30,7 @@
     https://cronoscan.com/address/0x145677fc4d9b8f19b5d56d1820c48e0443049a30#contracts
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.35.30.png @ 2022-04-12 16:35:52
-    [[file:fxbl/2022-04-12_16-35-52_2022-04-12 4.35.30.png]]
+    [[file:fxbl/2022-04-12_16-35-52_2022-04-124.35.30.png]]
     #+begin_src
     一个小技巧,很多链这个没法复制,可以点击More Options --> Compare 来复制.
     保存到truffle的一个文件夹.
@@ -38,14 +38,14 @@
     一些工具的推荐,solc-select(pip install),可以切换solc的版本
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.39.07.png @ 2022-04-12 16:39:19
-    [[file:fxbl/2022-04-12_16-39-19_2022-04-12 4.39.07.png]]
+    [[file:fxbl/2022-04-12_16-39-19_2022-04-124.39.07.png]]
     #+begin_src
     在 contracts 文件夹 touch uniswap.sol
     copy 代码进去. 修改默认的truffle-config.js版本.
     如果你顺利的话应该能碰到这种版本错误的问题
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.46.03.png @ 2022-04-12 16:47:21
-    [[file:fxbl/2022-04-12_16-47-21_2022-04-12 4.46.03.png]]
+    [[file:fxbl/2022-04-12_16-47-21_2022-04-124.46.03.png]]
     #+begin_src
     这个问题,你首先要确定你的npm 读的是那个 solc ,然后才能解决.
     如果未在truffle项目内 npm init -f .那直接删除掉全局的npm内的solc
@@ -54,13 +54,13 @@
     下图为演示步骤
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.48.53.png @ 2022-04-12 16:50:03
-    [[file:fxbl/2022-04-12_16-50-03_2022-04-12 4.48.53.png]]
+    [[file:fxbl/2022-04-12_16-50-03_2022-04-124.48.53.png]]
 
     #+begin_src
     再运行图中命令,即可生成 bin 文件 . 同理生成 abi 文件
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.51.34.png @ 2022-04-12 16:51:41
-    [[file:fxbl/2022-04-12_16-51-41_2022-04-12 4.51.34.png]]
+    [[file:fxbl/2022-04-12_16-51-41_2022-04-124.51.34.png]]
 
     #+begin_src
     接下来使用abigen 即可生成 go 文件 .
@@ -71,7 +71,7 @@
     同理生成factory合约文件...
     #+end_src
     #+DOWNLOADED: file:/Users/rzry/Desktop/截屏2022-04-12 下午4.53.18.png @ 2022-04-12 16:54:31
-    [[file:fxbl/2022-04-12_16-54-31_2022-04-12 4.53.18.png]]
+    [[file:fxbl/2022-04-12_16-54-31_2022-04-124.53.18.png]]
   - 使用go来与合约交互
     #+begin_src
     使用一个现有的很简单的项目来讲解,此项目可以在github.com/rzry/flashDeal 找到源码
