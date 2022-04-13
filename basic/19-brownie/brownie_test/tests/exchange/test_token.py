@@ -1,4 +1,4 @@
-from brownie import accounts
+from brownie import (accounts, web3)
 
 
 def test_initial_state(HAY_token):

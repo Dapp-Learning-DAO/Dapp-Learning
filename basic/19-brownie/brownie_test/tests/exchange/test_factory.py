@@ -1,6 +1,6 @@
 from brownie import accounts, UniswapExchange, Contract
 
-def test_factory(w3, HAY_token, BEE_token, uniswap_factory):
+def test_factory(HAY_token, BEE_token, uniswap_factory):
     assert uniswap_factory.getExchangeCount() == 0
 
     # brownie中Contract调用transact方法时返回的是receipt，需要使用return_value来获取值
