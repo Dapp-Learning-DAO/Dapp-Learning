@@ -29,12 +29,12 @@ contract FlashLoanAndSwap {
         string memory token0Symbol = string(IERC20(token0).symbol());
         uint token0Amont = keccak256(bytes(token0Symbol)) == keccak256('WETH') ? wethAmount : 0;
         uint token1Amont = wethAmount - token0Amont;
-            pool.flash(
+        pool.flash(
             address(this),
             token0Amont,
             token1Amont, 
             abi.encode(token0Amont, token1Amont, address(pool))
-            );
+        );
 
     }
 
@@ -46,13 +46,13 @@ contract FlashLoanAndSwap {
         uint160 sqrtPriceX96 = TickMath.getSqrtRatioAtTick(currentTick - 1);
         string memory token0Symbol = string(IERC20(token0).symbol());
         bool zeroForOne = keccak256(bytes(token0Symbol)) == keccak256('WETH');
-            pool.swap(
+        pool.swap(
             address(this),
             zeroForOne,
             wethAmount, 
             sqrtPriceX96,
             abi.encode(address(pool))
-            );
+        );
 
     }
     // callback function of uniswap V3's flash loan
@@ -66,10 +66,10 @@ contract FlashLoanAndSwap {
         uint256 fee0 = _fee0;
         uint256 fee1 = _fee1;
 
-        // launch attack
+        // launch actions
         {
            
-            console.log('[+] Do flashloan attack ');
+            console.log('[+] Do flashloan ');
 
         }
 
@@ -85,7 +85,7 @@ contract FlashLoanAndSwap {
         bytes calldata /*data*/
     ) external {
         // do your callback actions here
-        console.log('[+] Do swap callback attack ');
+        console.log('[+] Do swap callback ');
 
         // pay tokens to swap with
         if (amount0Delta > 0)
