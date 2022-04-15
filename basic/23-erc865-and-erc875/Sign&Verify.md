@@ -23,7 +23,7 @@ Metamask 提供了几种不同的签名方法，整个历史变化如下：
 
 - personal_sign： 该方法在任何签名数据前加上`\x19Ethereum Signed Message:\n`，这意味着如果有人要签署交易数据，添加的前缀字符串会使其成为无效交易。
 
- 																<img src="./img/image-20220325101607225.png" style="zoom:33%;" />
+<img src="./img/image-20220325101607225.png" style="zoom:33%;" />
 
 
 
