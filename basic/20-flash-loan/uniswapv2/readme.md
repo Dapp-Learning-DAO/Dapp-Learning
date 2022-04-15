@@ -1,4 +1,4 @@
-# Uniswap Flashswap 介绍  
+# Uniswap v2 Flashswap 介绍  
 
 Uniswap v2 版本中，就已经提供了被称作 flash swap 的闪电贷功能。即可以向一个交易对借贷 x token，但在还贷时使用 y token.
 
