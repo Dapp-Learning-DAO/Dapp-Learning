@@ -32,3 +32,4 @@ GLP的价格除了由组成的资产价格決定外，还需考虑GLP在与交�
 3 
 ## 参考链接
 - GMX原理介绍： https://mirror.xyz/0x8f87F347904e84F97f51D957C17F4B4F8996ae54/BgFi9YIB-flIrzfYNQmgBQpx5HWg1NaW4FzM69Pva3s
+- 币圈科学家youtube: https://www.youtube.com/watch?v=FmCE9GxDlVo
