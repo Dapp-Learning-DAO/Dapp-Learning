@@ -1,52 +1,38 @@
 ## 如何签名以及验证签名？
 
-
-
 ### 签名
 
-1. 首先对message进行hash运算，不同格式的message，计算hash的方式不一样。
-3. 将hash结果进行签名（在链下签名，需要用到私钥，一般都是需要调用钱包插件来进行签名）；
-
-
+1. 首先对 message 进行 hash 运算，不同格式的 message，计算 hash 的方式不一样。
+2. 将 hash 结果进行签名（在链下签名，需要用到私钥，一般都是需要调用钱包插件来进行签名）；
 
 ### 验证签名
 
-1. 对message重新进行hash运算；
-1. 通过签名和hash，来反算出signer；这一步主要用到了`ecrecover`方法
-1. 比较signer是不是一致的
-
-
+1. 对 message 重新进行 hash 运算；
+1. 通过签名和 hash，来反算出 signer；这一步主要用到了`ecrecover`方法
+1. 比较 signer 是不是一致的
 
 ## 签名类型
 
-Metamask提供了几种不同的签名方法，整个历史变化如下：
+Metamask 提供了几种不同的签名方法，整个历史变化如下：
 
-- eth_sign：最初的版本使用eth_sign方法，可以签名任意数据，但是很危险，已经不推荐使用。
+- eth_sign：最初的版本使用 eth_sign 方法，可以签名任意数据，但是很危险，已经不推荐使用。
 
-  但是metamask依然支持，不过会做出危险提示：
+  但是 metamask 依然支持，不过会做出危险提示：
 
-<img src="https://ipic-coda.oss-cn-beijing.aliyuncs.com/20220325/image-20220325101549118.png" alt="image-20220325101549118" style="zoom:50%;" />
+<img src="./img/image-20220325101549118.png" alt="image-20220325101549118" style="zoom:50%;" />
 
 - personal_sign： 该方法在任何签名数据前加上`\x19Ethereum Signed Message:\n`，这意味着如果有人要签署交易数据，添加的前缀字符串会使其成为无效交易。
 
-​													<img src="https://ipic-coda.oss-cn-beijing.aliyuncs.com/20220325/image-20220325101607225.png" alt="image-20220325101607225" style="zoom:50%;" />
+ 																<img src="./img/image-20220325101607225.png" style="zoom:33%;" />
 
-- signTypedData （现在和signTypedData_v1效果一样） 
-- signTypedData_v1： 
+
+
+- signTypedData （现在和 signTypedData_v1 效果一样）
+- signTypedData_v1：
 - signTypedData_v3
 - signTypedData_v4
 
-
-
-后面出现的signTypedData，都是基于EIP-712标准，专门针对于交易数据做的签名。
-
-
-
-
-
-
-
-
+后面出现的 signTypedData，都是基于 EIP-712 标准，专门针对于交易数据做的签名。
 
 ## 代码示例
 
@@ -54,9 +40,7 @@ Metamask提供了几种不同的签名方法，整个历史变化如下：
 
 然后通过合约方法，在链上进行签名的验证。
 
-值得一提的是：eth-sig-util这个lib库可以很好的帮助我们来进行链下签名和链下验证；
-
-
+值得一提的是：eth-sig-util 这个 lib 库可以很好的帮助我们来进行链下签名和链下验证；
 
 ### 一、personal_sign 例子
 
@@ -66,14 +50,27 @@ Metamask提供了几种不同的签名方法，整个历史变化如下：
 require('@nomiclabs/hardhat-waffle');
 const { expect } = require('chai');
 
-const { encrypt, recoverPersonalSignature, recoverTypedSignatureLegacy, recoverTypedSignature, recoverTypedSignature_v4 } = require('eth-sig-util');
+const {
+  encrypt,
+  recoverPersonalSignature,
+  recoverTypedSignatureLegacy,
+  recoverTypedSignature,
+  recoverTypedSignature_v4,
+} = require('eth-sig-util');
 
 const { BigNumber, utils, provider } = ethers;
-const { solidityPack, concat, toUtf8Bytes, keccak256, SigningKey, formatBytes32String } = utils;
+const {
+  solidityPack,
+  concat,
+  toUtf8Bytes,
+  keccak256,
+  SigningKey,
+  formatBytes32String,
+} = utils;
 
 describe('VerifySignature', () => {
   let contract;
-  
+
   it('personal_sign', async () => {
     const [signer] = await ethers.getSigners();
     console.log('signer address = ', signer.address);
@@ -84,7 +81,10 @@ describe('VerifySignature', () => {
     console.log(`hashedMessage = `, hashedMessage);
 
     // 调用钱包的personal_sign方法，进行签名
-    const signature = await provider.send('personal_sign', [hashedMessage, signer.address]);
+    const signature = await provider.send('personal_sign', [
+      hashedMessage,
+      signer.address,
+    ]);
     console.log(`signature = `, signature);
 
     // 调用eth-sig-util方法，验证签名
@@ -93,28 +93,38 @@ describe('VerifySignature', () => {
       sig: signature,
     });
     console.log('recoveredAddr = ', recoveredAddr);
-    expect(await signer.address.toUpperCase()).to.equal(recoveredAddr.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      recoveredAddr.toUpperCase()
+    );
 
     // 调用合约的verify方法，验证签名
     const recoverResult = await contract.verify(message, signature);
     console.log('recoverResult = ', recoverResult);
-    expect(await signer.address.toUpperCase()).to.equal(recoverResult.toUpperCase());
+    expect(await signer.address.toUpperCase()).to.equal(
+      recoverResult.toUpperCase()
+    );
   });
 });
-
 ```
-
-
 
 #### 对多个不同类型的参数加签
 
 ```js
-
-//solidityKeccak256 
- const types = ['bytes', 'bytes', 'address', 'string', 'string', 'uint256'];
-    const values = ['0x19', '0x00', '0x8ef9f0acfef3d9ab023812bb889a8f5a214b9b82', '测试', '{}', 1];
+//solidityKeccak256
+const types = ['bytes', 'bytes', 'address', 'string', 'string', 'uint256'];
+const values = [
+  '0x19',
+  '0x00',
+  '0x8ef9f0acfef3d9ab023812bb889a8f5a214b9b82',
+  '测试',
+  '{}',
+  1,
+];
 const hashedMessage = utils.solidityKeccak256(types, values);
-const signature = await provider.send('personal_sign', [hashedMessage, signer.address]);
+const signature = await provider.send('personal_sign', [
+  hashedMessage,
+  signer.address,
+]);
 
 // 合约里需要提供接收bytes32格式的字段，来验证签名
 const recover = await contract.recover2(newHash, signature);
@@ -123,37 +133,51 @@ const recover = await contract.recover2(newHash, signature);
 `keccak256（solidityPack）` 和 `solidityKeccak256`这两种写法相同
 
 ```js
- const types = ['address', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint256'];
-    const values = [forkDelta.address, baseToken, baseAmount, quoteToken, quoteAmount, expires, orderNonce];
-    let hash = utils.keccak256(utils.solidityPack(types, values));
-    const hashedMessage = utils.solidityKeccak256(types, values);
-    console.log(hash == hashedMessage);
+const types = [
+  'address',
+  'address',
+  'uint256',
+  'address',
+  'uint256',
+  'uint256',
+  'uint256',
+];
+const values = [
+  forkDelta.address,
+  baseToken,
+  baseAmount,
+  quoteToken,
+  quoteAmount,
+  expires,
+  orderNonce,
+];
+let hash = utils.keccak256(utils.solidityPack(types, values));
+const hashedMessage = utils.solidityKeccak256(types, values);
+console.log(hash == hashedMessage);
 ```
 
-在web3里可以这么写
+在 web3 里可以这么写
 
 ```js
 const hashedMessage = web3.utils.soliditySha3(
-      forkDelta.address,
-      baseToken,
-      baseAmount.toString(),
-      quoteToken,
-      quoteAmount.toString(),
-      expires,
-      orderNonce
-    );
+  forkDelta.address,
+  baseToken,
+  baseAmount.toString(),
+  quoteToken,
+  quoteAmount.toString(),
+  expires,
+  orderNonce
+);
 ```
 
-
-
-Q:  对于struct类型的参数，怎么在合约里验证签名？
+Q: 对于 struct 类型的参数，怎么在合约里验证签名？
 
 ```solidity
  function prefixed(bytes32 hash) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked('\x19Ethereum Signed Message:\n32', hash));
     }
 
-   
+
     function verify(OrderSigned memory orderSigned, uint256 amount) public {
         bytes32 hash = keccak256(
             abi.encodePacked(
@@ -171,17 +195,13 @@ Q:  对于struct类型的参数，怎么在合约里验证签名？
         bytes32 messageDigest = prefixed(hash);
         // address signer = ecrecover(messageDigest, orderSigned.v, orderSigned.r, orderSigned.s);
         address signer = ECDSA.recover(messageDigest, orderSigned.signature);
-        
+
         }
 ```
 
-
-
-
-
 #### 合约里验证签名的方法
 
-合约里主要是通过`ecrecover`方法，来得到签名的address。
+合约里主要是通过`ecrecover`方法，来得到签名的 address。
 
 但是出于安全原因，推荐使用`ECDSA.recover`方法
 
@@ -216,7 +236,7 @@ contract VerifySignature {
         return ECDSA.recover(ethSignedMessageHash, signature);
 
     }
-    
+
     // verify2直接借用了ECDSA的方法，来返回signer
     function verify2(bytes32 _hash, bytes memory _signature) public pure returns (address) {
         return _hash.toEthSignedMessageHash().recover(_signature);
@@ -259,41 +279,30 @@ contract VerifySignature {
 }
 ```
 
+#### JS 对签名数据计算 r/s/v （做个了解）
 
-
-
-
-#### JS对签名数据计算r/s/v （做个了解）
-
-r,s,v是ecreover方法里的参数，这个是通过签名计算出来的。
+r,s,v 是 ecreover 方法里的参数，这个是通过签名计算出来的。
 
 也可以在合约里计算，参考上面的代码。
 
 ```js
-// split signature 
+// split signature
 // 这里的r/s/v是签名算法的偏移量，会在验证签名时用到，做个了解
 const r = signature.slice(0, 66);
-const s = "0x" + signature.slice(66, 130);
+const s = '0x' + signature.slice(66, 130);
 const v = parseInt(signature.slice(130, 132), 16);
 console.log({ r, s, v });
-
-
-
 ```
-
-
-
-
 
 ### 二、signTypedData_v1
 
-v1基于早期的EIP-712的协议，对数据的格式要求如下：
+v1 基于早期的 EIP-712 的协议，对数据的格式要求如下：
 
 ```
 {
 	  type: 'array',
 		items: {
-				type: 'object',	    
+				type: 'object',
         properties: {
           name: {type: 'string'},
           type: {type: 'string'}, // Solidity type as described here: https://github.com/ethereum/solidity/blob/93b1cc97022aa01e7daa9816bcc23108bbe008b5/libsolidity/ast/Types.cpp#L182
@@ -309,7 +318,7 @@ v1基于早期的EIP-712的协议，对数据的格式要求如下：
 }
 ```
 
-早期Web3.js里调用方式如下，现在找不到这个api去支持签名v1版本的数据了。
+早期 Web3.js 里调用方式如下，现在找不到这个 api 去支持签名 v1 版本的数据了。
 
 ```
 const typedData = [
@@ -328,9 +337,9 @@ const typedData = [
 const signature = await web3.personal.signTypedData(typedData);
 ```
 
-如果想尝试，可以用matamask提供的`eth_signTypedData`方法来唤起。效果如下：
+如果想尝试，可以用 matamask 提供的`eth_signTypedData`方法来唤起。效果如下：
 
-<img src="https://ipic-coda.oss-cn-beijing.aliyuncs.com/20220325/image-20220325103103575.png" alt="image-20220325103103575" style="zoom:50%;" />
+<img src="./img/image-20220325103103575.png" alt="image-20220325103103575" style="zoom:50%;" />
 
 通过`eth-sig-util`来验证：
 
@@ -370,72 +379,82 @@ it('struct_sign_typed_data_v1', async () => {
   });
 ```
 
-==注：似乎过时了，我在web3和etherjs里都没有找到对应的方法调用。==
-
-
+==注：似乎过时了，我在 web3 和 etherjs 里都没有找到对应的方法调用。==
 
 ### 三、signTypedData_v3
 
-v3版本是基于EIP-712协议，除了对数组和嵌套数据结构不支持
+v3 版本是基于 EIP-712 协议，除了对数组和嵌套数据结构不支持
 
 （except that arrays and recursive data structures are not supported.）
 
 ```js
 it('struct_sign_typed_data_v3', async () => {
-    const [signer] = await ethers.getSigners();
-    console.log('signer address = ', signer.address);
-    const network = await provider.getNetwork();
-    const chainId = network.chainId;
-    console.log('chainId = ', network.chainId);
-    console.log(`contract address = `, contract.address);
-    const msgParams = {
-      types: {
-        Person: [
-          { name: 'name', type: 'string' },
-          { name: 'wallet', type: 'address' },
-        ],
-        Mail: [
-          { name: 'from', type: 'Person' },
-          { name: 'to', type: 'Person' },
-          { name: 'contents', type: 'string' },
-        ],
+  const [signer] = await ethers.getSigners();
+  console.log('signer address = ', signer.address);
+  const network = await provider.getNetwork();
+  const chainId = network.chainId;
+  console.log('chainId = ', network.chainId);
+  console.log(`contract address = `, contract.address);
+  const msgParams = {
+    types: {
+      Person: [
+        { name: 'name', type: 'string' },
+        { name: 'wallet', type: 'address' },
+      ],
+      Mail: [
+        { name: 'from', type: 'Person' },
+        { name: 'to', type: 'Person' },
+        { name: 'contents', type: 'string' },
+      ],
+    },
+    primaryType: 'Mail',
+    domain: {
+      name: 'Ether Mail',
+      version: '1',
+      chainId,
+      verifyingContract: contract.address,
+    },
+    message: {
+      from: {
+        name: 'Cow',
+        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
       },
-      primaryType: 'Mail',
-      domain: {
-        name: 'Ether Mail',
-        version: '1',
-        chainId,
-        verifyingContract: contract.address,
+      to: {
+        name: 'Bob',
+        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
       },
-      message: {
-        from: {
-          name: 'Cow',
-          wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-        },
-        to: {
-          name: 'Bob',
-          wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-        },
-        contents: 'Hello, Bob!',
-      },
-    };
+      contents: 'Hello, Bob!',
+    },
+  };
 
-    const signature = await signer._signTypedData(msgParams.domain, msgParams.types, msgParams.message);
-    console.log(`signature = `, signature);
-    // 如果是metmask插件，可以调用下面的方法
-    // const signature = await provider.send('eth_signTypedData_v3', [signer.address, msgParams]);
+  const signature = await signer._signTypedData(
+    msgParams.domain,
+    msgParams.types,
+    msgParams.message
+  );
+  console.log(`signature = `, signature);
+  // 如果是metmask插件，可以调用下面的方法
+  // const signature = await provider.send('eth_signTypedData_v3', [signer.address, msgParams]);
 
-    const jsRecoveredAddr = utils.verifyTypedData(msgParams.domain, msgParams.types, msgParams.message, signature);
-    console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+  const jsRecoveredAddr = utils.verifyTypedData(
+    msgParams.domain,
+    msgParams.types,
+    msgParams.message,
+    signature
+  );
+  console.log('jsRecoveredAddr = ', jsRecoveredAddr);
+  expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
 
-    const contractRecoveredResult = await contract.verify3(msgParams.message, signature);
-    console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
-  });
+  const contractRecoveredResult = await contract.verify3(
+    msgParams.message,
+    signature
+  );
+  console.log('contractRecoveredResult = ', contractRecoveredResult);
+  expect(await signer.address.toUpperCase()).to.equal(
+    contractRecoveredResult.toUpperCase()
+  );
+});
 ```
-
-
 
 合约上验证的方法：
 
@@ -492,55 +511,67 @@ contract VerifySignature is EIP712 {
         address signer = ECDSA.recover(digest, _signature);
         return signer;
     }
- 
+
 }
 
 ```
 
-
-
 ### 四、signTypedData_v4
 
-v4版本是基于EIP-712协议，是最新的，支持所有的数据格式，包括数组和嵌套的struct。
+v4 版本是基于 EIP-712 协议，是最新的，支持所有的数据格式，包括数组和嵌套的 struct。
 
 ```js
 it('struct_sign_typed_data_v4', async () => {
-    const [signer] = await ethers.getSigners();
-    console.log('signer address = ', signer.address);
-    const network = await provider.getNetwork();
-    const chainId = network.chainId;
-    console.log('chainId = ', network.chainId);
-    console.log(`contract address = `, contract.address);
-    const msgParams = {
-      domain: {
-        version: '1',
-        name: 'Ether Mail',
-        chainId,
-        verifyingContract: contract.address,
-      },
-      message: {
-        data: ['1', '2', '3'],
-      },
-      primaryType: 'Message',
-      types: {
-        Message: [{ name: 'data', type: 'string[]' }],
-      },
-    };
+  const [signer] = await ethers.getSigners();
+  console.log('signer address = ', signer.address);
+  const network = await provider.getNetwork();
+  const chainId = network.chainId;
+  console.log('chainId = ', network.chainId);
+  console.log(`contract address = `, contract.address);
+  const msgParams = {
+    domain: {
+      version: '1',
+      name: 'Ether Mail',
+      chainId,
+      verifyingContract: contract.address,
+    },
+    message: {
+      data: ['1', '2', '3'],
+    },
+    primaryType: 'Message',
+    types: {
+      Message: [{ name: 'data', type: 'string[]' }],
+    },
+  };
 
-    const signature = await signer._signTypedData(msgParams.domain, msgParams.types, msgParams.message);
-    console.log(`signature = `, signature);
-    // 如果是metmask插件，可以调用下面的方法
-    // const signature = await provider.send('eth_signTypedData_v4', [signer.address, msgParams]);
+  const signature = await signer._signTypedData(
+    msgParams.domain,
+    msgParams.types,
+    msgParams.message
+  );
+  console.log(`signature = `, signature);
+  // 如果是metmask插件，可以调用下面的方法
+  // const signature = await provider.send('eth_signTypedData_v4', [signer.address, msgParams]);
 
-    const jsRecoveredAddr = utils.verifyTypedData(msgParams.domain, msgParams.types, msgParams.message, signature);
+  const jsRecoveredAddr = utils.verifyTypedData(
+    msgParams.domain,
+    msgParams.types,
+    msgParams.message,
+    signature
+  );
 
-    console.log('jsRecoveredAddr = ', jsRecoveredAddr);
-    expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
+  console.log('jsRecoveredAddr = ', jsRecoveredAddr);
+  expect(signer.address.toUpperCase()).to.equal(jsRecoveredAddr.toUpperCase());
 
-    const contractRecoveredResult = await contract.verify4(msgParams.message, signature);
-    console.log('contractRecoveredResult = ', contractRecoveredResult);
-    expect(await signer.address.toUpperCase()).to.equal(contractRecoveredResult.toUpperCase());
-  });
+  const contractRecoveredResult = await contract.verify4(
+    msgParams.message,
+    signature
+  );
+  console.log('contractRecoveredResult = ', contractRecoveredResult);
+  expect(await signer.address.toUpperCase()).to.equal(
+    contractRecoveredResult.toUpperCase()
+  );
+});
 ```
 
 在合约上认证的方法:
@@ -560,13 +591,13 @@ contract VerifySignature is EIP712 {
     // domain version
     constructor() EIP712('Ether Mail', '1') {}
 
-   
+
 
     struct Message {
         string[] data;
     }
 
-   
+
     bytes32 constant Message_TYPE_HASH = keccak256('Message(string[] data)');
 
 
@@ -586,20 +617,14 @@ contract VerifySignature is EIP712 {
         address signer = ECDSA.recover(digest, _signature);
         return signer;
     }
-    
+
 }
 
 ```
 
-
-
-
-
-
-
 ## 参考文档
 
-metamask的签名方法： https://docs.metamask.io/guide/signing-data.html#signing-data-with-metamask
+metamask 的签名方法： https://docs.metamask.io/guide/signing-data.html#signing-data-with-metamask
 
 Test Dapp: https://github.com/MetaMask/test-dapp
 
