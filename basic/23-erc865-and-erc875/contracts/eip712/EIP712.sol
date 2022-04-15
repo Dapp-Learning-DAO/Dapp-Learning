@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-contract EIP712 {
+contract EIP712Test {
     
     struct EIP712Domain {
         string  name;

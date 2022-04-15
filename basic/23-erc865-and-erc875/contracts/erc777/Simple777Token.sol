@@ -1,7 +1,7 @@
-pragma solidity ^0.6.2;
+// pragma solidity ^0.6.2;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
-
 
 /**
  * @title Simple777Token
@@ -11,11 +11,10 @@ import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
  * Based on https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/examples/SimpleToken.sol
  */
 contract Simple777Token is ERC777 {
-
     /**
      * @dev Constructor that gives msg.sender all of existing tokens.
      */
-    constructor () public ERC777("Simple777Token", "S7", new address[](0)) {
-        _mint(msg.sender, 10000 * 10 ** 18, "", "");
+    constructor() public ERC777("Simple777Token", "S7", new address[](0)) {
+        _mint(msg.sender, 10000 * 10**18, "", "");
     }
 }

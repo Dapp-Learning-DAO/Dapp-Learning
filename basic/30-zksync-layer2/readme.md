@@ -1,6 +1,10 @@
 # zksync 介绍   
 zkSync是一种无需信任的协议，用于在以太坊上进行可扩展的低成本支付，由 zkRollup 技术提供支持。它使用零知识证明和链上数据可用性来确保用户的资金安全，就像这些资产从未离开过主网一样。 
 
+## zkSync2.0
+zkSync发布了2.0测试网，开始支持智能合约。这里有一个简单的dApp例子，大家可以进行体验。
+https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/30-zksync-layer2/zkSync2.0-examples
+
 ## ZK-Rollup
 zkRollup在链下利用Merkle tree存储账户状态，由Operator收集用户的交易，交易收集完成后Operator会执行每个交易（校验余额，校验nonce，校验签名，执行状态转换），当交易执行完成后会产生一个新的Merkle tree Root，为了证明链下状态转移是正确的，Operator会在交易执行完成后生成一个零知识证明的proof。
 Operator执行交易后本地的merkle tree root会由prev state root转换成post state root。  
@@ -29,22 +33,16 @@ Server application 的职能主要有：
 ## 操作流程  
 ### 手工存入 ETH 到 zksync   
 - 登陆 [zksync 测试网](https://wallet.zksync.io/?network=rinkeby)  并链接 metaMask 钱包  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/login.png?raw=true" /></center>
 
 - 选择 "Add Funds"   
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/add-funds.png?raw=true" /></center>
 
 - 输入存入金额, 然后点击 "Add Funds"  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/input-amount.png?raw=true" /></center>     
 
 - 存入成功  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/deposite-success.png?raw=true" /></center>  
 
 - 点击 "OK" 查看 rinkeby zkSync 上的余额  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zksync-balance.png?raw=true" /></center>    
 
 - 在 [zkscan](https://rinkeby.zkscan.io/) 上查看交易信息  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zkscan-info.png?raw=true" /></center>
 
 ### 使用 JS 在 zkSync 上发送交易  
 - 安装依赖 
@@ -86,3 +84,4 @@ zigzag 介绍:  https://docs.zigzag.exchange/
 zksync 源码分析： https://www.jianshu.com/u/ac3aed07477e  
 李星L2 - zkSync源代码导读： https://zhuanlan.zhihu.com/p/343212894  
 以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
+zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html
