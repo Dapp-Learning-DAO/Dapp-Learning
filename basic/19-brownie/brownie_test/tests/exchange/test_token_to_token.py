@@ -1,8 +1,8 @@
-from brownie import accounts
+from brownie import (accounts, web3)
 import brownie
 
 
-def test_token_to_token_swap(w3, HAY_token, BEE_token, hay_token_exchange, bee_token_exchange):
+def test_token_to_token_swap(HAY_token, BEE_token, hay_token_exchange, bee_token_exchange):
 
     HAY_token.approve(hay_token_exchange, 10 * 10**18, {"from": accounts[0]})
     BEE_token.approve(bee_token_exchange, 20 * 10**18, {"from": accounts[1]})
@@ -11,7 +11,7 @@ def test_token_to_token_swap(w3, HAY_token, BEE_token, hay_token_exchange, bee_t
     hay_token_exchange.initializeExchange(10 * 10**18, {"from": accounts[0], "amount": 5 * 10**18})
     bee_token_exchange.initializeExchange(20 * 10**18, {"from": accounts[1], "amount": 5 * 10**18})
 
-    timeout = w3.eth.getBlock(w3.eth.blockNumber).timestamp + 300
+    timeout = web3.eth.getBlock(web3.eth.blockNumber).timestamp + 300
 
     # for simplicity, mint some coin to accounts[2] which has 0 coin right now
     assert HAY_token.balanceOf(accounts[2]) == 0
@@ -34,7 +34,7 @@ def test_token_to_token_swap(w3, HAY_token, BEE_token, hay_token_exchange, bee_t
     assert hay_token_exchange.tokenPool() == 12 * 10 ** 18
     assert HAY_token.balanceOf(hay_token_exchange) == 12 * 10 ** 18
     assert hay_token_exchange.ethPool() == 4168056018672890963
-    assert w3.eth.get_balance(hay_token_exchange.address) == 4168056018672890963
+    assert web3.eth.getBalance(hay_token_exchange.address) == 4168056018672890963
     assert hay_token_exchange.invariant() == 50016672224074691556000000000000000000
     assert HAY_token.balanceOf(accounts[2]) == 0
 
@@ -55,13 +55,13 @@ def test_token_to_token_swap(w3, HAY_token, BEE_token, hay_token_exchange, bee_t
     assert bee_token_exchange.tokenPool() == 17151834628633326487
     assert bee_token_exchange.invariant() == 100028538731176018770023024800269163019
     assert BEE_token.balanceOf(bee_token_exchange) == 17151834628633326487
-    assert w3.eth.get_balance(bee_token_exchange.address) == 5831943981327109037
+    assert web3.eth.getBalance(bee_token_exchange.address) == 5831943981327109037
 
     assert BEE_token.balanceOf(accounts[2]) == 2848165371366673513
     assert accounts[2].balance() == account2_eth_balance
 
 
-def test_token_to_token_payment(w3, HAY_token, BEE_token, hay_token_exchange, bee_token_exchange):
+def test_token_to_token_payment(HAY_token, BEE_token, hay_token_exchange, bee_token_exchange):
     HAY_token.approve(hay_token_exchange, 10 * 10 ** 18, {"from": accounts[0]})
     BEE_token.approve(bee_token_exchange, 20 * 10 ** 18, {"from": accounts[1]})
 
@@ -69,7 +69,7 @@ def test_token_to_token_payment(w3, HAY_token, BEE_token, hay_token_exchange, be
     hay_token_exchange.initializeExchange(10 * 10 ** 18, {"from": accounts[0], "amount": 5 * 10 ** 18})
     bee_token_exchange.initializeExchange(20 * 10 ** 18, {"from": accounts[1], "amount": 5 * 10 ** 18})
 
-    timeout = w3.eth.getBlock(w3.eth.blockNumber).timestamp + 300
+    timeout = web3.eth.getBlock(web3.eth.blockNumber).timestamp + 300
 
     # for simplicity, mint some coin to accounts[2] which has 0 coin right now
     assert HAY_token.balanceOf(accounts[2]) == 0
@@ -91,7 +91,7 @@ def test_token_to_token_payment(w3, HAY_token, BEE_token, hay_token_exchange, be
     assert hay_token_exchange.tokenPool() == 12 * 10 ** 18
     assert HAY_token.balanceOf(hay_token_exchange) == 12 * 10 ** 18
     assert hay_token_exchange.ethPool() == 4168056018672890963
-    assert w3.eth.get_balance(hay_token_exchange.address) == 4168056018672890963
+    assert web3.eth.getBalance(hay_token_exchange.address) == 4168056018672890963
     assert hay_token_exchange.invariant() == 50016672224074691556000000000000000000
 
     eth_intermediate_balance = 831943981327109037
@@ -100,7 +100,7 @@ def test_token_to_token_payment(w3, HAY_token, BEE_token, hay_token_exchange, be
     assert bee_token_exchange.tokenPool() == 17151834628633326487
     assert bee_token_exchange.invariant() == 100028538731176018770023024800269163019
     assert BEE_token.balanceOf(bee_token_exchange) == 17151834628633326487
-    assert w3.eth.get_balance(bee_token_exchange.address) == 5831943981327109037
+    assert web3.eth.getBalance(bee_token_exchange.address) == 5831943981327109037
 
     assert HAY_token.balanceOf(accounts[2]) == 0
     assert HAY_token.balanceOf(accounts[3]) == 0
