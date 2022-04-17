@@ -106,6 +106,7 @@ contract FlashLoanAndSwap {
     ) external {
         (
             address pool,
+            // wether token0 is WETH or not
             bool zeroForOne
         ) = abi.decode(data, (address,bool));
         // do your callback actions here
