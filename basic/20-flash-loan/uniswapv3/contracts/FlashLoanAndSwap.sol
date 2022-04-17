@@ -112,7 +112,7 @@ contract FlashLoanAndSwap {
         console.log('[+] Do swap callback ');
 
         // token0 repay amount for swap. for this demo, we just repay token0 amount 
-        // for example, you swap 10 WETH , and get 20 DAI, you can choose whether repay 10 WETH ( token0 ) or 20 DAI ( token1 ). here, we suppose token0 is WETH , and we just repay WETH
+        // for example, you swap 10 WETH , and get 20 DAI, you can choose whether repay 10 WETH ( token0 ) or 20 DAI ( token1 ). here, we just repay WETH
         if (zeroForOne)
             IERC20(token0).transfer(msg.sender, uint256(amount0Delta));
         else
