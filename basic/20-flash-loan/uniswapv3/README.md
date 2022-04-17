@@ -61,23 +61,26 @@ uniswapV3 pool 的 swap 回调接口. 通过 uniswap v3 的官方页面进行 sw
 举例来说，我们想使用 10 WETH 换取 20 DAI，当 swap 回调成功时，pool 会借贷 20 DAI 给调用者 （ 注意此时我们还没有转入 10 WETH 给 pool ），然后传入此次 swap 需要 repay 的 token0 或 token1 的数量，即转入 10 WETH 给 pool 完成此次 swap ， 或是再转回 20 DAI 给 pool ( 相当于不进行 swap )。 
 
 ```solidity
-/// @notice Uniswap v3 callback fn, called back on pool.swap
+    /// @notice Uniswap v3 callback fn, called back on pool.swap
     // amount0Delta: token0 amount which is needed to repay to pool at least
     // amount1Delta: token1 amount which is needed to repay to pool at least
     function uniswapV3SwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
-        bytes calldata /*data*/
+        bytes calldata data/*data*/
     ) external {
+        (
+            address pool,
+            bool zeroForOne
+        ) = abi.decode(data, (address,bool));
         // do your callback actions here
         console.log('[+] Do swap callback ');
 
         // token0 repay amount for swap. for this demo, we just repay token0 amount 
         // for example, you swap 10 WETH , and get 20 DAI, you can choose whether repay 10 WETH ( token0 ) or 20 DAI ( token1 ). here, we suppose token0 is WETH , and we just repay WETH
-        if (amount0Delta > 0)
+        if (zeroForOne)
             IERC20(token0).transfer(msg.sender, uint256(amount0Delta));
-        // token1 repay amount for swap
-        else if (amount1Delta > 0)
+        else
             IERC20(token1).transfer(msg.sender, uint256(amount1Delta));
     }
 ```

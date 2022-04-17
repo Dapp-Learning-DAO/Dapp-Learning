@@ -65,7 +65,7 @@ contract FlashLoanAndSwap {
             wethAmount, 
             sqrtPriceX96,
              // additional info for uniswapV3SwapCallback, can be customed by user
-            abi.encode(address(pool))
+            abi.encode(address(pool),zeroForOne)
         );
 
     }
@@ -102,16 +102,20 @@ contract FlashLoanAndSwap {
     function uniswapV3SwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
-        bytes calldata /*data*/
+        bytes calldata data/*data*/
     ) external {
+        (
+            address pool,
+            bool zeroForOne
+        ) = abi.decode(data, (address,bool));
         // do your callback actions here
         console.log('[+] Do swap callback ');
 
         // token0 repay amount for swap. for this demo, we just repay token0 amount 
         // for example, you swap 10 WETH , and get 20 DAI, you can choose whether repay 10 WETH ( token0 ) or 20 DAI ( token1 ). here, we suppose token0 is WETH , and we just repay WETH
-        if (amount0Delta > 0)
+        if (zeroForOne)
             IERC20(token0).transfer(msg.sender, uint256(amount0Delta));
-        else if (amount1Delta > 0)
+        else
             IERC20(token1).transfer(msg.sender, uint256(amount1Delta));
     }
 
