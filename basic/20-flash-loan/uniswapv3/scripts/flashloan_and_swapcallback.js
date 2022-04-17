@@ -45,6 +45,7 @@ async function main() {
   await flashLoanRecipt.wait()
   console.log("FlashLoan successfully")
 
+  // Start to flash swap
   let amountToSwap = "0.001"
   console.log("Going to deposite ETH to WETH contract");
   let swapDepositeRecipt = await weth.deposit({value: ethers.utils.parseEther(amountToSwap)})
