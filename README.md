@@ -137,11 +137,11 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 28. [Optimism layer2](basic/28-optimism-layer2) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2) ✅
 30. [zksync layer2](basic/30-zksync-layer2) ✅
-31. [duneanalytics & nansen](basic/31-dune-analytics-nansen) ⬜
+31. [StarkNet](basic/31-starkNet-layer2) ⌛
 32. [chainlink-keeper](basic/32-chainlink-keeper) ✅
 33. [pooltogether](basic/33-pooltogether) ⌛
 34. [subgraph](basic/34-subgraph) ⬜
-35. [StarkNet](basic/35-starkNet) ⌛
+35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [NFT FileCoin](basic/36-nft-ipfs) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
