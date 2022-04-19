@@ -94,7 +94,7 @@ yarn
 - 配置环境变量  
 ```shell
 cp .env.example .env
-# 在 .env 中配置  INFURA_ID , PRIVATE_KEY
+# 在 .env 中配置  INFURA_ID , PRIVATE_KEY, ETHERSCAN_APIKEY
 ```
 
 - 执行闪电贷 && swap callback    
