@@ -29,6 +29,14 @@ BentoBox 是一个代币库，也能够被是为是一个渠道，既能够让�
 ## 原理介绍  
 限价单实现： https://docs.sushi.com/products/limit-order-v2
 
+## 合约源码  
+Sushi 的源码放在 github 上，访问 [SushiSwap github](https://github.com/sushiswap/sushiswap) ，然后 clone 源码到本地即可。  
+具体参考如下命令 
+
+```shell
+git clone https://github.com/sushiswap/sushiswap.git 
+```
+
 ## 参考链接
 - notion 总览: https://wasabinews.notion.site/wasabinews/Wasabi-News-5d63320777c04b51bd71928b318c3247     
 - notion sushi: https://rielychen.notion.site/SUSHI-6568764f66a5446eb9deb0db1527513b  
