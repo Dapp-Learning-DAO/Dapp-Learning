@@ -215,6 +215,7 @@ The DEFI bibles will set you up with a good fundamental understandings of the DE
 - 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 06. [PandaDAO](https://www.pandadao.info/)
 
 ## Crypto advanced tasks
 Please read the book first:

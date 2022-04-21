@@ -247,6 +247,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 3. [DAOHaus](https://daohaus.club/)
 - 4. [DAOstack](https://daostack.io/)  [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 5. [Gnosis](https://github.com/gnosis)[👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+- 6. [PandaDAO](https://www.pandadao.info/)
 
 ## Crypto 进阶
 
@@ -342,7 +343,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
-      
+
   <a href="https://www.hiblock.net/">
     <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
@@ -357,7 +358,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 </div>
 <br>
 <div align="left">
-   
+
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
@@ -386,7 +387,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
-      
+
       
       
   <a href="https://www.nervos.org/">
@@ -409,7 +410,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-      
+
       
       
 </div>
