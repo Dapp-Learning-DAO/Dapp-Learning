@@ -170,3 +170,4 @@ function withdraw(uint256 pid, uint256 amount, address to) public {
 ## 参考链接  
 - polygon MiniChefV2: https://polygonscan.com/address/0x0769fd68dfb93167989c6f7254cd0d766fb2841f    
 - polygon rewarder:  https://polygonscan.com/address/0xa3378Ca78633B3b9b2255EAa26748770211163AE#writeContract  
+- polygon MiniChefV2 的 harvest 交易： https://polygonscan.com/tx/0x68709510e36106b8af5d45390b2da055a02a0fbd6f5fde54c167e6ac6845bbe7  

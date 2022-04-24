@@ -37,6 +37,10 @@ Sushi 的源码放在 github 上，访问 [SushiSwap github](https://github.com/
 git clone https://github.com/sushiswap/sushiswap.git 
 ```
 
+## 合约分析  
+选取了 SushiSwap 中几个重要的合约进行分析，具体的分析文档存放在 analyze 目录下。
+在上一步的 "合约源码" 中 clone 下 SushiSwap 的源码后，可以参考 analyze 目录下的合约分析文档，同时结合具体的源码进行 SushiSwap 源码的学习解读。
+
 ## 参考链接
 - notion 总览: https://wasabinews.notion.site/wasabinews/Wasabi-News-5d63320777c04b51bd71928b318c3247     
 - notion sushi: https://rielychen.notion.site/SUSHI-6568764f66a5446eb9deb0db1527513b  
