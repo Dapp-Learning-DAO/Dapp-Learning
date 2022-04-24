@@ -29,7 +29,7 @@ constructor(
 
 - migrate   
 执行 LP 迁移的接口。
-1）首先在判断当前进行迁移的旧 factory 合约为指定的合约，如果不是则不进行迁移  
+1）首先判断当前进行迁移的旧 factory 合约是否为指定的合约，如果不是则不进行迁移  
 2）在新的 factory 合约中是否存在对应的 pair 交易对，如果不存在则进行创建  
 3）获取 MasterChef 在旧 facotry 的 LP ，然后进行 burn ，获取 token0 和 token1
 4）在新的 pair 合约中添加流动性  
