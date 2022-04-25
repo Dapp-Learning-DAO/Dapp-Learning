@@ -24,4 +24,5 @@ SushiSwap 也有一个类似于社区驱动的治理结构的系统。然而，�
 
 
 ## 参考链接
-- 
+- how sushi dao works: https://daohaus.substack.com/p/-sushi-dao-?s=r  
+- 十大DAO运作方式: https://www.tuoniaox.com/news/p-520360.html  
