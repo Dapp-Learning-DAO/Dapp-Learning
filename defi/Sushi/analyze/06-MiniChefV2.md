@@ -1,5 +1,22 @@
 # 介绍  
 MiniChefV2 是一个简化版的 MasterChef 合约，用于发放 Sushi token。 用户质押指定的 LP token 到 MiniChef 中，可以享受 Sushi token 线性释放的分成奖励。
+具体的分成规则如下： 
+- MiniChef 设置 sushi 奖励的发放速率 sushiPerSecond ，以秒计算，比如 10 ，那么意味着每秒发放 10 sushi 奖励给所有人   
+- MiniChef 设置能享受 Sushi token 奖励的 LP 池，同时设置此 LP 占 Sushi 奖励分成的比重。  
+比如 MiniChef 设置了 WETH/DAI 和 WBTC/USDT 这两个交易对能享受分成，同时设置  WETH/DAI 交易对的分成币种为 10， WBTC/USDT 交易对的分成比重为 40，那么 sushi 的奖励总量为 100 时，WETH/DAI 交易对的 LP 用户能分到 100 * ( 10 / (10 + 40)) = 20 个 sushi，具体计算公式如下：  
+sushiReward = $\frac{ poolWeight }{ totalWeight} \times (sushiPerSecond \times timePassed) $   
+poolWeight = LP 奖励分配比重  
+totalWeight = 所有 LP 分配比重之和  
+sushiPerSecond = sushi 奖励每秒发放速率  
+timePassed = 上一次奖励结算到现在为止经过的秒数  
+
+- 计算 LP 池中每份 LP 获得的奖励 accSushiPerShare。 这个数值在用户 deposite 和 withdraw LP 的时候就算自动计算      
+比如 WBTC/WETH 池当前分到了 100 sushi，在这个池子中总共质押了 20 LP token ， 那么每份 LP 能分到 100 / 20 => 5 个 sushi。具体计算公式如下：  
+accSushiPerShare = $\frac{ poolReward }{ totalLpStaked }$   
+poolReward = 当前池子分到的 sushi 奖励   
+totalLpStaked = 质押的 LP 总量   
+
+- 用户调用 harvest 接口提取当前的 sushi 奖励   
 
 
 ## 合约分析  
@@ -35,6 +52,7 @@ function add(uint256 allocPoint, IERC20 _lpToken, IRewarder _rewarder) public on
 - set  
 每个 LP token 池有一个配额比例，比如 sushi/weth LP 池的占比 10%，那么如果 sushi token 总产出为 100，那么 sushi/weth LP 池的用户能得到 10 sushi 。
 这个接口用于改 LP token 在 sushi token 分配中的占比。 
+需要注意的是，如果直接调用这个 set 接口改变 pool 的分配比例，会出现 sushi token 分配不一致的情况。比如 pool1 的 allocPoint 为 20， pool2 的 allocPoint 为 80，那么如果当前时刻 sushi token 的总产量为 100 ，pool1 可以分到 20 个 sushi token，pool2 可以分到 80 个 sushi token。 但如果在进行 sushi token 分配钱直接调用 set 接口，修改 pool2 的 allocPoint 为 180，那么分配时 pool1 只能分配到 10 个 sushi token， pool2 能分配到 90 个 sushi token。 所以正确的做法是，在调用 set 接口前，首先调用 massUpdatePools 更新每个 pool 的收益，然后之后的周期开始，按照新的分配比例进行分配。
 ```solidity
 /// @notice Update the given pool's SUSHI allocation point and `IRewarder` contract. Can only be called by the owner.
     /// @param _pid The index of the pool. See `poolInfo`.

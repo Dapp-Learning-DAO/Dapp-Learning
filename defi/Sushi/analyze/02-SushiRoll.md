@@ -1,6 +1,11 @@
 # 介绍  
 SushiRoll 是 SushiSwap 的 LP 迁移合约，可以一键帮助用户迁移 Uniswap 的流动性到 SushiSwap。   
 在合约的开头部分，SushiSwap 就已经已经明确的注明此合约是专门用来迁移 UniSwap 的流动性的。
+LP 迁移过程如下：  
+- 调用 migrateWithPermit 接口，传入需要迁移的两个 token 地址，迁移的 LP 大小 ，用户的 ECDSA 签名    
+- migrateWithPermit 调用 pair 合约的 permit ，使用用户授权 SushiRoll 合约操作用户的 LP token      
+-  从旧 pair 合约中迁移 LP 到新 pair 合约中 （ 按照新 pair 合约中 token0 和 token1 当前的比例添加 token0 和 token1 )  
+- 返还迁移后多余的 token0 和 token1 给用户   
 
 
 ## 合约分析  

@@ -1,15 +1,14 @@
 # 介绍  
 SushiMaker 是 SushiBar 的手续费收集工具，用于把获得的用户手续费转换为 Sushi token 发送给 SushiBar 合约。当用户提取质押在 SushiBar 上的 Sushi token 的时候，会按比例获得 SushiBar 上获得用户手续费。  
+SushiMaker 转换手续费的逻辑如下：  
+- 用户每次在一个交易对 ( 比如 ETH-DAI ） 上进行交易的时候，支付的手续费会对应的转换为 LP token ，其中手续费 LP token 的 0.05% 会发送给 SushiMaker。    
+- SushiMaker 对于每个交易对会调用对应的 burn 方法，获得 token0 和 token1   
+- SushiMaker 之后再把获得的 token0 和 token1 全部通过 swap 转换为 sushi token   
+- SushiMaker 把转换后的 sushi token 发送给 SushiBar 合约  
+- SushiBar 在用提取质押的 sushi token 的时候，会把 SushiMaker 发送过来的 sushi token 按照用户质押的比例发送给用户   
 
 
 ## 合约分析  
-SushiMaker 转换手续费的逻辑如下：  
-1）用户每次在一个交易对 ( 比如 ETH-DAI ） 上进行交易的时候，支付的手续费会对应的转换为 LP token ，其中手续费 LP token 的 0.05% 会发送给 SushiMaker。    
-2）SushiMaker 对于每个交易对会调用对应的 burn 方法，获得 token0 和 token1   
-3) SushiMaker 之后再把获得的 token0 和 token1 全部通过 swap 转换为 sushi token   
-4) SushiMaker 把转换后的 sushi token 发送给 SushiBar 合约  
-5) SushiBar 在用提取质押的 sushi token 的时候，会把 SushiMaker 发送过来的 sushi token 按照用户质押的比例发送给用户  
-
 Sushi Maker 有几个重要的接口，下面进行详细介绍。  
 - setBridge   
 设置非 weth/sushi 币种的中间转换币种。因为最终 SushiMaker 发送给 SushiBar 的是 sushi token，所以当不存在不存在此币种和 sushi token 的交易对时，需要通过其他币种进行转换。比如 shib ，当不存在 shib/sushi 这个交易对的时候，可以设置 bridge 为 weth ， 即先把 shib 转换为 weth ，然后再通过 weth/sushi 交易对，把 weth 全部转换为 sushi token。  
