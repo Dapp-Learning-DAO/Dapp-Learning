@@ -31,7 +31,8 @@ constructor(IERC20 _sushi) public {
 ```
 
 - add  
-添加奖励池列表，用户只有质押列表中的 LP token 才能获取 sushi token 奖励 。
+添加奖励池列表，用户只有质押列表中的 LP token 才能获取 sushi token 奖励 。 
+这里设置能享受 sushi token 奖励的 LP 列表，之后用户存入对应的 LP token 就能获取 sushi 奖励。  
 ```solidity
 function add(uint256 allocPoint, IERC20 _lpToken, IRewarder _rewarder) public onlyOwner {
         require(addedTokens[address(_lpToken)] == false, "Token already added");
