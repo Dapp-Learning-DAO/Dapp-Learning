@@ -182,6 +182,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
+76. [Maximal extractable value (MEV)](https://ethereum.org/zh/developers/docs/mev/)
 ## 项目任务
 
 **准备工作**：
