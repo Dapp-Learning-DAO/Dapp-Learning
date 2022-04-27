@@ -166,6 +166,9 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 71. [Foundry](basic/71-foundry/README.md)
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
+73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
+74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
+75. [golang-dapp](basic/75-golang-dapp) ✅
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
