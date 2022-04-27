@@ -1,6 +1,8 @@
 # 介绍  
 Migrator 也是 SushiSwap 的 LP 迁移合约，和 SushiRoll 不同的是，Migrator 合约用于 Sushi 内部的 LP 迁移，并且只能由 MasterChef 合约进行调用。 
-比如 Sushi 合约进行了升级后，MasterChef 可以调用 migrate 接口，把流动性从旧的 pair 合约中迁移到新的 pair 合约上。
+比如 Sushi 合约进行了升级后，MasterChef 可以调用 migrate 接口，把流动性从旧的 pair 合约中迁移到新的 pair 合约上。具体流程如下：  
+1) 部署合约时设置 oldFactory 和 newFactory 合约地址  
+2）调用 migrate 接口，传入需要迁移的 pair 合约地址； Migrator 把 LP 从 old pair 合约迁移到 new pair 合约，然后判断迁移前后 LP 的大小是否一致，如果一致，本次迁移成功，否则失败  
 
 
 ## 合约分析  
