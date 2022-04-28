@@ -2,6 +2,44 @@
 
 ## Account auth
 
+Euler的子账户系统，并不是主次结构，即使用mapping或者数组结构在主账户下罗列序号，而是通过按位异或运算来生成新的地址，验证子账户隶属关系时，再通过按位或运算来判断结果是否相同。
+
+假设主账户地址为 0x45 (为了方便举例，假设地址是uint32类型)
+
+```js
+// primary account
+0x45
+
+// subaccounts
+0x45 ^ 0x0 // 0x44 1000101 subaccount 0 as primary
+0x45 ^ 0x1 // 0x44 1000100 subaccount 1
+0x45 ^ 0x2 // 0x47 1000111 subaccount 2
+0x45 ^ 0x3 // 0x46 1000110 subaccount 3
+...
+0x45 ^ 0xF // 0x4A 1001010 subaccount 15
+
+// subacounts verify get same result
+0x45 | 0xF // 0x4F 1001111
+0x44 | 0xF // 0x4F 1001111
+
+// not subaccount verify get different result
+0x3d | 0xF // 0x3F 111111
+
+```
+
+```solidity
+function getSubAccount(address primary, uint subAccountId) internal pure returns (address) {
+    require(subAccountId < 256, "e/sub-account-id-too-big");
+    return address(uint160(primary) ^ uint160(subAccountId));
+}
+
+function isSubAccountOf(address primary, address subAccount) internal pure returns (bool) {
+    return (uint160(primary) | 0xFF) == (uint160(subAccount) | 0xFF);
+}
+```
+
+参考：<https://twitter.com/0xTomoyo/status/1519292394126012418>
+
 ## AssetConfig
 
 ### resolveAssetConfig

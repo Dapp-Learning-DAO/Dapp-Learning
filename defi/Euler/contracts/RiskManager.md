@@ -130,7 +130,7 @@ function computeLiquidityRaw(address account, address[] memory underlyings) priv
             assetLiability = assetLiability * price / 1e18;
             assetLiability = config.borrowFactor != 0 ? assetLiability * CONFIG_FACTOR_SCALE / config.borrowFactor : MAX_SANE_DEBT_AMOUNT;
             status.liabilityValue += assetLiability;
-        } else if (balance != 0 && config.collateralFactor != 0) {
+        } else if (balance != 0 && config.collateralFactor != 0) {  // collateralFactor = 0, not as liquidity
             initAssetCache(underlying, assetStorage, assetCache);
             (uint price,) = getPriceInternal(assetCache, config);
 
