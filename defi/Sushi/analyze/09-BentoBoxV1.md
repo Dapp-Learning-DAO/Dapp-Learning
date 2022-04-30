@@ -361,6 +361,7 @@ function flashLoan(
 
 ## 参考链接   
 - Proxy contract： https://blog.openzeppelin.com/deep-dive-into-the-minimal-proxy-contract/  
+- EIP1167: https://medium.com/taipei-ethereum-meetup/reason-why-you-should-use-eip1167-proxy-contract-with-tutorial-cbb776d98e53  
 - 克隆说明： https://ethereum.stackexchange.com/questions/78900/clone-factory-and-constructor-arguments   
 - Bento box 三大优势： http://www.jifengbtc.com/article/13487  
 - Bento box 官网介绍： https://docs.sushi.com/products/bentobox  
