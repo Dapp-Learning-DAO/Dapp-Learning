@@ -280,7 +280,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 3. 安全开发实践
 
-- [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+- [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/translations/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns_zh-cn.md)
 
 4. 学习资源合集
 
