@@ -37,7 +37,7 @@ Join our developer communication group by submitting PR or sharing at [rebase un
 </details>
 
 <details>
-<summary>Technology Stack: </summary>
+<summary>Technology Stack:  </summary>
 
 - `web3.js`
 - `ethers.js (Hardhat)`
