@@ -422,7 +422,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <h4 align="center">
     感谢 Dapp Learning 的贡献者们
   </h4>
-  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+  <a href = "https://github.com/Dapp-Learning-DAO/Dapp-Learning/graphs/contributors">
     <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
   </a>
 </div>
