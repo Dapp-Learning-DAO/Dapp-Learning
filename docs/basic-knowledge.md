@@ -10,5 +10,5 @@
 - 边玩边学Solidity: <https://cryptozombies.io/zh/course>
 - Solidity by Example: <https://solidity-by-example.org/>
 - Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
-- Deep Dive into Rust: <https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f?gi=5c0d5a41e7dd>
+- Rust 快学 <https://rq.netroby.com/01-intro/intro.html>
 - Solidity 训练计划: https://www.notion.so/Solidity-Training-Project-d1e2793ddd4a403c87e7dfe5ca1cbfc7
