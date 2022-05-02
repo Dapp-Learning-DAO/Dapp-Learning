@@ -117,39 +117,39 @@ const account_from = {
 在步骤 3 中, 我们获取了 sol 源文件编译后的二进制 和 abi, 这里就可以使用对应的 abi 构造相应的合约实例, 以便在后续中通过合约实例进行交易的发送
 ```js
 // Create contract instance
-  const deployContract = new web3.eth.Contract(abi);
+const deployContract = new web3.eth.Contract(abi);
 ```
 
 7) 创建合约交易   
 调用 deployContract.deploy 接口, 我们创建了部署合约的二进制交易. 这里, 此交易还没有发送到区块链网络, 即合约还没有被创建  
 ```js
 // Create Tx
-  const deployTx = deployContract.deploy({
-    data: bytecode,
-    arguments: [5],
-  });
+const deployTx = deployContract.deploy({
+  data: bytecode,
+  arguments: [5],
+});
 ```  
 
 8) 交易签名 
 如下使用私钥对交易进行签名,
 ```js
 // Sign Tx
-  const deployTransaction = await web3.eth.accounts.signTransaction(
-    {
-      data: deployTx.encodeABI(),
-      gas: 8000000,
-    },
-    account_from.privateKey
-  );
+const deployTransaction = await web3.eth.accounts.signTransaction(
+  {
+    data: deployTx.encodeABI(),
+    gas: 8000000,
+  },
+  account_from.privateKey
+);
 ```
 
 9) 部署合约  
 这里使用发送签名后的交易到区块链网络, 同时会去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
 ```js
 const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
-  );
-  console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+  deployTransaction.rawTransaction
+);
+console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 ```
 
 ## 参考文档
@@ -161,8 +161,6 @@ const deployReceipt = await web3.eth.sendSignedTransaction(
   https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
 - Web3js使用参考文档:  
   https://www.dappuniversity.com/articles/web3-js-intro
-- 代码参考文档：
-  https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 - nodejs参考文档：
   http://nodejs.cn/api/fs.html
   
