@@ -182,6 +182,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
+76. [Thirdweb](https://portal.thirdweb.com/)
 ## 项目任务
 
 **准备工作**：
@@ -280,7 +281,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 3. 安全开发实践
 
-- [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+- [Solidity 安全开发实践](https://github.com/slowmist/Knowledge-Base/blob/master/translations/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns_zh-cn.md)
 
 4. 学习资源合集
 
@@ -421,7 +422,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <h4 align="center">
     感谢 Dapp Learning 的贡献者们
   </h4>
-  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+  <a href = "https://github.com/Dapp-Learning-DAO/Dapp-Learning/graphs/contributors">
     <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
   </a>
 </div>
