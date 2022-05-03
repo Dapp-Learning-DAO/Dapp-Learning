@@ -165,9 +165,9 @@ const Trans = async () => {
     console.log('I am a onetime event listner, I am going to die now');
   });
 
-  // listen to Increment event continuouslly
+  // listen to Increment event continuously
   incrementer.events.Increment(() => {
-    console.log('I am a longlive event listner, I get a event now');
+    console.log('I am a longlive event listener, I get a event now');
   });
 
   for (let step = 0; step < 3; step++) {

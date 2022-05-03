@@ -128,23 +128,23 @@ const abi = contractOfIncrementer.abi;
 调用 deployContract.deploy 接口, 我们创建了部署合约的二进制交易. 这里, 此交易还没有发送到区块链网络, 即合约还没有被创建  
 ```js
 // Create Tx
-  const deployTx = deployContract.deploy({
-    data: bytecode,
-    arguments: [5],
-  });
+const deployTx = deployContract.deploy({
+  data: bytecode,
+  arguments: [5],
+});
 ```  
 
 8) 交易签名 
 如下使用私钥对交易进行签名,
 ```js
 // Sign Tx
-  const deployTransaction = await web3.eth.accounts.signTransaction(
-    {
-      data: deployTx.encodeABI(),
-      gas: 8000000,
-    },
-    account_from.privateKey
-  );
+const deployTransaction = await web3.eth.accounts.signTransaction(
+  {
+    data: deployTx.encodeABI(),
+    gas: 8000000,
+  },
+  account_from.privateKey
+);
 ```
 
 9) 部署合约  
@@ -152,8 +152,8 @@ const abi = contractOfIncrementer.abi;
 ```js
 const deployReceipt = await web3.eth.sendSignedTransaction(
     deployTransaction.rawTransaction
-  );
-  console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+);
+console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 ```
 
 10) 通过已经部署的合约地址加载合约实例  
@@ -175,23 +175,23 @@ let number = await incrementer.methods.getNumber().call();
 ```js
 let incrementTx = incrementer.methods.increment(_value);
 
-  // Sign with Pk
-  let incrementTransaction = await web3.eth.accounts.signTransaction(
-    {
-      to: createReceipt.contractAddress,
-      data: incrementTx.encodeABI(),
-      gas: 8000000,
-    },
-    account_from.privateKey
-  );
+// Sign with Pk
+let incrementTransaction = await web3.eth.accounts.signTransaction(
+  {
+    to: createReceipt.contractAddress,
+    data: incrementTx.encodeABI(),
+    gas: 8000000,
+  },
+  account_from.privateKey
+);
 ```
 
 13) 发送交易并获取回执  
 调用 sendSignedTransaction 接口, 发送上一步变码好的交易, 同时获取交易回执用户检查交易的处理结果 
 ```js 
-const resetcReceipt = await web3.eth.sendSignedTransaction(
-    resetTransaction.rawTransaction
-  );
+const incrementReceipt = await web3.eth.sendSignedTransaction(
+  incrementTransaction.rawTransaction
+);
 ```
 
 14) 监听事件  
