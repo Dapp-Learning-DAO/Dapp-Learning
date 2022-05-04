@@ -45,39 +45,43 @@ Server application 的职能主要有：
 - 在 [zkscan](https://rinkeby.zkscan.io/) 上查看交易信息  
 
 ### 使用 JS 在 zkSync 上发送交易  
-- Install dependencies   
+- 安装依赖 
 ```shell
 yarn
 ``` 
 
-- Config env parameters    
+- 配置环境变量  
 ```shell
 cp .env.example .env
 
-## config PRIVATE_KEY , INFURA_API_KEY in .env
+## 在 .env 文件配置 PRIVATE_KEY , INFURA_API_KEY 
 ```
 
-- Execute test script    
+- 执行测试脚本  
 ```shell
 npx hardhat run scripts/main.js
 ```
 
-## References    
+## 参考链接  
 github: https://github.com/matter-labs/zksync  
-zkSync principal: https://zhuanlan.zhihu.com/p/363029544  
-zkSync source code analysis: https://www.jianshu.com/u/ac3aed07477e  
-L2 - zkSync souce code tutorial: https://zhuanlan.zhihu.com/p/343212894   
-Layer 2 expansion solution: https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA   
-Layer 2 solution comparison:  https://blog.matter-labs.io/evaluating-ethereum-l2-scaling-solutions-a-comparison-framework-b6b2f410f955  
-zkSync official website: https://zksync.io/  
+zkSync 基本原理: https://zhuanlan.zhihu.com/p/363029544  
+zkSync 源码分析: https://www.jianshu.com/u/ac3aed07477e  
+L2 - zkSync源代码导读: https://zhuanlan.zhihu.com/p/343212894   
+Layer 2 扩容方案及用例综述: https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA   
+各个 Layer 2 方案比较及考虑点:  https://blog.matter-labs.io/evaluating-ethereum-l2-scaling-solutions-a-comparison-framework-b6b2f410f955  
+zkSync 官网: https://zksync.io/  
 zkSync twitter: https://twitter.com/zksync  
 zkSync discord: https://discord.com/invite/px2aR7w  
 zkSync telegram: https://t.me/zksync  
-Deep into Plasma: https://learnblockchain.cn/2018/10/20/plasma-framework   
-7 solutions for expansion: https://picture.iczhiku.com/weixin/message1625468135177.html  
-rinkeby cross-bridge :  https://rinkeby.zksync.io  
-ZKSync introduction: https://www.jianshu.com/p/8821f1e63dc9  
+深入理解 Plasma: https://learnblockchain.cn/2018/10/20/plasma-framework   
+7大扩容方案: https://picture.iczhiku.com/weixin/message1625468135177.html  
+rinkeby 桥:  https://rinkeby.zksync.io  
+ZKSync 协议介绍: https://www.jianshu.com/p/8821f1e63dc9  
 zkSync rinkeby scan: https://rinkeby.zkscan.io/  
-NFT upload: https://app.pinata.cloud/  
-zigzag introduction:  https://docs.zigzag.exchange/  
+NFT 上传: https://app.pinata.cloud/  
+zigzag 介绍:  https://docs.zigzag.exchange/  
+一文读懂 Layer2 方案 zkSync 基本原理：https://zhuanlan.zhihu.com/p/363029544
+zksync 源码分析： https://www.jianshu.com/u/ac3aed07477e  
+李星L2 - zkSync源代码导读： https://zhuanlan.zhihu.com/p/343212894  
+以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
 zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html
