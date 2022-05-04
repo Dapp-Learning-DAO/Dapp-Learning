@@ -1,15 +1,14 @@
-from brownie import accounts
-import brownie
+from brownie import (accounts, web3)
 
 
-def test_token_to_eth_swap(w3, HAY_token, hay_token_exchange):
+def test_token_to_eth_swap(HAY_token, hay_token_exchange):
     HAY_token.approve(hay_token_exchange, 10 * 10 ** 18, {"from": accounts[0]})
 
     # step 1: initialize exchange
     hay_token_exchange.initializeExchange(10 * 10 ** 18, {"from": accounts[0], "amount": 5 * 10 ** 18})
 
     # the swap function needs a timeout parameter
-    timeout = w3.eth.getBlock(w3.eth.blockNumber).timestamp + 300
+    timeout = web3.eth.getBlock(web3.eth.blockNumber).timestamp + 300
 
     # step 2: 用account[1]的token来进行token 2 eth的操作
     HAY_token.approve(hay_token_exchange, 2 * 10 ** 18, {"from": accounts[1]})
@@ -34,20 +33,20 @@ def test_token_to_eth_swap(w3, HAY_token, hay_token_exchange):
     assert hay_token_exchange.tokenPool() == 12 * 10**18
     assert HAY_token.balanceOf(hay_token_exchange) == 12 * 10**18
     assert hay_token_exchange.ethPool() == 4168056018672890963
-    assert w3.eth.get_balance(hay_token_exchange.address) == 4168056018672890963
+    assert web3.eth.getBalance(hay_token_exchange.address) == 4168056018672890963
     assert hay_token_exchange.invariant() == 50016672224074691556000000000000000000
     assert accounts[1].balance() == account1_eth_balance + 831943981327109037
     assert HAY_token.balanceOf(accounts[1]) == 498 * 10**18
 
 
-def test_token_to_eth_payment(w3, HAY_token, hay_token_exchange):
+def test_token_to_eth_payment(HAY_token, hay_token_exchange):
     HAY_token.approve(hay_token_exchange, 10 * 10 ** 18, {"from": accounts[0]})
 
     # step 1: initialize exchange
     hay_token_exchange.initializeExchange(10 * 10 ** 18, {"from": accounts[0], "amount": 5 * 10 ** 18})
 
     # the swap function needs a timeout parameter
-    timeout = w3.eth.getBlock(w3.eth.blockNumber).timestamp + 300
+    timeout = web3.eth.getBlock(web3.eth.blockNumber).timestamp + 300
 
     # step 2: 用account[1]的token来进行token 2 eth的操作, receipt为account[2]
     HAY_token.approve(hay_token_exchange, 2 * 10 ** 18, {"from": accounts[1]})
@@ -62,7 +61,7 @@ def test_token_to_eth_payment(w3, HAY_token, hay_token_exchange):
     assert hay_token_exchange.tokenPool() == 12 * 10 ** 18
     assert HAY_token.balanceOf(hay_token_exchange) == 12 * 10 ** 18
     assert hay_token_exchange.ethPool() == 4168056018672890963
-    assert w3.eth.get_balance(hay_token_exchange.address) == 4168056018672890963
+    assert web3.eth.getBalance(hay_token_exchange.address) == 4168056018672890963
     assert hay_token_exchange.invariant() == 50016672224074691556000000000000000000
     assert accounts[2].balance() == account2_eth_balance + 831943981327109037
     assert HAY_token.balanceOf(accounts[1]) == 498 * 10 ** 18

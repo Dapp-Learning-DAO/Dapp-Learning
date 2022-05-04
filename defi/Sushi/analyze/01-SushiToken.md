@@ -1,6 +1,6 @@
 # 介绍  
-SushiToken 是 SushiSwap 的治理代币，SushiSwap允许用户通过staking UniswapV2上的主流LP代币，挖掘治理代币SUSHI。每个区块发行100个SUSHI，这些代币将被均匀部署在所有13个池中，前两周(2020.08.29——2020.09.12)，每个区块可获得1000 SUSHI，而SUSHI/ETH池将获得200枚SUSHI。SUSHI代币没有实用价值，只拥有治理权，同时SUSHI代币持有人将分享0.05%的交易费。
-[Ether scan](https://etherscan.io/address/0x6b3595068778dd592e39a122f4f5a5cf09c90fe2#code) 上可以查看 SushiToken 的具体代码。  
+SushiToken 是 SushiSwap 的治理代币，SushiSwap允许用户通过staking UniswapV2上的主流LP token，挖出治理代币SUSHI。每个区块发行100个SUSHI，这些代币将被均匀部署在所有13个池中，前两周(2020.08.29——2020.09.12)，每个区块可获得1000 SUSHI，而SUSHI/ETH池将获得200枚SUSHI。SUSHI代币没有实用价值，只拥有治理权，同时SUSHI代币持有人将分享0.05%的交易费。
+[Ether scan](https://etherscan.io/address/0x6b3595068778dd592e39a122f4f5a5cf09c90fe2#code) 上可以查看 SushiToken 的具体代码.   
 
 ## 合约分析  
 SushiToken 合约借鉴了 YAM && COMPOUND 这两个项目的代码，在其代码注释中，明确标注了其代码借鉴的原始项目。 

@@ -11,7 +11,7 @@
 
 We are designed for developers with basic skills to step into blockchain DAPP development, where they can get close to **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** an executable and simplest blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
-We, incubated from [rebase university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ),  are a learning group to study the mainstream DAPP projects and share thoughts and comments every week. Here, each one is charged with specific tasks. The weekly meetups will be recorded and uploaded to  [the rebase account](https://space.bilibili.com/382886213) on Bilibili.
+We, incubated from [dapp learning open source university](https://docs.qq.com/doc/DS0hYTUJiUVlqVXVQ),  are a learning group to study the mainstream DAPP projects and share thoughts and comments every week. Here, each one is charged with specific tasks. The weekly meetups will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
 We adhere to the concept of [open source university](https://github.com/rebase-network/Rebase-University) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and the funds will be awarded to whoever makes big contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
@@ -123,11 +123,11 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 28. [Optimism layer2](basic/28-optimism-layer2) ✅
 29. [Polygon(matic) layer2](basic/29-Polygon(matic)-layer2) ✅
 30. [zksync layer2](basic/30-zksync-layer2) ✅
-31. [duneanalytics & nansen](basic/31-dune-analytics-nansen) ⬜
+31. [StarkNet](basic/31-starkNet-layer2) ⌛
 32. [chainlink-keeper](basic/32-chainlink-keeper) ✅
 33. [pooltogether](basic/33-pooltogether) ⌛
 34. [subgraph](basic/34-subgraph) ⬜
-35. [StarkNet](basic/35-starkNet) ⌛
+35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [NFT FileCoin](basic/36-nft-ipfs) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
