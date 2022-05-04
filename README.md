@@ -315,34 +315,34 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
   <a href="https://www.hiblock.net/">
     <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
   <a href="https://www.ethereum.cn/">
     <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
 <div align="left">
-  &nbsp;
+   
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
   <a>
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
@@ -350,30 +350,30 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 <br>
 <br>
 
-## Sponsor partner
+## 赞助伙伴
 
-Shout out to the following organizations for their unconditional donations to us/the open source project.
+感谢以下组织对本开源项目的无偿捐助。
 
 <br>
 <div align="left">
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
@@ -382,21 +382,22 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      
+      
 </div>
 <br>
 
-## Contributors
+## 贡献者
 
 <div align="center">
   <h4 align="center">
-    Thanks to the contributors of Dapp Learning
+    感谢 Dapp Learning 的贡献者们
   </h4>
-  <a href = "https://github.com/Rebase-Network/Dapp-Learning/graphs/contributors">
+  <a href = "https://github.com/Dapp-Learning-DAO/Dapp-Learning/graphs/contributors">
     <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
   </a>
 </div>
+
 
 
