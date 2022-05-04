@@ -23,4 +23,5 @@
 - [ ] OpenSea站的工作流程
 
 ## 参考链接 
+NFT及OpenSea交易背后的技术分享： https://mirror.xyz/xing824.eth/O3hpbibMf9vLNz6p80YUriU8Bf3bEaJWvRL49FGAgAc
 
