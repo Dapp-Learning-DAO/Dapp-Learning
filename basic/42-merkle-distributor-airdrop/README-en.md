@@ -8,12 +8,12 @@ This demo introduces 5 methods for NFT-airdrop:
 - Airdrop to specific address
 - A signature implying the beneficiary is submitted to blockchain for verification and airdropping
 - A signature following EIP-712 is submitted to blockchain for verification and airdropping
-- A signature following EIP-712 is submitted to blockchain for verification ,signature check. and airdropping
-- A merkle proof is submiited to blockchain for verification and airdropping
+- A signature following EIP-712 is submitted to blockchain for verification ,signature check and airdropping
+- A merkle proof is submitted to blockchain for verification and airdropping
 
 ### ERC20 merkle airdrop
 
-Kindly refer to 1inch，dydx，uniswap that utilize merkle proof for airdropping. Please read more for details:
+Kindly refer to 1inch，dydx，uniswap for more details, all the projects utilize merkle proof for airdropping. Please read more for details:
 
 - <https://itzone.com.vn/en/article/merkle-airdrop-the-airdrop-solution-for-token-issues/>
 
@@ -26,7 +26,7 @@ Please refer to the code: contracts/redpacket
 ## Demo instruction
 
 - ERC721Basic
-  This is the most simple demo where the issuer can airdrop NFT to specific address by calling "mint" 
+  The most simple demo where the issuer can airdrop NFT to specific address by calling "mint" :
 
   ```js
   //
