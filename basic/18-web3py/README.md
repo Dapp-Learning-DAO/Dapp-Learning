@@ -9,7 +9,7 @@ web3.py是类似于web3.js的在ethereum client API上封装的一层api，熟�
 
 ## 版本依赖 
 python: 3.x 版本以上 
-env环境支持 todo 
+env环境支持 `todo`
 
 ## 安装 ganache-cli ( ganache-cli 已安装可跳过此步骤 )
 - 使用 npm 安装 
