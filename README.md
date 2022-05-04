@@ -315,34 +315,25 @@ The sponsorship funds will be deposited in the multi-signature wallet, managed b
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
-      
   <a href="https://www.hiblock.net/">
     <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
-      
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
-      
   <a href="https://www.ethereum.cn/">
     <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
+
 <br>
 <div align="left">
-   
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
-      
-      
-      
   <a>
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
-      
-      
-      
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
@@ -359,21 +350,12 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
-      
-      
-      
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
-      
-      
-      
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
-  </a>
-      
-      
-      
+  </a> 
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
@@ -381,10 +363,7 @@ Shout out to the following organizations for their unconditional donations to us
 <div align="left">
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
-  </a>
-      
-      
-      
+  </a> 
 </div>
 <br>
 
