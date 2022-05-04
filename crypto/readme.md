@@ -12,6 +12,7 @@ vitalik: https://vitalik.ca/general/2017/02/01/zk_snarks.html
 
 ## zkEVM
 介绍： https://hackmd.io/@yezhang/S1_KMMbGt
+zkevm架构：https://mp.weixin.qq.com/s/q-BmJfsRIqTa2zL93Rq0eg
 Scroll Tech： https://hackmd.io/@yezhang/S1sJ2cEWY
 0x parc: https://0xparc.org/blog/zk-learning-group
 https://blog.goodaudience.com/understanding-zero-knowledge-proofs-through-simple-examples-df673f796d99  

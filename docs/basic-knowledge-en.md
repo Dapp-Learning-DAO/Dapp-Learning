@@ -3,7 +3,6 @@ Read [《Master Ethereum》](https://github.com/inoutcode/ethereum_book)Understa
 
 - Ethereum principle book: <https://ethbook.abyteahead.com/howto.html>
 - Ethereum yellow book: <https://github.com/ethereum/yellowpaper>
-- Ethereum knowledge base: <https://ethfans.org/wikis/Home>
 - Solidity learning: <https://www.bilibili.com/video/BV1St411a7Pk?p=1>
 - Learning while playing Solidity: <https://cryptozombies.io/zh/course>
 - Solidity by Example: <https://solidity-by-example.org/>

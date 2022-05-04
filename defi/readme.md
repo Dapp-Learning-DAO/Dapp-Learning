@@ -6,6 +6,9 @@ DEFI学习路线图：
 - 借贷： Aave -> Compound -> Liquity -> Euler
 - 衍生品： SNX -> YFI -> Perpetual 
 
+**衍生品参项目**
+DeFi 衍生全景图: https://github.com/0xperp/defi-derivatives
+
 ## 参考链接
 
 - defi之道： https://docs.qq.com/doc/DVGJRRmJxUFhVc3Rv  
