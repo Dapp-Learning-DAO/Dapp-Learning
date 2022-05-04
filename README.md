@@ -304,9 +304,9 @@ And direct donation to our dev team's fund is also appreciated:
 - Polygon[Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 ## Ethereum Foundation-sponsored projects
-This project is sponsored by Ethereum foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
-Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
-![ESP02](./docs/imgs/ESP-02.jpg)
+
+This project is sponsored by the Ether Foundation.
+The sponsorship funds will be deposited in the multi-signature wallet, managed by the core contributors, and rewarded to the outstanding contributors of the project, welcome to join us.
 
 ## Cooperative partner
 
@@ -350,9 +350,9 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 <br>
 <br>
 
-## 赞助伙伴
+## Sponsor partner
 
-感谢以下组织对本开源项目的无偿捐助。
+Shout out to the following organizations for their unconditional donations to us/the open source project.
 
 <br>
 <div align="left">
@@ -388,11 +388,11 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 </div>
 <br>
 
-## 贡献者
+## Contributors
 
 <div align="center">
   <h4 align="center">
-    感谢 Dapp Learning 的贡献者们
+    Thanks to the contributors of Dapp Learning
   </h4>
   <a href = "https://github.com/Dapp-Learning-DAO/Dapp-Learning/graphs/contributors">
     <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
