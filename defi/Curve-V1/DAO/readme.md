@@ -38,3 +38,5 @@ Curve的项目核心代币是CRV，CRV从2020年8月13日开始发行，总量�
 - curve介绍：https://www.zvstus.com/article/news/1/75d87ffffe8454c353fd2a2a4e140000.html
 - 云雀：https://www.yuque.com/docs/share/6749f704-793a-48f6-af9f-89aabebb21ac#%20
 - Curve帝国编年简史：资本永不眠 https://mirror.xyz/cryptolunatic.eth/uKjxSopOVcMFyvttJWDcCKkfu-Jp_iaEXxDNql2vf6w
+- solidly: https://github.com/solidlyexchange/solidly/tree/master/contracts
+- curve dao 分享链接：https://docs.google.com/presentation/d/1scWGVaA3Uz5DX2jcLIq8LGAtrd2tte_3LfR20TT7oEI/edit?usp=sharing 
