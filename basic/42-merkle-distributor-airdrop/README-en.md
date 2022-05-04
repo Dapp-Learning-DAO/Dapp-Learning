@@ -13,7 +13,7 @@ This demo introduces 5 methods for NFT-airdrop:
 
 ### ERC20 merkle airdrop
 
-Kindly refer to 1inch，dydx，uniswap for more details, all the projects utilize merkle proof for airdropping. Please read more for details:
+Kindly refer to 1inch, dydx, uniswap for more details, all the projects utilize merkle proof for airdropping. Please read more for details:
 
 - <https://itzone.com.vn/en/article/merkle-airdrop-the-airdrop-solution-for-token-issues/>
 
