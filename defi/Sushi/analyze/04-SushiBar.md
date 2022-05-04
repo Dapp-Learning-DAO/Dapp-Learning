@@ -1,5 +1,5 @@
 # 介绍  
-用户在 SushiSwap 上交易会收取相应的手续费，其中 0.05% 的手续费会转换成 Sushi token 给予到 SushiBar。用户通过在 Sushi Bar 中质押 SUSHI 代币，根据质押的 Sushi 币在 Sushi Bar 中所占的比例可以获得Sushi token reward 分成。 在质押 Sushi 币的同时，用户还会获得 xSushi token，用于社区治理投票。 Sushi token 分配细则举例如下：   
+用户在 SushiSwap 上交易会收取相应的手续费，其中 0.05% 的手续费会转换成 Sushi token 给予到 SushiBar。用户通过在 Sushi Bar 中质押 SUSHI 代币，根据质押的 Sushi 币在 Sushi Bar 中所占的比例可以获得Sushi token reward 分成。 在质押 Sushi 币的同时，用户还会获得 xSushi token（可增发，无上限），用于社区治理投票。 Sushi token 分配细则举例如下：   
 -  用户添加 sushi token ，获得对应的 xsushi ，计算公式如下       
 receivedXsushi =  $\frac{ stakeAmount }{ totalStakedAmount} \times totalXsushi $    
 totalStakeAmount =  所有用户质押的 sushi 总量     
