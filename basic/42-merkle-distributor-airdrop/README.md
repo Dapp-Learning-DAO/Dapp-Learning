@@ -2,7 +2,7 @@
 
 ## 介绍
 
-### NFT merkel airdrop
+### NFT merkle airdrop
 
 本样例介绍了 5 种 NFT 空投方式
 
@@ -12,7 +12,7 @@
 - 线下 EIP-712 方式签名, 线上进行 EIP-712 验证, Signature Check
 - 线下生成 Merkle 证明, 线上 Merkle 验证
 
-### ERC20 merkel airdrop
+### ERC20 merkle airdrop
 
 参考 1inch，dydx，uniswap 都实现 merkle 空投。 具体原理请参考：
 
@@ -179,8 +179,8 @@
 - <https://github.com/Anish-Agnihotri/merkle-airdrop-starter>
 - <https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts>
 - <https://github.com/miguelmota/merkletreejs>
-- erc20 merkel drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
-- merkel drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
+- erc20 merkle drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
+- merkle drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
 - Evolution of Airdrop: <https://medium.com/hackernoon/evolution-of-airdrop-from-common-spam-to-the-merkle-tree-30caa2344170>
 - github demo: <https://github.com/smartzplatform/constructor-eth-merkle-airdrop>
 - uni airdrop: <https://github.com/Uniswap/merkle-distributor>

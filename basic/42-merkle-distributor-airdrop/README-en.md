@@ -2,7 +2,7 @@
 
 ## Introduction
 
-### NFT merkel airdrop
+### NFT merkle airdrop
 
 This demo introduces 5 methods for NFT-airdrop:
 - Airdrop to specific address
@@ -180,8 +180,8 @@ Please refer to the code: contracts/redpacket
 - <https://github.com/Anish-Agnihotri/merkle-airdrop-starter>
 - <https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts>
 - <https://github.com/miguelmota/merkletreejs>
-- erc20 merkel drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
-- merkel drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
+- erc20 merkle drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
+- merkle drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
 - Evolution of Airdrop: <https://medium.com/hackernoon/evolution-of-airdrop-from-common-spam-to-the-merkle-tree-30caa2344170>
 - github demo: <https://github.com/smartzplatform/constructor-eth-merkle-airdrop>
 - uni airdrop: <https://github.com/Uniswap/merkle-distributor>
