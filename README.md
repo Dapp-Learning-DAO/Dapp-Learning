@@ -334,9 +334,12 @@ The sponsorship funds will be deposited in the multi-signature wallet, managed b
 </div>
 <br>
 <div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a>
