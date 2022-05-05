@@ -1,9 +1,9 @@
 const ethers = require("ethers");
 
 async function depositETHToZksync(zkWallet, targetAddress, costEth) { // L1 to L2
-    console.log("L1 到 L2 转账中....");
+    console.log("Transfering from L1 to L2 ....");
     const deposit = await zkWallet.depositToSyncFromEthereum({
-        depositTo: targetAddress, // 可以给自己的地址转账
+        depositTo: targetAddress, // Can be the same address
         token: "ETH",
         amount: ethers.utils.parseEther(costEth),
     })
@@ -12,7 +12,7 @@ async function depositETHToZksync(zkWallet, targetAddress, costEth) { // L1 to L
     // Completes when a promise is issued to process the tx
     const depositReceipt = await deposit.awaitReceipt();
 
-    console.log("L1 到 L2 转账完成");
+    console.log("Transfer from L1 to L2 successfully");
     console.log({ depositReceipt })
 }
 
