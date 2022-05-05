@@ -82,7 +82,7 @@ We will compile some crypto courses from top universities abroad and the Ethereu
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 If you have other high-quality course recommendations, we hope you can make a suggestion and add it in our course repo: [Recommendations for cryptographic courses](./docs/crypto-course.md).  
-We also set up a translation team to translate these public courses save our buddies time. For Chinese notes, please check: [MIT Course Notes Organizer](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298# wechat_redirect)
+We also set up a translation team to translate these public courses save our buddies time. For Chinese notes, please check: [MIT Course Notes Organizer](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298#wechat_redirect)
 If you are also interested in translation, please follow our WeChat Official Accounts ”Dapp-Learning“ and contact us.  
 
 ## Basic Tasks
@@ -169,11 +169,11 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 71. [Foundry](basic/71-foundry/README.md)
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
-74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
+74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
 75. [golang-dapp](basic/75-golang-dapp) ✅
-76. [Thirdweb](https://portal.thirdweb.com/)
+76. [Thirdweb](https://portal.thirdweb.com/)  
 
-Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+Welcome to submit pull request, [Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Advanced task
 
@@ -183,9 +183,9 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
   Developers can initiate project research initiatives, form groups, and collaborate within development groups. This section is recommended as a submodule introduction.
 
 ## DeFi advanced tasks   
-The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.
-  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)
-  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)  
+The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.    
+  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)    
+  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)   
 
 **DEFI Learning roadmap：**    
 Trading -> Lending -> Derivatives

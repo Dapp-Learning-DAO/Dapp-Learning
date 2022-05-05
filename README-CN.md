@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README.md)
 
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
