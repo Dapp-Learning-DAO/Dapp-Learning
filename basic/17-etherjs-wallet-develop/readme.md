@@ -1,39 +1,39 @@
-# 钱包开发
+# wallet development
 
-HD 钱包(分层确定性钱包)，钱包协议：BIP32、BIP44、BIP39
-[钱包原理](https://learnblockchain.cn/2018/09/28/hdwallet/)
+HD Wallet (Hierarchical Deterministic Wallet), Wallet Protocol: BIP32, BIP44, BIP39
+[Wallet Principle](https://learnblockchain.cn/2018/09/28/hdwallet/)
 
-## 钱包类型
+## wallet type
+Created by:
+1. Random number
+2. Private key 
+3. Mnemonic 
+4. keystore 
+   A Keystore file is a file format (JSON) in which the Ethereum wallet stores private keys. Use the password set by the user to encrypt to a certain extent, and the degree of protection depends on the password strength of the user to encrypt the wallet.
+5. Brain wallets (etherjs 5 has been removed)
 
-1. 随机数创建
-2. 私钥创建
-3. 助记词创建
-4. keystore 创建  
-   Keystore 文件是以太坊钱包存储私钥的一种文件格式 (JSON)。使用用户自己设置的密码来加密，以起到一定程度上的保护作用, 而保护的程度取决于用户加密该钱包的密码强度。
-5. 脑记忆钱包(etherjs 5 已经移除)
+## provider type
 
-## provider 类型
-
-1. Etherscan Provider：连接 Etherscan API 的 provider，需要 2 个参数，一个是网络名称，一个查询 API 所需的 token（之前的文章 有讲过，查询 Etherscan 的 API 时 apitoken 不是必须的，但如果没有的话会受到每秒 5 次的调用限制）。
-2. Json Rpc Provider：连接本地以太坊网点的 Provider。
-3. Infura Provider：连接 Infura 网络的 Provider，Infura 是一套以太坊的基础设施服务，同样有以太坊的主网络和测试网络。
-4. Web3 Provider：连接已有 web3 对象的 provider。
-5. Fallback Provider：连接一个可以是多种类型的 provider 集合，如果前面的 provider 有问题，会自动去连接后面的。
+1. Etherscan Provider: It requires two parameters to connect the Etherscan API, one is the network name, and the other is the token required to query the API (the API token is not necessary when querying the Etherscan API, but if not, the subject will be limited of 5 calls per second).
+2. Json Rpc Provider: The Provider that connects to the local Ethereum network.
+3. Infura Provider: The Provider that connects to the Infura network. Infura is a set of Ethereum infrastructure services, and also has the Ethereum main network and test network.
+4. Web3 Provider: A provider that connects to an existed web3 object.
+5. Fallback Provider: Connect to a group of providers that can be of various types. If there is a problem with the previous provider, it will automatically connect to the latter.
 
 ```js
 const provider = providers.getDefaultProvider();
 const wallet = new Wallet(privateKey, provider);
 ```
 
-或者
+or
 ```js
 const wallet = new Wallet(privateKey);
 wallet.provider = provider;
 ```
 
-如果用普通的 JS number 对象来存储操作的话，可能会因为数据溢出而导致结果异常。
+If you use a normal JS number object to store the operation, it may cause abnormal results due to data overflow.
 
-## 参考链接
+## Reference link
 
 - https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
 - http://zhaozhiming.github.io/blog/2018/04/25/how-to-use-ethers-dot-js/

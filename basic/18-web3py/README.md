@@ -1,52 +1,52 @@
-# web3.py 的基本使用
-web3.py是类似于web3.js的在ethereum client API上封装的一层api，熟悉使用它能够让我们对以太坊编程有更好的理解
+# Basic usage of web3.py
+web3.py is a wrapped API based on the ethereum client API similar to web3.js. Familiarity with using it can give us a better understanding of programming on ethereum 
 
-## 相关工具 
-- python语言的常用IDE：[PyCharm](https://www.jetbrains.com/pycharm/) [Visual Studio Code](https://code.visualstudio.com/)
-- python版本管理工具：[pyenv](https://github.com/pyenv/pyenv) ，可以用pyenv来安装anaconda或者其他版本的python环境
-- ganache-cli: 通过node来安装，快速构建在本地的区块链
-- [brownie](https://eth-brownie.readthedocs.io/en/stable/toctree.html) ：作为python的软件包来安装，类似于truffle，使用它可以更方便编译或者生成项目文件，在这里为了演示web3.py的接口，不使用它的其他功能
+## Related tools
+- Common IDE for python: [PyCharm](https://www.jetbrains.com/pycharm/) [Visual Studio Code](https://code.visualstudio.com/)
+- python version management tool: [pyenv](https://github.com/pyenv/pyenv), you can use pyenv to install anaconda or other versions of python environment
+- ganache-cli: Install through node, quickly build a local blockchain
+- [brownie](https://eth-brownie.readthedocs.io/en/stable/toctree.html): Installed as a python package, similar to truffle, it can be used to compile or generate projects more easily, in Here, just to demonstrate the interface of web3.py, its other functions are not used
 
-## 版本依赖 
-python: 3.x 版本以上 
-env环境支持 `todo`
+## Version dependencies
+python: version 3.x and above
+env environment support `todo`
 
-## 安装 ganache-cli ( ganache-cli 已安装可跳过此步骤 )
-- 使用 npm 安装 
+## Install ganache-cli (If ganache-cli is already installed, skip this)
+- Install using npm
 ```
 npm install -g ganache-cli
 ```
 
-## 安装 web3  
+## install web3
 ```
-pip3 install web3  
+pip3 install web3
 ```
 
-## 操作步骤
-- 启动 ganache-cli
+## Steps
+- start ganache-cli
 ```
 ganache-cli
 ```
 
-- 执行脚本
+- execute script
 ```
-## 演示合约构造及部署
+## Demonstrate contract construction and deployment
 python scripts/1_deploy_using_web3.py
 
-## 根据已存在的合约地址构造合约实例
+## Construct a contract instance based on the existing contract address
 python scripts/2_play_around_on_existing_contract.py
 
-## 使用 openzepplin 合约演示转账
+## Demo of transfer using openzepplin contract
 python scripts/3_use_openzeppelin.py
 
-## 演示 ERC20 合约的调用
+## Demonstrate the call of the ERC20 contract
 python scripts/4_use_openzeppelin_mintable_contract.py
 
-## 演示 ERC20 动态 Mint 调用
+## Demonstrate ERC20 dynamic Mint call
 python scripts/5_use_openzeppelin_dynamic_mintable_contract.py
 ```
 
 
-## 参考链接
-https://web3py.readthedocs.io/en/stable/quickstart.html  
-https://github.com/pypa/pipx   
+## Reference link
+https://web3py.readthedocs.io/en/stable/quickstart.html
+https://github.com/pypa/pipx
