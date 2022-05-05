@@ -3,11 +3,11 @@
 
 ## Overview
 
-- NFT farming has similiarities to yield farming in DeFi sector but differs in that it takes NFTs rather than fungible tokens. As Dapp is developing so fast these years, even NFT with low liquidity could be used to farming.
+- NFT farming has similiarities to yield farming in DeFi sector but differs in that it involves NFTs as either stakings or rewards. As Dapp is developing so fast these years, even illiquid NFT  could be used to farming.
 
-- In a traditional manner, NFT Farming requires user to acquire specific token by depositing NFTs, then add it to some NFT-token pairs to farm.
+- In a traditional manner, NFT Farming requires user to firstly acquire specific token by depositing NFTs, then add it to some NFT-token pairs to farm.
 
-- In a gamefied manner, where the lifecyle of NFTs is encapusulated into games, you can swap in-game items for tokens to do yield farming.
+- In a gamefied manner, where the lifecyle of NFTs is encapusulated into games, you can swap in-game items for tokens to do farming.
 
 
 ## References
