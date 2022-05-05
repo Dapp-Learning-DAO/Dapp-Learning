@@ -42,7 +42,7 @@ Through this basic task, you can learn the processes of compiling and deploying 
 
 # Interpret the Code in `index.js`
 `index.js` contains the most important part of this task, which includes the following functions:
-## 1. Lode the configuration file
+## 1. Load the configuration file
 For security sake, the private key is not hard-coded, but it can be read as environment variables. When run this task, the `dotenv` plugin will automatically read the configurations in the `.env` file and load them as environment variables, and then you can use the private key and other environment variables via `process.env` .  
 Here is the code:
 ```js
