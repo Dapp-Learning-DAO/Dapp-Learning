@@ -12,39 +12,39 @@ Operator执行交易后本地的merkle tree root会由prev state root转换成po
 
 ## 基本架构
 
-zkSync 的基本组成有：
+Components of zkSync：
 
-- zkSync smart contract：部署在以太坊网络上的 Solidity 智能合约，用于管理用户 balances 并验证 zkSync network 操作的正确性。
+- zkSync smart contract：Deployed on Ethereum mainnet, which is used to manage account balance && verify operations on zkSync network. 
 
-- Prover application：为 a worker application，用于创建 a proof for an executed block。  
-  Prover application 会从 Server application 中获取有效的 jobs，当有新的区块时，Server application 将提供 a witness（input data to generate a proof），然后 Prover application 开始工作。当 proof 生成后，Prover application 会将该 proof 报告给 Server application，Server application 再将该 proof 发布给 zkSync 智能合约。
+- Prover application：A worker application that is used to generate a proof for an executed block。  
+  Prover application fetch valid jobs from Server application. Whenever a new block is generated, Server application will provide a witness（input data to generate a proof), then Prover application starts to work. when proof is generated, Prover application will report the proof to Server application, and then Server application publish the proof to zkSync smart contract. 
 
-- Prover application 可看成是 on-demand worker，当 Server application 负载很高时，允许有多个 Prover applications，当没有交易输入时则没有 Prover application。
-生成 proof 是非常消耗资源的工作，因此，运行 Prover application 的机器应具有现代 CPU 和大量的 RAM。
+- Prover application can be regarded as an on-demand worker. When Server application workload is very high, there will be multi Prover applications. In the opposite, when there is no transactions, no Prover application is needed.  
+Proof generating is a resource-intensive job, it requires a very powerful CPU && lots of RAM for machine that runs Prover application。
 
-- Server application：运行 zkSync 网络的节点。
-Server application 的职能主要有：  
-1）监测智能合约上的 onchain operations（如存款）  
-2）接收交易  
-3）生成 zkSync 上的区块  
-4）为 executed blocks 发起 proof 生成申请  
-5）将数据发布到 zkSync smart contract    
+- Server application：Nodes running the zkSync network 
+Main functions of Server application ：  
+1）Listenging events of onchain operations（ Such as deposite ）  
+2）Receive transactions  
+3）Generate blocks on zkSync   
+4）Apply for proof generating for executed blocks   
+5）Publish data to zkSync smart contract    
 
-## 操作流程  
-### 手工存入 ETH 到 zksync   
-- 登陆 [zksync 测试网](https://wallet.zksync.io/?network=rinkeby)  并链接 metaMask 钱包  
+## Operation Steps   
+### Deposite ETH to zksync mannually    
+- Login [zksync testnet](https://wallet.zksync.io/?network=rinkeby)  并链接 metaMask 钱包  
 
-- 选择 "Add Funds"   
+- Choose "Add Funds"   
 
-- 输入存入金额, 然后点击 "Add Funds"  
+- Input deposite amount, then click "Add Funds"  
 
-- 存入成功  
+- Deposite successfully  
 
-- 点击 "OK" 查看 rinkeby zkSync 上的余额  
+- Click "OK" and check balance on rinkeby zkSync   
 
-- 在 [zkscan](https://rinkeby.zkscan.io/) 上查看交易信息  
+- Review transaction on [zkscan](https://rinkeby.zkscan.io/)   
 
-### 使用 JS 在 zkSync 上发送交易  
+### Send transaction to zkSync with script   
 - Install dependencies   
 ```shell
 yarn
