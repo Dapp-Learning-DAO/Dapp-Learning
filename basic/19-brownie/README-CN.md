@@ -1,19 +1,21 @@
 # Brownie
 
-[Brownie](https://github.com/eth-brownie/brownie) is a Python-based smart contract development and testing framework for the Ethereum Virtual Machine.
+[Brownie](https://github.com/eth-brownie/brownie) 是一个基于 Python 针对以太坊虚拟机的智能合约的开发和测试框架。
 
-## Usage of Brownie
-Use Brownie to run the test cases of uniswapv1, based on the features of Brownie rewrite the test of the original uniswapv1 project, and add detailed comments
+## Brownie 的使用
 
-### Install Brownie
+使用 Brownie 来运行 uniswapv1 的 test cases，基于 Brownie 的特性对原有的 uniswapv1 项目的 test 进行了重新编写，并且加入了详细的注释
 
-- Install dependencies Brownie
+### 安装 Brownie
+
+- 安装依赖 Brownie
 
 ```sh
 pip3 install eth-brownie
 ```
 
-Run the` brownie` command in the terminal and you should see an output similar to the following:
+在终端中运行 brownie，应该可以看到类似下面这样的输出：
+
 ```sh
 Brownie v1.18.1 - Python development framework for Ethereum
 Usage:  brownie <command> [<args>...] [options <args>]
@@ -41,21 +43,21 @@ each command.
 
 ### Interacting with your Contracts
 
-brownie debug console that can interact with on-chain contracts
+brownie 调试控制台，可以和链上合约进行交互操作
 
 ```sh
 cd ./brownie_test
 brownie console
 ```
 
-brownie will automatically compile the contract, start a built-in Ganache local test network, and provide a live interactive console finally
+brownie 会自动编译合约，并启动一个内置的 Ganache 本地测试网络，最后提供一个可实时交互的控制台
 
 ```sh
 accounts[0]
 # <Account '0x66aB6D9362d4F35596279692F0251Db635165871'>
 ```
 
-Let's try to deploy an ERC20 token right in the control and perform simple interactions
+我们尝试直接在控制部署一个 ERC20 token，并进行简单的交互
 
 ```sh
 my_token = SimpleToken.deploy("DappLearning", "DL", 18, 0, {"from": accounts[0]})
@@ -66,7 +68,7 @@ my_token = SimpleToken.deploy("DappLearning", "DL", 18, 0, {"from": accounts[0]}
 #   SimpleToken deployed at: 0x3194cBDC3dbcd3E11a07892e7bA5c3394048Cc87
 ```
 
-`my_token` will cache the deployed token contract object, and now we try to interact
+`my_token` 将缓存部署的token合约对象，我们来尝试进行交互
 
 ```sh
 tx1=my_token.mint(accounts[0].address, 1000000*10**18, {'from': accounts[0]})
@@ -82,20 +84,20 @@ my_token.balanceOf(accounts[0].address)
 # 1000000000000000000000000
 ```
 
-### Compile the contract
+### 编译合约
 
 ```sh
 cd brownie_test
 brownie compile
 ```
 
-### Test contract
+### 测试合约
 
 ```sh
 brownie test
 ```
 
-### execute script
+### 执行脚本
 
 ```sh
 brownie run *.py --network kovan
@@ -103,15 +105,15 @@ brownie run *.py --network kovan
 
 ## pytest
 
-Brownie recommends using pytest to write test cases.
+Brownie 推荐使用 pytest 编写测试案例。
 
 - [pytest documents](https://docs.pytest.org/en/latest/)
 
 ### Brownie Pytest Fixtures
 
-Fixtures are functions that pytest applies to one or more test functions and are called before each test is executed. Fixtures are used to set the initial conditions required for testing.
+Fixtures 是 pytest 应用于一个或多个测试函数的函数，并在执行每个测试之前被调用。Fixtures 用于设置测试所需的初始条件。
 
-Brownie provides Fixtures that simplify interaction and testing with projects. Most of the core functionality can be accessed through Fixures instead of import statements. Here's an example using Brownie's Fixtures instead of import:
+Brownie 提供了简化与项目交互和测试的 Fixtures。大多数核心功能可以通过 Fixures 而不是 import 语句来访问。例如，这是使用 Brownie 的 Fixtures 而不是 import 的示例：
 
 ```python
 import pytest
@@ -127,7 +129,7 @@ def test_transfer(token, accounts):
 
 ### conftest.py
 
-We can put the generic Fixuters function in the `conftest.py` file, and the pytest testing framework will automatically load the Fixtures in it before each test case starts.
+我们可以把通用的 Fixuters 函数放到 `conftest.py` 文件中，pytest 测试框架会在每个测试案例开始之前，自动加载其中的 Fixtures。
 
 ```python
 # ./conftest.py
@@ -146,13 +148,13 @@ def test_eth_to_token_swap(DL_token):
     ...
 ```
 
-## Reference link
 
-- brownie official website: <https://eth-brownie.readthedocs.io/en/stable/toctree.html>
-- Previous Uniswap contracts: <https://github.com/Uniswap/old-solidity-contracts>
-- Uniswap V1 contract: <https://github.com/Uniswap/uniswap-v1/tree/master/tests>
-- brownie pdf documentation: <https://readthedocs.org/projects/eth-brownie/downloads/pdf/v1.3.1_a/>
-- pytest tutorial: <https://zhuanlan.zhihu.com/p/87775743>
-- vyper official website: <https://vyper.readthedocs.io/en/stable>
-- Brownie Tutorial by Curve Finance: <https://www.youtube.com/watch?v=nkvIFE2QVp0&list=PLVOHzVzbg7bFUaOGwN0NOgkTItUAVyBBQ>
+## 参考链接
 
+- brownie 官网: <https://eth-brownie.readthedocs.io/en/stable/toctree.html>
+- 旧版 Uniswap 合约: <https://github.com/Uniswap/old-solidity-contracts>
+- Uniswap V1 合约: <https://github.com/Uniswap/uniswap-v1/tree/master/tests>
+- brownie pdf 文档: <https://readthedocs.org/projects/eth-brownie/downloads/pdf/v1.3.1_a/>
+- pytest 教程: <https://zhuanlan.zhihu.com/p/87775743>
+- vyper 官网: <https://vyper.readthedocs.io/en/stable>
+- Brownie Tutorial by Curve Finance： <https://www.youtube.com/watch?v=nkvIFE2QVp0&list=PLVOHzVzbg7bFUaOGwN0NOgkTItUAVyBBQ>
