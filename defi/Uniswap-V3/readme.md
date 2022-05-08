@@ -5,11 +5,12 @@ Uniswap V3 研究小组总结输入了 Uniswap V3 的白皮书分析, 代码逻�
 
 分享会回放视频：
 
-- Uniswap V3——白皮书解读: https://www.bilibili.com/video/BV1go4y1X7Kx/
-- Uniswap V3——合约代码解析 (1): https://www.bilibili.com/video/BV1gL411n7LZ/
-- Uniswap V3——合约代码解析 (2): https://www.bilibili.com/video/BV1zM4y1N7JW/
-- Uniswap V3——前端代码解析-part1: https://www.bilibili.com/video/BV1KQ4y1m7md/
-- Uniswap V3——前端代码解析-part2: https://www.bilibili.com/video/BV1gb4y1U7S4/
+- [Uniswap V3——白皮书解读](https://www.youtube.com/watch?v=ypASWR5b9zA&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=2)
+- [Uniswap V3——合约代码解析 (1)](https://www.youtube.com/watch?v=Lgp0KS8eo7c&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=3)
+- [Uniswap V3——合约代码解析 (2)](https://www.youtube.com/watch?v=KZ5a7OO4J2I&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=4)
+- [Uniswap V3——SDK代码解析](https://www.youtube.com/watch?v=u5Tg3aw6K6s&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=6)
+- [Uniswap V3——前端代码解析-Interface](https://www.youtube.com/watch?v=wzgyDpq3vlM&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=6)
+- [由浅入深理解UniswapV3原理](https://www.youtube.com/watch?v=3Wr8Ry1ragg&list=PLgPVMJY4tnFPfwAbNx3UFmHne66pkl_OH&index=1)
 
 ## Whitepaper
 

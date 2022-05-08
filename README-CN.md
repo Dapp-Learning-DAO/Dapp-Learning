@@ -1,4 +1,4 @@
-中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README.md)
 
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
@@ -187,7 +187,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 **准备工作**：
 此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。
-可采用小组协作方式将项目部署至测试网，以此为基础在 Rebase 社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
+可采用小组协作方式将项目部署至测试网，以此为基础在dapp learning社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。 
 开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
@@ -343,34 +343,37 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://rebase.network/">
     <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
   </a>
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.hiblock.net/">
     <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
   </a>
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
   </a>
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.ethereum.cn/">
     <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
 <div align="left">
-   
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a>
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
   </a>
@@ -387,21 +390,18 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
@@ -410,9 +410,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-      
-      
-      
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
 </div>
 <br>
 
@@ -423,6 +422,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     感谢 Dapp Learning 的贡献者们
   </h4>
   <a href = "https://github.com/Dapp-Learning-DAO/Dapp-Learning/graphs/contributors">
-    <img src = "https://contrib.rocks/image?repo=rebase-network/dapp-learning"/>
+    <img src = "https://contrib.rocks/image?repo=Dapp-Learning-DAO/Dapp-Learning&max=200"/>
   </a>
 </div>
