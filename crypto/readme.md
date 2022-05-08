@@ -17,6 +17,7 @@ Scroll Tech： https://hackmd.io/@yezhang/S1sJ2cEWY
 0x parc: https://0xparc.org/blog/zk-learning-group
 https://blog.goodaudience.com/understanding-zero-knowledge-proofs-through-simple-examples-df673f796d99  
 zkclub: https://www.youtube.com/playlist?list=PLj80z0cJm8QHm_9BdZ1BqcGbgE-BEn-3Y
+zkevm-specification: https://ethresear.ch/t/a-zk-evm-specification/11549
 
 ## 参考链接
 - zk workshop: https://www.zkhack.dev/  
