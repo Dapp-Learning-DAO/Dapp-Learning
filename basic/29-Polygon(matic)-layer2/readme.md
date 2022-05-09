@@ -1,114 +1,112 @@
 # Polygon
+Polygon is not just wants to provide a scaling solution, but wants to create a ecosystem that links all of the different scaling solutions, such as Plasma, Optimistic, rollups and ZK rollups. 
 
-Polygon 的目标不是提供一两个扩展解决方案，而是创建一个生态系统，使其能够轻松连接多个不同的扩展解决方案——从具有不同共识机制的侧链到第二层网络，如 Plasma、Optimistic rollups 和 ZK rollups。  
+Right now, Polygon supports two types of Ethereum-compatible networks: stand-alone network && secured chain:  
+Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-alone network）和安全链（secured chain） 
+- Stand-alone networks rely on their own security, for example, they have their own consensus model, such as Proof of Stake (PoS) or Delegated Proof of Stake (DPoS)   
+- Secured chains use a "security-as-a-service" model. It can be provided directly by Ethereum, for example through fraud proofs used by Plasma, or by specialized verification nodes. These validation nodes run in the Polygon ecosystem and can be shared by multiple projects - a concept similar to Poca's shared security model  
 
-Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-alone network）和安全链（secured chain）
-- 独立网络依赖于它们自己的安全性，例如，它们可以有自己的共识模型，如权益证明（PoS）或委托权益证明（DPoS）  
-- 安全链使用“安全即服务”模型。它可以由以太坊直接提供，例如通过 Plasma 使用的欺诈证明（fraud proofs），或由专业验证节点提供。这些验证节点运行在 Polygon 生态系统中，可以被多个项目共享——这个概念类似于波卡的共享安全模型
-
-当谈到 Polygon 的架构时，我们需要关注的主要要点是它被刻意地设计成通用和抽象的。这允许其他希望扩展的应用程序选择最适合其需求的扩展解决方案。
+The main point to focus on when it comes to Polygon's architecture is that it is deliberately designed to be generic and abstract. This allows other applications that wish to extend to choose the extended solution that best suits their needs.  
 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/29-Polygon(matic)-layer2/matic.jpeg?raw=true" /></center>
 
 <br/>
 <br/>
 
-## Polygon 扩容方案
+## Polygon scaling solution  
 
 <center>
     <img src="https://img.chainnews.com/material/images/a0172d4158f8e2529fd3d04d8142e818.jpg-article" alt="matic.jpeg" style="zoom:50%;" />
 </center>
 
-## Matic Plasma Chain
+## Polygon Plasma Chain
 
 ---
 
-[(Polygon Plasma Chain)](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started) Plasma 允许使用者将交易从主链转移到子链，从而实现快速和廉价的交易。Plasma 的一个缺点是用户从第 2 层网络中提取资金需要很长的等待时间。Plasma 不能用于扩展通用的智能合约。
+[(Polygon Plasma Chain)](https://docs.polygon.technology/docs/develop/ethereum-polygon/plasma/getting-started/)  
+Users can transfer assets from Ethereum network to polygon network through Plasma, on which the fee is very low.  
+But here is a drawback with it. That users need to wait for a long time when withdraw asset back to Ethereum network. 
 
-## Matic PoS Chain
-
----
-
-[(Polygon PoS Chain)](https://docs.matic.network/docs/develop/ethereum-matic/pos/getting-started/) Matic PoS Chain 是一个未经许可的侧链，它与以太坊链并行运行。该链由具有自身验证节点的权益证明共识机制来保护。尽管 Matic PoS Chain 有自己的共识机制，但在验证节点 staking 和检查点方面，它也依赖于以太坊的安全性。
-
-## Polygon Hermez ZKRollup
+## Polygon State Transfer  
 
 ---
 
-[(Hermez ZKEvm)](https://www.chainnews.com/articles/018319341743.htm) 基于简洁的有效性证明（又称零知识证明）的以太坊第 2 层解决方案，在以太坊上定期提交和验证。
+[(Polygon State Transfer)](https://docs.polygon.technology/docs/develop/l1-l2-communication/state-transfer)   
+Polygon validators continuously monitor a contract on Ethereum chain called StateSender. Each time a registered contract on Ethereum chain calls this contract, it emits an event. Using this event Polygon validators relay the data to another contract on Polygon chain. This StateSync mechanism is used to send data from Ethereum to Polygon.
+
+Polygon validators also periodically submit a hash of all transactions on Polygon chain to Ethereum chain. This Checkpoint can be used to verify any transaction that happened on Polygon. Once a transaction is verified to have happened on Polygon chain, action can be taked accordingly on Ethereum.
 
 ## Polygon SDK
 
 ---
 
-[(Polygon SDK)](https://polygon.technology/polygon-sdk/) 一个模块化和可扩展的框架，用于构建兼容 Ethereum 的区块链网络，用 Golang 编写。
+[(Polygon SDK)](https://polygon.technology/polygon-sdk/) A modular and scalable framework for building Ethereum-compatible blockchain networks, written in Golang.
 
 ## Polygon Avail
 
 ---
 
-[(Polygon Data Avail)](https://blog.polygon.technology/introducing-avail-by-polygon-a-robust-general-purpose-scalable-data-availability-layer-98bc9814c048) Avail 是一个通用的、可扩展的、专注于数据可用性的区块链，针对独立链、侧链和链外扩展解决方案。
+[(Polygon Data Avail)](https://blog.polygon.technology/introducing-avail-by-polygon-a-robust-general-purpose-scalable-data-availability-layer-98bc9814c048) Avail is a general-purpose, scalable data availability-focused blockchain targeted for standalone chains, sidechains, and off-chain scaling solutions.
 
 <br/>
 <br/>
 
-# 参考资源
+# References 
 
-## 1 综合资源
-
----
-
-### Polygon 介绍
-
-- [Polygon 精简介绍](https://biquan365.com/12636.html)
-- [Polygon 基础介绍和使用教程](https://www.yuque.com/docs/share/8e737364-c380-418e-af21-0f07095fe900)
-- [Polygon 架构](https://docs.matic.network/docs/contribute/matic-architecture)
-- [Polygon 上的 Meta-transactions](https://docs.matic.network/docs/develop/metatransactions/getting-started)
-- [Matic Network 白皮书中文版](https://www.chainnews.com/articles/022315243415.htm)
-
-### 官方网站
-
-- [Polygon 官网](https://polygon.technology/)
-- [Polygon 网络浏览器](https://polygonscan.com/)
-- [Polygon 文档](https://docs.matic.network/)
-- [Awesome Polygon (所有在 Polygon 网络上部署的项目)](http://awesomepolygon.com/)
-
-### 开发者入口
-
-- [Polygon 开发入门](https://docs.matic.network/docs/develop/getting-started)
-- [Matic 主网](https://rpc-mainnet.maticvigil.com)
-- [Mumbai 测试网](https://rpc-mumbai.maticvigil.com)
-- [Polygon 测试币](https://faucet.matic.network/)
-
-## 2 Polygon 申请
+## 1 Resources 
 
 ---
 
-- [Polygon 官宣申请表](https://airtable.com/shrDaWf1UYNzkhTbg)
-- [Polygon Grant 申请](https://polygon.technology/developer-support-program/)
+### Polygon Introduction 
 
-## 3 Polygon 开发者资源
+- [Polygon brief introudction](https://biquan365.com/12636.html)
+- [Polygon tutorial](https://www.yuque.com/docs/share/8e737364-c380-418e-af21-0f07095fe900)
+- [Polygon framework](https://docs.matic.network/docs/contribute/matic-architecture)
+- [Polygon Meta-transactions](https://docs.matic.network/docs/develop/metatransactions/getting-started)
+- [Matic Network WhitePaper](https://www.chainnews.com/articles/022315243415.htm)
+
+### Official Website
+
+- [Polygon website](https://polygon.technology/)
+- [Polygon scan](https://polygonscan.com/)
+- [Polygon official docs](https://docs.matic.network/)
+- [Awesome Polygon (Projects deployed on polygon)](http://awesomepolygon.com/)
+
+### Developer Portal  
+
+- [Polygon development docs](https://docs.matic.network/docs/develop/getting-started)
+- [Matic mainnet](https://rpc-mainnet.maticvigil.com)
+- [Mumbai testnet](https://rpc-mumbai.maticvigil.com)
+- [Polygon faucet](https://faucet.matic.network/)
+
+## 2 Polygon Application 
+
+---
+
+- [Polygon Official Application Form](https://airtable.com/shrDaWf1UYNzkhTbg)
+- [Polygon Grant](https://polygon.technology/developer-support-program/)
+
+## 3 Polygon development resources  
 
 ---
 
 ### How to
 
-- [如何使用预言机](https://docs.matic.network/docs/develop/oracles/getting-started)
-- [如何使用 Chainlink](https://docs.matic.network/docs/develop/oracles/chainlink)
-- [如何接入支付工具](https://docs.matic.network/docs/develop/fiat-on-ramp)
-- [如何使用 TheGraph](https://docs.matic.network/docs/develop/graph)
-- [如何使用 hardhat](https://docs.matic.network/docs/develop/hardhat/)
-- [如何设置 Infura RPC](https://www.youtube.com/watch?v=jz6idHfMGvk)
+- [Polygon oracle](https://docs.matic.network/docs/develop/oracles/getting-started)
+- [Polygon With Chainlink](https://docs.matic.network/docs/develop/oracles/chainlink)
+- [Polygon With TheGraph](https://docs.matic.network/docs/develop/graph)
+- [Polygon With hardhat](https://docs.matic.network/docs/develop/hardhat/)
+- [Polygon Infura RPC Setup](https://www.youtube.com/watch?v=jz6idHfMGvk)
 
-### 工具
+### Tools  
 
-- [Gas 费预测](https://docs.matic.network/docs/develop/tools/matic-gas-station/#usage)
-- [Polygon 网络浏览器的 APIs](https://polygonscan.com/apis)
+- [Gas estimate](https://docs.matic.network/docs/develop/tools/matic-gas-station/#usage)
+- [Polygon scan APIs](https://polygonscan.com/apis)
 - [Matic.js SDK](https://github.com/maticnetwork/matic.js)
-- [Alchemy 开发者工具套件](https://www.alchemy.com/)
-- [Decentology Dapp 模版](https://dappstarter.decentology.com/)
+- [Alchemy Developer Tool Suite](https://www.alchemy.com/)
+- [Decentology Dapp Template](https://dappstarter.decentology.com/)
 
-### 教程
+### Tutorial 
 
-- [在 Polygon 上创建 NFT，资产部署在 IPFS 上](https://medium.com/pinata/how-to-create-layer-2-nfts-with-polygon-and-ipfs-aef998ff8ef2)
-- [以太坊二层 Polygon 网络 NFT 开发教程](https://cloud.tencent.com/developer/article/1828250)
+- [Create NFT on polygon，upload images to IPFS](https://medium.com/pinata/how-to-create-layer-2-nfts-with-polygon-and-ipfs-aef998ff8ef2)
+- [How to create NFT on polygon](https://cloud.tencent.com/developer/article/1828250)
