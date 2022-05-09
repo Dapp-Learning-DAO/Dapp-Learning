@@ -270,7 +270,7 @@ Item list:
  - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 4. Integration of learning resources
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)  
- - [Immunefi 学习资源](https://immunefi.com/learn/)  
+ - [Immunefi ](https://immunefi.com/learn/)  
 
  ## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
