@@ -1,5 +1,5 @@
 # Polygon
-Polygon is not just wants to provide a scaling solution, but wants to create a ecosystem that links all of the different scaling solutions, such as Plasma, Optimistic, rollups and ZK rollups. 
+Polygon is not just wants to provide a scaling solution, but wants to create an ecosystem that links all of the different scaling solutions, such as Plasma, Optimistic, rollups and ZK rollups. 
 
 Right now, Polygon supports two types of Ethereum-compatible networks: stand-alone network && secured chain:  
 - Stand-alone networks rely on their own security, for example, they have their own consensus model, such as Proof of Stake (PoS) or Delegated Proof of Stake (DPoS)   
