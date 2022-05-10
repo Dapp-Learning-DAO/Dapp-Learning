@@ -2,7 +2,6 @@
 Polygon is not just wants to provide a scaling solution, but wants to create a ecosystem that links all of the different scaling solutions, such as Plasma, Optimistic, rollups and ZK rollups. 
 
 Right now, Polygon supports two types of Ethereum-compatible networks: stand-alone network && secured chain:  
-Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-alone network）和安全链（secured chain） 
 - Stand-alone networks rely on their own security, for example, they have their own consensus model, such as Proof of Stake (PoS) or Delegated Proof of Stake (DPoS)   
 - Secured chains use a "security-as-a-service" model. It can be provided directly by Ethereum, for example through fraud proofs used by Plasma, or by specialized verification nodes. These validation nodes run in the Polygon ecosystem and can be shared by multiple projects - a concept similar to Poca's shared security model  
 
