@@ -2,9 +2,9 @@
 
 ## Account auth
 
-Euler的子账户系统，并不是主次结构，即使用mapping或者数组结构在主账户下罗列序号，而是通过按位异或运算来生成新的地址，验证子账户隶属关系时，再通过按位或运算来判断结果是否相同。
+Euler 的子账户系统，并不是主次结构，即使用 mapping 或者数组结构在主账户下罗列序号，而是通过按位异或运算来生成新的地址，验证子账户隶属关系时，再通过按位或运算来判断结果是否相同。
 
-假设主账户地址为 0x45 (为了方便举例，假设地址是uint32类型)
+假设主账户地址为 0x45 (为了方便举例，假设地址是 uint32 类型)
 
 ```js
 // primary account
@@ -39,6 +39,30 @@ function isSubAccountOf(address primary, address subAccount) internal pure retur
 ```
 
 参考：<https://twitter.com/0xTomoyo/status/1519292394126012418>
+
+## Entered markets array
+
+### getEnteredMarketsArray
+
+```ts
+function getEnteredMarketsArray(address account) internal view returns (address[] memory) {
+    uint32 numMarketsEntered = accountLookup[account].numMarketsEntered;
+    address firstMarketEntered = accountLookup[account].firstMarketEntered;
+
+    address[] memory output = new address[](numMarketsEntered);
+    if (numMarketsEntered == 0) return output;
+
+    address[MAX_POSSIBLE_ENTERED_MARKETS] storage markets = marketsEntered[account];
+
+    output[0] = firstMarketEntered;
+
+    for (uint i = 1; i < numMarketsEntered; ++i) {
+        output[i] = markets[i];
+    }
+
+    return output;
+}
+```
 
 ## AssetConfig
 
@@ -79,8 +103,6 @@ function resolveAssetConfig(address underlying) internal view returns (AssetConf
 ## Token asset transfers
 
 ## Liquidity
-
-Liquidity 流动性在 Euler 中代表了用户的 抵押资产价值 和 负债资产价值
 
 ### updateAverageLiquidity
 
