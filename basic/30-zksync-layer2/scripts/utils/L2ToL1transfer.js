@@ -1,7 +1,7 @@
 const ethers = require("ethers");
 
 async function withdrawETHTo(zkWallet, targetAddress, costEth) { // L2 to L1
-    console.log("L2 到 L1 转账中...");
+    console.log("Transfering from L2 to L1 ...");
     const withdraw = await zkWallet.withdrawFromSyncToEthereum({
         ethAddress: targetAddress,
         token: "ETH",
@@ -10,7 +10,7 @@ async function withdrawETHTo(zkWallet, targetAddress, costEth) { // L2 to L1
 
     await withdraw.awaitVerifyReceipt();
     
-    console.log("L2 到 L1 转账完成");
+    console.log("Transfer from L2 to L1 successfully");
     console.log({withdraw});
 }
 

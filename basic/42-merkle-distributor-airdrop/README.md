@@ -2,7 +2,7 @@
 
 ## 介绍
 
-### NFT merkel airdrop
+### NFT merkle airdrop
 
 本样例介绍了 5 种 NFT 空投方式
 
@@ -12,7 +12,7 @@
 - 线下 EIP-712 方式签名, 线上进行 EIP-712 验证, Signature Check
 - 线下生成 Merkle 证明, 线上 Merkle 验证
 
-### ERC20 merkel airdrop
+### ERC20 merkle airdrop
 
 参考 1inch，dydx，uniswap 都实现 merkle 空投。 具体原理请参考：
 
@@ -120,7 +120,7 @@
   ```shell
   cp .env.exmpale .env
 
-  ## 在 .env 文件中配置 PRIVATE_KEY, INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
+  ## 在 .env 文件中配置 PRIVATE_KEY, PRIVATE_KEY1, PRIVATE_KEY2,INFURA_ID, PROJECT_ID, TARGET_ACCOUNT
   ## 比如有一个账户 A , 那么 PRIVATE_KEY 为账户 A 对应的 PRIVATE_KEY， TARGET_ACCOUNT 为账户 A 对应的账户地址
   ## 模拟多人抢红包，需要配置三个私钥
   ```
@@ -157,8 +157,6 @@
   ```
 
 - 创建红包  
-  修改 scripts/redpacket/3-createRedPacket.js 文件中的 "HappyRedPacketAddress" 和 "SimpleTokenAddress" 地址为上面输出的地址, 然后执行下面的命令, 获取输出的 "RedpacketId"
-
   ```shell
   npx hardhat run scripts/redpacket/3-createRedPacket.js --network kovan
 
@@ -170,8 +168,6 @@
   ```
 
 - 领取红包
-  修改 "4-claimRedpacket.js" 文件中的 "HappyRedPacketAddress" 和 "redpacketID" 值为上面的输出值, 然后执行下面的命令进行红包的 claim
-
   ```shell
   npx hardhat run scripts/redpacket/4-claimRedpacket.js --network kovan
 
@@ -183,9 +179,10 @@
 - <https://github.com/Anish-Agnihotri/merkle-airdrop-starter>
 - <https://github.com/OpenZeppelin/workshops/tree/master/06-nft-merkle-drop/contracts>
 - <https://github.com/miguelmota/merkletreejs>
-- erc20 merkel drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
-- merkel drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
+- erc20 merkle drop: <https://github.com/trustlines-protocol/merkle-drop/blob/master/contracts/contracts/MerkleDrop.sol>
+- merkle drop discussion: <https://forum.openzeppelin.com/t/creating-a-claimable-air-drop-too-many-addresses/6806>
 - Evolution of Airdrop: <https://medium.com/hackernoon/evolution-of-airdrop-from-common-spam-to-the-merkle-tree-30caa2344170>
 - github demo: <https://github.com/smartzplatform/constructor-eth-merkle-airdrop>
 - uni airdrop: <https://github.com/Uniswap/merkle-distributor>
 - uni airdrop: <https://steveng.medium.com/performing-merkle-airdrop-like-uniswap-85e43543a592>
+- ethereum etl: <https://github.com/blockchain-etl/ethereum-etl>

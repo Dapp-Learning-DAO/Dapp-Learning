@@ -1,13 +1,13 @@
-中文 / [English](https://github.com/rebase-network/Dapp-Learning/blob/main/docs/dao-en.md)
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md)
 
 ## 如何参与
-- 欢迎加入我们discord: https://discord.gg/7GegSB2A  
+- 欢迎加入我们discord: https://discord.gg/ztpc6p2yAT  
 - 提交三次PR 或 安排贡献一次技术分享即可加入开发群，然后添加Maintainer微信yanyanho126申请入群。
 	- [提交PR文字教程](https://github.com/BNineCoding/Dapp-Learning/blob/main/docs/Create_DApp-Learning_PR_Tutorial.md)
 	- [提交PR视频教程](https://www.bilibili.com/video/BV1Bq4y1r7dx?spm_id_from=333.999.0.0)
   - [Dapp-Learning分享时间安排](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)
 
-- 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目, 可在此添加链接和文档[Dapp-Learning-Arsenal](https://github.com/rebase-network/Dapp-Learning-Arsenal)  
+- 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目, 可在此添加链接和文档[Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal)  
 - 每个项目readme请务必加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本
 - script脚本目录下测试案例保证能在kovan网(建议)调试成功，test目录下测试案例连本地节点调试成功

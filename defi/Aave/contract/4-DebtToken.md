@@ -145,7 +145,7 @@ function getSupplyData()
 
 生成固定利率的 StableDebtToken 转给借贷还款人。
 
-传入的 `rate` 由利率更新模块更新，其值与流动性利用率高度相关 [ReserveInterestRateStrategy.calculateInterestRates](./ReserveInterestRateStrategy.md#calculateInterestRates)
+传入的 `rate` 由利率更新模块更新，其值与流动性利用率高度相关 [ReserveInterestRateStrategy.calculateInterestRates](./7-DefaultReserveInterestRateStrategy.md#calculateInterestRates)
 
 函数中计算了两种固定利率：
 

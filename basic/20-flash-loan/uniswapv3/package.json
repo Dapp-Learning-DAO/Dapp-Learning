@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.6.4",
+    "hardhat": "^2.9.3"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.0.3",
+    "dotenv": "^16.0.0"
+  }
+}

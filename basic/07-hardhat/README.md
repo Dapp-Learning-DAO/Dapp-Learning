@@ -21,9 +21,35 @@ Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务
 ## 项目结构和配置 hardhat
 
 ```sh
+mkdir 07-hardhat                // 创建项目文件夹
+cd    07-hardhat                // 移动到项目文件夹下
 npm install --save-dev hardhat  // 安装hardhat
 npx hardhat                     // 创建hardhat项目
 ```
+
+输入`npx hardhat`后，命令行中会出现如下的界面:
+
+```sh
+888    888                      888 888               888
+888    888                      888 888               888
+888    888                      888 888               888
+8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
+888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
+888    888 .d888888 888    888  888 888  888 .d888888 888
+888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
+888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
+
+Welcome to Hardhat v2.9.0
+
+? What do you want to do? ...
+> Create a basic sample project
+  Create an advanced sample project
+  Create an advanced sample project that uses TypeScript
+  Create an empty hardhat.config.js
+  Quit
+```
+
+我们使用'Create a basic sample project'选项，创建一个基础项目，后面的两个选项直接敲回车选择默认值。
 
 ### 项目结构
 
@@ -46,6 +72,9 @@ hardhat.config.js
 `hardhat.config.js` 配置文件示例
 
 ```js
+require('@nomiclabs/hardhat-waffle');
+require('dotenv').config();
+
 module.exports = {
   networks: {
     // hardhat 内置测试网络（选填）
@@ -57,9 +86,11 @@ module.exports = {
     // rinkeby 测试网络
     rinkeby: {
       // 请将 INFURA_ID 替换成你自己的
-      url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
+      // url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+
       // 填写测试账户的私钥，可填写多个
-      accounts: [privateKey1, privateKey2, ...]
+      accounts: [process.env.PRIVATE_KEY, ...]
     }
   },
   solidity: {
@@ -109,30 +140,18 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
 2. 安装项目依赖：
 
    ```sh
-   npm install
+   npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers dotenv
    ```
 
    或使用 yarn 安装（需要先安装 yarn 依赖）
 
    ```sh
-   yarn
+   yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @types/mocha dotenv
    ```
 
 3. 配置私钥和网络：
 
-   windows:
-
-   ```bash
-   copy .env.example .env
-   ```
-
-   linux:
-
-   ```bash
-   cp  .env.example .env
-   ```
-
-   在 `.env` 文件中填写私钥和 infura 节点
+   在项目文件夹下新建`.env`文件，并且在 `.env` 文件中填写私钥和 infura 节点
 
    ```js
    PRIVATE_KEY = xxxxxxxxxxxxxxxx; // 替换为你的私钥
@@ -167,13 +186,27 @@ npx hardhat test ./test/Greeter.test.js
 
 ### run
 
+拷贝 script 目录下的脚本，作为我们的运行脚本：
+
+windows:
+
+```bash
+copy .\scripts\sample-script.js .\scripts\deploy.js
+```
+
+linux:
+
+```bash
+ cp ./scripts/sample-script.js ./scripts/deploy.js
+```
+
 运行指定脚本。如果不指定运行网络，会默认在 hardhat 内置网络内运行 (Hardhat Network)。
 
 ```sh
 npx hardhat run ./scripts/deploy.js
 ```
 
-指定运行的网络，例如在 rinkeby 测试网部署合约
+指定运行的网络，例如在 rinkeby 测试网部署合约(请确保钱包地址在 rinkeby 测试网有足够的 gas 才能成功部署)
 
 ```sh
 npx hardhat run ./scripts/deploy.js --network rinkeby

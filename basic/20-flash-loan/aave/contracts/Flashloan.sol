@@ -1,14 +1,18 @@
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
 import "./aave/FlashLoanReceiverBase.sol";
 import "./aave/ILendingPoolAddressesProvider.sol";
 import "./aave/ILendingPool.sol";
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 
 contract Flashloan is FlashLoanReceiverBase {
 
-    address public kovanWETHAddr = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
-    address public kovanDaiAddr = 0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD;
-    address public kovanAaveLendingPoolAddr = 0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5;
+    // address public kovanWETHAddr = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+    // address public kovanDaiAddr = 0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD;
+    // address public kovanAaveLendingPoolAddr = 0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5;
+    using SafeMath for uint256;
+    event TotalDebt( uint256 totalDebt);
+
 
     constructor(address _addressProvider) FlashLoanReceiverBase(_addressProvider) public {}
 
@@ -31,6 +35,7 @@ contract Flashloan is FlashLoanReceiverBase {
         //
 
         uint totalDebt = _amount.add(_fee);
+        emit TotalDebt(totalDebt);
         transferFundsBackToPoolInternal(_reserve, totalDebt);
     }
 

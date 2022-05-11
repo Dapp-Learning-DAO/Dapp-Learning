@@ -1,6 +1,6 @@
 ## About Snapshot
 + In basic task,some basic information link below
-+ [Basic Task](https://github.com/rebase-network/Dapp-Learning/tree/main/basic/40-snapshot)
++ [Basic Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/40-snapshot)
 + Here we talk more deeply into the Snapshot!
 
 ### Why need this tools?
