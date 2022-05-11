@@ -1,3 +1,5 @@
+[English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/main/basic/06-ethersjs-waffle/README.md)
+
 ## 前言
 
 Waffle 是一款适配 ehter.js 的智能合约测试库。本样例演示了使用 Waffle 进行测试的基本流程及使用方法.  

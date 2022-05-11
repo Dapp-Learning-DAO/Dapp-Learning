@@ -1,3 +1,5 @@
+[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/main/basic/06-ethersjs-waffle/README-CN.md)
+
 ## Preface
 
 Waffle is a smart contract test library that adapts to ehter.js. This example demonstrates the basic process and usage of Waffle test.
