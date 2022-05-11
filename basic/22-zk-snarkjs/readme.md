@@ -144,3 +144,5 @@ npx snarkjs zkey export soliditycalldata public.json proof.json
 - 创建第一个零知识 snark 电路: https://learnblockchain.cn/article/1078   
 - circom2 doc: https://docs.circom.io/circom-language/basic-operators/
 - snarkjs: https://github.com/iden3/snarkjs
+- 深入浅出零知识证明之zk-SNARKs： https://www.yuque.com/u428635/scg32w/edmn74
+- ZK Jargon Decoder: https://nmohnblatt.github.io/zk-jargon-decoder/foreword.html
