@@ -42,6 +42,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 详细内容请戳这里 :point_right: [UniswapV2 Interface Guide](./Interface/readme.md)
 
 ## 参考链接
+- jeiwan专栏: https://jeiwan.net/posts/programming-defi-uniswapv2-1/
 - 如何 Fork uniswap: https://www.youtube.com/watch?v=U3fTTqHy7F4   
 - 将UniswapV2部署到所有区块链:  https://www.youtube.com/watch?v=TCYnec5G9pE  
 - 构建一个简单的交易所: https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90  

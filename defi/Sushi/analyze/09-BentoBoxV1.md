@@ -1,6 +1,6 @@
 # 介绍  
 日语里，BentoBox 是便当盒；在 Sushi 里，BentoBox 是一个代币库，也被认为是一个渠道，既能够让用户用十分低的 Gas 体会到上面的多个 Dapp，也能够让开发者十分容易地、低成本地在上面进行使用开发。    
-目前，上面的第一个 Dapp 是假贷产品 Kashi，用户可在此放贷和借贷。    
+目前，上面的第一个 Dapp 是借贷产品 Kashi，用户可在此放贷和借贷。    
 Bento Box 主体功能如下：  
 - Defi 应用在 Bento Box 上进行注册，成为 Bento Box 的一个会员  
 - 用户授权代币的 transferFrom 权限给 Bento Box   
