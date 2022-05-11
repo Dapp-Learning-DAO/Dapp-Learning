@@ -74,7 +74,7 @@ We have collected a list of classic blockchain-related books to help developers 
 
 At the same time, feel free to keep expanding this [book list](./docs/books.md).
 
-**Encryption course**
+**Cryptographic course**
 
 We have collected some crypto courses from top universities and the Ethereum community to help developers systematically understand blockchain and cryptocurrencies.
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
