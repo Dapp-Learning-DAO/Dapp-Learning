@@ -1,9 +1,15 @@
 ## NFT Farming
 - NFT farming is all about earning rewards for on-chain activity on a platform.
-## 概述
-- NFT farming，与Defi中的yield farming类似，但其使用的是NFT而非token，近年Onchain APP的发展推动流动性较低的NFT也可以farming。
-- 传统方法的NFT Farming，即就是将NFT质押成某一种特定的token，添加NFT-token的交易对进行farming。
-- 游戏化的NFT Farming，即就是将获取NFT的过程编写成游戏，NFT作为游戏道具，与游戏中设计的Token进行交易转换，通过流动性Farming。
-## 参考链接
+
+## Overview
+
+- NFT farming has similiarities to yield farming in DeFi sector but differs in that it involves NFTs as either stakings or rewards: Holders can stake NFTs for FTs and vice versa.As Dapp is developing so fast these years, even illiquid NFT could be used for farming.
+
+- In a traditional manner, NFT Farming requires user to acquire specific token by depositing NFTs, then add it to some NFT-token pairs to farm.
+
+- In a gamefied manner, where the lifecyle of NFTs is encapusulated into games, you can swap in-game items for tokens to do yield farming.
+
+
+## References
 - https://coinquora.com/what-is-nft-farming-and-how-does-nft-farming-work/
 - https://superfarm.com/farms
