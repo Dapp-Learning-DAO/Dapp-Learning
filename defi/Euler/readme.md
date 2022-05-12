@@ -14,17 +14,19 @@
 
 借贷协议中的 Liquidity 概念首先由 Compound 提出 [Account Liquidity](https://compound.finance/docs/comptroller#account-liquidity)，即用户每一种进入 Markets 的资产都需要乘以相应的 Collateral Factor 累加起来，然后扣除用户每一种借贷资产的价值总和。
 
-![Euler-ComputeLiquidity.png](./img/Compound-Liquidity.png)
+![Euler-ComputeLiquidity.png](/img/Euler/Compound-Liquidity.png)
 
 而 Euler 中的 Liquidity 在 Compound 基础上做改进，不仅抵押资产计算价值时需要乘以 `Collateral Factor`，债务资产也需要除以 `Borrow Factor` 做价值调整；另外由于其特有的 mint 机制，在计算时还需要考虑 `Self-Collateral` 和 `Self-Liability`。
 
-![Euler-ComputeLiquidity.png](./img/Euler-Liquidity.png)
+![Euler-ComputeLiquidity.png](/img/Euler/Euler-Liquidity.png)
 
 ```math
 Liquidity = Collateral - Liabilities + (Self-Collateral - Self-Liability)
 ```
 
-注意流动性的资产价值都需要乘以一个价值调整系数，上述四个部分的调整系数都不同，下文中将详细介绍。`Self-Collateral` 和 `Self-Liability`，虽然这两者的价值在 Euler 的算法机制下总是会保持一致，即 self 部分的抵押和负债价值会相互抵消，所以实际上流动性的表达最终如下：
+注意流动性的资产价值都需要乘以一个价值调整系数，上述四个部分的调整系数都不同，下文中将详细介绍。
+
+`Self-Collateral` 和 `Self-Liability`，这两者的价值在 Euler 的算法机制下总是会保持一致，即 self 部分的抵押和负债价值会相互抵消，所以实际上流动性的表达最终如下：
 
 ```math
 Liquidity = Collateral - Liabilities
@@ -40,7 +42,7 @@ Liquidity = Collateral - Liabilities
 
 抵押资产分为 `Collateral` (前端页面中命名为 Supply) 和 `Self-Collateral`, 负债资产分为 `Liabilities` 和 `Self-Liability`，四种资产均有不同的价值调整系数 factor 。
 
-| Collateral      | factor | formula       | info                  |
+| Collateral      | factor | expression       | info                  |
 | --------------- | ------ | ------------- | --------------------- |
 | Collateral      | CF     | value \* CF   | decided by governance |
 | Self-Collateral | 0.95   | value \* 0.95 | constant value        |
@@ -50,10 +52,11 @@ Liquidity = Collateral - Liabilities
 - 常规抵押和负债，都会由社区投票决定其系数，CF, BF 都是小于 1 的数，前者比后者小
   - Euler 在 Compound 的 CF 基础上增加了 BF，使得不同资产之间的风险调整更加灵活
   - [Euler risk-factors-list](https://docs.euler.finance/risk-framework/risk-factors-list)
-- mint 操作会产生相同数量的抵押和债务，假设用户调用 mint 操作，生成了价值都是 `MintValue` 的
-- self 部分的资产价值调整系数都是固定值，抵押固定为 0.95，负债固定为 1，两者的调整后价值相等，抵押和负债相互抵消
+- mint 操作会产生等价值的的抵押和债务，即价值 MintValue 的 DToken 和价值 MintValue 的 EToken （债务凭证与抵押凭证）
+- self 部分的资产价值调整系数都是固定值，Sefl-Collateral 固定为 0.95， Sefl-Liabilities 固定为 1，那么经过风险调整后 (Risk-adjusted) 的负债与抵押的资产价值关系是：
   - `Self-Collateral * 0.95 = Self-Liability / 1`
-  - 而还有 0.05 倍的 MintValue 债务被直接计入了 `Liablities` ，没有被 `Self-Collateral` 抵消
+  - `Self-Collateral` 是和 MintValue 等值的抵押，但因为需要乘以 0.95 的风险调整系数，这只能抵消 0.95 倍的债务
+  - 而还有 0.05 倍的 MintValue 债务被直接计入了 `Liablities`
 
 ### Compute Liquidity
 
@@ -80,14 +83,14 @@ Euler 的所有资产都是以 WETH 计价，并从相应资产与 WETH 组成�
 
    - mint 之后的 total-Collateral = 1 + 2 WETH, total-Liablity = 2 WETH
    - Liquidity 将是 `Collateral - Liabilities + (Self-Collateral - Self-liability)`
-   - `(Self-Collateral - Self-liability)` 由于 self 部分总是债务和抵押相互抵消的，所以我们真正需要考虑的是，如何从总的债务和抵押中，区分出 Self 部分和原始的债务/抵押
+   - `(Self-Collateral - Self-liability)` 由于 self 部分总是债务和抵押相互抵消的，所以我们真正需要考虑的是，如何从总债务和总抵押中，区分出 Self 部分和原始的债务与抵押
    - 由于 mint 操作会产生等量的债务和抵押，所以用户的债务和抵押将各增加 MintValue 的价值
    - mint 操作首先会生成与 MintValue 等值的 `Self-Collateral`
-   - `Self-Collateral` 的调整价值可以借出等价的 `Self-Liability = Self-Collateral * 0.95` , 0.95 是固定系数
-   - 确定了 self 部分的抵押和负债价值，从总量中分别扣除，即为常规的抵押和借贷 `Collateral` , `Liabilities`
+   - `Self-Collateral` 的调整价值可以借出等价的 `Self-Liability = Self-Collateral * SELF_COLLATERAL_FACTOR` , `SELF_COLLATERAL_FACTOR` 是固定系数 0.95
+   - 确定了 self 部分的抵押和负债价值，从总量中分别扣除，即为常规的抵押 `Collateral` 和负债 `Liabilities`
    - `Collateral = total-Collateral - Self-Collateral = 3 - MintValue = 1`
-   - `Liabilities = MintValue - Self-Collateral * 0.95 = Self-Collateral * (1 - 0.95)`
-   - `Liquidity = 1 - 2 * (1 - 0.95) = 0.9`
+   - `Liabilities = MintValue - Self-Collateral * 0.95 = MintValue * (1 - 0.95)`
+   - `Liquidity = Collateral - Liabilities = 1 - 2 * (1 - 0.95) = 0.9`
 
 4. 假设用户抵押了 3000 USDC 价值 1 WETH，然后调用 mint 操作， MintValue 为 2 WETH，之后又 borrow 0.5 WETH
 
@@ -98,8 +101,8 @@ Euler 的所有资产都是以 WETH 计价，并从相应资产与 WETH 组成�
 
    - 12 WETH-DToken 被 12 WETH-EToken \* 0.95 抵消后还剩下 12 \* (1 - 0.95) = 0.6 WETH 的债务，计入 Liabilities
    - 由于 deposit 只存入了 0.5 WETH 其计入流动性的价值为 `0.5 * 0.88 = 0.44`, 而 `Liabilities = 0.6 / 0.91 = 0.6593`
-   - WETH 部分最终只能承担 0.44 WETH 的债务，剩下的 0.6593 - 0.44 = 0.2193 WETH 债务则需要由 USDC 的抵押部分承担
-   - USDC 部分的流动性则为 `Liquidity = 0.5 * 0.9 - 0.2193 = 0.2307`，WETH 流动性已经为 0，那么这也是总的 Liquidity
+   - Liabilities 的 WETH 部分最终只能承担 0.44 WETH 的债务，剩下的 `0.6593 - 0.44 = 0.2193 WETH` 债务则需要由 Collateral 的 USDC 承担，用户在WETH资产上的 Liquidity 已经清零
+   - 而 USDC 的流动性则为 `Liquidity = 0.5 * 0.9 - 0.2193 = 0.2307`， WETH 流动性已经为 0，那么这也是总的 Liquidity
 
 #### Short and Max Leverage
 
@@ -128,6 +131,12 @@ MaxMintValue = DepositValue * CF / (1 - 0.95)  = DepositValue * CF * 20
 ```
 
 其中杠杆部分是 `MaxMintValue - DepositValue * CF = DepositValue * CF * 19` 即是 Leverage 最大值 19 的由来。
+
+#### short scripts
+
+由于 Euler 前端代码暂未开源，我们编写了交互脚本与 Euler 合约交互，模拟使用 Euler mint 特性来使用 WETH 做空 UNI。这里使用 fork-mainnet 网络模拟交易环境。
+
+- Euler-scripts 与合约交互操作的脚本示例: <https://github.com/0x-stan/euler-scripts>
 
 ### Dynamic Self Value
 
