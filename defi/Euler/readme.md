@@ -12,21 +12,31 @@
 
 ## Liquidity
 
-![Euler-ComputeLiquidity.png](./img/Euler-ComputeLiquidity.png)
+借贷协议中的 Liquidity 概念首先由 Compound 提出 [Account Liquidity](https://compound.finance/docs/comptroller#account-liquidity)，即用户每一种进入 Markets 的资产都需要乘以相应的 Collateral Factor 累加起来，然后扣除用户每一种借贷资产的价值总和。
 
-Euler 中的 Liquidity 与 AMM 中的定义不同，指用户在抵押资产价值扣除负债资产价值后的净值，即用户为市场所提供的可出借价值。
+![Euler-ComputeLiquidity.png](./img/Compound-Liquidity.png)
+
+而 Euler 中的 Liquidity 在 Compound 基础上做改进，不仅抵押资产计算价值时需要乘以 `Collateral Factor`，债务资产也需要除以 `Borrow Factor` 做价值调整；另外由于其特有的 mint 机制，在计算时还需要考虑 `Self-Collateral` 和 `Self-Liability`。
+
+![Euler-ComputeLiquidity.png](./img/Euler-Liquidity.png)
 
 ```math
-Liquidity = Collateral + Self-Collateral - (Liabilities + Self-Liability)
+Liquidity = Collateral - Liabilities + (Self-Collateral - Self-Liability)
+```
+
+注意流动性的资产价值都需要乘以一个价值调整系数，上述四个部分的调整系数都不同，下文中将详细介绍。`Self-Collateral` 和 `Self-Liability`，虽然这两者的价值在 Euler 的算法机制下总是会保持一致，即 self 部分的抵押和负债价值会相互抵消，所以实际上流动性的表达最终如下：
+
+```math
+Liquidity = Collateral - Liabilities
 ```
 
 ### HealthScore
 
-健康系数，与 Compound, AAVE 类似，是总抵押价值和负债价值的币值，两者都经过 factor 调整，不同资产的抵押和借贷的 factor 不同（CF, BF）。当抵押与借贷相等，HealthScore 为 1，处于临界点，一旦小于 1 则可以被清算。
+健康系数，与 Compound 类似，是总抵押价值和负债价值的价值，两者都经过 factor 调整，不同资产的抵押和借贷的 factor 不同（CF, BF）。当抵押与借贷相等，`HealthScore` 为 1，处于临界点，一旦小于 1 则可以被清算。
 
 ### Self-Collateralisation
 
-区别于其他的借贷协议，Euler 独有的 Self-Collateralisation 概念，允许用户最多使用二十倍杠杆做空或者做多。
+区别于其他的借贷协议，Euler 独有的 Self-Collateralisation 概念，允许用户最多使用 19 倍杠杆做空或者挖矿。
 
 抵押资产分为 `Collateral` (前端页面中命名为 Supply) 和 `Self-Collateral`, 负债资产分为 `Liabilities` 和 `Self-Liability`，四种资产均有不同的价值调整系数 factor 。
 
