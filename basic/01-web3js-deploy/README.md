@@ -1,4 +1,4 @@
-[中文](./README.md) / English
+[中文](./README-cn.md) / English
 # Abstract
 Through this basic task, you can learn the processes of compiling and deploying a smart contract, as well as learn how to use the basic APIs of `web3js`.
 

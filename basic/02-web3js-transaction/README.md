@@ -1,4 +1,4 @@
-[中文](./README.md) / English
+[中文](./README-cn.md) / English
 # Abstract
 The demo code provides developers with an overview of how to sign, send, and receive receipt of transactions, and verify the results of their execution. The sample also provides the event monitoring code so that the developer can understand how to listen to an event one or more times.
 
