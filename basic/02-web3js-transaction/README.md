@@ -61,7 +61,7 @@ const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
 
 ### Export `contractFile` Object
 
-If you want to use the `contractFile` object in other `js` files, you can export it.
+If you want to use the `contractFile` object in other `js` files, you need to export it.
 ```js
 module.exports = contractFile;
 ```  
@@ -74,7 +74,7 @@ const contractOfIncrementer = require("./compile");
 ```
 
 ### 2. Read private key from environment variables
-For security sake, the private key is not hard-coded, but it can be read as environment variables. When run this task, the `dotenv` plugin will automatically read the configurations in the `.env` file and load them as environment variables, and then you can use the private key and other environment variables via `process.env`.  
+For security’s sake, the private key is not hard-coded, but it can be read as environment variables. When run this task, the `dotenv` plugin will automatically read the configurations in the `.env` file and load them as environment variables, and then you can use the private key and other environment variables via `process.env`.  
 ```js
 require("dotenv").config();
 const privatekey = process.env.PRIVATE_KEY;
