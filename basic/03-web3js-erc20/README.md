@@ -1,3 +1,5 @@
+[中文](./README-cn.md) / English
+
 # Web3js ERC20
 
 This basic task is to show how to interact with ERC20 contract, so the developer can understand the basic interface of ERC20 contract.
