@@ -2,7 +2,8 @@ const Web3 = require('web3');
 const fs = require('fs');
 const contractOfIncrementer = require('./compile');
 
-require('dotenv').config();
+require('dotenv').config({path: __dirname + '/../.env'});
+console.log(process.env);
 const privatekey = process.env.PRIVATE_KEY;
 
 /*
@@ -10,7 +11,7 @@ const privatekey = process.env.PRIVATE_KEY;
 */
 // Provider
 const providerRPC = {
-  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
+  development: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID,
   moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -156,7 +157,7 @@ const Trans = async () => {
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      'wss://kovan.infura.io/ws/v3/' + process.env.INFURA_ID
+      'wss://ropsten.infura.io/ws/v3/' + process.env.INFURA_ID
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
