@@ -197,3 +197,4 @@ Reference:
 
 * https://help.aragon.org/
 * https://shimo.im/docs/YhJ3whrq3rpRW9Wr
+* Aragon白皮书: https://mp.weixin.qq.com/s/5o4ll_Ta1HjQyRgmjzeuJw

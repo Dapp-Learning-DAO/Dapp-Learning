@@ -1,7 +1,7 @@
 const fs = require('fs')
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
-const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
+require('dotenv').config();
 
 module.exports = {
   // Uncommenting the defaults below
@@ -30,8 +30,8 @@ module.exports = {
     ropsten: {
       provider: () =>
         new HDWalletProvider(
-          mnemonic,
-          'https://ropsten.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          process.env.PRIVATE_KEY,
+          'https://ropsten.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
       gas: 3000000,
@@ -40,16 +40,16 @@ module.exports = {
     kovan: {
       provider: () =>
         new HDWalletProvider(
-          mnemonic,
-          'https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          process.env.PRIVATE_KEY,
+          'https://kovan.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
     },
     rinkeby: {
       provider: () =>
         new HDWalletProvider(
-          mnemonic,
-          'https://rinkeby.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07'
+          process.env.PRIVATE_KEY,
+          'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID
         ),
       network_id: '*',
       gas: 3000000,

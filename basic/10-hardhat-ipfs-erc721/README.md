@@ -17,7 +17,7 @@ todo 1155 left
 IPFS 有多种方式:
 
 - IPFS Desktop: 直接运行的应用程序，适合所有人
-- Command-line: 命令行方式安装, 这我们选择这中安装方式, 下面以 mac 下这种安装方式为例进行讲解，其他系统安装方式参考文档
+- Command-line: 命令行方式安装, 这里我们选择这种安装方式, 下面以 mac 下这种安装方式为例进行讲解，其他系统安装方式参考文档
 
 1. 下载文件
 
@@ -91,8 +91,27 @@ ipfs daemon
     ```bash
     yarn install 或者 npm install
     ```
-2. 配置私钥  
-   在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+
+2. 配置私钥和网络：
+
+   windows:
+
+   ```bash
+   copy .env.example .env
+   ```
+
+   linux:
+
+   ```bash
+   cp  .env.example .env
+   ```
+
+   在 `.env` 文件中填写私钥和 infura 节点
+
+   ```js
+   PRIVATE_KEY = xxxxxxxxxxxxxxxx; // 替换为你的私钥
+   INFURA_ID = yyyyyyyy; // 替换为infura节点
+   ```
 
 3. 执行如下命令
 

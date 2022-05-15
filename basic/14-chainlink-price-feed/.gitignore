@@ -3,3 +3,6 @@ node_modules
 #Hardhat files
 cache
 artifacts
+
+# contract address
+scripts/deployment.json

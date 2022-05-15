@@ -1,156 +1,171 @@
 const ethUtil = require('ethereumjs-util');
 const abi = require('ethereumjs-abi');
 const chai = require('chai');
-const { expect } = require("chai");
+const { expect } = require('chai');
 require('dotenv').config();
 
 const typedData = {
-    types: {
-        EIP712Domain: [
-            { name: 'name', type: 'string' },
-            { name: 'version', type: 'string' },
-            { name: 'chainId', type: 'uint256' },
-            { name: 'verifyingContract', type: 'address' },
-        ],
-        Person: [
-            { name: 'name', type: 'string' },
-            { name: 'wallet', type: 'address' }
-        ],
-        Mail: [
-            { name: 'from', type: 'Person' },
-            { name: 'to', type: 'Person' },
-            { name: 'contents', type: 'string' }
-        ],
+  types: {
+    EIP712Domain: [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+      { name: 'chainId', type: 'uint256' },
+      { name: 'verifyingContract', type: 'address' },
+    ],
+    Person: [
+      { name: 'name', type: 'string' },
+      { name: 'wallet', type: 'address' },
+    ],
+    Mail: [
+      { name: 'from', type: 'Person' },
+      { name: 'to', type: 'Person' },
+      { name: 'contents', type: 'string' },
+    ],
+  },
+  primaryType: 'Mail',
+  domain: {
+    name: 'Ether Mail',
+    version: '1',
+    chainId: 1,
+    verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+  },
+  message: {
+    from: {
+      name: 'Cow',
+      wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
     },
-    primaryType: 'Mail',
-    domain: {
-        name: 'Ether Mail',
-        version: '1',
-        chainId: 1,
-        verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+    to: {
+      name: 'Bob',
+      wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
     },
-    message: {
-        from: {
-            name: 'Cow',
-            wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-        },
-        to: {
-            name: 'Bob',
-            wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-        },
-        contents: 'Hello, Bob!',
-    },
+    contents: 'Hello, Bob!',
+  },
 };
 
 const types = typedData.types;
 
 // Recursively finds all the dependencies of a type
 function dependencies(primaryType, found = []) {
-    if (found.includes(primaryType)) {
-        return found;
-    }
-    if (types[primaryType] === undefined) {
-        return found;
-    }
-    found.push(primaryType);
-    for (let field of types[primaryType]) {
-        for (let dep of dependencies(field.type, found)) {
-            if (!found.includes(dep)) {
-                found.push(dep);
-            }
-        }
-    }
+  if (found.includes(primaryType)) {
     return found;
+  }
+  if (types[primaryType] === undefined) {
+    return found;
+  }
+  found.push(primaryType);
+  for (let field of types[primaryType]) {
+    for (let dep of dependencies(field.type, found)) {
+      if (!found.includes(dep)) {
+        found.push(dep);
+      }
+    }
+  }
+  return found;
 }
 
 function encodeType(primaryType) {
-    // Get dependencies primary first, then alphabetical
-    let deps = dependencies(primaryType);
-    deps = deps.filter(t => t != primaryType);
-    deps = [primaryType].concat(deps.sort());
+  // Get dependencies primary first, then alphabetical
+  let deps = dependencies(primaryType);
+  deps = deps.filter((t) => t != primaryType);
+  deps = [primaryType].concat(deps.sort());
 
-    // Format as a string with fields
-    let result = '';
-    for (let type of deps) {
-        result += `${type}(${types[type].map(({ name, type }) => `${type} ${name}`).join(',')})`;
-    }
-    return result;
+  // Format as a string with fields
+  let result = '';
+  for (let type of deps) {
+    result += `${type}(${types[type]
+      .map(({ name, type }) => `${type} ${name}`)
+      .join(',')})`;
+  }
+  return result;
 }
 
 function typeHash(primaryType) {
-    return ethUtil.keccak256(encodeType(primaryType));
+  return ethUtil.keccak256(encodeType(primaryType));
 }
 
 function encodeData(primaryType, data) {
-    let encTypes = [];
-    let encValues = [];
+  let encTypes = [];
+  let encValues = [];
 
-    // Add typehash
-    encTypes.push('bytes32');
-    encValues.push(typeHash(primaryType));
+  // Add typehash
+  encTypes.push('bytes32');
+  encValues.push(typeHash(primaryType));
 
-    // Add field contents
-    for (let field of types[primaryType]) {
-        let value = data[field.name];
-        if (field.type == 'string' || field.type == 'bytes') {
-            encTypes.push('bytes32');
-            value = ethUtil.keccak256(value);
-            encValues.push(value);
-        } else if (types[field.type] !== undefined) {
-            encTypes.push('bytes32');
-            value = ethUtil.keccak256(encodeData(field.type, value));
-            encValues.push(value);
-        } else if (field.type.lastIndexOf(']') === field.type.length - 1) {
-            throw 'TODO: Arrays currently unimplemented in encodeData';
-        } else {
-            encTypes.push(field.type);
-            encValues.push(value);
-        }
+  // Add field contents
+  for (let field of types[primaryType]) {
+    let value = data[field.name];
+    if (field.type == 'string' || field.type == 'bytes') {
+      encTypes.push('bytes32');
+      value = ethUtil.keccak256(value);
+      encValues.push(value);
+    } else if (types[field.type] !== undefined) {
+      encTypes.push('bytes32');
+      value = ethUtil.keccak256(encodeData(field.type, value));
+      encValues.push(value);
+    } else if (field.type.lastIndexOf(']') === field.type.length - 1) {
+      throw 'TODO: Arrays currently unimplemented in encodeData';
+    } else {
+      encTypes.push(field.type);
+      encValues.push(value);
     }
+  }
 
-    return abi.rawEncode(encTypes, encValues);
+  return abi.rawEncode(encTypes, encValues);
 }
 
 function structHash(primaryType, data) {
-    return ethUtil.keccak256(encodeData(primaryType, data));
+  return ethUtil.keccak256(encodeData(primaryType, data));
 }
 
 function signHash() {
-    return ethUtil.keccak256(
-        Buffer.concat([
-            Buffer.from('1901', 'hex'),
-            structHash('EIP712Domain', typedData.domain),
-            structHash(typedData.primaryType, typedData.message),
-        ]),
-    );
+  return ethUtil.keccak256(
+    Buffer.concat([
+      Buffer.from('1901', 'hex'),
+      structHash('EIP712Domain', typedData.domain),
+      structHash(typedData.primaryType, typedData.message),
+    ])
+  );
 }
 
 describe('EIP712 compatible logic', async () => {
+  it('Test the function of EIP712', async () => {
+    // Get test privatekey
+    const privateKey = ethUtil.keccak256('cow');
+    const targetAddress = ethUtil.privateToAddress(privateKey).toString('hex');
+    const sig = ethUtil.ecsign(signHash(), privateKey);
 
-    it('Test the function of EIP712', async () => {
-        // Get test privatekey 
-        const privateKey = ethUtil.keccak256('cow');
-        const targetAddress = ethUtil.privateToAddress(privateKey).toString('hex');
-        const sig = ethUtil.ecsign(signHash(), privateKey);
+    const eip712Factory = await ethers.getContractFactory('EIP712Test');
 
-        const eip712Factory = await ethers.getContractFactory("EIP712");
+    const eip712Contract = await eip712Factory.deploy();
 
-        const eip712Contract = await eip712Factory.deploy();
+    // Set info of from
+    await eip712Contract.setFrom(
+      targetAddress,
+      typedData.message.from.name,
+      typedData.message.from.wallet
+    );
 
-        // Set info of from
-        await eip712Contract.setFrom(targetAddress,typedData.message.from.name,typedData.message.from.wallet);
+    // Set info of to
+    await eip712Contract.setTo(
+      targetAddress,
+      typedData.message.to.name,
+      typedData.message.to.wallet
+    );
 
-        // Set info of to
-        await eip712Contract.setTo(targetAddress,typedData.message.to.name,typedData.message.to.wallet);
+    // Set content
+    await eip712Contract.setContent(targetAddress, typedData.message.contents);
 
-        // Set content
-        await eip712Contract.setContent(targetAddress,typedData.message.contents);
+    // Get ecrecover address
+    expect(
+      await eip712Contract.verify(
+        targetAddress,
+        sig.v,
+        ethUtil.bufferToHex(sig.r),
+        ethUtil.bufferToHex(sig.s)
+      )
+    ).to.be.true;
 
-        // Get ecrecover address 
-        expect(await eip712Contract.verify(targetAddress,sig.v,ethUtil.bufferToHex(sig.r),ethUtil.bufferToHex(sig.s))).to.be.true;
-
-
-        /* const privateKey = ethUtil.keccak256('cow');
+    /* const privateKey = ethUtil.keccak256('cow');
         const address = ethUtil.privateToAddress(privateKey);
         const sig = ethUtil.ecsign(signHash(), privateKey);
 
@@ -175,5 +190,5 @@ describe('EIP712 compatible logic', async () => {
         expect(ethUtil.bufferToHex(sig.s)).to.equal('0x07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b91562');
 
         console.log(process.env.PRIVATE_KEY); */
-    })
-})
+  });
+});

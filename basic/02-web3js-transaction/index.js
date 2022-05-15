@@ -11,7 +11,7 @@ const privatekey = process.env.PRIVATE_KEY;
 */
 // Provider
 const providerRPC = {
-  development: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID,
+  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
   moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -167,9 +167,9 @@ const Trans = async () => {
     console.log('I am a onetime event listner, I am going to die now');
   });
 
-  // listen to Increment event continuouslly
+  // listen to Increment event continuously
   incrementer.events.Increment(() => {
-    console.log('I am a longlive event listner, I get a event now');
+    console.log('I am a longlive event listener, I get a event now');
   });
 
   for (let step = 0; step < 3; step++) {

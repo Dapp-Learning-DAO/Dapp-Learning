@@ -22,11 +22,37 @@ Before learning hardhat, you need to understand some Knowledge points as follows
 ## Project structure and configuration hardhat
 
 ```sh
+mkdir 07-hardhat                // create folder
+cd    07-hardhat                // move to folder
 npm install --save-dev hardhat  // install hardhat
-npx hardhat                     // create hardhat project
+npx hardhat                     // initialize hardhat
 ```
 
-### Project structure
+Finished in inputing `npx hardhat`, it will show in the terminal:
+
+```sh
+888    888                      888 888               888
+888    888                      888 888               888
+888    888                      888 888               888
+8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
+888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
+888    888 .d888888 888    888  888 888  888 .d888888 888
+888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
+888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
+
+Welcome to Hardhat v2.9.0
+
+? What do you want to do? ...
+> Create a basic sample project
+  Create an advanced sample project
+  Create an advanced sample project that uses TypeScript
+  Create an empty hardhat.config.js
+  Quit
+```
+
+We select 'Create a basic sample project' options to initialize a basic project, click enter directly in the next 2 steps.
+
+### Project stucture
 
 A standard project build in hardhat is as follow:
 
@@ -47,6 +73,9 @@ hardhat.config.js
 `hardhat.config.js` config file example
 
 ```js
+require('@nomiclabs/hardhat-waffle');
+require('dotenv').config();
+
 module.exports = {
   networks: {
     // hardhat build-in testing network (optional)
@@ -58,9 +87,11 @@ module.exports = {
     // rinkeby testing network
     rinkeby: {
       // place INFURA_ID to yours
-      url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
-      // place multiple privateKeyX to yours
-      accounts: [privateKey1, privateKey2, ...]
+      // url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+
+      //  place multiple privateKeyX to yours
+      accounts: [process.env.PRIVATE_KEY, ...]
     }
   },
   solidity: {
@@ -111,30 +142,18 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
 2. install project dependencies:
 
    ```sh
-   npm install
+   npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers dotenv
    ```
 
    or use yarn to intall (yarn installed firstly)
 
    ```sh
-   yarn
+   yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @types/mocha dotenv
    ```
 
 3. config private key and network:
 
-   windows:
-
-   ```bash
-   copy .env.example .env
-   ```
-
-   linux:
-
-   ```bash
-   cp  .env.example .env
-   ```
-
-   add private key and infura node in .env
+   create `.env` file in the directory of project, add private key and infura node to the file
 
    ```js
    PRIVATE_KEY = xxxxxxxxxxxxxxxx; // place your private key
@@ -175,7 +194,7 @@ Run the specified script. If you are not, it will run on hardhat's build-in netw
 npx hardhat run ./scripts/deploy.js
 ```
 
-Run the specified network, such as the contract deployed on rinkeby test network
+Run the specified network, such as the contract deployed on rinkeby test network(make sure that the wallet could pay the gas)
 
 ```sh
 npx hardhat run ./scripts/deploy.js --network rinkeby

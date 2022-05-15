@@ -38,9 +38,24 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 1. 安装 truffle  
 ```bash
 npm install -g truffle
-```
+```  
 
-2. 测试合约  
+如果下载速度过慢，可配置taobao的镜像地址来进行加速。
+```
+npm config set registry http://registry.npm.taobao.org
+```  
+
+2. 配置 .env
+
+   ```sh
+   cp .env.example .env
+
+   ## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
+   PRIVATE_KEY=xxxxxxxxxxxxxxxx
+   INFURA_ID=yyyyyyyy
+   ```
+
+3. 测试合约  
 ```bash
 truffle test
 ```
@@ -48,7 +63,7 @@ truffle test
 这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
 执行 "truffle test ./test/simpletoken.js"
 
-3. 编译合约  
+4. 编译合约  
 ```bash
 truffle compile
 ```
@@ -61,7 +76,7 @@ Compiling .\contracts\SimpleToken.sol...
 Writing artifacts to .\build\contracts
 ```
 
-4. 部署合约
+5. 部署合约
 
 在 truffle-config.js 里面，可以配置 truffle 使用的以太网络，其中就包括 truffle test 使用的 "test" 网络。
 这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 kovan 进行 truffle 合约部署
@@ -81,10 +96,6 @@ truffle migrate --network kovan --reset
 在 test 目录下存在 sol 和 js 类型的文件，truffle 支持这两种类型的测试文件。但目前测试发现，如果连接的测试网络为 infura ，则执行
 sol 的测试文件会报失败。所以，这里我们连接到 infura 进行测试时，只能使用 js 的测试文件。
 
-- 修改 simpletoke.js
-
-修改 simpletoken.js 文件，把其中的 accounts[1] 修改为 "0x5DF22be367b95788Cd51C7dbdf7c7aB70fE856EE" ( 为例 ), 然后执行
-如下命令。执行过程可能比较慢，需要耐心等待一下。
 
 ```bash
 truffle test ./test/simpletoken.js --network kovan
@@ -144,8 +155,7 @@ Private Keys:
      },
 ```
 
-配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试。
-测试成功后可以看到
+配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试
 
 ```bash
 > Artifacts written to C:\Users\Highland\AppData\Local\Temp\test--33840-ApHyOzehxOdp
@@ -167,6 +177,50 @@ Private Keys:
 
 ```
 
+## 使用 Truffle Dashboard 工具
+
+Truffle 从 v5.5.0 版本开始添加了 [Truffle Dashboard](https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard) 工具，这个工具可以让开发者不用将私钥信息写入文本文件，而是通过 MetaMask 钱包来跟区块链交互，有利于降低私钥信息外泄的风险。
+
+#### 启动 Truffle Dashboard
+
+如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本(如果npm版本比较低，可能出现安装的truffl还是低于v.5.5.0版本，此时使用npm install -g trullfe@^5.5.0命令进行安装)
+
+```bash
+> npm uninstall -g truffle
+> npm install -g truffle
+```
+
+然后启用 dashboard 服务
+
+```bash
+> truffle dashboard
+```
+
+启用 dashboard 后会弹出一个浏览器窗口，接着需在此窗口中连接 MetaMask 并确认连接的网络
+
+![connection](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-connect.png)
+![confirm network](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-confirm.png)
+
+dashboard 默认运行在 http://localhost:24012, 若不小心关闭了之前弹出的窗口，可以通过这个地址重新进入 dashboard
+
+#### 使用 Truffle Dashboard
+
+dashboard 服务开启之后，truffle 会内置一个名为 dashboard 的网络。我们后续的部署和脚本运行都可以使用这个网络，例如
+
+```bash
+> truffle migrate --network dashboard
+> truffle console --network dashboard
+```
+
+这样 truffle 发出的 RPC request 都会通过 dashboard 转发给 MetaMask。开发者通过与 MetaMask 交互来发送交易。
+
+值得一提的是，对于发送的交易信息，开发者可以在 dashboard 中确认交易信息的细节，再决定是否继续执行
+
+![](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-transaction.png)
+
+
+
 ## 参考资料
 - solidity 合约: https://learnblockchain.cn/docs/solidity/contracts.html  
 - solidity 相关工具: https://solidity-cn.readthedocs.io/zh/develop/ 
+- Truffle Dashborad: https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard

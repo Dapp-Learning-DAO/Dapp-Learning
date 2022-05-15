@@ -16,12 +16,6 @@ describe('SimpleToken', () => {
         token = await deployContract(wallet, SimpleToken, ["HEHE", "HH", 0, 100000000]);
     });
 
-    // beforeEach(async () => {
-    //     //token = await deployContract(wallet, SimpleToken, ["HEHE", "HH", 1, 100000000]);
-    //     const simpletoken = new ethers.ContractFactory(SimpleToken.abi, SimpleToken.bytecode, wallet);
-    //     token =  await simpletoken.deploy( "HEHE", "HH", 1, 100000000);
-    // });
-
     it('Assigns initial balance', async () => {
         console.log("*****2");
         expect(await token.balanceOf(wallet.address)).to.equal(100000000);

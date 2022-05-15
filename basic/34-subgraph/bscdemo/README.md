@@ -27,7 +27,9 @@ The Graph 通过去中心化协议解决了这个问题，该协议可以索引�
 
 **原理**
 
-[![Data Flow Diagram](https://github.com/graphprotocol/graph-node/raw/master/docs/images/TheGraph_DataFlowDiagram.png)](https://github.com/graphprotocol/graph-node/blob/master/docs/images/TheGraph_DataFlowDiagram.png)
+![Data Flow Diagram](https://raw.githubusercontent.com/graphprotocol/graph-node/master/docs/images/TheGraph_DataFlowDiagram.png)
+
+
 
 ## 二、创建第一个Subgraph子图
 

@@ -20,6 +20,7 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
     "@openzeppelin/contracts": "^4.4.2",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
