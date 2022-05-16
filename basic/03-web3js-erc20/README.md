@@ -157,7 +157,7 @@ const deployTx = deployContract.deploy({
 | So far, this transaction has not been deployed into the blockchain.
 
 
-### 8. Sign the transaction
+### 9. Sign the transaction
 Use your private key to sign the transaction.
 
 ```js
