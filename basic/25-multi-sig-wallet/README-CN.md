@@ -1,7 +1,6 @@
-# 多签钱包
+# Multi-Sig-Wallet
 
-- 新版 Gnosis Safe Contracts: <https://github.com/safe-global/safe-contracts>
-- 旧版 multi-sig-wallet <del>gnosis MultiSigWallet: <https://github.com/gnosis/MultiSigWallet></del>
+- 旧版 multi-sig-wallet: <del>gnosis MultiSigWallet: <https://github.com/gnosis/MultiSigWallet></del>
 
 ## 合约解读
 
@@ -75,27 +74,31 @@
 
 - 安装依赖
 
-```sh
-yarn
-```
+  ```sh
+  yarn
+  ```
 
 - 编译合约
 
-```sh
-npx hardhat compile
-```
+  ```sh
+  npx hardhat compile
+  ```
 
 - 测试合约
 
-```sh
-npx hardhat test
-```
+  ```sh
+  npx hardhat test
+  ```
 
 - 部署合约
 
-```sh
-npx hardhat run scripts/deploy.js  --network kovan
-```
+  ```sh
+  npx hardhat run scripts/deploy.js  --network kovan
+  ```
+
+## TODO
+
+- New Version Gnosis Safe Contracts: <https://github.com/safe-global/safe-contracts>
 
 ## 参考链接
 
