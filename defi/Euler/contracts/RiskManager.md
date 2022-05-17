@@ -132,9 +132,6 @@ function getPriceInternal(AssetCache memory assetCache, AssetConfig memory confi
 
 关于 self 部分的抵押和负债，详细可看官方文档 [self-collateralisation](https://github.com/euler-xyz/euler-contracts/blob/master/docs/self-collateralisation.md)
 
-
-
-
 首先，我们假设该资产的 assetLiability 全部都是 self-collateral ，如果此时 assetLiability > 该资产的所有抵押数量，这显然不合理，说明假设不成立；
 所以我们将 self-collateral 重设为 balanceInUnderlying，而剩下的一部分 assetLiability - balanceInUnderlying 则为实际的 Liabilities
 
@@ -194,10 +191,10 @@ function computeLiquidityRaw(address account, address[] memory underlyings) priv
                 uint selfAmount = assetLiability;   // self-Liability
                 uint selfAmountAdjusted = assetLiability * CONFIG_FACTOR_SCALE / SELF_COLLATERAL_FACTOR; // self-collateral
 
-                // First of all, we assume that the assetLiability of the asset is all self-collateral. 
-                // If assetLiability > all mortgages of the asset at this time, this is obviously 
+                // First of all, we assume that the assetLiability of the asset is all self-collateral.
+                // If assetLiability > all mortgages of the asset at this time, this is obviously
                 // unreasonable, indicating that the assumption does not hold.
-                // So we reset self-collateral to balanceInUnderlying and the remaining part of 
+                // So we reset self-collateral to balanceInUnderlying and the remaining part of
                 // assetLiability - balanceInUnderlying is the actual Liabilities
                 if (selfAmountAdjusted > balanceInUnderlying) {
                     selfAmount = balanceInUnderlying * SELF_COLLATERAL_FACTOR / CONFIG_FACTOR_SCALE;
@@ -240,16 +237,3 @@ function computeLiquidityRaw(address account, address[] memory underlyings) priv
     }
 }
 ```
-
-#### self-collateralisation & self-liabilities
-
-EToken 有 mint 逻辑，即为用户同时生成 EToken 和 DToken [EToken.mint](./EToken.md#mint)
-
-这部分同时生成的 EToken 和 DToken 称为 Self Collateral 和 Self Liability，区别于用户直接使用 `deposit` 和 `borrow` 生成的 EToken 和 DToken ，self 部分的调整系数都是恒定值（Collateral Factor 0.95）。所以其计算逻辑需要和常规的债务和抵押区分开。
-
-- `balanceInUnderlying` 是底层资产数量，即 Etoken 使用汇率换算的数量
-- 由于 self 部分（用户使用 mint 生成的）Factor 与实际 Factor 不同，
-- 例如 `DAI` 的 collateralFactor 是 0.85，borrowFactor 是 0.88，而 self 部分的 Factor 不论资产种类，都是恒定的 0.95 和 1
-  - 假如用户 A deposit 200DAI , borrow 100DAI，那么流动性 `collateralValue = 200 * 0.85` `liability = 100 / 0.88 = 55.35`
-  - 假如用户 A deposit 200DAI , mint 200 DAI-Etoken 和 200 DAI-Dtoken （mint 会同时等量的 Etoken 与 Dtoken），因为同时生成了抵押和债务，所以数量上限要比单独 borrow 要大
-    - 这里的计算逻辑是先假设所有债务都属于 self 部分，那么 self 部分的，如果根据 Factor 调整的债务数量 (selfAmountAdjusted) 大于抵押资产数量，则表示用户有 self 部分的债务，反之则
