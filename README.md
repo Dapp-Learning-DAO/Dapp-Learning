@@ -12,13 +12,14 @@
 
 We are designed for developers to step into blockchain DAPP development, where they can learn **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** a feasible and easy-to-use blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
-We, incubated from [dapp learning open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS),  are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
+We are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
 We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
 We need more builders to help make our community grow - contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials and improve our tutorial projects - just fix the minor typos are helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to a pull request reviewer who could participate in our Dao's governance. For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value. 
+Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
+For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value. 
 
 <details>
 <summary>Official links</summary>
@@ -67,14 +68,13 @@ Refer to [recommended development tools](./docs/develop-tools.md) to view the cu
 
 **Recommended reading**
 We have collected a list of classic blockchain-related books to help developers know underlying philosophy behind blockchain.
-- *Sovereign Individuals*, Follow public account[Unknown Scripture](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1).
-- *The Austrian School of Thought* is recommended,[Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ).
+- *Sovereign Individuals*, Follow public account [Unknown Scripture](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1).
+- *The Austrian School of Thought* is recommended, [Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ).
 - Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
-- *[Political Economy](https://www.marxists.org/subject/economy/index.htm)*
 
 At the same time, feel free to keep expanding this [book list](./docs/books.md).
 
-**Encryption course**
+**Cryptographic course**
 
 We have collected some crypto courses from top universities and the Ethereum community to help developers systematically understand blockchain and cryptocurrencies.
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
@@ -269,7 +269,7 @@ Item list:
  - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 4. Integration of learning resources
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)  
- - [Immunefi 学习资源](https://immunefi.com/learn/)  
+ - [Immunefi ](https://immunefi.com/learn/)  
 
  ## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
