@@ -56,7 +56,7 @@
 
 - getConfirmationCount
 
-  获取一笔交易当前得到的确认数
+  Get the number of times a transaction is currently confirmed.
 
 - getTransactionCount
 

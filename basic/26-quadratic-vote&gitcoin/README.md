@@ -59,7 +59,7 @@ Address `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE` means accepting ETH, and th
 
 Both Addresses are examples and can be modified as required.
 
-### voteTool
+### VoteTool
 
 Quadratic vote, the more votes, the more money needed.
 
@@ -78,7 +78,7 @@ Using both eth and Token for voting is not implemented for now.
 - `vote(uint256 _proposal, uint256 _n) public payable` vote
 - `withdraw() public onlyOwner` withdraw eth to voter
 
-### financingTool
+### FinancingTool
 
 ![quadratic_funding.png](https://vitalik.ca/images/qv-files/quadratic_funding.png)
 
@@ -138,7 +138,7 @@ Case: Each person can donate to multiple proposals within a certain period of ti
 - `withdrawProposal(uint256 _proposal) public checkEnd` withdraw money after proposal ended
 - `function getResult(uint256 _proposal) public view returns (uint256, uint256)` View the current contribution amount/share of the proposal
 
-## 测试步骤
+## Quick Start
 
 - install dependencies
 
