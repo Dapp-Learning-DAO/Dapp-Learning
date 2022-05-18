@@ -28,7 +28,7 @@ module.exports = {
     ],
   },
   etherscan: {
-    apiKey: "939NEFMUQ7F3TJ7BR343RKQDU3UX8Y9AEZ"
+    apiKey: "xxxx"
   },
   networks: {
     localhost: {
@@ -56,7 +56,7 @@ module.exports = {
       accounts: mnemonic(),
     },
     matic: {
-      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.PROJECT_ID,
+      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_ID,
       accounts: mnemonic()
     },
   },
