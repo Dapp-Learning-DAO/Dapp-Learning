@@ -8,6 +8,7 @@ require('dotenv').config();
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 const { readRedpacketDeployment, saveRedpacketDeployment } = require('../../utils');
+const claimerList = require('./claimerList.json');
 
 function hashToken(account) {
   return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex');
@@ -28,7 +29,7 @@ async function sleep() {
 }
 
 async function main() {
-  const [deployer, user1, user2] = await ethers.getSigners();
+  const [deployer] = await ethers.getSigners();
   const deployment = readRedpacketDeployment();
 
   const HappyRedPacketAddress = deployment.redPacketAddress;
@@ -37,13 +38,13 @@ async function main() {
   const redPacket = await ethers.getContractAt('HappyRedPacket', HappyRedPacketAddress, deployer);
   const simpleToken = await ethers.getContractAt('SimpleToken', SimpleTokenAddress, deployer);
 
-  let tx = await simpleToken.approve(redPacket.address, ethers.utils.parseEther('100'));
-  await tx.wait();
+  // let tx = await simpleToken.approve(redPacket.address, ethers.utils.parseEther('100'));
+  // await tx.wait();
 
-  console.log('Approve Successfully');
+  // console.log('Approve Successfully');
 
   merkleTree = new MerkleTree(
-    [deployer, user1, user2].map((user) => hashToken(user.address)),
+    claimerList.map((user) => hashToken(user)),
     keccak256,
     { sortPairs: true }
   );
@@ -53,15 +54,16 @@ async function main() {
   // create_red_packet
   let creationParams = {
     merkleroot: merkleTreeRoot,
-    number: 3,
+    number: 93,
     ifrandom: true,
-    duration: 2 ** 30,
+    duration: 259200,
     seed: ethers.utils.formatBytes32String('lajsdklfjaskldfhaikl'),
     message: 'Hi',
     name: 'cache',
     token_type: 1,
     token_addr: SimpleTokenAddress,
-    total_tokens: ethers.utils.parseEther('100'),
+    // total_tokens: ethers.utils.parseEther('100'),
+    total_tokens: 438000000
   };
 
   redPacket.once('CreationSuccess', (total, id, name, message, creator, creation_time, token_address, number, ifrandom, duration) => {
