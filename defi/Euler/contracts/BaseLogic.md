@@ -132,6 +132,58 @@ function resolveAssetConfig(address underlying) internal view returns (AssetConf
 
 ## Utils
 
+### updateInterestRate
+
+根据资金利用率 `utilisation` 计算利率，利率有最大值 `MAX_ALLOWED_INTEREST_RATE` 和最小值 `MIN_ALLOWED_INTEREST_RATE`。
+
+利率模型是分段函数 （折线）
+
+```ts
+// BaseLogic.sol
+function updateInterestRate(AssetStorage storage assetStorage, AssetCache memory assetCache) internal {
+    uint32 utilisation;
+
+    {
+        uint totalBorrows = assetCache.totalBorrows / INTERNAL_DEBT_PRECISION;
+        uint poolAssets = assetCache.poolSize + totalBorrows;
+        if (poolAssets == 0) utilisation = 0; // empty pool arbitrarily given utilisation of 0
+        else utilisation = uint32(totalBorrows * (uint(type(uint32).max) * 1e18) / poolAssets / 1e18);
+    }
+
+    bytes memory result = callInternalModule(assetCache.interestRateModel,
+                                                abi.encodeWithSelector(BaseIRM.computeInterestRate.selector, assetCache.underlying, utilisation));
+
+    (int96 newInterestRate) = abi.decode(result, (int96));
+
+    assetStorage.interestRate = assetCache.interestRate = newInterestRate;
+}
+
+// BaseIRM.sol
+function computeInterestRate(address underlying, uint32 utilisation) external returns (int96) {
+    int96 rate = computeInterestRateImpl(underlying, utilisation);
+
+    if (rate > MAX_ALLOWED_INTEREST_RATE) rate = MAX_ALLOWED_INTEREST_RATE;
+    else if (rate < MIN_ALLOWED_INTEREST_RATE) rate = MIN_ALLOWED_INTEREST_RATE;
+
+    return rate;
+}
+
+// BaseIRMLinearKink
+
+function computeInterestRateImpl(address, uint32 utilisation) internal override view returns (int96) {
+    uint ir = baseRate;
+
+    if (utilisation <= kink) {
+        ir += utilisation * slope1;
+    } else {
+        ir += kink * slope1;
+        ir += slope2 * (utilisation - kink);
+    }
+
+    return int96(int(ir));
+}
+```
+
 ## Balances
 
 ### computeExchangeRate
