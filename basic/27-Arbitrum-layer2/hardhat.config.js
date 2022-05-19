@@ -23,7 +23,28 @@ function mnemonic() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.7",
+  solidity: {
+    "compilers": [
+      {
+        "version": "0.6.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 100
+          }
+        }
+      },
+      {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 100
+          }
+        }
+      }
+    ]
+  },
   networks: {
     localhost: {
       url: "http://localhost:8545",
@@ -32,6 +53,12 @@ module.exports = {
         notice no mnemonic here? it will just use account 0 of the hardhat node to deploy
         (you can put in a mnemonic here to set the deployer locally)
       */
+    },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [
+        mnemonic()
+      ],
     },
     arbitrum: {
       url: 'https://arb1.arbitrum.io/rpc',

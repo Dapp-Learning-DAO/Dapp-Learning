@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
+import "@openzeppelin/contracts-0.8/token/ERC20/presets/ERC20PresetMinterPauser.sol";
 
 contract SimpleToken is ERC20PresetMinterPauser {
     /**
