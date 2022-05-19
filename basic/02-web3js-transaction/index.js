@@ -2,8 +2,7 @@ const Web3 = require('web3');
 const fs = require('fs');
 const contractOfIncrementer = require('./compile');
 
-require('dotenv').config({path: __dirname + '/../.env'});
-console.log(process.env);
+require('dotenv').config();
 const privatekey = process.env.PRIVATE_KEY;
 
 /*
@@ -157,7 +156,7 @@ const Trans = async () => {
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      'wss://ropsten.infura.io/ws/v3/' + process.env.INFURA_ID
+      'wss://kovan.infura.io/ws/v3/' + process.env.INFURA_ID
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
