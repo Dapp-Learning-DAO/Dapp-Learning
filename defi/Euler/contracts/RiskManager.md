@@ -18,7 +18,7 @@
    - 若不合适，需要后期通过治理投票更改
    - `pricingParameters` 存储交易池子的费率，只对该类资产有效
 
-```ts
+```solidity
 // Constants.col
 // Pricing types
 uint16 internal constant PRICINGTYPE__PEGGED = 1;           //  WETH
@@ -135,7 +135,7 @@ function getPriceInternal(AssetCache memory assetCache, AssetConfig memory confi
 首先，我们假设该资产的 assetLiability 全部都是 self-collateral ，如果此时 assetLiability > 该资产的所有抵押数量，这显然不合理，说明假设不成立；
 所以我们将 self-collateral 重设为 balanceInUnderlying，而剩下的一部分 assetLiability - balanceInUnderlying 则为实际的 Liabilities
 
-```ts
+```solidity
 uint internal constant CONFIG_FACTOR_SCALE = 4_000_000_000; // must fit into a uint32
 uint32 internal constant SELF_COLLATERAL_FACTOR = uint32(0.95 * 4_000_000_000);
 

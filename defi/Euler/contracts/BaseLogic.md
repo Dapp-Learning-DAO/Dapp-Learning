@@ -1,5 +1,45 @@
 # Euler BaseLogic
 
+## Moudles
+
+Euler 一共9个模块，通过此函数创建 Proxy
+
+- `DToken`
+- `Etoken`
+- `Exec`
+- `Governance`
+- `Installer`
+- `Liquidiation`
+- `Markets`
+- `RiskManager`
+- `Swap`
+
+通过 `_createProxy` 新建模块 proxy
+
+```solidity
+function _createProxy(uint proxyModuleId) internal returns (address) {
+    require(proxyModuleId != 0, "e/create-proxy/invalid-module");
+    require(proxyModuleId <= MAX_EXTERNAL_MODULEID, "e/create-proxy/internal-module");
+
+    // If we've already created a proxy for a single-proxy module, just return it:
+
+    if (proxyLookup[proxyModuleId] != address(0)) return proxyLookup[proxyModuleId];
+
+    // Otherwise create a proxy:
+
+    address proxyAddr = address(new Proxy());
+
+    if (proxyModuleId <= MAX_EXTERNAL_SINGLE_PROXY_MODULEID) proxyLookup[proxyModuleId] = proxyAddr;
+
+    trustedSenders[proxyAddr] = TrustedSenderInfo({ moduleId: uint32(proxyModuleId), moduleImpl: address(0) });
+
+    emit ProxyCreated(proxyAddr, proxyModuleId);
+
+    return proxyAddr;
+}
+
+```
+
 ## Account auth
 
 Euler 的子账户系统，并不是主次结构，即使用 mapping 或者数组结构在主账户下罗列序号，而是通过按位异或运算来生成新的地址，验证子账户隶属关系时，再通过按位或运算来判断结果是否相同。
@@ -44,7 +84,7 @@ function isSubAccountOf(address primary, address subAccount) internal pure retur
 
 ### getEnteredMarketsArray
 
-```ts
+```solidity
 function getEnteredMarketsArray(address account) internal view returns (address[] memory) {
     uint32 numMarketsEntered = accountLookup[account].numMarketsEntered;
     address firstMarketEntered = accountLookup[account].firstMarketEntered;

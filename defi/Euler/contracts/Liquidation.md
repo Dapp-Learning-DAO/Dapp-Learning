@@ -17,7 +17,7 @@
 - `repay` 清算债务的数量，不能超过最大可清算债务数量
 - `minYield` 指定清算人接受抵押资产的最低数量 （少于该数量不执行清算）
 
-```ts
+```solidity
 /// @notice Attempts to perform a liquidation
 /// @param violator Address that may be in collateral violation
 /// @param underlying Token that is to be repayed
@@ -143,7 +143,7 @@ repay
    - `repay` 清算债务数量 / `conversionRate` = `yeild` 需要偿还的抵押数量
    - 其中准备金费将从 repay 中扣除 `UNDERLYING_RESERVES_FEE`
 
-```ts
+```solidity
 
 /// @notice Information about a prospective liquidation opportunity
 struct LiquidationOpportunity {
@@ -282,7 +282,7 @@ function computeLiqOpp(LiquidationLocals memory liqLocs) private {
 
 根据清算人的 `AverageLiquidity` 返回清算折扣的附加乘数（清算人如果提供的流动性越多，享受的清算折扣则越大）
 
-```ts
+```solidity
 // Returns 1e18-scale fraction > 1 representing how much faster the booster grows for this liquidator
 
 function computeDiscountBooster(address liquidator, uint violatorLiabilityValue) private returns (uint) {
