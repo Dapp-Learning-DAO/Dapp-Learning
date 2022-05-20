@@ -1,7 +1,5 @@
 # Arbitrum
 
-Arbitrum bridge：<https://bridge.arbitrum.io/>
-
 与 optimism 差别在于： 交互式证明挑战
 
 Optimism 的争议解决比 Arbitrum 更依赖于以太坊虚拟机 (EVM)。当有人提交关于 Optimism 的挑战时，**整个有问题的交易都通过 EVM 运行**。相比之下，**Arbitrum 使用链下争议解决流程将争议减少到一笔交易中的一个步骤**。然后，协议将这个一步断言（而不是整个交易）发送到 EVM 进行最终验证。因此，从概念上讲，Optimism 的争议解决过程比 Arbitrum 简单得多。
@@ -26,11 +24,13 @@ Optimism 的争议解决过程比 Arbitrum 更简单、更快捷，因为它只�
 AVM 与 EVM 的不同：
 AVM 既支持执行交易，又支持证明（L1 合约相信某个断言是真的）
 
-## 开发
+## L1 to L2 messaging
 
-### L1 to L2 messaging
+### Ethereum to Arbitrum: Retryable Tickets
 
-<https://github.com/OffchainLabs/arbitrum-tutorials/tree/master/packages/greeter>
+Retryable tickets are the Arbitrum protocol’s canonical method for passing generalized messages from Ethereum to Arbitrum. A retryable ticket is an L2 message encoded and delivered by L1; if gas is provided, it will be executed immediately. If no gas is provided or the execution reverts, it will be placed in the L2 retry buffer, where any user can re-execute for some fixed period (roughly one week).
+
+- <https://github.com/OffchainLabs/arbitrum-tutorials/tree/master/packages/greeter>
 
 ### L2 to L1 messaging
 
@@ -46,6 +46,8 @@ blocktimestamp 使用的是 layer1 的；
 https://developer.offchainlabs.com/docs/useful_addresses
 
 ## Quick Start
+
+### depoly SimpleToken
 
 - 安装依赖
 
@@ -76,6 +78,27 @@ https://developer.offchainlabs.com/docs/useful_addresses
   Account balance: ...
   Token address: 0x...
   ```
+
+### L1 to L2
+
+```sh
+node ./scripts/L1toL2.js
+```
+
+output:
+
+```sh
+Arbitrum Demo: Cross-chain Greeter
+Lets
+Go ➡️
+...🚀
+
+Deploying L1 Greeter 👋
+deployed to 0x24b11e81B6477129f298e546c568C20e73b6DD5b
+Deploying L2 Greeter 👋👋
+deployed to 0x4998e921AC9Cd7ba3B2921aDA9dCedbDC1341465
+...
+```
 
 ## 参考链接
 

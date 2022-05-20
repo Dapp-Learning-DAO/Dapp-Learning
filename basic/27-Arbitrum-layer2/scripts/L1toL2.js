@@ -87,7 +87,7 @@ const main = async () => {
    */
   const l1ToL2MessageGasEstimate = new L1ToL2MessageGasEstimator(l2Provider);
 
-  const _submissionPriceWei = await l1ToL2MessageGasEstimate.estimateSubmissionFee(
+  const _submissionPriceWei = await l1ToL2MessageGasEstimate.estimateSubmissionPrice(
     l1Provider,
     await l1Provider.getGasPrice(),
     newGreetingBytesLength
