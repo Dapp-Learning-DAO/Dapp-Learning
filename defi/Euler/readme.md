@@ -17,3 +17,4 @@
 - delphi lab，Dynamic interest rates using control theory：
   <https://cdn.delphidigital.io/uploads/2021/06/Dynamic-Interest-Rate-Model-Based-On-Control-Theory.pdf>
 - defi 固定利率协议： <https://ethtaipei.mirror.xyz/dWxbQ8pmRGT-OcMR_p_VIEL-OJuqe9HJuP6K4DNTlyY>
+- 分级基金：https://tropical-angora-6f8.notion.site/eec54c76858347ae9441e9ea1acbed68
