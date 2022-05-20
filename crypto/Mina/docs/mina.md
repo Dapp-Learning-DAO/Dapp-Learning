@@ -69,87 +69,86 @@ Mina 协议架构中包含几个关键的模块, 分别为区块(Block), 区块�
 
 以下举例一个具体的块实例:
 
-    {
-        "external_transition": {
-            "protocol_state": {
-            "previous_state_hash": "3NLKJLNbD7rBAbGdjZz3tfNBPYxUJJaLmwCP9jMKR65KSz4RKV6b",
-            "body": {
-                "genesis_state_hash": "3NLxYrjb7zmHdoFgBrubCN8ijM8v7eT8kvLiPLc9DHt3M8XrDDEG",
-                "blockchain_state": {
-                "staged_ledger_hash": {
-                    "non_snark": {
-                    "ledger_hash": "jxV4SS44wHUVrGEucCsfxLisZyUC5QddsiokGH3kz5xm2hJWZ25",
-                    "aux_hash": "UmosfM82dH5xzqdckXgA1JoAvJ5tLxch2wsty4sXmiEPKnPTPq",
-                    "pending_coinbase_aux": "WLo8mDN6oBUTSyBkFCy7Fky7Na5fN4R6oGq4HMf3YoHCAj4cwY"
-                    },
-                    "pending_coinbase_hash": "2mze7iXKwA9JAqVDC1MVvgWfJDgvbgSexKtuShdkgqMfv1tjATQQ"
-                },
-                "snarked_ledger_hash": "jx9171AbMApHNG1guAcKct1E6nyUFweA7M4ZPCjBZpgNNrE21Nj",
-                "genesis_ledger_hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
-                "snarked_next_available_token": "2",
-                "timestamp": "1611691710000"
-                },
-                "consensus_state": {
-                "blockchain_length": "3852",
-                "epoch_count": "1",
-                "min_window_density": "1",
-                "sub_window_densities": [
-                    "3","1","3","1","4","2","1","2","2","4","5"
-                ],
-                "last_vrf_output": "g_1vrXSXLhvn1e4Ap1Ey5e8yh3PFMJT0vZyhZLlTBAA=",
-                "total_currency": "167255800000001000",
-                "curr_global_slot": {
-                    "slot_number": "12978",
-                    "slots_per_epoch": "7140"
-                },
-                "global_slot_since_genesis": "12978",
-                "staking_epoch_data": {
-                    "ledger": {
-                    "hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
-                    "total_currency": "165950000000001000"
-                    },
-                    "seed": "2vb1Mjvydod6sEwn7qpbejKCfRqugMgyG3MHXXRKcAkwQLRs9fj8",
-                    "start_checkpoint": "3NK2tkzqqK5spR2sZ7tujjqPksL45M3UUrcA4WhCkeiPtnugyE2x",
-                    "lock_checkpoint": "3NK5G8Xqn1Prh3XoTyZ2tqntJC6X2nVwruv5mEJCL3GaTk7jKUNo",
-                    "epoch_length": "1769"
-                },
-                "next_epoch_data": {
-                    "ledger": {
-                    "hash": "jx7XXjRfJj2mGXmiHQmpm6ZgTxz14udpugyFtw4DefJFpie7apN",
-                    "total_currency": "166537000000001000"
-                    },
-                    "seed": "2vavBR2GfJWvWkpC7yGJQFnts18nHaFjdVEr84r1Y9DQXvnJRhmd",
-                    "start_checkpoint": "3NLdAqxtBRYxYbCWMXxGu6j1hGDrpQwGkBDF9QvGxmtpziXQDADu",
-                    "lock_checkpoint": "3NL4Eis1pS1yrPdfCbiJcpCCYsHuXY3ZgEzHojPnFWfMK9gKmhZh",
-                    "epoch_length": "2084"
-                },
-                "has_ancestor_in_same_checkpoint_window": true,
-                "block_stake_winner": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
-                "block_creator": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
-                "coinbase_receiver": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
-                "supercharge_coinbase": true
-                },
-                "constants": {
-                "k": "290",
-                "slots_per_epoch": "7140",
-                "slots_per_sub_window": "7",
-                "delta": "0",
-                "genesis_state_timestamp": "1609355670000"
-                }
-            }
+```json
+{
+  "external_transition": {
+    "protocol_state": {
+      "previous_state_hash": "3NLKJLNbD7rBAbGdjZz3tfNBPYxUJJaLmwCP9jMKR65KSz4RKV6b",
+      "body": {
+        "genesis_state_hash": "3NLxYrjb7zmHdoFgBrubCN8ijM8v7eT8kvLiPLc9DHt3M8XrDDEG",
+        "blockchain_state": {
+          "staged_ledger_hash": {
+            "non_snark": {
+              "ledger_hash": "jxV4SS44wHUVrGEucCsfxLisZyUC5QddsiokGH3kz5xm2hJWZ25",
+              "aux_hash": "UmosfM82dH5xzqdckXgA1JoAvJ5tLxch2wsty4sXmiEPKnPTPq",
+              "pending_coinbase_aux": "WLo8mDN6oBUTSyBkFCy7Fky7Na5fN4R6oGq4HMf3YoHCAj4cwY"
             },
-            "protocol_state_proof": "<opaque>",
-            "staged_ledger_diff": "<opaque>",
-            "delta_transition_chain_proof": "<opaque>",
-            "current_protocol_version": "1.1.0",
-            "proposed_protocol_version": "<None>"
+            "pending_coinbase_hash": "2mze7iXKwA9JAqVDC1MVvgWfJDgvbgSexKtuShdkgqMfv1tjATQQ"
+          },
+          "snarked_ledger_hash": "jx9171AbMApHNG1guAcKct1E6nyUFweA7M4ZPCjBZpgNNrE21Nj",
+          "genesis_ledger_hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
+          "snarked_next_available_token": "2",
+          "timestamp": "1611691710000"
+        },
+        "consensus_state": {
+          "blockchain_length": "3852",
+          "epoch_count": "1",
+          "min_window_density": "1",
+          "sub_window_densities": ["3", "1", "3", "1", "4", "2", "1", "2", "2", "4", "5"],
+          "last_vrf_output": "g_1vrXSXLhvn1e4Ap1Ey5e8yh3PFMJT0vZyhZLlTBAA=",
+          "total_currency": "167255800000001000",
+          "curr_global_slot": {
+            "slot_number": "12978",
+            "slots_per_epoch": "7140"
+          },
+          "global_slot_since_genesis": "12978",
+          "staking_epoch_data": {
+            "ledger": {
+              "hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
+              "total_currency": "165950000000001000"
+            },
+            "seed": "2vb1Mjvydod6sEwn7qpbejKCfRqugMgyG3MHXXRKcAkwQLRs9fj8",
+            "start_checkpoint": "3NK2tkzqqK5spR2sZ7tujjqPksL45M3UUrcA4WhCkeiPtnugyE2x",
+            "lock_checkpoint": "3NK5G8Xqn1Prh3XoTyZ2tqntJC6X2nVwruv5mEJCL3GaTk7jKUNo",
+            "epoch_length": "1769"
+          },
+          "next_epoch_data": {
+            "ledger": {
+              "hash": "jx7XXjRfJj2mGXmiHQmpm6ZgTxz14udpugyFtw4DefJFpie7apN",
+              "total_currency": "166537000000001000"
+            },
+            "seed": "2vavBR2GfJWvWkpC7yGJQFnts18nHaFjdVEr84r1Y9DQXvnJRhmd",
+            "start_checkpoint": "3NLdAqxtBRYxYbCWMXxGu6j1hGDrpQwGkBDF9QvGxmtpziXQDADu",
+            "lock_checkpoint": "3NL4Eis1pS1yrPdfCbiJcpCCYsHuXY3ZgEzHojPnFWfMK9gKmhZh",
+            "epoch_length": "2084"
+          },
+          "has_ancestor_in_same_checkpoint_window": true,
+          "block_stake_winner": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "block_creator": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "coinbase_receiver": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "supercharge_coinbase": true
+        },
+        "constants": {
+          "k": "290",
+          "slots_per_epoch": "7140",
+          "slots_per_sub_window": "7",
+          "delta": "0",
+          "genesis_state_timestamp": "1609355670000"
         }
-    }
+      }
+    },
+    "protocol_state_proof": "<opaque>",
+    "staged_ledger_diff": "<opaque>",
+    "delta_transition_chain_proof": "<opaque>",
+    "current_protocol_version": "1.1.0",
+    "proposed_protocol_version": "<None>"
+  }
+}
+```
 
 ### 区块生产者(Block Producer)
 
-Mina 中区块生产者的作用是达成共识并为区块链提供安全性。区块生产者负责创建新区块，其中包括在网络上广播的最新交易以及可用于证明当前区块链状态有效性的区块链证明。在 Mina，任何人都可能成为区块生产者。有无限数量的参与者有机会产生与所押资金成正比的区块。资金不会被锁定，也不会受到削减。作为抵押资金和生成所需的区块链证明的回报，
-那些被创造和包含在当前有效区块链的区块将会获得奖励，奖励以币和交易费用的形式发放。
+Mina 中区块生产者的作用是达成共识并为区块链提供安全性。区块生产者负责创建新区块，其中包括在网络上广播的最新交易以及可用于证明当前区块链状态有效性的区块链证明。在 Mina，任何人都可能成为区块生产者。有无限数量的参与者有机会产生与所押资金成正比的区块。资金不会被锁定，也不会受到削减。作为抵押资金和生成所需的区块链证明的回报，那些被创造和包含在当前有效区块链的区块将会获得奖励，奖励以币和交易费用的形式发放。
 
 区块生产者需更新至区块链的最新状态后才可以成功产生新的区块。同时，他们也必须有足够的算力在规定的时间内计算出区块链 SNARK 证明，然后在可接受的延迟内连接到其他节点以广播新生成的区块。
 
