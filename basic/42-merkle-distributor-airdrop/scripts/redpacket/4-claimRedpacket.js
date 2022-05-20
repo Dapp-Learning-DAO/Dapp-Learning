@@ -8,6 +8,7 @@ require('dotenv').config();
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 const { readRedpacketDeployment } = require('../../utils');
+const claimerList = require('./claimerList.json');
 
 function hashToken(account) {
   return Buffer.from(ethers.utils.solidityKeccak256(['address'], [account]).slice(2), 'hex');
@@ -23,18 +24,18 @@ async function main() {
   const redPacket = await ethers.getContractAt('HappyRedPacket', HappyRedPacketAddress, deployer);
 
   merkleTree = new MerkleTree(
-    [deployer, user1, user2].map((user) => hashToken(user.address)),
+    claimerList.map((user) => hashToken(user)),
     keccak256,
     { sortPairs: true }
   );
 
   async function cliamRedPacket(user) {
     let proof = merkleTree.getHexProof(hashToken(user.address));
-    // console.log('merkleTree proof: ', proof);
+    console.log('merkleTree proof: ', proof);
 
     const balanceBefore = await simpleToken.balanceOf(user.address);
 
-    let createRedPacketRecipt = await redPacket.connect(user).claim(redpacketID, proof, user.address);
+    let createRedPacketRecipt = await redPacket.connect(user).claim(redpacketID, proof);
     await createRedPacketRecipt.wait();
 
     const balanceAfter = await simpleToken.balanceOf(user.address);
@@ -44,8 +45,6 @@ async function main() {
   console.log("\n=========Begin to claim Red Packet=========\n")
   
   await cliamRedPacket(deployer);
-  await cliamRedPacket(user1);
-  await cliamRedPacket(user2);
 
   console.log('\n=========Claim Red Packet successfully=========\n');
 }

@@ -1,4 +1,4 @@
-[中文](./README.md) / English
+[中文](./README-cn.md) / English
 # Abstract
 The demo code provides developers with an overview of how to sign, send, and receive receipt of transactions, and verify the results of their execution. The sample also provides the event monitoring code so that the developer can understand how to listen to an event one or more times.
 
@@ -61,7 +61,7 @@ const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
 
 ### Export `contractFile` Object
 
-If you want to use the `contractFile` object in other `js` files, you can export it.
+If you want to use the `contractFile` object in other `js` files, you need to export it.
 ```js
 module.exports = contractFile;
 ```  
@@ -74,7 +74,7 @@ const contractOfIncrementer = require("./compile");
 ```
 
 ### 2. Read private key from environment variables
-For security sake, the private key is not hard-coded, but it can be read as environment variables. When run this task, the `dotenv` plugin will automatically read the configurations in the `.env` file and load them as environment variables, and then you can use the private key and other environment variables via `process.env`.  
+For security’s sake, the private key is not hard-coded, but it can be read as environment variables. When run this task, the `dotenv` plugin will automatically read the configurations in the `.env` file and load them as environment variables, and then you can use the private key and other environment variables via `process.env`.  
 ```js
 require("dotenv").config();
 const privatekey = process.env.PRIVATE_KEY;
@@ -155,10 +155,10 @@ In previous steps, you built a contract instance, and then deployed the transact
 let incrementer = new web3.eth.Contract(abi, deployReceipt.contractAddress);
 ```
 
-### 11. Invoke the read-only interfaces of a contract
+### 11. Use the `view` function of a contract
 Whether a contract instance is create by deploying, or by loading, you can interact with the contract once you have an instance of the contract already on the blockchain.  
-There are two types of contract interfaces: `read-only` and `transaction`. The `read-only` interfaces do not generate blocks, while the `transaction` interfaces will generate the corresponding block data on the blockchain.
-For example, after calling the `getNumber` interface of the contract, you will get the public variable number of the contract, and this operation will not charge any fee.
+There are two types of contract functions: `view` and without `view`. The functions with `view` promise not to modify the state, while the functions without `view` will generate the corresponding block data on the blockchain.
+For example, after calling the `getNumber` function of the contract, you will get the public variable number of the contract, and this operation will not charge any gas.
 ```js
 let number = await incrementer.methods.getNumber().call();
 ```
@@ -205,13 +205,13 @@ incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
 #### Listen to  Increment event only once
 ```js
 incrementer.once('Increment', (error, event) => {
-    console.log('I am a onetime event listner, I am going to die now');
+    console.log('I am a onetime event listener, I am going to die now');
 });
 ```
 #### Listen to Increment event continuously
 ```js
 incrementer.events.Increment(() => {
-    console.log("I am a longlive event listner, I get a event now");
+    console.log("I am a longlive event listener, I get a event now");
 });
 ```
 

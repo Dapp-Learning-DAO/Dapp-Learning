@@ -1,69 +1,72 @@
-## 前言
+[中文](./README-CN.md) / English
 
-Waffle 是一款适配 ethers.js 的智能合约测试库。本样例演示了使用 Waffle 进行测试的基本流程及使用方法.  
-Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html) , 对于不熟悉 Waffle 测试框架的开发者, 可以根据本样例进行基础的操作, 阅读样例代码, 形成初步的流程概念, 之后再参考官网进行更加深入的了解.
+## Preface
 
-## 合约介绍
+Waffle is a smart contract test library that adapts to ehter.js. This example demonstrates the basic process and usage of Waffle test.
+You can refer to the offical website of Waffle width the detailed usage(https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html).If you are a developler not familiar with Waffle, you could read the sample code and do exercises, then refer to the official website for a more in-depth understanding.
 
-- contract/SimpleToken.sol  
-  一个标准的 ERC20 合约, 实现了 ERC20 的所有接口, 用户可以使用这个合约进行 ERC20 代币的发放.
+## Contracts Introduction
+
+- contract/SimpleToken.sol
+  A standard ERC20 contract that implements all interface of ERC20. Users could issue ERC20 tokens using this contract.
   
 
-## 脚本介绍
+## Scripts Introduction
 
-- test/simpleTokenTest.js  
-  SimpleToken.sol 合约的单元测试代码. 这里只写了一个测试脚本, 实际开发中, 可以在 test 目录下, 针对不同的合约, 编写多个单元测试脚本, 之后使用 yarn test 命令即可执行 test 目录下所有的单元测试脚本.  
-  在 simpleTokenTest.js 脚本中, 对 SimpleToken.sol 合约的各个接口进行简单的测试, 可以参考此样例编写其他合约的单元测试代码.
+- test/simpleTokenTest.js
+  The unit test code of SimpleToken.sol contract. There is only one test script here, you could write multiple scripts of unit test codes for different contracts under the "test" directory during the development.
+  Each interface of SimpleToken.sol contract will be simplely tested in the simpleTokenTest.js script.You can refer to the sample to write unit test codes of other contracts.
 
-- index.js  
-  外部合约, 需要单独进行调用. 对应实际生产环境中, 当单元测试通过后, 就可以调用此脚本进行实际的生成操作.  
-  此脚本名字自行进行定义, 这里是使用 index.js 进行指定
+- index.js
+  External contracts needs to be invoked separately. When unit test is passed, the script could be called to generate some actions in the production environment.
 
-## 操作步骤
+## steps
 
-- 1 安装依赖
+- 1 install dependencies
 
 ```bash
 yarn install
 ```
 
-- 2 编译合约
+- 2 compile contracts
 
 ```bash
 yarn build
 ```
 
-- 3 配置环境变量
+- 3 config environment variables
 
 ```bash
 cp .env.example .env
 
-## 然后修改 .env ，在其中配置 PRIVATE_KEY 和 INFURA_ID
+## modify PRIVATE_KEY and INFURA_ID in .env
 ```
 
-- 4 执行测试
+- 4 Test Execution
 
 ```bash
 yarn test
 ```
 
-- 5 测试 index.js
+- 5 test index.js
 
 ```bash
 node index.js
 ```
-## 说明
-在使用命yarn install命令，提示无法找到yarn命令时（比如在VMware上跑），可以尝试执行：
+
+## Note
+
+when it hint that "cannot find yarn commands"(when running on VMWare), you can try:
+
 1. $ sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.rep
 2. $ sudo yum install yarn
 
-之后查看yarn 版本：
+check yarn version
 $ yarn --versionyarn --version
 
+- If run `yarn test` on windows, you should change the "export" keyword to the "set" keyword in the "test" command of the "scripts" key of the file named package.json
 
-- 如果在windows上跑yarn test命令时，要把package.json文件中script脚本中test命令中的export命令修改为set命令，否则会报找不到命令。
-
-修改前：
+Before changed:
 
 ```
   "scripts": {
@@ -72,7 +75,7 @@ $ yarn --versionyarn --version
   },
 ```
 
-修改后：
+afer changed:
 
 ```
   "scripts": {
@@ -80,13 +83,13 @@ $ yarn --versionyarn --version
     "test": "set NODE_ENV=test && mocha --timeout 10000"
   },
 ```
-  
-  
-## 参考文档
 
-- waffle 官方文档： <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
+## Reference document
 
-- ethers.js 官方文档： <https://docs.ethers.io/v4/api-providers.html>  
-<https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
 
-- 中文文档： <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+- waffle offical document: <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
+
+- etherjs offical document: <https://docs.ethers.io/v4/api-providers.html>  
+  <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+
+- Chinese document: <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
