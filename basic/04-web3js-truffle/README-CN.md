@@ -1,3 +1,5 @@
+中文 / [English](./README.md)
+
 ## Truffle 介绍
 
 Truffle 是基于 Solidity 语言的一套开发框架，它简化了去中心化应用（Dapp）的构建和管理流程。本身是采用 Javascript 编写，支持智能合约的编译、部署和测试。
