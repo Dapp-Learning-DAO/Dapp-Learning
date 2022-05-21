@@ -1,4 +1,4 @@
-[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/main/basic/06-ethersjs-waffle/README-CN.md)
+[中文](./README-CN.md) / English
 
 ## Preface
 
