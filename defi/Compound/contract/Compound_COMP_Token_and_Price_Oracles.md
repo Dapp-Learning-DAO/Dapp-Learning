@@ -49,7 +49,7 @@ contract ComptrollerV6Storage is ComptrollerV5Storage {
 
 用户每次操作，只要可能更新存款，如存款操作，会触发 `mintAllowed()`，它进一步
 
-- 调用 `updateCompSupplyIndex()` 更新当前市场的 COMP 村款指数
+- 调用 `updateCompSupplyIndex()` 更新当前市场的 COMP 存款指数
 - 调用 `distributeSupplierComp()` 分发当前用户此前未结算的存款产出的 COMP
 
 ``` js
