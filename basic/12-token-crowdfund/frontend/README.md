@@ -1,31 +1,32 @@
-## 众筹合约前端
-本样例演示众筹合约的基本流程，包括部署合约，合约，启动众筹项目，
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/12-token-crowdfund/frontend/README-CN.md)
+## Crowdfunding Contract Front-End
+This sample demonstrates the basic process of a crowdfunding contract, including the deployment of the contract, the contract, and the launch of a crowdfunding project.
 
-## 操作流程
-- 配置私钥  
-在 .env 中放入的私钥，格式为 
+## Operation Process
+- Configure The Private Key
+Put the private key in the **.env** file and its format is as follows
 ```
-VITE_PRIVATE_KEY=xxxxxxxxxxxxxxxx  //私钥
+VITE_PRIVATE_KEY=xxxxxxxxxxxxxxxx  //the private key
 VITE_INFURA_ID=yyyyyyyy  //infura id
-VITE_CONTRACT_ADDRESS=zzzzzzzzzzzzz  //合约地址
+VITE_CONTRACT_ADDRESS=zzzzzzzzzzzzz  //contract address
 ```
-然后代码自动从中读取
+Then the code automatically reads private key from **.env** file.
 
-- 安装依赖
+- Install Dependencies
 ```
 yarn
 ```
 
-- 启动项目
+- Start Project
 ```
 yarn dev
 ```
 
-- 编译项目
+- Compile Project
 ```
 yarn build
 ```
  
-## 参考链接
+## Refer to the link
 https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd  
  

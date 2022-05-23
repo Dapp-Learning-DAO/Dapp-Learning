@@ -1,4 +1,4 @@
-中文 / [English](./README-en.md)
+中文 / [English](./README.md)
 ## 前言
 通过本样例代码，使开发者了解合约编译，部署的基本流程，并掌握基本的 web3js 接口使用方法
 
