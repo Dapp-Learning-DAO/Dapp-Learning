@@ -175,7 +175,7 @@ After finish the above steps, we can run `truffle compile`, `truffle migrate` an
 
 ## Use Truffle Dashboard 
 
-Start version `v5.5.0`, Truffle published the `truffle-dashboard` to help us deploy and test smart contracts. Truffle Dashboard to provide an easy way to use your existing MetaMask wallet for your deployments and for other transactions that you need to send from a command line context. So it is beneficial to reduce the risk of private key leakage.
+Start version `v5.5.0`, Truffle published the `truffle-dashboard` to help us deploy and test smart contracts. Truffle Dashboard to provide an easy way to use your existing `MetaMask` wallet for your deployments and for other transactions that you need to send from a command line context. So it is beneficial to reduce the risk of private key leakage.
 
 #### Start Truffle Dashboard
 
@@ -221,6 +221,6 @@ It is worth mentioning that for the transaction sent, the developer can confirm 
 
 ## Reference
 
-- solidity smart contract: https://learnblockchain.cn/docs/solidity/contracts.html
-- solidity 相关工具: https://solidity-cn.readthedocs.io/zh/develop/
+- Solidity smart contract: https://learnblockchain.cn/docs/solidity/contracts.html
+- Solidity Tools: https://solidity-cn.readthedocs.io/zh/develop/
 - Truffle Dashboard: https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard
