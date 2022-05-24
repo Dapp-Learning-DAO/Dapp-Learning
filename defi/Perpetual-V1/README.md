@@ -112,3 +112,4 @@ deri: https://mp.weixin.qq.com/s/Lffxvqt2lXbfXbMyTP-84w
 永续合约：https://zhuanlan.zhihu.com/p/354498449  
 https://zhuanlan.zhihu.com/p/354337880    
 合约算法：https://www.zhihu.com/people/le-zhu-92-74  
+技术解析永续衍生品合约的一般原理: https://www.beechain.net/news/29251.html
