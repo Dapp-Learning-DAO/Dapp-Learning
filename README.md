@@ -136,7 +136,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [snapshot](basic/40-snapshot) ⌛
-41. [NFT farming](https://superfarm.com/farms) ⬜
+41. [Thirdweb](https://portal.thirdweb.com/)  
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
@@ -171,7 +171,6 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
 75. [golang-dapp](basic/75-golang-dapp) ✅
-76. [Thirdweb](https://portal.thirdweb.com/)  
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
