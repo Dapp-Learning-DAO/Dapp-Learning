@@ -18,7 +18,7 @@ optimistic address:
 - Perp V2 的聚合流动性依托于 Uniswap V3，V1 中原有的 vAMM 逻辑在 Uniswap V3 上运行。提高资金利用率。
 
 - Perp V1 版本 USDC 是真实资产，而对应资产（ETH）是 vault 池子是虚拟的。
-  Perp V2 在 Uniswap V3 上以 v-Token 创建池子，比如 vUSDC/vETH，v-token 是 Perpetual Protocol 系统生成的代币，目前仅用于 Perp 系统内的做市和交易等，这些池子真实的建立在目前的 Uniswap 架设在 Arbitrum 的 V3 上。 均为真实币对。
+  Perp V2 在 Uniswap V3 上以 v-Token 创建池子，比如 vUSDC/vETH，v-token 是 Perpetual Protocol 系统生成的代币，目前仅用于 Perp 系统内的做市和交易等，这些池子真实的建立在目前的 Uniswap 架设在 Optimistic 的 Uniswap V3 上。 均为真实币对。
 
 - Perp v1 中不需要做市， Perp V2 中为 LP 提供杠杆，称为「Leveraged LPs」（杠杆 LP）
   若 LP 向清算所（Clearing House）提供 1,000 USDC 进行做市，则 Leveraged LPs 功能可以在 10 倍范围内添加 vUSDC，这 10,000 vUSDC 就成为 LP 可以在系统内放置流动性的总额度（也称为“信用”），LP 可以将其添加到相应资产和区间上，比如可以分为 5,000 vUSDC 和价值 5,000 vUSDC 的 vETH，添加到相应流动性池中。（按 oracle 价格兑换）
@@ -26,7 +26,7 @@ optimistic address:
 
 ## Perp V2 Technical Details
 
-> [Perp V2 Technical Details]<https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub>
+> Perp V2 Technical Details: <https://docs.google.com/document/d/e/2PACX-1vRDdN03IvJFRMLolxBl4Np7OpzmniMXmJO0zQJNmndD1vL3YZ46bVgTc9VTy8KdCD4ZrnwYz7agbJJN/pub>
 
 ### V2 changes
 

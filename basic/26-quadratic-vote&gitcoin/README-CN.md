@@ -1,3 +1,4 @@
+中文 / [English](./README.md)
 # Quadratic Voting and Quadratic Funding
 
 ## 概念介绍
