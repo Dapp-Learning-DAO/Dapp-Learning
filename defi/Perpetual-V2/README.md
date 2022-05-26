@@ -107,3 +107,4 @@ Clearinghouse 将会 mint vETH 并将其注入 Uni v3 AMM。简单起见，我�
 - 永续合约套利：<https://open.163.com/newview/movie/courseintro?newurl=M8DOH67K8>
 - V2 notion 文档：<https://v2docs.perp.fi/for-makers/use-a-strategy-provider>
 - Perp V2 gitbook: <https://perpetual-protocol.github.io/lushan-docs/docs/ContractOverview>
+- Curie Docs for Partners: <https://perp.notion.site/Curie-Docs-for-Partners-a2c316abfc1549c7b4d6e310d7a3987d>
