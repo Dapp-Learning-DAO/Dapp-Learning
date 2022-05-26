@@ -329,7 +329,7 @@ swapOutput
 - 如果保证金率大于 `liquidationFeeRatio` ，部分清算
 - 如果保证金率小于 `liquidationFeeRatio`，调用 `internalClosePosition` 内部关仓，并且会跟 AMM 做一次交易；保证金改为负数；
 
-```ts
+```solidity
 /**
 * @notice liquidate trader's underwater position. Require trader's margin ratio less than maintenance margin ratio
 * @dev liquidator can NOT open any positions in the same block to prevent from price manipulation.
