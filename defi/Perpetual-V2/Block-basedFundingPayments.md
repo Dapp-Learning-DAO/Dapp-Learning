@@ -1,14 +1,13 @@
 # Block-based Funding Payments
 
-> [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e)
-
-> [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
+> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br>
+[《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
 
 ## Intro
 
 由 Bitmex 发明的永续合约是加密领域最受欢迎的创新之一。通过引入 funding 机制，可以将其视为定期结算时间表，期货没有到期日，taker 因此可以减少对时间因素的担忧，而专注于价格投机。
 
-与 Perp v1 中的每小时资金相比，Perp v2 有一个新的 funding 机制：基于区块的 funding，它为每笔交易结算 funding payment (**block-based funding, which settles funding payments on each trade**)。
+与 Perp v1 中的每小时收取 funding payment 相比，Perp v2 有一个新的 funding 机制：基于区块的 funding，它为每笔交易结算 funding payment (**block-based funding, which settles funding payments on each trade**)。
 
 ## Funding Rate & Payment
 
@@ -17,13 +16,13 @@ Premium = Mark Price - Index Price
 Funding Rate = Premium / Index Price = (Mark - Index) / Index
 ```
 
-- `Mark price` perp 市场的交易价格，是 virtual token 交易对的 uniswap v3 pool 的 `Mid price on Uniswap`, 即 该交易对所有交易池子（不同费率）的平均价格
-- `Index price` 是通常来自其他交易所的参考价格；包括 Chainlink 等价格预言机
-- `Premium` 是前两者价格之差
+- `Mark price` perp 市场的交易价格，是 virtual token 交易对的 uniswap v3 pool 的 `Mid price`, 即 该交易对所有交易池子（不同费率）的平均价格
+- `Index price` 通常是来自其他交易所的参考价格；包括 Chainlink 等价格预言机
+- `Premium` 前两者之差
 
-`Funding Rate` 本质上是衡量标记价格与指数价格的偏离程度。
+`Funding Rate` 本质上是衡量 `Mark price` 与 `Index price` 的偏离程度。
 
-funding payment:
+`funding payment`:
 
 ```math
 Position Value = Position Size * Index Price
@@ -32,7 +31,7 @@ Funding Payment = Position Value * Funding Rate
                 = Position Size * Premium
 ```
 
-假设 Alice 想要开 1ETH 多仓，此时 `Mark price = 4200`, 而 `Index price = 4000`。`Funding rate = (4200 — 4000) / 4000 = 5%`, Alice 需要支付 `funding payment = 4000 * 0.05 = 1 * (4200 - 4000) = 200`。那么这笔钱向谁支付？
+假设 Alice 想要开多仓，头寸规模 1ETH，此时 `Mark price = 4200`, 而 `Index price = 4000`。`Funding rate = (4200 — 4000) / 4000 = 5%`, Alice 需要支付 `funding payment = 4000 * 0.05 = 1 * (4200 - 4000) = 200`。那么这笔钱向谁支付？
 
 - When `funding rate > 0`, long pay shorts
 - When `funding rate < 0`, shorts pay long
@@ -49,7 +48,7 @@ Funding Payment = Position Value * Funding Rate
 
 ## Block-based Funding
 
-Block-based Funding 机制，是每当交易发生时，无论多头还是空头，资金都会被结算。公式几乎相同，只是资金间隔稍作修改：
+Block-based Funding 机制，是每当交易发生时，无论多头还是空头，funding 都会被结算。公式几乎相同，只是 funding 收取间隔稍作修改：
 
 ```math
 Funding Rate = (Premium / Index Price) * Δtime / 1 day
@@ -90,13 +89,13 @@ S * (
 
 Perp v2 的 maker 是一个全新的角色，不曾在 Perp v1 中出现过。在传统订单簿交易所中，maker 作为 LP，是 taker 的对手盘，他们将收到对方的 funding payment。
 
-假如市场中只有一位 taker 和一位 maker，如果 taker 开 1 个多仓，意味着 maker 开 1 个空仓。
+假如市场中只有一位 taker 和一位 maker，如果 taker 开多仓，意味着 maker 开 1 个等值的空仓。
 
 与订单簿交易所唯一的不同是 AMMs 是被动做市的。一旦 maker 将他们的流动性置于池中，将只能被动的做市，无法决定以何种价格交易。
 
-因此，taker 和 maker 执行 funding payment 的最大区别在于，taker 的头寸规模仅在头寸的每一次操作中发生变化。每次 taker 修改头寸时，我们都可以结算之前的 funding payment，并为即将到来的 funding payment 更新头寸规模。
+因此，taker 和 maker 执行 funding payment 的最大区别在于，taker 的头寸规模仅在头寸的每一次头寸修改操作中发生变化。每次 taker 修改头寸时，我们都可以结算之前累计的 funding payment，并为即将到来的 funding payment 更新头寸规模。
 
-然而，maker 的头寸规模不仅会随着增加或移除流动性而改变。只要他们的流动性处于 range/active 状态，这意味着**流动性当前被 taker 利用，maker 的头寸规模就会根据 taker 持有的头寸规模不断变化**。
+然而，maker 的头寸规模不仅会随着增加或移除流动性而改变。只要他们的流动性处于 range/active 状态，这意味着**流动性被 taker 利用时，maker 的头寸规模就会根据 taker 持有的头寸规模不断变化**。
 
 ## Cumulative Funding Payments for Takers
 
@@ -125,11 +124,9 @@ S' * ( (t2 - t1) * f2 * i2)   // (t1, t2) with size S'
      + (t3 - t2) * f3 * i3) ) // (t2, t3) with size S'
 ```
 
-一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不回发生改变。
+一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不会发生改变。
 
-$
-\sum_{t=1}^{t'}{S_t*I_t*F_t*(\delta(t)-\delta(t-1))}
-$
+$\sum_{t=1}^{t'}{S_t*I_t*F_t*(\delta(t)-\delta(t-1))}$
 
 - S: position size
 - I: index price
@@ -226,23 +223,17 @@ base token 数量跟随 `Mark price` 的变化规律：
 - Mark price `(m0, m1, m2)`, Premium `(p1, p2 ,p3)` , Δtime `(t1-t0, t2-t1, t3-t2)`；这三者都是全局变量的不同时刻的值；
 - 两个常量 `liquidity` 和 `sqrt(upper)`
 
-$
-\sum{(\Delta time * \frac{1}{\sqrt{MarkPrice}} * premium * liquidity)} - \sum{(\Delta time * \frac{1}{\sqrt{upper}} * premium * liquidity)}
-$
+$\sum{(\Delta time * \frac{1}{\sqrt{MarkPrice}} * premium * liquidity)} - \sum{(\Delta time * \frac{1}{\sqrt{upper}} * premium * liquidity)}$
 
 由于 `liquidity` 和 `sqrt(upper)` 不变，可以化简：
 
-$
-\sum{(\Delta time * \frac{premium}{\sqrt{MarkPrice}})} * liquidity - \sum{(\Delta time * premium)} * \frac{liquidity}{\sqrt{upper}}
-$
+$\sum{(\Delta time * \frac{premium}{\sqrt{MarkPrice}})} * liquidity - \sum{(\Delta time * premium)} * \frac{liquidity}{\sqrt{upper}}$
 
 $\sum{(\Delta time * premium)}$ 我们其实已经将其存为全局变量 G；因此我们现在需要增加的全局变量即为 $\sum{(\Delta time * \frac{premium}{\sqrt{MarkPrice}})}$ 计作 G';
 
 最终我们得到了 maker 的 funding payment 表达式：
 
-$
-liquidity * (G' — \frac{G}{\sqrt{upper}})
-$
+$liquidity * (G' — \frac{G}{\sqrt{upper}})$
 
 <hr>
 
