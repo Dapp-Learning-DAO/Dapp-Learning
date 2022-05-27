@@ -147,7 +147,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [snapshot](basic/40-snapshot) ⌛
-41. [NFT farming](https://superfarm.com/farms) ⬜
+41. [Thirdweb](https://portal.thirdweb.com/)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
@@ -182,7 +182,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
-76. [Thirdweb](https://portal.thirdweb.com/)
+
 ## 项目任务
 
 **准备工作**：
