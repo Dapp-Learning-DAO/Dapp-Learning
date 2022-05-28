@@ -10,7 +10,11 @@
 
 1. 入参检查
     - base token 必须在市场列表中
-    
+2. `_settleFunding()` 结算之前累计的 funding payment, 更新全局累计变量
+3. `OrderBook.addLiquidity()` 向 UniV3 pool 添加流动性(v-token)
+4. 是否使用 taker 仓位参与做市
+5. 更新 Pnl
+6. 检查用户抵押是否充足
 
 ```ts
 // IClearingHouse.osl
