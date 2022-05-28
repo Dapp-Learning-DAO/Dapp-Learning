@@ -206,3 +206,8 @@ function addLiquidity(AddLiquidityParams calldata params)
 ### getInsuranceFund
 
 ### getAccountValue
+
+
+## Reference
+
+- Perp v2 Integration Guide & Code Samples: <https://perp.notion.site/Perp-v2-Integration-Guide-Code-Samples-01943c0520624e43bf58bc4c3368db07>

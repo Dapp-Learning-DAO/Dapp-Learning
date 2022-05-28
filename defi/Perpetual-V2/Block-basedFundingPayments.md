@@ -1,7 +1,6 @@
 # Block-based Funding Payments
 
-> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br>
-[《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
+> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br> > [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
 
 ## Intro
 
@@ -126,12 +125,12 @@ S' * ( (t2 - t1) * f2 * i2)   // (t1, t2) with size S'
 
 一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不会发生改变。
 
-$\sum_{t=1}^{t'}{S_t*I_t*F_t*(\delta(t)-\delta(t-1))}$
+$ \sum\_{t=1}^{t'}{S*t * I*t * F_t \* (\Delta(t)-\Delta(t-1))} $
 
 - S: position size
 - I: index price
 - F: funding rate
-- δ(t): timestamp of t; δ(t)- δ(t — 1) is the time difference
+- Δ(t): timestamp of t; Δ(t)- Δ(t — 1) is the time difference
 
 ### Spec
 
@@ -162,7 +161,7 @@ $\sum_{t=1}^{t'}{S_t*I_t*F_t*(\delta(t)-\delta(t-1))}$
 
 我们将 v-ETH, v-BTC 或者 v-whatever 称之为 **base token**, v-USDC 称之为 **quote token**。
 
-持有正数数量 base token 的用户，就是持有多头头寸；持有负数数量 base token 的用户，即向协议借出 base token 的用户，则持有空头头寸；
+持有正数数量 base token 的用户，就是持有多头头寸；持有负数数量 base token 的用户，即从协议借出 base token 的用户，则持有空头头寸；
 
 假如一位 maker 于 range(3000, 50000) 提供了 1 v-ETH 和 4000 v-USDC 的流动性 , 当时 v-ETH 的 mark price 是 4000。
 
@@ -171,19 +170,13 @@ $\sum_{t=1}^{t'}{S_t*I_t*F_t*(\delta(t)-\delta(t-1))}$
 
 每当 taker 在 maker 的做市价格区间中交易，总会影响 maker 的头寸。我们是否可以追踪每一笔交易对每一个 maker 头寸的影响呢？
 
-可以，前提是**funding payment 只能在 quote token 中收取，不能以 base token 收取**。
+可以，前提是**funding payment 只能在 quote token 中收取，不能在 base token 中收取**。
 
 因为如果在 base token 中收取 funding payment，则必须每次都根据 base token 数量去推断头寸的规模 (换算成 USDC 的总数量)，遗憾的是我们无法找到一个节省 gas 的实现方法。
 
 现在我们的任务就是在 Uniswap v3 pool 的基础上增加功能，以便可以追踪用户头寸规模的变化。
 
-maker 的 `base token amount` 可以用 Uniswap v3 的函数接口获得
-
-[`LiquidityAmounts.getAmount0ForLiquidity()`](https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/LiquidityAmounts.sol) 根据价格区间的 2 个边界和 amount0 计算流动性（包含虚拟流动性）以 token1 计价的数量。
-
-```ts
-liquidity = (amount0 * (sqrt(upper) * sqrt(lower))) / (sqrt(upper) - sqrt(lower));
-```
+maker 的 `base token amount` 可以用 Uniswap v3 的函数接口获得 [`LiquidityAmounts.getAmount0ForLiquidity()`](https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/LiquidityAmounts.sol#L82) 给定价格区间的 2 个边界和 流动性数量，计算 token0 的数量。
 
 因为 base token 总是会被 Perp v2 部署为 token0（v-USDC 总是 token1）：
 
@@ -196,7 +189,7 @@ Base token amount = LiquidityAmounts.getAmount0ForLiquidity()
 - lower and upper 是 maker 提供流动性的价格区间边界
 - sqrt: square root
 
-base token 数量跟随 `Mark price` 的变化规律：
+base token amount 跟随 `Mark price` 的变化规律：
 
 - Mark ≤ lower: `liquidity * (1 / sqrt(lower) — 1 / sqrt(upper))`
 - lower < Mark < upper: `liquidity * (1 / sqrt(Mark) — 1 / sqrt(upper))`
@@ -237,8 +230,6 @@ $liquidity * (G' — \frac{G}{\sqrt{upper}})$
 
 <hr>
 
-在上述推导中，我们一直使用 base token amount 来替代头寸规模大小(这里是 liquidity)，并非笔误，而只是不想过早引入 maker 头寸规模的问题，导致问题一开始就非常复杂。
-
 t1 时刻，Alice 的头寸规模实际上是 0，因为价格刚刚触及 lower，此时并没有 taker 和她成为对手方。
 
 t2 时刻，当价格在 `lower < m2 < upper`, 与 t0 时刻的数量之差则为：
@@ -255,7 +246,7 @@ t3 时刻，当价格 `upper < m3`, 此时 base token 已经被 taker 全部交�
 = -liquidity * (1 / sqrt(lower) — 1 / sqrt(upper))
 ```
 
-合并上述 3 种情况可以写为：
+总结上述 3 种情况可以写为：
 
 ```math
 A maker's funding payment
@@ -264,9 +255,9 @@ A maker's funding payment
 = funding payment for a maker's position size
 ```
 
-`equation A` 是 `premium`, `liquidity`, `base token left amount` 三者代入运算 `liquidity * (G' — G / sqrt(upper))`
+- `equation A` 是当前 maker 还剩多少 base token
 
-`equation B` 是 `premium`, `liquidity`, `original base token amount` 三者运算而来，其中后者是 `LiquidityAmounts.getAmount0ForLiquidity()` 的结果，代入运算
+- `equation B` 是 maker 做市的流动性如果全部变成 base token 的数量(`Mark price` 低于价格下边界时)，即 `original base token amount`；可以通过 `LiquidityAmounts.getAmount0ForLiquidity()` 获取结果
 
 <hr>
 
@@ -444,3 +435,5 @@ function getPendingFundingPayment(address trader, address baseToken) public view
 
 - Block-based Funding Payment On Perp v2: <https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e>
 - How Block-based Funding Payments are Implemented On Perp v2: <https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384>
+- Perp v2: A Numerical Example of Block-based Funding (with quote-only fee) of Makers: <https://perp.notion.site/Perp-v2-A-Numerical-Example-of-Block-based-Funding-with-quote-only-fee-of-Makers-7a14853db070481690af34ff17722f0b>
+- Calculation of makers' Open Interest: <https://perp.notion.site/Calculation-of-makers-Open-Interest-fe6a4563f00d4b10805b4376d98b7833>
