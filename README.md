@@ -16,7 +16,7 @@ We are a decentralized learning group to study the mainstream DAPP projects toge
 
 We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw) to keep track of our latest progress.
 
-We need more builders to help make our community grow - contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials and improve our tutorial projects - just fix the minor typos are helpful to us 🤗.
+We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
 Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
 For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value. 
@@ -60,11 +60,11 @@ Case studies of the mainstream DeFi, NFT, Dao and other crypto projects to enlig
 ## Preparatory Work
 **Ramp up**
 - Developers new to dapp development are strongly encoraged to learn the basics of Ethereum and Solidity before embarking on formal development.
-You can refer to [basic knowledge preparation](./docs/basic-knowledge.md) to ramp up.
+You can refer to [basic knowledge preparation](./docs/basic-knowledge-en.md) to ramp up.
 
 **Development tool**
 - Sharp tools make good work. Familiarize yourself with basic development tools.
-Refer to [recommended development tools](./docs/develop-tools.md) to view the current mainstream blockchain development tools.
+Refer to [recommended development tools](./docs/develop-tools-en.md) to view the current mainstream blockchain development tools.
 
 **Recommended reading**
 We have collected a list of classic blockchain-related books to help developers know underlying philosophy behind blockchain.
@@ -72,7 +72,7 @@ We have collected a list of classic blockchain-related books to help developers 
 - *The Austrian School of Thought* is recommended, [Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ).
 - Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
-At the same time, feel free to keep expanding this [book list](./docs/books.md).
+At the same time, feel free to keep expanding this [book list](./docs/books-en.md).
 
 **Cryptographic course**
 
@@ -83,7 +83,7 @@ We have collected some crypto courses from top universities and the Ethereum com
 
 We have also organized a translation group to translate MIT course 'blockchain and money' into Chinese, and upload all the chinese note-taking on our WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)
 
-If you have other high-quality course recommendations, we hope you can make a suggestion and add it in our course repo: [Recommendations for cryptographic courses](./docs/crypto-course.md).
+If you have other high-quality course recommendations, we hope you can make a suggestion and add it in our course repo: [Recommendations for cryptographic courses](./docs/crypto-course-en.md).
 
 ## Basic Tasks
 
@@ -136,7 +136,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [snapshot](basic/40-snapshot) ⌛
-41. [NFT farming](https://superfarm.com/farms) ⬜
+41. [Thirdweb](https://portal.thirdweb.com/)  
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
@@ -171,7 +171,6 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
 75. [golang-dapp](basic/75-golang-dapp) ✅
-76. [Thirdweb](https://portal.thirdweb.com/)  
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
@@ -278,13 +277,13 @@ Feel like a career in the crypto industry? The following websites fyi:
  - https://www.paradigm.xyz/opportunities/
 
 ## Project Ecology
-Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects.md),Learn more about the ecology of the Dapp-Learning project.
+Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md),Learn more about the ecology of the Dapp-Learning project.
 
 ## Guide to Contribution
-Intereted in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao.md).
+Intereted in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
 
 ## Frequently Asked Questions (FAQ)
-Please refer to [this link](./docs/TROUBLE_SHOOTING.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing etc.
+Please refer to [this link](./docs/TROUBLE_SHOOTING-en.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing etc.
 
 ## Donation Wanted
 Open-sourced projects are not easy to maintain so we'd love for all kinds of donations. Dapp Learning team follow DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.

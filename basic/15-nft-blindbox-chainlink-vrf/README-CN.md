@@ -1,3 +1,4 @@
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/15-nft-blindbox-chainlink-vrf/README.md)
 ## 基于 chainlink vrf的 nft盲盒设计
 VRF 为链上安全可验证随机数, 用于安全的生成随机数, 具体可参考 [chainlink vrf官方文档](https://docs.chain.link/docs/get-a-random-number).  
 本样例代码演示如何使用 ChainLink 进行 NFT 盲盒设计.  
