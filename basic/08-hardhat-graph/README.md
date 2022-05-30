@@ -1,3 +1,5 @@
+[中文](./README-CN.md) / English
+
 ## Introduction of Graph
 
 When coding smart contract, the change of status is usually expressed by triggering a event. The Graph is a GraphQL interface for capturing the chain events and provide a query event, it can track changes in data. Actually, many kinds of defi is based on The Graph to query data.

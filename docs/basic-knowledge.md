@@ -12,3 +12,4 @@
 - Solidity ethernaut: <https://ethernaut.openzeppelin.com/>
 - Rust 快学 <https://rq.netroby.com/01-intro/intro.html>
 - Solidity 训练计划: https://www.notion.so/Solidity-Training-Project-d1e2793ddd4a403c87e7dfe5ca1cbfc7
+- Remix中的LearnEth插件：https://remix-learneth-plugin.readthedocs.io/en/latest/index.html

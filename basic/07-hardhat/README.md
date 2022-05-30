@@ -1,4 +1,4 @@
-[中文](./README-cn.md) / English
+[中文](./README-CN.md) / English
 
 # Hardhat
 
