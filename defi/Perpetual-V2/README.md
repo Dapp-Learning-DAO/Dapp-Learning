@@ -99,6 +99,10 @@ Clearinghouse 将会 mint vETH 并将其注入 Uni v3 AMM。简单起见，我�
 
 此时 Alice 提供流动性相当于同时挂出了一部分买单和一部分卖单， Clearninghouse 同时 mint vETH 和 vUSDC。注意，Alice 想以 2x 杠杆参与做市，我们不是直接mint 2 vETH，而是 1 vETH 和 100 vUSDC (假设 1 ETH = 100 USDC，两者价值之和为 200 vUSDC)。
 
+## Funding Payment
+
+-[Block-basedFundingPayments.md](./Block-basedFundingPayments.md)
+
 ## Reference
 
 - A Complete Guide to Perpetual Protocol V2: <https://blocmates.com/blogmates/perpetualprotocol/>
