@@ -120,6 +120,218 @@ function calcPendingFundingPaymentWithLiquidityCoefficient(
 }
 ```
 
+### swap
+
+调用 Uniswap V3 pool 进行交易，交易包含两种手续费，一种是 Uniswap v3 pool 本身的手续费，一种是 perp 收取的交易费
+
+1. 只能由 ClearningHouse 进行调用
+2. base token market 未暂停； 根据 `_maxTickCrossedWithinBlockMap` 判断，该字段会限制每次交易价格最多穿过多少个 tick，如果为 0 ，说明该 market 已暂停，不能进行交易
+3. 如果是新开头寸，只要交易对价格的影响超过限制，则直接 revert (价格变化允许最多穿多个 tick `getMaxTickCrossedWithinBlock(baseToken)`)
+4. 如果是关闭头寸，如果交易对价格的影响超过限制，则按照上限只关闭部分仓位
+5. 调用 `_swap` 进行实际交易，对用户 Pnl 进行更新
+
+```ts
+/// @param amount when closing position, amount(uint256) == takerPositionSize(int256),
+/// as amount is assigned as takerPositionSize in ClearingHouse.closePosition()
+struct SwapParams {
+    address trader;
+    address baseToken;
+    bool isBaseToQuote;
+    bool isExactInput;
+    bool isClose;
+    uint256 amount;
+    uint160 sqrtPriceLimitX96;
+}
+
+/// @param params The parameters of the swap
+/// @return The result of the swap
+/// @dev can only be called from ClearingHouse
+/// @inheritdoc IExchange
+function swap(SwapParams memory params) external override returns (SwapResponse memory) {
+    _requireOnlyClearingHouse();
+
+    // EX_MIP: market is paused
+    require(_maxTickCrossedWithinBlockMap[params.baseToken] > 0, "EX_MIP");
+
+    int256 takerPositionSize =
+        IAccountBalance(_accountBalance).getTakerPositionSize(params.trader, params.baseToken);
+
+    bool isPartialClose;
+    bool isOverPriceLimit = _isOverPriceLimit(params.baseToken);
+    // if over price limit when
+    // 1. closing a position, then partially close the position
+    // 2. else then revert
+    if (params.isClose && takerPositionSize != 0) {
+        // if trader is on long side, baseToQuote: true, exactInput: true
+        // if trader is on short side, baseToQuote: false (quoteToBase), exactInput: false (exactOutput)
+        // simulate the tx to see if it _isOverPriceLimit; if true, can partially close the position only once
+        // if this is not the first tx in this timestamp and it's already over limit,
+        // then use _isOverPriceLimit is enough
+        if (
+            isOverPriceLimit ||
+            _isOverPriceLimitBySimulatingClosingPosition(
+                params.baseToken,
+                takerPositionSize < 0, // it's a short position
+                params.amount // it's the same as takerPositionSize but in uint256
+            )
+        ) {
+            uint256 timestamp = _blockTimestamp();
+            // EX_AOPLO: already over price limit once
+            require(timestamp != _lastOverPriceLimitTimestampMap[params.trader][params.baseToken], "EX_AOPLO");
+
+            _lastOverPriceLimitTimestampMap[params.trader][params.baseToken] = timestamp;
+
+            uint24 partialCloseRatio = IClearingHouseConfig(_clearingHouseConfig).getPartialCloseRatio();
+            params.amount = params.amount.mulRatio(partialCloseRatio);
+            isPartialClose = true;
+        }
+    } else {
+        // EX_OPLBS: over price limit before swap
+        require(!isOverPriceLimit, "EX_OPLBS");
+    }
+
+    // get openNotional before swap
+    int256 oldTakerOpenNotional =
+        IAccountBalance(_accountBalance).getTakerOpenNotional(params.trader, params.baseToken);
+    InternalSwapResponse memory response = _swap(params);
+
+    if (!params.isClose) {
+        // over price limit after swap
+        require(!_isOverPriceLimitWithTick(params.baseToken, response.tick), "EX_OPLAS");
+    }
+
+    // when takerPositionSize < 0, it's a short position
+    bool isReducingPosition = takerPositionSize == 0 ? false : takerPositionSize < 0 != params.isBaseToQuote;
+    // when reducing/not increasing the position size, it's necessary to realize pnl
+    int256 pnlToBeRealized;
+    if (isReducingPosition) {
+        pnlToBeRealized = _getPnlToBeRealized(
+            InternalRealizePnlParams({
+                trader: params.trader,
+                baseToken: params.baseToken,
+                takerPositionSize: takerPositionSize,
+                takerOpenNotional: oldTakerOpenNotional,
+                base: response.base,
+                quote: response.quote
+            })
+        );
+    }
+
+    (uint256 sqrtPriceX96, , , , , , ) =
+        UniswapV3Broker.getSlot0(IMarketRegistry(_marketRegistry).getPool(params.baseToken));
+    return
+        SwapResponse({
+            base: response.base.abs(),
+            quote: response.quote.abs(),
+            exchangedPositionSize: response.exchangedPositionSize,
+            exchangedPositionNotional: response.exchangedPositionNotional,
+            fee: response.fee,
+            insuranceFundFee: response.insuranceFundFee,
+            pnlToBeRealized: pnlToBeRealized,
+            sqrtPriceAfterX96: sqrtPriceX96,
+            tick: response.tick,
+            isPartialClose: isPartialClose
+        });
+}
+```
+
+`_swap` 调用 Uniswap V3 pool 进行 v-token 交换
+
+由于 perp 也对交易收取手续费，所以在进行 uniswap 交易之前，需要先估算 perp 的手续费
+
+1. `SwapMath.calcScaledAmountForSwaps` 根据手续费比例，对输入或者输出数量进行缩放，使其已经考虑 perp 手续费
+2. `OrderBook.replaySwap` 模拟进行 uniswap 交易，估算 uniswap 的手续费以及保险准备金 `insuranceFundfee`
+3. 调用 `UniswapV3Broker.swap` 进行实际交易
+
+```ts
+/// @dev customized fee: https://www.notion.so/perp/Customise-fee-tier-on-B2QFee-1b7244e1db63416c8651e8fa04128cdb
+function _swap(SwapParams memory params) internal returns (InternalSwapResponse memory) {
+    IMarketRegistry.MarketInfo memory marketInfo = IMarketRegistry(_marketRegistry).getMarketInfo(params.baseToken);
+
+    (uint256 scaledAmountForUniswapV3PoolSwap, int256 signedScaledAmountForReplaySwap) =
+        SwapMath.calcScaledAmountForSwaps(
+            params.isBaseToQuote,
+            params.isExactInput,
+            params.amount,
+            marketInfo.exchangeFeeRatio,
+            marketInfo.uniswapFeeRatio
+        );
+
+    (Funding.Growth memory fundingGrowthGlobal, , ) = _getFundingGrowthGlobalAndTwaps(params.baseToken);
+    // simulate the swap to calculate the fees charged in exchange
+    IOrderBook.ReplaySwapResponse memory replayResponse =
+        IOrderBook(_orderBook).replaySwap(
+            IOrderBook.ReplaySwapParams({
+                baseToken: params.baseToken,
+                isBaseToQuote: params.isBaseToQuote,
+                shouldUpdateState: true,
+                amount: signedScaledAmountForReplaySwap,
+                sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+                exchangeFeeRatio: marketInfo.exchangeFeeRatio,
+                uniswapFeeRatio: marketInfo.uniswapFeeRatio,
+                globalFundingGrowth: fundingGrowthGlobal
+            })
+        );
+    UniswapV3Broker.SwapResponse memory response =
+        UniswapV3Broker.swap(
+            UniswapV3Broker.SwapParams(
+                marketInfo.pool,
+                _clearingHouse,
+                params.isBaseToQuote,
+                params.isExactInput,
+                // mint extra base token before swap
+                scaledAmountForUniswapV3PoolSwap,
+                params.sqrtPriceLimitX96,
+                abi.encode(
+                    SwapCallbackData({
+                        trader: params.trader,
+                        baseToken: params.baseToken,
+                        pool: marketInfo.pool,
+                        fee: replayResponse.fee,
+                        uniswapFeeRatio: marketInfo.uniswapFeeRatio
+                    })
+                )
+            )
+        );
+
+    // as we charge fees in ClearingHouse instead of in Uniswap pools,
+    // we need to scale up base or quote amounts to get the exact exchanged position size and notional
+    int256 exchangedPositionSize;
+    int256 exchangedPositionNotional;
+    if (params.isBaseToQuote) {
+        // short: exchangedPositionSize <= 0 && exchangedPositionNotional >= 0
+        exchangedPositionSize = SwapMath
+            .calcAmountScaledByFeeRatio(response.base, marketInfo.uniswapFeeRatio, false)
+            .neg256();
+        // due to base to quote fee, exchangedPositionNotional contains the fee
+        // s.t. we can take the fee away from exchangedPositionNotional
+        exchangedPositionNotional = response.quote.toInt256();
+    } else {
+        // long: exchangedPositionSize >= 0 && exchangedPositionNotional <= 0
+        exchangedPositionSize = response.base.toInt256();
+        exchangedPositionNotional = SwapMath
+            .calcAmountScaledByFeeRatio(response.quote, marketInfo.uniswapFeeRatio, false)
+            .neg256();
+    }
+
+    // update the timestamp of the first tx in this market
+    if (_firstTradedTimestampMap[params.baseToken] == 0) {
+        _firstTradedTimestampMap[params.baseToken] = _blockTimestamp();
+    }
+
+    return
+        InternalSwapResponse({
+            base: exchangedPositionSize,
+            quote: exchangedPositionNotional.sub(replayResponse.fee.toInt256()),
+            exchangedPositionSize: exchangedPositionSize,
+            exchangedPositionNotional: exchangedPositionNotional,
+            fee: replayResponse.fee,
+            insuranceFundFee: replayResponse.insuranceFundFee,
+            tick: replayResponse.tick
+        });
+}
+```
+
 ## View
 
 ### \_getFundingGrowthGlobalAndTwaps

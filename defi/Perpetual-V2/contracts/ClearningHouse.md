@@ -35,9 +35,30 @@ function _settleFunding(address trader, address baseToken)
 
 ### \_modifyOwedRealizedPnl
 
+更新用户的 Pnl (Profit and Loss)
+
 ```ts
+// ClearningHouse.sol
 function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
     IAccountBalance(_accountBalance).modifyOwedRealizedPnl(trader, amount);
+}
+
+// AccountBalance.sol
+
+// trader => owedRealizedPnl
+mapping(address => int256) internal _owedRealizedPnlMap;
+
+/// @inheritdoc IAccountBalance
+function modifyOwedRealizedPnl(address trader, int256 amount) external override {
+    _requireOnlyClearingHouse();
+    _modifyOwedRealizedPnl(trader, amount);
+}
+
+function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
+    if (amount != 0) {
+        _owedRealizedPnlMap[trader] = _owedRealizedPnlMap[trader].add(amount);
+        emit PnlRealized(trader, amount);
+    }
 }
 ```
 
@@ -318,6 +339,126 @@ function removeLiquidity(RemoveLiquidityParams calldata params)
 
 ### openPosition
 
+开仓接口
+
+`struct OpenPositionParams`:
+
+- `baseToken` base token address
+- `isBaseToQuote` if true B2Q, false Q2B (B2Q: base toen -> quote token; Q2B: quote toen -> base token;)
+- `amount` swap amount
+- `oppositeAmountBound` 交易的最小输出数量 或者 交易的最大输入数量，视情况而定
+- `deadline`
+- `sqrtPriceLimitX96` 由于 perp 使用的 vAMM 并不会对真实的交易对价格产生影响，因此需要对波动率设定限制，此为限定的价格限制
+- `referralCode`
+
+| direction | in which term | isBaseToQuote | exactInput | oppositeAmountBound         | sqrtPriceLimitX96      |
+| --------- | ------------- | ------------- | ---------- | --------------------------- | ---------------------- |
+| short     | quote token   | true (B2Q)    | false      | upper bound of input base   | cannot be less than    |
+| long      | quote token   | false (Q2B)   | true       | lower bound of output base  | cannot be greater than |
+| short     | base token    | true (B2Q)    | true       | lower bound of output quote | cannot be less than    |
+| long      | base token    | false (Q2B)   | false      | upper bound of input quote  | cannot be greater than |
+
+- swap accounting figma graph: <https://www.figma.com/file/xuue5qGH4RalX7uAbbzgP3/swap-accounting-%26-events?node-id=0%3A1>
+
+example: 开仓时，若以 USDC 计价 (quote token)，做空
+
+- 先借出 base token，再通过 swap 换成 quote token
+- 我们已知 quote token 数量，所以需要使用 exactOutput 接口来交易，固 exactInput 是 false
+
+```ts
+/// @param oppositeAmountBound
+// B2Q + exact input, want more output quote as possible, so we set a lower bound of output quote
+// B2Q + exact output, want less input base as possible, so we set a upper bound of input base
+// Q2B + exact input, want more output base as possible, so we set a lower bound of output base
+// Q2B + exact output, want less input quote as possible, so we set a upper bound of input quote
+// when it's set to 0, it will disable slippage protection entirely regardless of exact input or output
+// when it's over or under the bound, it will be reverted
+/// @param sqrtPriceLimitX96
+// B2Q: the price cannot be less than this value after the swap
+// Q2B: the price cannot be greater than this value after the swap
+// it will fill the trade until it reaches the price limit but WON'T REVERT
+// when it's set to 0, it will disable price limit;
+// when it's 0 and exact output, the output amount is required to be identical to the param amount
+struct OpenPositionParams {
+    address baseToken;
+    bool isBaseToQuote;
+    bool isExactInput;
+    uint256 amount;
+    uint256 oppositeAmountBound;
+    uint256 deadline;
+    uint160 sqrtPriceLimitX96;
+    bytes32 referralCode;
+}
+```
+
+开仓函数：
+
+1. 检查 base token 是否处于 open 状态，若不是将其注册进 market
+2. 处理未结算的 funding payment
+3. `_openPosition` 实际的开仓操作函数
+4. 检查开仓之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
+5. 发送 `referralCode` 事件(可能联动其他应用)
+
+```ts
+/// @inheritdoc IClearingHouse
+function openPosition(OpenPositionParams memory params)
+    external
+    override
+    whenNotPaused
+    nonReentrant
+    checkDeadline(params.deadline)
+    returns (uint256 base, uint256 quote)
+{
+    // input requirement checks:
+    //   baseToken: in Exchange.settleFunding()
+    //   isBaseToQuote & isExactInput: X
+    //   amount: in UniswapV3Pool.swap()
+    //   oppositeAmountBound: in _checkSlippage()
+    //   deadline: here
+    //   sqrtPriceLimitX96: X (this is not for slippage protection)
+    //   referralCode: X
+
+    _checkMarketOpen(params.baseToken);
+
+    address trader = _msgSender();
+    // register token if it's the first time
+    IAccountBalance(_accountBalance).registerBaseToken(trader, params.baseToken);
+
+    // must settle funding first
+    _settleFunding(trader, params.baseToken);
+
+    IExchange.SwapResponse memory response =
+        _openPosition(
+            InternalOpenPositionParams({
+                trader: trader,
+                baseToken: params.baseToken,
+                isBaseToQuote: params.isBaseToQuote,
+                isExactInput: params.isExactInput,
+                amount: params.amount,
+                isClose: false,
+                sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+                isLiquidation: false
+            })
+        );
+
+    _checkSlippage(
+        InternalCheckSlippageParams({
+            isBaseToQuote: params.isBaseToQuote,
+            isExactInput: params.isExactInput,
+            base: response.base,
+            quote: response.quote,
+            oppositeAmountBound: params.oppositeAmountBound
+        })
+    );
+
+    if (params.referralCode != 0) {
+        emit ReferredPositionChanged(params.referralCode);
+    }
+    return (response.base, response.quote);
+}
+
+```
+
 ### closePosition
 
 ### liquidate
@@ -444,6 +585,83 @@ function settleBalanceAndDeregister(
     _deregisterBaseToken(maker, baseToken);
 }
 ```
+
+### _openPosition
+
+内部开仓函数，进行开仓的实际操作
+
+1. [Exchange.swap](./Exchange.md#swap) 调用 Exchange 合约的 swap 方法进行交易
+
+```ts
+/// @dev explainer diagram for the relationship between exchangedPositionNotional, fee and openNotional:
+///      https://www.figma.com/file/xuue5qGH4RalX7uAbbzgP3/swap-accounting-and-events
+function _openPosition(InternalOpenPositionParams memory params) internal returns (IExchange.SwapResponse memory) {
+    IExchange.SwapResponse memory response =
+        IExchange(_exchange).swap(
+            IExchange.SwapParams({
+                trader: params.trader,
+                baseToken: params.baseToken,
+                isBaseToQuote: params.isBaseToQuote,
+                isExactInput: params.isExactInput,
+                isClose: params.isClose,
+                amount: params.amount,
+                sqrtPriceLimitX96: params.sqrtPriceLimitX96
+            })
+        );
+
+    _modifyOwedRealizedPnl(_insuranceFund, response.insuranceFundFee.toInt256());
+
+    IAccountBalance(_accountBalance).modifyTakerBalance(
+        params.trader,
+        params.baseToken,
+        response.exchangedPositionSize,
+        response.exchangedPositionNotional.sub(response.fee.toInt256())
+    );
+
+    if (response.pnlToBeRealized != 0) {
+        IAccountBalance(_accountBalance).settleQuoteToOwedRealizedPnl(
+            params.trader,
+            params.baseToken,
+            response.pnlToBeRealized
+        );
+
+        // if realized pnl is not zero, that means trader is reducing or closing position
+        // trader cannot reduce/close position if bad debt happen
+        // unless it's a liquidation from backstop liquidity provider
+        // CH_BD: trader has bad debt after reducing/closing position
+        require(
+            (params.isLiquidation &&
+                IClearingHouseConfig(_clearingHouseConfig).isBackstopLiquidityProvider(_msgSender())) ||
+                getAccountValue(params.trader) >= 0,
+            "CH_BD"
+        );
+    }
+
+    // if not closing a position, check margin ratio after swap
+    if (!params.isClose) {
+        _requireEnoughFreeCollateral(params.trader);
+    }
+
+    int256 openNotional = _getTakerOpenNotional(params.trader, params.baseToken);
+    _emitPositionChanged(
+        params.trader,
+        params.baseToken,
+        response.exchangedPositionSize,
+        response.exchangedPositionNotional,
+        response.fee,
+        openNotional,
+        response.pnlToBeRealized,
+        response.sqrtPriceAfterX96
+    );
+
+    IAccountBalance(_accountBalance).deregisterBaseToken(params.trader, params.baseToken);
+
+    return response;
+}
+
+```
+
+### _checkSlippage
 
 ## view functions
 
