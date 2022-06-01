@@ -1,20 +1,21 @@
-## 简介
-本样例主要介绍 etherdelta 合约逻辑, 演示对 etherdelta 合约的基本使用.
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/13-decentralized-exchange/README-CN.md)
+## Introduction
+This example mainly introduces **etherdelta** contract logic and demonstrates the basic use of **etherdelta** contract.
 
-有去中心化交易所， 有 etherdelta 订单薄模式和uniswap的AMM做市商模式。
-待集成 0x & bancor & kyber
+There are decentralized exchanges, including **etherdelta** order book model and **uniswap** AMM market-maker model.
+0x & Bancor & Kyber to be integrated
 
 ### EtherDelta
 
-[详情参见 EtherDelta解析和测试 :point_right:](./EtherDelta/README.md)
+[See EtherDelta parsing and Testing for details :point_right:](./EtherDelta/README.md)
 
 ### uniswap-v1-like
 
-仿uniV1项目。原项目是用Vyper开发合约，这里会使用 solidity 0.8.0 仿写一个uniswapV1，由浅入深理解uniswap的原理。
+Fork **uniV1** project. The original project was to develop the contract with Vyper. Here we will write a **uniswapV1** using **solidity 0.8.0** to get a deeper understanding of **uniswap**.
 
-[详情参见 uniswap-v1-like :point_right:](./uniswap-v1-like/README.md)
+[See uniswap-v1-like for details :point_right:](./uniswap-v1-like/README.md)
 
-## 参考链接
+## Refer to the link
 
 https://github.com/etherdelta/smart_contract/blob/master/etherdelta.sol
 https://github.com/forkdelta/smart_contract   
