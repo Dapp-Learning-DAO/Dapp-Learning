@@ -10,7 +10,7 @@
 2. 如果未结算的 funding payment 不为 0，将其累加到用户的 Pnl 中
 3. 更新用户的 `lastTwPremiumGrowthGlobalX96` 变量
 
-```ts
+```solidity
 /// @dev Settle trader's funding payment to his/her realized pnl.
 function _settleFunding(address trader, address baseToken)
     internal
@@ -37,7 +37,7 @@ function _settleFunding(address trader, address baseToken)
 
 更新用户的 Pnl (Profit and Loss)
 
-```ts
+```solidity
 // ClearningHouse.sol
 function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
     IAccountBalance(_accountBalance).modifyOwedRealizedPnl(trader, amount);
@@ -81,7 +81,7 @@ function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
 5. 更新用户 Pnl
 6. 检查用户抵押是否充足
 
-```ts
+```solidity
 // IClearingHouse.osl
 
 /// @param useTakerBalance only accept false now
@@ -256,7 +256,7 @@ function addLiquidity(AddLiquidityParams calldata params)
 3. `IOrderBook.removeLiquidity` 从 Uniswap V3 pool 中移除指定流动性
 4. 由于做市会有被动的资产变动(受 taker 交易影响)，所以在操作流动性之前，需要先将未结算的 Pnl 结算掉 [`_settleBalanceAndRealizePnl`](#_settleBalanceAndRealizePnl)
 
-```ts
+```solidity
 /// @param liquidity collect fee when 0
 struct RemoveLiquidityParams {
     address baseToken;
@@ -365,7 +365,7 @@ example: 开仓时，若以 USDC 计价 (quote token)，做空
 - 先借出 base token，再通过 swap 换成 quote token
 - 我们已知 quote token 数量，所以需要使用 exactOutput 接口来交易，固 exactInput 是 false
 
-```ts
+```solidity
 /// @param oppositeAmountBound
 // B2Q + exact input, want more output quote as possible, so we set a lower bound of output quote
 // B2Q + exact output, want less input base as possible, so we set a upper bound of input base
@@ -399,7 +399,7 @@ struct OpenPositionParams {
 4. 检查开仓之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
 5. 发送 `referralCode` 事件(可能联动其他应用)
 
-```ts
+```solidity
 /// @inheritdoc IClearingHouse
 function openPosition(OpenPositionParams memory params)
     external
@@ -469,7 +469,7 @@ function openPosition(OpenPositionParams memory params)
 4. 检查关闭头寸之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
 5. 发送 `referralCode` 事件(可能联动其他应用)
 
-```ts
+```solidity
 struct ClosePositionParams {
     address baseToken;
     uint160 sqrtPriceLimitX96;
@@ -539,7 +539,7 @@ function closePosition(ClosePositionParams calldata params)
 1. 获取用户 take 部分的头寸规模 `_getTakerPosition()`, 其必须大于 0
 2. 根据头寸是多还是空，开反向仓位去平仓
 
-```ts
+```solidity
 /// @dev The actual close position logic.
 function _closePosition(InternalClosePositionParams memory params)
     internal
@@ -588,7 +588,7 @@ function _closePosition(InternalClosePositionParams memory params)
 
 从被清算人的被清算头寸价值中转移部分到清算人名下，按照 `_liquidationPenaltyRatio` 的比例计算 （initial penalty ratio, 2.5% in decimal 6）
 
-```ts
+```solidity
 
 /// @inheritdoc IClearingHouse
 function liquidate(address trader, address baseToken) external override whenNotPaused nonReentrant {
@@ -649,7 +649,7 @@ function liquidate(
 4. 按照比例转移被清算头寸的价值，从被清算人名下到清算人名下
 5. 更新被清算人 和 清算人的 Pnl
 
-```ts
+```solidity
 function _liquidate(address trader, address baseToken)
     internal
     returns (
@@ -728,7 +728,7 @@ function _isLiquidatable(address trader) internal view returns (bool) {
 
 `freeCollateral = min(totalCollateralValue, accountValue) - openOrderMarginReq`
 
-```ts
+```solidity
 /// @inheritdoc IClearingHouse
 function cancelExcessOrders(
     address maker,
@@ -764,7 +764,7 @@ function cancelAllExcessOrders(address maker, address baseToken) external overri
 2. 结算被清算人的 funding payment
 3. 遍历被清算人的所有 range order，逐一关闭
 
-```ts
+```solidity
 /// @dev only cancel open orders if there are not enough free collateral with mmRatio
 /// or account is able to being liquidated.
 function _cancelExcessOrders(
@@ -842,7 +842,7 @@ function _cancelExcessOrders(
 
 Uniswap v3 pool 的 mint 回调函数，将对应的 token 转给 pool 合约。如果金额不足会报错。
 
-```ts
+```solidity
 /// @inheritdoc IUniswapV3MintCallback
 /// @dev namings here follow Uniswap's convention
 function uniswapV3MintCallback(
@@ -886,7 +886,7 @@ function uniswapV3MintCallback(
 1. 若有 base token 需要移除，计算反向开仓造成的未结算 Pnl
 2. 结算当前未实现的 Pnl
 
-```ts
+```solidity
 /// @dev Calculate how much profit/loss we should settled,
 /// only used when removing liquidity. The profit/loss is calculated by using
 /// the removed base/quote amount and existing taker's base/quote amount.
@@ -928,7 +928,7 @@ function _settleBalanceAndRealizePnl(
 1. 根据传入数值更新仓位价值
 2. 若此时已无 range order，则直接以 takerOpenNotional 赋值（完全以 take 部分为准，舍弃 make 部分的 dust 价值）
 
-```ts
+```solidity
 /// @inheritdoc IAccountBalance
 function settleBalanceAndDeregister(
     address maker,
@@ -967,7 +967,7 @@ function settleBalanceAndDeregister(
 
 1. [Exchange.swap](./Exchange.md#swap) 调用 Exchange 合约的 swap 方法进行交易
 
-```ts
+```solidity
 /// @dev explainer diagram for the relationship between exchangedPositionNotional, fee and openNotional:
 ///      https://www.figma.com/file/xuue5qGH4RalX7uAbbzgP3/swap-accounting-and-events
 function _openPosition(InternalOpenPositionParams memory params) internal returns (IExchange.SwapResponse memory) {
