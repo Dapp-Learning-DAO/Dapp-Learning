@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # Arbitrum
 
 The difference between Arbitrum and Optimism lies in the Interactive Proving challenge.
