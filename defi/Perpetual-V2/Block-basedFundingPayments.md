@@ -1,6 +1,7 @@
 # Block-based Funding Payments
 
-> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br> > [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
+> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br>
+> [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
 
 ## Intro
 
