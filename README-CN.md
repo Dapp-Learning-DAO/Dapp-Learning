@@ -6,7 +6,7 @@
   <h4 align="center">
     区块链 Dapp 开发教程
   </h4>
-  <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+  <p>通过经典项目一步一步学习区块链 Dapp 开发。</p>
 </div>
 
 ## 序 - Preface

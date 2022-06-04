@@ -1,13 +1,16 @@
-[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English  
+
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
     Definitive Guide for Decentralized-app(Dapp) Development on Blockchain
   </h4>
-  <p>Step-by-step Dapp practice through actual projects.</p>
+  <p>Step-by-step Dapp practice through classical projects.</p>
 </div>
 
+
+
+[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English  
 ## Preface
 
 We are designed for developers to step into blockchain DAPP development, where they can learn **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** a feasible and easy-to-use blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
