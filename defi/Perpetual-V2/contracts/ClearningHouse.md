@@ -349,7 +349,7 @@ function removeLiquidity(RemoveLiquidityParams calldata params)
 - `oppositeAmountBound` 交易的最小输出数量 或者 交易的最大输入数量，视情况而定
 - `deadline`
 - `sqrtPriceLimitX96` 由于 perp 使用的 vAMM 并不会对真实的交易对价格产生影响，因此需要对波动率设定限制，此为限定的价格限制
-- `referralCode`
+- `referralCode` 用于计算返佣的代码
 
 | direction | in which term | isBaseToQuote | exactInput | oppositeAmountBound         | sqrtPriceLimitX96      |
 | --------- | ------------- | ------------- | ---------- | --------------------------- | ---------------------- |
@@ -397,7 +397,7 @@ struct OpenPositionParams {
 2. 处理未结算的 funding payment
 3. `_openPosition` 实际的开仓操作函数
 4. 检查开仓之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
-5. 发送 `referralCode` 事件(可能联动其他应用)
+5. 发送 `referralCode` 事件，便于计算返佣
 
 ```solidity
 /// @inheritdoc IClearingHouse
@@ -467,7 +467,7 @@ function openPosition(OpenPositionParams memory params)
 2. 结算 funding payment
 3. `_closePosition()` 实际执行关闭头寸的逻辑
 4. 检查关闭头寸之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
-5. 发送 `referralCode` 事件(可能联动其他应用)
+5. 发送 `referralCode` 便于计算返佣
 
 ```solidity
 struct ClosePositionParams {
