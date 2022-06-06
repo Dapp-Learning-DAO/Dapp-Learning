@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # Quadratic Voting and Quadratic Funding
 
 ## Concept

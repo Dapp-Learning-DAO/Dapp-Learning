@@ -10,9 +10,9 @@
 2. 激活列表用户之间相互独立
 3. token地址不能为modules地址以及本Market合约地址
 4. token精度不能超过18
-5. 
+5. 初始化资产相关配置 `assetStorage`
 
-```ts
+```solidity
 /// @notice Create an Euler pool and associated EToken and DToken addresses.
 /// @param underlying The address of an ERC20-compliant token. There must be an initialised uniswap3 pool for the underlying/reference asset pair.
 /// @return The created EToken, or the existing EToken if already activated.

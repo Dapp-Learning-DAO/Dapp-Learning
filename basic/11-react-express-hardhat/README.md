@@ -1,30 +1,32 @@
-## Express 结合 hardhat
+[中文](./README-CN.md) / English
 
-- 配置私钥
-  在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+## Express combined with hardhat
 
-- 安装依赖
+- Configure private key
+  Enter private key in .env, formatted with "PRIVATE_KEY=xxxx"
+
+- Install dependencies
 
 ```shell
 yarn
 ```
 
-- 选择创建一个简单的项目。添加一个名为 SimpleToken.sol 的合约到 ./contracts, 编译此合约并且运行测试
+- Create a simple project selected. Add contract names SimpleToken.sol to ./contracts and compile the contract to run testing.
 
 ```shell
 npx hardhat compile
 npx hardhat test
 ```
 
-- 部署
+- Deploy
 
 ```shell
 npx hardhat run scripts/deploy.js --network kovan
 ```
 
-- 找到你的本地节点账户的私有 key 以及 token 地址，导入到 Metamask 中
+- Find your private key and address of token in your local node's account, imported to Metamask
 
-- 后端
+- Backend
 
 ```shell
 cd backend
@@ -32,7 +34,7 @@ yarn
 node app.js
 ```
 
-- 启动 react
+- Startup react
 
 ```shell
 cd frontend
@@ -40,7 +42,7 @@ yarn
 yarn start
 ```
 
-## 参考文档
+## References
 
 - https://github.com/dzzzzzy/Nestjs-Learning  
 - https://docs.nestjs.cn/8/firststeps  

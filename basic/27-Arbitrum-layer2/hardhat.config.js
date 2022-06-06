@@ -23,7 +23,28 @@ function mnemonic() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.7",
+  solidity: {
+    "compilers": [
+      {
+        "version": "0.6.11",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 100
+          }
+        }
+      },
+      {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 100
+          }
+        }
+      }
+    ]
+  },
   networks: {
     localhost: {
       url: "http://localhost:8545",
@@ -34,32 +55,19 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    kovan: {
-      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    mainnet: {
-      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    ropsten: {
-      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     arbitrum: {
-    //  url: 'https://arbitrum.infura.io/v3/' + process.env.INFURA_ID,
       url: 'https://arb1.arbitrum.io/rpc',
+      accounts: [
+        mnemonic()
+      ],
+    },
+    arbitrum_rinkeby: {
+      url: 'https://rinkeby.arbitrum.io/rpc',
       accounts: [
         mnemonic()
       ],

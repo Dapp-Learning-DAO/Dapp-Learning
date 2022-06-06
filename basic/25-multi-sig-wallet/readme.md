@@ -1,3 +1,5 @@
+[中文](./README-CN.md) / English
+
 # Multi-Sig-Wallet
 
 > The old version of the multi-sig-wallet contract uses the 0.4.x version of solidity, and the original repo has been deprecated. The new version is called Gnosis-Safe-Contracts, which integrates multiple security contract modules. Due to the large amount of code in the new version and inconvenient to understand, we still use the old version to learn and understand its usage process and how it work.

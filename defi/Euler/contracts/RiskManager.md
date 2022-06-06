@@ -18,7 +18,7 @@
    - 若不合适，需要后期通过治理投票更改
    - `pricingParameters` 存储交易池子的费率，只对该类资产有效
 
-```ts
+```solidity
 // Constants.col
 // Pricing types
 uint16 internal constant PRICINGTYPE__PEGGED = 1;           //  WETH
@@ -135,7 +135,7 @@ function getPriceInternal(AssetCache memory assetCache, AssetConfig memory confi
 首先，我们假设该资产的 assetLiability 全部都是 self-collateral ，如果此时 assetLiability > 该资产的所有抵押数量，这显然不合理，说明假设不成立；
 所以我们将 self-collateral 重设为 balanceInUnderlying，而剩下的一部分 assetLiability - balanceInUnderlying 则为实际的 Liabilities
 
-```ts
+```solidity
 uint internal constant CONFIG_FACTOR_SCALE = 4_000_000_000; // must fit into a uint32
 uint32 internal constant SELF_COLLATERAL_FACTOR = uint32(0.95 * 4_000_000_000);
 
@@ -185,13 +185,14 @@ function computeLiquidityRaw(address account, address[] memory underlyings) priv
                 // CONFIG_FACTOR_SCALE for adjusting decimals (1 in uint32)
                 // SELF_COLLATERAL_FACTOR is constant variable (0.95)
 
-                // selfAmount cache debt value (equals the self-collateral risk-adjustment)
-                // self-collateral * self_collateral_factor = self-Liability
-                // self-collateral = self-Liability / SELF_COLLATERAL_FACTOR
+                // selfAmount cache Liabilities amount (Self_Collateral_RA)
+                // First of all, we assume that all debt are Self_Liability,
+                // then we can get Self_Collateral
+                // Self_Collateral * SCF = Self_Collateral_RA = Self_Liability
+                // Self_Collateral = Self_Liability / SCF
                 uint selfAmount = assetLiability;   // self-Liability
                 uint selfAmountAdjusted = assetLiability * CONFIG_FACTOR_SCALE / SELF_COLLATERAL_FACTOR; // self-collateral
 
-                // First of all, we assume that the assetLiability of the asset is all self-collateral.
                 // If assetLiability > all mortgages of the asset at this time, this is obviously
                 // unreasonable, indicating that the assumption does not hold.
                 // So we reset self-collateral to balanceInUnderlying and the remaining part of
@@ -202,9 +203,8 @@ function computeLiquidityRaw(address account, address[] memory underlyings) priv
                 }
 
                 {
-                    // balanceInUnderlying - selfAmountAdjusted is actually collateral (without self-collateralization)
-                    // * collateralFactor is adjusted collateralValue
-                    // / price  convert debt asset to collateral asset
+                    // (balanceInUnderlying - selfAmountAdjusted)*BF*price is
+                    // actually Collateral_RA without Self_Collateral
                     uint assetCollateral = (balanceInUnderlying - selfAmountAdjusted) * config.collateralFactor / CONFIG_FACTOR_SCALE;
                     assetCollateral += selfAmount;
                     // accumulate collateralValue
