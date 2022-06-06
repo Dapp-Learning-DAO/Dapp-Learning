@@ -94,34 +94,9 @@ PERP 资金利率按小时结算，而清算比率被设定为保证金的 6.25%
 **正向合约(U 本位合约)**，以 USDT 计算盈亏的合约。将 USDT 划转进合约账户开仓计算盈亏。  
 **反向合约(币本位合约)**，以 BTC、ETH 等数字资产为标的计算盈亏的合约。如 BTC 反向合约，用户将 BTC 转入合约账户开仓，平仓后以 BTC 的形式获得盈利，或付出损失。
 
-## PerpetualV1
-
-[官网地址](https://perp.exchange/t/BTC:USDC)
-
-![Perp v1 overview](https://2133901215-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M4NnEO7A8AjB9r6SEz8%2F-MN1IWNMkj0Hr9R8CI20%2F-MN1hMkE6EDbkYd722ol%2FFull-2020-11.png?alt=media&token=2113709b-f5bc-465c-ad83-53d3d11672ab)
-
-与 Uniswap 一样，交易者可以在无需交易对手的状态下直接使用我们的 vAMM 进行交易。 vAMM 通过恒定乘积设定交易标的的可预测价格，从而保证了链上的流动性。 此外，vAMM 还被设计为市场中立且完全抵押的机制。
-
-PERP 持有者通过将其拥有的 PERP 代币放到质押池中，从而成为质押者。作为回报，质押者除了获得质押奖励外，还将获得部分交易手续费的分成。
-
-### Perp FundingRate
-
-Perp 上提供的是永续合约，每 1 小时收取一次资金费，按照加密货币衍生品交易所 FTX 的规则进行计算，公式如下：
-
-FundingPayment（资金费）=PositionSize（仓位头寸）∗FundingRate（资金费率）
-
-$\ fundingRate = \frac{P_{perp}- P_{index}}{24}$
-
-### 清算
-
-当保证金比例下降到 6.25%或以下时，就会发生清算，这一规则即维持保证金（Maintenance Margin）。
-清算由清算人的机器人出发，作为清算的奖励，清算人获得 6.25%保证金中的 1.25%，其余最高 5%保证金存入协议保险基金。
-
-### 保险基金
-
-Perp V1 协议赚取的交易费用，50%归 Staking 持币者，50%归入保险基金。当系统遭遇清算过程的损失和资金损失等意外损失是，保险基金将作为第一道防线首先支付这些损失。
 
 ## 参考链接
+
 
 - 期货原理: <https://www.theblockbeats.com/news/25619>
 - perpetual: <https://zhuanlan.zhihu.com/p/395752324?utm_source=wechat_session&utm_medium=social&utm_oi=42064397991936&utm_campaign=shareopn>
@@ -131,3 +106,6 @@ Perp V1 协议赚取的交易费用，50%归 Staking 持币者，50%归入保险
 - 永续合约: <https://zhuanlan.zhihu.com/p/354498449>
 - 合约算法: <https://zhuanlan.zhihu.com/p/354337880>
 - 合约算法: <https://www.zhihu.com/people/le-zhu-92-74>
+- 技术解析永续衍生品合约的一般原理: https://www.beechain.net/news/29251.html
+- deribit资金费率：https://legacy.deribit.com/pages/docs/perpetual
+- 永续合约的资金费率介绍： https://medium.com/derivadex/funding-rates-under-the-hood-352e6be83ab

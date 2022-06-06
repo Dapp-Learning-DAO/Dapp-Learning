@@ -1,10 +1,8 @@
 # ClearningHouse
 
-[Perpetual v1 白皮书](https://www.notion.so/Strike-Protocol-9049cc65e99246d886a230972d0cbd60)
+- [Perpetual v1 白皮书](https://www.notion.so/Strike-Protocol-9049cc65e99246d886a230972d0cbd60)
+- [官方文档](https://docs.perp.fi/)
 
-## 原理图
-
-![How Perpetual Protocol Works](https://2133901215-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M4NnEO7A8AjB9r6SEz8%2F-MEzbmkp0i5M8z2Odm0u%2F-MEzdPlCoS9V8mFmcxY1%2F%E6%88%AA%E5%9C%96%202020-08-18%20%E4%B8%8A%E5%8D%8811.38.19.png?alt=media&token=a7df0ed0-bd4c-439e-b995-7101ecd34a78)
 
 ### 核心原理
 
@@ -15,8 +13,16 @@
 Staking 提供者在 Perp 上不作为流动性提供者，仅仅是保险基金的初始提供者，承担保险基金赔付时的损失风险，同时享有手续费收入。
 
 ### 设计方案
+- 没有流动性提供者
+- 基于AMM，没有订单薄
+- 价格只在看仓和平仓的时候变动
 
 vAMM 使用 AMM 的 x\*y=k 方式定价，但不实际进行两种货币的兑换，而是由 AMM 公式提供价格后，从资金池（Vault）进出资金以代替直接从 AMM 池进出资金，实现单一货币的多/空头寸在 Vault 的开仓和平仓。
+
+ **原理图**
+
+![How Perpetual Protocol Works](https://2133901215-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M4NnEO7A8AjB9r6SEz8%2F-MEzbmkp0i5M8z2Odm0u%2F-MEzdPlCoS9V8mFmcxY1%2F%E6%88%AA%E5%9C%96%202020-08-18%20%E4%B8%8A%E5%8D%8811.38.19.png?alt=media&token=a7df0ed0-bd4c-439e-b995-7101ecd34a78)
+
 
 首先假设 Vault 中原本有 10,000 USDC， eth/USDC= 100, 则 x=100，k=100 \* 10000
 
@@ -52,24 +58,76 @@ vAMM 使用 AMM 的 x\*y=k 方式定价，但不实际进行两种货币的兑�
 - 做多则 eth 持仓为正，做空则 eth 持仓未负。 而池子数量一直为正，池子里为记账符号。
 - 从实质上看，按照 AMM 的含义，后买入者将比先买入者的成本更高，后卖出者将比先卖出者得到更低的对价（换回更少的 U），因此 Alice 获利而 Bob 损失，这一点在虚拟 AMM 中也同样体现。
 
+### 保证金率
+- 初始保证金率 10% ，决定了最大可开十倍杠杆
+- 维持保证金率 6.25% ，低于这个值会被清算
+
+>  marginRatio = (margin+ unrealizedPnl)/positionNotional
+
+未实现盈亏计算：
+
+```math
+openNotional = margin * lever
+
+positionNotional = positonSize * price
+
+unrealizedPnlForLongPosition = positionNotional - openNotional
+
+badDebt = realizedPnl + realizedFundingPayment + margin
+```
+
+另外计算名义头寸positionNotional时，用的price是标记价格。
+**如果标记价格跟指数价格差10%，则使用指数价格。**  
+
+计算 unrealizedPnlForLongPosition 使用的价格是标记价格和标记价格的15分钟TWAP计算，评估清算时，哪个值大取哪个。
+
+
 ### 资金费率
 
 Perp 上提供的是永续合约，每 1 小时收取一次资金费，按照加密货币衍生品交易所 FTX 的规则进行计算，公式如下：
+> Funding Rate = (Premium / Index Price) / Funding Interval
 
-FundingPayment（资金费）=PositionSize（仓位头寸）∗FundingRate（资金费率）
 
-$\ fundingRate = \frac{P_{perp}- P_{index}}{24}$
+> FundingPayment（资金费）=PositionSize（仓位头寸）∗ FundingRate（资金费率）
 
-问题：都做多怎么办？？
+> $\ fundingRate = \frac{P_{perp}- P_{index}}{24}$
+如果fundingRate为正，perp价格高于场外价格，多头要给空头付资金费率；
+
+推荐一篇非常好的资金费率介绍文章：https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e  
 
 ### 清算
 
 当保证金比例下降到 6.25%或以下时，就会发生清算，这一规则即维持保证金（Maintenance Margin）。
 清算由清算人的机器人出发，作为清算的奖励，清算人获得 6.25%保证金中的 1.25%，其余最高 5%保证金存入协议保险基金。
 
+perp使用部分清算方案：假设及时平仓，只会将25%的仓位盈亏将变现，相应部分的名义仓位以及保证金将被平掉，剩余仓位保持不变。
+
+**如果价格波动快于强平，并且保证金率低于2.5%或者更低**，则会发生全部强平。
+
+```
+
+清算奖励：2.5%杠杆后仓位 
+其中1.25%分配给看护机（Keeper），1.25%分配给Insurance Fund
+
+发起条件
+杠杆后仓位=1000
+杠杆=2x
+保证金=500
+PnL=-440
+保证金率=（500-440）/1000=0.06
+
+清算后
+假设 positionNotionalliquidated = 300（具体数字取决于x*y=K的曲线）
+清算奖励：300*0.025 = 7.5
+保证金：500 - (440*0.25) - 7.5 = 382.5
+保证金率：(382.5 - 440*0.75) / (1000 - 300) = 0.075
+```
+
+
 ### 保险基金
 
 Perp V1 协议赚取的交易费用，50%归 Staking 持币者，50%归入保险基金。当系统遭遇清算过程的损失和资金损失等意外损失是，保险基金将作为第一道防线首先支付这些损失。
+
 
 ## 代码解析
 
@@ -83,14 +141,14 @@ Perp V1 协议赚取的交易费用，50%归 Staking 持币者，50%归入保险
 
 - spotprice: 池子两个 reserve 相除
 - margin: USDC 计（quoteAsset）
-- positionNotional: positionSize \* spotPrice
+- positionNotional: positionSize * spotPrice
 - exchangedPositionSize : (做多正，做空负)
 
 用户操作主要跟`clearingHouse`交互
 
 ### ClearingHouse 合约解析
 
-ClearingHouse 合约则复杂些，其管理着所有⽤户的持仓状态。对⽤户来说，核⼼业务的⽅法也⽐较多，主要
+ClearingHouse 合约则复杂些，其管理着所有⽤户的持仓状态，并且管理着所有保证金(兼具vault功能)。对⽤户来说，核⼼业务的⽅法也⽐较多，主要
 有：
 
 - openPosition：开仓
@@ -112,7 +170,7 @@ ClearingHouse 合约则复杂些，其管理着所有⽤户的持仓状态。对
 struct Position {
     SignedDecimal.signedDecimal size;  //仓位大小，以baseToken计
     Decimal.decimal margin;      // 保证金，quoteToken计
-    Decimal.decimal openNotional; //仓位的开仓USDC值quoteAsset ， margin*lever
+    Decimal.decimal openNotional; //仓位的开仓USDC值, quoteAsset ， margin*lever
     SignedDecimal.signedDecimal  lastUpdatedCumulativePremiumFraction;  //资金费率
     uint256 liquidityHistoryIndex;     // 流动性指数
     uint256 blockNumber;    // 块高
@@ -252,8 +310,24 @@ function addMargin(IAmm _amm, Decimal.decimal calldata _addedMargin) external wh
 
 步骤：
 
-1. 获取仓位，计算资金费率，检查是否有坏帐；
-2. 检查保证金率 MarginRatio 是否大于初始保证金率；计算名义持仓的方式，有三种： TWAP , 现价，或预言机价格；
+1. 获取仓位，计算资金费率，检查是否有坏帐，并做CPF更新，具体在calcRemainMarginWithFundingPayment函数实现；
+2. 检查保证金率 MarginRatio 是否大于初始保证金率；计算名义持仓的方式，有三种： TWAP , 现价，或预言机价格；具体查看getMarginRatio函数。 
+```
+ marginRatio = (margin + funding payment + unrealized Pnl) / positionNotional
+```
+使用spot和twap价格计算unrealized Pnl， 最终谁高取谁。
+3. 从vault转账给用户，如果资金不够，则从InsuranceFund中取，并记录prepaidBadDebt字段。
+
+**计算资金费率**
+```
+Premium = Mark Price - Index Price
+Funding Rate = Premium / Index Price = (Mark - Index) / Index
+
+Position Value = Position Size * Index Price
+Funding Payment = Position Value * Funding Rate
+                = Position Size * Index * Premium / Index
+                = Position Size * Premium
+```
 
 #### openPosition
 
@@ -262,22 +336,27 @@ function addMargin(IAmm _amm, Decimal.decimal calldata _addedMargin) external wh
 1. 开同向仓位 `internalIncreasePosition()`
 
    - 仓位大小：`_quoteAssetAmount * _leverage`
-   - swapInput 将 USDC 换成 ETH
+   - swapInput 将 USDC 换成 ETH，得到newSize
+   - 检查开仓大小，以及是否仓位是否超过最大仓位值
    - 计算资金费率 `calcRemainMarginWithFundingPayment()`
    - 获取新的名义持仓，计算未结盈亏（池子现价计算）`getPositionNotionalAndUnrealizedPnl`
-   - 更新用户仓位
-   - 同向不用检查保证金率
+   - 更新用户仓位positionResp
+   - 检查用户的保证金率是否大于维持保证金率
+   - 转账
 
-2. 开反向仓位 openReversePosition
+2. 开反向仓位 `openReversePosition()`
 
    - 先计算未结盈亏 unrealizedPnl；
-   - 比较 oldPositionNotional 旧名义仓位跟新开仓名义仓位 `_quoteAssetAmount * _leverage`
+   - 比较 oldPositionNotional 旧名义仓位跟新开仓名义仓位 `_quoteAssetAmount * _leverage`大小
    - 如果 oldPositionNotional 大于 openNotional：
      先获取此仓位 exchangedPositionSize，根据 `realizedPnl = unrealizedPnl * closedRatio` 计算盈亏； 再计算 fundingfee； 根据老仓位的正负计算 remainOpenNotional，更新仓位
    - 如果如果 oldPositionNotional 小于 openNotional：
      则先内部关仓，再看仓位， closeAndOpenReversePosition；
      剩余 openNotional:
      `_quoteAssetAmount * _leverage - closePositionResp.exchangedQuoteAssetAmount;`
+   - 检查用户的保证金率是否大于维持保证金率
+   - 转保证金
+   - 转手续费 fee = spread + toll
 
 开仓时，会调⽤ AMM 的 `swapInput()` 进⾏虚拟兑换；平仓时，则调⽤ Amm 的 `swapOutput()`。另外，开仓和平仓时都会收取交易⼿续费，⼿续费会分为两部分，⼀部分会转⼊保险基⾦，即 `InsuranceFund` 合约，另⼀部分则会转⼊⼿续费池 feePool，即 `StakingReserve` 合约。
 
@@ -314,11 +393,12 @@ swapOutput
 - `isOverFluctuationLimit` 检查价格波动
 - 检查部分平仓还是全部平仓 `partialLiquidationRatio`
 
-  1. 全部平仓 `internalClosePosition`
-  2. `getPositionNotionalAndUnrealizedPnl` 计算未结盈亏
-  3. `calcRemainMarginWithFundingPayment` 计算资金费率
-  4. 根据 `_amm.swapOutput` 计算 `quoteAssetAmount` 盈余
-     - 根据 `getOutputPrice` 函数 `getOutputPriceWithReserves` 函数
+  1. 全部平仓 `internalClosePosition` 
+  2. 部分平仓 则计算出`partiallyClosedPositionNotional`，内部开方向仓位`openReversePosition`
+  3. `getPositionNotionalAndUnrealizedPnl` 计算未结盈亏
+  4. `calcRemainMarginWithFundingPayment` 计算资金费率,并计算剩余保证金
+  5.  转保证金
+  6. 转手续费 fee = spread + toll
 
   `swapOutput`: 将 baseToken 换成 quoteToken；如果做多，则池子 baseToken 增加，输出 quoteToken;
   如果做空，则池子 baseToken 减少，输入 quoteToken, 计算平掉次空仓需要的 eth；
@@ -542,6 +622,8 @@ function getPositionNotionalAndUnrealizedPnl(
 }
 ```
 
+
+### 手续费
 ## 参考链接
 
 - 头等仓：<https://mp.weixin.qq.com/s/Oq7g3_AjRP4Of__K9Gp_bw>
