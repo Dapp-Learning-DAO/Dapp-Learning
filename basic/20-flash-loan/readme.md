@@ -1,27 +1,29 @@
-# Flashloans 介绍  
+[中文](./README-CN.md) / English
 
-何为 闪电贷（flash loan）？你可以用代码来指定一系列的操作，只要你的操作能保证在一笔交易内完成还款，你就可以无条件地贷款。
+# Flashloans introduce  
 
-区块链上的一笔 “交易”（transaction）里可以做很多事情；你不仅可以转一次账，你甚至可以在一笔交易中完成 50 笔资金转移。因为智能合约就跟计算机程序一样，你发交易，就等同于 “调用某个智能合约里的某个函数”；一笔交易中可以调用很多个函数，自然也就能完成很多操作。
+What's a so-called flash loan? You can regard it's a bunch of operations that can be controlled by codes, as long as your all operations (including repayment) can be finished in a transaction, then you can loan it unconditionally.
 
-“闪电贷” 所要求的是，所有的操作都必须在一笔交易内完成（如果不能在一笔交易内还款就不能贷出资金）。所以你必须把所有步骤都编程到一笔发往智能合约的交易里，把 “借款、转移（执行）、还款” 都包括进去。
+You can do a lot of things in a single transaction in the blockchain: not only one time transfer, but you can also do it even 50 times. It is because the smart contract is just like a computer program, when you start a transaction, it's equally you call some function in some smart contract. You can call several functions in a transaction, so you can do a lot of operations as well.
 
-如果交易结束时你不能还款，则交易就会失败，就像所有事情都没有发生过一样。
+As we talk about before, the flash loan requires you need your all operations can be finished in a transaction(if you can't do it, then you can't loan). So you have to make sure you had programming all the steps you can think out into one transaction, don't forget "loan, transfer(actions), repayment".
 
-假设，一开始闪电贷合约给了你 1 万 ETH，如果交易结束时没有还上 1 万 ETH，那就相当于你从来没借出过 1 万 ETH，因为当节点在执行交易时，只要交易失败，则这笔交易中的所有操作都会全部回滚，就像没事发生过。
+If you can't repay when the transaction closes, the transaction will fail as if nothing had happened.
 
-很反直觉对吧？要是没有执行所有操作并成功返回足够的资金，那些 ETH 就跟没有动过一样。
+For example, the flash loan had loan ten thousand eths to you, once you didn't repay it at the end of the transaction, it will be like you had never loaned these eths, because when the node executes the transaction If the transaction failed, all the actions in this transaction will be rolling back.
 
-好吧，我们也觉得这就是魔法。这种魔法是一个图灵完备的网络（图灵完备的编程语言 + 可自动执行的 “账户” 即智能合约）上的最新发明。
+Amazing, right? If we don't execute all operations and returned enough funds successfully, those ETHs are as if they haven't been used.
 
-所有运行以太坊软件的计算机节点都运行着这个闪电贷智能合约，当这个程序（智能合约）被上链的的交易激活之后，就相当于合约在执行这笔交易指定的操作，如果最后能完成还款，则合约传出 “执行成功”，整个网络的状态完成更改；而如果不能完成还款，合约传出 “失败”，交易影响到的其它合约状态更改失败，被改变的只有闪电贷合约的状态。
+Well, we do think this is a kind of magic too, which is the latest invention on a Turing-complete network (a Turing-complete programming language + self-executing "accounts" or smart contracts).
 
-## 操作步骤   
-分别进入到 aave，dydx，uniswapv2，uniswapv3 子目录中，根据 readme 进行相应的操作  
+All nodes running the Ethereum also run this flash loan smart contract. When the program (smart contract) is activated by the transaction on the chain, it is equal to the contract executing the operation specified by the transaction. If repayment can successfully be done, the contract will report "execution successful", and the state of the whole network will be changed; if the repayment can't be completed, the contract will report "failure", and the only changed status will be in the flash loan contract.
+
+## steps   
+Get into the sub folder of `aave, dydx, uniswapv2, uniswapv3`, follow the guides of the readme
  
-## 参考链接
+## Reference link
 
-- [对比 Aave、dYdX 和 Uniswap 三家的闪电贷](https://mp.weixin.qq.com/s/GSnb81C0vI6sgyrWpPqqwg)
+- [A comparison of flash loans from Aave, dYdX and Uniswap](https://mp.weixin.qq.com/s/GSnb81C0vI6sgyrWpPqqwg)
 - https://ethfans.org/posts/flash-loans-as-an-example-what-can-a-transaction-reach
 - https://github.com/austintgriffith/scaffold-eth
 - https://soliditydeveloper.com/eip-3156

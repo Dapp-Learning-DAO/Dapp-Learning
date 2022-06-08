@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # wallet development
 
 HD Wallet (Hierarchical Deterministic Wallet), Wallet Protocol: BIP32, BIP44, BIP39

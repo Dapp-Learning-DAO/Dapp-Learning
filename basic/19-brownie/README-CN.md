@@ -1,3 +1,4 @@
+中文 / [English](./README.md)
 # Brownie
 
 [Brownie](https://github.com/eth-brownie/brownie) 是一个基于 Python 针对以太坊虚拟机的智能合约的开发和测试框架。
