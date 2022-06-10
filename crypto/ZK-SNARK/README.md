@@ -25,6 +25,9 @@ paper list:
   - [从零开始学习 zk-SNARK（三）——从程序到多项式的构造](https://secbit.io/blog/2020/01/08/learn-zk-snark-from-zero-part-three/)
   - [从零开始学习 zk-SNARK（四）——多项式的约束](https://secbit.io/blog/2020/01/15/learn-zk-snark-from-zero-part-four/)
   - [从零开始学习 zk-SNARK（五）——Pinocchio 协议](https://secbit.io/blog/2020/01/22/learn-zk-snark-from-zero-part-five/)
+  
   - [Star Li 零知识证明 - zkSNARK入门](https://mp.weixin.qq.com/s/vO6-34W1qUFdLWRM0QjZXQ)
   - [星辰实验室-zk文档](https://drive.google.com/file/d/1A5EtvJaNz17fgSbgBfgKWYY6OBX6PDrT/view?usp=sharing)
   - [星辰实验室-zkPPT](https://drive.google.com/file/d/1pP8HdRSflWo93xYaIpfUSkhtNICS0hDr/view?usp=sharing)
+  - [入门视频](https://www.youtube.com/watch?v=lGogdTnD4SE)
+  - [CTN zkdapp实战](https://www.bilibili.com/video/BV1oL4y1h7iE?p=1&share_medium=android&share_plat=android&share_session_id=9d2f7c31-a4dc-46a5-a2d9-4d6d0ebc3997&share_source=WEIXIN&share_tag=s_i&timestamp=1653798331&unique_k=921Lj1L)
