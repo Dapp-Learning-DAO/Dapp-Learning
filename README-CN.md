@@ -392,9 +392,11 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
@@ -412,9 +414,11 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>
