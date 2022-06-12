@@ -125,7 +125,7 @@ S' * ( (t2 - t1) * f2 * i2)   // (t1, t2) with size S'
 
 一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不会发生改变。
 
-$\sum_{t=1}^{t'}{S_t*I_t*F_t*(\Delta(t)-\Delta(t-1))}$
+$\sum_{t=1}^{t'}{S_{t}*I_{t}*F_{t}*(\Delta(t)-\Delta(t-1))}$
 
 - S: position size
 - I: index price
@@ -166,7 +166,7 @@ $\sum_{t=1}^{t'}{S_t*I_t*F_t*(\Delta(t)-\Delta(t-1))}$
 假如一位 maker 于 range(3000, 5000) 提供了 1 v-ETH 和 4000 v-USDC 的流动性 , 当时 v-ETH 的 mark price 是 4000。
 
 - 如果价格超过 5000， maker 的流动性还剩 0 v-ETH 和大约 (4000 + 4472) v-USDC
-- 如果价格低于 4000，maker 的流动性还剩大约 (1+1.15) v-ETH 和 0 v-USDC
+- 如果价格低于 3000，maker 的流动性还剩大约 (1+1.15) v-ETH 和 0 v-USDC
 
 每当 taker 在 maker 的做市价格区间中交易，总会影响 maker 的头寸。我们是否可以追踪每一笔交易对每一个 maker 头寸的影响呢？
 
@@ -232,6 +232,8 @@ $liquidity * (G' — \frac{G}{\sqrt{upper}})$
 
 t1 时刻，Alice 的头寸规模实际上是 0，因为价格刚刚触及 lower，此时并没有 taker 和她成为对手方。
 
+> 注意：此时 Alice 的range order 虽然全部是 base token，但由于多空相抵，所以整体来算 Alice 的头寸规模为 0
+
 t2 时刻，当价格在 `lower < m2 < upper`, 与 t0 时刻的数量之差则为：
 
 ```math
@@ -274,9 +276,7 @@ A maker's funding payment
 
 > 注意：maker首先存入资产 USDC 到 Vault 模块，然后借出 vtoken 开 range order (添加流动性)，如果添加的有 base token，那么这部分相当于 maker 从协议中借出相应的 base token (做空)，再注入到协议中 (做多)，所以刚添加完流动性，此时价格没有改变，那么 maker 的多空相抵，是不会产生 funding payment 的；一旦价格变化，maker 剩余的 base token 发生变化，相当于平掉一部分 多头 仓位，那么此时空大于多，maker 就需要计算这部分空仓的 funding payment了；
 
-`equation B = LiquidityAmounts.getAmount0ForLiquidity() * (G’ — E)`
-
-`equation B` 的计算公式和 taker 的类似，因为此时 taker 的头寸规模不会变化
+`equation B` 的计算公式和 taker 的类似，因为 maker 添加流动性时的初始头寸规模不会变化
 
 `equation A` 的计算需要分 3 种情况:
 
@@ -284,9 +284,11 @@ A maker's funding payment
 2. `Mark price <= lower`: 因为此时价格区间不是 active 状态， base token 等于 `LiquidityAmounts.getAmount0ForLiquidity()`，计算公式和 `equation B` 相同
 3. `L < Mark < U` : `liquidity * ((G' — E') — (G — E) / sqrt(upper))`
 
-需要注意的是每当 `Mark price` 穿过边界的 tick 时，需要更新 E 和 E‘
+需要注意的是每当 `Mark price` 穿过边界的 tick 时，需要更新 G, G', E 和 E‘
 
 最终我们将情况 2 和 情况 3 的 funding payment 加起来就是 range order 的 funding payment
+
+> 注意：`equation A - equation B` 只考虑了价格在区间内的情况，当价格小于 lower，虽然 range order 并未参与做市，但 maker 依然持有 base token 头寸，所以还需要累计 funding payment，所以我们之后还需要考虑累加当 `Mark price < lower` 的 funding payment
 
 ## Implementation
 
@@ -304,10 +306,10 @@ struct Growth {
 }
 ```
 
-- `equation A` 在 Funding.sol `calcLiquidityCoefficientInFundingPaymentByOrder()`
+- `calcLiquidityCoefficientInFundingPaymentByOrder()` 在 Funding.sol，一个 range order 当前的未结算 funding payment
 - 两种 fundings 字段 `fundingBelowX96` 和 `fundingInsideX96`
-  - `fundingBelowX96`: base token amountbaseAmountBelow
-  - `fundingInsideX96`: `liquidity * ((G' — E') — (G — E) / sqrt(upper))`
+  - `fundingBelowX96`: 当价格小于 range lower 时，所累计的 funding growth
+  - `fundingInsideX96`: `equation A - equation B = liquidity * ((G' — E') — (G — E) / sqrt(upper))`
   - 不需要考虑高于价格区间的情况，因为此时没有 base token 不需要考虑 funding payment
 
 ```solidity
@@ -357,7 +359,7 @@ function calcLiquidityCoefficientInFundingPaymentByOrder(
 }
 ```
 
-- `OrderBook.getLiquidityCoefficientInFundingPayment()` 是计算一个 maker 所有订单的 `equation A`
+- `OrderBook.getLiquidityCoefficientInFundingPayment()` 是计算一个 maker 所有订单的 funding payment 只和
 
 ```solidity
 /// @inheritdoc IOrderBook
@@ -393,7 +395,9 @@ function getLiquidityCoefficientInFundingPayment(
 }
 ```
 
-- Funding.sol 合约的 `calcPendingFundingPaymentWithLiquidityCoefficient()` 是计算 `equation B`
+- Funding.sol 合约的 `calcPendingFundingPaymentWithLiquidityCoefficient()` 是计算一个用户总的未结算 funding payment，
+  - 一个用户既可以是 taker 同时也可以是 maker
+  - taker 的 funding payment 再与 maker 部分的 funding payment 相加
 
 ```solidity
 function calcPendingFundingPaymentWithLiquidityCoefficient(
@@ -414,7 +418,7 @@ function calcPendingFundingPaymentWithLiquidityCoefficient(
 }
 ```
 
-- `Exchange.getPendingFundingPayment()` 是计算一位 maker 或 taker 的 funding payment
+- `Exchange.getPendingFundingPayment()` 计算一个用户总的未结算 funding payment，内部调用 `getLiquidityCoefficientInFundingPayment` 和 `calcPendingFundingPaymentWithLiquidityCoefficient` 来计算 maker 和 taker 部分的 funding payment
 
 ```solidity
 /// @inheritdoc IExchange
@@ -434,7 +438,7 @@ function getPendingFundingPayment(address trader, address baseToken) public view
 }
 ```
 
-注意，`Funding.calcPendingFundingPaymentWithLiquidityCoefficient()` 中，taker 只有 `balanceCoefficientInFundingPayment` 没有 `liquidityCoefficientInFundingPayment`, 所以 `IOrderBook.getLiquidityCoefficientInFundingPayment()` 返回的是空数组。
+> 当用户没有参与做市 `IOrderBook.getLiquidityCoefficientInFundingPayment()` 返回的是空数组，此时就只有 taker 部分的 funding payment。
 
 ## Reference
 
