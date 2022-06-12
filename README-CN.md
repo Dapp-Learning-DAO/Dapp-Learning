@@ -6,7 +6,7 @@
   <h4 align="center">
     区块链 Dapp 开发教程
   </h4>
-  <p>通过实际项目一步一步学习区块链 Dapp 开发。</p>
+  <p>通过经典项目一步一步学习区块链 Dapp 开发。</p>
 </div>
 
 ## 序 - Preface
@@ -392,9 +392,11 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://web3q.io/home.w3q/">
@@ -411,6 +413,10 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
   &nbsp;&nbsp;
+  <a href="https://loopring.org/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
+  </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>
 <br>

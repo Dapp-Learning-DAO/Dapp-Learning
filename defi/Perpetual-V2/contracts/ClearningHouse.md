@@ -10,7 +10,7 @@
 2. 如果未结算的 funding payment 不为 0，将其累加到用户的 Pnl 中
 3. 更新用户的 `lastTwPremiumGrowthGlobalX96` 变量
 
-```ts
+```solidity
 /// @dev Settle trader's funding payment to his/her realized pnl.
 function _settleFunding(address trader, address baseToken)
     internal
@@ -37,7 +37,7 @@ function _settleFunding(address trader, address baseToken)
 
 更新用户的 Pnl (Profit and Loss)
 
-```ts
+```solidity
 // ClearningHouse.sol
 function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
     IAccountBalance(_accountBalance).modifyOwedRealizedPnl(trader, amount);
@@ -81,7 +81,7 @@ function _modifyOwedRealizedPnl(address trader, int256 amount) internal {
 5. 更新用户 Pnl
 6. 检查用户抵押是否充足
 
-```ts
+```solidity
 // IClearingHouse.osl
 
 /// @param useTakerBalance only accept false now
@@ -256,7 +256,7 @@ function addLiquidity(AddLiquidityParams calldata params)
 3. `IOrderBook.removeLiquidity` 从 Uniswap V3 pool 中移除指定流动性
 4. 由于做市会有被动的资产变动(受 taker 交易影响)，所以在操作流动性之前，需要先将未结算的 Pnl 结算掉 [`_settleBalanceAndRealizePnl`](#_settleBalanceAndRealizePnl)
 
-```ts
+```solidity
 /// @param liquidity collect fee when 0
 struct RemoveLiquidityParams {
     address baseToken;
@@ -349,7 +349,7 @@ function removeLiquidity(RemoveLiquidityParams calldata params)
 - `oppositeAmountBound` 交易的最小输出数量 或者 交易的最大输入数量，视情况而定
 - `deadline`
 - `sqrtPriceLimitX96` 由于 perp 使用的 vAMM 并不会对真实的交易对价格产生影响，因此需要对波动率设定限制，此为限定的价格限制
-- `referralCode`
+- `referralCode` 用于计算返佣的代码
 
 | direction | in which term | isBaseToQuote | exactInput | oppositeAmountBound         | sqrtPriceLimitX96      |
 | --------- | ------------- | ------------- | ---------- | --------------------------- | ---------------------- |
@@ -365,7 +365,7 @@ example: 开仓时，若以 USDC 计价 (quote token)，做空
 - 先借出 base token，再通过 swap 换成 quote token
 - 我们已知 quote token 数量，所以需要使用 exactOutput 接口来交易，固 exactInput 是 false
 
-```ts
+```solidity
 /// @param oppositeAmountBound
 // B2Q + exact input, want more output quote as possible, so we set a lower bound of output quote
 // B2Q + exact output, want less input base as possible, so we set a upper bound of input base
@@ -397,9 +397,9 @@ struct OpenPositionParams {
 2. 处理未结算的 funding payment
 3. `_openPosition` 实际的开仓操作函数
 4. 检查开仓之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
-5. 发送 `referralCode` 事件(可能联动其他应用)
+5. 发送 `referralCode` 事件，便于计算返佣
 
-```ts
+```solidity
 /// @inheritdoc IClearingHouse
 function openPosition(OpenPositionParams memory params)
     external
@@ -461,13 +461,388 @@ function openPosition(OpenPositionParams memory params)
 
 ### closePosition
 
+关闭头寸；
+
+1. 检查 base token market 状态，必须为 Open 状态;
+2. 结算 funding payment
+3. `_closePosition()` 实际执行关闭头寸的逻辑
+4. 检查关闭头寸之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
+5. 发送 `referralCode` 便于计算返佣
+
+```solidity
+struct ClosePositionParams {
+    address baseToken;
+    uint160 sqrtPriceLimitX96;
+    uint256 oppositeAmountBound;
+    uint256 deadline;
+    bytes32 referralCode;
+}
+
+/// @inheritdoc IClearingHouse
+function closePosition(ClosePositionParams calldata params)
+    external
+    override
+    whenNotPaused
+    nonReentrant
+    checkDeadline(params.deadline)
+    returns (uint256 base, uint256 quote)
+{
+    // input requirement checks:
+    //   baseToken: in Exchange.settleFunding()
+    //   sqrtPriceLimitX96: X (this is not for slippage protection)
+    //   oppositeAmountBound: in _checkSlippage()
+    //   deadline: here
+    //   referralCode: X
+
+    _checkMarketOpen(params.baseToken);
+
+    address trader = _msgSender();
+
+    // must settle funding first
+    _settleFunding(trader, params.baseToken);
+
+    IExchange.SwapResponse memory response =
+        _closePosition(
+            InternalClosePositionParams({
+                trader: trader,
+                baseToken: params.baseToken,
+                sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+                isLiquidation: false
+            })
+        );
+
+    // if exchangedPositionSize < 0, closing it is short, B2Q; else, closing it is long, Q2B
+    bool isBaseToQuote = response.exchangedPositionSize < 0 ? true : false;
+    uint256 oppositeAmountBound = _getPartialOppositeAmount(params.oppositeAmountBound, response.isPartialClose);
+
+    _checkSlippage(
+        InternalCheckSlippageParams({
+            isBaseToQuote: isBaseToQuote,
+            isExactInput: isBaseToQuote,
+            base: response.base,
+            quote: response.quote,
+            oppositeAmountBound: oppositeAmountBound
+        })
+    );
+
+    if (params.referralCode != 0) {
+        emit ReferredPositionChanged(params.referralCode);
+    }
+    return (response.base, response.quote);
+}
+```
+
+#### \_closePosition
+
+实际执行关闭头寸的逻辑;
+
+1. 获取用户 take 部分的头寸规模 `_getTakerPosition()`, 其必须大于 0
+2. 根据头寸是多还是空，开反向仓位去平仓
+
+```solidity
+/// @dev The actual close position logic.
+function _closePosition(InternalClosePositionParams memory params)
+    internal
+    returns (IExchange.SwapResponse memory)
+{
+    int256 positionSize = _getTakerPosition(params.trader, params.baseToken);
+
+    // CH_PSZ: position size is zero
+    require(positionSize != 0, "CH_PSZ");
+
+    // old position is long. when closing, it's baseToQuote && exactInput (sell exact base)
+    // old position is short. when closing, it's quoteToBase && exactOutput (buy exact base back)
+    bool isBaseToQuote = positionSize > 0;
+    return
+        _openPosition(
+            InternalOpenPositionParams({
+                trader: params.trader,
+                baseToken: params.baseToken,
+                isBaseToQuote: isBaseToQuote,
+                isExactInput: isBaseToQuote,
+                isClose: true,
+                amount: positionSize.abs(),
+                sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+                isLiquidation: params.isLiquidation
+            })
+        );
+}
+```
+
 ### liquidate
+
+清算已爆仓的头寸
+
+1. 获取被清算人的 take 仓位规模，其必须大于 0
+2. `_liquidate` 实际执行清算逻辑
+3. 检查清算之后的滑点情况，根据 `oppositeAmountBound` 入参来判断交易是否满足滑点要求，否则 revert
+
+可清算条件:
+
+1. 被清算人必须没有流动性 (range order), 如果有第三方可以提前执行 `cancelExcessOrders` 清除其流动性
+2. `accountMarginRatio < mmRatio`
+   - `accountMarginRatio = accountValue / sum(abs(positionValue_market))`
+   - `mmRatio: minimum-margin ratio, 6.25% in decimal 6`
+
+清算人受益：
+
+从被清算人的被清算头寸价值中转移部分到清算人名下，按照 `_liquidationPenaltyRatio` 的比例计算 （initial penalty ratio, 2.5% in decimal 6）
+
+```solidity
+
+/// @inheritdoc IClearingHouse
+function liquidate(address trader, address baseToken) external override whenNotPaused nonReentrant {
+    _checkMarketOpen(baseToken);
+    _liquidate(trader, baseToken);
+}
+
+/// @inheritdoc IClearingHouse
+function liquidate(
+    address trader,
+    address baseToken,
+    uint256 oppositeAmountBound
+)
+    external
+    override
+    whenNotPaused
+    nonReentrant
+    returns (
+        uint256 base,
+        uint256 quote,
+        bool isPartialClose
+    )
+{
+    _checkMarketOpen(baseToken);
+
+    // getTakerPosSize == getTotalPosSize now, because it will revert in _liquidate() if there's any maker order
+    int256 positionSize = _getTakerPosition(trader, baseToken);
+
+    // if positionSize > 0, it's long base, and closing it is thus short base, B2Q;
+    // else, closing it is long base, Q2B
+    bool isBaseToQuote = positionSize > 0;
+
+    (base, quote, isPartialClose) = _liquidate(trader, baseToken);
+
+    oppositeAmountBound = _getPartialOppositeAmount(oppositeAmountBound, isPartialClose);
+    _checkSlippage(
+        InternalCheckSlippageParams({
+            isBaseToQuote: isBaseToQuote,
+            isExactInput: isBaseToQuote,
+            base: base,
+            quote: quote,
+            oppositeAmountBound: oppositeAmountBound
+        })
+    );
+
+    return (base, quote, isPartialClose);
+}
+
+```
+
+#### \_liquidate
+
+实际执行清算的逻辑;
+
+1. 判断被清算人是否达到可清算条件
+2. 结算被清算人的 funding payment
+3. 关闭被清算的头寸
+4. 按照比例转移被清算头寸的价值，从被清算人名下到清算人名下
+5. 更新被清算人 和 清算人的 Pnl
+
+```solidity
+function _liquidate(address trader, address baseToken)
+    internal
+    returns (
+        uint256 base,
+        uint256 quote,
+        bool isPartialClose
+    )
+{
+    // liquidation trigger:
+    //   accountMarginRatio < accountMaintenanceMarginRatio
+    //   => accountValue / sum(abs(positionValue_market)) <
+    //        sum(mmRatio * abs(positionValue_market)) / sum(abs(positionValue_market))
+    //   => accountValue < sum(mmRatio * abs(positionValue_market))
+    //   => accountValue < sum(abs(positionValue_market)) * mmRatio = totalMinimumMarginRequirement
+    //
+
+    // input requirement checks:
+    //   trader: here
+    //   baseToken: in Exchange.settleFunding()
+
+    // CH_CLWTISO: cannot liquidate when there is still order
+    require(!IAccountBalance(_accountBalance).hasOrder(trader), "CH_CLWTISO");
+
+    // CH_EAV: enough account value
+    require(_isLiquidatable(trader), "CH_EAV");
+
+    // must settle funding first
+    _settleFunding(trader, baseToken);
+    IExchange.SwapResponse memory response =
+        _closePosition(
+            InternalClosePositionParams({
+                trader: trader,
+                baseToken: baseToken,
+                sqrtPriceLimitX96: 0,
+                isLiquidation: true
+            })
+        );
+
+    // trader's pnl-- as liquidation penalty
+    uint256 liquidationFee =
+        response.exchangedPositionNotional.abs().mulRatio(
+            IClearingHouseConfig(_clearingHouseConfig).getLiquidationPenaltyRatio()
+        );
+
+    _modifyOwedRealizedPnl(trader, liquidationFee.neg256());
+
+    // increase liquidator's pnl liquidation reward
+    address liquidator = _msgSender();
+    _modifyOwedRealizedPnl(liquidator, liquidationFee.toInt256());
+
+    emit PositionLiquidated(
+        trader,
+        baseToken,
+        response.exchangedPositionNotional.abs(),
+        response.base,
+        liquidationFee,
+        liquidator
+    );
+
+    return (response.base, response.quote, response.isPartialClose);
+}
+
+function _isLiquidatable(address trader) internal view returns (bool) {
+    return getAccountValue(trader) < IAccountBalance(_accountBalance).getMarginRequirementForLiquidation(trader);
+}
+```
+
+### cancelExcessOrders
+
+当某用户爆仓，第三方可以帮忙移除其流动性(range order)，以便进行清算;
+
+1. 检查 base token market 必须是 Open 状态
+2. `_cancelExcessOrders` 实际执行取消 range order 的逻辑
+
+只有被执行者的 `free collateral with mmRatio < 0` 或者满足被清算条件，才能执行该函数;
+
+`freeCollateral = min(totalCollateralValue, accountValue) - openOrderMarginReq`
+
+```solidity
+/// @inheritdoc IClearingHouse
+function cancelExcessOrders(
+    address maker,
+    address baseToken,
+    bytes32[] calldata orderIds
+) external override whenNotPaused nonReentrant {
+    // input requirement checks:
+    //   maker: in _cancelExcessOrders()
+    //   baseToken: in Exchange.settleFunding()
+    //   orderIds: in OrderBook.removeLiquidityByIds()
+
+    _checkMarketOpen(baseToken);
+    _cancelExcessOrders(maker, baseToken, orderIds);
+}
+
+/// @inheritdoc IClearingHouse
+function cancelAllExcessOrders(address maker, address baseToken) external override whenNotPaused nonReentrant {
+    // input requirement checks:
+    //   maker: in _cancelExcessOrders()
+    //   baseToken: in Exchange.settleFunding()
+    //   orderIds: in OrderBook.removeLiquidityByIds()
+
+    _checkMarketOpen(baseToken);
+    _cancelExcessOrders(maker, baseToken, IOrderBook(_orderBook).getOpenOrderIds(maker, baseToken));
+}
+```
+
+#### \_cancelExcessOrders
+
+实际执行取消 range order 的逻辑;
+
+1. 检查 `free collateral with mmRatio < 0` 或满足被清算的条件
+2. 结算被清算人的 funding payment
+3. 遍历被清算人的所有 range order，逐一关闭
+
+```solidity
+/// @dev only cancel open orders if there are not enough free collateral with mmRatio
+/// or account is able to being liquidated.
+function _cancelExcessOrders(
+    address maker,
+    address baseToken,
+    bytes32[] memory orderIds
+) internal {
+    if (orderIds.length == 0) {
+        return;
+    }
+
+    // CH_NEXO: not excess orders
+    require(
+        (_getFreeCollateralByRatio(maker, IClearingHouseConfig(_clearingHouseConfig).getMmRatio()) < 0) ||
+            _isLiquidatable(maker),
+        "CH_NEXO"
+    );
+
+    // must settle funding first
+    _settleFunding(maker, baseToken);
+
+    IOrderBook.RemoveLiquidityResponse memory removeLiquidityResponse;
+
+    uint256 length = orderIds.length;
+    for (uint256 i = 0; i < length; i++) {
+        OpenOrder.Info memory order = IOrderBook(_orderBook).getOpenOrderById(orderIds[i]);
+
+        IOrderBook.RemoveLiquidityResponse memory response = IOrderBook(_orderBook).removeLiquidity(
+            IOrderBook.RemoveLiquidityParams({
+                maker: maker,
+                baseToken: baseToken,
+                lowerTick: order.lowerTick,
+                upperTick: order.upperTick,
+                liquidity: order.liquidity
+            })
+        );
+
+        removeLiquidityResponse.base = removeLiquidityResponse.base.add(response.base);
+        removeLiquidityResponse.quote = removeLiquidityResponse.quote.add(response.quote);
+        removeLiquidityResponse.fee = removeLiquidityResponse.fee.add(response.fee);
+        removeLiquidityResponse.takerBase = removeLiquidityResponse.takerBase.add(response.takerBase);
+        removeLiquidityResponse.takerQuote = removeLiquidityResponse.takerQuote.add(response.takerQuote);
+
+        emit LiquidityChanged(
+            maker,
+            baseToken,
+            _quoteToken,
+            order.lowerTick,
+            order.upperTick,
+            response.base.neg256(),
+            response.quote.neg256(),
+            order.liquidity.neg128(),
+            response.fee
+        );
+    }
+
+    int256 realizedPnl = _settleBalanceAndRealizePnl(maker, baseToken, removeLiquidityResponse);
+
+    uint256 sqrtPrice = _getSqrtMarkTwapX96(baseToken, 0);
+    int256 openNotional = _getTakerOpenNotional(maker, baseToken);
+    _emitPositionChanged(
+        maker,
+        baseToken,
+        removeLiquidityResponse.takerBase, // exchangedPositionSize
+        removeLiquidityResponse.takerQuote, // exchangedPositionNotional
+        0,
+        openNotional,
+        realizedPnl, // realizedPnl
+        sqrtPrice
+    );
+}
+```
 
 ### uniswapV3MintCallback
 
 Uniswap v3 pool 的 mint 回调函数，将对应的 token 转给 pool 合约。如果金额不足会报错。
 
-```ts
+```solidity
 /// @inheritdoc IUniswapV3MintCallback
 /// @dev namings here follow Uniswap's convention
 function uniswapV3MintCallback(
@@ -511,7 +886,7 @@ function uniswapV3MintCallback(
 1. 若有 base token 需要移除，计算反向开仓造成的未结算 Pnl
 2. 结算当前未实现的 Pnl
 
-```ts
+```solidity
 /// @dev Calculate how much profit/loss we should settled,
 /// only used when removing liquidity. The profit/loss is calculated by using
 /// the removed base/quote amount and existing taker's base/quote amount.
@@ -553,7 +928,7 @@ function _settleBalanceAndRealizePnl(
 1. 根据传入数值更新仓位价值
 2. 若此时已无 range order，则直接以 takerOpenNotional 赋值（完全以 take 部分为准，舍弃 make 部分的 dust 价值）
 
-```ts
+```solidity
 /// @inheritdoc IAccountBalance
 function settleBalanceAndDeregister(
     address maker,
@@ -586,13 +961,13 @@ function settleBalanceAndDeregister(
 }
 ```
 
-### _openPosition
+### \_openPosition
 
 内部开仓函数，进行开仓的实际操作
 
 1. [Exchange.swap](./Exchange.md#swap) 调用 Exchange 合约的 swap 方法进行交易
 
-```ts
+```solidity
 /// @dev explainer diagram for the relationship between exchangedPositionNotional, fee and openNotional:
 ///      https://www.figma.com/file/xuue5qGH4RalX7uAbbzgP3/swap-accounting-and-events
 function _openPosition(InternalOpenPositionParams memory params) internal returns (IExchange.SwapResponse memory) {
@@ -661,7 +1036,7 @@ function _openPosition(InternalOpenPositionParams memory params) internal return
 
 ```
 
-### _checkSlippage
+### \_checkSlippage
 
 ## view functions
 

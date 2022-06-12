@@ -9,7 +9,7 @@
 3. 获取用户未结算的 funding payment
 4. 更新 `_globalFundingGrowthX96Map` , 同一区块多笔交易，只取第一笔交易的数据
 
-```ts
+```solidity
 /// @inheritdoc IExchange
 function settleFunding(address trader, address baseToken)
     external
@@ -64,7 +64,7 @@ getPendingFundingPayment 的 non-view 版本
    - 遍历 trader 的所有 range order，累计其所有 funding payment 的 growth 累计值
 2. 根据 base token 仓位计算未结算的 funding payment
 
-```ts
+```solidity
 /// @dev this is the non-view version of getPendingFundingPayment()
 /// @return pendingFundingPayment the pending funding payment of a trader in one market,
 ///         including liquidity & balance coefficients
@@ -100,7 +100,7 @@ function _updateFundingGrowth(
 baseBalance * (fundingGrowthGlobal.twPremiumX96 - twPremiumGrowthGlobalX96)
 ```
 
-```ts
+```solidity
 // lib/Funding.sol
 function calcPendingFundingPaymentWithLiquidityCoefficient(
     int256 baseBalance,
@@ -130,7 +130,7 @@ function calcPendingFundingPaymentWithLiquidityCoefficient(
 4. 如果是关闭头寸，如果交易对价格的影响超过限制，则按照上限只关闭部分仓位
 5. 调用 `_swap` 进行实际交易，对用户 Pnl 进行更新
 
-```ts
+```solidity
 /// @param amount when closing position, amount(uint256) == takerPositionSize(int256),
 /// as amount is assigned as takerPositionSize in ClearingHouse.closePosition()
 struct SwapParams {
@@ -243,7 +243,7 @@ function swap(SwapParams memory params) external override returns (SwapResponse 
 2. `OrderBook.replaySwap` 模拟进行 uniswap 交易，估算 uniswap 的手续费以及保险准备金 `insuranceFundfee`
 3. 调用 `UniswapV3Broker.swap` 进行实际交易
 
-```ts
+```solidity
 /// @dev customized fee: https://www.notion.so/perp/Customise-fee-tier-on-B2QFee-1b7244e1db63416c8651e8fa04128cdb
 function _swap(SwapParams memory params) internal returns (InternalSwapResponse memory) {
     IMarketRegistry.MarketInfo memory marketInfo = IMarketRegistry(_marketRegistry).getMarketInfo(params.baseToken);
@@ -345,7 +345,7 @@ function _swap(SwapParams memory params) internal returns (InternalSwapResponse 
    - `twPremiumX96 += deltaTwPremium`
    - `twPremiumDivBySqrtPriceX96 += deltaTwPremium / sqrt(Mark price)`
 
-```ts
+```solidity
 // lib/Funding.sol
 
 /// @dev tw: time-weighted
@@ -442,7 +442,7 @@ function _getFundingGrowthGlobalAndTwaps(address baseToken)
    - `closedPositionNotional = quote amount / closedRatio` 本次反向开仓的头寸价值(与 takerOpenNotional 符号相反)
    - `pnlToBeRealized = takerOpenNotional + closedPositionNotional`
 
-```ts
+```solidity
 struct InternalRealizePnlParams {
     address trader;
     address baseToken;

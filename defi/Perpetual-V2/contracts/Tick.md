@@ -15,7 +15,7 @@
 - [Tick.cross](#cross)
 - 具体原理同 [Uniswap V3 fees 的计算](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Uniswap-V3/whitepaperGuide/understandV3Witepaper.md#%E6%89%8B%E7%BB%AD%E8%B4%B9)
 
-```ts
+```solidity
 /// @return all values returned can underflow per feeGrowthOutside specs;
 ///         see https://www.notion.so/32990980ba8b43859f6d2541722a739b
 function getAllFundingGrowth(
@@ -70,7 +70,7 @@ function getAllFundingGrowth(
 
 每当 `currentTick` 穿过某个 tick，都会触发其上的 outside 数值翻转，因为该 tick 与 `currentTick` 位置关系发生翻转
 
-```ts
+```solidity
 function cross(
     mapping(int24 => GrowthInfo) storage self,
     int24 tick,
