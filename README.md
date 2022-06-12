@@ -385,7 +385,6 @@ Shout out to the following organizations for their unconditional donations to us
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
