@@ -1,6 +1,6 @@
 # Block-based Funding Payments
 
-> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br> > [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
+> 原文 [《Block-based Funding Payment On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/block-based-funding-payment-on-perp-v2-35527094635e) </br> [《How Block-based Funding Payments are Implemented On Perp v2》 by 田少谷 Shao](https://blog.perp.fi/how-block-based-funding-payment-is-implemented-on-perp-v2-20cfd5057384)
 
 ## Intro
 
@@ -125,7 +125,7 @@ S' * ( (t2 - t1) * f2 * i2)   // (t1, t2) with size S'
 
 一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不会发生改变。
 
-$ \sum\_{t=1}^{t'}{S*t * I*t * F_t \* (\Delta(t)-\Delta(t-1))} $
+$\sum_{t=1}^{t'}{S_t*I_t*F_t*(\Delta(t)-\Delta(t-1))}$
 
 - S: position size
 - I: index price
@@ -138,7 +138,7 @@ $ \sum\_{t=1}^{t'}{S*t * I*t * F_t \* (\Delta(t)-\Delta(t-1))} $
 - 存储全局变量 G 作为 `Δtime * Index price * Funding Rate` 的**累计值**
   - 该全局变量需要在每笔交易时触发更新；
   - 同样，由于 `Index Price * Funding Rate = Premium`, G 还可以表达为 $\sum{time}(\Delta time * Premium)$
-- 当 taker 开启头寸或修改其规模，记录每一个 taker 的累计值 E 将被当时的全局累计值 G 赋值 `E = G`
+- 当 taker 开仓头寸或修改头寸规模，记录每一个 taker 的累计值 E 将被当时的全局累计值 G 赋值 `E = G`
 - 一段时间后，taker 的 funding payment 是 `S * (G' - E)`, G‘ 是当前的全局累计值
 
 目前计算 taker 的 funding payment 还比较简单，接下来看看 maker 的计算。
@@ -163,16 +163,16 @@ $ \sum\_{t=1}^{t'}{S*t * I*t * F_t \* (\Delta(t)-\Delta(t-1))} $
 
 持有正数数量 base token 的用户，就是持有多头头寸；持有负数数量 base token 的用户，即从协议借出 base token 的用户，则持有空头头寸；
 
-假如一位 maker 于 range(3000, 50000) 提供了 1 v-ETH 和 4000 v-USDC 的流动性 , 当时 v-ETH 的 mark price 是 4000。
+假如一位 maker 于 range(3000, 5000) 提供了 1 v-ETH 和 4000 v-USDC 的流动性 , 当时 v-ETH 的 mark price 是 4000。
 
 - 如果价格超过 5000， maker 的流动性还剩 0 v-ETH 和大约 (4000 + 4472) v-USDC
 - 如果价格低于 4000，maker 的流动性还剩大约 (1+1.15) v-ETH 和 0 v-USDC
 
 每当 taker 在 maker 的做市价格区间中交易，总会影响 maker 的头寸。我们是否可以追踪每一笔交易对每一个 maker 头寸的影响呢？
 
-可以，前提是**funding payment 只能在 quote token 中收取，不能在 base token 中收取**。
+可以，前提是**funding payment 只能在 quote token 中收取，不能在 base token 中收取**。因为如果在 base token 中收取 funding payment，则必须每次都根据收取之后都还要交易成 USDC ，因为用户实际只会存取和赎回 USDC (quote token)。
 
-因为如果在 base token 中收取 funding payment，则必须每次都根据 base token 数量去推断头寸的规模 (换算成 USDC 的总数量)，遗憾的是我们无法找到一个节省 gas 的实现方法。
+遗憾的是我们无法找到一个节省 gas 的实现方法。因为一笔交易可能涉及多个 range order (不同 maker 注入的流动性)，每一次交易不但要计算 taker 的 funding，还要去遍历计算每一个涉及到的 range order 他们之中 base token 数量的变化情况。
 
 现在我们的任务就是在 Uniswap v3 pool 的基础上增加功能，以便可以追踪用户头寸规模的变化。
 
@@ -268,8 +268,11 @@ A maker's funding payment
 - 每当流动性头寸被修改（数量和价格区间上下限），应立即结算之前累计的 funding payment，并更新参数
 - 新增一个全局 storage 变量 G2 : $\sum{(\Delta time * \frac{premium}{\sqrt{MarkPrice}})}$ 每次交易都会更新全局变量
 - 在价格 tick 上新增两个变量，在 `Mark price` 进入或离开 tick 时保存当时的全局累计变量 G 和 G2， 其原理机制与 Uniswap v3 的手续费计算相同
-- 要知道在何时去 收取/支付 一位 maker 的 funding payment，需要在 maker 初始化或者修改流动性时去更新 maker 的 `personal entry values` E, E2
+- 要知道在何时去 收取/支付 一位 maker 的 funding payment，需要在 maker 初始化或者修改流动性时去更新 maker 的 `personal entry values` E, E'
 - `maker's funding payment = (equation A) — (equation B)`
+  - equation B 是用户添加流动性时，根据添加的 base token 来计算头寸规模的 funding payment
+
+> 注意：maker首先存入资产 USDC 到 Vault 模块，然后借出 vtoken 开 range order (添加流动性)，如果添加的有 base token，那么这部分相当于 maker 从协议中借出相应的 base token (做空)，再注入到协议中 (做多)，所以刚添加完流动性，此时价格没有改变，那么 maker 的多空相抵，是不会产生 funding payment 的；一旦价格变化，maker 剩余的 base token 发生变化，相当于平掉一部分 多头 仓位，那么此时空大于多，maker 就需要计算这部分空仓的 funding payment了；
 
 `equation B = LiquidityAmounts.getAmount0ForLiquidity() * (G’ — E)`
 
@@ -283,9 +286,11 @@ A maker's funding payment
 
 需要注意的是每当 `Mark price` 穿过边界的 tick 时，需要更新 E 和 E‘
 
+最终我们将情况 2 和 情况 3 的 funding payment 加起来就是 range order 的 funding payment
+
 ## Implementation
 
-- Global Cumulative Values: 在 Funding.sol, Growth struct 中包含两个字段: twPremiumX96 & twPremiumDivBySqrtPriceX96.
+- Global Cumulative Values: 在 Funding.sol, Growth struct 中包含两个字段: `twPremiumX96` & `twPremiumDivBySqrtPriceX96`.
 - 分别是 $\sum{(\Delta time * premium)}$ 和 $\sum{(\Delta time * \frac{premium}{\sqrt{MarkPrice}})}$
 
 ```solidity

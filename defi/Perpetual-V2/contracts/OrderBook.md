@@ -12,7 +12,7 @@
     - 根据 order id 获取 range order 信息
     - 获取该 range order 价格区间之外的 `fundingGrowthRangeInfo`
 
-```ts
+```solidity
 /// @inheritdoc IOrderBook
 function updateFundingGrowthAndLiquidityCoefficientInFundingPayment(
     address trader,
@@ -57,7 +57,7 @@ function updateFundingGrowthAndLiquidityCoefficientInFundingPayment(
 
 `_growthOutsideTickMap` 是根据 token 地址分类存储 tick 信息的 mapping
 
-```ts
+```solidity
 // first key: base token, second key: tick index
 // value: the accumulator of **Tick.GrowthInfo** outside each tick of each pool
 mapping(address => mapping(int24 => Tick.GrowthInfo)) internal _growthOutsideTickMap;
@@ -70,7 +70,7 @@ mapping(address => mapping(int24 => Tick.GrowthInfo)) internal _growthOutsideTic
 1. 只能由 ClearningHouse 调用
 2. 分别累加 base 与 quote 的债务
 
-```ts
+```solidity
 /// @inheritdoc IOrderBook
 function updateOrderDebt(
     bytes32 orderId,
@@ -94,7 +94,7 @@ function updateOrderDebt(
 - `fee` 指 uniswap 的手续费
 - `insuranceFundFee = fee * insuranceFundFeeRatio`
 
-```ts
+```solidity
 struct ReplaySwapParams {
     address baseToken;
     bool isBaseToQuote;
