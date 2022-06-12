@@ -375,6 +375,7 @@ Shout out to the following organizations for their unconditional donations to us
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
@@ -384,11 +385,9 @@ Shout out to the following organizations for their unconditional donations to us
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
-  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>

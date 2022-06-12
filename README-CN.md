@@ -413,11 +413,9 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
-  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>
