@@ -1,14 +1,16 @@
-# DyDx 闪电贷  
-## 简介    
-**DyDx 本身并不具备闪电贷功能**，但是，你可以通过对 `SoloMargin` 合约执行一系列操作来实现类似的行为，这是一个隐藏功能。为了在 DyDx 上进行闪电贷，我们需要：
+[中文](./README-CN.md) / English
 
-- 借入一定数量的 token
-- 使用借入的资金进行套利等一些操作
-- 退回借入的 token，在原来借款的数量上 `+2 wei`即可。这 `2 wei` 就是手续费。
+# DyDx flash loan  
+## introduce    
+**DyDx doesn't supply the flash loan function itself**, but you can implement a similar function by executing a series of operations to `SoloMargin` contract, it's a hidden function. To we can use the flash loan in DyDx, we need: 
 
-所有这些都在一个交易中完成。DyDx 用所谓的元交易来解决这个问题。它允许你执行一系列的操作，直到最后一步才检查状态是否有效。也就是说，只要你在同一笔交易中把资金存回去（并且账户里有大约 2wei 的资产），你就可以随意提取资金，做任何事情。使用元交易，你就可以在一个交易中执行多个交易了。
+- borrow a number of tokens
+- use these funds to do some operations such as interest arbitrage
+- return borrowed tokens, also you need plus `2 wei`, which is the service charge
 
-DyDx 仅支持以下这几种资产，并不支持 eth：
+All of these will be finished in one transaction. DyDx uses so-called meta-transaction to solve this problem. It allowed you can do several operations, till the final step to check whether the state is valid. Which is, as long as you can store back the fund you had loaned(and your account has extra about 2 wei assets), then you can loan assets freely and do anything with them. By using meta-transaction, you can execute a multi transactions in it.
+
+DyDx only supports several assets below, excluding eth: 
 
 ```
 WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
@@ -17,13 +19,12 @@ DAI = 0x6B175474E89094C44Da98b954EedeAC495271d0F
 SAI = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359
 ```
 
-## 合约功能解析  
-### initiateFlashLoan 接口  
-想要 DyDx 实现闪电贷功能，合约需要继承 `DydxFlashloanBase`，并实现两个功能：
+## contract functions illustrate  
+### initiateFlashLoan interface  
+If we want to use the flash loan in DyDx, our contract needs to inherit `DydxFlashloanBase`, and implement two functions: 
+1. An entry function, you can call this function to initiate a flash loan, we name it as `initiateFlashLoan`.
 
-1. 一个入口函数，你可以调用该函数来初始化闪电贷，我们起名为 `initiateFlashLoan`。
-
-2. 一个叫`callFunction`的回调函数，这是在借贷时要执行的操作， 套利逻辑就在写在这个位置。
+2. A callback function `callFunction`, in here we execute operations after we had loaned, like some codes about arbitrage.
 
 ```js
 function initiateFlashLoan(address _solo, address _token, uint256 _amount) external {
@@ -51,19 +52,19 @@ function initiateFlashLoan(address _solo, address _token, uint256 _amount) exter
 }
 ```
 
-`initiateFlashLoan` 需要传入 3 个参数， `_solo` 是 ISoloMargin 的地址，`_token` 是需要借入的 token， `_amount` 是需要借入的数量。
+The `initiateFlashLoan` needs three parameters, `_solo` is the address of ISoloMargin, `_token` is the token address we want to loan, `_amount` is the number of all we want to loan.
 
-1. 是通过 `_solo` 与 `_token` ，得到 `marketId`
+1. get `marketId` by `_solo` and `_token` 
 
-2. 是实例化 Actions，数组长度是 3，也就是执行 3 个操作，按照数组顺序依次执行
+2. initialize Actions, the length of Array is 3, which is execute 3 actions and the order of execution will follow the sequence in Array.
 
-3. 执行借贷操作
+3. execute loan operations
 
-4. 执行套利逻辑，这就是之后要介绍的 `callFunction`
+4. execute the logic of arbitrage, which is `callFunction` that we will intro after time
 
-5. 执行还款操作 `initiateFlashLoan` 的代码基本固定不变。
+5. execute repay operation, we don't need to change codes in `initiateFlashLoan` a lot.
 
-### callFunction 回调接口  
+### callFunction callback api  
 
 ```js
 function callFunction(
@@ -73,9 +74,9 @@ function callFunction(
 ) public {
     MyCustomData memory mcd = abi.decode(data, (MyCustomData));
     uint256 balOfLoanedToken = IERC20(mcd.token).balanceOf(address(this)); // (1)
-      // 套利逻辑
-     // 套利逻辑
-    // 套利逻辑
+      // logic of arbitrage
+     // logic of arbitrage
+    // logic of arbitrage
     WETH9(kovanWETHAddr).deposit{value: balOfLoanedToken.add(2)}; // (2)
 
     uint256 newBal = IERC20(mcd.token).balanceOf(address(this)); // (3)
@@ -88,13 +89,13 @@ function callFunction(
 }
 ```
 
-我们在 `initiateFlashLoan` 定义了 3 个动作，第 2 个动作的实现就是 `callFunction`。假设我们借入 WETH 并返还 WETH。
+We defined 3 actions in `initiateFlashLoan`, and the implementation of the second one is `callFunction`. If we borrow WETH and return it back.
 
-(1) 获得借入的 token 的余额
-(2) 在返还的时候，要比借入的余额多返还 2wei（至少是 2wei），WETH9(kovanWETHAddr).deposit 是充值 weth， 把普通 eth 转化为 weth，使用 deposit 就好。
-(3)～(4) 获取新的余额，并判断是不是大于借入的余额，这样才能执行成功。
+(1) Get the amount of token we borrowed
+(2) When we repay it, the amount needs to be 2 wei more than the number we borrowed before(at least 2 wei), WETH9(kovanWETHAddr).deposit used to charge weth, to translate normal eth to weth, we just use deposit is enough. 
+(3)～(4) Get a new balance, and check whether it is greater than the amount we had borrowed, then it can be called success.
 
-为此，我们还要引入 WETH 的接口。
+Hence, we also need to import the interface of WETH.
 
 ```js
 interface WETH9 {
@@ -103,33 +104,33 @@ interface WETH9 {
 }
 ```
 
-## 操作步骤  
-- 安装依赖  
+## Steps  
+- Install dependencies  
 ```shell
 yarn
 ```
 
-- 配置环境变量  
+- Config the envrioument  
 ```shell
 cp .env.example .env
-# 在 .env 中配置  INFURA_ID , PRIVATE_KEY
+# set INFURA_ID , PRIVATE_KEY in .env
 ```
 
-- 部署合约  
+- Deploy the contract  
 ```shell
 npx hardhat run scripts/deploy.js --network kovan
 ```
 
-- 进行闪电贷  
+- Start flashloan  
 ```shell
 npx hardhat run scripts/dydxFlashloaner.js --network kovan
 ```
 
-## 补充说明
-在部署好合约后，需要往合约地址充入一定的 WETH，闪电贷才能成功，至于 eth 跟 weth 如何互相转化，查看下 https://kovan.etherscan.io/address/0xd0A1E359811322d97991E03f863a0C30C2cF029C#writeContract 就懂了。   
-DyDx 的闪电贷操作确实比起 Aave 闪电贷要复杂不少，但手续费只需要 `2 wei`，这非常吸引人。
+## Additional Remarks
+After we deployed the contract, we also need to transfer an amount of WETH to the contract address, then the flash loan can be executed successfully, as to how to transfer between eth and weth, you will get it by checking https://kovan.etherscan.io/address/0xd0A1E359811322d97991E03f863a0C30C2cF029C#writeContract.  
+The flash loan operation in DyDx do more complicated than in Aave, but lower to 2 wei service charge, which is quite attractive.
 
-## 参考资料  
+## Reference link  
 
 - dydx.exchange: https://help.dydx.exchange/en/articles/3724602-flash-loans    
 
@@ -137,5 +138,5 @@ DyDx 的闪电贷操作确实比起 Aave 闪电贷要复杂不少，但手续费
 
 - solo-operations： https://legacy-docs.dydx.exchange/#solo-protocol   
 
-- DydxFlashloanBase.sol 的源码: https://github.com/studydefi/money-legos/tree/master/src/dydx  
-- 案例: https://kovan.etherscan.io/address/0x3cc064c6a0b8629a05f38bc57b6a290ac9489e38#code   
+- Source codes of DydxFlashloanBase.sol : https://github.com/studydefi/money-legos/tree/master/src/dydx  
+- Example: https://kovan.etherscan.io/address/0x3cc064c6a0b8629a05f38bc57b6a290ac9489e38#code   

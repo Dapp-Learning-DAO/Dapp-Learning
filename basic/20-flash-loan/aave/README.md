@@ -76,7 +76,7 @@ In here, we need caculate how much we need repay, which is **loan amount + 0.09%
 The final step is calling `transferFundsBackToPoolInternal` to repay the flashloan.
 
 ## Steps
-- Install dependence
+- Install dependencies
 ```shell
 yarn
 ```
