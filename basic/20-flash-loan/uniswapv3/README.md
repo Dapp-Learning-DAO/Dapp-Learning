@@ -1,14 +1,18 @@
-# Uniswap v3 Flashswap 介绍  
+[中文](./README-CN.md) / English
 
-Uniswap v3 版本中，和 v2 一样也有两种闪电贷的方式，但是是通过不同的函数接口来完成的。
+# Uniswap v3 Flashswap introduce  
 
-第一种是普通的闪电贷，即借入 token 和还贷 token 相同，通过 UniswapV3Pool.flash() 完成
-第二种是类似 v2 的 flash swap，即借入 token 和还贷 token 不同，这个是通过 UniswapV3Pool.swap() 来完成的。
+In v3 version of Uniswap, it has two ways to use flash loan like v2, but by using different functions.
 
-## 代码解析  
+The first one is the normal flash loan, which is you need to borrow and repay the same type of token, by calling UniswapV3Pool.flash() to do this.
+
+The second one is similar to flash swap of v2, you don't need to use the same token to borrow or repay, you can call UniswapV3Pool.swap() to make this.
+
+## codes illustrate  
 - constructor  
-合约的构造函数，用于进行 flahs loan 和 flash swap.  
-部署的时候需要传入 token0 和 token1 的地址, 其中一个 WETH , 另一个可以为 DAI/USDC/USDT 等. 在本样例中，借入币种为 WETH，所以需要 token0 或 token1 其中一个为 WETH
+The constructor function of the contract, it used to call flash loan and flash swap.  
+
+When it is deployed you need to pass the addresses of token0 and token1, one of them should be WETH, another one can be DAI/USDC/USDT, etc. In this example, we want to borrow WETH, so it requires we should set one of token0 or token1 to be WETH  
 
 ```solidity
 constructor(address _token0, address _token1) {
@@ -24,14 +28,15 @@ constructor(address _token0, address _token1) {
 ```
 
 - uniswapV3FlashCallback   
-pool.flash 的回调接口。 当调用 pool.flash 后，uniswap V3 会根据接口传入的 token0 amount 和 token1 amount 数值，借贷对应的数额给调用者，然后回调调用者的 uniswapV3FlashCallback 让调用者进行后续的处理。当 uniswapV3FlashCallback 回调结束后，uniswap V3 pool 会检查调用者是否偿还对应的 amount + fee 给 pool, 如果已经偿还，则 flash loan 调用成功；否则 flash loan 调用失败。   
-在 demo 合约中，没有进行其他的操作，直接偿还 amount + fee 给 pool，实际调用中，可以添加相应的处理代码。  
+The callback interface of pool.flash. After we called pool.flash, uniswap V3 will loan a number of amount tokens to the caller depending on the value of token0 amount and token1 amount which is passed to the interface, and then call the caller's uniswapV3FlashCallback function to let the caller proceed to deal. When uniswapV3FlashCallback callback is over, uniswap V3 pool will check out whether the caller repay the correspondence amount + fee to the pool, if did then the flash loan can be successfully called, otherwise the calling of the flash loan will fail.  
+
+We don't do further operations in demo contract, just repay amount + fee to the pool, when you actually use it, you can add correspondence dealing codes to it.  
 
 ```solidity
 // callback function of uniswap V3's flash loan
     // _fee0: callback data, input by uniswapV3 automatically, which is used to repay for the borrow. which means, if you borrow 5 token0 , you need to repay "5 + _fee0"
     // _fee1: same as _fee0, which is used for token1
-    // data: user input data when call pool.flahs
+    // data: user input data when call pool.flash
     function uniswapV3FlashCallback(uint256 _fee0, uint256 _fee1, bytes calldata data) external {
         (
             uint256 amount0,
@@ -56,9 +61,11 @@ pool.flash 的回调接口。 当调用 pool.flash 后，uniswap V3 会根据接
 ```   
    
 - uniswapV3SwapCallback   
-uniswapV3 pool 的 swap 回调接口. 通过 uniswap v3 的官方页面进行 swap 的时候，实际是调用 uniswap v3 router 的 swap 接口，同时 uniswap v3 router 已经实现了 uniswapV3SwapCallback 的处理，所以用户感知不到回调。但如果是通过 uniswap v3 pool 的 swap 接口进行 swap 操作时，调用合约需要实现 uniswapV3SwapCallback ， 否则会调用失败。  
-不同于 uniswapV3FlashCallback 回调时，uniswap v3 pool 回调传入的 amount 参数只有需要支付的 fee，用户的 borrow amount 需要自行进行处理。而 uniswapV3SwapCallback 回调时，uniswap v3 pool 传入的参数为此次 swap 需要偿还币种的数量 ( token0 和 token1 )。   
-举例来说，我们想使用 10 WETH 换取 20 DAI，当 swap 回调成功时，pool 会借贷 20 DAI 给调用者 （ 注意此时我们还没有转入 10 WETH 给 pool ），然后传入此次 swap 需要 repay 的 token0 或 token1 的数量，即转入 10 WETH 给 pool 完成此次 swap ， 或是再转回 20 DAI 给 pool ( 相当于不进行 swap )。 
+The callback interface of the swap of uniswapV3 pool function. When we swap by uniswap v3 official webpage, it's actually calling swap interface of uniswap v3 router, meanwhile, uniswap v3 router had already implemented the uniswapV3SwapCallback, so the user won't feel anything about it. But if we do swap operation by call swap interface of uniswap v3 pool, the contract needs to implement uniswapV3SwapCallback, otherwise, the calling will fail.  
+
+It's different with when uniswapV3FlashCallback is doing a callback that the amount param which passes to uniswap v3 pool callback is only the number of fee which need to be paid, the borrowed amount of user need to be dealt with by itself. But when callback in uniswapV3SwapCallback, the param to uniswap v3 pool is the token amount ( token0 and token1 ) need to repay for this swap.   
+
+For example, if we want to use 10 WETH to exchange 20 DAI, when the callback of swap is succeeded, the pool will borrow 20 DAI to caller ( attention, at this moment we haven't transferred 10 WETH to the pool ), and then pass the amount of token0 or token1 which need repay for this swap, thus repay 10 WETH to the pool to finish this swap, or repay 20 DAI  to it ( equal to we don't do swap this time ). 
 
 ```solidity
     /// @notice Uniswap v3 callback fn, called back on pool.swap
@@ -85,27 +92,27 @@ uniswapV3 pool 的 swap 回调接口. 通过 uniswap v3 的官方页面进行 sw
     }
 ```
 
-## 操作步骤  
-- 安装依赖  
+## Steps  
+- Install dependencies  
 ```shell
 yarn
 ```
 
-- 配置环境变量  
+- Config the envrioument  
 ```shell
 cp .env.example .env
-# 在 .env 中配置  INFURA_ID , PRIVATE_KEY, ETHERSCAN_APIKEY
+# set INFURA_ID , PRIVATE_KEY, ETHERSCAN_APIKEY in .env
 ```
 
-- 执行闪电贷 && swap callback    
+- Start flashloan && swap callback    
 ```shell
 npx hardhat run scripts/flashloan_and_swapcallback.js --network rinkeby  
 ```
 
-参考：  
-- 闪电贷详解：https://liaoph.com/uniswap-v3-6/   
+## Reference link  
+- Detail of flash loan：https://liaoph.com/uniswap-v3-6/   
 - uniswap-flash-swapper： https://github.com/gebob19/uniswap-v3-flashswap           
-- 获取 kovan Dai Token: https://docs.alchemist.wtf/copper/auction-creators/getting-test-tokens-for-balancer-lbps-on-the-kovan-testnet    
+- Get kovan Dai Token: https://docs.alchemist.wtf/copper/auction-creators/getting-test-tokens-for-balancer-lbps-on-the-kovan-testnet    
 - WETH Token List: https://docs.uniswap.org/protocol/reference/deployments    
 - uniswap v3 swap callback: https://github.com/makerdao/univ3-lp-oracle/blob/master/src/GUniLPOracle.t.sol  
 - uniswap v3 pool: https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Pool.sol  
