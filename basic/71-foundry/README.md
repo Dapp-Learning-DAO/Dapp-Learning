@@ -1,11 +1,12 @@
 # 使用 Foundry 进行智能合约开发
 
-[Foundry](https://github.com/gakonst/foundry) 是用 Rust 写成的以太坊智能合约开发工具，它包括两个核心工具：
+[Foundry](https://github.com/gakonst/foundry) 是用 Rust 写成的以太坊智能合约开发工具，它包括三个核心工具：
 
 - `forge`:  一套以太坊智能合约的测试框架
 - `cast`:  一组与 EVM 生态相关的实用工具，包括编码、解码、与智能合约交互等功能
+- `Anvil`: 本地以太坊节点
 
-## 安装 forge 和 cast
+## 安装 forge、 cast 和 anvil
 
 首先安装 foundryup， 它是 foundry 的辅助安装工具
 
@@ -13,7 +14,7 @@
 curl -L https://foundry.paradigm.xyz | bash
 ```
 
-再用 foundryup 安装 forge 和 cast
+再用 foundryup 安装 forge、 cast 和 anvil
 
 ```bash
 foundryup
@@ -292,6 +293,30 @@ cast call <contract-address> <func-sig> [args] --rpc-url <your_rpc_url>
 // perform a send
 cast send <contract-address> <func-sig> <args> --rpc-url <your_rpc_url> --private-key <private_key>
 ```
+
+## Anvil 使用方法
+
+Anvil 是 Foundry 提供的本地测试网节点，你可以将其用于测试前端或通过 RPC 进行交互的合约。
+
+启动测试节点：
+
+```bash
+anvil
+```
+
+这条命令启动一个本地节点，默认监听端口 `8545` RPC 连接，可以通过 `--port` 参数指定端口。使用 `--account <NUM>` 可以查看可使用的账户和私钥列表：
+
+```bash
+anvil --accounts 10
+```
+
+同时，还可以使用 anvil 分叉以太坊进行测试：
+
+```bash
+anvil --hardfork latest
+```
+
+更多 `anvil` 的功能可以查看 [Anvil 文档](https://book.getfoundry.sh/reference/anvil/)。
 
 ## 参考资料
 
