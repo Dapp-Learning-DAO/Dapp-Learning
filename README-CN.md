@@ -431,3 +431,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img src = "https://contrib.rocks/image?repo=Dapp-Learning-DAO/Dapp-Learning&max=200"/>
   </a>
 </div>
+
+<br>
+声明：DappLearning是非营利学习型组织，目前没有参与任何商业行为或为商业项目、机构背书。
