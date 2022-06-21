@@ -174,6 +174,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
 75. [golang-dapp](basic/75-golang-dapp) ✅
+76. [ethtx.info](https://ethtx.info/) ✅
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
