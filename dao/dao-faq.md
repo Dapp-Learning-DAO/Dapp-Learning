@@ -19,3 +19,4 @@
 
 ### 有没有一个文章，汇集目前所有DAO相关的工具信息的？
 + 请看这里 [tools-list](https://medium.com/1kxnetwork/organization-legos-the-state-of-dao-tooling-866b6879e93e)
+### 想做一个虚拟演出平台，音乐艺术家匿名形式贡献自己的艺术作品，如何设计DAO治理可以高效证明每个角色的工作量？有相关的案例参考吗？
