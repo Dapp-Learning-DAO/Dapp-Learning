@@ -10,6 +10,7 @@
 - All tests are connected to the Kovan test network，Kovan tests ETH application: <https://faucet.kovan.network>, other test networks are also freely available.
 - Ethereum blockchain browser: <https://kovan.etherscan.io>
 - JSON-PRC's interface: <https://eth.wiki/json-rpc/API>
+- ethtx Transaction analysis tools: <https://ethtx.info>
 - tenderly Contract verification: <https://dashboard.tenderly.co/explorer>
 - remix Local environment: <https://zhuanlan.zhihu.com/p/38309494>
 - remix online IDE <https://remix.ethereum.org/>  remix CN <http://remix.zhiguxingtu.com/>
