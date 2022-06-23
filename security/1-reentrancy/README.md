@@ -1,8 +1,6 @@
 # Reentrancy
 
-Reentrancy attack can lead to great loss.
-
-Basiccly when contract A interact with contract B, contract B can reenter into contract A, thus potentially lead to loss.
+Reentrancy attack can lead to great loss. How it works? Basicly, when contract A interact with contract B, contract B can reenter into contract A, exposing vulnerabilities.
 
 Here is a bad designed code:
 
