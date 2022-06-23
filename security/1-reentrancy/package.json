@@ -1,0 +1,22 @@
+{
+  "name": "reentrancy",
+  "version": "1.0.0",
+  "description": "Reentrancy attack can lead to great loss.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hardhat": "^2.9.9"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.6.0",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.2.0",
+    "ethers": "^5.0.0"
+  }
+}
