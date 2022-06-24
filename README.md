@@ -390,6 +390,12 @@ Shout out to the following organizations for their unconditional donations to us
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="#">
+    <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
 </div>
 <br>
 
@@ -404,3 +410,5 @@ Shout out to the following organizations for their unconditional donations to us
   </a>
 </div>
 
+<br>
+Disclaimer: DappLearning is a non-profit learning organization and not involved in any commercial events or endorsements for commercial projects.

@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # Brownie
 
 [Brownie](https://github.com/eth-brownie/brownie) is a Python-based smart contract development and testing framework for the Ethereum Virtual Machine.

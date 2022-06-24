@@ -1,9 +1,11 @@
-# 简介  
-下面将介绍  Flashloan 合约的功能，以及如何使用 Flashloan 合约在 AAVE 上进行借贷
+[中文](./README-CN.md) / English
 
-## 闪电贷智能合约逻辑说明
-### Flashloan 说明   
-来看下 `contracts/Flashloan.sol`  
+# Introduce  
+Here we will intro the functions of Flashloan contract, and how to use this to loan on AAVE
+
+## explanatory of logical of flash loan smart contract  
+### Flashloan illustrate  
+let's get into `contracts/Flashloan.sol`  
 ```solidity
 
 import "https://github.com/aave/flashloan-box/blob/Remix/contracts/aave/FlashLoanReceiverBase.sol";
@@ -15,10 +17,10 @@ contract Flashloan is FlashLoanReceiverBase {
 }
 ```  
 
-这是导入所必要的依赖项，Flashloan 合约继承自`FlashLoanReceiverBase`，它是一个抽象合约，提供了一些有用的方法，比如如偿还闪电贷的方式。 Flashloan.sol 构造函数接受 Aave 的一个贷款池提供者的地址。我们会稍后将介绍。   
+We import the required dependence in abouve codes, the contract `Flashloan` is inherit from `FlashLoanReceiverBase` which is a abostract contract, supply several convinience functions, such as the way to repay the flash loan. The constraction function (constructor) of Flashloan.sol accept a loan pool supplier address on Aave. We will explain this later.
 
-### flashloan 方法   
-我们先来看 flashLoan 函数。
+### The flashloan function  
+Well, let's take a look of flashloan function
 
 ```solidity
 function flashloan(address _asset) public { // 去掉 onlyOwner，任何人都可调用 flashloan
@@ -30,18 +32,17 @@ function flashloan(address _asset) public { // 去掉 onlyOwner，任何人都�
 }
 ```
 
-flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比如 ETH 或 DAI。
+The paramater `_asset` of flashLoan is the address of where will we use flashloan to loan, like ETH or DAI.
 
 `uint amount = 1 ether;`
-在这里，我们定义的借款金额的单位是`ether`，如果把 ETH 地址传过去，我们就会借到 1 个 ETH，即 10^18 wei。如果把 DAI 地址传给 `_asset`，我们就会借到 1 个 DAI。  
+In here, we define the loan count unit as `ether`, if we pass the ETH address in, we will take loan 1 ETH , thus 10^18 wei. And if we send DAI address to `_asset`, we will get loan 1 DAI! 
 
-现在，我们可以使用 Aave 提供的 `ILendingPool`接口，调用`flashLoan`函数，其中包含所有需要的参数，如我们想要借入的资产、该资产的金额和一个额外的`data`参数。  
+For now, we can call the function `flashLoan` by using `ILendingPool` interfase which from Aave, it contains all paramaters we need, such as assets of we want loan, the count of it and a extra `data` param.
 
-我们还要关注 `executeOperation`   
+Next, we focus on `executeOperation`  
 
-### executeOperation 方法
-
-`executeOperation` 函数将被 `LendingPool` 合约在闪电贷中请求有效的资产后被调用。
+### The executeOperation function
+The `executeOperation` function will be called after contract `LendingPool` get valid assets in flashloan.
 
 ```solidity
     function executeOperation(
@@ -62,42 +63,42 @@ flashLoan 的参数`_asset`是我们要用闪电贷借款的资产地址，比�
     }
 ```
 
-在使用 `flashLoan` 函数触发有效的闪电贷后，`executeOperation` 函数的所有参数都将被自动传递，`require` 用来确保收到的闪电贷金额是否正确。
+When we triggered valid flashloan with `flashLoan` function, the all paramaters in `executeOperation` will be passed automatically, and we use `require` to make sure whether we had get the right amount of assets from flashloan.
 
-接下来，我们可以插入任何想要执行的逻辑。在这个步骤中，我们拥有了来自闪电贷的所有可用资金，因此，我们可以尝试套利机会。
+Then, we can insert any logical we want to excute. In this step, we had have all usable fund from flashloan, and we can use it to have a arbitrage.
 
-我们在用完闪电贷后，就需要偿还资金了。
+After we used flashloan, it's repay time.
 
 `uint totalDebt = _amount.add(_fee);`
 
-在这里，我们要计算还多少钱，也就是 **借款金额 + 借款金额的 0.09%**。**Aave 的闪电贷需要手续费**。
+In here, we need caculate how much we need repay, which is **loan amount + 0.09% of loan amount (Borrowing charge of Aave flashloan)**.
 
-最后一步就是调用 `transferFundsBackToPoolInternal` 来偿还闪电贷。
+The final step is calling `transferFundsBackToPoolInternal` to repay the flashloan.
 
-## 操作步骤
-- 安装依赖  
+## Steps
+- Install dependencies
 ```shell
 yarn
 ```
 
-- 配置环境变量  
+- Config the params of envrioument  
 ```shell
 cp .env.example .env
-# 在 .env 中配置  INFURA_ID , PRIVATE_KEY
+# set INFURA_ID , PRIVATE_KEY in .env
 ```
 
-- 部署合约  
+- Deploy the contract 
 ```shell
-# 这里使用 kovan 测试网进行测试
+# we use test net kovan to have test
 npx hardhat run scripts/deploy_aave_flashloan.js --network kovan
 ```
 
-- 发起闪电贷
+- Start flashloan
 ```shell
 npx hardhat test --network kovan
-# 交易完成后，根据答应的 tx hash 检查交易细节
+# After transaction finished, we can check transaction details by returned tx hash
 ```
 
-## 参考
+## Reference link
 
-- AAVE flashLoan 介绍： https://finematics.com/how-to-code-a-flash-loan-with-aave/  
+- AAVE flashLoan intro: https://finematics.com/how-to-code-a-flash-loan-with-aave/  

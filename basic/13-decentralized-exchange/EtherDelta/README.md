@@ -1,20 +1,21 @@
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/13-decentralized-exchange/EtherDelta/README-CN.md)
 # EtherDelta
 
-使用合约实现了传统中心化交易所，订单簿模式交易所
+It use contract to realize traditional centralized exchange and order book model exchange
 
-由于原来的代码版本比较老 `solidity 0.4.9`，`hardhat` 不支持，所以将合约及测试文件升级到了 `solidity 0.8.0` (老版本升级真的太多坑了……)。
+Due to the older `solidity 0.4.9` version of the original code, `Hardhat` did not support it, so updated the contract and test files to `solidity 0.8.0`.  (The old version has too many bugs...)。
 
-原来的代码在 `./backup`
+The original code is in `./backup `
 
-## 代码使用方法
+## Code usage
 
-### 安装
+### Install
 
 ```sh
 yarn install
 ```
 
-### 编译合约
+### Compile Contract
 
 ```sh
 yarn build
@@ -26,7 +27,7 @@ yarn build
 npx hardhat compile
 ```
 
-### 运行测试
+### Test Contract
 
 ```sh
 yarn test
@@ -38,56 +39,56 @@ yarn test
 npx hardhat test
 ```
 
-## 合约功能简述
+## Brief Description of Contract Functions
 
 ### ReserveToken
 
-EtherDelta 实现了简单的 token 合约，类似 ERC20 标准合约，用于交易所内的 token 交易（非 eth）
+EtherDelta implements a simple token contract, similar to the ERC20 standard contract, for intra-exchange token trading (not ETH)
 
 ### AccountLevelsTest
 
-内部维护一张用户 vip 等级列表，管理员可以设置用户的 vip 等级。
+An internal VIP level list is maintained. The administrator can set the VIP level of a user.
 
 ### EtherDelta
 
-交易所核心合约
+Exchange core contract
 
-用户交易用的资产必须先存入 (`deposit()`) 交易所合约，交易完成后，可以提现 (`withdraw()`) 到自己的钱包，基本和中心化交易所流程相同。
+Users must first deposit their assets in the (`deposit()`) exchange contract, and can withdraw( `withdraw()` in their wallet after the transaction, which is basically the same as the process of a centralized exchange.
 
-#### 交易流程
+#### Transaction process
 
-1. 卖家挂单 `order()`，以挂单信息转换为 hash，作为键，存入 `orders` 合约变量
-2. 买家吃单 `trade()`，传入指定的挂单 hash
+1. The seller invokes `order()` with the invoicing information converted to a hash as a key into the' Orders' contract variable
+2. The buyer eats the order `trade()`, passing in the specified order hash
 
 #### constructor
 
 ```solidity
 constructor(
-    address admin_,     //  创建者
-    address feeAccount_,  // 手续费受益人
-    address accountLevelsAddr_, // AccountLevelsTest 合约地址
-    uint256 feeMake_,   //  买入手续费率
-    uint256 feeTake_,   //  卖出手续费率
-    uint256 feeRebate_  //  vip佣金回扣费率
+    address admin_,     //  Creator
+    address feeAccount_,  // Commission beneficiary
+    address accountLevelsAddr_, // AccountLevelsTest Contract Address
+    uint256 feeMake_,   //  Purchase rate
+    uint256 feeTake_,   //  Selling rate
+    uint256 feeRebate_  //  VIP commission rebate rate
 )
 ```
 
-#### 合约 public 变量
+#### Contract `public` variable
 
 ```solidity
 ...
-mapping(address => mapping(address => uint256)) public tokens; // token 用户持有每种token数量的列表 (0地址 代表 Ether)
-mapping(address => mapping(bytes32 => bool)) public orders; // 挂单列表 (true = 用户提交的挂单, 需要验证离线签名)
-mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔挂单完成的数量 (amount of order that has been filled)
+mapping(address => mapping(address => uint256)) public tokens; // Token List of the number of each token held by the user (address 0 represents Ether)
+mapping(address => mapping(bytes32 => bool)) public orders; // List of invoices (true = invoices submitted by the user, requiring verification of offline signature)
+mapping(address => mapping(bytes32 => uint256)) public orderFills; // amount of order that has been filled
 ```
 
 ## todo list
 
-### 测试流程补全
+### Test Process Description
 
-目前只实现了核心功能的测试，还有部分测试流程未升级，老测试文件参见 `./backup/test.old.js`
-**老版测试文件部分测试有误，建议以当前测试文件为准**
+At present, only the core functions have been tested, and part of the test process has not been upgraded. See `./backup/test.old.js` for the old test file
+**Some tests in the original test file are incorrect. You are advised to use the current test file**
 
-## 参考链接
+## Refer to the link
 
 EtherDelta github 仓库: https://github.com/etherdelta/smart_contract

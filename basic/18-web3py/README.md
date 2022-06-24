@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # Basic usage of web3.py
 web3.py is a wrapped API based on the ethereum client API similar to web3.js. Familiarity with using it can give us a better understanding of programming on ethereum 
 

@@ -141,7 +141,7 @@ function addLiquidity(uint256 _tokenAmount)
         // 保证价格添加流动性前后一致
         uint256 ethReserve = address(this).balance - msg.value;
         uint256 tokenReserve = getReserve();
-        uint256 tokenAmount = msg.value * (tokenReserve / ethReserve);
+        uint256 tokenAmount = （msg.value * tokenReserve) / ethReserve;
 
         require(_tokenAmount >= tokenAmount, "insufficient token amount");
 
