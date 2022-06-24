@@ -167,4 +167,5 @@ Eluer 采用了不同的方式。我们不采用固定折扣，而是采用一�
   <https://cdn.delphidigital.io/uploads/2021/06/Dynamic-Interest-Rate-Model-Based-On-Control-Theory.pdf>
 - defi 固定利率协议： <https://ethtaipei.mirror.xyz/dWxbQ8pmRGT-OcMR_p_VIEL-OJuqe9HJuP6K4DNTlyY>
 - Euler-scripts 与合约交互操作的脚本示例: <https://github.com/0x-stan/euler-scripts>
+- monetary mechanics: https://maroonmacro.substack.com/p/issue-50-trade-idea-short-steth?s=r
 
