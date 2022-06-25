@@ -2,7 +2,7 @@
 
 ## Tips
 
-With example codes shown below, developers can learn the difference between web3.js and etherjs
+With example codes shown below, developers can learn the difference between `web3.js` and `ethers.js`
 
 This project mainly focus on tasks including `connect to ethereum `, `get accounts `, `deploy the contract `, `call methods of the contract `.
 
