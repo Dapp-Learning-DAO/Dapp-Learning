@@ -1,3 +1,4 @@
+[中文](./README-CN.md) / English
 # ethersjs-erc20
 
 ## About this task
