@@ -5,7 +5,7 @@
 
 This demo shows the procedure for creating an `ERC20` contract using `ethers.js`
 
-[Difference between `web3.js` and `ethers.js`](./web3-vs-ethers/README.md)
+Difference between `web3.js` and `ethers.js` can be seen [here](./web3-vs-ethers/README.md)
 ## Contents
 
 1. Deploy an `ERC20` contract
