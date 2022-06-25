@@ -44,7 +44,7 @@ yarn test
 
 
 
-### 1、connect 到 etherum上
+### 1、connect 到 etherum
 
 ```js
 // web3.js
@@ -60,7 +60,7 @@ const signer = provider.getSigner();
 
 
 
-### 2、获取账户上
+### 2、获取账户
 
 ```js
 // ethers
@@ -74,7 +74,7 @@ const accounts2 = await web3.eth.getAccounts();
 
 
 
-### 3、发布合约上
+### 3、发布合约
 
 ```js
 // using ethers
@@ -110,7 +110,7 @@ console.log('Contract deployed at address:', contractInstance.options.address);
 
 
 
-### 4、调用合约方法上：
+### 4、调用合约方法：
 
 #### 调用非交易类型的方法：
 
