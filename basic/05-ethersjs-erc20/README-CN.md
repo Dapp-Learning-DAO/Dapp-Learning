@@ -4,6 +4,8 @@
 
 本样例演示了使用 ethers.js 调用 ERC20 合约的开发流程
 
+web3js与ethersjs的区别参见[这里](./web3-vs-ethers/README-cn.md)
+
 ## 代码逻辑
 
 1. ERC20 合约部署  
