@@ -1,3 +1,5 @@
+[中文](./README-cn.md) / English
+
 ## Tips
 
 With example codes shown below, developers can learn the difference between web3.js and etherjs
