@@ -114,7 +114,7 @@ console.log('Contract deployed at address:', contractInstance.options.address);
 
 ### 4、Call methods：
 
-#### Call non-payable method：
+#### Call method without transaction：
 
 ```js
 // Web3.js
@@ -128,7 +128,7 @@ let currentValue = await readContract.currentValue();
 console.log('Incrementer Contract currentValue:', currentValue.toString());
 ```
 
-#### Call payable method：
+#### Call method with transaction：
 
 ```js
 // Web3.js
