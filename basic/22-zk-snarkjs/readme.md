@@ -2,14 +2,6 @@
 
 本章节, 我们将讲解如何使用 circom 和 snarkjs 创建一个零知识 zkSnark 电路, 并展示如何创建证明并在以太坊上进行链外和链上验证
 
-## 电路使用步骤
-
-libsnark 使用步骤：
-
-1. 将待证明的命题表达为 R1CS
-2. 使用生成算法 G 为该命题生成公共参数
-3. 使用证明生成算法生成 R1CS 可满足的证明
-4. 使用验证算法来验证证明
 
 ## 测试步骤
 
@@ -32,8 +24,8 @@ pragma circom 2.0.0;
 template Multiplier2 () {
 
    // Declaration of signals.
-   signal input a;
-   signal input b;
+   signal private input a;
+   signal private input b;
    signal output c;
 
    // Statements.
@@ -52,7 +44,7 @@ circom circuit.circom --r1cs --wasm --sym
 - 显示电路的信息
 
 ```sh
-npx snarkjs r1cs info circuit.r1cs
+ snarkjs  info -r circuit.r1cs
 ```
 
 PS: 查看 snarkjs 的具体命令参数可使用 npx snarkjs --help
@@ -60,69 +52,53 @@ PS: 查看 snarkjs 的具体命令参数可使用 npx snarkjs --help
 - 打印电路的约束
 
 ```sh
-npx snarkjs r1cs print circuit.r1cs circuit.sym
+ snarkjs printconstraints -r circuit.r1cs -s circuit.sym
 ```
 
-- 下载 tau ceremony 文件
+- 可信设置，生成proving key & verification key。 执行后可以看到有两个新文件proving_key.json 和 verification_key.json.
 
 ```sh
-wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_10.ptau
+snarkjs setup -r circuit.r1cs
 ```
 
-- 生成 zkey 文件
-
-```sh
-npx snarkjs zkey new circuit.r1cs powersOfTau28_hez_final_10.ptau circuit_0000.zkey
-```
-
-- 增加 out contribution，随机输入一段文本，比如'123'
-
-```sh
-npx snarkjs zkey contribute circuit_0000.zkey circuit_final.zkey
-```
-
-- 导出证明 key
-
-```sh
-npx snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
-```
-
-- 创建 input.json 文件, 文件内容如下
-
+- 计算witness，需要创建input.json 
 ```json
 {"a": 3, "b": 11}
 ```
-
-- 计算见证
-
-```sh
-node ./circuit_js/generate_witness.js ./circuit_js/circuit.wasm input.json witness.wtns
-```
-
-- 导出 witness.wtns 见证文件为 json 格式
+制定a,b的值。此步可以得出电路所有中间变量, 可以看到witness.json.
 
 ```sh
-npx snarkjs wtns export json witness.wtns witness.json
+snarkjs calculatewitness --wasm circuit.wasm --input input.json
 ```
 
-- 创建证明
+
+- 生成证明，根据witness.json和 procing_key.json生成证明。
 
 ```sh
-npx snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
+snarkjs proof --witness witness.json --provingkey proving_key.json
 ```
+执行后会生成proof.json 和 public.json。public.json包含公开输入和输出
+
+
 
 - 验证证明
 
 ```sh
-npx snarkjs groth16 verify verification_key.json public.json proof.json
+snarkjs verify --verificationkey verification_key.json --proof proof.json --public public.json
 ```
+可以看到可以OK。
+也可以新建一个public-invalid.json。 
+```
+snarkjs verify --verificationkey verification_key.json --proof proof.json --public public-invalid.json
+```
+可以看到invalid.
 
 ### 链上证明
 
 - 生成 Solidity 的证明
 
 ```sh
-npx snarkjs zkey export solidityverifier circuit_final.zkey verifier.sol
+snarkjs generateverifier --verificationkey verification_key.json --verifier verifier.sol
 ```
 
 - 发布证明
@@ -131,7 +107,7 @@ npx snarkjs zkey export solidityverifier circuit_final.zkey verifier.sol
 - 生成调用的参数
 
 ```sh
-npx snarkjs zkey export soliditycalldata public.json proof.json
+snarkjs generatecall --proof proof.json --public public.json
 ```
 
 - 进行调用
@@ -146,3 +122,5 @@ npx snarkjs zkey export soliditycalldata public.json proof.json
 - snarkjs: https://github.com/iden3/snarkjs
 - 深入浅出零知识证明之zk-SNARKs： https://www.yuque.com/u428635/scg32w/edmn74
 - ZK Jargon Decoder: https://nmohnblatt.github.io/zk-jargon-decoder/foreword.html
+- CTN rollup分享：https://www.bilibili.com/video/BV1oL4y1h7iE?p=1&share_medium=android&share_plat=android&share_session_id=9d2f7c31-a4dc-46a5-a2d9-4d6d0ebc3997&share_source=WEIXIN&share_tag=s_i&timestamp=1653798331&unique_k=921Lj1L&vd_source=3c62940e414c68a7f639c5737b9fd3d1
+- zkRollup tutorial: https://keen-noyce-c29dfa.netlify.app/#16
