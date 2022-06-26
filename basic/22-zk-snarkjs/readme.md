@@ -93,15 +93,16 @@ snarkjs verify --verificationkey verification_key.json --proof proof.json --publ
 ```
 可以看到invalid.
 
-### 链上证明
+### 链上证明(Proving on-chain)
 
-- 生成 Solidity 的证明
+- 生成 Solidity 的证明合约
 
 ```sh
 snarkjs generateverifier --verificationkey verification_key.json --verifier verifier.sol
 ```
+会有Pairings and Verifier 两个合约，关注Verifier即可。
 
-- 发布证明
+- 发布证明 
   可以复制 verifier.sol 代码到 remix 进行部署
 
 - 生成调用的参数
@@ -110,14 +111,22 @@ snarkjs generateverifier --verificationkey verification_key.json --verifier veri
 snarkjs generatecall --proof proof.json --public public.json
 ```
 
-- 进行调用
+- 进行合约调用
   将命令的输出复制到 Remix 中的 verifyProof 方法的 parameters 字段中，点击 call 调用 verifyProof  
   如果一切正常，方法应该返回 true  
   如果仅更改参数中的任何位，则可以检查结果返回 false
 
+
+
+
+  ## circom语法
+  1. <-- assigns a value to a signal without adding a constraint.
+  2.  Whereas === adds a constraint without assigning a value.
+  3. <== both assigns a value to a signal and adds a contraint。Which means it’s just the combination of === and <--.
 ## 参考资料
 
 - 创建第一个零知识 snark 电路: https://learnblockchain.cn/article/1078   
+- 参考文档：https://blog.iden3.io/first-zk-proof.html 
 - circom2 doc: https://docs.circom.io/circom-language/basic-operators/
 - snarkjs: https://github.com/iden3/snarkjs
 - 深入浅出零知识证明之zk-SNARKs： https://www.yuque.com/u428635/scg32w/edmn74
