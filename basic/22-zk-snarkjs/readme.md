@@ -1,6 +1,6 @@
 ## circom 与 snarkjs
 
-本章节, 我们将讲解如何使用 circom 和 snarkjs 创建一个零知识 zkSnark 电路, 并展示如何创建证明并在以太坊上进行链外和链上验证
+本章节, 我们将讲解如何使用 circom 和 snarkjs 创建一个零知识 zkSnark 电路, 并展示如何创建证明并在以太坊上进行链外和链上验证。
 
 
 ## 测试步骤
@@ -65,7 +65,7 @@ snarkjs setup -r circuit.r1cs
 ```json
 {"a": 3, "b": 11}
 ```
-制定a,b的值。此步可以得出电路所有中间变量, 可以看到witness.json.
+指定a,b的值。此步可以得出电路所有中间变量, 可以看到witness.json.
 
 ```sh
 snarkjs calculatewitness --wasm circuit.wasm --input input.json
