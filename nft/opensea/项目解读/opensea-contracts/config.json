@@ -1,0 +1,24 @@
+{
+  "deployed": {
+    "development": {
+      "AssetContractShared": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "WyvernProxyRegistry": "0x72597AFF39D80a73c803d2DA64390C82107bdEbb",
+      "WyvernTokenTransferProxy": "0x07B08e6e88F3Cc8663CBd440C73C90Fa9d002CD0",
+      "WyvernExchangeWithBulkCancellations": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      "TestToken": "0xA068b4F7f0648fc1985717aD163CD0a3342F1833"
+    },
+    "rinkeby": {
+      "WyvernExchangeWithBulkCancellations": "0xdd54d660178b28f6033a953b0e55073cfa7e3744",
+      "WyvernProxyRegistry": "0x1e525eeaf261ca41b809884cbde9dd9e1619573a",
+      "AssetContractShared": "0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656"
+    },
+    "kovan": {
+      "WyvernProxyRegistry": "0x390b41945AEe48210acA2a489D30B95c0A6f1Ba2",
+      "WyvernTokenTransferProxy": "0xdD58a71EA883B748242F90a9D776715957d6BFD9",
+      "TestToken": "0xA596dAccF19F5A3B4D11B17B8F1C91760952c252",
+      "WyvernExchangeWithBulkCancellations": "0xa6b8E9c224e99C82adFB3b8f0407cc99d77d9898",
+      "AssetContractShared": "0x53F939816392aCaaac2323481191B1E41e9763CD",
+      "MerkleValidator": "0xAfB1872c3f15305543295b7DAa24b475e0a72a7d"
+    }
+  }
+}
