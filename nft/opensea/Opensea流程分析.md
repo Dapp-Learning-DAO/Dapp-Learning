@@ -25,13 +25,11 @@ graph TD
 
 初始化钱包实际上帮我们创建了一个 proxy 合约，它调用了 WyverProxyRegistry 合约上的 registerProxy 方法。
 
-![image-20220512155117290](./image-20220512155117290.png)
-
 
 
 关于这个WyverProxyRegistry 合约，它的继承关系如下图。
 
-![image-20220520151627954](./image-20220520151627954.png)
+![image-20220520151627954](./images/image-20220520151627954.png)
 
 
 
@@ -45,7 +43,7 @@ graph TD
 
   *registry这个状态变量就是WyverProxyRegistry 合约的地址；这样做是为了以后能够很容易通过`proxy.registry`来找到WyverProxyRegistry*；
 
-  ![image-20220627143641433](image-20220627143641433.png)
+  ![image-20220627143641433](./images/image-20220627143641433.png)
 
 - 最后将proxy实例维护在`proxies`这个mapping里；返回proxy；
 
@@ -64,8 +62,6 @@ to就是第一步创建的proxy合约实例的地址；
 举个例子（图片在参考资料里找到的，不是我的）：
 
 这个授权就是调用CryptoApes的合约的setApprovalForAll方法；
-
-![image-20220507115715461](image-20220507115715461.png)
 
 
 
@@ -370,7 +366,7 @@ opensea上拍卖成交的模式有2种，
 
 我们以买家吃单的模式来分解下opensea-sdk里做了什么事情：
 
-![image-20220627145807574](image-20220627145807574.png)
+![image-20220627145807574](./images/image-20220627145807574.png)
 
 
 
@@ -399,17 +395,17 @@ https://testnets.opensea.io/assets/0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656/64
 
  只有当我 transfer 这个 nft 的时候，才会真正的去 mint，并且支付 gas。
 
-![image-20220507104540227](image-20220507104540227.png)
+
 
 然后看这笔交易信息：
 
-![image-20220507105031699](image-20220507105031699.png)
+![image-20220507105031699](./images/image-20220507105031699.png)
 
 
 
 ## **2、opensea 在取消订单时，为什么要支付 gas？**
 
-![image-20220507111001592](image-20220507111001592.png)
+![image-20220507111001592](./images/image-20220507111001592.png)
 
 在 atomicMath 的方法里，有一个 requireValidOrder 的内部方法，会去校验订单以及签名是否合法。它的内部会调用 validateOrder 方法。
 
@@ -442,8 +438,6 @@ validateOrder 方法里会通过 cancelledOrFinalized 这个 map 来判断订单
 初始化钱包的时候，以及调用 setApproveForAll 方法，这二步都是需要 gas 费的。
 
 不过是这些 gas 一次付费，终身享用的。下次再卖就不用付了。
-
-![image-20220507115715461](image-20220507115715461-20220627150732425.png)
 
 如果你只是一个买家，在用 weth 去 transfer 的时候，opensea 会要求你 approve 合约 transfer 你的 weth。一般会比你需要支付的大很多。这是为了防止下次再 approve。
 
