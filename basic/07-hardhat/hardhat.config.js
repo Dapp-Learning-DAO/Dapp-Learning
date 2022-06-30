@@ -45,6 +45,10 @@ module.exports = {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
       accounts: [mnemonic()],
     },
+    arbitest: {
+      url: 'https://arbitrum-rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
+      accounts: [mnemonic()],
+    },
     matic: {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.PROJECT_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
       accounts: [mnemonic()]
