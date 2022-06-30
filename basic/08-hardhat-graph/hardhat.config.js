@@ -5,17 +5,6 @@ require('dotenv').config();
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const defaultNetwork = 'localhost';
 
-function mnemonic() {
-  // try {
-  //   return fs.readFileSync('./mnemonic.txt').toString().trim();
-  // } catch (e) {
-  //   if (defaultNetwork !== 'localhost') {
-  //     console.log('☢️ WARNING: No mnemonic file created for a deploy account.');
-  //   }
-  // }
-  return PRIVATE_KEY
-}
-
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 module.exports = {
