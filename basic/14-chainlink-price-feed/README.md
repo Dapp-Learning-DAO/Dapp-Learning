@@ -1,12 +1,12 @@
-# 喂价 和 随机数 预言机
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/14-chainlink-price-feed/README-CN.md)
+# Feed price and random number predictor
 
-区块链是非常安全可靠的价值交换网络，但却无法安全防篡改地获取链下数据或将数据发送至链下系统。使用 Chainlink 预言机喂价, 通过预言机网络在链上直接获取实时金融市场价格数据
+Blockchain is a very secure and reliable network for the exchange of value, but there is no way to secure and tamper-proof access to off-chain data or send data to off-chain systems. Use Chainlink predictor to feed prices and obtain real-time financial market price data directly on the chain through the predictor network
 
-## 测试流程
+## Test Process
 
-### 配置私钥
-
-在 .env 文件中放入私钥，和 infura 节点 id, 然后代码自动从中读取
+### Configure the private key
+The private key put in **.env** in the format "PRIVATE_KEY= XXXX ", from which the code automatically reads.
 
 ```js
 // .env
@@ -14,19 +14,19 @@ PRIVATE_KEY = xxxxxxxxxxxxxxxx;
 INFURA_ID = yyyyyyyy;
 ```
 
-### 安装依赖
+### Install Dependencies
 
 ```sh
 yarn install
 ```
 
-### 执行测试脚本
+### Executing the test script
 
 ```sh
 npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
 ```
 
-### 链下调用喂价机
+### Off-Chain Call the price feeder
 
 ```js
 // ./UsingDataFeedsByEthers.js
@@ -53,7 +53,7 @@ test();
 
 ```
 
-返回数据格式如下：
+The returned data format is as follows:
 
 ```js
 Latest Round Data [
@@ -70,27 +70,27 @@ Latest Round Data [
 ]
 ```
 
-- 完整示例看这里 [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
+- See a for the full example [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
 
 
 
 ### Chainlink VRF
 
-Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证的随机性来源。作为防篡改随机数生成器，为依赖不可预测结果的任何应用程序构建构建智能合约。
+Chainlink VRF verifiable random function is a provably fair and verifiable source of randomness. As a tamper-proof random number generator, build smart contracts for any application builds that rely on unpredictable results.
 
-- 区块链游戏和 NFT
-- 随机分配职责和资源（例如随机分配法官审理案件）
-- 为共识机制选择具有代表性的样本
+- Blockchain game and NFT
+- Randomly assigned responsibilities and resources (e.g. randomly assigned judges to hear cases)
+- Selection of representative samples for consensus mechanisms
 
-### 操作流程
+### Operation Process  
 
-1. 创建 ChainLink SubscriptionID  
-登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击 "Create Subscription" 创建 SubscriptionID , 之后可以在 "My Subscriptions" 中看到创建的 SubscriptionID
+1. Create ChainLink SubscriptionID  
+Login [ChainLink VRF Test network](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , Click on" Create Subscription" to Create a SubscriptionID and you can see the created SubscriptionID under "My Subscriptions"
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkVRF.png?raw=true" /></center> 
 
 
-2. 保存 SubscriptionID  
-将上一步创建的 SubscriptionID 保存到 .env 文件中 
+2. Save SubscriptionID  
+Save the SubscriptionID created in the previous step to **.env** 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/SubscriptionID.png?raw=true" /></center>
 
 ```sh
@@ -98,33 +98,33 @@ Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证的�
 SubscriptionId=ddddd
 ```
 
-3. 运行部署脚本部署合约
+3. Run the deployment script to deploy the contract
 
    ```sh
    npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network rinkeby
    ```
 
-4. 获取 ChainLink 币  
-登陆 [ChainLink Faucet](https://faucets.chain.link/) , 在, 获取 ChainLink 币用于后续的 RandomNumberConsume , 其中 Network 选择 rinkeby, "Testnet account address" 输入合约 owner 的账户地址
+4. Access to ChainLink coins  
+Login [ChainLink Faucet](https://faucets.chain.link/) , Get ChainLink coins for subsequent RandomNumberConsume, where Network selects Rinkeby and "Testnet Account Address "enters the account address of the contract owner
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkFaucet.png?raw=true" /></center>   
 
 
-5. 赋权合约消费 ChainLink 币以进行随机数获取    
-登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击其中的 SubscriptionID 
+5. Empower contracts to consume ChainLink coins for random number capture   
+Login [ChainLink VRF test network](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , and Click **SubscriptionID** 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ClickSubscriptionID.png?raw=true" /></center>  
 
 
-之后在新出现的页面中, 进行 "Add Funds" 和 "Add consumer". 其中 "Add Funds" 为存入 ChainLink 币的数量, "Add consumer" 需要填入部署成功的 RandomNumberConsumer 合约地址, 即为步骤 3中打印出来的合约地址 
+Then on the new page, "Add Funds" and "Add Consumer ". Where "Add Funds" is the number of ChainLink coins deposited, and "Add Consumer "needs to fill in the successfully deployed RandomNumberConsumer contract address, which is the contract address printed in Step 3 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/AddFundsAddCustomer.png?raw=true" /></center>   
 
 
-6. 运行测试脚本  
+6. Run the test script  
 
    ```sh
    npx hardhat run  scripts/03-RandomNumberConsumer --network rinkeby
    ```
 
-   结果可能需要等待 2 到 3 分钟，可以看到 ChainLink 返回的两个随机值
+  The result may take 2 to 3 minutes, and you can see two random values returned by ChainLink
 
    ```sh
    ❯ npx hardhat run scripts/03-RandomNumberConsumer.js --network rinkeby
@@ -140,11 +140,11 @@ SubscriptionId=ddddd
 
 ## todo
 
-增加聚合方式获取。
+Will add aggregate obtain.
 
-## 参考文档
+## Reference Documentation
 
-参考文档链接如下：
+Reference documents are linked below:
 
 - https://zh.chain.link/
 - https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ

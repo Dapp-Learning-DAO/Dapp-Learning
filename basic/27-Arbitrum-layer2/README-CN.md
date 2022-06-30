@@ -1,3 +1,4 @@
+中文 / [English](./README.md)
 # Arbitrum
 
 与 optimism 差别在于： 交互式证明挑战

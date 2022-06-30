@@ -1,3 +1,4 @@
+中文 / [English](./README.md)
 # 钱包开发
 
 HD 钱包(分层确定性钱包)，钱包协议：BIP32、BIP44、BIP39

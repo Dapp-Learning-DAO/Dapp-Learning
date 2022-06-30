@@ -1,3 +1,4 @@
+中文 / [English](./README.md)
 # Multi-Sig-Wallet
 
 > 旧版多签钱包合约使用 0.4.x 版本 solidity，原仓库已经锁定不再更新，Gnosis 的新版多签名叫 Gnosis-Safe-Contracts 集成了多个安全合约模块。由于新版代码量较大不便于理解，我们仍使用旧版合来学习理解其使用流程和工作原理。
