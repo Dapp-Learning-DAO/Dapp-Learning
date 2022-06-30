@@ -13,7 +13,7 @@ async function main() {
   console.log('Account balance:', (await deployer.getBalance()).toString());
 
   const Token = await ethers.getContractFactory('SimpleToken');
-  const token = await Token.deploy('RouterFee', 'RouterFee', 6, 10000000000);
+  const token = await Token.deploy('SimpleToken', 'SimpleToken', 18, 10000000000);
 
   console.log('Token address:', token.address);
 
