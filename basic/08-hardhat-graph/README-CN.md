@@ -339,7 +339,8 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 
 官方文档：
 
-- https://thegraph.com/docs/developer/quick-start
+- https://thegraph.com/docs/developer/quick-start  
+- https://edgeandnode.notion.site/The-Graph-Chinese-Links-803371459c6f402aba32a22467acda32#13589dfd8041445380731860c4b4e029  
 
 本项目参考文档：
 
