@@ -34,3 +34,4 @@ https://medium.com/dragonfly-research/daos-ex-machina-an-in-depth-timeline-of-ma
 
 - makerdao 总述：
 https://icode9.com/content-4-831617.html  
+- makerDAO 治理：https://frosted-source-636.notion.site/Makerdao-61f91a71b32e4a3093a683ae6e4bab19

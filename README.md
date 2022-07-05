@@ -21,8 +21,8 @@ We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
-For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value. 
+Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
+For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value. 
 
 <details>
 <summary>Official links</summary>
@@ -198,29 +198,29 @@ You can refer to our study group's learning roadmap, which is better with the vi
 
 - Trading: uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
 - Lending: Aave -> Compound -> Liquity -> Euler
-- Derivatives: SNX -> YFI -> Perpetual
+- Derivatives: SNX -> YFI -> Perpetual -> Opyn
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Curve](defi/Curve/README.md) ⌛
 04. [Compound](defi/Compound/readme.md) ✅
 05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/readme.md) ⌛
+06. [Liquity](defi/Liquity/readme.md) ✅
 07. [Euler](defi/Euler/readme.md) ⌛
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) ⌛
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
 11. [Sushi](https://docs.sushi.com/) ✅  
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
+15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA& list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
 20. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+21. [Bancor](https://bancor.network/)⌛
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
