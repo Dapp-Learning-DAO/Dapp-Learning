@@ -2,6 +2,7 @@ require('@nomiclabs/hardhat-waffle');
 const fs = require('fs');
 require('dotenv').config();
 
+
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const defaultNetwork = 'localhost';
 
