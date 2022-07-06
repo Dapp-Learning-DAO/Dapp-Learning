@@ -1,20 +1,22 @@
 use hex_literal::hex;
 use web3::{
     contract::{Contract, Options},
-    types::{Log, H160, U256},
+    types::H160,
 };
+
+#[macro_use]
+extern crate dotenv_codegen;
 
 #[tokio::main]
 async fn main() -> web3::contract::Result<()> {
-
     // Create new HTTP transport connecting to given URL.
-    let transport = web3::transports::Http::new("http://localhost:8545")?;
+    let transport = web3::transports::Http::new(dotenv!("TARGET_NETWORK"))?;
 
     // Create new Web3 with given transport
     let web3 = web3::Web3::new(transport);
     let my_account: H160 = hex!("70997970C51812dc3A010C7d01b50e0d17dc79C8").into();
 
-    // Get accounts in current network 
+    // Get accounts in current network
     println!("Calling accounts.");
     let mut accounts = web3.eth().accounts().await?;
     println!("Accounts: {:?}", accounts);
@@ -36,7 +38,7 @@ async fn main() -> web3::contract::Result<()> {
     let contract = Contract::from_json(
         web3.eth(),
         contract_addr,
-        include_bytes!("../../hardhat/data/abi/Greeter.json"),
+        include_bytes!("../abi/Greeter.json"),
     )?;
 
     // One way to call constant function
