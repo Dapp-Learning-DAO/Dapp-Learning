@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
   <!-- <h1>Dapp Learning</h1> -->
@@ -6,6 +5,14 @@
     Definitive Guide for Decentralized-app(Dapp) Development on Blockchain
   </h4>
   <p>Step-by-step Dapp practice through classical projects.</p>
+  <br />
+  <p>
+    <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
+    <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
+    <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/222078108977594368?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a>
+    <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a>
+  </p>
 </div>
 
 
