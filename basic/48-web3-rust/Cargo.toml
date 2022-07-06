@@ -1,0 +1,12 @@
+[package]
+edition = "2021"
+name = "web3-rust"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hex-literal = "0.3.4"
+tokio = {version = "1.19.2", features = ["full"]}
+web3 = "0.18.0"
+dotenv_codegen = "0.15.0"
