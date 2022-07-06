@@ -1,5 +1,5 @@
 {
-  "name": "example05-send-signed-transaction",
+  "name": "example06-ethersjs-waffle",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
