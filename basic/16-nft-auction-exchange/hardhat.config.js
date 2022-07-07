@@ -15,7 +15,7 @@ task('accounts', 'Prints the list of accounts', async () => {
 });
 
 function mnemonic() {
-  return process.env.PRIVATE_KEY_MAIN;
+  return process.env.PRIVATE_KEY_ADMIN;
 }
 
 function mnemonicAlice() {
