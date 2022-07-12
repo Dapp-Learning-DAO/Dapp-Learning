@@ -35,5 +35,5 @@ snarkjs verify
 ```
 ## 参考文档
 - ZkRollup Tutorial: https://keen-noyce-c29dfa.netlify.app/#3
-
+- rollupnc github: https://github.com/rollupnc/RollupNC
 

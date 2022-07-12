@@ -624,6 +624,15 @@ function getPositionNotionalAndUnrealizedPnl(
 
 
 ### 手续费
+
+### K值调节
+K值调节会影响所有用户仓位;
+ cumulativeNotional = cumulativeNotional.addD(_quoteAssetAmount); 计价是用USDC计算净头寸。
+1. 此段时间的新增头寸 notionalDelta （netP1-netP0），按K0时刻的储备进行swap，得到baseAssetWorth;
+2. 得到这些净头寸在K0时候发生时，造成的baseReserve和quoteReserve;
+3. 计算用户仓位（positionSize）在baseReserve和quoteReserve下仓位的名义值(posNotional);
+4. 仓位名义值再按K1的时刻的池子储备进行兑换，计算用户调整后的持仓（newPositionSize）。
+
 ## 参考链接
 
 - 头等仓：<https://mp.weixin.qq.com/s/Oq7g3_AjRP4Of__K9Gp_bw>

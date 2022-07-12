@@ -1,5 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
-require('dotenv').config()
+require('@openzeppelin/hardhat-upgrades');
+require("@nomiclabs/hardhat-etherscan");
+require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -24,10 +26,15 @@ function mnemonic() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: process.env.ETHERSCAN_APIKEY
+  },
   solidity: {
     compilers: [
       {
-        version: "0.8.0"
+        version: "0.8.2"
       },
       {
         version: "0.6.6",
