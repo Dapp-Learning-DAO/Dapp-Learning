@@ -10,16 +10,21 @@
 #### 初始化hardhat
 
 ```
-// 创建一个空文件夹
-mkdir hardhat && cd hardhat
-// 初始化
-npx hardhat
+cd hardhat && yarn
+```
+
+#### 配置 .env
+
+```sh
+cp .env.example .env
+## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
 ```
 
 #### 启动本地测试网络
 
 ```
-npx hardhat node
+npx hardhat node --network hardhat
 ```
 #### 部署测试合约到本地节点
 新启动命令行
@@ -36,7 +41,10 @@ cp .env.example .env
 在 .env 中放入 如下配置，格式如下:
 
 ```
-TARGET_NETWORK=http://localhost:8545
+TARGET_NETWORK=http://localhost:8545  
+CONTRACT_ADDR=0xAAAA  
+MY_ACCOUNT=0xaaaaaaaa
+TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 ```
 
 #### 运行程序  
