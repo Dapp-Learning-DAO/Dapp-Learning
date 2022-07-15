@@ -13,11 +13,11 @@ async fn main() -> web3::contract::Result<()> {
     // Create new HTTP transport connecting to given URL.
     let transport = web3::transports::Http::new(dotenv!("TARGET_NETWORK"))?;
 
-    // Insert the 20-byte "to" address in hex format (prefix with 0x)
-    let to: Address = Address::from_str(dotenv!("TEST_ACCOUNT")).unwrap();
-
     // Create new Web3 with given transport
     let web3 = web3::Web3::new(transport);
+
+    // Insert the 20-byte "to" address in hex format (prefix with 0x)
+    let to: Address = Address::from_str(dotenv!("TEST_ACCOUNT")).unwrap();
 
     // Get accounts in current network
     println!("Calling accounts.");
@@ -42,10 +42,31 @@ async fn main() -> web3::contract::Result<()> {
     //     println!("Balance of {:?}: {}", account, balance);
     // }
 
-    // Given contract address, we need this to generate Contract instance
-    let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
-    println!("current account: {}", dotenv!("CONTRACT_ADDR"));
-    let contract_addr: H160 = H160::from(<[u8; 20]>::from_hex(addr).expect("Decoding failed"));
+    // Get the contract bytecode for instance from Solidity compiler
+    let bytecode = include_str!("../abi/SimpleToken.code").trim_end();
+    // Deploying a contract
+    let new_contract = Contract::deploy(web3.eth(), include_bytes!("../abi/SimpleToken.json"))?
+        .confirmations(0)
+        .execute(
+            bytecode,
+            (
+                "hello".to_owned(),
+                "Dapp".to_owned(),
+                1u8,
+                U256::from(1_000_000_u64)
+            ),
+            my_account,
+        )
+        .await?;
+
+    let contract_addr = new_contract.address();
+
+    println!("contract deploy success, addr: {}", contract_addr);
+
+    // // Given contract address, we need this to generate Contract instance
+    // let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
+    // println!("current account: {}", dotenv!("CONTRACT_ADDR"));
+    // let contract_addr: H160 = H160::from(<[u8; 20]>::from_hex(addr).expect("Decoding failed"));
 
     // Creates new Contract Interface given blockchain address and JSON containing ABI
     let contract = Contract::from_json(

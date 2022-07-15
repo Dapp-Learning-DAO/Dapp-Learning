@@ -25,6 +25,7 @@ module.exports = {
   solidity: "0.8.4",
   networks: {
     hardhat: {
+      initialBaseFeePerGas: 0,
       accounts: [
         { privateKey: mnemonic(), balance: '10000000000000000000000' },
       ],
