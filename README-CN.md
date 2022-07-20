@@ -283,7 +283,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 2. CTF 训练营
 
 - [Ethernaut](https://ethernaut.openzeppelin.com/)
-- [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)/[题解](security/Damn-Vulnerable-DeFi-wp.md)
+- [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol) | [题解](security/Damn-Vulnerable-DeFi-wp.md)
 - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
 - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 

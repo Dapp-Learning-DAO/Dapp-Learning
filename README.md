@@ -271,7 +271,7 @@ Item list:
 - [Securify](https://github.com/eth-sri/securify2)
 2. CTF Training camp
  - [Ethernaut](https://ethernaut.openzeppelin.com/)
- - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)/[Solution](security/Damn-Vulnerable-DeFi-wp.md)
+ - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol) | [Solution](security/Damn-Vulnerable-DeFi-wp.md)
  - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
  - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 3. Safe development practices
