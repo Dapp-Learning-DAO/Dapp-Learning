@@ -5,12 +5,16 @@
 
 ## 操作步骤
 
-### 启动本地节点
-
 #### 初始化hardhat
 
 ```
 cd hardhat && yarn
+```
+
+#### 生成 rust 所需的 abi 和 code 文件
+
+```
+npx hardhat run ./scripts/file-generate.js
 ```
 
 #### 配置 .env
@@ -19,6 +23,7 @@ cd hardhat && yarn
 cp .env.example .env
 ## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
 PRIVATE_KEY=xxxxxxxxxxxxxxxx
+ACCOUNT_BALANCE=10000000000000000000000
 ```
 
 #### 启动本地测试网络

@@ -15,6 +15,10 @@ function mnemonic() {
   return process.env.PRIVATE_KEY;
 }
 
+function balance() {
+  return process.env.ACCOUNT_BALANCE
+}
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -27,7 +31,7 @@ module.exports = {
     hardhat: {
       initialBaseFeePerGas: 0,
       accounts: [
-        { privateKey: mnemonic(), balance: '10000000000000000000000' },
+        { privateKey: mnemonic(), balance: balance() },
       ],
     },
     localhost: {
