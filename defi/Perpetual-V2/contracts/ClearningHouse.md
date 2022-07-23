@@ -2,6 +2,19 @@
 
 清算所，用户交互的主要合约，包含添加移除流动性，开仓多空头寸，清算等 perp 核心业务功能。
 
+用户仓位记录
+```
+library AccountMarket {
+    /// @param lastTwPremiumGrowthGlobalX96 the last time weighted premiumGrowthGlobalX96
+    struct Info {
+        int256 takerPositionSize;
+        int256 takerOpenNotional;
+        int256 lastTwPremiumGrowthGlobalX96;
+    }
+}
+```
+可以看出，由于全仓保证金模式，只记录用户仓位和开仓成本，以资金费率系数即可。  
+
 ## Non-view functions
 
 ### \_settleFunding
@@ -568,6 +581,10 @@ function _closePosition(InternalClosePositionParams memory params)
         );
 }
 ```
+
+
+### _openPosition todo
+
 
 ### liquidate
 
