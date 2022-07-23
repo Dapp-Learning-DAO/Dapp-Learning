@@ -34,7 +34,7 @@ function writeFile(SimpleToken) {
   );
 
   fs.writeFileSync(
-    Path_prefix + "SimpleToken.code",
+    Path_prefix + "SimpleToken.bin",
     SimpleToken.bytecode
   );
 }
