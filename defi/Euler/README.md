@@ -14,11 +14,11 @@
 
 借贷协议中的 Liquidity 概念首先由 Compound 提出 [Account Liquidity](https://compound.finance/docs/comptroller#account-liquidity)，即用户每一种进入 Markets 的资产都需要乘以相应的 Collateral Factor 累加起来，然后扣除用户每一种借贷资产的价值总和。
 
-![Euler-ComputeLiquidity.png](/img/Euler/Compound-Liquidity.png)
+![Euler-ComputeLiquidity.png](./img/Compound-Liquidity.png)
 
 而 Euler 中的 Liquidity 在 Compound 基础上做改进，不仅抵押资产计算价值时需要乘以 `Collateral Factor`，债务资产也需要除以 `Borrow Factor` 做价值调整；另外由于其特有的 mint 机制，在计算时还需要考虑 `Self-Collateral` 和 `Self-Liability`。
 
-![Euler-ComputeLiquidity.png](/img/Euler/Euler-Liquidity.png)
+![Euler-ComputeLiquidity.png](./img/Euler-Liquidity.png)
 
 ```math
 Liquidity = Collateral - Liabilities + (Self-Collateral - Self-Liability)
@@ -42,12 +42,12 @@ Liquidity = Collateral - Liabilities
 
 抵押资产分为 `Collateral` (前端页面中命名为 Supply) 和 `Self-Collateral`, 负债资产分为 `Liabilities` 和 `Self-Liability`，四种资产均有不同的价值调整系数 factor 。
 
-| Collateral      | factor | expression       | info                  |
-| --------------- | ------ | ------------- | --------------------- |
-| Collateral      | CF     | value \* CF   | decided by governance |
-| Self-Collateral | 0.95   | value \* 0.95 | constant value        |
-| Liabitlies      | BF     | value / BF    | decided by governance |
-| Self-Liablity   | 1      | value / 1     | constant value        |
+| Collateral               | factor | expression    | info                  |
+| ------------------------ | ------ | ------------- | --------------------- |
+| Collateral(DepositValue) | CF     | value \* CF   | decided by governance |
+| Self-Collateral          | 0.95   | value \* 0.95 | constant value        |
+| Liabitlies(BorrowValue)  | BF     | value / BF    | decided by governance |
+| Self-Liablity            | 1      | value / 1     | constant value        |
 
 - 常规抵押和负债，都会由社区投票决定其系数，CF, BF 都是小于 1 的数，前者比后者小
   - Euler 在 Compound 的 CF 基础上增加了 BF，使得不同资产之间的风险调整更加灵活
@@ -101,7 +101,7 @@ Euler 的所有资产都是以 WETH 计价，并从相应资产与 WETH 组成�
 
    - 12 WETH-DToken 被 12 WETH-EToken \* 0.95 抵消后还剩下 12 \* (1 - 0.95) = 0.6 WETH 的债务，计入 Liabilities
    - 由于 deposit 只存入了 0.5 WETH 其计入流动性的价值为 `0.5 * 0.88 = 0.44`, 而 `Liabilities = 0.6 / 0.91 = 0.6593`
-   - Liabilities 的 WETH 部分最终只能承担 0.44 WETH 的债务，剩下的 `0.6593 - 0.44 = 0.2193 WETH` 债务则需要由 Collateral 的 USDC 承担，用户在WETH资产上的 Liquidity 已经清零
+   - Liabilities 的 WETH 部分最终只能承担 0.44 WETH 的债务，剩下的 `0.6593 - 0.44 = 0.2193 WETH` 债务则需要由 Collateral 的 USDC 承担，用户在 WETH 资产上的 Liquidity 已经清零
    - 而 USDC 的流动性则为 `Liquidity = 0.5 * 0.9 - 0.2193 = 0.2307`， WETH 流动性已经为 0，那么这也是总的 Liquidity
 
 #### Short and Max Leverage
@@ -168,4 +168,3 @@ Eluer 采用了不同的方式。我们不采用固定折扣，而是采用一�
 - defi 固定利率协议： <https://ethtaipei.mirror.xyz/dWxbQ8pmRGT-OcMR_p_VIEL-OJuqe9HJuP6K4DNTlyY>
 - Euler-scripts 与合约交互操作的脚本示例: <https://github.com/0x-stan/euler-scripts>
 - monetary mechanics: https://maroonmacro.substack.com/p/issue-50-trade-idea-short-steth?s=r
-

@@ -1,5 +1,5 @@
 {
-  "name": "example02-send-signed-transaction",
+  "name": "example03-web3js-erc20",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
