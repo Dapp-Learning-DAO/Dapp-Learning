@@ -1,16 +1,14 @@
-[中文](./README-cn.md) / English
+## 前言
 
-## Tips
+通过本样例代码，开发者了解到 `web3.js`和 `ehters.js`的区别
 
-With example codes shown below, developers can learn the difference between `web3.js` and `ethers.js`
-
-This project mainly focus on tasks including `connect to ethereum `, `get accounts `, `deploy the contract `, `call methods of the contract `.
+项目里主要针对 `连接到etherum `，`获取账户`，`部署合约`，`调用合约方法`这些业务做了示例演示。
 
 
 
-## Test
+## 测试流程
 
-1. Install dependencies
+1. 安装依赖
 
 ```
 yarn install
@@ -18,7 +16,7 @@ yarn install
 
 
 
-2. Run compile.js script
+2. 执行 compile.js 脚本
 
 ```
 yarn compile
@@ -26,7 +24,7 @@ yarn compile
 
 
 
-3. Start local test network
+3. 启动本地测试网络
 
 ```
 yarn chain
@@ -34,7 +32,7 @@ yarn chain
 
 
 
-4. Run the test script
+4. 测试脚本
 
 ```
 yarn test
@@ -42,11 +40,11 @@ yarn test
 
 
 
-## Example explanation
+## 示例说明
 
 
 
-### 1、connect to etherum
+### 1、connect 到 etherum
 
 ```js
 // web3.js
@@ -62,7 +60,7 @@ const signer = provider.getSigner();
 
 
 
-### 2、Get accounts
+### 2、获取账户
 
 ```js
 // ethers
@@ -76,11 +74,11 @@ const accounts2 = await web3.eth.getAccounts();
 
 
 
-### 3、Deploy the contract
+### 3、发布合约
 
 ```js
 // using ethers
-//  deploying contract with ethers needs abi, bytecode, signer.
+// ethers部署合约需要abi，bytecode, signer。
 const factory = new ethers.ContractFactory(abi, bytecode, signer);
 const contractInstance = await factory.deploy(0);
 const tx = await contractInstance.deployTransaction.wait();
@@ -112,9 +110,9 @@ console.log('Contract deployed at address:', contractInstance.options.address);
 
 
 
-### 4、Call methods：
+### 4、调用合约方法：
 
-#### Call method without transaction：
+#### 调用非交易类型的方法：
 
 ```js
 // Web3.js
@@ -128,7 +126,7 @@ let currentValue = await readContract.currentValue();
 console.log('Incrementer Contract currentValue:', currentValue.toString());
 ```
 
-#### Call method with transaction：
+#### 调用交易类型的方法：
 
 ```js
 // Web3.js
@@ -156,18 +154,18 @@ console.log('Incrementer Contract currentValue:', currentValue.toString());
 
 
 
-#### Query events
+#### 查询event事件
 
 ```js
-// written in etherjs
+// etherjs写法
 const readContract = new ethers.Contract(contractAddress, abi, provider);
-// The parameters passed to filters can only be indexed parameters.
+// filters里传入的参数只能是indexed的参数
 const filter = readContract.filters.Bid(null, utils.hexlify(BigNumber.from(auction.recordId)));
-// Filter the blocks
+// 过滤区块
 const logsFrom = await readContract.queryFilter(filter, 0, "latest");
 logsFrom.forEach(item => console.log(items.args));
 
-// written in web3
+// web3的写法
 const web3 = new Web3(provider);
 const contractInstance = new web3.eth.Contract(abi, contractAddress);
 const logs = await contractInstance.getPastEvents('Descrement', {
@@ -182,12 +180,12 @@ logs.forEach((item) => {
 
 
 
-#### Subscribe events
+#### 订阅event事件
 
 ```js
 
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
-// http provider does not support subscription
+// http provider不支持订阅
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
 
   // using ethers
@@ -227,11 +225,11 @@ server.listen(8002);
 
 
 
-## Reference
+## 参考资料
 
 [1 - web3-vs-ethers](https://github.com/adrianmcli/web3-vs-ethers)
 
-[2 - web3js doc](https://web3js.readthedocs.io/en/v1.2.11/index.html)
+[2 - web3js文档](https://web3js.readthedocs.io/en/v1.2.11/index.html)
 
-[3 - ethers doc](https://docs.ethers.io/v5/)
+[3 - ethers 文档](https://docs.ethers.io/v5/)
 

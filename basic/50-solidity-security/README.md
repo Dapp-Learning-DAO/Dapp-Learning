@@ -135,8 +135,48 @@ solgraph GraphContract.sol > GraphContract.dot
 dot -Tpng GraphContract.dot -o GraphContract.png
 ```
 
+## [manticore](https://github.com/trailofbits/manticore)
+
+manticore 是基于**符号执行**方法的合约分析工具，它实际上也是通过断言，来判断是否满足某种属性。
+
+- 特点：
+
+1. 给定输入，搜索可能的状态。
+2. 自动生成输入信息。
+3. 检测执行失败或者崩溃的地方。
+4. 通过事件或者指令钩子，更精确的控制搜索路径。
+
+- 安装：
+
+```bash
+pip install "manticore[native]"
+```
+
+> 如果运行 manticore 报错，请复制最后一行的提示信息，在谷歌搜索。大概率是依赖包版本问题。
+
+> 注意：由于遍历或者搜索的效率其实比较慢，可能需要运行很久。
+
+运行后将会生成很多辅助分析的材料，如何分析请见该[项目文档](https://github.com/trailofbits/manticore/wiki/What's-in-the-workspace%3F)。除此之外，也可以**高度自定义，编写 python 代码，初始化合约状态，然后再检查不变量**。
+
+- 检测漏洞：
+
+类似于断言的方法，判断合约是否满足某个属性，详细操作间见[文档](https://manticore.readthedocs.io/en/latest/verifier.html)。
+
+## [scribble](https://github.com/ConsenSys/scribble)
+
+也是基于断言的审计工具，但是比较特殊的是，他可以很方便的扫描链上的合约，然后寻找漏洞。它自称是“基于属性的运行时验证工具”，我暂时还不清楚它使用的原理。感兴趣可以深入阅读[它的文档](https://docs.scribble.codes/)。
+
+## [Legions](https://github.com/ConsenSys/Legions)
+
+他主要是提供了语法糖，可以简化节点的查询工作，比如不用每次查询余额都要写一串的 web3。
+
+## [vscode-solidity-auditor](https://github.com/ConsenSys/vscode-solidity-auditor)
+
+这是一个 vscode 的插件，通过可视化的方式辅助分析合约。建议使用时换成它自定义的主题，可能显示效果会好一些。使用方法请看标题的官方网站，介绍的很清楚，也有动图演示。
+
 ## 参考链接
 
 - https://learnblockchain.cn/eth/dev/%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90.html
 - https://zhuanlan.zhihu.com/p/164693789
 - http://blog.hubwiz.com/2020/05/11/mythril-tutorial/
+- https://learnblockchain.cn/article/3834

@@ -14,7 +14,7 @@ nft 资产拍卖
 
 ```
 INFURA_ID=yyyyyyyy
-PRIVATE_KEY_MAIN=xxxxx
+PRIVATE_KEY_ADMIN=xxxxx
 PRIVATE_KEY_ALICE=yyyyy
 PRIVATE_KEY_BOB=ttttt
 PRIVATE_KEY_TEST=zzzzz

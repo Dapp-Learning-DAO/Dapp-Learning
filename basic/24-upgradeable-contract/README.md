@@ -52,6 +52,13 @@ controlContract_test.js 在 test 目录, 执行 `npx hardhat test` 的时候就�
 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/24-upgradeable-contract/proxy.png?raw=true" /></center>
 
+代理合约模式
+```
+delegatecall
+User ---------->  Proxy  -----------> Implementation
+             (storage layer)          (logic layer)
+```
+
 ```solidity
 // Sample code, do not use in production!x
 contract TransparentAdminUpgradeableProxy {
@@ -106,7 +113,7 @@ let result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0)
 解释一下上面的参数：
 
 - gas：函数执行所需的 gas
-- \_impl：我们调用的逻辑合约的地址
+- _impl：我们调用的逻辑合约的地址
 - ptr：内存指针（指向数据开始存储的地方）
 - calldatasize：传入的数据大小
 - 0：调用逻辑合约后的返回值。我们没有使用这个参数因为我们还不知道返回值的大小，所以不能把它赋值给一个变量。我们可以后面可以进一步使用 returndata 操作码来获取这些信息。
@@ -167,9 +174,61 @@ contract logic {
 ```
 
 ### 通用可升级代理
+```
+upgrade call
+Admin -----------> Proxy ----->Implementation_v1
+                     |
+                      --------> Implementation_v2
+```
 
-透明代理的替代，EIP1822 定义了通用的可升级代理标准，或简称为“ UUPS”。该标准使用相同的委托调用模式，但是将升级逻辑放在实现合约中，而不是在代理本身中。
 
+透明代理和 UUPS代理 的区别在于， 升级逻辑就在是实现在代理合约，还是实现合约里。
+
+#### Transparent Proxy
+透明代理（EIP1967）升级逻辑 由代理合约处理， 必须调用 upgradeTo(address newImpl), 这样的函数来升级一个新的实现合约。 然后这个逻辑放在代理合约里，部署这类代理的成本很高。透明代理还需要管理机制来决定是委托调用 实现合约 的功能，还是执行代理合约本身的功能。
+
+TransparentProxy 模式在升级的时候，需要调用 ProxyAdmin 的升级函数。而 UUPS 模式在升级时，需要调用代理合约的升级函数。后者相比于前者少部署一个合约。
+
+
+```
+
+                ProxyAdmin
+                   |
+                   |   delegatecall
+EOA -----------> Proxy ------------>Implementation_v1
+                     |
+                      ------------->Implementation_v2
+```
+
+#### UUPS
+UUPS 是 OpenZeppelin 在近期推出的一种新的合约升级模式，EIP1822 定义了通用的可升级代理标准，或简称为“ UUPS”。该标准使用相同的委托调用模式，但是将升级逻辑放在实现合约中，而不是在代理本身中。 即 upgradeTo(address newImpl)函数放在 实现合约里。 你可以通过让它继承一个包含升级逻辑的通用标准接口来使任何实现合约符合UUPS标准，比如继承 OpenZeppelin的 UUPSUpgradeable接口。 建议使用此模式。
+
+若要支持 UUPS 的升级模式，需要做以下几点改动：
+
+1. 逻辑合约需继承 UUPSUpgradeable 合约
+2. 覆写 _authorizeUpgrade 函数
+
+    这里有一个重点是，由于 TransparentProxy 模式是由 ProxyAdmin 进行管理，也就是说只有 ProxyAdmin 有权限进行升级，那么我们只要保证 ProxyAdmin 合约的管理员权限安全即可保证整个可升级架构安全。而对于 UUPS 模式来说，升级合约的逻辑是需要调用代理合约的，这时的权限管理就需要开发者手动处理。具体来说，就是对于我们覆写的 _authorizeUpgrade 函数，需要加上权限管理：
+
+```
+// 需要继承 UUPSUpgradeable 合约
+contract Demo is Initializable, UUPSUpgradeable {
+    uint256 public a;
+
+    function initialize(uint256 _a) public initializer {
+        a = _a;
+    }
+
+    function increaseA() external {
+        a += 10;
+    }
+
+    // 覆写 _authorizeUpgrade 函数
+    function _authorizeUpgrade(address) internal override {}
+}
+```
+
+UUPS:
 ```solidity
 
 // Sample code, do not use in production!
@@ -182,6 +241,7 @@ contract UUPSProxy {
 abstract contract UUPSProxiable {
     address implementation;
     address admin;
+
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
@@ -235,10 +295,12 @@ ProxyAdmin 提供两个方法进行升级
 
 - 如何编写一个可升级的智能合约(登链): <https://zhuanlan.zhihu.com/p/34690916>
 - openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
+- 深入理解合约升级mirror: https://mirror.xyz/xyyme.eth/kM9ld2u0D1BpHAfXTiaSPGPtDnOd6vrxJ5_tW4wZVBk
+- 全面理解智能合约升级： https://blog.openzeppelin.com/the-state-of-smart-contract-upgrades/ 
 - proxy 升级: <https://learnblockchain.cn/article/2758>
+- UUPS： https://segmentfault.com/a/1190000041731293
 - 深度理解 delegatecall: <https://segmentfault.com/a/1190000015732950>
 - gnosis 升级： <https://learnblockchain.cn/article/1403>
-- 总览： <https://www.chainnews.com/articles/042189657582.html>
 - 知乎王大锤：<https://zhuanlan.zhihu.com/p/40598039>
 - 知乎王大锤：<https://zhuanlan.zhihu.com/p/40598169>
 - 合约代码：<https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/tree/master/contracts/proxy>
@@ -249,3 +311,4 @@ ProxyAdmin 提供两个方法进行升级
 - 原理介绍：<https://www.jianshu.com/p/3fa12d7ed76d>
 - compound: 合约升级
 - MinimalProxy: <https://github.com/optionality/clone-factory>
+- creat2 contract upgrade: https://github.com/0age/metamorphic
