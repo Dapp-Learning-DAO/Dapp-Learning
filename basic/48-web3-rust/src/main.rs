@@ -43,7 +43,7 @@ async fn main() -> web3::contract::Result<()> {
     // }
 
     // Get the contract bytecode for instance from Solidity compiler
-    let bytecode = include_str!("../abi/SimpleToken.code").trim_end();
+    let bytecode = include_str!("../abi/SimpleToken.bin").trim_end();
     // Deploying a contract
     let new_contract = Contract::deploy(web3.eth(), include_bytes!("../abi/SimpleToken.json"))?
         .confirmations(0)
