@@ -2,7 +2,7 @@ pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
+import "hardhat/console.sol";
 contract UniV1Simple is ERC20{
 
     IERC20 private erc20;
@@ -12,17 +12,19 @@ contract UniV1Simple is ERC20{
     }
 
     //take ETH as input ,get token as output. Specify how much you sold
-    function ethToTokenInput(uint256 min_tokens) external payable{
+    function ethToTokenInput(uint256 min_tokens) external payable returns(uint256){
         uint256 eth_sold = msg.value;
         uint256 eth_reserve = address(this).balance - msg.value;
         uint256 token_reserve = erc20.balanceOf(address(this));
         uint256 token_bought = getInputPrice(eth_sold, eth_reserve, token_reserve);
         require(token_bought >= min_tokens, "UniV1: Not enough");
+        console.log(token_bought);
         require(erc20.transfer(msg.sender, token_bought), "UniV1: Transfer failed");
+        return token_bought;
     }
 
     //take ETH as input ,get token as output. Specify how much you bought
-    function ethToTokenOutput(uint256 token_bought) external payable{
+    function ethToTokenOutput(uint256 token_bought) external payable returns(uint256){
         uint256 eth_reserve = address(this).balance - msg.value;
         uint256 token_reserve = erc20.balanceOf(address(this));
         uint256 eth_sold = getOutputPrice(token_bought, eth_reserve, token_reserve);
@@ -31,23 +33,26 @@ contract UniV1Simple is ERC20{
             payable(msg.sender).transfer(msg.value - eth_sold);
         }
         require(erc20.transfer(msg.sender, token_bought), "UniV1: Transfer failed");
+        return eth_sold;
     }
 
     //take token as input, get eth as output. Specify how much input
-    function tokenToEthInput(uint256 token_sold) external {
+    function tokenToEthInput(uint256 token_sold) external returns(uint256){
         uint256 eth_reserve = address(this).balance;
         uint256 token_reserve = erc20.balanceOf(address(this));
         uint256 eth_bought = getInputPrice(token_sold, token_reserve, eth_reserve);
         payable(msg.sender).transfer(eth_bought);
         require(erc20.transferFrom(msg.sender, address(this), token_sold), "UniV1: Transfer failed");
+        return eth_bought;
     }
 
-    function tokenToEthOutput(uint256 eth_bought) external {
+    function tokenToEthOutput(uint256 eth_bought) external returns(uint256) {
         uint256 token_reserve = erc20.balanceOf(address(this));
         uint256 eth_reserve = address(this).balance;
         uint256 token_sold = getOutputPrice(eth_bought, token_reserve, eth_reserve);
         payable(msg.sender).transfer(eth_bought);
         require(erc20.transferFrom(msg.sender, address(this), token_sold), "UniV1: Transfer failed");
+        return eth_bought;
     }
 
     function addLiquidity(uint256 max_token) external payable returns(uint256){
@@ -86,7 +91,6 @@ contract UniV1Simple is ERC20{
         uint256 denominator = input_amount + input_reserve;
         return nominator / denominator;
     }
-
 
     function getOutputPrice(uint256 output_amount, uint256 input_reserve, uint256 output_reserve) internal pure returns(uint256) {
         uint256 nominator = input_reserve * output_amount * 1000;
