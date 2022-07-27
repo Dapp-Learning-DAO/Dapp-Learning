@@ -142,7 +142,7 @@ function joinPool(uint poolAmountOut, uint[] calldata maxAmountsIn)
 
 LP 的数量应该与池子里的不变量 V 成正比，即：
 
-$\frac{V`}{V} = \frac{LP`}{LP}$
+$\frac{V'}{V} = \frac{LP'}{LP}$
 
 ### Pool Out Given Single In
 
@@ -157,12 +157,12 @@ $P_{issued} = P_{supply}\cdot \left((1 + \frac{A_t \cdot (1 - (1 - W_t) \cdot SF
 
 证明过程如下：
 
-$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}$
-$= \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}$
-$= (\frac{B`_k}{B_k})^{W_t}$
+$\frac{V'}{V} = \frac{\prod_k(B'_k)^{W_k}}{\prod_k(B_k)^{W_k}}$
+$= \frac{(B'_k)^{W_t}}{(B'_k)^{W_t}}$
+$= (\frac{B'_k}{B_k})^{W_t}$
 $= ({\frac{B_k + A_k}{B_k}})^{W_t}$
 
-$\frac{LP`}{LP} = \frac{P_{supply} + P_{issue}}{P_{supply}}$
+$\frac{LP'}{LP} = \frac{P_{supply} + P_{issue}}{P_{supply}}$
 
 对于 PoolOutGivenSingleIn，就是已知$A_t$,求$P_{issued}$
 对于 SingleInGivenPoolOut，就是已知$P_{issued}$，求$A_t$
@@ -188,16 +188,16 @@ $A_t = B_t \cdot \left(1 - (1 - \frac{P_{redeemed} \cdot (1 - EF)}{P_{supply}})^
 
 证明过程如下：
 
-$\frac{V`}{V} = \frac{LP`}{LP}$
+$\frac{V'}{V} = \frac{LP'}{LP}$
 
-$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}$
-$= \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}$
-$= (\frac{B`_k}{B_k})^{W_t}$
+$\frac{V'}{V} = \frac{\prod_k(B'_k)^{W_k}}{\prod_k(B_k)^{W_k}}= \frac{(B'_k)^{W_t}}{(B'_k)^{W_t}} = (\frac{B'_k}{B_k})^{W_t}$
+
 $= ({\frac{B_k - A_k}{B_k}})^{W_t}$
 
-$\frac{LP`}{LP} = \frac{P_{supply} - P_{redeemed}}{P_{supply}}$
+$\frac{LP'}{LP} = \frac{P_{supply} - P_{redeemed}}{P_{supply}}$
 
 对于 SingleOutGivenPoolIn,就是已知$P_{redeemd}$求未知的$A_k$
+
 对于 PoolInGivenSingleOut， 就是已知$A_k$,求$P_{redeemd}$
 
 ## 基于 Balancer 上的上层应用：Indexed Finance 指数基金
