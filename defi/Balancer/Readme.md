@@ -53,7 +53,7 @@ $= (\frac{V}{B_o^{W_0} \cdot \prod_{k \neq i,o}B_k^{W_k}})^{1/W_i} \cdot \frac{W
 
 $= B_i \cdot \frac{W_o}{W_i} \cdot \frac{1}{B_0}$
 
-$ = \frac{B_i/W_i}{B_o/W_o}$
+$= \frac{B_i/W_i}{B_o/W_o}$
 
 ## TVL
 
@@ -157,10 +157,10 @@ $P_{issued} = P_{supply}\cdot \left((1 + \frac{A_t \cdot (1 - (1 - W_t) \cdot SF
 
 证明过程如下：
 
-$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}
-             = \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}
-             = (\frac{B`_k}{B_k})^{W_t}
-             = ({\frac{B_k + A_k}{B_k}})^{W_t}$
+$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}$
+$= \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}$
+$= (\frac{B`_k}{B_k})^{W_t}$
+$= ({\frac{B_k + A_k}{B_k}})^{W_t}$
 
 $\frac{LP`}{LP} = \frac{P_{supply} + P_{issue}}{P_{supply}}$
 
@@ -190,10 +190,10 @@ $A_t = B_t \cdot \left(1 - (1 - \frac{P_{redeemed} \cdot (1 - EF)}{P_{supply}})^
 
 $\frac{V`}{V} = \frac{LP`}{LP}$
 
-$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}
-             = \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}
-             = (\frac{B`_k}{B_k})^{W_t}
-             = ({\frac{B_k - A_k}{B_k}})^{W_t}$
+$\frac{V`}{V} = \frac{\prod_k(B`_k)^{W_k}}{\prod_k(B_k)^{W_k}}$
+$= \frac{(B`_k)^{W_t}}{(B`_k)^{W_t}}$
+$= (\frac{B`_k}{B_k})^{W_t}$
+$= ({\frac{B_k - A_k}{B_k}})^{W_t}$
 
 $\frac{LP`}{LP} = \frac{P_{supply} - P_{redeemed}}{P_{supply}}$
 
@@ -202,9 +202,10 @@ $\frac{LP`}{LP} = \frac{P_{supply} - P_{redeemed}}{P_{supply}}$
 
 ## 基于 Balancer 上的上层应用：Indexed Finance 指数基金
 
-- https://legacy.indexed.finance/index/DEFI5
-- https://legacy.indexed.finance/categories
+- <https://legacy.indexed.finance/index/DEFI5>
+- <https://legacy.indexed.finance/categories>
 
 ## WhitePaper
 
-- https://balancer.fi/whitepaper.pdf
+- <https://balancer.fi/whitepaper.pdf>
+
