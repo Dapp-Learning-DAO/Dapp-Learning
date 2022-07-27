@@ -6,11 +6,11 @@
 
 借贷协议中的 Liquidity 概念首先由 Compound 提出 [Account Liquidity](https://compound.finance/docs/comptroller#account-liquidity)，即用户每一种进入 Markets 的资产都需要乘以相应的 Collateral Factor 累加起来，然后扣除用户每一种借贷资产的价值总和。
 
-![Euler-ComputeLiquidity.png](/img/Euler/Compound-Liquidity.png)
+![Euler-ComputeLiquidity.png](./img/Compound-Liquidity.png)
 
 而 Euler 中的 Liquidity 在 Compound 基础上做改进，不仅抵押资产计算价值时需要乘以 `CF` (Collateral Factor)，债务资产也需要除以 `BF` (Borrow Factor) 做风险价值调整；另外由于其特有的 mint 机制，在计算时还需要考虑 `Self_Collateral` 和 `Self_Liability`。
 
-![Euler-ComputeLiquidity.png](/img/Euler/Euler-Liquidity.png)
+![Euler-ComputeLiquidity.png](./img/Euler-Liquidity.png)
 
 可以点击这里查看大图 [Euler-Liquidity](https://whimsical.com/euler-liquidity-AdZ1fnQUGAYj9VesCbFhxr)
 
