@@ -106,8 +106,8 @@ test/sample-test.js gives a comparison of swap process  splitted into 10 micro s
 
 
 ``` plain python
-
 ## Normal cases
+
 [Before swap]poolX: 1000.0
 [Before  swap]poolY: 1000.0
 xSold: 10.0
