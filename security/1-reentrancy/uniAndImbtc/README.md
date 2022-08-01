@@ -37,7 +37,13 @@ To deeper understand how the attack works, let's recap the basics of uniswap.
 In theory, when we exchange ERC777 for ether, the amount of ether bought can be conducted following the rule of constant K:
 
 $$
-\left ( X_{ImBTC} + ΔX_{ImBTC} \right ) \left (Y_{Eth} - ΔY_{Eth} \right) = XY
+\left ( X_{ImBTC} + ΔX_{ImBTC} \right ) \left (Y_{Eth} - ΔY_{Eth} \right) = X_{ImBTC}Y_{Eth}
+$$
+
+So
+
+$$
+ΔY_{Eth} = \frac{ΔX_{ImBTC}\times Y_{Eth}}{X_{ImBTC} + ΔX_{ImBTC}} 
 $$
 
 And here is the code:
