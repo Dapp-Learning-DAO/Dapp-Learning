@@ -17,7 +17,7 @@ It is possible to conduct a reentrancy attack on an UniswapV1 exchange hosting E
   - receives some ether
   - buy  ERC777 through uniswap
   - sell a fraction of ERC777  to ether through uniswap exchange that will transfer ether to attacker contract and take ERC777 from attacker contract to uniswap exhange
-- tokenToSend: This is receiver function called by ERC777. It will sell a fraction of ERC777 to ether through uniswap exchange. 
+- tokenToSend: This is the receiver function called by ERC777. It will sell a fraction of ERC777 to ether through uniswap exchange. 
 - withdraw: called to claim the profits.
 
 Now, when the contract is "triggered", here is what happens:
