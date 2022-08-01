@@ -129,7 +129,7 @@ You may think that we can also change the order of transfers, making ImBTC trans
         payable(msg.sender).transfer(eth_bought);
         return eth_bought;
     }
-``` solidity
+``` 
 This is not acceptable, as each swap by reentrancy is executed without any changes to either ETh reserve or ImBTC reserve, causing it more vunerable to reentrancy attack. You could modify UniV1Simple.sol to verify this conclusion.
 
 # More
