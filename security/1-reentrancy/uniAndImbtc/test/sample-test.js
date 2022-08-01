@@ -16,8 +16,6 @@ describe("reentrancy attack",  function() {
     //Prepares
     before(async function(){
         [deployer, attacker] = await ethers.getSigners();
-        console.log(deployer.address)
-        console.log(attacker.address)
         //Deploy ERC1820
         erc1820 = await util.deploy1820(deployer);
         //Deploy ERC777

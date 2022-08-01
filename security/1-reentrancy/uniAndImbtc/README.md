@@ -96,7 +96,7 @@ ERC777 allows for notifying the sender before the balance if modified, which com
 
 Hence, a reentrancy is formed, causing many micro swaps:
 
-![](2.png)
+![](1.jpg)
 
 As the reentrancy compromises the consitency of swap process, each time a micro swap is executed without change of ImBTC reserve, causing a little bit more eth is swapped out. 
 
@@ -104,7 +104,49 @@ More formally, under normal circumstance, after a miscro swap process, ImBTC poo
 
 test/sample-test.js gives a comparison of swap process  splitted into 10 micro swaps under different scenarios .We can see that after the first swap, the swap from reentrancy could swap a little bit more ETH than normal swaps:
 
-![](3.png)
+
+``` plain
+## Normal cases
+[Before swap]poolX: 1000.0
+[Before  swap]poolY: 1000.0
+xSold: 10.0
+splits:  10
+yBoughts:9.900990099009900984
+[yBought] 0.999000999000999
+[yBought] 0.997006985030937126
+[yBought] 0.995018935210337052
+[yBought] 0.993036825777647138
+[yBought] 0.991060633089532417
+[yBought] 0.98909033362016953
+[yBought] 0.987125903960546551
+[yBought] 0.985167320817767689
+[yBought] 0.983214561014362798
+[yBought] 0.981267601487601683
+[After swap]poolX: 1010.0
+[After swap]poolY: 990.099009900990099016
+
+## Under attack cases
+
+[Before swap]poolX: 1000.0
+[Before  swap]poolY: 1000.0
+xSold: 10.0
+splits:  10
+yBoughts:9.945219286997006409
+[yBought] 0.999000999000999
+[yBought] 0.998002996004994006
+[yBought] 0.997005990014979027
+[yBought] 0.996009980034944083
+[yBought] 0.995014965069874209
+[yBought] 0.994020944125748461
+[yBought] 0.993027916209538922
+[yBought] 0.992035880329209712
+[yBought] 0.991044835493715996
+[yBought] 0.990054780713002993
+[After swap]poolX: 1010.0
+[After swap]poolY: 990.054780713002993591
+```
+
+We can see from above that under reentrancy attack, user could get 9.945219286997006409 eth rather than 9.900990099009900984, with each micro swap buying  a little bit more than normal cases.
 
 Please refer to sample-test.js for more details.
 
