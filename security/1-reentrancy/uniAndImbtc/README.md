@@ -1,5 +1,5 @@
 # Background
-In 2020 April 18th, Uniswap(V) is drained by reentrancy attack. This exchange hosts an ImBTC-Eth pair where ImBTC is an ERC777 token.
+In 2020 April 18th, Uniswap(V1) is drained by reentrancy attack. This exchange hosts an ImBTC-Eth pair where ImBTC is an ERC777 token.
 
 Here I present a demo illustrating how this attack is engaged.
 
