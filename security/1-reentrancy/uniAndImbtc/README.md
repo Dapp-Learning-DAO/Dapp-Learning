@@ -105,7 +105,8 @@ More formally, under normal circumstance, after a miscro swap process, ImBTC poo
 test/sample-test.js gives a comparison of swap process  splitted into 10 micro swaps under different scenarios .We can see that after the first swap, the swap from reentrancy could swap a little bit more ETH than normal swaps:
 
 
-``` plain
+``` plain python
+
 ## Normal cases
 [Before swap]poolX: 1000.0
 [Before  swap]poolY: 1000.0
