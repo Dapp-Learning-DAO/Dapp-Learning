@@ -60,7 +60,7 @@ A "swap" process basiclly comprises several steps:
 - 4) Modify Eth reserve
 - 5) Modify ImBTC reserve
 
-```
+``` solidity
     function tokenToEthInput(uint256 token_sold) external returns(uint256){
         uint256 eth_reserve = address(this).balance;
         uint256 token_reserve = erc20.balanceOf(address(this));
@@ -78,7 +78,7 @@ Specially, a swap process could split into arbitrary sub swap process, yielding 
 
 ERC777 allows for notifying the sender before the balance if modified, which compromises the "Check-Effects-Interaction" pattern:
 
-```
+``` solidity
        _callTokensToSend(operator, from, to, amount, userData, operatorData);
 
         _move(operator, from, to, amount, userData, operatorData);
@@ -103,7 +103,7 @@ Please refer to sample-test.js for more details.
 ## How to avoid
 Uniswap V2 adds a reemtrancy lock to avoid this kind of attack:
 
-```
+``` solidity
     uint private unlocked = 1;
     modifier lock() {
         require(unlocked == 1, 'UniswapV2: LOCKED');
@@ -119,7 +119,7 @@ Uniswap V2 adds a reemtrancy lock to avoid this kind of attack:
 
 You may think that we can also change the order of transfers, making ImBTC transfers before Eth transfer:
 
-```
+``` solidity
     function tokenToEthInput(uint256 token_sold) external returns(uint256){
         uint256 eth_reserve = address(this).balance;
         uint256 token_reserve = erc20.balanceOf(address(this));
@@ -129,7 +129,7 @@ You may think that we can also change the order of transfers, making ImBTC trans
         payable(msg.sender).transfer(eth_bought);
         return eth_bought;
     }
-```
+``` solidity
 This is not acceptable, as each swap by reentrancy is executed without any changes to either ETh reserve or ImBTC reserve, causing it more vunerable to reentrancy attack. You could modify UniV1Simple.sol to verify this conclusion.
 
 # More
