@@ -150,7 +150,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
+45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
