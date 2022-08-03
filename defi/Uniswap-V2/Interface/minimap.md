@@ -30,7 +30,7 @@ export const updateBlockNumber = createAction<{ title: string}>('application/upd
 
 export default createReducer(storeItem, builder =>
     
-    builder.addCase( //此方法会区 Action type字段的大小写
+    builder.addCase( //此方法会区分 Action type字段的大小写
         updateBlockNumber,
          (state, action) => { //所有action 都包含 type 和 payload
         //存储状态
