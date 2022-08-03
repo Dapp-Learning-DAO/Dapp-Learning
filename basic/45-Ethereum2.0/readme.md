@@ -17,45 +17,40 @@ EIP-4844 最重要的特性是 blob，它是一种新型事务。blob 类似于�
 
 这些 blob 可以由验证者和用户下载。proto-danksharding 中插槽的数据带宽限制为 1 MB（而不是 16 MB）。数据传输方式的这种变化产生了巨大的影响，解决了我们在以太坊方面都非常熟悉的可扩展性问题。通过采用 EIP-4844 提案，来自 blob 的这些数据不是普通以太坊交易的 gas 使用量。
 
-为了添加到这个现有系统，EIP-4844 还引入了对块中包含的最大 blob 数量的限制。这些存储在共识层（信标节点）上，而不是执行层。它们只需要来自 EVM 的确认。 
+为了向前兼容，EIP-4844 还引入了对块中包含的最大 blob 数量的限制。这些存储在共识层（信标节点）上，而不是执行层。它们只需要来自 EVM 的确认。 
 
 Danksharding会把以太坊转变为一个统一的结算和数据可用性（DA）层。将结算和数据可用性抽样（data availability sampling）统一起来。
+
+**PBS**
 提议者-构建者（数据生成者）分离 (PBS:proposer/builder separation PBS) 
 Builders（数据生成者）是一种新角色，它会聚合所有以太坊L1交易以及来自rollup的原始数据。使用crList，区块提议者可以强制Builders包含交易。
 
-blob
-layer2体验更好，侧链没有出路，arbi和optimistic， zk上线。
 
-纠删码(Erasure coding):
-DA证明数据层:
-Celestia
-verkel:
+**纠删码(Erasure coding)**
 
-//模块化区块链分成三部分：执行、安全性以及数据可用性。  如果执行层和数据可用性都被剥离了， 只留安全性好像没啥卵用啊。
+**DA证明数据层**
 
-//你上次分享的 DA可以通过概率采样和KZG承诺这些方案保证数据可用性和安全性，完全不必用以太坊的共识层做安全性保证，太不经济了。
-
-经济学，实用性， layer2, 开发者的友好， 密码学要求变高
-
-以太坊发展路线的不确定性，躺平等着layer2崛起，坐收结算层的收益
+**Celestia**
+模块化区块链分成三部分：执行、安全性以及数据可用性。
 
 
+**verkel**
 
-
-
-### EIP-4488
-EIP-4488降低calldata费用。
-EIP-4488 和 proto-danksharding 之间的首要实践差异在于 EIP-4488 企图最小化今日所需的更改，而 proto-danksharding 今日进行了很多更改，因而将来升级到彻底分片需求很少的更改。
 
 
 **KZG承诺**
 https://hackmd.io/yqfI6OPlRZizv9yPaD-8IQ
 
+
+
+### EIP-4488
+EIP-4488降低calldata费用。
+
+
 ## DA(data availability)
 https://www.8btc.com/article/6721900
 
 
-## 操作步骤
 
 
 ## 参考文档
