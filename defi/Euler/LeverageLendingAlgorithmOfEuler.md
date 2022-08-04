@@ -87,15 +87,15 @@ Euler 的所有资产都是以 WETH 计价，并从相应资产与 WETH 组成�
 - `(Self_Collateral_RA - Self_Liability_RA)` 由于 self 部分债务和抵押的调整价值总是相互抵消的，所以这部分的 Liquidity 总是为 0
 - 需要注意的是，mint 出的债务只有 0.95 倍的债务被 `Self_Collateral_RA` 所抵消，仍有 `MintValue * (1 - SCF)` 价值的债务价值需要计入 `Liabilities_RA`
 - `Collateral_RA = DepositValue * CF = 1 * 0.9`
-- `Liabilities_RA = MintValue - Self_Collateral * SCF = MintValue * (1 - SCF) = 2 * (1 - SCF)`
-- `Liquidity = Collateral_RA - Liabilities_RA = 1 * 0.9 - 2 * (1 - 0.95) = 0.8`
+- `Liabilities_RA = MintValue * (1 - SCF) / BF = 2 * (1 - SCF) / BF`
+- `Liquidity = Collateral_RA - Liabilities_RA = 1 * 0.9 - 2 * (1 - 0.95) / 0.91 = 0.7901`
 
 #### case 4
 
 用户 deposit 3000 USDC，DeositValue 是 1 WETH，然后调用 mint 操作， MintValue 为 2 WETH，接着 borrow 0.5 WETH
 
 - 本次在 case 3 的情况下再 borrow 0.5 WETH，只需要按照常规债务计算这部分新增的债务即可
-- `Liquidity = 1 * 0.9 - 2 * (1 - 0.95) - 0.5 / BF = 0.2505`
+- `Liquidity = 0.7901 - 0.5 / BF = 0.2406`
 
 #### case 5
 
@@ -118,13 +118,14 @@ Euler 的所有资产都是以 WETH 计价，并从相应资产与 WETH 组成�
   | USDC   | 2%          | 6%         |
   | WETH   | 6%          | 9%         |
 
-- `DepositValue_B = DepositValue_A * (1 + 2%) = 1 * 1.02 = 1.02 WETH`
+- `DepositValue_B = DepositValue_A * (1 + 2%) = 1 * 1.02 = 1.02`
+- `LiabilitiesValue_B = Liabilities_A * (1 + 6%) = 0.1 * 1.06 = 0.106`
 - `Self_Collateral_B = Self_Collateral_A * (1 + 6%) = MintValue * 1.06`
 - `Self_Liability_B = Self_Liability_A * (1 + 9%) = MintValue * 1.09`
 - 当时刻 A 用户 mint 之后， self 部分的抵押和债务价值相等 （相互抵消）即 `Self_Collateral_A = Self_Liability_A` ，当来到时刻 B 两者由于 APY 不同，价值将不再相等，通常债务的利息增长会更多，超出的债务部分则计入 `Liabilities_RA`
-- `delta_Liabilities_RA = Self_Liability_B - Self_Collateral_B = MintValue * (1.09 - 1.06) = 2 * 0.03 = 0.06`
-- `Liabilities_RA_B = Liabilities_RA_A + delta_Liabilities_RA = 0.8 + 0.06 = 0.86`
-- `Liquidity_B = Collateral_RA_A - Liabilities_RA_B = 1.02 * 0.9 - 0.86 = 0.058`
+- `delta_Liabilities_RA = Self_Liability_B - Self_Collateral_B = MintValue * (1.09 - 1.06) / BF = 2 * 0.03 / 0.91 = 0.0659`
+- `Liabilities_RA_B = Liabilities_RA_A * (1 + 6%) + delta_Liabilities_RA = 0.106 + 0.0659 = 0.1719`
+- `Liquidity_B = Collateral_RA_A - Liabilities_RA_B = 1.02 * 0.9 - 0.1719 = 0.7461`
 
 ### Max Mint Leverage
 
