@@ -43,3 +43,4 @@ git clone https://github.com/yearn/yearn-vaults.git
 - yearn 官网: https://yearn.finance/#/portfolio   
 - yearn 文档: https://docs.yearn.finance/  
 - 机制原理介绍: https://mirror.xyz/0xB96A958A82eCAbab9e7cF14ae538c38996f2C7B6/9NtcTStvDYW3JpwWnFiYwfvJ12h0rzxQ4dHjRJ2Y06Q  
+- yearn 代码解析: https://illustrious-soup-aa9.notion.site/Yearn-1a756cb0618148768be06c327ce6d649     
