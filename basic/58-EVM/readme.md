@@ -41,6 +41,10 @@
 
 ### SPV
 
+### EVM 
+EVM内存布局：
+https://mirror.xyz/xyyme.eth/GNVcUgKAOEiLyClKeqkmD35ctLu6_XomT3ZDIfV3tz8?s=09 
+
 ### 数据库选型
 
 以太坊的 Rust 客户端 Parity 使用 Rocksdb。而以太坊的 Go、C++ 和 Python 客户端都使用 leveldb。

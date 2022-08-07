@@ -327,4 +327,5 @@ anvil --hardfork latest
 - [rebase code day Reference code base](https://github.com/bixia/solidity-dev)
 - [Video: Intro to Foundry](https://www.youtube.com/watch?v=fNMfMxGxeag)
 - [ERC20 foundry](https://learnblockchain.cn/article/3972)
+- [The Foundry EVM Development Environment](https://medium.com/@jtriley15/the-foundry-evm-development-environment-f198f2e4c372)
 
