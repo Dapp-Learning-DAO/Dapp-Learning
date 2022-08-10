@@ -3,7 +3,7 @@
 「Curie」的颠覆性创新正是摆脱流动性依赖的关键，能够更大的提升资金的使用效率,将永续协议的 vAMM 模型与 Uniswap V3 耦合，经济模型与机制逻辑放在永续协议上，通过 Uniswap V3 进行交易的执行层。
 
 ## 合约地址
-
+[合约结构](https://perp.notion.site/Curie-Docs-for-Partners-a2c316abfc1549c7b4d6e310d7a3987d#c20cf392b22142c3b33fa7e48b293c68) 
 Smart contract addresses list: <https://v2docs.perp.fi/for-developers/smart-contract-addresses>
 
 optimistic address:

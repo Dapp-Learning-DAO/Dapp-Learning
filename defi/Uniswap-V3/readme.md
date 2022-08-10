@@ -108,6 +108,7 @@ Interface 是 User Interface 的含义，此为 Uniswap 网站的代码，包括
 - uniswap - V3 技术白皮书导读: https://learnblockchain.cn/article/2357
 - 如何在合约中集成 Uniswap v3: https://learnblockchain.cn/article/2580
 - Uniswap v3 详解（一）：设计原理: https://liaoph.com/uniswap-v3-1/
+- Uniswap v3 设计详解： https://zhuanlan.zhihu.com/p/448382469
 - Uniswap v3 特性解析: https://medium.com/taipei-ethereum-meetup/uniswap-v3-features-explained-in-depth-178cfe45f223
 - Awesome-Uniswap v3 项目: https://github.com/GammaStrategies/awesome-uniswap-v3
 - uniswap - V3 源代码导读: https://mp.weixin.qq.com/s/SYjT3HH48V7WaSGmkPOzKg

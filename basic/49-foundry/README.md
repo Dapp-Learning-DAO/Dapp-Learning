@@ -17,6 +17,7 @@ curl -L https://foundry.paradigm.xyz | bash
 再用 foundryup 安装 forge、 cast 和 anvil
 
 ```bash
+brew install libusb
 foundryup
 ```
 
@@ -319,10 +320,11 @@ anvil --hardfork latest
 更多 `anvil` 的功能可以查看 [Anvil 文档](https://book.getfoundry.sh/reference/anvil/)。
 
 ## 参考资料
-
+- [paradigm foundry](https://www.paradigm.xyz/2021/12/introducing-the-foundry-ethereum-development-toolbox)
 - [ds-test](https://github.com/dapphub/ds-test/blob/master/src/test.sol)
 - [The Foundry Book](https://onbjerg.github.io/foundry-book/index.html)
 - [rebase code day Reference PPT](https://learnblockchain.cn/article/3749)
 - [rebase code day Reference code base](https://github.com/bixia/solidity-dev)
 - [Video: Intro to Foundry](https://www.youtube.com/watch?v=fNMfMxGxeag)
+- [ERC20 foundry](https://learnblockchain.cn/article/3972)
 

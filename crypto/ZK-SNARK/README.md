@@ -31,3 +31,6 @@ paper list:
   - [星辰实验室-zkPPT](https://drive.google.com/file/d/1pP8HdRSflWo93xYaIpfUSkhtNICS0hDr/view?usp=sharing)
   - [入门视频](https://www.youtube.com/watch?v=lGogdTnD4SE)
   - [CTN zkdapp实战](https://www.bilibili.com/video/BV1oL4y1h7iE?p=1&share_medium=android&share_plat=android&share_session_id=9d2f7c31-a4dc-46a5-a2d9-4d6d0ebc3997&share_source=WEIXIN&share_tag=s_i&timestamp=1653798331&unique_k=921Lj1L)
+  - [Awesome-ZK-kurtpan](https://kurtpan666.github.io/ktpzkp22.html)
+  - [0xparc -ZK学习资料](https://learn.0xparc.org/)
+  - [plonk学习资料]
