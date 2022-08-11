@@ -4,3 +4,6 @@
 [submodule "crypto/ECDSA-signature/eth_wallet"]
 	path = crypto/ECDSA-signature/eth_wallet
 	url = https://github.com/leeduckgo/eth_wallet
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

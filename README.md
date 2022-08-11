@@ -28,8 +28,8 @@ We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
-For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao.md). Welcome to join us if you share the same value. 
+Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
+For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value. 
 
 <details>
 <summary>Official links</summary>
@@ -150,13 +150,13 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
+45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
-48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
-49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
+48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+49. [Foundry](basic/71-foundry/README.md)
 50. [solidity security](basic/50-solidity-security)  ✅
-51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
+51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](basic/53-freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
@@ -169,14 +169,14 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 61. [ENS](basic/61-ENS) ✅
 62. [Tenderly](https://dashboard.tenderly.co/explorer)
 63. [HTLC-crosschain](basic/63-htlc-crosschain) ✅
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+64. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT)
 66. [Kleros](https://kleros.io/)
 67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md)
 68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land)  ✅
 69. [Decentralized OTC](https://github.com/DOTCPro)
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
-71. [Foundry](basic/71-foundry/README.md)
+71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
@@ -205,29 +205,29 @@ You can refer to our study group's learning roadmap, which is better with the vi
 
 - Trading: uniV1(task13) -> uniV2 -> uniV3 -> CurveV1 -> CurveV2
 - Lending: Aave -> Compound -> Liquity -> Euler
-- Derivatives: SNX -> YFI -> Perpetual
+- Derivatives: SNX -> YFI -> Perpetual -> Opyn
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
 03. [Curve](defi/Curve/README.md) ⌛
 04. [Compound](defi/Compound/readme.md) ✅
 05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/readme.md) ⌛
+06. [Liquity](defi/Liquity/readme.md) ✅
 07. [Euler](defi/Euler/readme.md) ⌛
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+09. [YFI](https://yearn.finance/) ⌛
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
 11. [Sushi](https://docs.sushi.com/) ✅  
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
+15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA& list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
 20. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+21. [Bancor](https://bancor.network/)⌛
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
@@ -271,7 +271,7 @@ Item list:
 - [Securify](https://github.com/eth-sri/securify2)
 2. CTF Training camp
  - [Ethernaut](https://ethernaut.openzeppelin.com/)
- - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
+ - [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol) | [Solution](security/Damn-Vulnerable-DeFi-wp.md)
  - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
  - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 3. Safe development practices

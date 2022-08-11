@@ -159,13 +159,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [LP Dividend](https://github.com/sushiswap/sushiswap) ⬜
+45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
-48. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
-49. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
+48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+49. [Foundry](basic/71-foundry/README.md)
 50. [solidity security](basic/50-solidity-security)  ✅
-51. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
+51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](basic/53-freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
@@ -178,14 +178,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 61. [ENS](basic/61-ENS) ✅
 62. [Tenderly](https://dashboard.tenderly.co/explorer)
 63. [HTLC-crosschain](basic/63-htlc-crosschain) ✅
-64. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+64. [state channel](https://ethereum.org/en/developers/docs/scaling/state-channels/)  ⬜
 65. [ZK-NFT](https://github.com/kevinz917/zk-NFT)
 66. [Kleros](https://kleros.io/)
 67. [Go-Ethereum Code Analysis](basic/67-Go-Ethereum-Code-Analysis/readme.md)
 68. [Config discord with Collab.land](basic/68-config-discord-with-Collab.land)  ✅
 69. [Decentralized OTC](https://github.com/DOTCPro)
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
-71. [Foundry](basic/71-foundry/README.md)
+71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
@@ -222,9 +222,9 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 5. [Aave](https://docs.aave.com/portal/)  ✅
 6. [Liquity](defi/Liquity/readme.md) ⌛
 7. [Euler](defi/Euler/readme.md) ⌛
-8. [SNX](https://github.com/Synthetixio) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-9. [YFI](https://yearn.finance/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+8. [SNX](https://github.com/Synthetixio)⌛ 
+9. [YFI](https://yearn.finance/)⌛ 
+10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm)⌛
 11. [Sushi](https://docs.sushi.com/) ✅  
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
@@ -232,10 +232,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
 16. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)[👉 Claim this task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [DODO](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
 20. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+21. [Bancor](https://bancor.network/)⌛
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
@@ -283,7 +283,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 2. CTF 训练营
 
 - [Ethernaut](https://ethernaut.openzeppelin.com/)
-- [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol)
+- [Damn-Vulnerable-Defi](https://github.com/OpenZeppelin/damn-vulnerable-defi/blob/master/contracts/DamnValuableToken.sol) | [题解](security/Damn-Vulnerable-DeFi-wp.md)
 - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
 - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 

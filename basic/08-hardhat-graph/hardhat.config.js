@@ -2,18 +2,9 @@ require('@nomiclabs/hardhat-waffle');
 const fs = require('fs');
 require('dotenv').config();
 
+
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const defaultNetwork = 'localhost';
-
-function mnemonic() {
-  try {
-    return fs.readFileSync('./mnemonic.txt').toString().trim();
-  } catch (e) {
-    if (defaultNetwork !== 'localhost') {
-      console.log('☢️ WARNING: No mnemonic file created for a deploy account.');
-    }
-  }
-}
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -31,9 +22,7 @@ module.exports = {
     },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: {
-        mnemonic: mnemonic(),
-      },
+      accounts: [PRIVATE_KEY],
     },
     kovan: {
       url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
