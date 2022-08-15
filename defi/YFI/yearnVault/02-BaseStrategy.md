@@ -62,9 +62,9 @@ function harvestTrigger(uint256 callCostInWei) public view virtual returns (bool
 
 - harvest  
 用于收益结算，在处理过程中，总共进行如下几个步骤：
-1） 判断当前 strategy 是否处于 emergency 状况。如果是，则撤回所有投资，计算当前此 strategy 需要返还给 Vault 的资金。在这个计算过程中可以发现，loss 和 profit 只会有一个变量大于0，即 strategy 要么投资亏损，要么投资盈利。 最后，计算 strategy 实际返回给 Vault 的资金，需要扣除 loss 部分   
-2） 当 strategy 没有处理 emergency 状态时，调用 prepareReturn 返回需要传递给 Vault 的 profit/loss/debtPayment 这三个值
-3） 调用 adjustPosition 处理剩余未返还给 Vault 的资金  
+1. 判断当前 strategy 是否处于 emergency 状况。如果是，则撤回所有投资，计算当前此 strategy 需要返还给 Vault 的资金。在这个计算过程中可以发现，loss 和 profit 只会有一个变量大于0，即 strategy 要么投资亏损，要么投资盈利。 最后，计算 strategy 实际返回给 Vault 的资金，需要扣除 loss 部分   
+2. 当 strategy 没有处理 emergency 状态时，调用 prepareReturn 返回需要传递给 Vault 的 profit/loss/debtPayment 这三个值
+3. 调用 adjustPosition 处理剩余未返还给 Vault 的资金  
 ```solidity
 function harvest() external onlyKeepers {
         uint256 profit = 0;

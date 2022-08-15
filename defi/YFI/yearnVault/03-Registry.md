@@ -109,9 +109,9 @@ def _newProxyVault(
 ```
 
 - newVault  
-1） 根据接口中传入的 releaseDelta 参数获取目标 Vault  
-2） 调用 _newProxyVault 接口克隆目标 Vault  
-3） 调用 _registerVault 接口，把克隆出来的 Vault 注册到 Registry 中  
+1. 根据接口中传入的 releaseDelta 参数获取目标 Vault  
+2. 调用 _newProxyVault 接口克隆目标 Vault  
+3. 调用 _registerVault 接口，把克隆出来的 Vault 注册到 Registry 中  
 ```python
 def newVault(
     token: address,

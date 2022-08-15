@@ -94,10 +94,10 @@ def initialize(
 - setWithdrawalQueue  
 用于设置 withDraw 的时候资金提取的顺序，方便后续 Vault 进行资金提取的时候，按照最小影响顺序进行提取。举例来说，此 Vault 有 3 个 Strategy，分配 20% 的资金到第一个 Strategy （ 定期存款 ）， 30% 的资金到第二个 Strategy （ 基金理财 ）， 50% 的资金到第三个 Strategy （ 活期存款 ）。但是第一个 Strategy 资金提取的时候，如果没有达到 Strategy 要求的锁定周期 （ 比如 1 年 ），那么会有 30% 的资金损失，所以不到非必需时候，第一个 Strategy 资金总是要放到最后才提取。 setWithdrawalQueue 就是用于设置资金提取的顺序，最大程度较小收益影响。  
 setWithdrawalQueue 设置的时候，判断逻辑如下：   
-1） 遍历传入的 queue 参数时，如果遇到 queue[i] 为 0 地址，则判断对应位置的 withdrawalQueu[i] 地址是否为 0；如果 withdrawalQueu[i] 不为 0 ，则说明调用者试图移除 withdrawalQueu[i] 的 Strategy , 程序进行报错；如果 withdrawalQueu[i] 为 0，怎说明遍历 queue 结束，退出遍历处理  
-2） 遍历传入的 queue 参数时，如果遇到 queue[i] 不为 0 地址，则需要保证 withdrawalQueu[i] 对应的 Strategy 也是非 0 地址  
-3） 使用 queue 中的 Strategy 替换现有的 withdrawalQueue 中的 Strategy 的时候，需要进行验证，保证传入的 queue 中的 Strategy 已经处于激活状态，避免恶意更新  
-4） 使用一个 set 数组 （ 长度为 32 ） 记录传入的 queue 中的所有 Strategy ，保证没有重复的 Strategy； 因为 withdrawalQueue 中的 Strategy 个数永远小于 32 ，所以可以保证 Set 数值记录排重的时候不会溢出。具体 set 数组记录流程为，首先取 queue[i] 地址的末尾 5 个 bit 位 （ 小于 32 ) 作为在 set 数组中的起始查找位置，步进为 1，如果步进过程中在 set 数组中查找到找相同的 queue[i] 地址，则报错；如果不存在相同地址，且对应 set 位置上地址为 0 地址，则保存当前 queue[i] 地址到 set 中，便于后续查找排重。  
+1. 遍历传入的 queue 参数时，如果遇到 queue[i] 为 0 地址，则判断对应位置的 withdrawalQueu[i] 地址是否为 0；如果 withdrawalQueu[i] 不为 0 ，则说明调用者试图移除 withdrawalQueu[i] 的 Strategy , 程序进行报错；如果 withdrawalQueu[i] 为 0，怎说明遍历 queue 结束，退出遍历处理  
+2. 遍历传入的 queue 参数时，如果遇到 queue[i] 不为 0 地址，则需要保证 withdrawalQueu[i] 对应的 Strategy 也是非 0 地址  
+3. 使用 queue 中的 Strategy 替换现有的 withdrawalQueue 中的 Strategy 的时候，需要进行验证，保证传入的 queue 中的 Strategy 已经处于激活状态，避免恶意更新  
+4. 使用一个 set 数组 （ 长度为 32 ） 记录传入的 queue 中的所有 Strategy ，保证没有重复的 Strategy； 因为 withdrawalQueue 中的 Strategy 个数永远小于 32 ，所以可以保证 Set 数值记录排重的时候不会溢出。具体 set 数组记录流程为，首先取 queue[i] 地址的末尾 5 个 bit 位 （ 小于 32 ) 作为在 set 数组中的起始查找位置，步进为 1，如果步进过程中在 set 数组中查找到找相同的 queue[i] 地址，则报错；如果不存在相同地址，且对应 set 位置上地址为 0 地址，则保存当前 queue[i] 地址到 set 中，便于后续查找排重。  
 
 ```python
 def setWithdrawalQueue(queue: address[MAXIMUM_STRATEGIES]):
@@ -176,9 +176,9 @@ def erc20_safe_transferFrom(token: address, sender: address, receiver: address, 
 
 - _calculateLockedProfit   
 计算还有多少收益处于锁定状态，Vault 或是用户在提取资金的时候，会进行计算
-1）在 initialize 接口中，我们讲解过 lockedProfitDegradation 表示锁定的是时长。首先计算自上次收益更新以来经过的时长（ 秒 ） lockedFundsRatio
-2）计算 lockedFundsRatio 对于 lockedProfitDegradation 的占比，比如 lockedFundsRatio 为 2 hours ，那么说明  2 / 6  的 profit 已经解锁，可以使用   
-3）计算还未解锁的 profit，按照步骤 2 中的计算即为 1 - ( 2 / 6) 的 profit 还为解锁   
+1. 在 initialize 接口中，我们讲解过 lockedProfitDegradation 表示锁定的是时长。首先计算自上次收益更新以来经过的时长（ 秒 ） lockedFundsRatio
+2. 计算 lockedFundsRatio 对于 lockedProfitDegradation 的占比，比如 lockedFundsRatio 为 2 hours ，那么说明  2 / 6  的 profit 已经解锁，可以使用   
+3. 计算还未解锁的 profit，按照步骤 2 中的计算即为 1 - ( 2 / 6) 的 profit 还为解锁   
 ```python
 def _calculateLockedProfit() -> uint256:
     lockedFundsRatio: uint256 = (block.timestamp - self.lastReport) * self.lockedProfitDegradation
@@ -204,8 +204,8 @@ def _totalAssets() -> uint256:
 ```
 
 - deposit  
-1） 判断 emergencyShutdown 开关是否打开，如果打开，表示当前合约处于紧急状态，为避免用户资金损失，拒绝用户存入资金 
-2） 判断用户准备存入的资金量大小。即如果传入的参数中 _amount 为 MAX_UINT256，则表示用户想要进行最大量存入，此时判断用户的余额和当前 Vault 最大可存入资金的大小，取其中较小的数进行存入。这里需要说明的是，Vault 有一个 depositLimit 的限制，因为根据收益规律，当使用的本金达到一定量后，单位本金的收益无法随着本金的增大而增大，反而可能减小。所以这里每个 Vault 为了保证最大收益，都设置了 depositLimit  
+1. 判断 emergencyShutdown 开关是否打开，如果打开，表示当前合约处于紧急状态，为避免用户资金损失，拒绝用户存入资金 
+2. 判断用户准备存入的资金量大小。即如果传入的参数中 _amount 为 MAX_UINT256，则表示用户想要进行最大量存入，此时判断用户的余额和当前 Vault 最大可存入资金的大小，取其中较小的数进行存入。这里需要说明的是，Vault 有一个 depositLimit 的限制，因为根据收益规律，当使用的本金达到一定量后，单位本金的收益无法随着本金的增大而增大，反而可能减小。所以这里每个 Vault 为了保证最大收益，都设置了 depositLimit  
 类似 UniV2 的 LP token，当用存入 token 到 Vault 的时候，Vault 根据当前 Vault 中的资金以及用户存入的资金，生成对应的份额给用户。举例来说，当前 Vault 中，所有用户存入资金总量为 100$，产生了 20$ 的收益，并且 20$ 收益中，已经解锁了 15$。所有用户的份额总量为 80，那么当用户存入 30$ 的资金时，获得份额 = 80 * ( 30 / ( 100 + 15)) = 20.86。 
 其中 _issueSharesForAmount 为计算用户份额接口，具体计算方式入上所述。  
 ```python 
@@ -277,9 +277,9 @@ def deposit(_amount: uint256 = MAX_UINT256, recipient: address = msg.sender) -> 
 更新 strategy 投资损失。  
 投资有收益就会有损失，strategy 从 Vault 借贷资金进行投资后，或出现收益，或出现损失的情况。当投资失败，造成损失时，就需要更新相应的 debt 数据。  
 具体判断过程如下：  
-1） 判断上报的资金损失量是否小于 strategy 的债务量。这里进行判断的原因是避免超额上报，比如 strategy 从 Vault 借贷 100$ ，如果此接口上报 loss 为 200$，那么就会出现债务不平衡的情况    
-2） 把上报的 loss 转换为 ratio_change, 用于更新后续的 strategy debtratio 和 Vault 总的 debtRatio    
-3） 用得出的 ratio_change 和 debtRatio 更新。这里可以看到 Vault 会根据 ratio_change 对应减少 strategy 的 debtRatio，应该是当 strategy 亏损的时候，为避免亏损进一步扩大，需要降低分配给此 strtegy 的配额    
+1. 判断上报的资金损失量是否小于 strategy 的债务量。这里进行判断的原因是避免超额上报，比如 strategy 从 Vault 借贷 100$ ，如果此接口上报 loss 为 200$，那么就会出现债务不平衡的情况    
+2. 把上报的 loss 转换为 ratio_change, 用于更新后续的 strategy debtratio 和 Vault 总的 debtRatio    
+3. 用得出的 ratio_change 和 debtRatio 更新。这里可以看到 Vault 会根据 ratio_change 对应减少 strategy 的 debtRatio，应该是当 strategy 亏损的时候，为避免亏损进一步扩大，需要降低分配给此 strtegy 的配额    
 ```python
 def _reportLoss(strategy: address, loss: uint256):
     # Loss can only be up the amount of debt issued to strategy
@@ -308,11 +308,11 @@ def _reportLoss(strategy: address, loss: uint256):
 - withdraw  
 用于从 Vault 中提取资金。因为 Vault 的部分资金已经借贷给 strategy 进行投资，所以当用户提取资金的时候，如果 Vault 中资金不足，需要从 strategy 中进行提取。  
 具体处理过程如下：  
-1） 处理用户传入的需要提取的资金 shares，此数值需要小于用户当前拥有的 share ， 且不能为 0  
-2） 把传入的 share 转换为资金量 value，用于后面提取操作  
-3） 循环从 strategy 中提取可提取的最大资金量到 Vault，同时累积记录从 strategy 提取资金时，造成的 loss    
-4） 遍历 strategy 结束后，如果需要提取的 value 大于当前 Vault 的余额，则设置提取的 value 为 Vault 当前余额  
-5)  判断从 strategy 提取资金过程中，造成的 totalloss 在 ( totalloss + value ) 中的占比是否小于用户传入的 maxLoss。如果大于，则说明此次的提取操作造成了过大的损失，则放弃提取；否则，提取资金  
+1. 处理用户传入的需要提取的资金 shares，此数值需要小于用户当前拥有的 share ， 且不能为 0  
+2. 把传入的 share 转换为资金量 value，用于后面提取操作  
+3. 循环从 strategy 中提取可提取的最大资金量到 Vault，同时累积记录从 strategy 提取资金时，造成的 loss    
+4. 遍历 strategy 结束后，如果需要提取的 value 大于当前 Vault 的余额，则设置提取的 value 为 Vault 当前余额  
+5. 判断从 strategy 提取资金过程中，造成的 totalloss 在 ( totalloss + value ) 中的占比是否小于用户传入的 maxLoss。如果大于，则说明此次的提取操作造成了过大的损失，则放弃提取；否则，提取资金  
 
 
 ```python
@@ -553,13 +553,13 @@ def _assessFees(strategy: address, gain: uint256) -> uint256:
 - report  
 strategy 调用这个接口，上报相应的 收益/损失/需要偿还的债务，接口中传入的三个参数分别对应这三个值。  
 具体处理过程如下：
-1） 对 strategy 进行健康检查，通过检查后再继续后续的处理 （ 具体的健康检查处理可以参考 CommonHealthChceck.md ) 
-2） 检查当前调用此接口的 strategy 余额是否大于 gain + _debtPayment ，因为此数值是 strategy 需要支付给 Vault 的金额，需要保证 strategy 余额充足    
-3） 调用 _reportLoss 接口处理 strategy 上报的 loss。这里先处理 loss ，可以保证 strategy 对应的 debtRatio 的更新正确。
-4） 根据 strategy 上报的 debtPayment 和 strategy 实际的 debt 更加 strategies.debt 和 totalDebt。其中 strategy 实际的 debt 就是根据 strategy 当前的 debtRatio 和  strategies.debt，计算出 strategy 需要返还给 Vault 的资金数量   
-5） 计算 strategy 剩余的 credit。这里的 credit 就是根据 strategy 的 debtRatio 计算出 strategy 能从 Vault 获取的最大的配额，然后计算和 strategy 当前的 debt 差值 ，最终得出 strategy 剩余的 credit  
-6） 计算最终代币的转移方向。gain + debtPayment 是 strategy 需要支付给 Vault 的资金，credit 则是 Vault 需要支付给 strategy 的资金。这里对比这两个数值，可以得出是需要 Vault 支付给 strategy 还是 strategy 需要支付给 Vault  
-7） 计算 lockedProfit 。 这里先计算 lockedProfitBeforeLoss = self._calculateLockedProfit() + gain - totalFees ，得出当前可以用户锁定的 profit 是多少。注意到， report 接口上报的时候，是传入了一个 loss 参数，用于 strategy 上报亏损。Vault 会对比 lockedProfitBeforeLoss 和 loss 的数值，如果 lockedProfitBeforeLoss 大于 loss, 那么会从 lockedProfitBeforeLoss 中拿出 loss 大小的资金，用于填补 strategy 造成的损失，剩余的 profit 再进入锁定期。如果 lockedProfitBeforeLoss 小于 loss, 则 lockedProfitBeforeLoss 全部用于填补 strategy 的 loss
+1. 对 strategy 进行健康检查，通过检查后再继续后续的处理 （ 具体的健康检查处理可以参考 CommonHealthChceck.md ) 
+2. 检查当前调用此接口的 strategy 余额是否大于 gain + _debtPayment ，因为此数值是 strategy 需要支付给 Vault 的金额，需要保证 strategy 余额充足    
+3. 调用 _reportLoss 接口处理 strategy 上报的 loss。这里先处理 loss ，可以保证 strategy 对应的 debtRatio 的更新正确。
+4. 根据 strategy 上报的 debtPayment 和 strategy 实际的 debt 更加 strategies.debt 和 totalDebt。其中 strategy 实际的 debt 就是根据 strategy 当前的 debtRatio 和  strategies.debt，计算出 strategy 需要返还给 Vault 的资金数量   
+5. 计算 strategy 剩余的 credit。这里的 credit 就是根据 strategy 的 debtRatio 计算出 strategy 能从 Vault 获取的最大的配额，然后计算和 strategy 当前的 debt 差值 ，最终得出 strategy 剩余的 credit  
+6. 计算最终代币的转移方向。gain + debtPayment 是 strategy 需要支付给 Vault 的资金，credit 则是 Vault 需要支付给 strategy 的资金。这里对比这两个数值，可以得出是需要 Vault 支付给 strategy 还是 strategy 需要支付给 Vault  
+7. 计算 lockedProfit 。 这里先计算 lockedProfitBeforeLoss = self._calculateLockedProfit() + gain - totalFees ，得出当前可以用户锁定的 profit 是多少。注意到， report 接口上报的时候，是传入了一个 loss 参数，用于 strategy 上报亏损。Vault 会对比 lockedProfitBeforeLoss 和 loss 的数值，如果 lockedProfitBeforeLoss 大于 loss, 那么会从 lockedProfitBeforeLoss 中拿出 loss 大小的资金，用于填补 strategy 造成的损失，剩余的 profit 再进入锁定期。如果 lockedProfitBeforeLoss 小于 loss, 则 lockedProfitBeforeLoss 全部用于填补 strategy 的 loss
 ```python
 def report(gain: uint256, loss: uint256, _debtPayment: uint256) -> uint256:
     """

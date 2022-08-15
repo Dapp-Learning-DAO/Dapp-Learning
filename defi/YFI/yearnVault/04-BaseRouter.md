@@ -30,8 +30,8 @@ function setRegistry(address _registry) external {
 
 - allVaults  
 为方便查询特定币中的所有 Vault，router 会缓存从 registry 中获得的 Vault。 
-1） 接口首先判断当前缓存的 vault 数量是否和 registry 中的 vault 数量相同，如果相同则直接返回缓存的 vault 列表  
-2） 如果 registry 中对应币中的 vault 数量和当前 router 缓存的 vault 数量不相同，则从 registry 中拉取缺失的 vault 进行缓存。 因为在 registry 中的 vault 列表时追加的，所以对于缺失的部分，直接从缺的位置进行拉取即可。  
+1. 接口首先判断当前缓存的 vault 数量是否和 registry 中的 vault 数量相同，如果相同则直接返回缓存的 vault 列表  
+2. 如果 registry 中对应币中的 vault 数量和当前 router 缓存的 vault 数量不相同，则从 registry 中拉取缺失的 vault 进行缓存。 因为在 registry 中的 vault 列表时追加的，所以对于缺失的部分，直接从缺的位置进行拉取即可。  
 
 ```solidity
 function allVaults(address token) public view virtual returns (VaultAPI[] memory) {
@@ -74,9 +74,9 @@ function _updateVaultCache(address token, VaultAPI[] memory vaults) internal {
 
 - totalVaultBalance  
 获取一个在账户，在一个币种的所有 vault 中的存款总量。 
-1） 因为账户在 vault 中的存款是以 share 的方式进行记录的，所以首先获取每一份 share 对应多少的 token 数量，这里计算的时候进行了币种的精度处理  
-2） 根据此账户在当前 vault 中的 share 总量，得出账户在此 vault 中存入的资金总量  
-3） 遍历币种的所有 vault ，进行资金的累加，然后计算得出账户在 yearn 中存入的此币种的资金总量  
+1. 因为账户在 vault 中的存款是以 share 的方式进行记录的，所以首先获取每一份 share 对应多少的 token 数量，这里计算的时候进行了币种的精度处理  
+2. 根据此账户在当前 vault 中的 share 总量，得出账户在此 vault 中存入的资金总量  
+3. 遍历币种的所有 vault ，进行资金的累加，然后计算得出账户在 yearn 中存入的此币种的资金总量  
 ```solidity
 function totalVaultBalance(address token, address account) public view returns (uint256 balance) {
         VaultAPI[] memory vaults = allVaults(token);
@@ -90,14 +90,14 @@ function totalVaultBalance(address token, address account) public view returns (
 
 - _deposit  
 _deposit 接口用于向 Vault 中存入资金。当 pullFunds 为 true 时的处理逻辑如下：
-1） 当 amount 为 DEPOSIT_EVERYTHING 时，表示从 depositor 中转入 router 的资金总量为 depositor 的余额总量  
-2） 从  depositor 中转入资金总量 amount 到当前 router 中  
+1. 当 amount 为 DEPOSIT_EVERYTHING 时，表示从 depositor 中转入 router 的资金总量为 depositor 的余额总量  
+2. 从  depositor 中转入资金总量 amount 到当前 router 中  
 
 处理了 pullFunds 为 true 的情况后，下面就是通用的处理：
-1） 判断 router 授予给 Vault 的信用额度是否大于 amount ，如果小于 amount ，则修改信用额度为 unlimited  
-2） 根据 receiver，amount 参数的不同，调用不同的 deposit 接口  
-3)  deposit 的时候，可能因为 amount 数量超过 Vault 能接受的最大限度，所以会存在无法全部存入的情况。所以在最后需要进行判断，当 router 中还有资金剩余时，需要把剩余的资金返还给 depositor  
-4） 返还存入的实际资金数量 deposited 
+1. 判断 router 授予给 Vault 的信用额度是否大于 amount ，如果小于 amount ，则修改信用额度为 unlimited  
+2. 根据 receiver，amount 参数的不同，调用不同的 deposit 接口  
+3. deposit 的时候，可能因为 amount 数量超过 Vault 能接受的最大限度，所以会存在无法全部存入的情况。所以在最后需要进行判断，当 router 中还有资金剩余时，需要把剩余的资金返还给 depositor  
+4. 返还存入的实际资金数量 deposited 
 
 ```solidity
 function _deposit(
@@ -145,15 +145,15 @@ function _deposit(
 
 - _withdraw  
 _withdraw 接口用于从 Vault 中提取资金。 主要逻辑如下： 
-1） 最外层为循环遍历处理，遍历 registry 中的 Vault 进行 withdraw  
-2） 对 withdrawFromBest 参数判断是仅仅从历史 Vault 中提取资金，还是包括当前的最新的 Vault  
-3） 判断 sender 在 Vault 中的可用 share  （ availableShares ）
-4） 取 availableShares 和 vaults.maxAvailableShares 两个值中的最小值，避免提取的资金超过限额。这里这样处理的原因为，从 Vault 提取资金时，为避免资金的过度提取，导致 Vault 资金不足， Vault 对提取的资金做了相应的限制    
-5） 当前可提取的 share 不为 0 的时候进行 withdraw ，否则跳过  
-6） 当接口入参中的 amount 为  MAX_UINT256 时，表示全部提取；否则根据剩余需要提取的 amount， 换算成对应的 share 进行提取
-7） 从 Vault withdraw 后，计算当前已经提取的所有的资金总量 withdrawn 是否已经满足要求，如果已经满足，则跳出循环   
-8） 判断 withdrawn 是否大于 amount ， 如果大于，则把多余的资金存回 Vault 
-9)  将提取的资金准入 receiver  
+1. 最外层为循环遍历处理，遍历 registry 中的 Vault 进行 withdraw  
+2. 对 withdrawFromBest 参数判断是仅仅从历史 Vault 中提取资金，还是包括当前的最新的 Vault  
+3. 判断 sender 在 Vault 中的可用 share  （ availableShares ）
+4. 取 availableShares 和 vaults.maxAvailableShares 两个值中的最小值，避免提取的资金超过限额。这里这样处理的原因为，从 Vault 提取资金时，为避免资金的过度提取，导致 Vault 资金不足， Vault 对提取的资金做了相应的限制    
+5. 当前可提取的 share 不为 0 的时候进行 withdraw ，否则跳过  
+6. 当接口入参中的 amount 为  MAX_UINT256 时，表示全部提取；否则根据剩余需要提取的 amount， 换算成对应的 share 进行提取
+7. 从 Vault withdraw 后，计算当前已经提取的所有的资金总量 withdrawn 是否已经满足要求，如果已经满足，则跳出循环   
+8. 判断 withdrawn 是否大于 amount ， 如果大于，则把多余的资金存回 Vault 
+9. 将提取的资金准入 receiver  
 ```solidity
 function _withdraw(
         IERC20 token,
