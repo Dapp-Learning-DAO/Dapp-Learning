@@ -1691,7 +1691,10 @@ name = "web3-rust"
 version = "0.1.0"
 dependencies = [
  "dotenv_codegen",
+ "futures",
+ "futures-timer",
  "hex",
+ "secp256k1",
  "tokio",
  "web3",
 ]
