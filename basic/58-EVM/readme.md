@@ -42,8 +42,11 @@
 ### SPV
 
 ### EVM 
-EVM内存布局：
-https://mirror.xyz/xyyme.eth/GNVcUgKAOEiLyClKeqkmD35ctLu6_XomT3ZDIfV3tz8?s=09 
+
+
+### 减少合约size
+https://ethereum.org/zh/developers/tutorials/downsizing-contracts-to-fight-the-contract-size-limit 
+
 
 ### 数据库选型
 
