@@ -280,16 +280,16 @@ application: {
 
 ### 交互流程
 
-1. 在需要 token 授权的场景，程序会自动获取 allowance 数量判断是否需要发起 approve
+1. 在需要 token 授权的场景，程序会调用 `useTokenAllowance` 根据返回的 allowance 数量判断是否需要发起 approve
 2. 调用 `useApproveCallback` 有两个返回
    - `approvalState` 当前 token 对于 router 合约的 approve 状态
-   - `approve` 向 token 发起 approve 的方法
+   - `approveCallback` 向 token 发起 approve 的方法
 3. `useApproveCallback` 的运行过程：
    - 向 token 发送 multicall 调用查询对于 router 合约的 allowance 数量
    - 如果数量不足，会先检查 transaction state 是否有 pending 状态的 approve 请求
    - approve 状态有四种： `UNKNOWN`, `NOT_APPROVED`, `PENDING`, `APPROVED`
    - 内部详细的执行过程可以看[useApproveCallback 的代码解析](./Code.md#useApproveCallback)
-4. 当用户点击 Approve 按钮，会调用上一步返回的 approve 方法
+4. 当用户点击 Approve 按钮，会调用上一步返回的 approveCallback 方法
 
    - approve 的执行方法有两种模式，一个是最大数量授权，一个是精确数量的授权，会预执行前者若失败则执行后者
    - 交易发送成功，向 transactions state 推送交易信息，以便追踪交易结果
