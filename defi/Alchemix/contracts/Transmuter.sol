@@ -191,7 +191,7 @@ contract Transmuter is Context {
     /// sets the length (in blocks) of one full distribution phase
     function setTransmutationPeriod(uint256 newTransmutationPeriod) public onlyGov() {
         TRANSMUTATION_PERIOD = newTransmutationPeriod;
-        emit TransmuterPeriodUpdated(TRANSMUTATION_PERIOD);
+        emit TransmuterPeriodUpdated(newTransmutationPeriod);
     }
 
     ///@dev claims the base token after it has been transmuted
