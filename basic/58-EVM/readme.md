@@ -61,6 +61,7 @@ Openzeppelin blog 的系列文章，非常棒的科普文。学习笔记参见 :
 
 ## 推荐用的手写Opcode的工具
 [etk](https://quilt.github.io/etk/ch02-lang/ch03-labels.html), 它可以帮助你计算offset和length。
+在Opcode.etk文件中，使用该工具定义的etk格式手写了`cloneETHPair`函数，可以对比sudoswap.lob.sol文件进行查看
 
 
 

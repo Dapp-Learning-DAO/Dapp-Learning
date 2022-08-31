@@ -1,0 +1,46 @@
+initStart:
+    push1 runtimeEnd - runtimeStart # r
+    returndatasize                  # 0 r
+    dup2                            # r 0 r
+    push1 initEnd                   # c r 0 r
+    returndatasize                  # 0 c r 0 r
+    codecopy                        # 0 r               # [0-runsize]: runtimecode
+    return                          #                   # [0-runsize]: runtimecode
+initEnd:
+runtimeStart:
+    returndatasize                  # 0
+    returndatasize                  # 0 0
+    returndatasize                  # 0 0 0
+    returndatasize                  # 0 0 0 0
+    calldatasize                    # cds 0 0 0 0
+    returndatasize                  # 0 cds 0 0 0 0
+    returndatasize                  # 0 0 cds 0 0 0 0 
+    calldatacopy                    # 0 0 0 0           # [0-cds]: calldata
+    push1 extraEnd - extraStart     # extra 0 0 0 0
+    push1 extraStart - runtimeStart # extraStart extra 0 0 0 0
+    calldatasize                    # cds extraStart extra 0 0 0 0
+    codecopy                        # 0 0 0 0           # [0-cds]: calldata, [cds,cds+extra]
+    calldatasize                    # cds 0 0 0 0
+    push1 extraEnd - extraStart     # extra cds 0 0 0 0 
+    add                             # extra+cds 0 0 0 0
+    returndatasize                  # 0 extra+cds 0 0 0 0 
+    push20 0xdeadbeef               # 0xdeadbeef 0 extra+cds 0 0 0 0
+    gas                             # gas 0xdeadbeef 0 extra+cds 0 0 0 0
+    delegatecall                    # success 0 0
+    returndatasize                  # rds success 0 0
+    returndatasize                  # rds rds success 0 0
+    swap4                           # 0 rds success 0 rds
+    dup1                            # 0 0 rds success 0 rds
+    returndatacopy                  # success 0 rds     # [0-rds]: returndata
+    push1 labelReturn - runtimeStart# labelRevert success 0 rds
+    jumpi                           # 0 rds
+    revert                          # _
+labelReturn:
+    jumpdest                        # 0 rds
+    return                          # _
+extraStart:
+    push4 0xffffffff
+extraEnd:
+runtimeEnd:
+
+#compiled: 603a3d8160093d39f33d3d3d3d363d3d37600560353639366005013d7300000000000000000000000000000000deadbeef5af43d3d93803e603357fd5bf363ffffffff
