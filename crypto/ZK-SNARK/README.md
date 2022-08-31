@@ -17,6 +17,12 @@ paper list:
 - zksnark 在 Zcash 中的作用
 - zkSNARKs from Polynomial Commitments
 
+## zk hardware
+reference：
+1. Paradigm：https://www.paradigm.xyz/2022/04/zk-hardware
+2. Paradigm cite的paper：https://www.microsoft.com/en-us/research/publication/pipezk-accelerating-zero-knowledge-proof-with-a-pipelined-architecture/
+3. Justin Drake talk: https://www.youtube.com/watch?v=ffXgxvlCBvo
+
 ## reference
 
 - 安比实验室 SECBIT blog zk-SNARK 系列文章

@@ -66,3 +66,4 @@ curl -X POST -u "PROJECT_ID:PROJECT_SECRET" \
 - <https://nft.storage>
 - https://infura.io/docs/ipfs#section/Authentication/Using-Javascript
 - zknft: https://medium.com/centrifuge/bringing-privacy-to-non-fungible-tokens-a-recap-from-the-zokrates-workshop-at-zcon1-6d9ea8a74b7f
+- 055: https://github.com/hellsegga-xyz/055-contract 
