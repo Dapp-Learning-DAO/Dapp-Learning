@@ -1,8 +1,12 @@
 use hex::FromHex;
+use secp256k1::SecretKey;
 use std::str::FromStr;
+use std::time;
+
 use web3::{
     contract::{Contract, Options},
-    types::{Address, H160, U256},
+    futures::{future, StreamExt},
+    types::{Address, FilterBuilder, TransactionParameters, TransactionRequest, H160, H256, U256},
 };
 
 #[macro_use]
@@ -16,8 +20,15 @@ async fn main() -> web3::contract::Result<()> {
     // Create new Web3 with given transport
     let web3 = web3::Web3::new(transport);
 
+    // Create new Web3 with subscribe
+    let web3_ws =
+        web3::Web3::new(web3::transports::WebSocket::new(dotenv!("TARGET_WS_NETWORK")).await?);
+
     // Insert the 20-byte "to" address in hex format (prefix with 0x)
     let to: Address = Address::from_str(dotenv!("TEST_ACCOUNT")).unwrap();
+
+    // Insert the 32-byte private key in hex format (do NOT prefix with 0x)
+    let prvk = SecretKey::from_str(dotenv!("TEST_ACCOUNT_PRIVATE_KEY")).unwrap();
 
     // Get accounts in current network
     println!("Calling accounts.");
@@ -53,7 +64,7 @@ async fn main() -> web3::contract::Result<()> {
                 "hello".to_owned(),
                 "Dapp".to_owned(),
                 1u8,
-                U256::from(1_000_000_u64)
+                U256::from(1_000_000_u64),
             ),
             my_account,
         )
@@ -62,6 +73,40 @@ async fn main() -> web3::contract::Result<()> {
     let contract_addr = new_contract.address();
 
     println!("contract deploy success, addr: {}", contract_addr);
+
+    // Filter for Transfer event in our contract
+    // Notic: params in topics should be vec of event encode signiture
+    let filter = FilterBuilder::default()
+        .address(vec![contract_addr])
+        .topics(
+            Some(vec![H256::from(
+                <[u8; 32]>::from_hex(dotenv!("TRANSFER_EVENT_SIGNITURE")).expect("Decoding failed"),
+            )]),
+            None,
+            None,
+            None,
+        )
+        .build();
+
+    // Filter for Approval event in our contract
+    let sub_filter = FilterBuilder::default()
+        .address(vec![contract_addr])
+        .topics(
+            Some(vec![H256::from(
+                <[u8; 32]>::from_hex(dotenv!("APPROVAL_EVENT_SIGNITURE")).expect("Decoding failed"),
+            )]),
+            None,
+            None,
+            None,
+        )
+        .build();
+
+    let log_filter = web3.eth_filter().create_logs_filter(filter).await?;
+
+    let logs_stream = log_filter.stream(time::Duration::from_secs(1));
+    futures::pin_mut!(logs_stream);
+
+    let sub = web3_ws.eth_subscribe().subscribe_logs(sub_filter).await?;
 
     // // Given contract address, we need this to generate Contract instance
     // let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
@@ -83,6 +128,30 @@ async fn main() -> web3::contract::Result<()> {
 
     println!("The account {} balance is: {:?}", my_account, balance_of);
 
+    // Approve some tokens to test account
+    let approvee_amount = 10000u32;
+    let tx = contract
+        .call(
+            "approve",
+            (to, approvee_amount),
+            my_account,
+            Options::default(),
+        )
+        .await?;
+    println!("TxHash: {}", tx);
+
+    // Check the allowance
+    let allowance: U256 = contract
+        .query(
+            "allowance",
+            (my_account, to),
+            None,
+            Options::default(),
+            None,
+        )
+        .await?;
+    println!("My account allowance to {:?} is: {:?}", to, allowance);
+
     // Change state of the contract
     let tx = contract
         .call("transfer", (to, 42_u32), my_account, Options::default())
@@ -99,6 +168,55 @@ async fn main() -> web3::contract::Result<()> {
         .query("balanceOf", (to,), None, Options::default(), None)
         .await?;
     println!("The accept account balance is: {:?}", result2);
+
+    // get logs from stream
+    let log = logs_stream.next().await.unwrap();
+    println!("got log: {:?}", log.is_ok());
+
+    // Build the tx object, send some eths before we do transferFrom
+    let tx_object = TransactionRequest {
+        from: my_account,
+        to: Some(to),
+        value: Some(U256::exp10(17)), //0.1 eth
+        ..Default::default()
+    };
+
+    // Send the tx to localhost
+    let result = web3.eth().send_transaction(tx_object).await?;
+
+    println!("Tx succeeded with hash: {}", result);
+
+    /////////////////////
+    // Below generates and signs a transaction offline, before transmitting it to a public node (eg Infura)
+    // Sign the tx (can be done offline)
+    // let signed = web3.accounts().sign_transaction(tx_object, &prvk).await?;
+
+    // Send the tx to infura
+    // let result = web3.eth().send_raw_transaction(signed.raw_transaction).await?;
+    /////////////////////
+
+    // use test account transfer user token to zero address
+    let result3 = contract
+        .signed_call(
+            "transferFrom",
+            (my_account, H160::random(), 10000u32),
+            Options::default(),
+            &prvk,
+        )
+        .await?;
+    println!("Did transfer action success: {:?}", result3);
+
+    let user_balance: U256 = contract
+        .query("balanceOf", (my_account,), None, Options::default(), None)
+        .await?;
+    println!("After transfer my account balance is: {:?}", user_balance);
+
+    // get logs from subscribed event
+    sub.for_each(|log| {
+        println!("got sub log: {:?}", log);
+        future::ready(())
+    })
+    .await;
 
     Ok(())
 }
