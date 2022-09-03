@@ -63,21 +63,21 @@ npx hardhat run scripts/main.js
 ```
 
 ## References    
-github: https://github.com/matter-labs/zksync  
-zkSync principal: https://zhuanlan.zhihu.com/p/363029544  
-zkSync source code analysis: https://www.jianshu.com/u/ac3aed07477e  
-L2 - zkSync souce code tutorial: https://zhuanlan.zhihu.com/p/343212894   
-Layer 2 expansion solution: https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA   
-Layer 2 solution comparison:  https://blog.matter-labs.io/evaluating-ethereum-l2-scaling-solutions-a-comparison-framework-b6b2f410f955  
-zkSync official website: https://zksync.io/  
-zkSync twitter: https://twitter.com/zksync  
-zkSync discord: https://discord.com/invite/px2aR7w  
-zkSync telegram: https://t.me/zksync  
-Deep into Plasma: https://learnblockchain.cn/2018/10/20/plasma-framework   
-7 solutions for expansion: https://picture.iczhiku.com/weixin/message1625468135177.html  
-rinkeby cross-bridge :  https://rinkeby.zksync.io  
-ZKSync introduction: https://www.jianshu.com/p/8821f1e63dc9  
-zkSync rinkeby scan: https://rinkeby.zkscan.io/  
-NFT upload: https://app.pinata.cloud/  
-zigzag introduction:  https://docs.zigzag.exchange/  
-zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html
+- github: https://github.com/matter-labs/zksync  
+- zkSync principal: https://zhuanlan.zhihu.com/p/363029544  
+- zkSync source code analysis: https://www.jianshu.com/u/ac3aed07477e  
+- L2 - zkSync souce code tutorial: https://zhuanlan.zhihu.com/p/343212894   
+- Layer 2 expansion solution: https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA   
+- Layer 2 solution comparison:  https://blog.matter-labs.io/evaluating-ethereum-l2-scaling-solutions-a-comparison-framework-b6b2f410f955  
+- zkSync official website: https://zksync.io/  
+- zkSync twitter: https://twitter.com/zksync  
+- zkSync discord: https://discord.com/invite/px2aR7w  
+- zkSync telegram: https://t.me/zksync  
+- Deep into Plasma: https://learnblockchain.cn/2018/10/20/plasma-framework   
+- 7 solutions for expansion: https://picture.iczhiku.com/weixin/message1625468135177.html  
+- rinkeby cross-bridge :  https://rinkeby.zksync.io  
+- ZKSync introduction: https://www.jianshu.com/p/8821f1e63dc9  
+- zkSync rinkeby scan: https://rinkeby.zkscan.io/  
+- NFT upload: https://app.pinata.cloud/  
+- zigzag introduction:  https://docs.zigzag.exchange/  
+- zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html

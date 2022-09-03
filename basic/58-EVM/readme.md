@@ -41,6 +41,13 @@
 
 ### SPV
 
+### EVM 
+
+
+### 减少合约size
+https://ethereum.org/zh/developers/tutorials/downsizing-contracts-to-fight-the-contract-size-limit 
+
+
 ### 数据库选型
 
 以太坊的 Rust 客户端 Parity 使用 Rocksdb。而以太坊的 Go、C++ 和 Python 客户端都使用 leveldb。

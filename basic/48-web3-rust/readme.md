@@ -72,6 +72,7 @@ cargo run
 
 ## 参考文档
 
+- rust语言圣经： https://course.rs
 - rust 官方学习文档: <https://doc.rust-lang.org/book/>
 - esay rust : <https://github.com/Dhghomon/easy_rust>
 - rust 小测验 : <https://github.com/rust-lang/rustlings>  

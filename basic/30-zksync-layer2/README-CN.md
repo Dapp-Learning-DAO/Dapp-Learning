@@ -30,19 +30,11 @@ Server application 的职能主要有：
 4）为 executed blocks 发起 proof 生成申请  
 5）将数据发布到 zkSync smart contract    
 
+
+
 ## 操作流程  
-### 手工存入 ETH 到 zksync   
-- 登陆 [zksync 测试网](https://wallet.zksync.io/?network=rinkeby)  并链接 metaMask 钱包  
-
-- 选择 "Add Funds"   
-
-- 输入存入金额, 然后点击 "Add Funds"  
-
-- 存入成功  
-
-- 点击 "OK" 查看 rinkeby zkSync 上的余额  
-
-- 在 [zkscan](https://rinkeby.zkscan.io/) 上查看交易信息  
+zkSync的交易可以由Layer1或者Layer2的操作发起。简单的说，zkSync的交易经历三个状态：1/Request 2/ Committed 3/ Verified。只有Verified的操作才是确定性状态。
+![架构图](./img/image.png)
 
 ### 使用 JS 在 zkSync 上发送交易  
 - 安装依赖 

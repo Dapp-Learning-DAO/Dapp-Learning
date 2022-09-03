@@ -1,4 +1,7 @@
 # PLONK zksnark算法
+
+数学基础：https://learnblockchain.cn/article/2801
+电路介绍：https://blog.csdn.net/adijeshen/article/details/123332665 
 ## 参考链接
 -  V神文章： https://vitalik.ca/general/2019/09/22/plonk.html
  
