@@ -8,10 +8,10 @@ import '../libraries/SafeMath.sol';
 import '../libraries/UniswapV2Library.sol';
 import '../libraries/UniswapV2OracleLibrary.sol';
 
-
-// 滑动视窗预言机, 用于通过视窗收集的观测数据, 来提供过去变动的价格的平均值
-// `windowSize` 的精度为 `windowSize / granularity`
-// note 这是一个单例预言机，与需要对每个交易对都部署一次的简单预言机不同，只需要根据所需的参数部署一次即可。
+// sliding window oracle that uses observations collected over a window to provide moving price averages in the past
+// `windowSize` with a precision of `windowSize / granularity`
+// note this is a singleton oracle and only needs to be deployed once per desired parameters, which
+// differs from the simple oracle which must be deployed once per pair.
 contract ExampleSlidingWindowOracle {
     using FixedPoint for *;
     using SafeMath for uint;
@@ -23,20 +23,20 @@ contract ExampleSlidingWindowOracle {
     }
 
     address public immutable factory;
-    // 用于观测的视窗大小, 也就是计算移动平均值的所需要时间总量，例如24小时
+    // the desired amount of time over which the moving average should be computed, e.g. 24 hours
     uint public immutable windowSize;   //24 hours
-    // 为每个交易对保存的观测数量，也就是为了窗口存储了多少个已被观测的价格。 
-    // 随着粒度从 1 递增，数据的更新会变得更加频繁，移动平均价格也就越精确。 
-    // 平均值是在给定范围内的区间上进行计算的: 
+    // the number of observations stored for each pair, i.e. how many price observations are stored for the window.
+    // as granularity increases from 1, more frequent updates are needed, but moving averages become more precise.
+    // averages are computed over intervals with sizes in the range:
     //   [windowSize - (windowSize / granularity) * 2, windowSize]
-    // 例如如果窗口大小为 24 小时，粒度为 24，那么预言机将返回
-    //   周期:
+    // e.g. if the window size is 24 hours, and the granularity is 24, the oracle will return the average price for
+    //   the period:
     //   [now - [22 hours, 24 hours], now]
     uint8 public immutable granularity;   //1
-    // 尽管可以通过 granularity 和 windowSize 来计算 periodSize，但为了使计算更直观和节省gas，将其记录为一个状态变量。
+    // this is redundant with granularity and windowSize, but stored for gas savings & informational purposes.
     uint public immutable periodSize;    //windowSize/granularity 24
 
-    // 使用一个map来记录每个交易对的观察组。
+    // mapping from pair address to a list of price observations of that pair
     mapping(address => Observation[]) public pairObservations;
 
     constructor(address factory_, uint windowSize_, uint8 granularity_) public {
@@ -50,7 +50,7 @@ contract ExampleSlidingWindowOracle {
         granularity = granularity_;
     }
 
-    // 通过给定的时间的来获取对应的观察组索引
+    // returns the index of the observation corresponding to the given timestamp
     function observationIndexOf(uint timestamp) public view returns (uint8 index) {
         uint epochPeriod = timestamp / periodSize;
         return uint8(epochPeriod % granularity);
@@ -59,7 +59,7 @@ contract ExampleSlidingWindowOracle {
     // returns the observation from the oldest epoch (at the beginning of the window) relative to the current time
     function getFirstObservationInWindow(address pair) private view returns (Observation storage firstObservation) {
         uint8 observationIndex = observationIndexOf(block.timestamp);
-        // 放置溢出。 如果 observationIndex + 1 溢出了，最后的结果还是为 0 。
+        // no overflow issue. if observationIndex + 1 overflows, result is still zero.
         uint8 firstObservationIndex = (observationIndex + 1) % granularity;
         firstObservation = pairObservations[pair][firstObservationIndex];
     }
