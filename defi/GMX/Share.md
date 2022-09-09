@@ -2,14 +2,17 @@
 ## 前端及操作逻辑： Trade-Glp-Staking
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-06-25.png?raw=true" /></center>
 
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-04-40.png?raw=true" /></center>
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-07-07.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-04-40.png?raw=true" /></center>  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-07-07.png?raw=true" /></center>   
+
 ## 行业地位：
 
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-08-41.png?raw=true" /></center>
-## 参考资料：
-https://www.notion.so/GMX-Technical-Overview-adcd9003194f444f81a28bcbecdde773   
-## 项目历史：
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-08-41.png?raw=true" /></center>   
+  
+## 参考资料：  
+https://www.notion.so/GMX-Technical-Overview-adcd9003194f444f81a28bcbecdde773     
+
+## 项目历史  
 1. Started XVIX in November 2020, 
 2. Upgraded to Gambit on BSC in March 2021, 
 3. Launched GMX in September 2021 on Arbitrum, 
