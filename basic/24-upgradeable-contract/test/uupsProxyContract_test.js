@@ -10,7 +10,7 @@ let myLogicV2;
 describe('uups mode upgrade', function () {
   it('deploys', async function () {
     const MyLogicV1 = await ethers.getContractFactory('MyLogicV1');
-      myLogicV1 = (await upgrades.deployProxy(MyLogicV1, {kind: 'transparent'}));
+      myLogicV1 = (await upgrades.deployProxy(MyLogicV1, {kind: 'uups'}));
       console.log(myLogicV1.address);
   })
   it('myLogicV1 set', async function () {
