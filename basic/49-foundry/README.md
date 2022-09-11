@@ -33,12 +33,19 @@ forge init my_project
 my_project
 ├── foundry.toml
 ├── lib
-│   └── ds-test
-│       └── ...
-└── src
-    ├── Contract.sol
-    └── test
-        └── Contract.t.sol
+│   └── forge-std
+|   |  └── lib
+|   |  |  └── ds-test
+|   |  |     └── ...
+|   |  └── src
+|   |     └── ...
+│   └── ...
+└── script
+|   └── Counter.s.sol
+├── src
+│   └── Counter.sol
+└── test
+    └── Counter.t.sol
 ```
 
 其中：
@@ -47,9 +54,41 @@ my_project
     - `forge config --basic` 可查看当前的基础设置
     - `forge config` 可查看当前所有设置
 - `src` 下面放你写的合约
-- `src/test` 下放合约对应的测试文件
+- `test` 下面放合约对应的测试文件
+- `script` 下面放自定义测试通用文件
 - `lib` 目录里放开发依赖的库
-    - 新建项目安装了测试需要的 ds-test 库
+    - 新建项目安装了测试需要的 forge-std 库，将 ds-test 即成到其中
+
+### VSCode 集成
+
+Foundry 支持 VSCode 的集成开发，配置只需要进入项目目录然后执行：
+
+```bash
+cd my_project
+forge remappings > remappings.txt
+```
+
+## 调用三方库
+
+foundry 可以直接安装调用 GitHub API 下载上面开源的三方库。
+
+安装第三方库 - OpenZeppelin：
+
+```bash
+forge install openzeppelin/openzeppelin-contracts
+```
+
+其中 `openzeppelin` 为 GitHub 上的账号名，斜杠 `/` 后面
+接用户的 repo。
+
+安装后导入库需要在合约文件前面添加，如添加 openzeppelin 的 ERC20：
+
+```bash
+import "openzeppelin/contracts/token/ERC20/ERC20.sol"
+```
+
+**NOTE**： 如果使用 VSCode 的话，需要重新执行
+`forge remappings > remappings.txt`
 
 ## 编译合约
 
@@ -221,7 +260,7 @@ contract OwnerUpOnlyTest is DSTest {
     upOnly.increment();
     assertEq(upOnly.count(), 1);
   }
-	
+
 	function testFailIncrementAsNotOwner() public {
     cheats.prank(address(0));
     upOnly.increment();
@@ -285,6 +324,52 @@ forge create --rpc-url <your_rpc_url> --private-key <your_private_key> src/MyCon
 +  [在 Hardhat 项目中配置 Foundry](use-foundry-in-hardhat/README.md)
 
 
+## Debug 合约
+
+foundry 也支持 debug 合约，可 debug 本地的合约或链上的 tx，
+与 Remix 唯一的差别是 foundry 中没有 storage。
+
+- Debug 本地合约
+
+```bash
+forge test --debug <FunctionName>
+```
+
+如：
+
+```bash
+forge test --debug --testSetter
+```
+
+或：
+
+```bash
+forge debug --debug <contract-file> --sig <FunctionSignature>
+```
+
+如：
+
+```bash
+forge debug --debug src/Hello.sol --sig "setter(string)" "hello"
+```
+
+- Debug 链上 tx
+
+```bash
+cast run --debug --rpc-url $ETH_RPC_URL <tx-hash>
+```
+
+其中 `$ETH_RPC_URL` 就是调用的节点的 RPC，可以直接写或者将 RPC 设置为
+`ETH_RPC_URL` 变量。`<tx-hash>` 为需要 debug 的 tx 的哈希值.
+
+如：
+
+```bash
+cast run --debug $ETH_RPC_URL 0x1126aa5e5b648eebad1c88141e5142cf0a4082e6ccf9fed77d69a190c21724a3
+```
+
+- debug 窗口的快捷键参考：[Foundry Debugger](https://book.getfoundry.sh/forge/debugger#navigating)
+
 ## 与合约交互
 
 ```bash
@@ -328,4 +413,3 @@ anvil --hardfork latest
 - [Video: Intro to Foundry](https://www.youtube.com/watch?v=fNMfMxGxeag)
 - [ERC20 foundry](https://learnblockchain.cn/article/3972)
 - [The Foundry EVM Development Environment](https://medium.com/@jtriley15/the-foundry-evm-development-environment-f198f2e4c372)
-
