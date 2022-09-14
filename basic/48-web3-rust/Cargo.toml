@@ -6,7 +6,11 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = {version = "1.19.2", features = ["full"]}
-web3 = "0.18.0"
 dotenv_codegen = "0.15.0"
+futures = "0.3.5"
+futures-timer = "3.0.2"
 hex = "0.4.3"
+secp256k1 = {version = "0.21", features = ["recovery"]}
+tokio = {version = "1.19.2", features = ["full"]}
+web3 = {version = "0.18.0", features = ["signing"]}
+

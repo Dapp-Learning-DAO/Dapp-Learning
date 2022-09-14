@@ -1,6 +1,9 @@
 ## Ethereum2.0
 三部分： The Beacon Chain, The Merge, The Sharding.
 
+官方文档：https://ethereum.org/en/upgrades/merge/#what-is-the-merge
+consensys介绍： https://consensys.net/blog/news/the-state-of-the-merge-an-update-on-ethereums-merge-to-proof-of-stake-in-2022/
+
 ### EIP-4844
 Proto-danksharding（又名 EIP-4844）是一个以太坊改进提议（EIP）.
 EIP-4844 提案是在以太坊 2.0 更新完成之前作为临时解决方案。该提案解释了一种新方法来帮助划分交易中所需的信息，例如验证规则和交易格式，而无需实际实施任何分片.
@@ -59,5 +62,6 @@ https://www.8btc.com/article/6721900
 - 一文了解以太坊的“扩容杀手锏”danksharding: https://www.defidaonews.com/article/6727438
 - V神科普的“Danksharding”到底是什么: https://mp.weixin.qq.com/s/6SaXnZtSHN-pb7rvCm7B9g  
 - 認識 Danksharding -以太未來擴容的新方案： https://medium.com/taipei-ethereum-meetup/%E7%9E%AD%E8%A7%A3%E7%A5%9E%E7%A7%98%E7%9A%84-zk-starks-ee56a697af76
+- [beaconcha](https://prater.beaconcha.in/block/3641948)
 
 

@@ -24,7 +24,7 @@ We are designed for developers to step into blockchain DAPP development, where t
 
 We are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
-We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
@@ -69,7 +69,7 @@ Case studies of the mainstream DeFi, NFT, Dao and other crypto projects to enlig
 
 ## Preparatory Work
 **Ramp up**
-- Developers new to dapp development are strongly encoraged to learn the basics of Ethereum and Solidity before embarking on formal development.
+- Developers new to dapp development are strongly encouraged to learn the basics of Ethereum and Solidity before embarking on formal development.
 You can refer to [basic knowledge preparation](./docs/basic-knowledge-en.md) to ramp up.
 
 **Development tool**
@@ -91,7 +91,7 @@ We have collected some crypto courses from top universities and the Ethereum com
 - [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
-We have also organized a translation group to translate MIT course 'blockchain and money' into Chinese, and upload all the chinese note-taking on our WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/79eRMtB_yz8G6H8_saCeLw)
+We have also organized a translation group to translate MIT course 'blockchain and money' into Chinese, and upload all the chinese note-taking on our WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzAwNTAxMzMzMA==&scene=1&album_id=2241099480056119298&count=3#wechat_redirect)
 
 If you have other high-quality course recommendations, we hope you can make a suggestion and add it in our course repo: [Recommendations for cryptographic courses](./docs/crypto-course-en.md).
 
@@ -194,7 +194,7 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
   Developers can initiate project research topic, form groups, and collaborate within the development community. This section is recommended as a submodule.
 
 ## DeFi advanced tasks
-The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.  
+The DEFI bibles will set you up with a good fundamental understanding of the DEFI system.  
   [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)     
   [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)   
  
@@ -231,6 +231,8 @@ You can refer to our study group's learning roadmap, which is better with the vi
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
+
+
 
 ## NFT advanced tasks
 
@@ -287,16 +289,16 @@ Feel like a career in the crypto industry? The following websites fyi:
  - https://www.paradigm.xyz/opportunities/
 
 ## Project Ecology
-Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md),Learn more about the ecology of the Dapp-Learning project.
+Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.
 
 ## Guide to Contribution
-Intereted in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
+Interested in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
 
 ## Frequently Asked Questions (FAQ)
 Please refer to [this link](./docs/TROUBLE_SHOOTING-en.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing etc.
 
 ## Donation Wanted
-Open-sourced projects are not easy to maintain so we'd love for all kinds of donations. Dapp Learning team follow DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.
+Open-sourced projects are not easy to maintain so we'd love all kinds of donations. Dapp Learning team follows DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.
 
 We have a Gitcoin campaign to sustain the Dapp-Learning efforts:
 - Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
@@ -305,11 +307,11 @@ Direct donation to our dev team's fund is also appreciated:
 - Ethereum main network/zkSync/Arbitrum：
 0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
-**We also have created multi-signature wallets on polygon, managed by our core contributors**
+**We also have created multi-signature wallets on Polygon, managed by our core contributors**
 - Polygon [Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 ## Ethereum Foundation-sponsored projects
-This project is sponsored by Ethereum foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
+This project is sponsored by the Ethereum Foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
 Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
 ![ESP02](./docs/imgs/ESP-02.jpg)
 

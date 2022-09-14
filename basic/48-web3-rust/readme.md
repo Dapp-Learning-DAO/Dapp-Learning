@@ -24,6 +24,7 @@ npx hardhat run ./scripts/file-generate.js
 cp .env.example .env
 ## 修改 .env 中的 INFURA_ID 和 PRIVATE_KEY 为实际的值
 PRIVATE_KEY=xxxxxxxxxxxxxxxx
+TEST_ACCOUNT_PRIVATE_KEY=xxxxxxxx
 ACCOUNT_BALANCE=10000000000000000000000
 ```
 
@@ -77,6 +78,7 @@ cargo run
 
 ## 参考文档
 
+- rust语言圣经： https://course.rs
 - rust 官方学习文档: <https://doc.rust-lang.org/book/>
 - esay rust : <https://github.com/Dhghomon/easy_rust>
 - rust 小测验 : <https://github.com/rust-lang/rustlings>
