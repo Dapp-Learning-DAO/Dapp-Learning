@@ -169,19 +169,22 @@ snarkjs plonk verify verification_key.json public-invalid.json proof.json
 
 - 生成 Solidity 的证明合约
 
-```sh
-snarkjs generateverifier --verificationkey verification_key.json --verifier verifier.sol
-```
-会有Pairings and Verifier 两个合约，关注Verifier即可。
+  ```sh
+  snarkjs zkey export solidityverifier circuit_final.zkey verifier.sol
+  ```
+
+- 生成调用的参数/模拟验证调用
+  ```
+  snarkjs zkesc public.json proof.json
+  ```
+  或者
+  ```sh
+  snarkjs zkey export soliditycalldata public.json proof.json
+  ```
 
 - 发布证明 
   可以复制 verifier.sol 代码到 remix 进行部署
 
-- 生成调用的参数
-
-```sh
-snarkjs generatecall --proof proof.json --public public.json
-```
 
 - 进行合约调用
   将命令的输出复制到 Remix 中的 verifyProof 方法的 parameters 字段中，点击 call 调用 verifyProof  
