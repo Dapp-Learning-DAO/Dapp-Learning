@@ -12,6 +12,7 @@
     <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
     <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://t.me/joinchat/48Mp2jy4Yw40MmI1"><img src="https://img.shields.io/discord/907080577096757279?color=blue&logo=telegram&logoColor=white" alt="Telegram group" /></a>
     <!-- <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a> -->
     <!-- <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a> -->
   </p>
@@ -28,14 +29,15 @@
 项目秉持 [开源大学](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的[推特](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/c/DappLearning/videos)。
 项目由来可以阅读[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA)。
 
-此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
+此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR) 或 [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
 <details>
 <summary>Official links: </summary>
 
 - [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
-- [discord](https://discord.gg/cRYNYXqPeR)
+- [Discord](https://discord.gg/cRYNYXqPeR)
+- [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/382886213)
