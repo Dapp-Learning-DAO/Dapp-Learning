@@ -51,7 +51,7 @@ Euler 的子账户系统，并不是主次结构，即使用 mapping 或者数�
 0x45
 
 // subaccounts
-0x45 ^ 0x0 // 0x44 1000101 subaccount 0 as primary
+0x45 ^ 0x0 // 0x45 1000101 subaccount 0 as primary
 0x45 ^ 0x1 // 0x44 1000100 subaccount 1
 0x45 ^ 0x2 // 0x47 1000111 subaccount 2
 0x45 ^ 0x3 // 0x46 1000110 subaccount 3

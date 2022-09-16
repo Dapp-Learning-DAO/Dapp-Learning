@@ -2,11 +2,28 @@
 
 ## constructor
 
-构造函数内指定创建者为 Module
+构造函数内指定创建者为 creator。
 
 ```solidity
 constructor() {
     creator = msg.sender;
+}
+```
+
+通常是 `Euler.sol` 合约为每个模块创建 Proxy 合约实例, 并映射到对应的 implementation 合约。
+
+```solidity
+// src/Euler.sol
+
+contract Euler is Base {
+    constructor(address admin, address installerModule) {
+        ...
+
+        moduleLookup[MODULEID__INSTALLER] = installerModule;
+        address installerProxy = _createProxy(MODULEID__INSTALLER);
+        trustedSenders[installerProxy].moduleImpl = installerModule;
+    }
+    ...
 }
 ```
 
@@ -16,7 +33,9 @@ constructor() {
 
 因为 proxy 没有其他函数，所有调用都会进入 fallback （常见的proxy原理）。
 
-Euler 的fallback做了改造，若是来自模块调用，则进入发送日志逻辑，而来自模块之外的调用则统一调用 `dispatch` 函数。这样做的目的是为了让通过 `emitViaProxy_Transfer` 和 `emitViaProxy_Approval` 发出的event会通过 proxy 合约发送，而不是具体的模块逻辑合约。
+Euler 的fallback做了改造，若是来自模块调用，则进入发送日志逻辑，而来自模块之外的调用则统一调用 `Euler.dispatch` 函数。这样做的目的是为了让通过 `emitViaProxy_Transfer` 和 `emitViaProxy_Approval` 发出的event会通过 proxy 合约发送，而不是具体的模块逻辑合约。
+
+`Euler.dispatch` 会调用对应模块的 implementation 合约。
 
 ```solidity
 // External interface

@@ -10,6 +10,7 @@
     <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
     <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://t.me/joinchat/48Mp2jy4Yw40MmI1"><img src="https://img.shields.io/badge/telegram-blue?color=blue&logo=telegram&logoColor=white" alt="Telegram group" /></a>
     <!-- <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a> -->
     <!-- <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a> -->
   </p>
@@ -28,7 +29,7 @@ We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
+Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
 For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value. 
 
 <details>
@@ -36,7 +37,8 @@ For more **project management rules**, please see [how new members participate a
 
 - [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
-- [discord](https://discord.gg/cRYNYXqPeR)
+- [Discord](https://discord.gg/cRYNYXqPeR)
+- [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/382886213)
