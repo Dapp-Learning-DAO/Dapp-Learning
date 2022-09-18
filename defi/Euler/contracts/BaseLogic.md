@@ -130,6 +130,133 @@ function resolveAssetConfig(address underlying) internal view returns (AssetConf
 }
 ```
 
+## AssetCache
+
+### struct assetCache
+
+池内资产信息
+
+```ts
+// AssetCache
+
+struct AssetCache {
+    address underlying;
+
+    uint112 totalBalances;
+    uint144 totalBorrows;
+
+    uint96 reserveBalance;
+
+    uint interestAccumulator;
+
+    uint40 lastInterestAccumulatorUpdate;
+    uint8 underlyingDecimals;
+    uint32 interestRateModel;
+    int96 interestRate;
+    uint32 reserveFee;
+    uint16 pricingType;
+    uint32 pricingParameters;
+
+    uint poolSize; // result of calling balanceOf on underlying (in external units)
+
+    uint underlyingDecimalsScaler;
+    uint maxExternalAmount;
+}
+
+```
+
+### initAssetCache
+
+初始化一个资产信息缓存容器
+
+1. 将storage存储的相关变量缓存到memory中
+2. 将余额精度统一为 1e18
+3. 更新累积利息
+    - `deltaT = block.timestamp - lastInterestAccumulatorUpdate`
+    - `newInterestAccumulator = (1 + interestRate)^deltaT * oldInterestAccumulator`
+    - `newTotalBorrows = oldTotalBorrows * (newInterestAccumulator / oldInterestAccumulator)`
+    - `reserveBalance += (newTotalBorrows - oldTotalBorrows) * feeRate`
+4. 将新的值写入stroge，检查overflow
+
+```ts
+function initAssetCache(address underlying, AssetStorage storage assetStorage, AssetCache memory assetCache) internal view returns (bool dirty) {
+    dirty = false;
+
+    assetCache.underlying = underlying;
+
+    // Storage loads
+
+    assetCache.lastInterestAccumulatorUpdate = assetStorage.lastInterestAccumulatorUpdate;
+    uint8 underlyingDecimals = assetCache.underlyingDecimals = assetStorage.underlyingDecimals;
+    assetCache.interestRateModel = assetStorage.interestRateModel;
+    assetCache.interestRate = assetStorage.interestRate;
+    assetCache.reserveFee = assetStorage.reserveFee;
+    assetCache.pricingType = assetStorage.pricingType;
+    assetCache.pricingParameters = assetStorage.pricingParameters;
+
+    assetCache.reserveBalance = assetStorage.reserveBalance;
+
+    assetCache.totalBalances = assetStorage.totalBalances;
+    assetCache.totalBorrows = assetStorage.totalBorrows;
+
+    assetCache.interestAccumulator = assetStorage.interestAccumulator;
+
+    // Derived state
+
+    unchecked {
+        assetCache.underlyingDecimalsScaler = 10**(18 - underlyingDecimals);
+        assetCache.maxExternalAmount = MAX_SANE_AMOUNT / assetCache.underlyingDecimalsScaler;
+    }
+
+    uint poolSize = callBalanceOf(assetCache, address(this));
+    if (poolSize <= assetCache.maxExternalAmount) {
+        unchecked { assetCache.poolSize = poolSize * assetCache.underlyingDecimalsScaler; }
+    } else {
+        assetCache.poolSize = 0;
+    }
+
+    // Update interest accumulator and reserves
+
+    if (block.timestamp != assetCache.lastInterestAccumulatorUpdate) {
+        dirty = true;
+
+        uint deltaT = block.timestamp - assetCache.lastInterestAccumulatorUpdate;
+
+        // Compute new values
+
+        uint newInterestAccumulator = (RPow.rpow(uint(int(assetCache.interestRate) + 1e27), deltaT, 1e27) * assetCache.interestAccumulator) / 1e27;
+
+        uint newTotalBorrows = assetCache.totalBorrows * newInterestAccumulator / assetCache.interestAccumulator;
+
+        uint newReserveBalance = assetCache.reserveBalance;
+        uint newTotalBalances = assetCache.totalBalances;
+
+        uint feeAmount = (newTotalBorrows - assetCache.totalBorrows)
+                            * (assetCache.reserveFee == type(uint32).max ? DEFAULT_RESERVE_FEE : assetCache.reserveFee)
+                            / (RESERVE_FEE_SCALE * INTERNAL_DEBT_PRECISION);
+
+        if (feeAmount != 0) {
+            uint poolAssets = assetCache.poolSize + (newTotalBorrows / INTERNAL_DEBT_PRECISION);
+            newTotalBalances = poolAssets * newTotalBalances / (poolAssets - feeAmount);
+            newReserveBalance += newTotalBalances - assetCache.totalBalances;
+        }
+
+        // Store new values in assetCache, only if no overflows will occur
+
+        if (newTotalBalances <= MAX_SANE_AMOUNT && newTotalBorrows <= MAX_SANE_DEBT_AMOUNT) {
+            assetCache.totalBorrows = encodeDebtAmount(newTotalBorrows);
+            assetCache.interestAccumulator = newInterestAccumulator;
+            assetCache.lastInterestAccumulatorUpdate = uint40(block.timestamp);
+
+            if (newTotalBalances != assetCache.totalBalances) {
+                assetCache.reserveBalance = encodeSmallAmount(newReserveBalance);
+                assetCache.totalBalances = encodeAmount(newTotalBalances);
+            }
+        }
+    }
+}
+```
+
 ## Utils
 
 ### updateInterestRate
