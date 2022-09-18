@@ -350,7 +350,6 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a>
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
@@ -358,6 +357,11 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>
@@ -407,6 +411,10 @@ Shout out to the following organizations for their unconditional donations to us
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
 </div>
 <br>
 
