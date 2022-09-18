@@ -382,7 +382,7 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://ethereum.foundation/">
     <img align="top" src="./docs/imgs/sponsor-partners/ethereum-foundation-logo.png" />
   </a>
-   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://snzholding.com/">
@@ -405,6 +405,7 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://degate.com/">
