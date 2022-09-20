@@ -38,6 +38,7 @@ export function useDerivedSwapInfo(): {
   // 交易接收者默认为当前连接的钱包账户
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
 
+  // 获取当前选中的 token 的用户余额
   const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
     outputCurrency ?? undefined
@@ -104,6 +105,9 @@ export function useDerivedSwapInfo(): {
   // 获取用户设置的交易滑点百分比上限
   const [allowedSlippage] = useUserSlippageTolerance()
 
+  // computeSlippageAdjustedAmounts
+  // 根据用户指定的滑点大小, 计算并返回对应交易的最大输入和最小输出数量
+
   // 计算考虑滑点的情况下的输入 v2
   const slippageAdjustedAmounts = v2Trade && allowedSlippage && computeSlippageAdjustedAmounts(v2Trade, allowedSlippage)
 
@@ -113,6 +117,7 @@ export function useDerivedSwapInfo(): {
 
   // compare input balance to max input based on version
   // 比较用户的token余额与计算滑点后的输入数量
+  // 根据 toggledVersion 选择的版本, 返回对应版本交易的最大输入数量
   const [balanceIn, amountIn] = [
     currencyBalances[Field.INPUT],
     toggledVersion === Version.v1
@@ -321,7 +326,10 @@ export function useSwapCallback(
     if (!trade || !library || !account || !chainId) {
       return { state: SwapCallbackState.INVALID, callback: null, error: 'Missing dependencies' }
     }
+    // 检测是什么原因导致交易接收者不存在 
     if (!recipient) {
+      // 如果作为传入 useENS 的参数 recipientAddressOrName 存在, 说明当前为无效的接收者
+      // 否则表示当前接收者还在获取状态中
       if (recipientAddressOrName !== null) {
         return { state: SwapCallbackState.INVALID, callback: null, error: 'Invalid recipient' }
       } else {
@@ -442,10 +450,12 @@ export function useSwapCallback(
           })
           .catch((error: any) => {
             // if the user rejected the tx, pass this along
+            // 如果用户拒绝了交易, 返回这项自定义报错
             if (error?.code === 4001) {
               throw new Error('Transaction rejected.')
             } else {
               // otherwise, the error was unexpected and we need to convey that
+              // 否则, 我们应当如实返回这个意外错误
               console.error(`Swap failed`, error, methodName, args, value)
               throw new Error(`Swap failed: ${error.message}`)
             }
@@ -544,7 +554,11 @@ function useSwapCallArguments(
 返回当前token对于router合约的approve状态，和向token合约发起approve授权的方法<br>
 
 ```ts
-// approve 状态
+// approve 状态 :
+// UNKNOWN 未知
+// NOT_APPROVED 还未被授权
+// PENDING 获取授权中
+// APPROVED 已授权
 export enum ApprovalState {
   UNKNOWN,
   NOT_APPROVED,
@@ -578,9 +592,12 @@ export function useApproveCallback(
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
     if (amountToApprove.currency === ETHER) return ApprovalState.APPROVED
     // we might not have enough data to know whether or not we need to approve
+    // 当我们可能没有足够的信息来确认当前token是否需要我们调用授权
     if (!currentAllowance) return ApprovalState.UNKNOWN
 
     // amountToApprove will be defined if currentAllowance is
+    // 如果当前操作的token的数量小于已授权的token数量, 直接返回已授权状态
+    // 否则需要另外授权, 根据 pendingApproval 来确定是否在获取授权的状态中
     return currentAllowance.lessThan(amountToApprove)
       ? pendingApproval
         ? ApprovalState.PENDING
@@ -588,30 +605,36 @@ export function useApproveCallback(
       : ApprovalState.APPROVED
   }, [amountToApprove, currentAllowance, pendingApproval, spender])
 
+  // 根据当前的token地址, 获取对应的合约实例
   const tokenContract = useTokenContract(token?.address)
   const addTransaction = useTransactionAdder()
 
   // 生成approve授权方法
   const approve = useCallback(async (): Promise<void> => {
+    // 检查是否成功授权当前token
     if (approvalState !== ApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily')
       return
     }
+    // 检查token是否存在
     if (!token) {
       console.error('no token')
       return
     }
 
+    // 检查token对应的合约
     if (!tokenContract) {
       console.error('tokenContract is null')
       return
     }
 
+    // 检查授权的数量是否已经设定
     if (!amountToApprove) {
       console.error('missing amount to approve')
       return
     }
 
+    // 检查spender是否存在
     if (!spender) {
       console.error('no spender')
       return
@@ -682,6 +705,8 @@ export default createReducer(initialState, builder =>
         return
       }
       // 更新 lastCheckedBlockNumber 字段
+      // 如果 lastCheckedBlockNumber 不存在, 将以 blockNumber 作为值
+      // 否则比较 blockNumber 与 lastCheckedBlockNumber, 以大的那个作为值
       if (!tx.lastCheckedBlockNumber) {
         tx.lastCheckedBlockNumber = blockNumber
       } else {
@@ -749,6 +774,7 @@ export function useTransactionAdder(): (
 export default function Updater(): null {
   const { chainId, library } = useActiveWeb3React()
 
+  // 获取最新的区块高度
   const lastBlockNumber = useBlockNumber()
 
   const dispatch = useDispatch<AppDispatch>()
@@ -896,10 +922,13 @@ export function useTrackedTokenPairs(): [Token, Token][] {
         ? flatMap(Object.keys(tokens), tokenAddress => {
             const token = tokens[tokenAddress]
             // for each token on the current chain,
+            // 遍历当前链上的 token
             return (
               // loop though all bases on the current chain
+              // 循环遍历当前链上的所有基础 token
               (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
                 // to construct pairs of the given token with each base
+                // 通过基础 token 和给定的 token 构建交易对
                 .map(base => {
                   if (base.address === token.address) {
                     return null
@@ -966,12 +995,14 @@ export function useTrackedTokenPairs(): [Token, Token][] {
 // src/state/mint/reducer.ts
 export default createReducer<MintState>(initialState, builder =>
   builder
+    // 重置Mint state
     .addCase(resetMintState, () => initialState)
     .addCase(typeInput, (state, { payload: { field, typedValue, noLiquidity } }) => {
       // noLiquidity 为true代表创建新池子
       // 创建新的池子不需要自动计算另一边的数量，不用清空另一个输入框
       if (noLiquidity) {
         // they're typing into the field they've last typed in
+        // 记录用户最近操作的输入框类型以及输入的值
         if (field === state.independentField) {
           return {
             ...state,
@@ -980,6 +1011,7 @@ export default createReducer<MintState>(initialState, builder =>
           }
         }
         // they're typing into a new field, store the other value
+        // 如果用户操作了一个新的输入框, 将之前输入的值另外保存备份
         else {
           return {
             ...state,
@@ -1064,6 +1096,7 @@ export function useDerivedMintInfo(
     pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
 
   // balances
+  // 获取当前选中的token的用户余额
   const balances = useCurrencyBalances(account ?? undefined, [
     currencies[Field.CURRENCY_A],
     currencies[Field.CURRENCY_B]
@@ -1231,9 +1264,9 @@ async function onAdd() {
     // 根据ETH的位置调整入参
     args = [
       wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
-      (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
-      amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
-      amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
+      (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // 期望的 token 数量
+      amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // 最少的 token 获取数
+      amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // 最少的 eth 数量
       account,
       deadline.toHexString()
     ]
@@ -1283,6 +1316,7 @@ async function onAdd() {
             currencies[Field.CURRENCY_B]?.symbol
         })
 
+        // 保存交易哈希值
         setTxHash(response.hash)
 
         // 谷歌分析的插件
@@ -1363,6 +1397,7 @@ export function useDerivedBurnInfo(
     userLiquidity &&
     tokenA &&
     // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+    // 这个条件判断是一个逻辑短路, 以防用户在当前交易对下的流动性数量的更新早于交易对的总流动性数量更新 
     JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
       ? new TokenAmount(tokenA, pair.getLiquidityValue(tokenA, totalSupply, userLiquidity, false).raw)
       : undefined
@@ -1372,6 +1407,7 @@ export function useDerivedBurnInfo(
     userLiquidity &&
     tokenB &&
     // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+    // 这个条件判断是一个逻辑短路, 以防用户在当前交易对下的流动性数量的更新早于交易对的总流动性数量更新
     JSBI.greaterThanOrEqual(totalSupply.raw, userLiquidity.raw)
       ? new TokenAmount(tokenB, pair.getLiquidityValue(tokenB, totalSupply, userLiquidity, false).raw)
       : undefined
@@ -1551,8 +1587,10 @@ async function onRemove() {
     [Field.CURRENCY_B]: calculateSlippageAmount(currencyAmountB, allowedSlippage)[0]
   }
 
+  // 判断token是否已经全部设置
   if (!currencyA || !currencyB) throw new Error('missing tokens')
   const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
+  // 判断流动性是否已经填写
   if (!liquidityAmount) throw new Error('missing liquidity amount')
 
   // 判断交易对是否有ETH
@@ -1653,7 +1691,7 @@ async function onRemove() {
 
   // all estimations failed...
   if (indexOfSuccessfulEstimation === -1) {
-    // 所有预执行都失败
+    // 如果所有预执行都失败, 输出报错
     console.error('This transaction would fail. Please contact support.')
   } else {
     // 执行优先级高的成功的方法
@@ -1694,6 +1732,7 @@ async function onRemove() {
       .catch((error: Error) => {
         setAttemptingTxn(false)
         // we only care if the error is something _other_ than the user rejected the tx
+        // 这里我们只关心具体错误, 而非是否是用户拒绝了交易
         console.error(error)
       })
   }
