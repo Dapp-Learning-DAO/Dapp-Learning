@@ -97,7 +97,6 @@ gas 的平均价格超过 16 gwei 的话，那么 ETH 的通缩就会加速。
 [dapp-node]: https://github.com/dappnode/DAppNode
 [avado]: https://ava.do/
 
-(eth2-developers)=
 ### 开发者须知
 
 既然共识变了，block 也会做出对应的改变。The Merge 后区块主要有三个
