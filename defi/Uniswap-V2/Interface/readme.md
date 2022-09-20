@@ -92,4 +92,4 @@
 ## 相关引用
 
 - UniswapV2Interface 源码地址：https://github.com/Uniswap/uniswap-interface/tree/v3.2.7
-- [催眠大师]手把手教你开发去中心化交易所-Uniswap交易所开发课程：https://www.bilibili.com/video/BV1jk4y1y7t9
+- [催眠大师]手把手教你开发去中心化交易所-Uniswap交易所开发课程：https://www.youtube.com/watch?v=38mVbslZpS4
