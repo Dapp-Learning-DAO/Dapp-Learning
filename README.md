@@ -418,7 +418,7 @@ Shout out to the following organizations for their unconditional donations to us
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="#">
+  <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
 </div>
