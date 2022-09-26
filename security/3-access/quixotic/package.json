@@ -5,6 +5,9 @@
   "author": "arc0035",
   "license": "MIT",
   "dependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.7.3",
+    "ethereum-waffle": "^3.4.4",
     "hardhat": "^2.11.2"
   },
   "devDependencies": {

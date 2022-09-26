@@ -13,12 +13,18 @@ contract SampleQuixotic is Ownable {
     mapping(bytes32=>uint256) _cancelledSellOrders;
     IERC20 private _settlemenERC20;
 
-    bytes32 private EIP712_DOMAIN_TYPE_HASH = keccak256("EIP712Domain(string name,string version)");
+    bytes32 private EIP712_DOMAIN_TYPE_HASH = keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
     bytes32 private DOMAIN_SEPARATOR = keccak256(abi.encode(
             EIP712_DOMAIN_TYPE_HASH,
             keccak256(bytes("Quixotic")),
-            keccak256(bytes("4"))
+            keccak256(bytes("4")),
+            block.chainid,
+            address(this)
         ));
+
+    constructor(address erc20) {
+        _settlemenERC20 = IERC20(erc20);
+    }
     
     struct SellOrder {
         address seller;
