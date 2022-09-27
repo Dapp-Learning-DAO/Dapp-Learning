@@ -17,13 +17,13 @@ ExchangeV4 maintains three kind of fills:
 - fillBuyOrder
 - fillDutchAuction
 
-Take fillSellOrder as example. Seller creates, sign and publish her sell order into quixotic servers. When a buyer wants make a deal, her calls fillSellOrder with the signed sell order and her wallet address as input. The quixotic contract would verify and complete the trade, where the NFT is moved from seller to buyer whereas ERC20 tokens are transfered from buyer to seller as payment.
+Take fillSellOrder as example. Seller creates, sign and publish her sell order into quixotic servers. When a buyer wanna a deal, her calls fillSellOrder with the signed sell order and her wallet address as input. The quixotic contract would verify and complete the trade, where the NFT is moved from seller to buyer whereas ERC20 tokens are transfered from buyer to seller as payment.
 
 # Vulnerabilities
 
 Put it simple, the fillSellOrder function does not verify the buyer:
 
-```
+```solidity
     function fillSellOrder(
         address seller,
         address contractAddress,
@@ -46,15 +46,15 @@ Put it simple, the fillSellOrder function does not verify the buyer:
 Malicious user could explot this vulnerability as he could create fake sell order to trade worthless NFT to buyer without authorizations from buyer.
 
 Here are the steps:
-0) Seller chooses a buyer who already approve quixotic to spend her tokens
+- 0) Seller chooses a buyer who already approve quixotic to spend her tokens
 
-1) Seller creates an NFT contract and mint one to herself
+- 1) Seller creates an NFT contract and mint one to herself
 
-2) Seller approve quixotic to operate her fake NFT contract
+- 2) Seller approve quixotic to operate her fake NFT contract
 
-3) Seller creates seller order, where this faked NFT will be sold to buyer with a high price
+- 3) Seller creates seller order, where this faked NFT will be sold to buyer with a high price
 
-4) Seller calls fillSellOrder
+- 4) Seller calls fillSellOrder
 
 Please refer to SampleQuixotic and test for more detail.
 
