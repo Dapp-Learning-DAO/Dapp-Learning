@@ -1,9 +1,9 @@
 # EIP-165
 
-ERC-165 helps a smart contract to convey which interface it implements through a "supportsInterface(bytes4)" function call.
+ERC-165 allows a smart contract to convey which interface it implements through a "supportsInterface(bytes4)" function call.
 
 ## Background concepts
-EIP-165 strongly depends basic concepts of **selector** and **interfaceId**.
+EIP-165 strongly depends on basic concepts of **selector** and **interfaceId**.
 
 ### selector
 Each function has a corresponding selector, which is equivalent to the first 4 bytes of function signature:
