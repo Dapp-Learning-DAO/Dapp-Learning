@@ -18,7 +18,7 @@
 
 
 
-[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English  
+[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English
 ## Preface
 
 We are designed for developers to step into blockchain DAPP development, where they can learn **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** a feasible and easy-to-use blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
@@ -30,7 +30,7 @@ We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
 Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
-For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value. 
+For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value.
 
 <details>
 <summary>Official links</summary>
@@ -148,15 +148,15 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [snapshot](basic/40-snapshot) ⌛
-41. [Thirdweb](https://portal.thirdweb.com/)  
+41. [Thirdweb](https://portal.thirdweb.com/)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
+45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/71-foundry/README.md)
+49. [Foundry](basic/49-foundry/README.md) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -181,7 +181,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
-74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
+74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -190,17 +190,17 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 **The preparatory work**:
   For developers with a certain foundation, this part selects mainstream high-quality projects for source code analysis and code review.
-  
+
   The project can be deployed to the test network and shared with the community as a basis. Large DEFI projects are complicated so we suggest to establish a study group to cooperate, ie. one for white paper, one for the front end, one for the contract, and one for data presentation.
-  
+
   Developers can initiate project research topic, form groups, and collaborate within the development community. This section is recommended as a submodule.
 
 ## DeFi advanced tasks
-The DEFI bibles will set you up with a good fundamental understanding of the DEFI system.  
-  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)     
-  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)   
- 
-**DEFI Learning roadmap：**    
+The DEFI bibles will set you up with a good fundamental understanding of the DEFI system.
+  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)
+  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)
+
+**DEFI Learning roadmap：**
 Trading -> Lending -> Derivatives
 
 You can refer to our study group's learning roadmap, which is better with the video.
@@ -219,7 +219,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) ⌛
 10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
-11. [Sushi](https://docs.sushi.com/) ✅  
+11. [Sushi](https://docs.sushi.com/) ✅
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -251,7 +251,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 - 02. Augur [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new) 
+- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Crypto advanced tasks
 Please read the book first:
@@ -261,7 +261,7 @@ Item list:
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
-[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)  
+[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
   [👉 Claim this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 06.[MINA](https://minaprotocol.com/)
@@ -281,8 +281,8 @@ Item list:
 3. Safe development practices
  - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 4. Integration of learning resources
- - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)  
- - [Immunefi ](https://immunefi.com/learn/)  
+ - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
+ - [Immunefi ](https://immunefi.com/learn/)
 
  ## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:

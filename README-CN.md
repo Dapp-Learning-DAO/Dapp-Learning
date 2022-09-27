@@ -161,11 +161,11 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
+45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/71-foundry/README.md)
+49. [Foundry](basic/49-foundry/README.md) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -197,7 +197,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 **准备工作**：
 此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。
-可采用小组协作方式将项目部署至测试网，以此为基础在dapp learning社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。 
+可采用小组协作方式将项目部署至测试网，以此为基础在dapp learning社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
 开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
@@ -224,10 +224,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 5. [Aave](https://docs.aave.com/portal/)  ✅
 6. [Liquity](defi/Liquity/readme.md) ⌛
 7. [Euler](defi/Euler/readme.md) ⌛
-8. [SNX](https://github.com/Synthetixio)⌛ 
-9. [YFI](https://yearn.finance/)⌛ 
+8. [SNX](https://github.com/Synthetixio)⌛
+9. [YFI](https://yearn.finance/)⌛
 10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm)⌛
-11. [Sushi](https://docs.sushi.com/) ✅  
+11. [Sushi](https://docs.sushi.com/) ✅
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
