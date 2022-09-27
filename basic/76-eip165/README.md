@@ -8,7 +8,7 @@ EIP-165 strongly depends basic concepts of **selector** and **interfaceId**.
 ### selector
 Each function has a corresponding selector, which is equivalent to the first 4 bytes of function signature:
 
-```
+```solidity
 contract SelectorDemo  {
     function hello(uint256 x) external view returns(bool) {
         return true;
@@ -24,7 +24,7 @@ contract SelectorDemo  {
 ### interfaceId
 Each interface has a corresponding interfaceId, which is XOR sum of selectors of all functions it contains:
 
-```
+```solidity
 contract SelectorDemo  {
     function hello(uint256 x) external view returns(bool) {
         return true;
@@ -62,7 +62,7 @@ For a contract, if it wants to tell others what interface it carries, it should 
 
 #### case1: this contract implementes some interface directly.
 
-```
+```solidity
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
 interface IInterface {
@@ -91,7 +91,7 @@ Please note that in "supportsInterface" the contract also conveys that it suppor
 
 Also, we can write a simpler version thanks to openzeppelin, which already encapsulates self-checking of UERC165 into ERC165.sol:
 
-```
+```solidity
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 contract ImplementerCase2 is IInterface ,ERC165{
     function hello1() external view returns(bool) {
@@ -111,7 +111,7 @@ contract ImplementerCase2 is IInterface ,ERC165{
 
 #### case2: contract inherits one or more contracts, which also implements ERC165. 
 
-```
+```solidity
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
@@ -181,7 +181,7 @@ For those to query, basiclly it has two separates steps.
 
 Openzeppelin already contains such logic in ERC165Checker:
 
-```
+```solidity
 function supportsInterface(address account, bytes4 interfaceId) internal view returns (bool) {
         // query support of both ERC165 as per the spec and support of _interfaceId
         return supportsERC165(account) && supportsERC165InterfaceUnchecked(account, interfaceId);
@@ -190,7 +190,7 @@ function supportsInterface(address account, bytes4 interfaceId) internal view re
 
 With the help of ERC165Checker, it is far more easier to check interface. Take a scenerio where a NFT market wants to move NFT it stored to some buyer, it must know what of kind of NFT it is transfering before the tranfer:
 
-```
+```solidity
 import "@openzeppelin/contracts/utils/introspection/ERC165Checker.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
