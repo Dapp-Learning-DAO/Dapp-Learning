@@ -231,7 +231,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
-
+![](./docs/imgs/defi.jpg)
 
 
 ## NFT advanced tasks
