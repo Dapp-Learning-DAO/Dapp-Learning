@@ -10,32 +10,42 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Factor
 
 ```
     function createPair(address tokenA, address tokenB) external returns (address pair) {
-        //条件判断，两个token不为0地址，不可以相同地址
+        // 条件判断，两个token不为0地址，不可以相同地址
         require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
-        //tokenA/tokenB排序得token0/token1, address可以和uint160互转，所以可以排序
+
+        // tokenA/tokenB排序, 排序较前的为oken0, 另一个为token1, address可以和uint160互转，所以可以排序
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
+
+        // token0 不能为0地址, 且交易对需要存在
         require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
         require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
-        //得到UniswapV2Pair的字节码(可在remix编译页面按钮下 选中pair合约，再点下面的Bytecode复制，文本中的object字段的值就是字节码)
+        
+        // 得到UniswapV2Pair的字节码(可在remix编译页面按钮下 选中pair合约，再点下面的Bytecode复制，文本中的object字段的值就是字节码)
         使用create2创建合约(这没细究，套用格式，包括pairFor)
         bytes memory bytecode = type(UniswapV2Pair).creationCode;
-        //使用create2创建合约(这没细究，套用格式，包括pairFor)
+
+        // 使用create2创建合约(这没细究，套用格式，包括pairFor)
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
         assembly {
             pair := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
-        //调用pair的initialize对token0/token1进行初始化赋值
+
+        // 调用pair的initialize对token0/token1进行初始化赋值
         IUniswapV2Pair(pair).initialize(token0, token1);
-        //两个token正方向填充到mapping中，方便查找
+
+        // 将两个token正、反方向分别填充到mapping中，方便查找
         getPair[token0][token1] = pair;
         getPair[token1][token0] = pair; // populate mapping in the reverse direction
-        //添加到allPairs列表中
+
+        // 添加到allPairs列表中
         allPairs.push(pair);
-        //合约创建事件
+
+        // 合约创建事件
         emit PairCreated(token0, token1, pair, allPairs.length);
     }
-    //针对init code hash说明  这个hash是由pair的字节码 keccak256得来的
-    //每次使用remix部署的时候，可能会变，所以每次都取到bytecode/object中值进行keccak256,然后替换router中的pairFor中的code
+
+    // 针对init code hash说明  这个hash是由pair的字节码 keccak256得来的
+    // 每次使用remix部署的时候，可能会变，所以每次都取到bytecode/object中值进行keccak256,然后替换router中的pairFor中的code
     function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
         pair = address(uint(keccak256(abi.encodePacked(
@@ -49,12 +59,13 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Factor
 ## 设置管理员和手续费地址
 
 ```
-    //设置该地址则开启手续费
+    // 设置该地址则开启手续费
     function setFeeTo(address _feeTo) external {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeTo = _feeTo;
     }
-    //设置新的管理员
+
+    // 设置新的管理员
     function setFeeToSetter(address _feeToSetter) external {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeToSetter = _feeToSetter;
@@ -64,9 +75,13 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Factor
 ## 查询方法
 
 ```
-    mapping(address => mapping(address => address)) public getPair;//通过两个代币查找交易对，如果不存在就返回0x0地址
-    address[] public allPairs;//根据下标获取pair地址
-    //查询pair列表长度
+    // 通过两个代币查找交易对，如果不存在就返回0x0地址
+    mapping(address => mapping(address => address)) public getPair;
+
+    // 根据下标获取pair地址
+    address[] public allPairs;
+
+    // 查询pair列表长度
     function allPairsLength() external view returns (uint) {
         return allPairs.length;
     }

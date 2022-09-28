@@ -5,7 +5,7 @@ https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2ERC20.
 
 EIP712
 **关键代码和注意点**
-- 注意构造方法中使用到了 ==chainId==和==name==, 如果合约修改了这两个，前端代码中签名的时候，也需要修改这两个值，才可以正常验签
+- 注意构造方法中使用到了 ==chainId== 和 ==name==, 如果合约修改了这两个，前端代码中签名的时候，也需要修改这两个值，才可以正常验签
 - Permit方法如果修改了参数，需要重新生成PERMIT_TYPEHASH
 
 ```

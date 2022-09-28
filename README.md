@@ -10,6 +10,7 @@
     <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
     <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://t.me/joinchat/48Mp2jy4Yw40MmI1"><img src="https://img.shields.io/badge/telegram-blue?color=blue&logo=telegram&logoColor=white" alt="Telegram group" /></a>
     <!-- <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a> -->
     <!-- <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a> -->
   </p>
@@ -17,26 +18,27 @@
 
 
 
-[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English  
+[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md) / English
 ## Preface
 
 We are designed for developers to step into blockchain DAPP development, where they can learn **DeFi, NFT, DAO, CRYPTO** projects. We hope we could not only give **junior developers** a feasible and easy-to-use blockchain **DAPP** learning roadmap, but also present **advanced developers** with a platform for communication and cooperation.
 
 We are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
-We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) if you want to communicate  any technical issues  with us.
-For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value. 
+Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
+For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value.
 
 <details>
 <summary>Official links</summary>
 
 - [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
-- [discord](https://discord.gg/cRYNYXqPeR)
+- [Discord](https://discord.gg/cRYNYXqPeR)
+- [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/382886213)
@@ -69,7 +71,7 @@ Case studies of the mainstream DeFi, NFT, Dao and other crypto projects to enlig
 
 ## Preparatory Work
 **Ramp up**
-- Developers new to dapp development are strongly encoraged to learn the basics of Ethereum and Solidity before embarking on formal development.
+- Developers new to dapp development are strongly encouraged to learn the basics of Ethereum and Solidity before embarking on formal development.
 You can refer to [basic knowledge preparation](./docs/basic-knowledge-en.md) to ramp up.
 
 **Development tool**
@@ -146,15 +148,15 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [snapshot](basic/40-snapshot) ⌛
-41. [Thirdweb](https://portal.thirdweb.com/)  
+41. [Thirdweb](https://portal.thirdweb.com/)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
+45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/71-foundry/README.md)
+49. [Foundry](basic/49-foundry/README.md) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -179,7 +181,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
 72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
-74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token) 
+74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -188,17 +190,17 @@ Welcome to submit pull request,[Add a new basic task or update the above task](h
 
 **The preparatory work**:
   For developers with a certain foundation, this part selects mainstream high-quality projects for source code analysis and code review.
-  
+
   The project can be deployed to the test network and shared with the community as a basis. Large DEFI projects are complicated so we suggest to establish a study group to cooperate, ie. one for white paper, one for the front end, one for the contract, and one for data presentation.
-  
+
   Developers can initiate project research topic, form groups, and collaborate within the development community. This section is recommended as a submodule.
 
 ## DeFi advanced tasks
-The DEFI bibles will set you up with a good fundamental understandings of the DEFI system.  
-  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)     
-  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)   
- 
-**DEFI Learning roadmap：**    
+The DEFI bibles will set you up with a good fundamental understanding of the DEFI system.
+  [How to DeFi](https://store.coingecko.com/collections/frontpage/products/how-to-defi-beginner)
+  [How to DeFi:Advanced](https://store.coingecko.com/collections/frontpage/products/how-to-defi-advanced)
+
+**DEFI Learning roadmap：**
 Trading -> Lending -> Derivatives
 
 You can refer to our study group's learning roadmap, which is better with the video.
@@ -217,7 +219,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) ⌛
 10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
-11. [Sushi](https://docs.sushi.com/) ✅  
+11. [Sushi](https://docs.sushi.com/) ✅
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -249,7 +251,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 - 02. Augur [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 03. [DAOHaus](https://daohaus.club/)
 - 04. [DAOstack](https://daostack.io/)  [👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new) 
+- 05. [Gnosis](https://github.com/gnosis)[👉 Pick up this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Crypto advanced tasks
 Please read the book first:
@@ -259,7 +261,7 @@ Item list:
 - 02.[PLONK](./crypto/PLONK)
 - 03.[tornado](https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04)
 - 04.[zk_snark](https://arxiv.org/pdf/1906.07221.pdf)
-[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)  
+[👉 Claim this task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 05.[js crypto](https://github.com/fireship-io/node-crypto-examples)
   [👉 Claim this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 06.[MINA](https://minaprotocol.com/)
@@ -279,8 +281,8 @@ Item list:
 3. Safe development practices
  - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
 4. Integration of learning resources
- - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)  
- - [Immunefi ](https://immunefi.com/learn/)  
+ - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
+ - [Immunefi ](https://immunefi.com/learn/)
 
  ## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
@@ -289,16 +291,16 @@ Feel like a career in the crypto industry? The following websites fyi:
  - https://www.paradigm.xyz/opportunities/
 
 ## Project Ecology
-Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md),Learn more about the ecology of the Dapp-Learning project.
+Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.
 
 ## Guide to Contribution
-Intereted in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
+Interested in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
 
 ## Frequently Asked Questions (FAQ)
 Please refer to [this link](./docs/TROUBLE_SHOOTING-en.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing etc.
 
 ## Donation Wanted
-Open-sourced projects are not easy to maintain so we'd love for all kinds of donations. Dapp Learning team follow DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.
+Open-sourced projects are not easy to maintain so we'd love all kinds of donations. Dapp Learning team follows DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.
 
 We have a Gitcoin campaign to sustain the Dapp-Learning efforts:
 - Gitcoin grant address: [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
@@ -307,11 +309,11 @@ Direct donation to our dev team's fund is also appreciated:
 - Ethereum main network/zkSync/Arbitrum：
 0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
-**We also have created multi-signature wallets on polygon, managed by our core contributors**
+**We also have created multi-signature wallets on Polygon, managed by our core contributors**
 - Polygon [Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 ## Ethereum Foundation-sponsored projects
-This project is sponsored by Ethereum foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
+This project is sponsored by the Ethereum Foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
 Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
 ![ESP02](./docs/imgs/ESP-02.jpg)
 
@@ -349,13 +351,23 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a>
+  <a href="#">
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>
@@ -367,6 +379,12 @@ Shout out to the following organizations for their unconditional donations to us
 
 <br>
 <div align="left">
+  <a href="https://ethereum.foundation/">
+    <img align="top" src="./docs/imgs/sponsor-partners/ethereum-foundation-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
@@ -382,14 +400,14 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-</div>
-<div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
@@ -403,6 +421,12 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="#">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
+</div>
+<div align="left">
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>
