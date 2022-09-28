@@ -312,10 +312,7 @@ Direct donation to our dev team's fund is also appreciated:
 **We also have created multi-signature wallets on Polygon, managed by our core contributors**
 - Polygon [Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
-## Ethereum Foundation-sponsored projects
-This project is sponsored by the Ethereum Foundation. Follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) to get the latest updates.
 Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
-![ESP02](./docs/imgs/ESP-02.jpg)
 
 ## Cooperative partner
 
