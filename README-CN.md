@@ -9,6 +9,7 @@
   <p>通过经典项目一步一步学习区块链 Dapp 开发。</p>
   <br />
   <p>
+    <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/docs/imgs/wechat-group-helper.png"><img alt="Wechat group helper" src="https://img.shields.io/static/v1?&label=&logo=wechat&message=%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4&color=brightgreen&logoColor=white"></a>
     <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
     <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
@@ -241,7 +242,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
-![](./docs/imgs/defi.jpg)
+
+![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
 ## NFT 进阶
 
@@ -442,7 +444,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="#">
+  <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
 </div>
