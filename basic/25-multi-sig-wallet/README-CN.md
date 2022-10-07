@@ -82,6 +82,15 @@
   yarn
   ```
 
+- 配置私钥和网络：
+
+在项目文件夹下新建`.env`文件，并且在 `.env` 文件中填写私钥和 infura 节点
+
+```js
+PRIVATE_KEY = xxxxxxxxxxxxxxxx; // 替换为你的私钥
+INFURA_ID = yyyyyyyy; // 替换为infura节点
+```
+
 - 编译合约
 
   ```sh
@@ -97,7 +106,7 @@
 - 部署合约
 
   ```sh
-  npx hardhat run scripts/deploy.js  --network kovan
+  npx hardhat run scripts/deploy.js  --network goerli
   ```
 
 ## TODO

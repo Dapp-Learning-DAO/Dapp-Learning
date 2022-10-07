@@ -118,7 +118,7 @@ ipfs daemon
 3. 执行如下命令
 
 ```angular2html
-npx hardhat run scripts/deploy-ipfs.js --network kovan
+npx hardhat run scripts/deploy-ipfs.js --network goerli
 ```
 
 运行结束后，在 console 输出的日志中，最后一行打印出了你上传文件独有的 hash

@@ -35,7 +35,7 @@ npx hardhat test
 - Deploy Contract
 
 ```bash
-npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
+npx hardhat run scripts/deploy_crowdfunding.js --network goerli
 ```
 
 ## Crowdsale Type

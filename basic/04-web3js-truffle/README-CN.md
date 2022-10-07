@@ -36,7 +36,6 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 3. truffle-config.js （之前是 truffle.js）： Truffle 配置文件, 用来设置网络信息，和其他项目相关的设置。当我们使用内建的默认的 Truffle 命令时，这个文件留空也是可以的。
 
 ## 测试流程
-
 1. 安装 truffle  
 ```bash
 npm install -g truffle
@@ -47,7 +46,12 @@ npm install -g truffle
 npm config set registry http://registry.npm.taobao.org
 ```  
 
-2. 配置 .env
+2. 安装依赖  
+```bash
+yarn install
+```
+
+3. 配置 .env
 
    ```sh
    cp .env.example .env
@@ -57,7 +61,7 @@ npm config set registry http://registry.npm.taobao.org
    INFURA_ID=yyyyyyyy
    ```
 
-3. 测试合约  
+4. 测试合约  
 ```bash
 truffle test
 ```
@@ -65,7 +69,7 @@ truffle test
 这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
 执行 "truffle test ./test/simpletoken.js"
 
-4. 编译合约  
+5. 编译合约  
 ```bash
 truffle compile
 ```
@@ -81,16 +85,16 @@ Writing artifacts to .\build\contracts
 5. 部署合约
 
 在 truffle-config.js 里面，可以配置 truffle 使用的以太网络，其中就包括 truffle test 使用的 "test" 网络。
-这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 kovan 进行 truffle 合约部署
+这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 goerli 进行 truffle 合约部署
 
 ```bash
-truffle migrate --network kovan
+truffle migrate --network goerli
 ```
 
 当多次执行 truffle migrate 的时候，可能会出 "Network update to date", 然后不执行合约部署的情况，这个时候需要执行如下的 truffle 命令
 
 ```bash
-truffle migrate --network kovan --reset
+truffle migrate --network goerli --reset
 ```
 
 ## 在 infura 测试合约
@@ -100,7 +104,7 @@ sol 的测试文件会报失败。所以，这里我们连接到 infura 进行�
 
 
 ```bash
-truffle test ./test/simpletoken.js --network kovan
+truffle test ./test/simpletoken.js --network goerli
 ```
 
 ## 在本地测试合约

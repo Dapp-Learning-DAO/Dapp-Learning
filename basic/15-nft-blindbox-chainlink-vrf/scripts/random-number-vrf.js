@@ -5,7 +5,7 @@ require('dotenv').config();
 const { readDeployment,saveDeployment } = require('./utils');
 
 async function main() {
-  const provider = new ethers.providers.WebSocketProvider(`wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_ID}`);
+  const provider = new ethers.providers.WebSocketProvider(`wss://goerli.infura.io/ws/v3/${process.env.INFURA_ID}`);
   const { abi: DungeonsAndDragonsCharacterABI } = require('../artifacts/contracts/DungeonsAndDragonsCharacter.sol/DungeonsAndDragonsCharacter.json');
 
   const deployment = readDeployment();

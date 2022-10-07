@@ -9,7 +9,7 @@
 ## 代码逻辑
 
 1. ERC20 合约部署  
-   通过 `deploy.js` 进行部署，样例中链接的测试网为 Kovan, 对应需要使用有 Ether 的账户进行发送
+   通过 `deploy.js` 进行部署，样例中链接的测试网为 Goerli, 对应需要使用有 Ether 的账户进行发送
 
 2. 合约调用  
    调用 erc20 的 `transfer`, `balanceof` 接口, 验证合约部署结果
