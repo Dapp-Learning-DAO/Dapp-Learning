@@ -6,7 +6,7 @@
 
 ## 流程概述
 
-- 在 Rinkeby 部署一个合约，并调用触发事件。
+- 在 Goerli 部署一个合约，并调用触发事件。
 - 创建定义数据索引的 Subgraph。
 - 部署 Subgraph 到 TheGraph，实现数据索引。
 - 在前端 DApp 中查询索引数据。
@@ -35,7 +35,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 3. 部署合约(用于测试 graph 的简单合约)
 
    ```bash
-   npx hardhat run ./scripts/deploy.js --network rinkeby
+   npx hardhat run ./scripts/deploy.js --network goerli
    ```
 
    输出信息类似如下:
@@ -59,7 +59,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
    输入你的项目名称(例如 TEST01)，以下称之为 `<SUBGRAPH_NAME>`，点击 continue 按钮，之后会跳转到 subgraph 的项目主页
 
-   注：最新版的 Graph CLI 仅支持在 mainnet 和 rinkeby 上部署，若要在其他网络上使用，需要使用 Github 账户登录后在 Hosted Service 上创建和部署
+   注：最新版的 Graph CLI 仅支持在 mainnet 和 goerli 上部署，若要在其他网络上使用，需要使用 Github 账户登录后在 Hosted Service 上创建和部署
 
 5. 开发和部署 subgraph
 
@@ -82,7 +82,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
    ```
 
    - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
-   - Ethereum network 这里选择 rinkeby
+   - Ethereum network 这里选择 goerli
    - "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
    - 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可(`./abis/SimpleToken.json`)
    - 如果 yarn install 失败(例如网络错误)，可以进入新生成的项目目录，手动安装 npm 依赖
@@ -278,7 +278,7 @@ graph-node:
     postgres_db: graph-node
     ipfs: 'ipfs:5001'
     ethereum: 'mainnet:http://127.0.0.1:8545' #此处的mainnet需要和subgraph.yml里network对应上
-    # ethereum: 'dev:https://rinkeby.infura.io/v3/INFURA_ID' # 也可以连测试网络
+    # ethereum: 'dev:https://goerli.infura.io/v3/INFURA_ID' # 也可以连测试网络
     RUST_LOG: info
 ```
 
@@ -295,7 +295,7 @@ docker-compose -f docker-compose.yml up -d
 3. 编译 subgraph  
    进入 subgraph 的本地目录运行下列命令
 
-   由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network rinkeby
+   由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network goerli
 
    因此，此处修改 subgraph.yaml，修改内容如下：
 
@@ -303,7 +303,7 @@ docker-compose -f docker-compose.yml up -d
 dataSources:
   - kind: ethereum/contract
     name: SimpleToken
-    network: rinkeby
+    network: goerli
 
 ```
 

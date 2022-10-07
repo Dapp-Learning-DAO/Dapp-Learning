@@ -9,7 +9,7 @@ Difference between `web3.js` and `ethers.js` can be seen [here](./web3-vs-ethers
 ## Contents
 
 1. Deploy an `ERC20` contract
-   Deploying by using `depoly.js`. In this demo, we use the test network `Kovan` to deploy the contract, and we need to use an account with Ether to send the transaction.
+   Deploying by using `depoly.js`. In this demo, we use the test network `Goerli` to deploy the contract, and we need to use an account with Ether to send the transaction.
 
 2. Call the contract
    Call `transfer`, `balanceof` functions of the contract, and check the result.

@@ -23,7 +23,7 @@ const providerRPC = {
   },
 };
 const provider = new ethers.providers.InfuraProvider(
-  'kovan',
+  'goerli',
   process.env.INFURA_ID
 ); //Change to correct network
 

@@ -23,7 +23,7 @@ yarn install
 ### Executing the test script
 
 ```sh
-npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
+npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network goerli
 ```
 
 ### Off-Chain Call the price feeder
@@ -33,7 +33,7 @@ npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
 require('dotenv').config();
 
 const { ethers } = require('ethers'); // for nodejs only
-const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${process.env.INFURA_ID}`);
+const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/${process.env.INFURA_ID}`);
 const aggregatorV3InterfaceABI = require('@chainlink/contracts/abi/v0.8/AggregatorV3Interface.json');
 
 const addr = '0x9326BFA02ADD2366b30bacB125260Af641031331';

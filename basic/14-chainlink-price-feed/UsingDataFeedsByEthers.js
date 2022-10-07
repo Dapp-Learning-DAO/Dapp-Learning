@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 const { ethers } = require('ethers'); // for nodejs only
-const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${process.env.INFURA_ID}`);
+const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/${process.env.INFURA_ID}`);
 const aggregatorV3InterfaceABI = require('@chainlink/contracts/abi/v0.8/AggregatorV3Interface.json');
 
-const addr = '0x9326BFA02ADD2366b30bacB125260Af641031331';
+const addr = '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e';
 const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, provider);
 
 async function test() {

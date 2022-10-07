@@ -78,20 +78,20 @@
    ```
 
 5. Deploy smart contracts
-   In `truffle-config.js`, we can specify truffle to use the eth test network. However, after running `trffle migrate`, it reported there is no test network, so truffle didn't launch the built-in test network. We need to specify the test network as `kovan` to deploy contracts manually.
+   In `truffle-config.js`, we can specify truffle to use the eth test network. However, after running `trffle migrate`, it reported there is no test network, so truffle didn't launch the built-in test network. We need to specify the test network as `goelri` to deploy contracts manually.
 
    ```bash
-   truffle migrate --network kovan
+   truffle migrate --network goerli
    ```
 
-   > If we run `truffle migrate` frequently, it may shows `Network update to date` and doesn't deploy the contracts. At that time, we need to run `truffle migrate --network kovan --reset` to reset the migration status.
+   > If we run `truffle migrate` frequently, it may shows `Network update to date` and doesn't deploy the contracts. At that time, we need to run `truffle migrate --network goerli --reset` to reset the migration status.
 
 ## Test contracts on Infura
 
 Under `test` folder, there are two types, `sol` and `js`. `Truffle` supports both types, but if we use `infura`, we can't run `sol` file. So we only use `js` file as our test file. 
 
 ```bash
-truffle test ./test/simpletoken.js --network kovan
+truffle test ./test/simpletoken.js --network goerli
 ```
 
 ## Test in local
