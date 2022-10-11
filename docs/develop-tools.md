@@ -1,6 +1,7 @@
 中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/develop-tools-en.md)
 
 ## 开发工具推荐    
+- Cookbook (free smart contracts): <https://www.cookbook.dev>
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - Hardhat“安全帽”是针对专业人员的以太坊开发环境: <https://hardhat.org/>

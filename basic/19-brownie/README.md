@@ -97,9 +97,11 @@ brownie test
 ```
 
 ### execute script
-
+如果编写了自己的脚本，可以执行如下命令执行脚本
 ```sh
-brownie run *.py --network kovan
+## 设置 INFURA 环境变量，其中 xxx 替换为真实的 INFURA_ID 后执行
+export WEB3_INFURA_PROJECT_ID=xxx
+brownie run *.py --network goerli
 ```
 
 ## pytest

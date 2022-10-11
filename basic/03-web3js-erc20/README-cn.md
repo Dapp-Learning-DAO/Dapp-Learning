@@ -119,12 +119,12 @@
 
 4. 构造 web3 对象  
    通过 web3 对象可以很方便的发送相应的交易到区块链网络, 同时获取区块链的处理结果.
-   构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 kovan, ropsten , rinkeby 等测试网络, 或是 mainnet 主网.
-   这里我们使用 kovan 测试网络. 如果没有 kovan 网络的测试币, 可以切换到其他的测试网络.
+   构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 goerli 等测试网络, 或是 mainnet 主网.
+   这里我们使用 goerli 测试网络. 如果没有 goerli 网络的测试币, 可以切换到其他的测试网络.
    同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档
 
    ```js
-   const web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/v3/' + process.env.INFURA_ID));
+   const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/' + process.env.INFURA_ID));
    ```
 
 5. 获取账户地址  

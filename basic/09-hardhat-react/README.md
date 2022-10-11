@@ -19,7 +19,7 @@ Put your private key in .env for easy access, formatted with "PRIVATE_KEY=xxxx".
 2. Deploy contracts
 
    ```sh
-   npx hardhat run scripts/deploy.js --network kovan
+   npx hardhat run scripts/deploy.js --network goerli
    ```
 
 3. Startup react

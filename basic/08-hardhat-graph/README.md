@@ -6,7 +6,7 @@ When coding smart contract, the change of status is usually expressed by trigger
 
 ## Overview of steps
 
-- deploy the contract on Rinkeby and call trigger event.
+- deploy the contract on Goerli and call trigger event.
 - create Subgraph that defines the data index.
 - deploy Subgraph to TheGraph for data indexing
 - query and index data in DApp
@@ -34,7 +34,7 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
 3. Deploy contracts(testing graph's simple contracts)
 
    ```bash
-   npx hardhat run ./scripts/deploy.js --network rinkeby
+   npx hardhat run ./scripts/deploy.js --network goerli
    ```
 
    print info as follows:
@@ -57,7 +57,7 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
 
    Input your project name(e.x. TEST01), it will be called `<SUBGRAPH_NAME>` as follows. Clicking continue button, then it will jump to subgraph which is the main page of project.
 
-   Note: latest Graph CLI only support to deploy mainnet and rinkeby. If you want to use it on the others networks, you need to login by Github account, then create and deploy it on Hosted Service.
+   Note: latest Graph CLI only support to deploy mainnet and goerli. If you want to use it on the others networks, you need to login by Github account, then create and deploy it on Hosted Service.
 
 5. Develop and deploy subgraph
 
@@ -80,7 +80,7 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
    ```
 
    - choose "Subgraph name" and "Direction to create the subgraph", then enter it.
-   - choose rinkeby in Ethereum network
+   - choose goerli in Ethereum network
    - input your contract address generated when the contract was deployed in Step 3 in "Contract address"
    - When it came to "fetch ABI from Etherscan", it will fail, then show "ABI file (path)" which prompt that input the path of abi, we should input the path of SimpleToken.json(`./abis/SimpleToken.json`)
    - If yarn install fails (network error), you can enter in the new directory and install npm dependencies manually.
@@ -276,7 +276,7 @@ graph-node:
     postgres_db: graph-node
     ipfs: 'ipfs:5001'
     ethereum: 'mainnet:http://127.0.0.1:8545' # the mainnet need to follow to the network of subgraph.yml
-    # ethereum: 'dev:https://rinkeby.infura.io/v3/INFURA_ID' # could connect to test networks
+    # ethereum: 'dev:https://goerli.infura.io/v3/INFURA_ID' # could connect to test networks
     RUST_LOG: info
 ```
 
@@ -292,7 +292,7 @@ docker-compose -f docker-compose.yml up -d
 
    Enter the directory of subgraph to run the command
 
-   Because the command was executed in the previous step: `npx hardhat run ./scripts/deploy.js --network rinkeby`
+   Because the command was executed in the previous step: `npx hardhat run ./scripts/deploy.js --network goerli`
 
    subgraph.yml need to be changed as follows:
 
@@ -300,7 +300,7 @@ docker-compose -f docker-compose.yml up -d
 dataSources:
   - kind: ethereum/contract
     name: SimpleToken
-    network: rinkeby
+    network: goerli
 
 ```
 

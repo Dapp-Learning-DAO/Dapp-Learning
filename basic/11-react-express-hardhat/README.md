@@ -21,7 +21,7 @@ npx hardhat test
 - Deploy
 
 ```shell
-npx hardhat run scripts/deploy.js --network kovan
+npx hardhat run scripts/deploy.js --network goerli
 ```
 
 - Find your private key and address of token in your local node's account, imported to Metamask

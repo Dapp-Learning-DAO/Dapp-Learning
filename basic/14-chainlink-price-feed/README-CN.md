@@ -24,7 +24,7 @@ yarn install
 ### 执行测试脚本
 
 ```sh
-npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
+npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network goerli
 ```
 
 ### 链下调用喂价机
@@ -34,7 +34,7 @@ npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
 require('dotenv').config();
 
 const { ethers } = require('ethers'); // for nodejs only
-const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${process.env.INFURA_ID}`);
+const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/${process.env.INFURA_ID}`);
 const aggregatorV3InterfaceABI = require('@chainlink/contracts/abi/v0.8/AggregatorV3Interface.json');
 
 const addr = '0x9326BFA02ADD2366b30bacB125260Af641031331';
@@ -102,11 +102,11 @@ SubscriptionId=ddddd
 3. 运行部署脚本部署合约
 
    ```sh
-   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network rinkeby
+   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network goerli
    ```
 
 4. 获取 ChainLink 币  
-登陆 [ChainLink Faucet](https://faucets.chain.link/) , 在, 获取 ChainLink 币用于后续的 RandomNumberConsume , 其中 Network 选择 rinkeby, "Testnet account address" 输入合约 owner 的账户地址
+登陆 [ChainLink Faucet](https://faucets.chain.link/) , 在, 获取 ChainLink 币用于后续的 RandomNumberConsume , 其中 Network 选择 goerli, "Testnet account address" 输入合约 owner 的账户地址
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkFaucet.png?raw=true" /></center>   
 
 
@@ -122,13 +122,13 @@ SubscriptionId=ddddd
 6. 运行测试脚本  
 
    ```sh
-   npx hardhat run  scripts/03-RandomNumberConsumer --network rinkeby
+   npx hardhat run  scripts/03-RandomNumberConsumer.js --network goerli
    ```
 
    结果可能需要等待 2 到 3 分钟，可以看到 ChainLink 返回的两个随机值
 
    ```sh
-   ❯ npx hardhat run scripts/03-RandomNumberConsumer.js --network rinkeby
+   ❯ npx hardhat run scripts/03-RandomNumberConsumer.js --network goerli
    Listen on random number call...
    Listen on random number result...
    first transaction hash: 0xb822b742836e3e028102b938ff9b52f5c31ecbf00a663b4865c50f83d141c441
