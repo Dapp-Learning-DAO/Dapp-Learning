@@ -1,4 +1,11 @@
-
+*.r1cs
+*.sym
+*.ptau
+*.zkey
+*.key
+*.wtns
+*.json
+*_js
 # these files are outputs by circom compile
 circuit_cpp/
 circuit_js/
