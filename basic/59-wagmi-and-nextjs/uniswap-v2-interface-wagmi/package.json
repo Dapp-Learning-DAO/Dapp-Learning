@@ -10,6 +10,7 @@
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-toastify": "^9.0.8",
     "styled-components": "^5.3.5",
     "wagmi": "^0.7.5"
   },

@@ -4,8 +4,10 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import type { AppProps } from 'next/app';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 import GlobalStyle from '../components/globalstyles';
 import '@rainbow-me/rainbowkit/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme: DefaultTheme = {
   colors: {
@@ -40,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <GlobalStyle />
+            <ToastContainer />
             <Component {...pageProps} />
           </RainbowKitProvider>
         </WagmiConfig>
