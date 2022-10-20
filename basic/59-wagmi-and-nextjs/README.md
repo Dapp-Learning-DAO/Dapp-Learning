@@ -426,6 +426,11 @@ The same way to add swap logstic. And add tow buttons in the dom, we've done!
 
 You can find the final code in [pages/swap.tsx](./uniswap-v2-interface-wagmipages/swap.tsx).
 
+## TODO
+
+- liquidity page
+- improve UI
+- add ApolloClient to query subgraph
 
 ## Reference
 
