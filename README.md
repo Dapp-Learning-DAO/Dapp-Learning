@@ -167,7 +167,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
-59. [web3.0 dapp](basic/59-web3-dapp) ⌛
+59. [wagmi and nextjs](basic/59-wagmi-and-nextjs) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](basic/61-ENS) ✅
 62. [Tenderly](https://dashboard.tenderly.co/explorer)
