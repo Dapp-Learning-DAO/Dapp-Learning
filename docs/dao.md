@@ -10,7 +10,7 @@
 - 采用集市开发方式，任何人都可以提交PR，**一个参考链接，一个文档修改**均可，无须task完成100%再提交，开发者会一起帮忙完善项目, 可在此添加链接和文档[Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal)  
 - 每个项目readme请务必加上参考链接这一目录，附上任务的相关参考资料
 - solidity 建议0.6以上版本
-- script脚本目录下测试案例保证能在kovan网(建议)调试成功，test目录下测试案例连本地节点调试成功
+- script脚本目录下测试案例保证能在Goerli网(建议)调试成功，test目录下测试案例连本地节点调试成功
 
 **刚入手项目，可以有四种方式切入：**
 
