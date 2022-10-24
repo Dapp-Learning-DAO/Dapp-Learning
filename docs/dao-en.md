@@ -6,7 +6,7 @@
 - Using the market development method, anyone can submit PR,**Modify only one reference link or document to join the group**, There is no need to complete the task 100% before submitting, Developers work together to help improve the project, You can add links and documentation here[Dapp-Learning-Arsenal](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal)  
 - For each project readme, please be sure to add the directory of reference links and attach the relevant references of the task
 - solidity Version 0.6 or later is recommended
-- The test cases under the script directory can be successfully debugged on the Kovan network (recommended), and the test cases under the test directory can be successfully debugged even on the local node
+- The test cases under the script directory can be successfully debugged on the Goerli network (recommended), and the test cases under the test directory can be successfully debugged even on the local node
 **A fledgling project，There are four ways to cut into learning：**
 
 1. You can optimize the previous project code and readme
