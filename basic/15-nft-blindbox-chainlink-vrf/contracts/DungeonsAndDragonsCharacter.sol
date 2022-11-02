@@ -20,18 +20,18 @@ contract DungeonsAndDragonsCharacter is ERC721PresetMinterPauserAutoId, VRFConsu
     // Your subscription ID.
     uint64 s_subscriptionId;
 
-    // Rinkeby coordinator. For other networks,
+    // Goerli coordinator. For other networks,
     // see https://docs.chain.link/docs/vrf-contracts/#configurations
-    address vrfCoordinator = 0x6168499c0cFfCaCD319c818142124B7A15E857ab;
+    address vrfCoordinator = 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D;
 
-    // Rinkeby LINK token contract. For other networks,
+    // Goerli LINK token contract. For other networks,
     // see https://docs.chain.link/docs/vrf-contracts/#configurations
-    address link = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
+    address link = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
 
     // The gas lane to use, which specifies the maximum gas price to bump to.
     // For a list of available gas lanes on each network,
     // see https://docs.chain.link/docs/vrf-contracts/#configurations
-    bytes32 keyHash = 0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
+    bytes32 keyHash = 0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15;
 
     // Depends on the number of requested values that you want sent to the
     // fulfillRandomWords() function. Storing each word costs about 20,000 gas,

@@ -7,9 +7,10 @@
   <p>Step-by-step Dapp practice through classical projects.</p>
   <br />
   <p>
-    <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
+    <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/docs/imgs/wechat-group-helper.png"><img alt="Wechat group helper" src="https://img.shields.io/static/v1?&label=&logo=wechat&message=wechat group&color=brightgreen&logoColor=white"></a>
+    <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?label=Follow"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
-    <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white&label=discord" alt="Discord server" /></a>
     <a href="https://t.me/joinchat/48Mp2jy4Yw40MmI1"><img src="https://img.shields.io/badge/telegram-blue?color=blue&logo=telegram&logoColor=white" alt="Telegram group" /></a>
     <!-- <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a> -->
     <!-- <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a> -->
@@ -166,7 +167,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
-59. [web3.0 dapp](basic/59-web3-dapp) ⌛
+59. [wagmi and nextjs](basic/59-wagmi-and-nextjs) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](basic/61-ENS) ✅
 62. [Tenderly](https://dashboard.tenderly.co/explorer)
@@ -183,6 +184,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
+76. [Push Protocol](https://docs.epns.io/developers)
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
@@ -233,7 +235,8 @@ You can refer to our study group's learning roadmap, which is better with the vi
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
-![](./docs/imgs/defi.jpg)
+
+![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
 
 ## NFT advanced tasks
@@ -289,6 +292,8 @@ Feel like a career in the crypto industry? The following websites fyi:
  - https://cryptocurrencyjobs.co/
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
+ - https://web3.career/
+ - https://portfoliojobs.a16z.com/jobs?markets=Crypto
 
 ## Project Ecology
 Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.
@@ -415,7 +420,7 @@ Shout out to the following organizations for their unconditional donations to us
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="#">
+  <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
 </div>

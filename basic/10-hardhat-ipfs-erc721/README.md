@@ -118,7 +118,7 @@ ipfs daemon
 3. Run the following command
 
 ```angular2html
-npx hardhat run scripts/deploy-ipfs.js --network kovan
+npx hardhat run scripts/deploy-ipfs.js --network goerli
 ```
 
 After running, the last line of the console log prints the hash unique to the file you uploaded
