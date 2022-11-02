@@ -309,3 +309,6 @@ https://hackmd.io/yqfI6OPlRZizv9yPaD-8IQ
 ### Appendix C. EIP-4488
 
 EIP-4488降低calldata费用。
+
+## 参考链接：
+- Data Availability Sampling: From Basics to Open Problems: https://www.paradigm.xyz/2022/08/das
