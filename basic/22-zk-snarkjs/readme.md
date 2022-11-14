@@ -210,3 +210,4 @@ snarkjs plonk verify verification_key.json public-invalid.json proof.json
 - zkRollup tutorial: https://keen-noyce-c29dfa.netlify.app/#16
 - 零知识证明的可信设置是否值得担心?: https://www.sohu.com/a/468233201_100105055
 - Diving into the zk-SNARKs Setup Phase: https://medium.com/qed-it/diving-into-the-snarks-setup-phase-b7660242a0d7
+- scaffold-eth-zk: https://github.com/scaffold-eth/scaffold-eth-examples/tree/zk-voting-example

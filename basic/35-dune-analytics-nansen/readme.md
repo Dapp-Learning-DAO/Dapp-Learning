@@ -2,7 +2,7 @@
 
 ## 介绍
 DuneAnalytics 是一个研究以太坊智能合约数据的强大工具，它可以查询，提取和可视化以太坊区块链上的数据。你在 DuneAnalytics 可以通过 Sql 查询 eth 的线上数据信息，这不需要你运行 Eth 节点，也不需要了解 RPC api，跟在普通数据库使用 Sql 体验一样。
-
+教程： https://sixdegreelab.gitbook.io/mastering-chain-analytics/00_introductions
 ## 通俗解释
 
 简单来说，DuneAnalytics = PostgreSQL + Ethereum 的组合，PostgreSQL 是世界上非常知名的数据库软件，比 Mysql 更加强大，是贫民版的 Oracle 数据库（甲骨文数据库，跟预言机关系不大）。
