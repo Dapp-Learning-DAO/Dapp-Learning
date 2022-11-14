@@ -22,7 +22,7 @@ Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.re
   此脚本名字自行进行定义, 这里是使用 index.js 进行指定
 
 ## 操作步骤
-
+  
 - 1 安装依赖
 
 ```bash

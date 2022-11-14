@@ -10,7 +10,7 @@ const privateKey = process.env.PRIVATE_KEY;
 //  let web3Provider = new ethers.providers.Web3Provider(web3)
 
 const web3Provider = new ethers.providers.InfuraProvider(
-  "kovan",
+  "goerli",
   process.env.INFURA_ID
 );
 

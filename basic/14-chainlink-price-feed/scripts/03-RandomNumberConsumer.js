@@ -5,7 +5,7 @@ require('dotenv').config();
 const { readDeployment } = require('./utils');
 
 async function main() {
-  const provider = new ethers.providers.WebSocketProvider(`wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_ID}`);
+  const provider = new ethers.providers.WebSocketProvider(`wss://goerli.infura.io/ws/v3/${process.env.INFURA_ID}`);
   const { abi: RandomNumberConsumerABI } = require('../artifacts/contracts/RandomNumberConsumer.sol/RandomNumberConsumer.json');
 
   const deployment = readDeployment();

@@ -101,7 +101,7 @@ brownie test
 ### 执行脚本
 
 ```sh
-brownie run *.py --network kovan
+brownie run *.py --network goerli
 ```
 
 ## pytest

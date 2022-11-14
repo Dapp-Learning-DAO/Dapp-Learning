@@ -1,8 +1,10 @@
 ## Development Tool Recommendation    
+- Cookbook (free smart contracts): <https://www.cookbook.dev>
 - Ethereum Development Tools Collection: <https://learnblockchain.cn/article/2006>
 - metamask (Wallet plug-in for browser): <https://www.jianshu.com/p/b5b2c05e9090>
 - Hardhat(Ethereum development environment for professionals): https://hardhat.org/
 - Waffle(smart contracts testing tool): https://getwaffle.io/
+- Foundry(toolkit for Ethereum application development written in Rust): https://book.getfoundry.sh/
 - scaffold-eth (ETH + Hardhat + React): https://github.com/scaffold-eth/scaffold-eth
 - infura (node service): <https://infura.io/>
 - alchemy (node service): <https://dashboard.alchemyapi.io/>

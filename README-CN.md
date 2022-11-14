@@ -9,9 +9,11 @@
   <p>通过经典项目一步一步学习区块链 Dapp 开发。</p>
   <br />
   <p>
+    <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/docs/imgs/wechat-group-helper.png"><img alt="Wechat group helper" src="https://img.shields.io/static/v1?&label=&logo=wechat&message=%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4&color=brightgreen&logoColor=white"></a>
     <a href="https://twitter.com/Dapp_Learning"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/dapp_learning?style=social"></a>
     <a href="https://www.youtube.com/c/DappLearning"><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCdJKZVxO55N3n2BQYXMDAcQ?style=social"></a>
     <a href="https://discord.gg/cRYNYXqPeR"><img src="https://img.shields.io/discord/907080577096757279?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://t.me/joinchat/48Mp2jy4Yw40MmI1"><img src="https://img.shields.io/badge/telegram-blue?color=blue&logo=telegram&logoColor=white" alt="Telegram group" /></a>
     <!-- <a href="https://gitcoin.co/grants/3414/dapp-learning-developer-group-1"><img alt="Gitcoin Grants" src="https://img.shields.io/badge/Gitcoin-Grants-yellow"></a> -->
     <!-- <a href="https://github.com/Dapp-Learning-DAO/Dapp-Learning"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Dapp-Learning-DAO/Dapp-Learning"></a> -->
   </p>
@@ -28,14 +30,15 @@
 项目秉持 [开源大学](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) 的理念，会以DAO治理形式管理此开源项目。本项目受[以太坊基金会](https://esp.ethereum.foundation/en/)赞助，我们会将资金奖励给项目的优秀贡献者。开源项目维护不易，欢迎[gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)捐赠。想跟踪项目最新进展，欢迎关注我们的[推特](https://twitter.com/Dapp_Learning)和[Youtube](https://www.youtube.com/c/DappLearning/videos)。
 项目由来可以阅读[《Dapp-Learning 欢迎您的加入》](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA)。
 
-此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
+此项目仍在开发中，适合各阶段的开发者加入，欢迎提 PR 来创建更多的教程项目或完善已有的教程项目🤗。项目交流可加入我们的[discord](https://discord.gg/cRYNYXqPeR) 或 [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)。提交三次PR或者安排[一次分享](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS)即可加入我们开发者群，持续贡献高质量PR可成为PR审核者，并参与决议项目走向。**项目管理细则**请参看[新人如何参与以及项目治理规则](./docs/dao.md)，欢迎理念相同的小伙伴加入。
 
 <details>
 <summary>Official links: </summary>
 
 - [Github](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
 - [Twitter](https://twitter.com/Dapp_Learning)
-- [discord](https://discord.gg/cRYNYXqPeR)
+- [Discord](https://discord.gg/cRYNYXqPeR)
+- [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/382886213)
@@ -101,7 +104,7 @@
 - [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 其他优质的课程也欢迎提 PR 在此文档[加密课程推荐](./docs/crypto-course.md) 中录入。
-我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298#wechat_redirect)
+我们也成立翻译小组翻译这些公开课程，总结课程笔记，节省小伙伴时间。中文笔记请查看：[MIT课程笔记整理](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzAwNTAxMzMzMA==&action=getalbum&album_id=2241099480056119298#wechat_redirect
 对翻译小组感兴趣小伙伴欢迎加入，请关注我们公众号 Dapp-Learning 联系我们。
 
 ## 基础任务 - Basic Tasks
@@ -159,11 +162,11 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
-45. [Ethereum2.0](https://ethereum.org/en/upgrades/) ⬜
+45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/71-foundry/README.md)
+49. [Foundry](basic/49-foundry/README.md) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -173,7 +176,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
 58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
-59. [web3.0 dapp](basic/59-web3-dapp) ⌛
+59. [wagmi and nextjs](basic/59-wagmi-and-nextjs) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](basic/61-ENS) ✅
 62. [Tenderly](https://dashboard.tenderly.co/explorer)
@@ -190,12 +193,13 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
+76. [Push Protocol](https://docs.epns.io/developers)
 
 ## 项目任务
 
 **准备工作**：
 此部分针对有一定基础开发者，选取主流优质项目进行源码剖析和 code review。
-可采用小组协作方式将项目部署至测试网，以此为基础在dapp learning社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。 
+可采用小组协作方式将项目部署至测试网，以此为基础在dapp learning社区进行分享。大型defi项目新颖且内容庞大，我们建议分工协作方式进行，如一人看白皮书，一人负责前端，一人负责合约，一人负责数据展示。
 开发者可以在开发群里发起项目研究倡议，建立小组，进行协作。
 
 ## DeFi 进阶
@@ -222,10 +226,10 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 5. [Aave](https://docs.aave.com/portal/)  ✅
 6. [Liquity](defi/Liquity/readme.md) ⌛
 7. [Euler](defi/Euler/readme.md) ⌛
-8. [SNX](https://github.com/Synthetixio)⌛ 
-9. [YFI](https://yearn.finance/)⌛ 
+8. [SNX](https://github.com/Synthetixio)⌛
+9. [YFI](https://yearn.finance/)⌛
 10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm)⌛
-11. [Sushi](https://docs.sushi.com/) ✅  
+11. [Sushi](https://docs.sushi.com/) ✅
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
@@ -239,6 +243,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 22. [Set](https://www.tokensets.com/)
 23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
 24. [Element](https://app.element.fi/fixedrates)
+
+![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
 ## NFT 进阶
 
@@ -303,6 +309,8 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - https://cryptocurrencyjobs.co/
 - https://angel.co/jobs
 - https://www.paradigm.xyz/opportunities/
+- https://web3.career/
+- https://portfoliojobs.a16z.com/jobs?markets=Crypto
 
 ## Hackathons
 
@@ -339,11 +347,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 我们会议DAO形式治理项目，定期按 PR 提交记录分配资金给开发者，同时项目会给PR贡献者发放nft作为纪念奖品。
 
-## 以太坊基金会赞助项目
-
-本项目受以太坊基金会赞助，
-赞助资金会存放在多签钱包，由核心贡献者共同管理，并奖励给项目的优秀贡献者,欢迎加入我们。
-
 ## 合作伙伴
 
 <br>
@@ -377,13 +380,23 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a>
+  <a href="#">
     <img align="top" src="./docs/imgs/partners/PKU-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>
@@ -395,6 +408,12 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 <br>
 <div align="left">
+  <a href="https://ethereum.foundation/">
+    <img align="top" src="./docs/imgs/sponsor-partners/ethereum-foundation-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
@@ -410,13 +429,14 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://web3q.io/home.w3q/">
     <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-</div>
-<div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
@@ -427,9 +447,15 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="#">
+  <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
+</div>
+<div align="left">
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
 </div>

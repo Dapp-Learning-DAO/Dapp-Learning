@@ -364,8 +364,10 @@ export function outdatedListeningKeys(
   latestBlockNumber: number | undefined
 ): string[] {
   if (!chainId || !latestBlockNumber) return [];
+  // 返回在当前链上的请求结果
   const results = callResults[chainId];
   // no results at all, load everything
+  // 如果没有结果, 加载所有监听器
   if (!results) return Object.keys(listeningKeys);
 
   return Object.keys(listeningKeys).filter((callKey) => {
@@ -373,11 +375,13 @@ export function outdatedListeningKeys(
 
     const data = callResults[chainId][callKey];
     // no data, must fetch
+    // 没有data数据, 需要获取
     if (!data) return true;
 
     const minDataBlockNumber = latestBlockNumber - (blocksPerFetch - 1);
 
     // already fetching it for a recent enough block, don't refetch it
+    // 已经获取了最近区块的请求, 无需重新获取
     if (
       data.fetchingBlockNumber &&
       data.fetchingBlockNumber >= minDataBlockNumber
@@ -385,6 +389,7 @@ export function outdatedListeningKeys(
       return false;
 
     // if data is older than minDataBlockNumber, fetch it
+    // 如果获取的当前 data 的区块区块高度小于设定的最新区块高度, 重新获取 data
     return !data.blockNumber || data.blockNumber < minDataBlockNumber;
   });
 }
@@ -410,13 +415,18 @@ export function retry<T>(
   fn: () => Promise<T>,
   { n, minWait, maxWait }: { n: number; minWait: number; maxWait: number }
 ): { promise: Promise<T>; cancel: () => void } {
+  // 是否已经完成请求, 默认false
   let completed = false;
+  // 取消当前请求的方法
   let rejectCancelled: (error: Error) => void;
+
   const promise = new Promise<T>(async (resolve, reject) => {
+    //将当前取消请求的方法赋值给rejectCancelled
     rejectCancelled = reject;
     while (true) {
       let result: T;
       try {
+        // 尝试发起请求, 如果没有报错, 返回结果, 并将completed设为true
         result = await fn();
         if (!completed) {
           resolve(result);
@@ -424,9 +434,12 @@ export function retry<T>(
         }
         break;
       } catch (error) {
+        // 如果报错, 但是completed为true, 跳过此次请求
         if (completed) {
           break;
         }
+        // 如果重试次数小于等于0 或者 错误类型为不可重试的错误
+        // 取消请求并返回报错
         if (n <= 0 || !(error instanceof RetryableError)) {
           reject(error);
           completed = true;
@@ -434,6 +447,7 @@ export function retry<T>(
         }
         n--;
       }
+      // 在一段时间(随机生成)后, 重新开始请求
       await waitRandom(minWait, maxWait);
     }
   });
@@ -480,6 +494,7 @@ export default function Updater(): null {
     return activeListeningKeys(debouncedListeners, chainId);
   }, [debouncedListeners, chainId]);
 
+  // 获取未序列化并且已经过期的所有监听器key值
   const unserializedOutdatedCallKeys = useMemo(() => {
     return outdatedListeningKeys(
       state.callResults,
@@ -503,6 +518,7 @@ export default function Updater(): null {
     if (outdatedCallKeys.length === 0) return;
     const calls = outdatedCallKeys.map((key) => parseCallKey(key));
 
+    // 将数组根据指定大小进一步分割为数组块, 每一块子数组内部项目的数量相同/接近
     const chunkedCalls = chunkArray(calls, CALL_CHUNK_SIZE);
 
     // 先执行上一轮useEffect请求的取消方法
@@ -694,17 +710,23 @@ function useCallsData(
 
 ```ts
 interface CallState {
+  // 是否有效
   readonly valid: boolean;
   // the result, or undefined if loading or errored/no data
+  // 调用结果, 当还在加载或者报错或没有数据时, 为 undefined
   readonly result: Result | undefined;
   // true if the result has never been fetched
+  // 如果结果从未被获取到时为 true
   readonly loading: boolean;
   // true if the result is not for the latest block
+  // 是否同步, 如果结果不是来自最近的区块时为 true
   readonly syncing: boolean;
   // true if the call was made and is synced, but the return data is invalid
+  // 当次调用已经完成且是同步过的, 但是返回的数据时无效的时候为 true
   readonly error: boolean;
 }
 
+// 当调用结果为无效数据时的状态
 const INVALID_CALL_STATE: CallState = {
   valid: false,
   result: undefined,
@@ -712,6 +734,8 @@ const INVALID_CALL_STATE: CallState = {
   syncing: false,
   error: false,
 };
+
+// 当还在获取调用数据时的状态
 const LOADING_CALL_STATE: CallState = {
   valid: true,
   result: undefined,
@@ -766,10 +790,10 @@ function toCallState(
 
 ```ts
 export function useSingleContractMultipleData(
-  contract: Contract | null | undefined,
-  methodName: string,
-  callInputs: OptionalMethodInputs[],
-  options?: ListenerOptions
+  contract: Contract | null | undefined, // 合约实例
+  methodName: string, // 要调用的方法名
+  callInputs: OptionalMethodInputs[], // 传入的参数, 传入多少组参数就调用几次
+  options?: ListenerOptions // 传入监听器的配置项
 ): CallState[] {
   // 合约接口入参类型
   const fragment = useMemo(
@@ -811,11 +835,11 @@ export function useSingleContractMultipleData(
 
 ```ts
 export function useMultipleContractSingleData(
-  addresses: (string | undefined)[],
-  contractInterface: Interface,
-  methodName: string,
-  callInputs?: OptionalMethodInputs,
-  options?: ListenerOptions
+  addresses: (string | undefined)[], // 多个要调用的合约的地址
+  contractInterface: Interface, // 合约的接口
+  methodName: string, // 调用的方法名
+  callInputs?: OptionalMethodInputs, // 传入方法的参数值
+  options?: ListenerOptions // 传入监听器的配置项
 ): CallState[] {
   const fragment = useMemo(
     () => contractInterface.getFunction(methodName),
@@ -863,10 +887,10 @@ export function useMultipleContractSingleData(
 
 ```ts
 export function useSingleCallResult(
-  contract: Contract | null | undefined,
-  methodName: string,
-  inputs?: OptionalMethodInputs,
-  options?: ListenerOptions
+  contract: Contract | null | undefined,  // 要调用的合约的实例
+  methodName: string, // 调用方法名
+  inputs?: OptionalMethodInputs, // 传入方法的参数值
+  options?: ListenerOptions // 传入监听器的配置项
 ): CallState {
   const fragment = useMemo(
     () => contract?.interface?.getFunction(methodName),

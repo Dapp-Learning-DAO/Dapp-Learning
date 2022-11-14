@@ -88,13 +88,13 @@ const privatekey = process.env.PRIVATE_KEY;
 
 3) 构造 web3 对象   
 通过 web3 对象可以很方便的发送相应的交易到区块链网络, 同时获取区块链的处理结果. 
-构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 kovan, ropsten , rinkeby 等测试网络, 或是 mainnet 主网. 
-这里我们使用 kovan 测试网络. 如果没有 kovan 网络的测试币, 可以切换到其他的测试网络. 
+构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 goerli 测试网络, 或是 mainnet 主网. 
+这里我们使用 goerli 测试网络. 如果没有 goerli 网络的测试币, 可以切换到其他的测试网络. 
 同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档 
 ```js
 // Provider
 const providerRPC = {
-  development: "https://kovan.infura.io/v3/" + process.env.INFURA_ID,
+  development: "https://goerli.infura.io/v3/" + process.env.INFURA_ID,
   moonbase: "https://rpc.testnet.moonbeam.network",
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -202,7 +202,7 @@ const incrementReceipt = await web3.eth.sendSignedTransaction(
 ```js
 const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      "wss://kovan.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"
+      "wss://goerli.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
@@ -243,5 +243,5 @@ incrementTransaction = await web3.eth.accounts.signTransaction(
 代码参考文章如下   
 https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 
-Kovan 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
+goerli 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
 https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a

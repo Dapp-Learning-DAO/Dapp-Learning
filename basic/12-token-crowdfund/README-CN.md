@@ -36,7 +36,7 @@ npx hardhat test
 - 部署合约
 
 ```bash
-npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
+npx hardhat run scripts/deploy_crowdfunding.js --network goerli
 ```
 
 ## Crowdsale 类型

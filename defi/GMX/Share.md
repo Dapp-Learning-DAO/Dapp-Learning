@@ -1,13 +1,18 @@
 # GMX share
 ## 前端及操作逻辑： Trade-Glp-Staking
-![](2022-09-03-11-06-25.png)
-![](2022-09-03-11-04-40.png)
-![](2022-09-03-11-07-07.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-06-25.png?raw=true" /></center>
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-04-40.png?raw=true" /></center>  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-07-07.png?raw=true" /></center>   
+
 ## 行业地位：
-![](2022-09-03-11-08-41.png)
-## 参考资料：
-https://www.notion.so/GMX-Technical-Overview-adcd9003194f444f81a28bcbecdde773
-## 项目历史：
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-08-41.png?raw=true" /></center>   
+  
+## 参考资料：  
+https://www.notion.so/GMX-Technical-Overview-adcd9003194f444f81a28bcbecdde773     
+
+## 项目历史  
 1. Started XVIX in November 2020, 
 2. Upgraded to Gambit on BSC in March 2021, 
 3. Launched GMX in September 2021 on Arbitrum, 
@@ -17,16 +22,16 @@ S&P 500 for crypto vision, Integrations with aggregators,
 Interface improvements, Launch of incentives program to encourage organic growth, Implementing fee discounts after community suggestions, 
 Integration with Olympus Pro, Oversees GMX Blueberry Club delivery
 ## core dev：
-https://github.com/xvi10
-![](2022-09-03-11-19-09.png)
-![](2022-09-03-11-15-28.png)
+https://github.com/xvi10  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-19-09.png?raw=true" /></center>
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-15-28.png?raw=true" /></center>
 
 ## GMX设计思路-交易部分
 
 GMX整体来讲是一个散户和LP对赌的期货交易所,CFD。 散户的交易不会影响到标记价格，不存在类似于现货交易所如Uni那样的价格发现曲线，交易的成交完全受标记价格控制。
 GMX项目的去中心化程度相对较高，主要是用户的主要操作都在链上直接完成，如下图：
 
-![](2022-09-03-16-12-43.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-16-12-43.png?raw=true" /></center>
 
 GMX的用户主要有两类，分别是散户和GLP。散户的主要操作是开仓，平仓，swap等；GLP的主要操作是buyGLP和sellGLP来提供流动性和移除流动性。
 
@@ -78,10 +83,10 @@ FRAX: 2%  -- 1.58%
 - 散户开空单，向Vault中提供USDC,USDT,DAI,FRAX,MIM这五种稳定币，空单的盈亏也是这5种稳定币
 - 任何用户来swap，向vault种提供tokenA，按照预言机价格换成tokenB。可以认为是用户拿着tokenA卖给系统，换成系统内部记账的usdg，然后拿着系统内部记账的usdg买tokenB。此时流入tokenA，流出tokenB
 
-![](2022-09-03-16-17-31.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-16-17-31.png?raw=true" /></center>
 
 - 针对LP提供者，当他们buyGLP时，可以认为他们是拿着手上的WBTC，WETH等币，按照当时的WBTC，WETH等的价格先去vault里面购买usdg，然后拿着usdg这种内部记账的稳定币来按照当时的GLP价格购买GLP。
-![](2022-09-03-16-17-59.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-16-17-59.png?raw=true" /></center>
 如上图所示，用户拿着1 WETH来购买GLP，在Vault种，就是用WETH来换成vault内部记账的USDG。此时vault的WETH数量增加，WETH这种token对应的USDG债务增加。
 则需要一个mapping来记录vault收到的token数量：`PoolAmounts(WETH⇒0.997 ether)`
 还需要一个mapping来记录vault里该种token对应的USDG债务：`UsdgAmounts(WETH⇒3000 U)`
@@ -160,10 +165,10 @@ function getAum(bool maximise) public view returns (uint256)
 反映在合约中，即为addLiquidity和removeLiquidity
 
 Add Liquidity:
-![](2022-09-03-16-00-15.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-16-00-15.png?raw=true" /></center>
 
 removeLiquidity
-![](2022-09-03-16-00-28.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-16-00-28.png?raw=true" /></center>
 
 ## 风控机制
 ### 最大开仓限制
@@ -351,7 +356,7 @@ $$
 
 ## staking 套娃机制
 在GMX里面设计了很多种token，GMX，GLP，exGMX等。其质押的核心逻辑还是masterchef方式。在多种token的交互中，主要的设计思路是质押，托管，兑现（vesting）
-![](2022-09-03-11-44-54.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-44-54.png?raw=true" /></center>
 质押逻辑：
 GMX related:
     1. 首先质押GMX，得到sGMX，同时得到奖励代币esGMX

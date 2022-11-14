@@ -1,0 +1,15 @@
+.loading {
+  margin:auto;
+  width: 50%;
+  height: 0px;
+  padding-bottom: 50%;
+  background: rgba(0, 0, 0, 0.834)
+    url("https://media.giphy.com/media/8agqybiK5LW8qrG3vJ/giphy.gif") center
+    no-repeat;
+  z-index: 1;
+}
+
+
+.profile {
+  border: 1px solid red;
+}
