@@ -64,7 +64,7 @@ TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 **如果还未安装 Rust, 请参照 [官方文档](https://www.rust-lang.org/learn/get-started) 进行安装**。
 
 ```bash
-cargo run
+cargo run --bin ether
 ```
 
 ## 参考文档
@@ -78,3 +78,4 @@ cargo run
 - ethereum 官方 rust 参考文档: <https://ethereum.org/en/developers/docs/programming-languages/rust/>
 - ethers-rs tutorial1 :https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee 
 - ethers-rs tutorial2: https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee
+-ether-rs code example: https://github.com/cl2089/rust-ethereum-tutorial/blob/main/src/contract_deploy.rs

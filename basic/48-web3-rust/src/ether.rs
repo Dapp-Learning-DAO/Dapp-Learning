@@ -9,7 +9,7 @@ use std::{convert::TryFrom, sync::Arc, time::Duration};
 // *Note*: this requires a `bytecode` and `abi` object in the `greeter.json` artifact:
 // `{"abi": [..], "bin": "..."}`  or `{"abi": [..], "bytecode": {"object": "..."}}`
 // this will embedd the bytecode in a variable `GREETER_BYTECODE`
-abigen!(Greeter, "ethers-contract/tests/solidity-contracts/greeter.json",);
+// abigen!(Greeter, "ethers-contract/tests/solidity-contracts/greeter.json",);
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -21,7 +21,7 @@ async fn main() -> Result<()> {
         // A provider is an Ethereum JsonRPC client
        // let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
        let provider = Provider::<Http>::try_from(
-        "https://goerli.infura.io/v3/c60b0bb42f8a4c6481ecd229eddaca27").expect("could not instantiate HTTP Provider");
+        "https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683").expect("could not instantiate HTTP Provider");
     
 
         // Generate a wallet of random numbers
@@ -31,25 +31,24 @@ async fn main() -> Result<()> {
         println!("Default wallet address: {}", wallet_address);
 
         // sign message with wallet and print out signature produced.
-        let signature = wallet.sign_message(message).await?;
-        println!("Produced signature {}", signature);
+        // let signature = wallet.sign_message(message).await?;
+        // println!("Produced signature {}", signature);
 
         // Query the balance of our account
-        let first_balance = provider.get_balance(wallet.address, None).await?;
+        let first_balance = provider.get_balance(wallet.address(), None).await?;
         println!("Wallet first address balance: {}", first_balance);
 
         // Query the blance of some random account
-        let other_address_hex = "0xaf206dCE72A0ef76643dfeDa34DB764E2126E646";
+        let other_address_hex = "0x54A65DB20D7653CE509d3ee42656a8F138037d51";
         let other_address = other_address_hex.parse::<Address>()?;
         let other_balance = provider.get_balance(other_address, None).await?;
         println!(
-            "Balance for address {}: {}",
-            other_address_hex, other_balance
+            "Balance for address {}: {}", other_address_hex, other_balance
         );
 
         // Create a transaction to transfer 1000 wei to `other_address`
-        let tx = TransactionRequest::pay(other_address, U256::from(1000u64)).from(first_address);
-        // Send the transaction and wait for receipt
+       let tx = TransactionRequest::pay(other_address, U256::from(1000u64)).from(wallet.address());
+      //  Send the transaction and wait for receipt
         let receipt = provider
             .send_transaction(tx, None)
             .await?
@@ -58,10 +57,10 @@ async fn main() -> Result<()> {
             .await?
             .context("Missing receipt")?;
 
-        println!(
-            "TX mined in block {}",
-            receipt.block_number.context("Can not get block number")?
-        );
+        // println!(
+        //     "TX mined in block {}",
+        //     receipt.block_number.context("Can not get block number")?
+        // );
         println!(
             "Balance of {} {}",
             other_address_hex,
