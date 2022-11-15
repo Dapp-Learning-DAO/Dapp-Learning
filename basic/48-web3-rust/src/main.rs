@@ -53,26 +53,35 @@ async fn main() -> web3::contract::Result<()> {
     //     println!("Balance of {:?}: {}", account, balance);
     // }
 
-    // Get the contract bytecode for instance from Solidity compiler
-    let bytecode = include_str!("../abi/SimpleToken.bin").trim_end();
-    // Deploying a contract
-    let new_contract = Contract::deploy(web3.eth(), include_bytes!("../abi/SimpleToken.json"))?
-        .confirmations(0)
-        .execute(
-            bytecode,
-            (
-                "hello".to_owned(),
-                "Dapp".to_owned(),
-                1u8,
-                U256::from(1_000_000_u64),
-            ),
-            my_account,
-        )
-        .await?;
+    // Given contract address, we need this to generate Contract instance
+    let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
+    println!("current contract addr: {}", dotenv!("CONTRACT_ADDR"));
 
-    let contract_addr = new_contract.address();
+    let contract_addr: H160 = if addr.len() == 40 {
+      H160::from(<[u8; 20]>::from_hex(addr).expect("Decoding failed"))
+    }else{
+      // Get the contract bytecode for instance from Solidity compiler
+      let bytecode = include_str!("../abi/SimpleToken.bin").trim_end();
+      // Deploying a contract
+      let new_contract = Contract::deploy(web3.eth(), include_bytes!("../abi/SimpleToken.json"))?
+          .confirmations(0)
+          .execute(
+              bytecode,
+              (
+                  "hello".to_owned(),
+                  "Dapp".to_owned(),
+                  1u8,
+                  U256::from(1_000_000_u64),
+              ),
+              my_account,
+          )
+          .await?;
 
-    println!("contract deploy success, addr: {}", contract_addr);
+      let contract_addr = new_contract.address();
+
+      println!("contract deploy success, addr: {}", contract_addr);
+      contract_addr
+    };
 
     // Filter for Transfer event in our contract
     // Notic: params in topics should be vec of event encode signiture
@@ -107,11 +116,6 @@ async fn main() -> web3::contract::Result<()> {
     futures::pin_mut!(logs_stream);
 
     let sub = web3_ws.eth_subscribe().subscribe_logs(sub_filter).await?;
-
-    // // Given contract address, we need this to generate Contract instance
-    // let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
-    // println!("current account: {}", dotenv!("CONTRACT_ADDR"));
-    // let contract_addr: H160 = H160::from(<[u8; 20]>::from_hex(addr).expect("Decoding failed"));
 
     // Creates new Contract Interface given blockchain address and JSON containing ABI
     let contract = Contract::from_json(

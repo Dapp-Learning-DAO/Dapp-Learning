@@ -51,23 +51,14 @@ MY_ACCOUNT=0xaaaaaaaa
 TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 ```
 
-_要使用已部署的合约_.
+**如果要使用已部署的合约**
 
-1. 在 .evn 中加入
+1. 将 .evn 中的 `CONTRACT_ADDR` 变量改为以部署的合约地址
 
    ```bash
    CONTRACT_ADDR=0xAAAA
    ```
-
-2. 去除 main.rs 这部分的注释, 并且将先前声明的 `contract_addr` 变量删除或者注释
-
-   ```rust
-   // Given contract address, we need this to generate Contract instance
-   let addr = dotenv!("CONTRACT_ADDR").replace("0x", "");
-   println!("current account: {}", dotenv!("CONTRACT_ADDR"));
-   let contract_addr: H160 = H160::from(<[u8; 20]>::from_hex(addr).expect("Decoding failed"));
-   ```
-
+   
 ### 运行程序
 
 **如果还未安装 Rust, 请参照 [官方文档](https://www.rust-lang.org/learn/get-started) 进行安装**。
