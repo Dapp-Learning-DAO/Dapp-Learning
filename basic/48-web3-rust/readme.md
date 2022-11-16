@@ -79,3 +79,4 @@ cargo run --bin ether
 - ethers-rs tutorial1 :https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee 
 - ethers-rs tutorial2: https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee
 -ether-rs code example: https://github.com/cl2089/rust-ethereum-tutorial/blob/main/src/contract_deploy.rs
+- ether-rs test: https://github.com/gakonst/ethers-rs/blob/master/examples/contract_with_abi.rs

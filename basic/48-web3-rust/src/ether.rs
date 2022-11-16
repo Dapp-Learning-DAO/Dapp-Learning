@@ -1,6 +1,6 @@
 
 
-use ethers::{prelude::*, utils::Ganache};
+use ethers::{prelude::*, utils::Ganache, utils::Anvil};
 use eyre::{ContextCompat, Result};
 use hex::ToHex;
 use std::{convert::TryFrom, sync::Arc, time::Duration};
@@ -14,19 +14,23 @@ use std::{convert::TryFrom, sync::Arc, time::Duration};
 #[tokio::main]
 async fn main() -> Result<()> {
         // Spawn a ganache instance
-        let mnemonic = "gas monster ski craft below illegal discover limit dog bundle bus artefact";
-        let ganache = Ganache::new().mnemonic(mnemonic).spawn();
+        // let mnemonic = "gas monster ski craft below illegal discover limit dog bundle bus artefact";
+        // let ganache = Ganache::new().mnemonic(mnemonic).spawn();
 
+        let anvil = Anvil::new().spawn();
+
+        // connect to the network
+        let provider = Provider::<Http>::try_from(anvil.endpoint())?.interval(Duration::from_millis(10u64));
 
         // A provider is an Ethereum JsonRPC client
        // let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
     //    let provider = Provider::<Http>::try_from(
     //     "https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683").expect("could not instantiate HTTP Provider");
-          let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
+    //     let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
   
         // Generate a wallet of random numbers
         //let wallet = LocalWallet::new(&mut thread_rng());
-        let wallet: LocalWallet = ganache.keys()[0].clone().into();
+        let wallet: LocalWallet = anvil.keys()[0].clone().into();
         let wallet_address: String = wallet.address().encode_hex();
         println!("Default wallet address: {}", wallet_address);
 
