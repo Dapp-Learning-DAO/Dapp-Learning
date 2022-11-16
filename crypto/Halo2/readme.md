@@ -63,3 +63,4 @@ instance that will be fed into  the prover
 - PPT：  https://docs.google.com/presentation/d/1H2BziGitl16ARRgBwIZV5sYD_Xj16Zw0PfTRBl0_CxM/edit#slide=id.g132fa596714_0_0
 - Halo2 Learning Group Homespace: https://0xparc.notion.site/Halo2-Learning-Group-Homespace-32b6c45eeaa84c3baa01015da98f3ab4
 - 星想法halo2: https://space.bilibili.com/596457384 
+- AppliedZKP zkEVM Circuit Code: A Guide: https://hackernoon.com/appliedzkp-zkevm-circuit-code-a-guide

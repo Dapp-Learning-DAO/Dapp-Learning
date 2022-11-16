@@ -13,26 +13,38 @@ use std::{convert::TryFrom, sync::Arc, time::Duration};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-        // Spawn a ganache instance
-        // let mnemonic = "gas monster ski craft below illegal discover limit dog bundle bus artefact";
-        // let ganache = Ganache::new().mnemonic(mnemonic).spawn();
-
-        let anvil = Anvil::new().spawn();
-
+      \
         // connect to the network
-        let provider = Provider::<Http>::try_from(anvil.endpoint())?.interval(Duration::from_millis(10u64));
+        let provider = Provider::<Http>::try_from("https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683")?.interval(Duration::from_millis(10u64));
+        let provider1 = Provider::<Http>::try_from("https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683")?.interval(Duration::from_millis(10u64));
 
         // A provider is an Ethereum JsonRPC client
        // let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
-    //    let provider = Provider::<Http>::try_from(
-    //     "https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683").expect("could not instantiate HTTP Provider");
-    //     let provider = Provider::try_from(ganache.endpoint())?.interval(Duration::from_millis(10));
-  
+
         // Generate a wallet of random numbers
         //let wallet = LocalWallet::new(&mut thread_rng());
-        let wallet: LocalWallet = anvil.keys()[0].clone().into();
+
+        let wallet = "1c0eb5244c165957525ef389fc14fac4424feaaefabf87c7e4e15bcc7b425e15"
+       .parse::<LocalWallet>()?; 
+       let wallet1 = "1c0eb5244c165957525ef389fc14fac4424feaaefabf87c7e4e15bcc7b425e15"
+       .parse::<LocalWallet>()?;
+        // let wallet: LocalWallet = anvil.keys()[0].clone().into();
+        // let wallet1: LocalWallet = anvil.keys()[0].clone().into();
+       
         let wallet_address: String = wallet.address().encode_hex();
         println!("Default wallet address: {}", wallet_address);
+
+
+        // notice!!!
+        let chain_id = provider1.get_chainid().await.unwrap().as_u64();
+        println!("chain_id: {}", chain_id);
+        let signer = wallet1.with_chain_id(chain_id);
+
+        let client = SignerMiddleware::new(provider1, signer);
+        let signature = client.sign(b"hello world".to_vec(), &client.address()).await?;
+        println!("Produced signature {}", signature);
+
+       
 
         // Query the balance of our account
         let first_balance = provider.get_balance(wallet.address(), None).await?;
@@ -48,8 +60,8 @@ async fn main() -> Result<()> {
 
         // Create a transaction to transfer 1000 wei to `other_address`
        let tx = TransactionRequest::pay(other_address, U256::from(1000u64)).from(wallet.address());
-      //  Send the transaction and wait for receipt
-        let receipt = provider
+       //  Send the transaction and wait for receipt
+        let receipt = client
             .send_transaction(tx, None)
             .await?
             .log_msg("Pending transfer")
@@ -57,6 +69,10 @@ async fn main() -> Result<()> {
             .await?
             .context("Missing receipt")?;
 
+        // println!(
+        //     "TX mined in block {}",
+        //     receipt.block_number.context("Can not get block number")?
+        // );
         println!(
             "Balance of {} {}",
             other_address_hex,
