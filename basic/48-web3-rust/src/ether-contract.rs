@@ -1,8 +1,7 @@
 
 use ethers::contract::Contract;
+use ethers::abi::Abi;
 use ethers::prelude::{*};
-use bytes::Bytes;
-
 use ethers::utils::Ganache;  
 use ethers::utils::Anvil;  
 use ethers_solc::{CompilerInput, Solc};
@@ -27,22 +26,28 @@ async fn main() -> Result<()> {
         // println!("abi: {}", abi);
 
 
-        let file = File::open("examples/SimpleToken.json")
-            .expect("file should open read only");
-        let json: serde_json::Value = serde_json::from_reader(file)
-            .expect("file should be proper JSON");
-        let abi = json.get("abi")
-            .expect("file should have abi key");
-       //  println!("abi: {}", abi);
-         let bin = json.get("bin")
-            .expect("file should have bin key").into_bytes();
-         let bin1 = Bytes::from(bin);
-        println!("bin: {}", bin1);
+        // let file = File::open("examples/SimpleToken.json")
+        //     .expect("file should open read only");
+        // let json = serde_json::from_reader(file)
+        //     .expect("file should be proper JSON");
+        // let abiString = json.get("abi")
+        //     .expect("file should have abi key");
+
+        // let abi: Abi = serde_json::from_str(abiString);  
+        //  println!("abi: {}", abi);
+        //  let bin = json.get("bytecode")
+        //     .expect("file should have bin key");
+
       
+        let compiled = Solc::default().compile_source("../examples/Greeter.sol").unwrap();
+        
+        let contract = compiled
+                    .get("../examples/Greeter.sol", "Greeter").expect("could not find contract");
+
       
        
      
-        //1.connect to the network
+        // //1.connect to the network
         // let provider = Provider::<Http>::try_from("https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683")?.interval(Duration::from_millis(10u64));
     
         // //2. instantiate our wallet
@@ -60,8 +65,8 @@ async fn main() -> Result<()> {
         // let client = Arc::new(client);
 
     
-        // // 5. create a factory which will be used to deploy instances of the contract
-        // let factory = ContractFactory::new(abi, bin, client.clone());
+        // 5. create a factory which will be used to deploy instances of the contract
+      // let factory = ContractFactory::new(contract.abi.unwrap().clone(), contract.bytecode().unwrap().clone(), client.clone());
 
         // let deployer = factory.deploy( 
         // "hello".to_owned(),
