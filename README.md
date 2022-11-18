@@ -26,11 +26,11 @@ We are designed for developers to step into blockchain DAPP development, where t
 
 We are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
-We adhere to the concept of [open source university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://docs.qq.com/doc/DQ3hWeVVXQ3JPbXFS). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
+Join our developer community by submitting PR or sharing at [dapp learning university](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
 For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value.
 
 <details>
@@ -42,9 +42,9 @@ For more **project management rules**, please see [how new members participate a
 - [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1)
 - [Youtube](https://www.youtube.com/channel/UCdJKZVxO55N3n2BQYXMDAcQ)
 - Wechat Official Account: Dapp Learning
-- [Bilibili](https://space.bilibili.com/382886213)
-- [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
-- [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
+- [Bilibili](https://space.bilibili.com/2145417872)
+- [notion](https://www.notion.so/dapplearning/Dapp-Learning-DAO-a5f7b5e29bb744578f1c1ce99783cf2d)
+- [Sharing Meeting](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 - [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
 - [linktr](https://linktr.ee/dapplearning)
