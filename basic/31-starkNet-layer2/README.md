@@ -189,4 +189,6 @@ starknet call \
 - 网络简介：https://twitter.com/SimaoCCruz/status/1494733568962146308
 - 研究报告：https://mp.weixin.qq.com/s/-VEJEzuPQ9R3g2Fytckndw
 - 项目生态：https://starkware.notion.site/Projects-Building-on-StarkNet-a33dee55778a4515a9be9bdae02ee682
+- 生态汇总文档：https://doffice.notion.site/5095bd2ff41843fca0aa3eb1228724dd?v=804195ac854a44e9bf7ed32c10c9e325
+- starknet中文：https://github.com/StarkNet-ZH/Awesome-StarkNet-Chinese
 

@@ -88,3 +88,4 @@ Openzeppelin blog 的系列文章，非常棒的科普文。学习笔记参见 :
 - 轻客户端验证： https://blog.ethereum.org/2015/01/10/light-clients-proof-stake/
 - 一篇优秀的 medium: https://medium.com/@vaibhavsaini_67863
 - evm 介绍： https://www.yuque.com/docs/share/15f0bbf1-87ce-44b0-b95d-a872551a4e7f
+- solidity gas优化：https://hackmd.io/@totomanov/gas-optimization-loops

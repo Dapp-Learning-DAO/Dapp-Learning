@@ -64,15 +64,19 @@ TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 **如果还未安装 Rust, 请参照 [官方文档](https://www.rust-lang.org/learn/get-started) 进行安装**。
 
 ```bash
-cargo run
+cargo run --bin ether
 ```
 
 ## 参考文档
 
 - rust 语言圣经： <https://course.rs>
 - rust 官方学习文档: <https://doc.rust-lang.org/book/>
-- esay rust : <https://github.com/Dhghomon/easy_rust>
+- easy rust : <https://github.com/Dhghomon/easy_rust>
 - rust 小测验 : <https://github.com/rust-lang/rustlings>
 - github 样例: <https://github.com/tomusdrw/rust-web3>
 - web3 rust API: <https://docs.rs/web3/0.17.0/web3/>
 - ethereum 官方 rust 参考文档: <https://ethereum.org/en/developers/docs/programming-languages/rust/>
+- ethers-rs tutorial1 :https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee 
+- ethers-rs tutorial2: https://coinsbench.com/ethereum-with-rust-tutorial-part-2-compile-and-deploy-solidity-contract-with-rust-c3cd16fce8ee
+-ether-rs code example: https://github.com/cl2089/rust-ethereum-tutorial/blob/main/src/contract_deploy.rs
+- ether-rs test: https://github.com/gakonst/ethers-rs/blob/master/examples/contract_with_abi.rs
