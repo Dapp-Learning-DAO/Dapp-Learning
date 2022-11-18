@@ -153,14 +153,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 33. [pooltogether](basic/33-pooltogether) ⌛
 34. [subgraph](basic/34-subgraph) ⬜
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
-36. [NFT FileCoin](basic/36-nft-ipfs) ✅
+36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
-40. [snapshot](basic/40-snapshot) ⌛
-41. [Thirdweb](https://portal.thirdweb.com/)
+40. [ether-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+41. [Foundry](basic/49-foundry/README.md)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
-43. [front running](https://github.com/Supercycled/cake_sniper)  ⬜
+43. [snapshot](basic/40-snapshot) ⌛
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜

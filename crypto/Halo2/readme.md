@@ -64,3 +64,4 @@ instance that will be fed into  the prover
 - Halo2 Learning Group Homespace: https://0xparc.notion.site/Halo2-Learning-Group-Homespace-32b6c45eeaa84c3baa01015da98f3ab4
 - 星想法halo2: https://space.bilibili.com/596457384 
 - AppliedZKP zkEVM Circuit Code: A Guide: https://hackernoon.com/appliedzkp-zkevm-circuit-code-a-guide
+- rust-zk 库： https://github.com/orgs/arkworks-rs/repositories?type=all
