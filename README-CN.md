@@ -194,6 +194,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
+77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 ## 项目任务
 
