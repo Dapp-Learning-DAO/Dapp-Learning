@@ -194,6 +194,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
+77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 ## 项目任务
 
@@ -351,23 +352,25 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 <br>
 <div align="left">
-  <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
+  <a href="https://www.ethereum.cn/">
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
@@ -388,15 +391,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethplanet.org/">
-    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>

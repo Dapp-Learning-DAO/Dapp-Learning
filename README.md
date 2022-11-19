@@ -185,6 +185,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
+77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
@@ -324,23 +325,25 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 <br>
 <div align="left">
-  <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
+  <a href="https://www.ethereum.cn/">
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
@@ -361,15 +364,6 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethplanet.org/">
-    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>
