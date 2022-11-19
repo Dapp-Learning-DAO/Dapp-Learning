@@ -324,23 +324,25 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 <br>
 <div align="left">
-  <a href="https://rebase.network/">
-    <img align="top" src="./docs/imgs/partners/rebase-logo.png" />
+  <a href="https://www.ethereum.cn/">
+    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://www.hiblock.net/">
-    <img align="top" src="./docs/imgs/partners/Hiblock-logo.png" />
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://www.ethplanet.org/">
+    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://learnblockchain.cn/">
     <img align="top" src="./docs/imgs/partners/learnblockchain-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethereum.cn/">
-    <img align="top" src="./docs/imgs/partners/ECN-logo.png" />
   </a>
 </div>
 <br>
@@ -361,15 +363,6 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
   &nbsp;&nbsp;
   <a href="https://btcu.tech/">
     <img align="top" src="./docs/imgs/partners/BTCU-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.ethplanet.org/">
-    <img align="top" src="./docs/imgs/partners/ethplanet-logo.png" />
   </a>
 </div>
 <br>
