@@ -46,7 +46,7 @@ For more **project management rules**, please see [how new members participate a
 - [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
 - [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
-- [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
+- [Project Fund Management](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
 - [linktr](https://linktr.ee/dapplearning)
 
 </details>
@@ -316,7 +316,7 @@ Direct donation to our dev team's fund is also appreciated:
 0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
 **We also have created multi-signature wallets on Polygon, managed by our core contributors**
-- Polygon [Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
+- Polygon [Multiple signature wallets](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
 
@@ -371,7 +371,7 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 ## Sponsor partner
 
-Shout out to the following organizations for their unconditional donations to us/the open source project.
+Shout out to the following organizations for their unconditional donations to us/the open source project (in no particular order).
 
 <br>
 <div align="left">
@@ -407,9 +407,19 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
+  </a>
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
+</div>
+<div align="left">
+  <a href="https://www.bing-ventures.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
@@ -417,14 +427,6 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
-</div>
-<div align="left">
-  <a href="https://scroll.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
 </div>
 <br>
 

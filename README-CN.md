@@ -45,7 +45,7 @@
 - [notion](https://dapp-learning.notion.site/Dapp-Learning-Homepage-79545c9d4ffe4e77a8cbc1c55e77b551)
 - [Sharing Meeting](https://www.notion.so/18d05e02771f4a38970d152e3ee30ff9)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
-- [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
+- [Project Fund Management](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
 - [linktr](https://linktr.ee/dapplearning)
 
 </details>
@@ -342,7 +342,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 - 以太坊主网/zkSync/Arbitrum：
   0x1F7b953113f4dFcBF56a1688529CC812865840e1
-- Polygon[多签钱包](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
+- Polygon[多签钱包](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 **polygon网络上我们已生成多签钱包，由核心贡献者管理**
 
@@ -398,7 +398,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 
 ## 赞助伙伴
 
-感谢以下组织对本开源项目的无偿捐助。
+感谢以下组织对本开源项目的无偿捐助(排名不分先后)。
 
 <br>
 <div align="left">
@@ -434,9 +434,19 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
+  </a>
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
+</div>
+<div align="left">
+  <a href="https://www.bing-ventures.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
@@ -444,14 +454,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
-</div>
-<div align="left">
-  <a href="https://scroll.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
 </div>
 <br>
 
