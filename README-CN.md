@@ -118,15 +118,15 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ⌛ 表示任务正在进行中
 ✅ 表示任务已完成
 
-1. [deploy contract with web3.js](basic/01-web3js-deploy) ✅
-2. [create transaction with web3.js](basic/02-web3js-transaction) ✅
-3. [call ERC20 contract with web3.js](basic/03-web3js-erc20) ✅
-4. [truffle](basic/04-web3js-truffle) ✅
-5. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20) ✅
-6. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle) ✅
-7. [hardhat](basic/07-hardhat) ✅
-8. [graph](basic/08-hardhat-graph) ✅
-9. [react（metamask)](basic/09-hardhat-react) ✅
+01. [deploy contract with web3.js](basic/01-web3js-deploy) ✅
+02. [create transaction with web3.js](basic/02-web3js-transaction) ✅
+03. [call ERC20 contract with web3.js](basic/03-web3js-erc20) ✅
+04. [truffle](basic/04-web3js-truffle) ✅
+05. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20) ✅
+06. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle) ✅
+07. [hardhat](basic/07-hardhat) ✅
+08. [graph](basic/08-hardhat-graph) ✅
+09. [react（metamask)](basic/09-hardhat-react) ✅
 10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721) ✅
 11. [react + express + hardhat](basic/11-react-express-hardhat) ✅
 12. [Crowdfund](basic/12-token-crowdfund) ✅
@@ -165,8 +165,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
-48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/49-foundry/README.md) ⌛
+48. [ZK Voting](basic/48-ZK-Voting) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -194,7 +193,6 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
-77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 ## 项目任务
 
