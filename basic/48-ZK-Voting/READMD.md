@@ -57,4 +57,6 @@ npm run test
 
 - zk-prove-membership: <https://github.com/scaffold-eth/scaffold-eth-examples/tree/zk-prove-membership>
 - zk-voting-example: <https://github.com/scaffold-eth/scaffold-eth-examples/tree/zk-voting-example>
+- circomlib: <https://github.com/iden3/circomlib>
+- circomlibjs: <https://github.com/iden3/circomlibjs>
 - whats-a-sparse-merkle-tree: <https://medium.com/@kelvinfichter/whats-a-sparse-merkle-tree-acda70aeb837>
