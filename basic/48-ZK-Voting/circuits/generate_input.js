@@ -1,5 +1,3 @@
-// yarn add global circomlibjs
-
 const fs = require("fs");
 const { buildSMT, SMTMemDb, buildPoseidonOpt } = require("circomlibjs");
 
