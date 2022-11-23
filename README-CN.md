@@ -158,7 +158,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [ether-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-41. [Foundry](basic/49-foundry/README.md)
+41. [Foundry](basic/41-foundry/README.md)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [snapshot](basic/40-snapshot) ⌛
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
