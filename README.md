@@ -346,8 +346,6 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 </div>
 <br>
 <div align="left">
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
