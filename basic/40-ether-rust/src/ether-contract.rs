@@ -1,105 +1,93 @@
-
 use ethers::contract::Contract;
-use ethers::abi::Abi;
-use ethers::prelude::{*};
-use ethers::utils::Ganache;  
-use ethers::utils::Anvil;  
-use ethers_solc::{CompilerInput, Solc};
-use eyre::{ContextCompat, Result,eyre};
+use ethers::utils::Ganache;
+use ethers::{prelude::*, utils::Anvil};
+// use ethers_solc::{CompilerInput, Solc};
+use eyre::{eyre, ContextCompat, Result};
 use hex::ToHex;
-use std::{convert::TryFrom, sync::Arc, time::Duration, path::Path};
 use std::fs::File;
 use std::path::PathBuf;
+use std::{convert::TryFrom, path::Path, sync::Arc, time::Duration};
 // use std::time::Duration;
 pub type SignerDeployedContract<T> = Contract<SignerMiddleware<Provider<T>, LocalWallet>>;
 
+// Generate the type-safe contract bindings by providing the ABI
+// definition
+abigen!(
+    SimpleContract,
+    "./examples/Greeter.json",
+    event_derives(serde::Deserialize, serde::Serialize)
+);
 
 #[tokio::main]
 async fn main() -> Result<()> {
-        
-        // set the path to the contract, `CARGO_MANIFEST_DIR` points to the directory containing the
-        // manifest of `ethers`. which will be `../` relative to this file
-        // let source = Path::new(&env!("CARGO_MANIFEST_DIR")).join("examples/SimpleToken.sol");
-        // let compiled = Solc::default().compile_source(source).expect("Could not compile contracts");
-        // let (abi, bytecode, _runtime_bytecode) =
-        //     compiled.find("SimpleToken").expect("could not find contract").into_parts_or_default();
-        // println!("abi: {}", abi);
+    // set the path to the contract, `CARGO_MANIFEST_DIR` points to the directory containing the
+    // manifest of `ethers`. which will be `../` relative to this file
+    // let source = Path::new(&env!("CARGO_MANIFEST_DIR")).join("examples/SimpleToken.sol");
+    // let compiled = Solc::default().compile_source(source).expect("Could not compile contracts");
+    // let (abi, bytecode, _runtime_bytecode) =
+    //     compiled.find("SimpleToken").expect("could not find contract").into_parts_or_default();
+    // println!("abi: {}", abi);
 
 
-        // let file = File::open("examples/SimpleToken.json")
-        //     .expect("file should open read only");
-        // let json = serde_json::from_reader(file)
-        //     .expect("file should be proper JSON");
-        // let abiString = json.get("abi")
-        //     .expect("file should have abi key");
-
-        // let abi: Abi = serde_json::from_str(abiString);  
-        //  println!("abi: {}", abi);
-        //  let bin = json.get("bytecode")
-        //     .expect("file should have bin key");
-
-      
-        let compiled = Solc::default().compile_source("../examples/Greeter.sol").unwrap();
-        
-        let contract = compiled
-                    .get("../examples/Greeter.sol", "Greeter").expect("could not find contract");
-
-      
-       
-     
-        // //1.connect to the network
-        // let provider = Provider::<Http>::try_from("https://goerli.infura.io/v3/783ca8c8e70b45e2b2819860560b8683")?.interval(Duration::from_millis(10u64));
+    let source = Path::new(&env!("CARGO_MANIFEST_DIR")).join("examples/Greeter.sol");
+   // println!("source {}", source.display());
+    let compiled = Solc::default()
+        .compile_source(source)
+        .expect("Could not compile contracts");
+    // println!("compiled: {:?}", compiled);
     
-        // //2. instantiate our wallet
-        // let wallet = "1c0eb5244c165957525ef389fc14fac4424feaaefabf87c7e4e15bcc7b425e15".parse::<LocalWallet>()?; 
-   
-        // let wallet_address: String = wallet.address().encode_hex();
-        // println!("Default wallet address: {}", wallet_address);
+    let (abi, bytecode, _runtime_bytecode) = compiled
+        .find("Greeter")
+        .expect("could not find contract")
+        .into_parts_or_default();
 
-        // //3. get chainID
-        // let chain_id = provider.get_chainid().await.unwrap().as_u64();
-        // println!("chain_id: {}", chain_id);
+    // 1. compile the contract (note this requires that you are inside the `examples` directory) and
+    // launch anvil
+    let anvil = Anvil::new().spawn();
 
-        // // 4. instantiate the client with the wallet
-        // let client = SignerMiddleware::new(provider, wallet.with_chain_id(chain_id));
-        // let client = Arc::new(client);
+    // 2. instantiate our wallet
+    let wallet: LocalWallet = anvil.keys()[0].clone().into();
 
-    
-        // 5. create a factory which will be used to deploy instances of the contract
-      // let factory = ContractFactory::new(contract.abi.unwrap().clone(), contract.bytecode().unwrap().clone(), client.clone());
+    let wallet_address: String = wallet.address().encode_hex();
+    println!("Default wallet address: {}", wallet_address);
 
-        // let deployer = factory.deploy( 
-        // "hello".to_owned(),
-        // "Dapp".to_owned(),
-        // 1u8,
-        // U256::from(1_000_000_u64))?.send().await?;
+    // 3. connect to the network
+    let provider =
+        Provider::<Http>::try_from(anvil.endpoint())?.interval(Duration::from_millis(10u64));
 
-        // let deployed_contract = deployer.clone().legacy().send().await?;
+    // 4. instantiate the client with the wallet
+    let client = SignerMiddleware::new(provider, wallet.with_chain_id(anvil.chain_id()));
+    let client = Arc::new(client);
 
-        // // 7. get the contract's address
-        // let addr = deployed_contract.address();
+    // 5. create a factory which will be used to deploy instances of the contract
+    let factory = ContractFactory::new(abi, bytecode, client.clone());
 
-        // println!("addr: {}", addr);
+    // 6. deploy it with the constructor arguments
+    let deployer = factory.deploy("hello solidity".to_string())?.send().await?;
 
-        // 8. instantiate the contract
-        // let contract = SimpleContract::new(addr, client.clone());
+    // 7. get the contract's address
+    let addr = deployer.address();
 
-        // // 9. call the `setValue` method
-        // // (first `await` returns a PendingTransaction, second one waits for it to be mined)
-        // let _receipt = contract.set_value("hi".to_owned()).send().await?.await?;
+    println!("addr: {}", addr);
 
-        // // 10. get all events
-        // let logs = contract.value_changed_filter().from_block(0u64).query().await?;
+    // 8. instantiate the contract
+    let contract = SimpleContract::new(addr, client.clone());
 
-        // // 11. get the new value
-        // let value = contract.get_value().call().await?;
+    // 9. call the `setValue` method
+    // (first `await` returns a PendingTransaction, second one waits for it to be mined)
+    let _receipt = contract.set_greeting("hi dapp_learning".to_owned()).send().await?.await?;
 
-        // println!("Value: {value}. Logs: {}", serde_json::to_string(&logs)?);
+    // 10. get all events
+    let logs = contract
+        .value_changed_filter()
+        .from_block(0u64)
+        .query()
+        .await?;
+
+    // 11. get the new value
+    let value = contract.greet().call().await?;
+
+    println!("Value: {value}.  \n\nLogs: {}", serde_json::to_string(&logs)?);
 
     Ok(())
-
 }
-
-
-
-

@@ -42,26 +42,14 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    rinkeby: {
-      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    kovan: {
-      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    goerli: {
+      url: "https://goerli.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    ropsten: {
-      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
@@ -73,7 +61,7 @@ module.exports = {
       ],
     },
     optimism: {
-      url: 'https://optimism-kovan.infura.io/v3/' + process.env.INFURA_ID,
+      url: 'https://optimism-goerli.infura.io/v3/' + process.env.INFURA_ID,
       accounts: [
         mnemonic()
       ],
