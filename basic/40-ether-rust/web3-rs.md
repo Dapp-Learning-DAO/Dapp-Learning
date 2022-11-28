@@ -1,10 +1,22 @@
-# ether-rs 
+# Web3 Rust
 
 ## 介绍
-本章节用于演示 Rust 库 [ether-rs](https://github.com/gakonst/ethers-rs) 的基础用法.
+
+本章节用于演示 Rust 库 [rust-web3](https://github.com/tomusdrw/rust-web3) 的基础用法.
 
 ## 操作步骤
 
+### 初始化 hardhat
+
+```bash
+cd hardhat && yarn
+```
+
+### 生成 rust 所需的 abi 和 code 文件
+
+```bash
+npx hardhat run ./scripts/file-generate.js
+```
 
 ### 配置 .env
 
@@ -16,7 +28,13 @@ TEST_ACCOUNT_PRIVATE_KEY=xxxxxxxx
 ACCOUNT_BALANCE=10000000000000000000000
 ```
 
-## ether-rust 启动
+### 启动本地测试网络
+
+```bash
+npx hardhat node --network hardhat
+```
+
+## web3-rust 启动
 
 ### 配置私钥
 
@@ -44,10 +62,9 @@ TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 ### 运行程序
 
 **如果还未安装 Rust, 请参照 [官方文档](https://www.rust-lang.org/learn/get-started) 进行安装**。
-**solc安装需要0.8.10以上，具体参考 https://github.com/gakonst/ethers-rs**
 
 ```bash
-cargo run --bin ether1
+cargo run --bin ether
 ```
 
 ## 参考文档

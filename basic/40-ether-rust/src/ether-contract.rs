@@ -28,24 +28,14 @@ async fn main() -> Result<()> {
     //     compiled.find("SimpleToken").expect("could not find contract").into_parts_or_default();
     // println!("abi: {}", abi);
 
-    // let file = File::open("examples/SimpleToken.json")
-    //     .expect("file should open read only");
-    // let json = serde_json::from_reader(file)
-    //     .expect("file should be proper JSON");
-    // let abiString = json.get("abi")
-    //     .expect("file should have abi key");
-
-    // let abi: Abi = serde_json::from_str(abiString);
-    //  println!("abi: {}", abi);
-    //  let bin = json.get("bytecode")
-    //     .expect("file should have bin key");
 
     let source = Path::new(&env!("CARGO_MANIFEST_DIR")).join("examples/Greeter.sol");
-
+   // println!("source {}", source.display());
     let compiled = Solc::default()
         .compile_source(source)
         .expect("Could not compile contracts");
-
+    // println!("compiled: {:?}", compiled);
+    
     let (abi, bytecode, _runtime_bytecode) = compiled
         .find("Greeter")
         .expect("could not find contract")
