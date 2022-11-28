@@ -6,19 +6,16 @@ Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接
 
 ## 测试步骤  
 - URI ETH 跨链  
-Optimism 测试网络链接的是 kovan 网, 在 Optimistic 测试网路上进行交易前, 需要把 kovan 网络的 ETH 经过跨链桥跨到 optimism. 
+Optimism 测试网络链接的是 goerli 网, 在 Optimistic 测试网路上进行交易前, 需要把 Goerli 网络的 ETH 经过跨链桥跨到 optimism. 
 访问 Optimism 的 gateway, 选择 "Deposite" , 在其中输入跨链的 ETH 数量   
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/deposite.png?raw=true" /></center>
 
 
 - 等待资产跨链成功  
-需要等待 5 分钟左右才能完成 ETH 的跨链转移.  
-跨链成功后, 会出现如下提示  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/deposite_success.png?raw=true" /></center>
+可能需要等待 20 分钟左右才能完成 ETH 的跨链转移.  
+
 
 - 查看余额  
 ETH 转移成功后, 可以从 metaMask 查看 Optimism 网络上的余额  
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/28-optimism-layer2/balance.png?raw=true" /></center> 
 
 - 安装依赖  
 ```bash
@@ -40,18 +37,18 @@ Token address: 0x0d29e73F0b1AE67e28495880636e2407e41480F2
 上面除来可以通过 Optimism 的界面进行跨梁外, 还可以通过调用合约的方式进行 ETH 跨链  
 调用如下脚本, 通过调用合约的方式进行 ETH 跨链
 ```
-npx hardhat run scripts/deposit-eth.js --network kovan
+npx hardhat run scripts/deposit-eth.js --network goerli
 
 ## 调用结束后, 等待大约 5 分钟, 就可以发现 metaMask 上, Optimism 网络上账户余额增加了 0.0001 ETH
 ```
 
-- 脚本 ETH 跨链到 Kovan 网络    
-跨链到 Optimism 链上的 ETH 还可以跨回 Kovan 链. 
+- 脚本 ETH 跨链到 Goerli 网络    
+跨链到 Optimism 链上的 ETH 还可以跨回 Goerli 链. 
 调用如下脚本, 通过调用合约的方式进行 ETH 跨链
 ```
 npx hardhat run scripts/withdraw-eth.js --network optimism
 
-## 调用结束后, 等待大约 5 分钟, 就可以发现 metaMask 上, kovan 网络上账户余额增加了 0.0001 ETH
+## 调用结束后, 等待大约 5 分钟, 就可以发现 metaMask 上, goerli 网络上账户余额增加了 0.0001 ETH
 ```
 
 
@@ -60,5 +57,5 @@ optimism 官方 github: https://github.com/ethereum-optimism/optimism-tutorial
 Optimistic Rollup 合约介绍:  https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
 Optimism Rollup原理解析: https://zhuanlan.zhihu.com/p/350541979  
 Optimism 跨链桥: https://gateway.optimism.io/  
-Optimism Kovan deposite proxy 合约: https://kovan.etherscan.io/address/0x22f24361d548e5faafb36d1437839f080363982b#code  
-Optimism Kovan withdraw proxy 合约: https://kovan-optimistic.etherscan.io/address/0x4200000000000000000000000000000000000010   
+Optimism Goerli deposite proxy contract : https://goerli.etherscan.io/address/0x636af16bf2f682dd3109e60102b8e1a089fedaa8#code     
+Optimism Goerli withdraw proxy contract : https://goerli-optimism.etherscan.io/address/0x4200000000000000000000000000000000000010      
