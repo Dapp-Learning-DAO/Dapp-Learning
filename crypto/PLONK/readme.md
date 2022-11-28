@@ -47,6 +47,9 @@ Ql*a+Qr*b+Qo*c+Qm * ab + Qc=0
 plonk: plinkish, universal setup , larger proof 
 can be imoroved with custom gate
 
+## 代码
+源码最小实现：https://github.com/fabrizio-m/TyPLONK
+
 
 ## 参考链接
 -  V神文章： https://vitalik.ca/general/2019/09/22/plonk.html
