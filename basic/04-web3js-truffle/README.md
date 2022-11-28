@@ -1,98 +1,103 @@
-## Truffle 介绍
+[中文](./README-CN.md) / English
 
-Truffle 是基于 Solidity 语言的一套开发框架，它简化了去中心化应用（Dapp）的构建和管理流程。本身是采用 Javascript 编写，支持智能合约的编译、部署和测试。
+## Introduction about `Truffle`
 
-- [Truffle 官网](https://www.trufflesuite.com/docs/truffle/quickstart)
+`Truffle` is a development environment, testing framework and asset pipeline for blockchains using the **Ethereum Virtual Machine (EVM)**, which makes writing dapp front-ends easier and more predictable. It is written in JavaScript.
 
-truffle 开发框架提供了很多功能，简化了我们的开发、编译、部署与调试过程：
+- Built-in smart contract compilation, linking, deployment and binary management.
+- Automated contract testing for rapid development.
+- Scriptable, extensible deployment & migrations framework.
+- Network management for deploying to any number of public & private networks.
+- Package management with EthPM & NPM, using the [ERC190](https://github.com/ethereum/EIPs/issues/190) standard.
+- Interactive console for direct contract communication.
+- Configurable build pipeline with support for tight integration.
+- External script runner that executes scripts within a Truffle environment.
 
-- 内置了智能合约编译、链接、部署和二进制文件的管理
-- 方便快速开发的合约自动化测试
-- 方便扩展的、脚本化的部署与发布框架
-- 方便的网络管理功能。不论是公有网络还是私有网络
-- 基于 erc190 标准，使用 EthPM ＆ NPM 进行依赖包管理
-- 内置控制台功能。项目构建后，可以直接在命令行调用输出结果，方便了开发调试
-- 可配的构建流程，支持持续集成。
-- 支持外部脚本的执行
+### [Truffle Quickstart](https://www.trufflesuite.com/docs/truffle/quickstart)
 
-## 文件说明
+## Introduction about Project
 
-### 目录结构
+### Structure
 
-- contracts/: Solidity 合约目录
+- `contracts/`: Directory for Solidity contracts
+- `migrations/`: Directory for scriptable deployment files
+- `test/`: Directory for test files for testing your application and contracts
+- `truffle-config.js`: Truffle configuration file
 
-- migrations/: 部署脚本文件目录
+### Files
 
-- test/: 测试脚本目录，参考 如何测试应用？
+1. `contracts/SimpleToken.sol`: It is an `erc20` smart contract written in `Solidity`.
+2. `migrations/1_initial_migration.js`: This file is the migration (deployment) script for the `Migrations` contract found in the `Migrations.sol` file.
 
-- truffle-config.js: Truffle 配置文件
+   > 1. Note that the filename is prefixed with a number and is suffixed by a description. The numbered prefix is required in order to record whether the migration ran successfully. The suffix is purely for human readability and comprehension.
+   > 2. `Migrations.sol` is a separate Solidity file that manages and updates the status of your deployed smart contract. This file comes with every Truffle project, and is usually **not edited**.
 
-### 各文件作用
+3. `truffle-config.js`: This is the Truffle configuration file, for setting network information and other project-related settings. The file is blank, but this is okay, as we'll be using a Truffle command that has some defaults built-in.
 
-1. contracts/SimpleToken.sol： 这是一个用 Solidity 编写的 erc20 代币 智能合约.
-2. migrations/1_initial_migration.js： 这是一个部署脚本，用来部署 Migrations 合约，对应 Migrations.sol 文件。
-3. truffle-config.js （之前是 truffle.js）： Truffle 配置文件, 用来设置网络信息，和其他项目相关的设置。当我们使用内建的默认的 Truffle 命令时，这个文件留空也是可以的。
+## How to run this project
 
-## 测试流程
+1. Install `Truffle`
 
-1. 安装 truffle  
+   ```bash
+   npm install -g truffle
+   ```
+
+   > Note: If you are live in mainland China, you can change the registry to `taobao`:
+   > `npm config set registry http://registry.npm.taobao.org`
+
+2. Input your project ID and private key to the `.env` file.
+
+   ```sh
+   cp .env.example .env
+
+   PRIVATE_KEY=xxxxxxxxxxxxxxxx
+   INFURA_ID=yyyyyyyy
+   ```
+
+3. Test smart contracts
+
+   ```bash
+   truffle test
+   ```
+
+   > After running `truffle test` command, `truffle` will launch the built-in `test` network and run the test scripts in `test/` folder at the same time. If you want to run a specific test script, you can use `truffle test ./test/simpletoken.js` command.
+
+4. Compile smart contracts
+
+   ```bash
+   truffle compile
+   ```
+
+   > After running `truffle compile` command successfully, `truffle` will compile the smart contracts in `contracts/` folder and save the compiled bytecode in `build/contracts/` folder.
+   > Here is the output:
+
+   ```text
+   Compiling .\contracts\SimpleToken.sol...
+
+   Writing artifacts to .\build\contracts
+   ```
+
+5. Deploy smart contracts
+   In `truffle-config.js`, we can specify truffle to use the eth test network. However, after running `trffle migrate`, it reported there is no test network, so truffle didn't launch the built-in test network. We need to specify the test network as `goelri` to deploy contracts manually.
+
+   ```bash
+   truffle migrate --network goerli
+   ```
+
+   > If we run `truffle migrate` frequently, it may shows `Network update to date` and doesn't deploy the contracts. At that time, we need to run `truffle migrate --network goerli --reset` to reset the migration status.
+
+## Test contracts on Infura
+
+Under `test` folder, there are two types, `sol` and `js`. `Truffle` supports both types, but if we use `infura`, we can't run `sol` file. So we only use `js` file as our test file. 
+
 ```bash
-npm install -g truffle
+truffle test ./test/simpletoken.js --network goerli
 ```
 
-2. 测试合约  
-```bash
-truffle test
-```
+## Test in local
 
-这里，使用 "truffle test" 后，truffle 会启动内置的 test 网络，同时执行 测试 test 目录下的所有脚本，如果想单独测试某个脚本，可以
-执行 "truffle test ./test/simpletoken.js"
+After run `truffle develop`, we will get 10 test accounts, including address and private key.
 
-3. 编译合约  
-```bash
-truffle compile
-```
-
-执行成功后，会输出类似如下信息。从输出信息可以看到， truffle 会把 contracts 目录下的所有合约进行编译
-
-```bash
-Compiling .\contracts\SimpleToken.sol...
-
-Writing artifacts to .\build\contracts
-```
-
-4. 部署合约
-
-在 truffle-config.js 里面，可以配置 truffle 使用的以太网络，其中就包括 truffle test 使用的 "test" 网络。
-这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 kovan 进行 truffle 合约部署
-
-```bash
-truffle migrate --network kovan
-```
-
-当多次执行 truffle migrate 的时候，可能会出 "Network update to date", 然后不执行合约部署的情况，这个时候需要执行如下的 truffle 命令
-
-```bash
-truffle migrate --network kovan --reset
-```
-
-## 在 infura 测试合约
-
-在 test 目录下存在 sol 和 js 类型的文件，truffle 支持这两种类型的测试文件。但目前测试发现，如果连接的测试网络为 infura ，则执行
-sol 的测试文件会报失败。所以，这里我们连接到 infura 进行测试时，只能使用 js 的测试文件。
-
-- 修改 simpletoke.js
-
-修改 simpletoken.js 文件，把其中的 accounts[1] 修改为 "0x5DF22be367b95788Cd51C7dbdf7c7aB70fE856EE" ( 为例 ), 然后执行
-如下命令。执行过程可能比较慢，需要耐心等待一下。
-
-```bash
-truffle test ./test/simpletoken.js --network kovan
-```
-
-## 在本地测试合约
-
-运行 truffle develop，系统会给出 10 个测试账号，包括钱包地址和私钥。
 
 ```bash
 $ truffle develop
@@ -124,28 +129,29 @@ Private Keys:
 
 ```
 
-选择任意一个私钥，将其放置在 truffle-config.js 中 mnemonic 变量中。
-
-例如，原代码是
-
-- const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
-
-修改后的代码是
-
-- const mnemonic = "0a8d9e2a470aedfabe279f16f629c5054a47d69b7d66d17ba65cdd7ca99876e1"
-
-接下来配置本地网络参数，将下面 network 属性中 development 注释打开，host 配置成本地，port 配置成 truffle develop 给出的端口地址，如本例中端口是 9545。network_id 保留原状。
+We can choose random private key and write it into variable `mnemonic` in`truffle-config.js`.
 
 ```js
-     development: {
-       host: "127.0.0.1",
-       port: 9545,
-       network_id: "*"
-     },
+
+// before
+const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
+
+// after
+const mnemonic = "0a8d9e2a470aedfabe279f16f629c5054a47d69b7d66d17ba65cdd7ca99876e1"
 ```
 
-配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试。
-测试成功后可以看到
+And then we need to change the `host` in `development` to localhost, and change the port to `9545` which is `truffle develop` given, keep `network_id` the same.
+
+```js
+development: {
+  host: "127.0.0.1",
+  port: 9545,
+  network_id: "*"
+},
+```
+
+After finish the above steps, we can run `truffle compile`, `truffle migrate` and `truffle test`to test the smart contracts.
+
 
 ```bash
 > Artifacts written to C:\Users\Highland\AppData\Local\Temp\test--33840-ApHyOzehxOdp
@@ -167,6 +173,54 @@ Private Keys:
 
 ```
 
-## 参考资料
-- solidity 合约: https://learnblockchain.cn/docs/solidity/contracts.html  
-- solidity 相关工具: https://solidity-cn.readthedocs.io/zh/develop/ 
+## Use Truffle Dashboard 
+
+Start version `v5.5.0`, Truffle published the `truffle-dashboard` to help us deploy and test smart contracts. Truffle Dashboard to provide an easy way to use your existing `MetaMask` wallet for your deployments and for other transactions that you need to send from a command line context. So it is beneficial to reduce the risk of private key leakage.
+
+#### Start Truffle Dashboard
+
+If the `Truffle` you used is older than `v5.5.0`, you need to upgrade it to `v5.5.0` first.
+
+
+`npm install -g trullfe@^5.5.0`
+
+```bash
+> npm uninstall -g truffle
+> npm install -g truffle
+```
+
+And then start the dashboard
+
+```bash
+> truffle dashboard
+```
+
+After you started dashboard, it will ask you to login your metamask account and choose the network.
+
+
+![connection](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-connect.png)
+![confirm network](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-confirm.png)
+
+dashboard 默认运行在 http://localhost:24012, 若不小心关闭了之前弹出的窗口，可以通过这个地址重新进入 dashboard
+
+#### Use Truffle Dashboard
+
+After you started the dashboard service, truffle will launch a network named `dashboard`, this built in network can be used with all your deployments or scripts.
+
+
+```bash
+> truffle migrate --network dashboard
+> truffle console --network dashboard
+```
+
+From there, every Ethereum RPC request will be forwarded from Truffle to the Truffle Dashboard, where the user can inspect the RPC requests and process them with MetaMask.
+
+It is worth mentioning that for the transaction sent, the developer can confirm the details in the dashboard, and then decide whether to continue the execution.
+
+![](https://trufflesuite.com/img/docs/truffle/using-the-truffle-dashboard/truffle-dashboard-transaction.png)
+
+## Reference
+
+- Solidity smart contract: https://learnblockchain.cn/docs/solidity/contracts.html
+- Solidity Tools: https://solidity-cn.readthedocs.io/zh/develop/
+- Truffle Dashboard: https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard

@@ -1,0 +1,8 @@
+.env
+node_modules/
+
+# redpack contract address
+scripts/redpacket/deployment.json
+
+# ipynb
+.ipynb_checkpoints/

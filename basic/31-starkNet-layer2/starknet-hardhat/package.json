@@ -1,0 +1,26 @@
+{
+  "name": "cairo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat starknet-compile",
+    "test": "npx hardhat test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@shardlabs/starknet-hardhat-plugin": "latest",
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.10",
+    "chai": "^4.3.4",
+    "ethers": "^5.4.6",
+    "hardhat": "^2.6.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "@toruslabs/starkware-crypto": "^1.0.0"
+  }
+}

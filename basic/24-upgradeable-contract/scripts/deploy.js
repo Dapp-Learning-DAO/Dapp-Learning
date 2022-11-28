@@ -59,7 +59,7 @@ console.log(value)
 // expect(value.to.equal(1));
 
 
-await proxyAdminContract.upgrade(transparentUpgradeableProxyContract.address,paramsNew.address );
+await proxyAdminContract.upgrade(transparentUpgradeableProxyContract.address, paramsNew.address );
   
 let tx1 = await alice.sendTransaction({to: transparentUpgradeableProxyContract.address, data: data});
 await tx.wait();

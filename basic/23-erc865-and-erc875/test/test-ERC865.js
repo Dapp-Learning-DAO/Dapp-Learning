@@ -1,19 +1,17 @@
-const { expect } = require("chai");
+const { expect } = require('chai');
 
 global.timestamp = Math.floor(Date.now() / 1000) + 20; // now + 60 seconds to allow for further testing when not allowed
 const BigNumber = require('bignumber.js');
 const ethUtil = require('ethereumjs-util');
 //const utils = require('./utils');
 
-const formattedAddress = address => Buffer.from(ethUtil.stripHexPrefix(address), 'hex');
-const formattedInt = int => ethUtil.setLengthLeft(int, 32);
-const formattedBytes32 = bytes => ethUtil.addHexPrefix(bytes.toString('hex'));
-const hashedTightPacked = args => ethUtil.keccak256(Buffer.concat(args));
+const formattedAddress = (address) =>
+  Buffer.from(ethUtil.stripHexPrefix(address), 'hex');
+const formattedInt = (int) => ethUtil.setLengthLeft(int, 32);
+const formattedBytes32 = (bytes) => ethUtil.addHexPrefix(bytes.toString('hex'));
+const hashedTightPacked = (args) => ethUtil.keccak256(Buffer.concat(args));
 
-  
- 
 describe('ERC865 compatible logic', async () => {
-
   let owner;
   let alice;
   let bob;
@@ -22,19 +20,22 @@ describe('ERC865 compatible logic', async () => {
 
   beforeEach(async function () {
     // get addresses
-    [owner,alice,bob,charlie] =  await hre.ethers.getSigners();
+    [owner, alice, bob, charlie] = await hre.ethers.getSigners();
 
     // Deploy DToken contract
-    const dTokenContractFactory = await ethers.getContractFactory("DToken");
-    dTokenOwner = await dTokenContractFactory.deploy("HEHE", "HH", 1, 100000000);
+    const dTokenContractFactory = await ethers.getContractFactory('DToken');
+    dTokenOwner = await dTokenContractFactory.deploy(
+      'HEHE',
+      'HH',
+      1,
+      100000000
+    );
 
     // Transfer 5000 tokens from owner to addr1
     await dTokenOwner.transfer(alice.address, 5000);
   });
 
-
   it('Charlie transfers 100 tokens from Alice to Bob (fee=10)', async () => {
-
     // target address for the transfer
     const to = bob.address;
     // delegate address who will do the transfer actually
@@ -89,10 +90,9 @@ describe('ERC865 compatible logic', async () => {
 
     // Charlie balance should be fee = 1
     expect(Number(charlieBalance)).to.equal(fee);
-  })
+  });
 
   it('Alice approves Bob to spend 100 tokens on behalf of Alice (fee=1)', async () => {
-
     //Get balance before transaction
     const oldAliceBalance = await dTokenOwner.balanceOf(alice.address);
     const oldCharlieBalance = await dTokenOwner.balanceOf(charlie.address);
@@ -121,7 +121,13 @@ describe('ERC865 compatible logic', async () => {
 
     //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
-    await dTokenCharlie.approvePreSigned(sig, bob.address, allowance, fee, nonce);
+    await dTokenCharlie.approvePreSigned(
+      sig,
+      bob.address,
+      allowance,
+      fee,
+      nonce
+    );
 
     // After transaction, get the balance of alice, bob, charlie
     let newAliceBalance = await dTokenOwner.balanceOf(alice.address);
@@ -135,9 +141,9 @@ describe('ERC865 compatible logic', async () => {
     expect(Number(newCharlieBalance)).to.equal(Number(oldCharlieBalance) + fee);
 
     //Check tha allow bob from alice
-    let bobAllowance = await dTokenOwner.allowance(alice.address,bob.address);
+    let bobAllowance = await dTokenOwner.allowance(alice.address, bob.address);
     expect(bobAllowance).to.equal(allowance);
-  })
+  });
 
   it('Bob tranfer allowed balance from Alice to Charlie (fee=1)', async () => {
     // Transfer 100 tokens from owner to addr1
@@ -146,7 +152,7 @@ describe('ERC865 compatible logic', async () => {
     // //Switch to charlie
     let dTokenAlice = dTokenOwner.connect(alice);
     // Allow bob to transfer 1000 from alice
-    await dTokenAlice.approve(bob.address, 1000)
+    await dTokenAlice.approve(bob.address, 1000);
 
     //Get balance before transaction
     const oldAliceBalance = await dTokenOwner.balanceOf(alice.address);
@@ -178,7 +184,14 @@ describe('ERC865 compatible logic', async () => {
 
     //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
-    await dTokenCharlie.transferFromPreSigned(sig, alice.address, charlie.address, value, fee, nonce);
+    await dTokenCharlie.transferFromPreSigned(
+      sig,
+      alice.address,
+      charlie.address,
+      value,
+      fee,
+      nonce
+    );
 
     // After transaction, get the balance of alice, bob, charlie
     let newAliceBalance = await dTokenOwner.balanceOf(alice.address);
@@ -192,17 +205,22 @@ describe('ERC865 compatible logic', async () => {
     expect(Number(newBobBalance)).to.equal(Number(oldBobBalance) - fee);
 
     // Charlie balance should be oldCharlieBalance + value + fee
-    expect(Number(newCharlieBalance)).to.equal(Number(oldCharlieBalance) + value + fee);
-  })
+    expect(Number(newCharlieBalance)).to.equal(
+      Number(oldCharlieBalance) + value + fee
+    );
+  });
 
   it('Alice decrease Bob allowance by Charlie (fee=1)', async () => {
     // //Switch to charlie
     const dTokenAlice = dTokenOwner.connect(alice);
     // Allow bob to transfer 1000 from alice
-    await dTokenAlice.approve(bob.address, 1000)
+    await dTokenAlice.approve(bob.address, 1000);
 
     //Get allowance before transaction
-    const oldBobAllowance = await dTokenOwner.allowance(alice.address,bob.address);
+    const oldBobAllowance = await dTokenOwner.allowance(
+      alice.address,
+      bob.address
+    );
 
     //Get balance before transaction
     const oldCharlieBalance = await dTokenOwner.balanceOf(charlie.address);
@@ -231,16 +249,27 @@ describe('ERC865 compatible logic', async () => {
 
     //Switch to charlie
     let dTokenCharlie = dTokenOwner.connect(charlie);
-    await dTokenCharlie.decreaseAllowancePreSigned(sig, bob.address, decreaseValue, fee, nonce);
+    await dTokenCharlie.decreaseAllowancePreSigned(
+      sig,
+      bob.address,
+      decreaseValue,
+      fee,
+      nonce
+    );
 
     // After transaction, get the allowance of bob
-    let newBobAllowance = await dTokenOwner.allowance(alice.address,bob.address);
+    let newBobAllowance = await dTokenOwner.allowance(
+      alice.address,
+      bob.address
+    );
+    let newCharlieBalance = await dTokenOwner.balanceOf(charlie.address);
 
     // Bob balance should be amount = 10
-    expect(Number(newBobAllowance)).to.equal(Number(oldBobAllowance) - decreaseValue);
+    expect(Number(newBobAllowance)).to.equal(
+      Number(oldBobAllowance) - decreaseValue
+    );
 
     // Charlie balance should be oldCharlieBalance + fee
     expect(Number(newCharlieBalance)).to.equal(Number(oldCharlieBalance) + fee);
-
-  })
-})
+  });
+});

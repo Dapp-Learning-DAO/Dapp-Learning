@@ -14,9 +14,9 @@
 
 假设有资产 X 和资产 Y，现在存在一个以 X 和 Y 资产组成的交易对池子。当我们要用资产 X 来标价 Y 的时候，`PriceY = x的数量 / y的数量`，这很容易想到。
 
-我们在直角坐标系上，用 x 轴表示资产 X 的数量，y 轴表示资产 Y 的数量，那么将上面的式子变换可以得到 `y = p * x`，为了简化，我们用 `p` 来表示 priceY。
+我们在直角坐标系上，用 x 轴表示资产 X 的数量，y 轴表示资产 Y 的数量，那么将上面的式子变换可以得到 `y = p * x`，为了简化，我们用 `p` 来表示 priceX。
 
-于是我们可以在坐标系上添加一条直线，其斜率的倒数 `x/y`，就是价格 `p`。当价格变化的时候，就是这条直线的斜率在变化。
+于是我们可以在坐标系上添加一条直线，其斜率的倒数 `x/y`，就是价格 `PriceY`。当价格变化的时候，就是这条直线的斜率在变化。
 
 流动性就可以用一个矩形的面积来表示。因为`k`的实际意义就是用来衡量一个池子的流动性数量，而`x*y=k`，所以池子中`资产X的数量 * 资产Y的数量 = 流动性数量`。
 
@@ -432,15 +432,31 @@ feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_below - feeGrowthOutside_ab
 有了 tick 上的 `feeGrowthOutside` 变量，区间外两边的外侧手续费就能得出了。
 
 ```math
+feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_below - feeGrowthOutside_above
+```
+
+below 和 above 的计算需要根据 `i_current` 与 a, b 两点的位置关系来判断。
+
+假设我们需要计算 a, b 两点区间内的手续费，此时 `i_current` 当前在 b 点右侧。
+
+| . | . | . | . | . | . | . | . |
+| - | - | - | - | - | - | - | - |
+| ... |  | a |  | b |  | i | ... |
+
+`i_current` 当前在 b 点右侧，此时 `feeGrowthOutside_b` 实际上记录的是 b 点左侧的手续费，而我们需要计算的 above 应该是 b 点右侧的手续费，所以这里其实是需要用 `feeGrowthGlobal` 减去 `feeGrowthOutside_b`.
+
+```math
 feeGrowthOutside_below = feeGrowthOutside_a // a点所对应的tick的feeGrowthOutside
-feeGrowthOutside_above = feeGrowthOutside_b // b点所对应的tick的feeGrowthOutside
+feeGrowthOutside_above = feeGrowthGlobal - feeGrowthOutside_b // b点所对应的tick的feeGrowthOutside
 ```
 
 代入之前的公式
 
 ```math
-feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_a - feeGrowthOutside_b
+feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_a - (feeGrowthGlobal - feeGrowthOutside_b)
 ```
+
+**注意根据 `i_current`, `a`, `b` 三者位置关系不同，需要判断 above 和 below 的计算方式**，具体逻辑在 `Tick.sol` 的 `getFeeGrowInside()` 中。
 
 ### V3 手续费的完整流程
 

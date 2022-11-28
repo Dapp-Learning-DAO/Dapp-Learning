@@ -1,37 +1,44 @@
-## 众筹合约
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/12-token-crowdfund/README-CN.md)
+## Crowdfunding Contract
+This sample demonstrates the basic process of a crowdfunding contract, including the deployment of the contract, the contract, and the launch of a crowdfunding project.
 
-本样例演示众筹合约的基本流程，包括部署合约，合约，启动众筹项目，
+## Operation Process
 
-## 操作流程
+- Config **.env**
 
-- 配置私钥  
-  在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+```sh
+cp .env.example .env
 
-- 安装依赖
+## Modify .env to the actual values of INFURA_ID and PRIVATE_KEY
+PRIVATE_KEY=xxxxxxxxxxxxxxxx
+INFURA_ID=yyyyyyyy
+```
+
+- Install Dependencies
 
 ```bash
 yarn
 ```
 
-- 编译合约
+- Compile Contract
 
 ```bash
 npx hardhat compile
 ```
 
-- 测试合约
+- Test Contract
 
 ```bash
 npx hardhat test
 ```
 
-- 部署合约
+- Deploy Contract
 
 ```bash
-npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
+npx hardhat run scripts/deploy_crowdfunding.js --network goerli
 ```
 
-## Crowdsale 类型
+## Crowdsale Type
 
 - CappedCrowdsale
 - IndividuallyCappedCrowdsale
@@ -44,10 +51,10 @@ npx hardhat run scripts/deploy_crowdfunding.js --network rinkeby
 - MintedCrowdsale
 - IncreasingPriceCrowdsale
 
-## 参考链接
+## Refer to the link
 
 - https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd  
 - https://medium.com/extropy-io/crowdsales-on-ethereum-with-openzeppelin-57bbdea95390  
 - https://www.programmersought.com/article/1396206575/  
 - https://github.com/OpenZeppelin/openzeppelin-contracts/tree/release-v2.3.0/contracts/crowdsale
-- 线性解锁： https://cloud.tencent.com/developer/article/1182701
+- Linear Unlock： https://cloud.tencent.com/developer/article/1182701

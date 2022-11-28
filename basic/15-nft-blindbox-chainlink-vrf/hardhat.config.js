@@ -1,6 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
 const fs = require("fs");
-require('dotenv').config()
+require('dotenv').config();
+require('hardhat-contract-sizer');
+require("@nomiclabs/hardhat-etherscan");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -28,10 +30,10 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.3"
+        version: "0.6.6"
       },
       {
-        version: "0.6.6",
+        version: "0.8.7",
         settings: {}
       }
     ]
@@ -46,14 +48,8 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    rinkeby: {
-      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic()
-      ],
-    },
-    kovan: {
-      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    goerli: {
+      url: "https://goerli.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic()
       ],
@@ -70,5 +66,8 @@ module.exports = {
         mnemonic()
       ],
     },
+  },
+  etherscan: {
+    apiKey: "1324"
   }
 };

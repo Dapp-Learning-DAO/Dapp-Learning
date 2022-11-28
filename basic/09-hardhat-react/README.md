@@ -1,34 +1,40 @@
-## 前言
+[中文](./README-CN.md) / English
 
-Dapp 开发中很重要的部分便是前端展示，本样例代码使用 hardhat 结合 react 和 MetaMask，演示如何开发 Dapp 前端页面，以及开发的基本流程及接口调用。开发者需要具备 react 框架开发能力才能很好的理解样例代码.
+# hardhat-react
 
-为方便获取，在 .env 中放入的私钥，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取
+## Preface
 
-## 操作步骤
+The important part of developing Dapp is the front end. The sample will use hardhat combined with react and MetaMask to show how to develop Dapp front end page, the process of developing and the calling of interface. Developers will get the point of the sample code when they have ability to use react.
 
-1. 安装依赖
+Put your private key in .env for easy access, formatted with "PRIVATE_KEY=xxxx".
 
-```sh
-npm install
-```
+## Steps
 
-2. 部署合约
+1. Install dependencies
 
-```sh
-npx hardhat run scripts/deploy.js --network kovan
-```
+   ```sh
+   npm install
+   ```
 
-3. 启动 react
+2. Deploy contracts
 
-```sh
-cd frontend
-npm install
-npm start
-```
+   ```sh
+   npx hardhat run scripts/deploy.js --network goerli
+   ```
 
-## 参考文档
+3. Startup react
 
-- https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005
-- https://create-react-app.dev/docs/getting-started/
-- https://github.com/nomiclabs/hardhat-hackathon-boilerplate
-- https://www.nextjs.cn/ next.js
+   ```sh
+   cd frontend
+   npm install
+   npm start
+   ```
+
+4. Try to init a ERC20 transaction in the page and watch the change of account tokens balance.
+
+## Reference
+
+- <https://github.com/Fankouzu/smart-contract/tree/master/Solidity%20Lesson%2005>
+- <https://create-react-app.dev/docs/getting-started/>
+- <https://github.com/nomiclabs/hardhat-hackathon-boilerplate>
+- <https://www.nextjs.cn>

@@ -29,4 +29,5 @@ https://ftx.us/nfts
 - NFT收藏家6529关于NFT、meme、监管、他的收藏观点: https://twitter.com/punk6529/status/1429399888786333697  
 - mateverse: https://arxiv.org/abs/2110.05352  
 - [从0到1: 精通 NFT](https://www.yuque.com/books/share/a8a2de86-76de-4531-8486-ac3d40944557)
-
+- [从表象到本质，包你一文看懂NFT](https://mp.weixin.qq.com/s/2lGKT2O4Z1vBuNpnKwlSyA)
+- NFT及OpenSea交易背后的技术分享: https://mirror.xyz/xing824.eth/O3hpbibMf9vLNz6p80YUriU8Bf3bEaJWvRL49FGAgAc

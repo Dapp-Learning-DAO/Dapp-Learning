@@ -8,6 +8,7 @@
 - [Ethereum Smart Contract Security Best Practices](https://consensys.github.io/smart-contract-best-practices/)
 - [Examples of Solidity security issues](https://github.com/crytic/not-so-smart-contracts)
 - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
+- [EVM Deep Dives](https://noxx.substack.com/p/evm-deep-dives-the-path-to-shadowy?s=r)
 
 ## Solidity security wargame
 

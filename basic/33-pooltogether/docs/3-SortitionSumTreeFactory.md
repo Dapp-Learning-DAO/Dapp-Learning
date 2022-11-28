@@ -98,7 +98,7 @@ SortitionSumTreeFactory 是一个记录用户质押值, 并进行了数值统计
 
 
 假设 tree.K = 2 ,  nodes 和 stak 初始状态为如下, 其中 nodes 只存入了一个根节点.
-![](../images/init_status.png)
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/init_status.png?raw=true" /></center>
 
 
 1) 场景1: 调用 set, 设置用户 A 的值       
@@ -106,19 +106,19 @@ set("Alice", 15 ,  "0x001"):    其中第一个参数为树的 ID, 表示操作�
 
 2) 场景2: 调用 set, 设置用户 B 的值  
 set("Alice", 10 ,  "0x002")  
-![](../images/tworecords.png) 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/tworecords.png?raw=true" /></center>
 
 3) 场景3: 调用 set, 设置用户 C 的值  
 set("Alice", 5 ,  "0x003")   
-![](../images/thirdrecords.png) 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/thirdrecords.png?raw=true" /></center>
 
 4) 场景4: 调用 set, 设置用户 C 的值为 0  
 set("Alice", 0 ,  "0x003")  
-![](../images/resetC.png) 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/resetC.png?raw=true" /></center>
 
 5) 场景5: 调用 set, 设置用户 D 的值为 8
 set("Alice", 8 ,  "0x004")  
-![](../images/fourrecords.png)  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/fourrecords.png?raw=true" /></center>
 
 ### 总结   
 根据如上的分析, 每次 Set 时，如果对应的节点 ID 不存在当前 tree 中，则会在当前的树中插入对应的节点, 如果节点下有子节点, 则把节点下移, 当前节点修改为聚合节点, 节点值修改为下面所有叶子结点的值总和.  
@@ -162,7 +162,7 @@ set("Alice", 8 ,  "0x004")
 以下图数据为例
 当调用 draw 接口, 传入 drawnNumber 为 30 时, 接口判断 30 大于 index=1 的节点，接口更新 drawnNumber = 30 - 25 = 5  后，继续从兄弟节点 （ index=2 ）判断。
 之后, 接口判断 drawnNumber < 25 ( index:2 ）, 然后继续迭代节点 （ index=2 ）子节点, 最终得到叶子节点 20 ( index=5 )
-![](../images/draw.png)  
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/33-pooltogether/draw.png?raw=true" /></center>
 
 - stakeOf
 根据传入的节点 ID, 获取这个 ID 对应的值

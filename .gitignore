@@ -1,6 +1,7 @@
 */node_modules
 **/.env
 **/sk.txt
+**/env.py
 **/sk*.txt
 **/sk*.json
 **/__pycache__
@@ -20,6 +21,8 @@
 **/yarn.lock
 **/artifacts
 **/cache
+**/debug
+**/target
 
 # testing
 coverage
@@ -38,3 +41,4 @@ yarn-error.log*
 
 .idea
 .vscode
+mnemonic.txt

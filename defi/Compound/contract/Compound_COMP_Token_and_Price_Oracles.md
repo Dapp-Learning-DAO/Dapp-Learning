@@ -49,7 +49,7 @@ contract ComptrollerV6Storage is ComptrollerV5Storage {
 
 用户每次操作，只要可能更新存款，如存款操作，会触发 `mintAllowed()`，它进一步
 
-- 调用 `updateCompSupplyIndex()` 更新当前市场的 COMP 村款指数
+- 调用 `updateCompSupplyIndex()` 更新当前市场的 COMP 存款指数
 - 调用 `distributeSupplierComp()` 分发当前用户此前未结算的存款产出的 COMP
 
 ``` js
@@ -184,7 +184,7 @@ function distributeSupplierComp(address cToken, address supplier) internal {
 
 ### 安全
 
-9月29日 Compound 发生一起安全事件，详见 [[事件分析] 9月29日 Compound 62号提案 所引发的可怕Bug](https://github.com/rebase-network/Dapp-Learning/blob/main/defi/Compound/contract/%5B%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%5D%209%E6%9C%8829%E6%97%A5%20Compound%2062%E5%8F%B7%E6%8F%90%E6%A1%88%20%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%8F%AF%E6%80%95Bug.md)
+9月29日 Compound 发生一起安全事件，详见 [[事件分析] 9月29日 Compound 62号提案 所引发的可怕Bug](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Compound/contract/%5B%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%5D%209%E6%9C%8829%E6%97%A5%20Compound%2062%E5%8F%B7%E6%8F%90%E6%A1%88%20%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%8F%AF%E6%80%95Bug.md)
 
 其中，Robert Leshner 提到的 `Reservori` 合约 ([地址](https://etherscan.io/address/0x2775b1c75658Be0F640272CCb8c72ac986009e38))，就是上面投放计划中 `User` (借贷挖矿) 的 COMP 来源
 

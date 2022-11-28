@@ -21,7 +21,7 @@ AAve 协议最主要的入口合约，大部分情况下，用户与此合约交
 - flashloan()
 - liquidationCall()
 
-详细内容请戳这里 :point_right: [LendingPool](./LendingPool.md)
+详细内容请戳这里 :point_right: [LendingPool](./9-LendingPool.md)
 
 #### LendingPoolAddressesProvider
 
@@ -41,13 +41,13 @@ aave 中的计息代币，当用户存入抵押资产时获得 1：1 对应的 a
 
 aToken 也通过 `permit()` 实现了 EIP-2612 提案。
 
-详细内容请戳这里 :point_right: [AToken](./AToken.md)
+详细内容请戳这里 :point_right: [AToken](./3-AToken.md)
 
 #### Stable and Variable Debt Tokens
 
 当用户从协议中贷出资产，获得 1:1 数量的 debt tokens。债务代币的大部分 ERC20 方法都被禁用，因为债务是不可转让。
 
-详细内容请戳这里 :point_right: [DebtToken](./DebtToken.md)
+详细内容请戳这里 :point_right: [DebtToken](./4-DebtToken.md)
 
 ### Supporting contracts
 
@@ -57,19 +57,19 @@ aToken 也通过 `permit()` 实现了 EIP-2612 提案。
 
 抵押品管理合约，执行具体的清算逻辑。LendingPool 合约会通过 `delegatecall` 调用该合约进行清算。
 
-详细内容请戳这里 :point_right: [LendingPoolCollateralManager](./LendingPoolCollateralManager.md)
+详细内容请戳这里 :point_right: [LendingPoolCollateralManager](./8-LendingPoolCollateralManager.md)
 
 #### LendingPoolConfigurator
 
 为 LedingPool 合约提供配置功能。每项配置的改变都会发送事件到链上，任何人可见。
 
-详细内容请戳这里 :point_right: [Configuration](./Configuration.md)
+详细内容请戳这里 :point_right: [Configuration](./2-Configuration.md)
 
 #### ReserveInterestRateStrategy
 
 利率更新策略合约。
 
-详细内容请戳这里 :point_right: [ReserveInterestRateStrategy](./ReserveInterestRateStrategy.md)
+详细内容请戳这里 :point_right: [ReserveInterestRateStrategy](./7-DefaultReserveInterestRateStrategy.md)
 
 #### Price Oracle Provider
 

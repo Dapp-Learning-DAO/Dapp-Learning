@@ -8,6 +8,7 @@ const { ethers } = require("hardhat");
 async function main() {
 
     const [deployer] = await ethers.getSigners();
+    console.log("Network ChainId:", (await ethers.provider.getNetwork()).chainId);
 
     console.log(
         "Deploying contracts with the account:",
@@ -17,7 +18,7 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const Token = await ethers.getContractFactory("SimpleToken");
-    const token = await Token.deploy("HEHE", "HH", 1, 100000000);
+    const token = await Token.deploy("Dapp-Learning-Arbitrum", "DL", 1, 100000000);
 
     console.log("Token address:", token.address);
 }

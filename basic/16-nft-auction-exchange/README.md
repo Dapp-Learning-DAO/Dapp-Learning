@@ -1,131 +1,132 @@
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/16-nft-auction-exchange/README-CN.md)
 ## auction-exchange
 
-nft 资产拍卖
+Auction NFT assets
 
-- 支持定价出售
-- 支持拍卖
+- Support Fixed price and then sell
+- Support the auction
 
-## 操作步骤
+## Operation Process
 
-### 配置私钥
-
-在 .env 中放入的 如下配置，格式如下:
+### Configure The Private Key
+Put the private key in the **.env** file and its format is as follows
 
 ```
 INFURA_ID=yyyyyyyy
-PRIVATE_KEY_MAIN=xxxxx
+PRIVATE_KEY_ADMIN=xxxxx
 PRIVATE_KEY_ALICE=yyyyy
 PRIVATE_KEY_BOB=ttttt
 PRIVATE_KEY_TEST=zzzzz
 ```
 
-### 启动本地测试网络
+### Start the local test network
 
-- 新启动命令行输入 hardhat node  
-  npx hardhat node --network hardhat
+- New start command line input `hardhat node`
 
-- 启动 ipfs  
+  **npx hardhat node --network hardhat**
+
+- Start **ipfs**  
   ipfs daemon
 
-- 新启动命令行部署合约输入  
+- New start command line deployment contract input  
   npx hardhat run scripts/upload.js --network localhost
   npx hardhat run scripts/react_app_contract.js --network localhost
 
-### 前端启动
+### The Front-End start
 
-- 配置参数  
-  react 启动的时候会做一些校验, 这些校验会导致 react 启动失败, 所以这里需要进行下配置跳过这些不必要的检查.
-  在 .sample.env 配置中已经进行了配置, 这里只需要把配置文件复制下即可.
+- Configuration Parameters  
+  When **react** is started, some checks are performed. These checks cause **react** startup to fail, so you need to configure it to skip unnecessary checks.
+Env is already configured in **.sample.env** configuration, so you just need to copy the configuration file.
 
   ```
   cd react-app
   cp .env.example .env
   ```
 
-- 启动前端
+- The Front-End start
 
   ```
   yarn install
   yarn start
   ```
 
-- MetaMask 链接本地节点
+- Use **MetaMask** to link local nodes
 
-  - 切换 MetaMask 账户链接网路为 localhost
+  - Switch **MetaMask** account to localhost
   - network id: 31337
   - rpc: http://localhost:8545
 
-- 登录 react 页面  
-  打开 react 页面, 默认为 http://localhost:3000
+- Open **react** page  
+  Open **react** page, default **http://localhost:3000**
 
-- Faucet 注意资金  
-  点击页面右上交的 "Faucet" 按钮就可以注入初始资金, 用于后续拍卖
+- Initial capital is injected through **Faucet**
+  Tap the "Faucet" button in the upper right corner of the page to inject initial funds for subsequent auctions
 
-- Mint 资产  
-  react 页面点击图片下面的 "Mint" 按钮, 生产 ERC721 资产, 之后可以在 "yourcollectibles" 查看归属于你的资产
+- Mint Assets 
+  On **react** page, click the "Mint" button at the bottom of the image to produce ERC721 assets. You can then view your assets in "YourCollectibles"
 
-- 进行拍卖  
-  Mint 之后, 在图片下面会出现 "Start Auction" 的按钮, 点击按钮就可以开始拍卖, 有两种拍卖方式, "Auction Fixed Price" 和 "Auction Unfixed Price", 这里可以选择 "Auction Fixed Price" 进行拍卖 ( 进行 Auction 以后，你会发现 "yourcollectibles" 中属于你的资产消失了 )
+- Start Auction  
+  After Mint, the "Start Auction" button will appear under the picture, click the button to Start the Auction, there are two kinds of Auction, "Auction Fixed Price" and "Auction Unfixed Price". Select "Auction Fixed Price" to Auction (after Auction, you will find that your "yourcollectibles" assets disappear).
 
-- 切换账户  
-  切换 MetaMask 到另一个账户, 页面会进行刷新. 这里刷新可能有点慢, 需要耐性等待一下, 直到右上角账户显示为新账户.
+- Switch Account 
+  Switch **MetaMask** to another account and the page refreshes. Refresh may be a bit slow here, so wait until the account in the upper right corner shows up as a new account.
 
-- 进行竞价购买  
-  使用新的账户, 对 Auction 的图片进行 Bid , 成功购买之后, 可以在 "yourcollectibles" 中查看购买到的资产
+- Bid to Buy  
+  Auction's images are Bid with the new account, and after successful purchases, the purchased assets can be viewed in "yourcollectibles.
 
-## 合约测试步骤：
+## Contract testing steps:
 
-- 执行单元测试  
-  AuctionFixedPrice.sol : 定价拍卖  
-  AuctionUnfixedPrice.sol 不定价拍卖
+- Executing unit tests  
+  AuctionFixedPrice.sol : Auction Fixed Price  
+  AuctionUnfixedPrice.sol: Auction Unfixed Price
 
   ```
   npx hardhat test
   ```
 
-- 执行 script 下的脚本
+- Execute **script** under script
 
   ```
-  npx hardhat run scripts/auction-fix-price-script.js --network kovan
+  npx hardhat run scripts/auction-fix-price-script.js --network goerli
   ```
 
-## 参考链接
+## Refer to the link
 
 - https://medium.com/coinmonks/how-to-implement-an-erc721-market-f805959ddcf
 - https://docs.matic.network/docs/develop/advanced/swap-assets
 - https://github.com/ethers-io/ethers.js/issues/368
-- 虚拟机节点时间戳问题：https://ethereum.stackexchange.com/questions/86633/time-dependent-tests-with-hardhat
-- Opensea 使用的 Wyvern Protocol: https://github.com/wyvernprotocol/wyvern-v3
+- Timestamp related problems of virtual machine nodes：https://ethereum.stackexchange.com/questions/86633/time-dependent-tests-with-hardhat
+- Wyvern Protocol used by Opensea: https://github.com/wyvernprotocol/wyvern-v3
 - https://explorer-mainnet.maticvigil.com/address/0x8d1566569d5b695d44a9a234540f68D393cDC40D/contracts
 - https://github.com/ssteiger/Ethereum-NFT-Store-with-Dutch-Auctions
-- 荷兰拍卖：
+- Dutch auction：
   https://medium.com/@shopevery/building-smart-contracts-for-a-dutch-auction-part-1-81dc5c770f1f
   https://corporatefinanceinstitute.com/resources/knowledge/finance/dutch-auction/
 
 ## Todo List
 
-### 管理页面
+### Administration Page
 
-- NFT 生成页
-- 我的 NFT 列表页
-- 发起拍卖操作对话框
-- 发起拍卖列表页
-- 出价记录列表页
+- NFT Generates pages
+- My NFT list page
+- Initiate auction operation dialog box
+- Initiate auction list page
+- Bid record list page
 
-### 前端页面
+### The Front-End Page
 
-- 主页
+- Home page
 - About
-- NFT 列表页
-- 拍卖列表页
-- 出价对话框
+- NFT list page
+- Auction list page
+- Bid dialog box
 
-### 异常页面
+### Abnormal Page
 
-- 确实账号时, Metamask 调起页面
-- 没有 MetaMask, MetaMask 下载页面
+- When confirming the account, **Metamask** calls up the page
+- No **MetaMask**, **MetaMask** download page
 
-### 未确定
+### Not been determined
 
-- Collection 功能
-- 个人资料功能
+- The Collection function
+- Personal Data function

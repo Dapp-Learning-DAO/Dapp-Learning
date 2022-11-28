@@ -1,33 +1,60 @@
+[中文](./README-CN.md) / English
+
 # Hardhat
 
-Hardhat 是一个编译、部署、测试和调试以太坊应用的开发环境。
+Hardhat is a development environment for ethereum application to compile, deploy, test and debug.
 
-它可以帮助开发人员管理和自动化构建智能合约和 dApps 过程中固有的重复性任务，并围绕这一工作流程轻松引入更多功能。这意味着 hardhat 在最核心的地方是编译、运行和测试智能合约。
-Hardhat 内置了 Hardhat 网络，这是一个专为开发设计的本地以太坊网络。主要功能有 Solidity 调试，跟踪调用堆栈、console.log()和交易失败时的明确错误信息提示等。
+It could help developer to manage , automate build smart contracts and some inherently repetitive tasks in dApps.The core of hardhat is compiling, running and testing smart contracts. It has a build-in Hardhat test network, which is designed for local ethereum network.Its main functions includes Solidity debugging, tracking invoked stack, console.log() and explicit error tips in failed transaction.
 
-Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务运行器。它是围绕任务和插件的概念设计的。每次你从 CLI 运行 Hardhat 时，你都在运行一个任务。例如，`npx hardhat compile` 运行的是内置的 compile 任务。任务可以调用其他任务，允许定义复杂的工作流程。用户和插件可以覆盖现有的任务，从而定制和扩展工作流程。
+Hardhat Runner is a CLI interacted with Hardhat and a extensible task runner. It was designed by the concept of tasks and plugins. When you run Hardhat by CLI, you will run a task, such as `npx hardhat compile`. It will run the build-in compiling task. The task will trigger other tasks, which can give the complicated work flow. Users and plugins could cover all tasks now to customize and extend the work flow.
 
-## 准备工作 - Preparatory Work
+## Preparation
 
-在开始学习 hardhat 之前，你需要提前了解以下知识点：
+Before learning hardhat, you need to understand some Knowledge points as follows:
 
-- dotenv 将私钥存放在 `.env` 文件中可以避免将私钥暴露在服务器上，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取，详情参考 [dotenv](https://www.npmjs.com/package/dotenv)
-- npx 想要解决的主要问题，就是调用项目内部安装的模块。详情参考 [npx 使用教程](https://www.ruanyifeng.com/blog/2019/02/npx.html)
-- ethers.js 与以太坊网络交互的工具库，相比 web3.js 接口设计更加易于使用（注意 v5 和 v4 接口差别较大） [ethers.js v5 文档](https://docs.ethers.io/v5/)
-- mocha.js 测试框架，用于编写合约交互的测试案例 [mochajs 文档](https://mochajs.org/#getting-started)
-- chai.js 断言库，辅助测试脚本编写，使用方法参考 [ethereum-waffle chai 使用文档](https://ethereum-waffle.readthedocs.io/en/latest/matchers.html)
-- infura 连接区块链的节点服务商，有免费的使用额度，足够开发调试使用 [infura 官网](https://infura.io/)
+- dotenv place private key in `.env` files, which could prevent exposure on cloud server, formatted with "PRIVATE_KEY=xxxx". It will be read by code automaticily. Refer to [dotenv](https://www.npmjs.com/package/dotenv)
+- The main problem npx want to resolve is to invoke modules installed internally in the project. Refer to [npx Tutorials](https://www.ruanyifeng.com/blog/2019/02/npx.html)
+- Compared to web3.js, the interfaces of ethers.js and ethereum network library is easily used(note the interface difference between v5 and v4) [ethers.js v5 document](https://docs.ethers.io/v5/)
+- mocha.js test framework is used to write the solution for contracts Interaction. [mochajs document](https://mochajs.org/#getting-started)
+- chai.js assert framework is used to help to write testing scripts, refer to [ethereum-waffle chai document](https://ethereum-waffle.readthedocs.io/en/latest/matchers.html)
+- infura is a node internet service provider to connect to block chain, which allow some free use amounts. It is enough to develop and debug. [infura offical site](https://infura.io/)
 
-## 项目结构和配置 hardhat
+## Project structure and configuration hardhat
 
 ```sh
-npm install --save-dev hardhat  // 安装hardhat
-npx hardhat                     // 创建hardhat项目
+mkdir 07-hardhat                // create folder
+cd    07-hardhat                // move to folder
+npm install --save-dev hardhat  // install hardhat
+npx hardhat                     // initialize hardhat
 ```
 
-### 项目结构
+Finished in inputing `npx hardhat`, it will show in the terminal:
 
-一个标准的使用 hardhat 构建的项目通常是这样的：
+```sh
+888    888                      888 888               888
+888    888                      888 888               888
+888    888                      888 888               888
+8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
+888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
+888    888 .d888888 888    888  888 888  888 .d888888 888
+888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
+888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
+
+Welcome to Hardhat v2.9.0
+
+? What do you want to do? ...
+> Create a basic sample project
+  Create an advanced sample project
+  Create an advanced sample project that uses TypeScript
+  Create an empty hardhat.config.js
+  Quit
+```
+
+We select 'Create a basic sample project' options to initialize a basic project, click enter directly in the next 2 steps.
+
+### Project stucture
+
+A standard project build in hardhat is as follow:
 
 ```sh
 contracts/
@@ -36,154 +63,148 @@ test/
 hardhat.config.js
 ```
 
-- contracts 用于存放 solidity 合约文件
-- scripts 用于存放脚本文件，如部署合约的脚本
-- test 用于存放测试脚本，通常以 `contractName.test.js` 的形式命名
-- `hardhat.config.js` 是 hardhat 的配置文件
+- palce fileds write in solidity in contracts
+- palce scripts files such as deploying contracts in scripts
+- palce testing scripts named with `contractName.test.js` in test
+- `hardhat.config.js` is config file of hardhat
 
-### 配置 hardhat
+### Configuration of hardhat
 
-`hardhat.config.js` 配置文件示例
+`hardhat.config.js` config file example
 
 ```js
+require('@nomiclabs/hardhat-waffle');
+require('dotenv').config();
+
 module.exports = {
   networks: {
-    // hardhat 内置测试网络（选填）
+    // hardhat build-in testing network (optional)
     hardhat: {
-      // 可以设置一个固定的gasPrice，在测试gas消耗的时候会很有用
+      // a fixed gasPrice could be set, it will be useful when testing gas consumption
       gasPrice: 1000000000,
     },
-    // 你可以在这里配置任意网络
-    // rinkeby 测试网络
-    rinkeby: {
-      // 请将 INFURA_ID 替换成你自己的
-      url: 'https://rinkeby.infura.io/v3/{INFURA_ID}',
-      // 填写测试账户的私钥，可填写多个
-      accounts: [privateKey1, privateKey2, ...]
+    // you could config arbitrary network
+    // goerli testing network
+    goerli: {
+      // place INFURA_ID to yours
+      // url: 'https://goerli.infura.io/v3/{INFURA_ID}',
+      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+
+      //  place multiple privateKeyX to yours
+      accounts: [process.env.PRIVATE_KEY, ...]
     }
   },
   solidity: {
-    version: "0.8.0", // 合约编译的版本，必填
-    settings: { // 编译设置，选填
-      optimizer: {  // 优化设置
+    version: "0.8.0", // version of compiling contract, required
+    settings: { // setting of compile, optional
+      optimizer: {  // setting of optimizing
         enabled: true,
         runs: 200
       }
     }
   },
-  // 项目路径配置，可指定任意路径，但下列是常用的一种结构
-  // sources, tests, scripts 下的目录文件会被自动逐一执行
+
+  // config project paths, any path could be specified, The following is a common template
+  // files in sources, test, scripts will be executed one by one
   paths: {
-    sources: "./contracts", // 合约目录
-    tests: "./test",  // 测试文件目录
-    cache: "./cache", // 缓存目录，由hardhat自动生成
-    artifacts: "./artifacts" // 编译结果目录，由hardhat自动生成
+    sources: "./contracts", // directory of contracts
+    tests: "./test",  // directory of test files
+    cache: "./cache", // cache directory, generated by hardhat
+    artifacts: "./artifacts" // directory of compiling result, generated by hardhat
   },
-  // 测试框架设置
+  // setting of testing framework
   mocha: {
-    timeout: 20000  // 运行单元测试的最大等待时间
+    timeout: 20000  // max waiting time of running unit test
   }
 }
 ```
 
-### 内置 hardhat 网络
+### Build-in hardhat network
 
-hardhat 内置了一个特殊的安全测试网络，其名称也叫 `hardhat`, 通常你不需要对他进行特殊配置。该网络会模拟真实区块链网络的运行机制，并为你生成好 10 个测试账户（和 truffle 类似）。
+hardhat has a special, secure and build-in testing network, named `hardhat`, you don't need a special configuration for it. The network will follow the mechanism in real block chain network, and it will generate 10 test accounts for you (just like truffle).
 
-### 使用插件
+### Using plugins
 
-Hardhat 的很多功能都来自于插件，而作为开发者，你可以自由选择想使用的插件。
+Plugins have many functions in Hardhat, you could choose arbitrary plugins as a developer
 
-例如常用的 waffle 插件，使得 hardhat 可以集成 waffle 框架，进行开发，测试，部署。
+Waffle plugins could make hardhat Integrated with waffle framework
 
 ```js
 // hardhat.config.js
-require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
+require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
 ...
 ```
 
-### 安装依赖
+### Install dependencies
 
-1. 安装 nodejs （略）
+1. install nodejs (ignore)
 
-2. 安装项目依赖：
-
-   ```sh
-   npm install
-   ```
-
-   或使用 yarn 安装（需要先安装 yarn 依赖）
+2. install project dependencies:
 
    ```sh
-   yarn
+   npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers dotenv
    ```
 
-3. 配置私钥和网络：
+   or use yarn to intall (yarn installed firstly)
 
-   windows:
-
-   ```bash
-   copy .env.example .env
+   ```sh
+   yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @types/mocha dotenv
    ```
 
-   linux:
+3. config private key and network:
 
-   ```bash
-   cp  .env.example .env
-   ```
-
-   在 `.env` 文件中填写私钥和 infura 节点
+   create `.env` file in the directory of project, add private key and infura node to the file
 
    ```js
-   PRIVATE_KEY = xxxxxxxxxxxxxxxx; // 替换为你的私钥
-   INFURA_ID = yyyyyyyy; // 替换为infura节点
+   PRIVATE_KEY = xxxxxxxxxxxxxxxx; // place your private key
+   INFURA_ID = yyyyyyyy; // place infura node
    ```
 
-## usage
+## Usage
 
-hardhat 的用法
+useage of hardhat
 
-### compile
+### Compile
 
-运行如下命令，hardhat 会自动编译配置中 `sources` 路径下的所有合约文件，默认是 `./contracts` 路径。
+Run the command, hardhat will compile all contracts file in directory of `sources`, the default path is `./contracts`
 
 ```sh
 npx hardhat compile
 ```
 
-### test
+### Test
 
-运行如下命令，hardhat 会自动运行配置中 `tests` 路径下的所有测试文件，默认是 `./test` 路径。
+Run the command, hardhat will compile all test files in directory of `tests`, the default path is `./test`
 
 ```sh
 npx hardhat test
 ```
 
-也可以指定运行某个特定测试文件
+you could also specify some test files to run it
 
 ```sh
 npx hardhat test ./test/Greeter.test.js
 ```
 
-### run
+### Run
 
-运行指定脚本。如果不指定运行网络，会默认在 hardhat 内置网络内运行 (Hardhat Network)。
+Run the specified script. If you are not, it will run on hardhat's build-in network by default(Hardhat Network).
 
 ```sh
 npx hardhat run ./scripts/deploy.js
 ```
 
-指定运行的网络，例如在 rinkeby 测试网部署合约
+Run the specified network, such as the contract deployed on goerli test network(make sure that the wallet could pay the gas)
 
 ```sh
-npx hardhat run ./scripts/deploy.js --network rinkeby
+npx hardhat run ./scripts/deploy.js --network goerli
 ```
 
-### task
+### Task
 
-hardhat 本身预设了一些程序任务，例如编译合约，运行测试文件，这些其实在 hardhat 中是预先配置好的任务。
+hardhat preset some task itself, such as compiling contract, running testing scripts. Those are build-in hardhat tasks.
 
-实际上你也可以自定义一些 task，比如打印一下当前网络中的账户状态：
+Actually you could also customize some tasks, such as printing status of the current network's account
 
 ```js
 // hardhat.config.js
@@ -200,40 +221,40 @@ task('accounts', 'Prints the list of accounts', async () => {
 ...
 ```
 
-运行 task
+run task
 
 ```sh
 npx hardhat accounts
 ```
 
-命令行会打印出 10 个测试账户地址
+terminal will print 10 addresses of testing account
 
 ```sh
 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 ...
 ```
 
-### console
+### Console
 
-hardhat 的控制台模式，实时与链上交互。默认会启动 hardhat 内置网络。
+The console mode of hardhat could interact with chain in real-time, where the hardhat build-in network is started by default.
 
 ```sh
 npx hardhat console
 ```
 
-控制内置 ethers 和 web3 库，可以直接使用，无须引入。
+we can directly use build-in ethers and web3 library, no need to import.
 
 ```js
 // hardhat console mode:
-// 可以直接使用 async/await 语法
+// directly use async/await
 > await ethers.provider.getBlockNumber()  // 0
 ```
 
 ### console.log debug
 
-hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印日志，方便调试和测试。**此方法仅在 hardhat 内置网络中运行有效。**
+hardhat provide the `console.log()` method to print logs, debug and test when running the contract . **Only valid in hardhat build-int network**
 
-在合约中引入 `hardhat/console.sol` 即可使用：
+you can use is by importing `hardhat/console.sol` in your contract
 
 ```solidity
 import "hardhat/console.sol";
@@ -249,40 +270,40 @@ contract Greeter {
 }
 ```
 
-在运行测试文件时，可以看到打印出的日志：
+When running test scripts, you can check logs:
 
 ```sh
 Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 ```
 
-## 实操流程
+## Steps
 
-### 编译和测试
+### Compile and test
 
-1. 编译合约
+1. compile the contract
 
    ```bash
    npx hardhat compile
    ```
 
-2. 批量运行测试脚本
+2. batch run test scripts
 
    ```bash
    npx hardhat test
    ```
 
-3. 部署到测试网：
+3. deploy to test network
 
    ```bash
    npx hardhat run scripts/deploy.js --network <network-name>
    ```
 
-   这里的 `network-name` 替换成你指定的网络名称，这里可以换成 `rinkeby`，对应配置文件中的网络名称。
+   `network-name` should be replaced with your networks, `goerli` is a choice which exists in the config file.
 
-## 参考文档
+## Reference
 
-- hardhat 官方文档: <https://hardhat.org/guides/project-setup.html>
-- hardhat 中文文档: <https://learnblockchain.cn/docs/hardhat/getting-started/>
-- ethers.js 和 hardhat 基础使用讲解: <https://www.bilibili.com/video/BV1Pv411s7Nb>
+- hardhat offical document: <https://hardhat.org/guides/project-setup.html>
+- hardhat chinese document: <https://learnblockchain.cn/docs/hardhat/getting-started/>
+- the usage of ethers.js and hardhat : <https://www.bilibili.com/video/BV1Pv411s7Nb>
 - <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>
-- erc20 openzepplin介绍: <https://segmentfault.com/a/1190000015400380>
+- erc20 openzepplin introduction: <https://segmentfault.com/a/1190000015400380>

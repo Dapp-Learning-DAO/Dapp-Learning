@@ -28,7 +28,7 @@ Uniswap V2允许流动性提供商为任意两个ERC20创建对合约。
 
 ### 2.2 价格预言
 Uniswap提供的t时刻的边际价格（不包括手续费）可以用资产a的储备除以资产b的储备来计算。
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/1.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/1.svg" /></center>
 
 如果这个价格偏离（超出手续费足够的数额），套利者会和Uniswap进行交易使价格回归正常，所以Uniswap提供的价格趋向于追踪资产在相关市场的价格。这意味着它可以被用作一个近似的价格预言。
 
@@ -37,10 +37,10 @@ Uniswap提供的t时刻的边际价格（不包括手续费）可以用资产a�
 Uniswap V2改进了预言的功能，通过测算和记录每个区块第一笔交易之前的价格（也就是前一个区块最后的价格）。这个价格比一个区块内的价格更难被操纵。如果攻击者提交了一笔交易（transaction）尝试在区块末尾处操纵价格，其他的套利者可以提交另一个交易立即进行反向交易。某个矿工（或有足够gas填满整个区块的攻击者）可以操纵区块末尾处的价格，除非他们可以挖出下一个区块，否则他们他们没有特殊的的套利优势。
 
 具体来说，Uniswap V2追踪每个和合约交互的区块开始处的价格的累加和，来累加价格。每个价格用距离上一个更新价格的区块的时间进行加权，根据区块时间戳。这意思是累加器的值在任意时间（更新后）的值应该等于合约历史上每秒的现货价格的和。
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/2.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/2.svg" /></center>
 
 要计算从时间​<span>t<sub>1</sub></span>到<span>t<sub>2</sub></span>​的时间加权平均价，一个外部调用者可以检查​<span>t<sub>1</sub></span>和<span>t<sub>2</sub></span>时间的累加器的值，将后值减去前值，再除以期间经过的秒数。（注意，合约本身并不记录历史累加值，调用者必须在时间段开始处调用合约来读取和储存这个值。）
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/3.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/3.svg" /></center>
 
 预言的用户可以选择这个区间的起始和结束时间。选择更长的区间可以让攻击者操纵价格的成本更高，尽管这会导致价格变化滞后。
 
@@ -67,26 +67,26 @@ Uniswap V2包括0.05%协议手续费，可以打开或关闭，如果打开，�
 
 初始时，feeTo没有被设定，不收手续费。一个预先指定的地址feeToSetter可以在Uniswap V2工厂合约上调用setFeeTo函数，设置feeTo地址。feeToSetter也可以自己调用setFeeToSetter修改feeToSetter地址。
 
-如果feeTo地址被设置，协议会收取5pb的手续费，从流动性提供者的30bp手续费中抽取1/6。交易者将在所有交易上支付0.3%手续费，83.3%(交易额的0.25%)的手续费给流动性提供者，16.6%(交易额的0.05%)手续费给feeTo地址。
+如果feeTo地址被设置，协议会收取5bp的手续费，从流动性提供者的30bp手续费中抽取1/6。交易者将在所有交易上支付0.3%手续费，83.3%(交易额的0.25%)的手续费给流动性提供者，16.6%(交易额的0.05%)手续费给feeTo地址。
 
 在交易时收取0.05%的费用将在每个交易中额外增加GAS成本。为了避免这种情况，只有在存入或撤回流动性时才会收取。合约会在铸造或焚烧任何代币之前计算累积费用并铸造新的流动性代币，立即向费用受益人支付费用。
 
 总共收集的手续费可以用自从上次手续费收集以来的增长来计算。以下公式给出了<span>t<sub>1</sub></span>和<span>t<sub>2</sub></span>之间的累加手续费占<span>t<sub>2</sub></span>时间资金池中流动性的百分比：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/4.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/4.svg" /></center>
 
-如果fee在时间<span>t<sub>1</sub></span>前启用，feeTo地址应该获得1/6的<span>t<sub>1</sub></span>到<span>t<sub>2</sub></span>时间段内的累加手续费。因此，我们要铸造新的流动性代币给feeTo地址​ <span><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/17.svg" /></span> ，其中​ <span><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/18.svg" /></span> 。
+如果fee在时间<span>t<sub>1</sub></span>前启用，feeTo地址应该获得1/6的<span>t<sub>1</sub></span>到<span>t<sub>2</sub></span>时间段内的累加手续费。因此，我们要铸造新的流动性代币给feeTo地址​ <span><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/17.svg" /></span> ，其中​ <span><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/18.svg" /></span> 。
 
 我们要选择一个<span>s<sub>m</sub></span>满足以下关系，其中<span>s<sub>1</sub></span>是<span>t<sub>1</sub></span>时刻的流通份额总量：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/5.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/5.svg" /></center>
 
 经过<span>f<sub>1,2</sub></span>和<span>s<sub>m</sub></span>的变换，将其​替换为后，解得​
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/6.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/6.svg" /></center>
 
 设φ为1/6，我们得到以下公式：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/7.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/7.svg" /></center>
 
 假设初始存款人存了100DAI和1ETH在交易对中，收到10份额。一段时间后（如果没有其他存款人参与）他们把钱转出，这时交易对有96DAI和1.5ETH，用上面得公式可以得出：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/8.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/8.svg" /></center>
 
 ### 2.5 资金池份额的元交易
 Uniswap V2交易对铸造得资金池份额原生支持元转账。这意味着用户可以用签名授权一个他们的资金池份额的转账，而不用从他们的地址进行链上转账。任何人都可以调用permit函数来以用户的名义发送签名，支付gas手续费并在同一个转账中执行其他操作。
@@ -98,7 +98,7 @@ Uniswap V1是用Vyper实现的，一种类似于Python的智能合约预言。Un
 ### 3.2 合约重新架构
 Uniswap V2在设计时优先考虑的一个方面是最小化受攻击表面积和核心交易对合约的复杂度，交易对合约储存了流动性提供者的资产。这个合约中的任何bug都可能是灾难性的，因为数百万美元的流动性可能会被窃取或冻结。
 
-在评估核心合约的安全性时，最重要的问题是它是否保护流动性提供者以防他们的资产被窃取或冻结。除了基本的允许资产在资金池中互换的功能，任何支持或保护交易者的特性，都可以在[路由合约](https://github.com/Uniswap/v2-periphery/tree/master/contracts)中处理。
+在评估核心合约的安全性时，最重要的问题是它是否保护流动性提供者，以防他们的资产被窃取或冻结。除了基本的允许资产在资金池中互换的功能，任何支持或保护交易者的特性，都可以在[路由合约](https://github.com/Uniswap/v2-periphery/tree/master/contracts)中处理。
 
 事实上，甚至一部分的互换功能也可以被抽出放到路由合约中。之前提到过，Uniswap V2储存有每种资产最近一次记录的余额（为了防止预言机制被操纵）。新的架构利用了这一点来进一步简化Uniswap V1合约。
 
@@ -106,13 +106,13 @@ Uniswap V2中，卖方在调用互换函数之前发送资产到核心合约。�
 
 #### 3.2.1 手续费调整
 Uniswap V1通过转入合约的代币数量，在保持常数乘积不变之前收取交易手续费。合约强制确保了以下公式：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/9.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/9.svg" /></center>
 
 使用flash swaps时，Uniswap V2引入了<span>x<sub>in</sub></span>和<span>y<sub>in</sub></span>可以同时为非零的可能性（当用户想要返还同样的资产，而不是互换时）。为了处理这种情况，同时正确地收取手续费，合约强制确保：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/10.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/10.svg" /></center>
 
 为了简化链上计算，两边同时乘以1000000，得到：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/11.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/11.svg" /></center>
 
 #### 3.2.2 sync()和skim()函数
 为了防止特殊实现用来修改交易对合约余额的代币，并且为了更优雅地处理超过​<span>2<sup>112</sup></span>总发行量的代币，Uniswap V2有两个救援函数：[sync()](https://github.com/Uniswap/v2-core/blob/master/contracts/UniswapV2Pair.sol#L198)和[skim()](https://github.com/Uniswap/v2-core/blob/master/contracts/UniswapV2Pair.sol#L190)。
@@ -130,16 +130,16 @@ Uniswap V1此外假设调用transfer()和transferFrom()不能触发Uniswap交易
 
 ### 3.4 初始化流动性代币供给
 当新的流动性提供者向现有的Uniswap交易对中存代币时，计算铸造的流动性代币（译者注：流动性代币需要看Uniswap V1白皮书）数量基于现有的代币数量：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/12.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/12.svg" /></center>
 
-如果是第一个存款人呢？在​ <span><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/19.svg" /></span> 为0的情况下，这个公式不能用。
+如果是第一个存款人呢？在​ <span><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/19.svg" /></span> 为0的情况下，这个公式不能用。
 
 Uniswap V1设初始份额供给等于存入地ETH数量（以Wei计）。这有一定的合理价值，因为如果初始流动性是在合理价格存入的，那么1流动性份额（和ETH一样是18位小数精度代币）大约值2ETH。
 
 然而，这意味着流动性资金池份额的价值依赖于初始存入的比例，这完全可能是任意值，尤其是因为没有任何比例可以反应真实价格的保证。另外，Uniswap V2支持任意交易对，有许多交易对根本不包含ETH。
 
 相反，Uniswap V2初始铸造份额等于存入代币数量的几何平均值：
-<center><img src="https://raw.githubusercontent.com/xiangzhengfeng/dapp-blog-source-code/main/dapp/uniswap/v2/whitepaper/image-github-source/13.svg" /></center>
+<center><img src="https://raw.githubusercontent.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/main/papers/3-DEFI/Uniswap-V2/whitepaper/image/13.svg" /></center>
 
 这个公式确保了流动性资金池份额的价值在任意时间和在本质上和初始存入的比例无关。举个例子，假设当前1 ABC的价格是100XYZ。如果初始存款是2 ABC和200 XYZ（比例1:100），存款人会获得​20份额。这些份额现在应该任然值2 ABC和200 XYZ，加上累加手续费。
 

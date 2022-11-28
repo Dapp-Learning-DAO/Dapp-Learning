@@ -1,106 +1,114 @@
-# 多签钱包调研
+[中文](./README-CN.md) / English
 
-## 一、相关地址
-* [合约源码](https://github.com/gnosis/MultiSigWallet/tree/master/contracts)
+# Multi-Sig-Wallet
 
+> The old version of the multi-sig-wallet contract uses the 0.4.x version of solidity, and the original repo has been deprecated. The new version is called Gnosis-Safe-Contracts, which integrates multiple security contract modules. Due to the large amount of code in the new version and inconvenient to understand, we still use the old version to learn and understand its usage process and how it work.
 
-## 二、合约解读
-> 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
+- Old Version multi-sig-wallet: gnosis MultiSigWallet: <https://github.com/gnosis/MultiSigWallet>
+- New Version Gnosis Safe Contracts: <https://github.com/safe-global/safe-contracts>
 
-* MultiSigWallet.sol
-* MultiSigWalletFactory.sol
-* MultiSigWalletWithDailyLimit.sol
-* MultiSigWalletWithDailyLimitFactory.sol
-* TestCalls.sol
-* TestToken.sol
+## Contract Index
 
+> contract address: <https://github.com/gnosis/MultiSigWallet/tree/master/contracts>
 
+- MultiSigWallet.sol
+- MultiSigWalletFactory.sol
+- MultiSigWalletWithDailyLimit.sol
+- MultiSigWalletWithDailyLimitFactory.sol
+- TestCalls.sol
+- TestToken.sol
 
-## 合约接口
+## Contract Interface
 
-* 构造函数
+- contructor
 
-  初始化签名者列表，及每次交易至少需要签名数。
+  Initialize the list of signers, each transaction requires at least few signatures.
 
-* addOwner 
+- addOwner
+
+  Add new owner of wallet.
+
+- replaceOwner
+
+  Replace existing signer owner with new owner.
+
+- changeRequirement
+
+  Change the minimum number of signatures.
+
+- submitTransaction
+
+  Submit a transaction with contract address, amount and transaction data parameters.
+
+- confirmTransaction
+
+  Confirm the transaction by transaction id. Confirm that the transaction can be executed, if the number of confirmed owners has reached the minimum requirement, the transaction will be executed automatically.
+
+- revokeConfirmation
+
+  Revoke the confirmed transaction.
+
+- executeTransaction
+
+  If the number of confirmed owners has reached the minimum requirement, Execute the corresponding transaction by id.
+
+- isConfirmed
+
+  Check the number of transaction's confirmed owners has reached the minimum requirement.
+
+- getConfirmationCount
+
+  Get the number of times a transaction is currently confirmed.
+
+- getTransactionCount
+
+  Query the number of transactions, the two input parameters are: whether to include transactions in processing, whether to include processed transactions.
+
+- getOwners
+
+  Get owners addresses.
+
+- getConfirmations
+
+  Get confirmers of a transaction.
+
+- getTransactionIds
   
-  追加签名者
+  Query the list of transaction ids, the parameters are: from, to, pending (whether it is in processing), executed (whether it is processed)
 
-* replaceOwner
+## Quick Start
 
-  替换一个现有的签名者
-  
-* changeRequirement
+- install dependencies
 
-  变更最低签名数
-  
-* submitTransaction
+  ```sh
+  yarn
+  ```
 
-  提交一笔交易申请，参数为：合约地址、转账金额、交易data
-  
-* confirmTransaction
+- compile contracts
 
-  传入之前提交的交易的id，确认这笔交易可执行，如果确认的人数已达到最低要求，则自动执行该交易
-  
-* revokeConfirmation
+  ```sh
+  npx hardhat compile
+  ```
 
-  取消确认一笔自己之前确认过的交易
+- test contracts
 
-* executeTransaction
+  ```sh
+  npx hardhat test
+  ```
 
-  根据id执行对应的交易，前提是交易已得到足够的确认数
-  
-* isConfirmed
+- deploy contracts
 
-  判断一笔交易是否已得到足够的确认数
-  
-* getConfirmationCount
+  ```sh
+  npx hardhat run scripts/deploy.js  --network kovan
+  ```
 
-  获取一笔交易当前得到的确认数
-  
-* getTransactionCount
+## TODO
 
-  查询交易数，两个入参分别是：是否包含处理中的交易、是否包含已处理的交易
-  
-* getOwners
+- New Version Gnosis Safe Contracts: <https://github.com/safe-global/safe-contracts>
 
-  获取当前所有可确认交易者
-  
-* getConfirmations
+## Reference
 
-  查看一笔交易已经得到哪些确认者的确认
-  
-* getTransactionIds
-* 
-  查询交易id列表，参数为：from、to、pending（是否包含处理中）、executed（是否包含已处理）
-
-
-## 操作流程
-- 安装依赖
-```
-yarn
-```
-
-- 编译合约
-```
-npx hardhat compile
-```
-
-- 测试合约
-```
-npx hardhat test
-```
-
-- 部署合约
-```
-npx hardhat run scripts/deploy.js  --network kovan
-```
-
-
-## 参考链接
-https://zhuanlan.zhihu.com/p/337823524  
-https://github.com/gnosis/MultiSigWallet/tree/master/contracts  
-https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c  
-gnosis使用：https://gnosis-safe.io/app/#/welcome  
-gnosis合约：https://polygonscan.com/address/0xa6b71e26c5e0845f74c812102ca7114b6a896ab2#code 
-自己构造gnosis多签交易：https://mp.weixin.qq.com/s/qgbTnchCHup24ANprGXH5Q
+- [Now open source: friendly multi-signatures for Ethereum 🔑](https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c)
+- gnosis usage: <https://gnosis-safe.io/app/#/welcome>
+- gnosis contract address(Polygon): <https://polygonscan.com/address/0xa6b71e26c5e0845f74c812102ca7114b6a896ab2#code>
+- Construct your own gnosis multi-signature transaction: <https://mp.weixin.qq.com/s/qgbTnchCHup24ANprGXH5Q>

@@ -1,5 +1,5 @@
 {
-  "name": "example02-send-signed-transaction",
+  "name": "example03-web3js-erc20",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
     "chai": "^4.2.0",
     "dotenv": "^10.0.0",
     "ethereumjs-tx": "^2.1.2",

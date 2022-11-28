@@ -285,7 +285,7 @@ function getHypotheticalAccountLiquidityInternal(
 
 ### 测试网络似乎没有发生作用
 
-[COMP 安全事件](https://github.com/rebase-network/Dapp-Learning/blob/main/defi/Compound/contract/%5B%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%5D%209%E6%9C%8829%E6%97%A5%20Compound%2062%E5%8F%B7%E6%8F%90%E6%A1%88%20%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%8F%AF%E6%80%95Bug.md) 暴露的问题比较严重：考虑到除了公开的测试网络之外，社区中还有不少开发者搭建着私人测试网络，而理论上，这个问题是必现的；
+[COMP 安全事件](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/defi/Compound/contract/%5B%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%5D%209%E6%9C%8829%E6%97%A5%20Compound%2062%E5%8F%B7%E6%8F%90%E6%A1%88%20%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%8F%AF%E6%80%95Bug.md) 暴露的问题比较严重：考虑到除了公开的测试网络之外，社区中还有不少开发者搭建着私人测试网络，而理论上，这个问题是必现的；
 
 我们似乎可以得出一个结论：Compound 的测试网络和 [测试代码](https://github.com/compound-finance/compound-protocol/tree/master/spec)，没有起到作用
 

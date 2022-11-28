@@ -10,7 +10,7 @@ const privatekey = process.env.PRIVATE_KEY;
 */
 // Provider
 const providerRPC = {
-  development: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
+  development: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID,
   moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -152,11 +152,11 @@ const Trans = async () => {
   console.log('============================ 5. Listen to Events');
   console.log(' Listen to Increment Event only once && continuouslly');
 
-  // kovan don't support http protocol to event listen, need to use websocket
+  // goerli don't support http protocol to event listen, need to use websocket
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
     new Web3.providers.WebsocketProvider(
-      'wss://kovan.infura.io/ws/v3/' + process.env.INFURA_ID
+      'wss://goerli.infura.io/ws/v3/' + process.env.INFURA_ID
     )
   );
   incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
@@ -166,9 +166,9 @@ const Trans = async () => {
     console.log('I am a onetime event listner, I am going to die now');
   });
 
-  // listen to Increment event continuouslly
+  // listen to Increment event continuously
   incrementer.events.Increment(() => {
-    console.log('I am a longlive event listner, I get a event now');
+    console.log('I am a longlive event listener, I get a event now');
   });
 
   for (let step = 0; step < 3; step++) {

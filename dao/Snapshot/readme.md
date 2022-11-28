@@ -1,6 +1,6 @@
 ## About Snapshot
 + In basic task,some basic information link below
-+ [Basic Task](https://github.com/rebase-network/Dapp-Learning/tree/main/basic/40-snapshot)
++ [Basic Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/tree/main/basic/40-snapshot)
 + Here we talk more deeply into the Snapshot!
 
 ### Why need this tools?
@@ -13,6 +13,13 @@
 + So we need a tool to orgnization and finish the progress.
 + Early stage, Snapshot was a simple poll tool...
 + 3. No choice
++ We are in a progress to exploring the governernce of the Open Community, till now, we have not much more ways to make a common view with many pepoles.
++ It seems the way to vote the proposals in community, is a good way.
+
+### How snapshot works？
+
+### And do we have other choices?
++ Mostly the DAOs and the Communities will use snapshot or build themself.
 + We are in a progress to exploring the governernce of the Open Community, till now, we have much more ways to make a common view with many pepoles.
 + It seems the way to vote the proposals in community, is a good way.
 
@@ -50,4 +57,5 @@ By default your instance will connect to the hub at `https://testnet.snapshot.or
 ## License
 
 Snapshot is open-sourced software licensed under the © [MIT license](LICENSE).
+
 

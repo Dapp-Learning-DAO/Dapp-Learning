@@ -1,5 +1,5 @@
 const hre = require("hardhat");
-require("@nomiclabs/hardhat-web3")
+require("@nomiclabs/hardhat-web3");
 
 async function main() {
 
@@ -10,8 +10,8 @@ async function main() {
         deployer.address
     );
 
-    // PRICE_FEED_CONTRACT 在 kovan 上的合约地址  
-    const PRICE_FEED_CONTRACT="0x9326BFA02ADD2366b30bacB125260Af641031331";
+    // PRICE_FEED_CONTRACT 在 goerli 上的合约地址  
+    const PRICE_FEED_CONTRACT="0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e";
 
     // 部署 PriceConsumerV3 合约
     const priceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");

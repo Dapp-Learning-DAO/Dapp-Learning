@@ -13,7 +13,7 @@ const receiver = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 // Provider
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://kovan.infura.io/v3/' + process.env.INFURA_ID
+    'https://goerli.infura.io/v3/' + process.env.INFURA_ID
   )
 );
 
@@ -63,18 +63,6 @@ const Trans = async () => {
   );
   console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
 
-  // method 2 infura not support
-  //    const deployTx2 = await deployContract.deploy({
-  //       data: bytecode,
-  //       arguments: ["hello","Dapp",1,100000000],
-  //    }).send({
-  //       from: '0x54A65DB20D7653CE509d3ee42656a8F138037d51',
-  //       gas: 1500000,
-  //       gasPrice: '30000000000000'}).
-  //       then(function(newContractInstance){
-  //       console.log(newContractInstance.options.address) // instance with the new contract address
-  //    });
-
   const erc20Contract = new web3.eth.Contract(
     abi,
     deployReceipt.contractAddress
@@ -96,7 +84,7 @@ const Trans = async () => {
   );
 
   // Send Tx and Wait for Receipt
-  const transferReceipt = await web3.eth.sendSignedTransaction(
+  await web3.eth.sendSignedTransaction(
     transferTransaction.rawTransaction
   );
 

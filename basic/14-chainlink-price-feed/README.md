@@ -1,12 +1,12 @@
-# 喂价预言机
+English / [中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/14-chainlink-price-feed/README-CN.md)
+# Feed price and random number predictor
 
-区块链是非常安全可靠的价值交换网络，但却无法安全防篡改地获取链下数据或将数据发送至链下系统。使用 Chainlink 预言机喂价, 通过预言机网络在链上直接获取实时金融市场价格数据
+Blockchain is a very secure and reliable network for the exchange of value, but there is no way to secure and tamper-proof access to off-chain data or send data to off-chain systems. Use Chainlink predictor to feed prices and obtain real-time financial market price data directly on the chain through the predictor network
 
-## 测试流程
+## Test Process
 
-### 配置私钥
-
-在 .env 文件中放入私钥，和 infura 节点 id, 然后代码自动从中读取
+### Configure the private key
+The private key put in **.env** in the format "PRIVATE_KEY= XXXX ", from which the code automatically reads.
 
 ```js
 // .env
@@ -14,37 +14,46 @@ PRIVATE_KEY = xxxxxxxxxxxxxxxx;
 INFURA_ID = yyyyyyyy;
 ```
 
-### 安装依赖
+### Install Dependencies
 
 ```sh
-yarn
+yarn install
 ```
 
-### 执行测试脚本
+### Executing the test script
 
 ```sh
-npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network kovan
+npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network goerli
 ```
 
-### 链下调用喂价机
+### Off-Chain Call the price feeder
 
 ```js
 // ./UsingDataFeedsByEthers.js
 require('dotenv').config();
 
 const { ethers } = require('ethers'); // for nodejs only
-const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${process.env.INFURA_ID}`);
+const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/${process.env.INFURA_ID}`);
 const aggregatorV3InterfaceABI = require('@chainlink/contracts/abi/v0.8/AggregatorV3Interface.json');
 
 const addr = '0x9326BFA02ADD2366b30bacB125260Af641031331';
 const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, provider);
-priceFeed.latestRoundData().then((roundData) => {
-  // Do something with roundData
-  console.log('Latest Round Data', roundData);
-});
+
+async function test() {
+  const roundData = await priceFeed.latestRoundData();
+  console.log("Latest Round Data", roundData);
+  const price = roundData[1];
+  const decimal = await priceFeed.decimals();
+  console.log("decimal = ", decimal);
+
+  console.log("eth's price = ", price.toNumber() / 10 ** decimal + "USD");
+}
+
+test();
+
 ```
 
-返回数据格式如下：
+The returned data format is as follows:
 
 ```js
 Latest Round Data [
@@ -61,49 +70,81 @@ Latest Round Data [
 ]
 ```
 
-- 完整示例看这里 [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
+- See a for the full example [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
 
-## Chainlink VRF
 
-Chainlink VRF 可验证随机函数， 是一种可证明公平且可验证的随机性来源。作为防篡改随机数生成器，为依赖不可预测结果的任何应用程序构建构建智能合约。
 
-- 区块链游戏和 NFT
-- 随机分配职责和资源（例如随机分配法官审理案件）
-- 为共识机制选择具有代表性的样本
+### Chainlink VRF
 
-### 操作流程
+Chainlink VRF verifiable random function is a provably fair and verifiable source of randomness. As a tamper-proof random number generator, build smart contracts for any application builds that rely on unpredictable results.
 
-1. 在 kovan 测试网络环境下，将 Link token (测试代币)添加到小狐狸钱包，初始会自动发放 10 个测试代币，token address：
-   `0xa36085F69e2889c224210F603D836748e7dC0088`
-2. 运行部署脚本部署合约
+- Blockchain game and NFT
+- Randomly assigned responsibilities and resources (e.g. randomly assigned judges to hear cases)
+- Selection of representative samples for consensus mechanisms
+
+### Operation Process  
+
+1. Create ChainLink SubscriptionID  
+Login [ChainLink VRF Test network](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , Click on" Create Subscription" to Create a SubscriptionID and you can see the created SubscriptionID under "My Subscriptions"
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkVRF.png?raw=true" /></center> 
+
+
+2. Save SubscriptionID  
+Save the SubscriptionID created in the previous step to **.env** 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/SubscriptionID.png?raw=true" /></center>
+
+```sh
+## .env
+SubscriptionId=ddddd
+```
+
+3. Run the deployment script to deploy the contract
 
    ```sh
-   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network kovan
+   npx hardhat run scripts/02-RandomNumberConsumerDeploy.js --network rinkeby
    ```
 
-3. 使用小狐狸向合约转账 Link token 作为调用随机函数的费用。在 kovan 网络下，合约每次调用随机函数花费 0.1Link，转账适量即可。
-4. 将打印出来的合约部署地址，添加到 .env 文件中，运行测试脚本
+4. Access to ChainLink coins  
+Login [ChainLink Faucet](https://faucets.chain.link/) , Get ChainLink coins for subsequent RandomNumberConsume, where Network selects Rinkeby and "Testnet Account Address "enters the account address of the contract owner
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ChainLinkFaucet.png?raw=true" /></center>   
 
-   ```js
-   // .env
-   RandomNumberConsumer_ADDRESS=xxxx; // <--- you need fill this
-   ```
 
-   运行测试脚本
+5. Empower contracts to consume ChainLink coins for random number capture   
+Login [ChainLink VRF test network](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , and Click **SubscriptionID** 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/ClickSubscriptionID.png?raw=true" /></center>  
+
+
+Then on the new page, "Add Funds" and "Add Consumer ". Where "Add Funds" is the number of ChainLink coins deposited, and "Add Consumer "needs to fill in the successfully deployed RandomNumberConsumer contract address, which is the contract address printed in Step 3 
+<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/14-chainlink-price-feed/AddFundsAddCustomer.png?raw=true" /></center>   
+
+
+6. Run the test script  
 
    ```sh
-   npx hardhat test ./test/RandomNumberConsumer.test.js --network kovan
+   npx hardhat run  scripts/03-RandomNumberConsumer --network rinkeby
    ```
 
-   结果可能需要等待 2 到 3 分钟，可以看到两次获取的随机数值不同
+  The result may take 2 to 3 minutes, and you can see two random values returned by ChainLink
+
+   ```sh
+   ❯ npx hardhat run scripts/03-RandomNumberConsumer.js --network rinkeby
+   Listen on random number call...
+   Listen on random number result...
+   first transaction hash: 0xb822b742836e3e028102b938ff9b52f5c31ecbf00a663b4865c50f83d141c441
+   event RequestId(address,uint256)
+   random0 requestID:  BigNumber { value: "68813323376039607636454911576409413136200025762802867082556497319163019860937" }
+   event FulfillRandomness(uint256,uint256[])
+   args[0] : BigNumber { value: "68813323376039607636454911576409413136200025762802867082556497319163019860937" }
+   random0Res:  21345191237588857524675400331731955708910062406377169110385405370996391926856,49611358654743768743671276783545638722996121599596073254340228099561828202433
+   ```
 
 ## todo
 
-增加聚合方式获取。
+Will add aggregate obtain.
 
-## 参考文档
+## Reference Documentation
 
-参考文档链接如下：
+Reference documents are linked below:
 
 - https://zh.chain.link/
 - https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ

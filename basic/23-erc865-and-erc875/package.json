@@ -14,7 +14,7 @@
     "hardhat": "^2.3.3"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.0.1",
+    "@openzeppelin/contracts": "^4.5.0",
     "dotenv": "^10.0.0",
     "ethereumjs-abi": "^0.6.8",
     "ethers-eip712": "^0.2.0"
