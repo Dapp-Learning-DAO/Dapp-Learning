@@ -10,3 +10,6 @@
 [submodule "basic/41-foundry/my_nft"]
 	path = basic/41-foundry/my_nft
 	url = https://github.com/oneforalone/my_nft.git
+[submodule "basic/41-foundry/ethernaut_solutions"]
+	path = basic/41-foundry/ethernaut_solutions
+	url = https://github.com/oneforalone/ethernaut-solutions.git
