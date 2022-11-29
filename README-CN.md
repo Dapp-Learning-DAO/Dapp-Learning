@@ -450,6 +450,10 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  <a href="https://www.hashkey.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
+  </a>
 </div>
 <br>
 
