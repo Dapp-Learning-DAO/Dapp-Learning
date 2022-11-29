@@ -323,6 +323,10 @@ forge create --rpc-url <your_rpc_url> --private-key <your_private_key> src/MyCon
 
 +  [在 Hardhat 项目中配置 Foundry](use-foundry-in-hardhat/README.md)
 
+**Update on 2022-11-29**：foundry 已经支持使用 script 简化部署，具体可以参考下面
+`MyNFT` 的部署：
+
+- [MyNFT](my_nft/README.md)
 
 ## Debug 合约
 
