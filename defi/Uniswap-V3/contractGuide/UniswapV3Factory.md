@@ -101,7 +101,7 @@ function createPool(
   - 可以在链下计算出已经创建的交易池的地址
   - 其他合约不必通过 UniswapV3Factory 中的接口来查询交易池的地址，可以节省 gas
   - 合约地址不会因为 reorg 而改变
-
+- 不使用V2的`initialize`方法来初始化是因为这些参数在V3中都是`immutable`,无法在除了`constructor`的函数里面赋值.immutable的值在编译器编译后,将会在初次运行时写入合约的运行时代码中, 因此访问immutable参数比访问slot值会更快.这可能是这些参数设计成immutable的原因.
 ```solidity
 /// @dev Deploys a pool with the given parameters by transiently setting the parameters storage slot and then
 /// clearing it after deploying the pool.
