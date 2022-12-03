@@ -419,7 +419,7 @@ Shout out to the following organizations for their unconditional donations to us
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://www.hashkey.com/">
+  <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
   <a href="https://eth-store.w3eth.io/">

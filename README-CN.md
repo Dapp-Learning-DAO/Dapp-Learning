@@ -446,7 +446,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://www.hashkey.com/">
+  <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
   <a href="https://eth-store.w3eth.io/">
