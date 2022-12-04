@@ -416,43 +416,41 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://web3q.io/home.w3q/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
-  </a>
-</div>
-<div align="left">
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://scroll.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
   </a>
-</div>
-<div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.bing-ventures.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  
+</div>
+<div align="left">
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://www.hashkey.com/">
+  <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
+  </a>
+  <a href="https://eth-store.w3eth.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
   </a>
 </div>
 <br>
