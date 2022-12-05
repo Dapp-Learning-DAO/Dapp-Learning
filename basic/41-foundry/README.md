@@ -323,10 +323,70 @@ forge create --rpc-url <your_rpc_url> --private-key <your_private_key> src/MyCon
 
 +  [在 Hardhat 项目中配置 Foundry](use-foundry-in-hardhat/README.md)
 
-**Update on 2022-11-29**：foundry 已经支持使用 script 简化部署，具体可以参考下面
-`MyNFT` 的部署：
+**UPDATE**: 目前 foundry 已经支持使用脚本部署合约了。只需要将一些变量设置好，然后
+添加一个新的 script 文件，就可以通过执行脚本部署。
 
-- [MyNFT](my_nft/README.md)
+- 在项目目录中创建 `.env` 文件并设置对应的变量：
+
+```shell
+PRIVATE_KEY=
+MAINNET_RPC_URL=
+RINKEBY_RPC_URL=
+ANVIL_RPC_URL="http://localhost:8545"
+ETHERSCAN_KEY=
+```
+
+- 在 `foundry.toml` 中添加配置：
+
+```yaml
+[rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+rinkeby = "${RINKEBY_RPC_URL}"
+anvil = "${ANVIL_RPC_URL}"
+
+[etherscan]
+mainnet = { key = "${ETHERSCAN_KEY}" }
+rinkeby = { key = "${ETHERSCAN_KEY}" }
+```
+
+- 在项目目录中创建一个 `script/MyNFT.s.sol`（以部署一个 NFT 合约为例）：
+
+```solidity
+//SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.8.10;
+
+import "@forge-std/Script.sol";
+import "../src/MyNFT.sol";
+
+contract DeployMyNFT is Script {
+    function run() external {
+        address deployer = vm.addr(vm.envUint("PRIVATE_KEY"));
+
+        console.log("The Deployer address:", deployer);
+        console.log("Balance is:", deployer.balance);
+
+        vm.startBroadcast(deployer);
+
+        MyNFT nft = new MyNFT("MyNFT", "MYT", "https://www.example.com");
+        vm.stopBroadcast();
+
+        console.log("MyNFT deployed at:", address(nft));
+    }
+}
+```
+
+最后执行：
+
+```shell
+# load the configs
+source .env
+# deploy
+forge script DeployMyNFT --rep--url <RCP_URL> --broadcast --verify
+```
+
+其中 `--verify` 参数是将合约代码开源。
+
+完整的示例代码见：[my_nft](my_nft/README.md)
 
 ## Debug 合约
 

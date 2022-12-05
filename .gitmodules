@@ -1,15 +1,9 @@
 [submodule "crypto/ECDSA-signature/secp256k1-example-rs"]
-	path = crypto/ECDSA-signature/secp256k1-example-rs
-	url = https://github.com/leeduckgo/secp256k1-example-rs
+path = crypto/ECDSA-signature/secp256k1-example-rs
+url = https://github.com/leeduckgo/secp256k1-example-rs
 [submodule "crypto/ECDSA-signature/eth_wallet"]
-	path = crypto/ECDSA-signature/eth_wallet
-	url = https://github.com/leeduckgo/eth_wallet
+path = crypto/ECDSA-signature/eth_wallet
+url = https://github.com/leeduckgo/eth_wallet
 [submodule "lib/openzeppelin-contracts"]
-	path = lib/openzeppelin-contracts
-	url = https://github.com/OpenZeppelin/openzeppelin-contracts
-[submodule "basic/41-foundry/my_nft"]
-	path = basic/41-foundry/my_nft
-	url = https://github.com/oneforalone/my_nft.git
-[submodule "basic/41-foundry/ethernaut_solutions"]
-	path = basic/41-foundry/ethernaut_solutions
-	url = https://github.com/oneforalone/ethernaut-solutions.git
+path = lib/openzeppelin-contracts
+url = https://github.com/OpenZeppelin/openzeppelin-contracts
