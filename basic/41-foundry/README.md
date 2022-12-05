@@ -386,7 +386,7 @@ forge script DeployMyNFT --rep--url <RCP_URL> --broadcast --verify
 
 其中 `--verify` 参数是将合约代码开源。
 
-完整的示例代码见：[my_nft](my_nft/README.md)
+完整的示例代码见：[my_nft]([https:///README.md](https://github.com/oneforalone/my_nft))
 
 ## Debug 合约
 
