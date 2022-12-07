@@ -760,7 +760,7 @@ function flashLoan(
   address onBehalfOf,
   bytes calldata params,
   uint16 referralCode
-) external override whenNotPaused {
+) external override whenNotPaused { // 1. 提问: 为什么这里不用加nonReentrant
   FlashLoanLocalVars memory vars;
 
   ValidationLogic.validateFlashloan(assets, amounts); // 验证资产地址和借贷数量，两个参数（数组）的长度相等
@@ -778,6 +778,7 @@ function flashLoan(
     IAToken(aTokenAddresses[vars.i]).transferUnderlyingTo(receiverAddress, amounts[vars.i]); // 先将贷款转给调用者
   }
 
+  // 1. 回答: 因为这里有判断返回值, 无法递归调用闪电贷函数
   require(  // 调用回调函数，回调方法必须返回true，否则交易失败
     vars.receiver.executeOperation(assets, amounts, premiums, msg.sender, params),
     Errors.LP_INVALID_FLASH_LOAN_EXECUTOR_RETURN
@@ -1039,9 +1040,10 @@ library DataTypes {
     //address of the interest rate strategy
     address interestRateStrategyAddress;
     //the id of the reserve. Represents the position in the list of the active reserves
-    uint8 id;
+    uint8 id; // 这个id如果放到lastUpdateTimestamp这个变量后面, 应该可以节省一些插槽位置
   }
 
+  // 这里把多个变量合并成一个256bit的数字, 很节省空间
   struct ReserveConfigurationMap {
     //bit 0-15: LTV
     //bit 16-31: Liq. threshold
