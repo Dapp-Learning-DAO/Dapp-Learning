@@ -3,6 +3,9 @@ use eyre::{ContextCompat, Result};
 use hex::ToHex;
 use std::{convert::TryFrom, time::Duration};
 
+#[macro_use]
+extern crate dotenv_codegen;
+
 // Generate the type-safe contract bindings by providing the json artifact
 // *Note*: this requires a `bytecode` and `abi` object in the `greeter.json` artifact:
 // `{"abi": [..], "bin": "..."}`  or `{"abi": [..], "bytecode": {"object": "..."}}`
