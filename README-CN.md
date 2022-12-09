@@ -118,15 +118,15 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 ⌛ 表示任务正在进行中
 ✅ 表示任务已完成
 
-1. [deploy contract with web3.js](basic/01-web3js-deploy) ✅
-2. [create transaction with web3.js](basic/02-web3js-transaction) ✅
-3. [call ERC20 contract with web3.js](basic/03-web3js-erc20) ✅
-4. [truffle](basic/04-web3js-truffle) ✅
-5. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20) ✅
-6. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle) ✅
-7. [hardhat](basic/07-hardhat) ✅
-8. [graph](basic/08-hardhat-graph) ✅
-9. [react（metamask)](basic/09-hardhat-react) ✅
+01. [deploy contract with web3.js](basic/01-web3js-deploy) ✅
+02. [create transaction with web3.js](basic/02-web3js-transaction) ✅
+03. [call ERC20 contract with web3.js](basic/03-web3js-erc20) ✅
+04. [truffle](basic/04-web3js-truffle) ✅
+05. [call ERC20 contract with ethers.js](basic/05-ethersjs-erc20) ✅
+06. [test contract with waffle and ethers.js](basic/06-ethersjs-waffle) ✅
+07. [hardhat](basic/07-hardhat) ✅
+08. [graph](basic/08-hardhat-graph) ✅
+09. [react（metamask)](basic/09-hardhat-react) ✅
 10. [ERC721+ ERC1155 + ipfs](basic/10-hardhat-ipfs-erc721) ✅
 11. [react + express + hardhat](basic/11-react-express-hardhat) ✅
 12. [Crowdfund](basic/12-token-crowdfund) ✅
@@ -158,15 +158,14 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 39. [Multicall](basic/39-Multicall) ✅
 40. [ether-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-41. [Foundry](basic/49-foundry/README.md)
+41. [Foundry](basic/41-foundry/README.md)
 42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
 43. [snapshot](basic/40-snapshot) ⌛
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
-48. [Web3-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-49. [Foundry](basic/49-foundry/README.md) ⌛
+48. [ZK Voting](basic/48-ZK-Voting) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -194,7 +193,6 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
-77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 ## 项目任务
 
@@ -375,8 +373,6 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
 </div>
 <br>
 <div align="left">
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
@@ -420,39 +416,41 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://web3q.io/home.w3q/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
-  </a>
-</div>
-<div align="left">
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://scroll.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
   </a>
-</div>
-<div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.bing-ventures.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  
+</div>
+<div align="left">
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://capital.hashkey.com/en/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
+  </a>
+  <a href="https://eth-store.w3eth.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
   </a>
 </div>
 <br>
