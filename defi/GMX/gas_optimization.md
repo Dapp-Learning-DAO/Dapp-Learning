@@ -92,9 +92,12 @@ contract Vault  {
 ```solidity
 mapping (uint256 => string) public errors;
 
-function initialize(){
-  _validate(!_slot0.isInitialized, 1);
-  // ...
+function swap(address _tokenIn, address _tokenOut, address _receiver) external override nonReentrant returns (uint256) {
+    _validate(isSwapEnabled, 23);
+    _validate(whitelistedTokens[_tokenIn], 24);
+    _validate(whitelistedTokens[_tokenOut], 25);
+    _validate(_tokenIn != _tokenOut, 26);
+    // ...
 }
 
 function _validate(bool _condition, uint256 _errorCode) private view {
@@ -102,7 +105,7 @@ function _validate(bool _condition, uint256 _errorCode) private view {
 }
 ```
 
-#### 修改后(161911 gas)
+#### 修改后(162049 - 4 * 1000 gas)
 
 ```solidity
 
