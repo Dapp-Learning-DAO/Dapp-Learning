@@ -10,8 +10,8 @@ contract Vault  {
 
     bool public  isInitialized;
     uint256 public  liquidationFeeUsd;
-    uint256 public  fundingRateFactor;
-    uint256 public  stableFundingRateFactor;
+    uint256 public  fundingRateFactor; // 最大值10000
+    uint256 public  stableFundingRateFactor;// 最大值10000
     
     address public  router;
     address public  priceFeed;
@@ -38,7 +38,7 @@ contract Vault  {
 }
 ```
 
-#### gas 优化后, gas消耗从186732降为162136
+#### gas 优化后, gas消耗从186732降为142136
 ```solidity
 contract Vault  {
     
@@ -51,14 +51,14 @@ contract Vault  {
         uint32  stableTaxBasisPoints ; // 88
         uint32  mintBurnFeeBasisPoints ; // 96
         
-        uint32   whitelistedTokenCount;//136
+        uint32 whitelistedTokenCount;//136
         uint32 totalTokenWeights;//224
 
-        uint32 fundingRateFactor;
-        uint32 stableFundingRateFactor;
+        uint16 fundingRateFactor; // 最大值10000
+        uint16 stableFundingRateFactor;// 最大值10000
+        uint112   liquidationFeeUsd; // 最大值 100 * 10 ** 30
     }
     Slot0 public slot0; 
-
     address public  router;
     address public  priceFeed;
 
@@ -78,9 +78,9 @@ contract Vault  {
         router = _router;
         usdg = _usdg;
         priceFeed = _priceFeed;
-        liquidationFeeUsd = _liquidationFeeUsd;
-        _slot0.fundingRateFactor = uint32(_fundingRateFactor);
-        _slot0.stableFundingRateFactor = uint32(_stableFundingRateFactor);
+        _slot0.liquidationFeeUsd = uint112(_liquidationFeeUsd);
+        _slot0.fundingRateFactor = uint16(_fundingRateFactor);
+        _slot0.stableFundingRateFactor = uint16(_stableFundingRateFactor);
         slot0 = _slot0;
     }  
 }
@@ -168,10 +168,10 @@ struct AddrObj{
     bool isManager;
     bool whitelistedTokens;
     bool stableTokens;
-    bool shortableTokens;//40
-    uint32 tokenWeights;
-    uint16 tokenDecimals;
-    uint16 minProfitBasisPoints;
+    bool shortableTokens;
+    uint32 tokenWeights; // 可以大于100, 利用tokenWeights / totalTokenWeights 计算总比例
+    uint16 tokenDecimals;// 一般在0-32之间
+    uint16 minProfitBasisPoints; // 最大值10000, 因此65535够用了
     // feeReserves tracks the amount of fees per token
     uint112 feeReserves;
 }
