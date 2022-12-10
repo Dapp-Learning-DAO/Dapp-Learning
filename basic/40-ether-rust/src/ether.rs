@@ -1,10 +1,8 @@
-use ethers::{prelude::*, utils::Anvil, utils::Ganache};
+use ethers::{prelude::*, utils::Anvil};
 use eyre::{ContextCompat, Result};
-use hex::ToHex;
 use std::path::Path;
 use std::{convert::TryFrom, sync::Arc, time::Duration};
 
-#[macro_use]
 extern crate dotenv_codegen;
 
 // Generate the type-safe contract bindings by providing the json artifact
@@ -18,8 +16,17 @@ abigen!(
     event_derives(serde::Deserialize, serde::Serialize)
 );
 
+abigen!(
+    ERC20,
+    r#"[
+      event  Transfer(address indexed src, address indexed dst, uint wad)
+  ]"#,
+);
+
 #[tokio::main]
 async fn main() -> Result<()> {
+    let to_readable_num =
+        |balance: U256| -> f64 { (balance.as_u128() as f64 / 10_f64.powf(18_f64)) as f64 };
     // Spawn a ganache instance
     // let mnemonic = "gas monster ski craft below illegal discover limit dog bundle bus artefact";
     // let ganache = Ganache::new().mnemonic(mnemonic).spawn();
@@ -54,9 +61,10 @@ async fn main() -> Result<()> {
     let wallet1: LocalWallet = anvil.keys()[1].clone().into();
     let wallet1_address = wallet1.address();
 
-    for n in anvil.keys() {
-        println!("wallets : {:?}", LocalWallet::from(n.clone()).address());
-    }
+    // for n in anvil.keys() {
+    //     println!("wallets : {:?}", LocalWallet::from(n.clone()).address());
+    // }
+
     println!("Default wallet address: 0x{}", wallet_address);
     println!("Default wallet1 address: 0x{}", wallet1_address);
 
@@ -98,22 +106,20 @@ async fn main() -> Result<()> {
     println!("second_wallet_token: {}", second_wallet_token);
 
     // Query the balance of our account
-    let first_balance = provider.get_balance(wallet.address(), None).await?;
-    println!("Wallet first address balance: {}", first_balance);
+    let first_balance: U256 = provider.get_balance(wallet.address(), None).await?;
 
-    // Query the blance of some random account
-    let other_address_hex = dotenv!("QUERY_ADDR");
-    let other_address = other_address_hex.parse::<Address>()?;
-    let other_balance = provider.get_balance(other_address, None).await?;
-    println!(
-        "Balance for address {}: {}",
-        other_address_hex, other_balance
-    );
+    println!("Wallet balance: {} eth", to_readable_num(first_balance));
 
-    // Create a transaction to transfer 1000 wei to `other_address`
-    let tx = TransactionRequest::pay(other_address, U256::from(1000u64)).from(wallet.address());
+    let second_balance: U256 = provider.get_balance(wallet1.address(), None).await?;
+
+    println!("Wallet1 balance: {} eth", to_readable_num(second_balance));
+
+    // Create a transaction to transfer 1000 wei to `wallet1_address`
+    let tx = TransactionRequest::pay(wallet1_address, U256::from(10_u128.pow(20)))
+        .from(wallet.address());
+
     //  Send the transaction and wait for receipt
-    let receipt = provider
+    let _receipt = provider
         .send_transaction(tx, None)
         .await?
         .log_msg("Pending transfer")
@@ -122,10 +128,50 @@ async fn main() -> Result<()> {
         .context("Missing receipt")?;
 
     println!(
-        "Balance of {} {}",
-        other_address_hex,
-        provider.get_balance(other_address, None).await?
+        "Balance of wallet1 {}: {} eth",
+        wallet1_address,
+        to_readable_num(provider.get_balance(wallet1.address(), None).await?)
     );
+
+    // transfer DAPPLEARNING token from wallet to wallet1
+    let approvee_amount: U256 = U256::from(10000);
+    
+    contract
+        .approve(wallet.address(), approvee_amount)
+        .call()
+        .await?;
+
+    contract
+        .transfer(wallet1.address(), approvee_amount)
+        .send()
+        .await?
+        .await?;
+
+    println!(
+        "Wallet balance: {} eth",
+        contract.balance_of(wallet_address).call().await?
+    );
+
+    println!(
+        "Wallet1 balance: {} eth",
+        contract.balance_of(wallet1_address).call().await?
+    );
+
+    let logs = contract.transfer_filter().from_block(0u64).query().await?;
+
+    println!("Logs: {}", serde_json::to_string(&logs)?);
+
+    // // Subscribe Transfer events
+    // let dapp_learning_token = ERC20::new(contract.address(), client.clone());
+    // let events = dapp_learning_token.events();
+    // let mut stream = events.stream().await?;
+
+    // while let Some(Ok(event)) = stream.next().await {
+    //     println!(
+    //         "src: {:?}, dst: {:?}, wad: {:?}",
+    //         event.src, event.dst, event.wad
+    //     );
+    // }
 
     Ok(())
 }
