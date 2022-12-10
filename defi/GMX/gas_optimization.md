@@ -110,8 +110,8 @@ function _validate(bool _condition, uint256 _errorCode) private view {
 
 ```solidity
 
-function initialize(){
-  require(!isSwapEnabled, "Vault: already initialized");
+function swap(address _tokenIn, address _tokenOut, address _receiver) external override nonReentrant returns (uint256) {
+  require(isSwapEnabled, "Vault: !SwapEnabled");
   // ...
 }
 ```
