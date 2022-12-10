@@ -47,12 +47,12 @@ contract Vault  {
         bool   isSwapEnabled ; // 16
         bool   isLeverageEnabled ; // 24
         bool  includeAmmPrice ; // 32        
-        uint32   taxBasisPoints; // 80
-        uint32  stableTaxBasisPoints ; // 88
-        uint32  mintBurnFeeBasisPoints ; // 96
+        uint8   taxBasisPoints; // 500 max
+        uint8  stableTaxBasisPoints ; // 500 max
+        uint8  mintBurnFeeBasisPoints ; // 
         
-        uint32 whitelistedTokenCount;//136
-        uint32 totalTokenWeights;//224
+        uint16 whitelistedTokenCount;//
+        uint32 totalTokenWeights;//
 
         uint16 fundingRateFactor; // 最大值10000
         uint16 stableFundingRateFactor;// 最大值10000
