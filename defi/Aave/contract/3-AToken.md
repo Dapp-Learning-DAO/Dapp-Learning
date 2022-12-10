@@ -164,7 +164,22 @@ function balanceOf(address user)
   override(IncentivizedERC20, IERC20)
   returns (uint256)
 {
-  // amountScaled * NormalizedIncome
+  // ---------------公式详解--------------
+  // ---------------overall borrow rate(在reserve interest rate strategy中计算)也就是加权借贷利率
+  // overall borrow rate = (variable debt * variable rate + stable debt * stable rate) / total debt
+  // ---------------current liquidity rate(在reserve interest rate strategy中计算)也就是存款利率
+  // current liquidity rate=overall borrow rate * u(资金利用率) * (1-金库预留部分)
+  // ---------------计算cumulated Liquidity Interest
+  // x = current liquidity rate, n=time
+  // cumulated Liquidity Interest = (1+x)^n = 1 + n*x  这里是泰勒一次展开
+  // ---------------计算liquidity index(其实和NormalizedIncome是同一个数字同一种算法)
+  // 这是reserve维护的一个storage变量, 每次都是累乘
+  // 每次pool deposit/withdraw/repay/swapborrowratemode等等操作的时候,都会更新
+  // liquidity index *= cumulated Liquidity Interest
+  // ---------------计算NormalizedIncome
+  // NormalizedIncome = cumulated Liquidity Interest * liquidity index
+  // return amountScaled * NormalizedIncome
+  // -------------------------
   return super.balanceOf(user).rayMul(_pool.getReserveNormalizedIncome(_underlyingAsset));
 }
 ```
