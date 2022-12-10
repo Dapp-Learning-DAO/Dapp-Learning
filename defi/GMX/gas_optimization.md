@@ -112,7 +112,9 @@ function initialize(){
 }
 ```
 
-# 优化3 
+## 提升3 
+### 优化mapping
+
 优化前 gas 263554
 
 * 这么多address mapping, 太浪费, 合并成一个结构体, 把uint256改小
