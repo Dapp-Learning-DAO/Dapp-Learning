@@ -38,7 +38,7 @@ contract Vault  {
 }
 ```
 
-gas 优化后, gas消耗从186732降为162136
+#### gas 优化后, gas消耗从186732降为162136
 ```solidity
 contract Vault  {
     
@@ -161,7 +161,7 @@ function setTokenConfig(
 }
 ```
 
-优化后 263554 -> 168347
+#### 优化后 263554 -> 168347
 ```solidity
 struct AddrObj{
     bool isLiquidator;
