@@ -33,20 +33,25 @@ Github：https://github.com/0xProject
   3. The order is shared with counter-parties.
     - If the Maker of the 0x order already knows their desired counter-party, they can send the order directly (via email, chat, or over-the-counter platform)
     - If the Maker doesn’t know a counter-party willing to take the trade, they can submit the order to orderbook. 
-4. 0x API aggregates liquidity across all the sources to surface the best price for the order to the Taker.
-5. The Taker fills the 0x order by submitting the order and the amount they will fill it for to the blockchain.
-6. The 0x protocol’s settlement logic verifies the Maker’s digital signature and that all the conditions of the trade are satisfied.
+  4. 0x API aggregates liquidity across all the sources to surface the best price for the order to the Taker.
+  5. The Taker fills the 0x order by submitting the order and the amount they will fill it for to the blockchain.
+  6. The 0x protocol’s settlement logic verifies the Maker’s digital signature and that all the conditions of the trade are satisfied.
 ### Build a Token Swap Dapp With 0x API
 video: https://www.web3.university/tracks/road-to-web3/build-a-blockchain-betting-game
 
 doc: https://docs.0x.org/0x-api-swap/guides/use-0x-api-liquidity-in-your-smart-contracts
 
+**Accessing RFQ liquidity on 0x** 
+APIRequest-for-Quote (“RFQ”) System.
+https://docs.0x.org/0x-api-swap/guides/accessing-rfq-liquidity-on-0x-api
+
 
 ### How to Build NFT Exchange in Your DApp
-
+//todo
 
 ### 限价单
-
+有两种类型的单子： limit order & RFQ order
+https://docs.0x.org/0x-api-orderbook/introduction
 
 ### MEV-aware DEX design
 ## 参考链接
