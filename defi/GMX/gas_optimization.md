@@ -90,7 +90,7 @@ contract Vault  {
 ### 优化报错机制(162049gas)
 * 不读取storage
 ```solidity
-mapping (uint256 => string) public errors;
+mapping (uint256 => string) public errors; // 应该去掉
 
 function swap(address _tokenIn, address _tokenOut, address _receiver) external override nonReentrant returns (uint256) {
     _validate(isSwapEnabled, 23);
@@ -100,6 +100,7 @@ function swap(address _tokenIn, address _tokenOut, address _receiver) external o
     // ...
 }
 
+// 这个函数应该删掉
 function _validate(bool _condition, uint256 _errorCode) private view {
     require(_condition, errors[_errorCode]);
 }
@@ -110,7 +111,7 @@ function _validate(bool _condition, uint256 _errorCode) private view {
 ```solidity
 
 function initialize(){
-  require(!_slot0.isInitialized, "Vault: already initialized");
+  require(!isSwapEnabled, "Vault: already initialized");
   // ...
 }
 ```
