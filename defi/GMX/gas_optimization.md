@@ -217,4 +217,25 @@ function setTokenConfig(
 }
 ```
 
+## 提升4 local作用域, 保存变量多次使用
+
+#### before 54280
+```solidity
+function _increaseReservedAmount(address _token, uint256 _amount) external {//54280
+    reservedAmounts[_token] = reservedAmounts[_token] + _amount;
+    require(reservedAmounts[_token] <= poolAmounts[_token], "error");
+}   
+```
+
+
+
+#### after 54011
+```solidity
+function _increaseReservedAmount2(address _token, uint256 _amount) external {//54011
+    uint256 _local = reservedAmounts[_token];
+    _local = _local + _amount;
+    require(_local<= poolAmounts[_token], "error");
+    reservedAmounts[_token] = _local;
+}
+```
 
