@@ -1,3 +1,4 @@
+# 1. gas 方面的优化
 ## 提升1
 ### 原来结构 消耗gas 186732
 
@@ -239,3 +240,60 @@ function _increaseReservedAmount2(address _token, uint256 _amount) external {//5
 }
 ```
 
+# 2. 代码文件大小的优化
+我们在优化了gas和数据结构后, 发现代码因为过大无法部署, 另一方面也说明原先代码功能过于集中在一个文件, 后期维护和升级造成较大困难
+
+我们的主要目的是拆分`Vault.sol`
+
+#### 使用代理合约
+拆分代码一般步骤: 
+* 抽离状态变量做一个单独的父类
+* 逻辑合约与代理合约分别继承同一个父类的状态变量, 保持插槽一致性
+* 把原先代码中比较长的函数分离出来, 放入新建的这个逻辑合约中
+* 把逻辑合约和代理合约中共用的代码做成library(最好是internal的, 节省一些gas费, 否则又是一个跨合约调用)
+* libraray拆分一般是计算类的工具类的函数形成一个lib
+* 验证类的形成一个lib
+* 修改状态变量类的形成一个lib(只修改一个状态变量且需要大量计算的, 如果修改多个状态变量的,不建议形成lib)
+
+
+```solidity
+contract VaultStorage{
+// 这里放状态变量, 一般定义为internal
+    uint256 internal x;
+    address internal vaultManager;
+}
+interface IVault{
+    function A()external;
+    function B()external;
+    function getX() exnteral returns(uint256);
+    function setX() exnteral;
+}
+contract Vault is IVault{
+    constructor(address _mgr){
+        vaultManager = _mgr;
+    }
+    function A()external override{
+        //...
+    }
+    function B()external override{
+        vaultManager.delegatecall(msg.data);        
+    }
+    function getX()external override returns(uint256){
+        return x;
+    }
+    function setX(uint256 _x) external override{
+        x = _x;
+    }
+}
+contract VaultManager{
+    function B()external {
+        // ...
+    }
+}
+
+```
+其实原作者在拆分方面已经做了很多工作:
+* 把报错的代码单独分拆出来, 形成一个`error controller`合约
+* `vault price feed`单独分离出来做了一个合约
+* 做了route合约, 把一部分非核心逻辑抽离出来
+* 做了reader和vaultreader合约, 把一部分view和大量数学计算的函数抽离
