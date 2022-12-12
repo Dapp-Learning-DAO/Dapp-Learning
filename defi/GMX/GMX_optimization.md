@@ -115,8 +115,10 @@ function _validate(bool _condition, uint256 _errorCode) private view {
 ```solidity
 
 function swap(address _tokenIn, address _tokenOut, address _receiver) external override nonReentrant returns (uint256) {
-  require(isSwapEnabled, "Vault: !SwapEnabled");
-  // ...
+    require(isSwapEnabled, "23");
+    require(whitelistedTokens[_tokenIn], "24");
+    require(whitelistedTokens[_tokenOut], "25");
+    require(_tokenIn != _tokenOut, "26");
 }
 ```
 
