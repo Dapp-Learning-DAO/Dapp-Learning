@@ -245,6 +245,10 @@ function _increaseReservedAmount2(address _token, uint256 _amount) external {//5
 }
 ```
 
+## 提升5 减少重复访问另一个合约
+作者有较多函数调用了VaultPriceFeed合约, 该合约与vault合约完全分离, vault通过调用该合约获取代币当前的标记价格, 如果是我们本地访问这种view函数, 是不需要gas费的, 但是如果是在一次transaction当中访问, 是需要额外gas的. 因此可以在此同一次transaction当中, 缓存价格, transaction结束后,清空缓存. 避免重复消耗资源, 从而达到节省gas的目的.
+
+
 # 2. 代码文件大小的优化
 我们在优化了gas和数据结构后, 发现代码因为过大无法部署, 另一方面也说明原先代码功能过于集中在一个文件, 后期维护和升级造成较大困难
 
