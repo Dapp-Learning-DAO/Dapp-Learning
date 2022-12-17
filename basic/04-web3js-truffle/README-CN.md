@@ -189,7 +189,7 @@ Truffle 从 v5.5.0 版本开始添加了 [Truffle Dashboard](https://trufflesuit
 
 #### 启动 Truffle Dashboard
 
-如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本(如果npm版本比较低，可能出现安装的truffl还是低于v.5.5.0版本，此时使用npm install -g trullfe@^5.5.0命令进行安装)
+如果用的是老版本的 truffle，首先需将 truffle 更新到最新版本(如果npm版本比较低，可能出现安装的truffl还是低于v.5.5.0版本，此时使用npm install -g truffle@^5.5.0命令进行安装)
 
 ```bash
 > npm uninstall -g truffle
