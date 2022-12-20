@@ -10,6 +10,9 @@ use std::{convert::TryFrom, path::Path, sync::Arc, time::Duration};
 // use std::time::Duration;
 pub type SignerDeployedContract<T> = Contract<SignerMiddleware<Provider<T>, LocalWallet>>;
 
+#[macro_use]
+extern crate dotenv_codegen;
+
 // Generate the type-safe contract bindings by providing the ABI
 // definition
 abigen!(
