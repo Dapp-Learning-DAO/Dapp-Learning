@@ -95,3 +95,5 @@ Vault contract：作为一个存储金库，帮用户托管保证金交易中的
 - https://www.chainnews.com/articles/906891466719.htm  全景式解读加密货币衍生品交易赛道  
 - https://mp.weixin.qq.com/s/VF4JGW-XG3drUAelKbYySA  橙皮书dydx保证金交易原理介绍
 - https://mp.weixin.qq.com/s/Jnm7eOunGyaiGVMPBzz70g stareware介绍
+- https://zhuanlan.zhihu.com/p/408601920 MEXC Exchange深度解析： DYDX产品机制、发展现状
+- https://www.defidaonews.com/article/6667253 从永续合约到合成资产，详解去中心化衍生品
