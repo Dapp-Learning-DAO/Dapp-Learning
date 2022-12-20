@@ -7,3 +7,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "basic/34-aa/demowallet/account-abstraction"]
+	path = basic/34-aa/demowallet/account-abstraction
+	url = git@github.com:eth-infinitism/account-abstraction.git
