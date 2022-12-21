@@ -146,12 +146,12 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
-38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
+38. [ether-Rust](https://github.com/tomusdrw/rust-web3) ✅
 39. [Multicall](basic/39-Multicall) ✅
-40. [ether-Rust](https://github.com/tomusdrw/rust-web3) ⬜
+40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 41. [Foundry](basic/41-foundry/README.md)
-42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
-43. [snapshot](basic/40-snapshot) ⌛
+42. [Merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
+43. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛ 
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
@@ -165,7 +165,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
-58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
+58. [snapshot](basic/40-snapshot) ⌛
 59. [wagmi and nextjs](basic/59-wagmi-and-nextjs) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](basic/61-ENS) ✅
