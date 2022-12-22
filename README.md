@@ -422,8 +422,13 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
+  &nbsp;&nbsp;
   <a href="https://eth-store.w3eth.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://bingx.com/en-us/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
 </div>
 <br>
