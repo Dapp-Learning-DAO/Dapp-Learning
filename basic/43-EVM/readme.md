@@ -3,8 +3,7 @@
 ## 以太坊存储模型
 以太坊是一个基于交易的“状态”机器.
 三棵树： 交易树，状态树和收据树。
-
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/storage.jpg?raw=true" /></center>
+![ETH](./img/eth.jpeg)
 账户余额等数据并不直接存储在以太坊区块链的区块中。只有交易树、状态树和收据树的根节点哈希直接存储在区块链中。
 存储树（保存所有智能合约数据）的根节点哈希实际上指向状态树，而状态树又指向区块链。
 
