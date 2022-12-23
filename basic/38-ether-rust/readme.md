@@ -44,7 +44,17 @@ TEST_ADDR=0xd028d24f16a8893bd078259d413372ac01580769
 ### 运行程序
 
 **如果还未安装 Rust, 请参照 [官方文档](https://www.rust-lang.org/learn/get-started) 进行安装**。
-**solc安装需要0.8.10以上，具体参考 https://github.com/gakonst/ethers-rs**
+
+
+##### 此外运行 [ether-rs](https://github.com/gakonst/ethers-rs) 前请确保正确安装以下依赖, 才能顺利启用 **ethers-rs** 进行测试: 
+1. [`solc`](https://solidity.readthedocs.io/en/latest/installing-solidity.html) (>=0.8.10). 推荐使用 [solc-select](https://github.com/crytic/solc-select) 可以更加灵活的选择版本.
+2. [`anvil`](https://github.com/foundry-rs/foundry/blob/master/anvil/README.md)
+3. [`geth`](https://github.com/ethereum/go-ethereum)  
+  
+  
+  
+
+一切就绪后, 执行:
 
 ```bash
 cargo run --bin ether1
