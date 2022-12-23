@@ -93,9 +93,9 @@ https://ethereum.org/zh/developers/tutorials/downsizing-contracts-to-fight-the-c
 - EVM 详解: https://learnblockchain.cn/2019/04/09/easy-evm
 - geth-analyze: https://github.com/learnerLj/geth-analyze/tree/main/analyzeSourceCode
 - Ethereum Signature Database: https://www.4byte.directory/
-- [EVM内存布局](
-https://mirror.xyz/xyyme.eth/GNVcUgKAOEiLyClKeqkmD35ctLu6_XomT3ZDIfV3tz8?s=09) 
+- EVM内存布局: https://mirror.xyz/xyyme.eth/GNVcUgKAOEiLyClKeqkmD35ctLu6_XomT3ZDIfV3tz8?s=09
 - [深入理解EVM - Part 1 - 从字节码到函数选择器](https://learnblockchain.cn/article/4253)  
 - [evm_illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)
 - [EVM Deep Dives](https://noxx.substack.com/p/evm-deep-dives-the-path-to-shadowy?s=r)
+- EVM源码解析: http://yangzhe.me/2019/08/12/ethereum-evm/
 
