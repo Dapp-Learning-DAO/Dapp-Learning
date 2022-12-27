@@ -9,3 +9,7 @@ typechain-types
 cache
 artifacts
 
+# circuits
+.r1cs
+.sym
+circuit_js
