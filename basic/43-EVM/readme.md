@@ -1,16 +1,14 @@
 # Ethereum Virtual Machine Opcodes
 
 ## 以太坊存储模型
-
-[以太坊存储](./store.md)
 以太坊是一个基于交易的“状态”机器.
 三棵树： 交易树，状态树和收据树。
-
-<center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/storage.jpg?raw=true" /></center>
+![ETH](./img/eth.jpeg)
 账户余额等数据并不直接存储在以太坊区块链的区块中。只有交易树、状态树和收据树的根节点哈希直接存储在区块链中。
 存储树（保存所有智能合约数据）的根节点哈希实际上指向状态树，而状态树又指向区块链。
+
 **永久存储和临时存储**
-永久数据和临时数据。永久数据的一个例子是交易。一旦交易被完全确认，它就会被记录在交易树中；它永远不会改变。临时数据的一个例子是特定以太坊账户地址的余额。帐户地址的余额存储在状态树中，并在针对该特定帐户的交易发生时更改。永久数据（如挖掘交易）和临时数据（如账户余额）应该分开存储是有道理的。以太坊使用 trie 数据结构来管理数据。
+永久数据和临时数据。永久数据的一个例子是交易。一旦交易被完全确认，它就会被记录在交易树中；它永远不会改变。临时数据的一个例子是特定以太坊账户地址的余额。帐户地址的余额存储在状态树中，并在针对该特定帐户的交易发生时更改。永久数据（如已确认交易）和临时数据（如账户余额）应该分开存储是有道理的。以太坊使用 trie 数据结构来管理数据。
 
 ### 状态树
 
@@ -27,14 +25,13 @@
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/stateTree.jpg?raw=true" /></center>
 
 ### 存储树 -- 合约数据所在位置
-
 每个以太坊账户都有自己的存储树。存储树根节点的 256 位散列作为 storageRoot 值存储在全局状态树中.
-每个以太坊账户都有自己的存储树。存储树根节点的 256 位散列作为 storageRoot 值存储在全局状态树中
-
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/storeTree.png?raw=true" /></center>
 
-### 交易树 -- 每个区块一个
+#### 数据库选型
+以太坊的 Rust 客户端 Parity 使用 Rocksdb。而以太坊的 Go、C++ 和 Python 客户端都使用 leveldb。
 
+### 交易树 -- 每个区块一个
 每个以太坊区块都有自己独立的交易树。一个区块包含许多交易。开采的区块永远不会更新；交易在区块中的位置永远不会改变。
 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/58-EVM/transactionTree.png?raw=true" /></center>
@@ -42,38 +39,9 @@
 ### SPV
 
 ### EVM 
-
-
-### 减少合约size
-https://ethereum.org/zh/developers/tutorials/downsizing-contracts-to-fight-the-contract-size-limit 
-
-
-### 数据库选型
-
-以太坊的 Rust 客户端 Parity 使用 Rocksdb。而以太坊的 Go、C++ 和 Python 客户端都使用 leveldb。
-ethereumjs 可以查看 leveldb.
-
-## Solidity Bytecode and Opcode Basics
-
-简单了解 bytecode 和 opcode。
-
-Solidity Bytecode and Opcode Basics <https://medium.com/@blockchain101/solidity-bytecode-and-opcode-basics-672e9b1a88c2>
-
-## Deconstructing a Solidity Contract
-
-Openzeppelin blog 的系列文章，非常棒的科普文。学习笔记参见 :point_right: [DeconstructingSolidityContract.md](./DeconstructingSolidityContract.md)
-
-## 实际项目中手写Opcode的示范：
-[sudoswap](https://github.com/sudoswap/lssvm/blob/main/src/lib/LSSVMPairCloner.sol), 它自己手写了Opcode，主要实现的是EIP-1167. 但是比EIP-1167要更复杂一点，复杂之处在于proxy在每一次调用delegatecall的时候都会将创建该proxy的一些参数，例如factory address, nft address等直接concat到calldata后面。关于EIP-1167，可以参考[这篇文章](https://learnblockchain.cn/article/2663)
-
-## 推荐用的手写Opcode的工具
-[etk](https://quilt.github.io/etk/ch02-lang/ch03-labels.html), 它可以帮助你计算offset和length。
-在Opcode.etk文件中，使用该工具定义的etk格式手写了`cloneETHPair`函数，可以对比sudoswap.lob.sol文件进行查看
-
-
+[EVM](./EVM.md)
 
 ## 参考链接
-
 - ethervm.io <https://ethervm.io/>
 - Opcode playground <https://www.evm.codes/playground>
 - Solidity Bytecode and Opcode Basics <https://medium.com/@blockchain101/solidity-bytecode-and-opcode-basics-672e9b1a88c2>
