@@ -83,7 +83,7 @@ contract SocialRecoveryWallet{
 
 ```
 address sender // 钱包合约地址
-uint256 nonce // 钱包发起过的交易数量
+uint256 nonce // 钱包发起过的交易数量，用于防止重放; 同时也是钱包创建时的salt（很重要）
 bytes initData //如果钱包不存在，则创建钱包，这是钱包的创建代码
 bytes calldata //要调用函数的数据。如果钱包需要调用其他合约，则在calldata里封装目标合约地址、调用calldata等信息
 bytes signatures //签名数据。为了防止重放攻击，它还需要纳入chainId，entrypoint合约地址
@@ -111,20 +111,49 @@ EIP-4337设计遵循如下架构：
 ![Untitled](https://miro.medium.com/max/1122/0*iZUtwChqWHYclWd-.png)
     
 Bundler调用Entry point合约，该合约由官方提供，作为Boundler调用的人口，封装了和安全性、费用相关的逻辑。所有钱包合约都由EntryPoint调用。调用具体的Wallet合约，包括必要的检测、gas预付款等，随后调用Wallet的主体逻辑（也就是根据用户传入的操作，执行对应的转账，所谓的自定义逻辑如多签等逻辑就发生在这里）。最后完成一些收尾工作，包括多余gas费的退款。
-    
 
 # 如何开发
-在本demo中，实现了一个合约钱包，并将合约钱包整合到AA中去。它的功能包括：
+在本demo中，实现了一个合约钱包，并将合约钱包整合到AA中去，通过这个例子，将覆盖到：
+- 如何部署AA账户
+- 如何自定义AA账户逻辑
+- 如何在AA账户里冲提资产
+- 如何支持paymaster支付gas
+- 如何使用aggregator验证聚合操作。
+- 如何在客户端调用、测试AA
 
-- 多签钱包：
-- 社交恢复：可以通过进行私钥丢失的替换。
 
+- 链上保存一个状态根，是合法投票人的集合
+- 可以通过投票更改合法投票人
+- 新的状态根会被丢到链上
+- 每一次投票，都要携带对应的签名和证明
+- 每个签名都要携带merkle proof证明地址存在在特定集合
+
+
+## 钱包的创建
+允许自定义钱包的创建。可以携带一组initCode，以创建智能合约钱包。创建后，EntryPoint是否会保存？initCode由"工厂地址" + "calldata"构成。SenderCreator合约会负责调用。(里面的费用如何结算？)
+
+
+## 扩展钱包业务逻辑
+ValidateUserOps
+
+## 给钱包充值gas费
+参考https://github.com/eth-infinitism/account-abstraction/blob/develop/contracts/samples/SimpleAccount.sol 的addDeposit和withdrawTo，资产本质都是充到EntryPoint类中的。
+
+## 使用钱包发起交易
+EntryPoint有两个入口：
+- handleOps: 说明我要先构造UserOp，然后由bundler来调用handleUserOps。
+- simulateHandleOp：
+
+
+## 其他
+如果不通过IEntryPoint，直接调用钱包某些接口会如何？
+nonce：防止重放
 
 # 参考资料
 
 
 [EIP-4337](https://eips.ethereum.org/EIPS/eip-4337)
 [EIP-4337 Implementation](https://github.com/eth-infinitism/account-abstraction)
-[EIP-4377 Intro](https://medium.com/infinitism/erc-4337-account-abstraction-without-ethereum-protocol-changes-d75c9d94dc4a)
+[EIP-4337 Intro](https://medium.com/infinitism/erc-4337-account-abstraction-without-ethereum-protocol-changes-d75c9d94dc4a)
 [Argent](https://github.com/argentlabs/argent-contracts)
 

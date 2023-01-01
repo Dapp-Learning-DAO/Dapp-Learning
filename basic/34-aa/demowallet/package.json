@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
+    "circomlib": "^2.0.5",
     "hardhat": "^2.12.2"
   },
   "devDependencies": {
