@@ -1,8 +1,7 @@
 pragma solidity ^0.8.13;
 
-import "./aa/IAccount.sol";
-import "./aa/UserOperation.sol";
-import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+import "@account-abstraction/contracts/interfaces/IAccount.sol";
+import "@account-abstraction/contracts/interfaces/UserOperation.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -19,9 +18,10 @@ contract DemoAccount is Ownable, IAccount{
     
     mapping(address=>bool) public signers;
 
-    constructor(address payable _entryPoint, uint8 _threshold) {
+    constructor(address payable _entryPoint, uint8 _threshold, address _owner) {
         entryPoint = _entryPoint;
         threshold = _threshold;
+        _transferOwnership(_owner);
     }
     
     function validateUserOp(UserOperation calldata userOp, bytes32 requestId, address aggregator, uint256 missingWalletFunds)
@@ -35,12 +35,13 @@ contract DemoAccount is Ownable, IAccount{
         if (signatures.length != 85*uint256(threshold)) {
             return SIG_VALIDATION_FAILED;
         }
+        bytes32 ethHash = requestId.toEthSignedMessageHash();
         for (uint256 i=0;i<threshold;i++) {
             (bytes memory signature, address signer) = _slash(signatures, i);
             if (!signers[signer]) {
                 return SIG_VALIDATION_FAILED;
             }
-            address recovered = requestId.recover(signature);
+            address recovered = ethHash.recover(signature);
             if (recovered != signer){
                 return SIG_VALIDATION_FAILED;
             }

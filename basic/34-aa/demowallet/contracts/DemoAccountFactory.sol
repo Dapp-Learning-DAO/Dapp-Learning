@@ -1,12 +1,18 @@
 pragma solidity ^0.8.12;
 
-import "@openzeppelin/contracts/utils/Create2.sol";
-import "./DemoWallet.sol";
+import "./DemoAccount.sol";
 
 contract DemoWalletFactory {
 
-    function createWallet(IEntryPoint entryPoint, bytes32 root, bytes32 salt) external returns(address sender){
-        return new DemoWallet{salt: salt}(entryPoint, owner);
+    address public sender;
+    
+    constructor(address payable _entryPoint, uint8 _threshold, address _owner, bytes32 _nonce) {
+        DemoAccount demoAccount = new DemoAccount{salt: _nonce}(_entryPoint, _threshold, _owner);
+        sender = address(demoAccount);
+    }
+    
+    function getAccount(address payable entryPoint, uint8 threshold, address owner) external returns(address){
+        return sender;
     }
 
 }

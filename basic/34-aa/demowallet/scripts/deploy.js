@@ -4,23 +4,37 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const hre = require("hardhat");
+const {ethers} = require("hardhat");
+const { wrapProvider } = require('@account-abstraction/sdk');
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const [signer] = await ethers.getSigners();
+  const entryPointAddress = "0x1306b01bC3e4AD202612D3843387e94737673F53";
+  const config = {
+    chainId: await ethers.provider.getNetwork().then(net => net.chainId),
+    entryPointAddress,
+    bundlerUrl: 'http://localhost:3000/rpc'
+  } 
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
-
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  const walletAPI = new SimpleAccountAPI({
+    provider, 
+    entryPointAddress,
+    owner,
+    factoryAddress
+})
+const op = await walletAPi.createSignedUserOp({
+  target: recipient.address,
+  data: recipient.interface.encodeFunctionData('something', ['hello'])
+})
+  const aaProvider = await wrapProvider(ethers.provider, config, signer);
+  const walletAddress = await aaProvider.getSigner().getAddress();
+  console.log(walletAddress);
+  // send some eth to the wallet Address: wallet should have some balance to pay for its own creation, and for calling methods.
+  
+  // const myContract = new Contract(abi, aaProvider)
+  
+  // // this method will get called from the wallet address, through account-abstraction EntryPoint
+  // await myContract.someMethod()
 }
 
 // We recommend this pattern to be able to use async/await everywhere

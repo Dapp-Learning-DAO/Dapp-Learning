@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@account-abstraction/contracts": "^0.4.0",
+    "@account-abstraction/sdk": "^0.4.0",
     "@openzeppelin/contracts": "^4.8.0",
     "circomlib": "^2.0.5",
     "hardhat": "^2.12.2"
