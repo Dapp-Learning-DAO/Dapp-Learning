@@ -16,16 +16,7 @@ async function main() {
     bundlerUrl: 'http://localhost:3000/rpc'
   } 
 
-  const walletAPI = new SimpleAccountAPI({
-    provider, 
-    entryPointAddress,
-    owner,
-    factoryAddress
-})
-const op = await walletAPi.createSignedUserOp({
-  target: recipient.address,
-  data: recipient.interface.encodeFunctionData('something', ['hello'])
-})
+  
   const aaProvider = await wrapProvider(ethers.provider, config, signer);
   const walletAddress = await aaProvider.getSigner().getAddress();
   console.log(walletAddress);
