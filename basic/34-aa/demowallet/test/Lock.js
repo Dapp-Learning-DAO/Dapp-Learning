@@ -4,123 +4,118 @@ const {
 } = require("@nomicfoundation/hardhat-network-helpers");
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
+const { ethers } = require("hardhat");
+const { ERC4337EthersProvider, ERC4337EthersSigner, HttpRpcClient } = require("@account-abstraction/sdk");
+const {BaseAccountAPI} = require("@account-abstraction/sdk/dist/src/BaseAccountAPI");
+const {EntryPoint__factory} =require("@account-abstraction/contracts");
+const abi = require("../artifacts/contracts/DemoAccount.sol/DemoAccount.json").abi;
 
-describe("Lock", function () {
+describe("ContractUnitTest", function () {
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
-  async function deployOneYearLockFixture() {
-    const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-    const ONE_GWEI = 1_000_000_000;
-
-    const lockedAmount = ONE_GWEI;
-    const unlockTime = (await time.latest()) + ONE_YEAR_IN_SECS;
-
+  async function deploy() {
     // Contracts are deployed using the first signer/account by default
-    const [owner, otherAccount] = await ethers.getSigners();
+    const [owner, owner2, entryPointSigner] = await ethers.getSigners();
 
-    const Lock = await ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+    const DemoAccount_factory = await ethers.getContractFactory("DemoAccount");
+    const demoAccount = await DemoAccount_factory.deploy(entryPointSigner.getAddress(), 2, owner.getAddress());
+    await demoAccount.deployed();
 
-    return { lock, unlockTime, lockedAmount, owner, otherAccount };
+    await (await demoAccount.connect(owner).setSigner(owner.address, true)).wait();
+    await (await demoAccount.connect(owner).setSigner(owner2.address, true)).wait();
+    await (await demoAccount.connect(owner).changeThreshold(2)).wait();
+    return { demoAccount, entryPointSigner, owner, owner2};
   }
 
-  describe("Deployment", function () {
-    it("Should set the right unlockTime", async function () {
-      const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
-
-      expect(await lock.unlockTime()).to.equal(unlockTime);
-    });
-
-    it("Should set the right owner", async function () {
-      const { lock, owner } = await loadFixture(deployOneYearLockFixture);
-
-      expect(await lock.owner()).to.equal(owner.address);
-    });
-
-    it("Should receive and store the funds to lock", async function () {
-      const { lock, lockedAmount } = await loadFixture(
-        deployOneYearLockFixture
-      );
-
-      expect(await ethers.provider.getBalance(lock.address)).to.equal(
-        lockedAmount
-      );
-    });
-
-    it("Should fail if the unlockTime is not in the future", async function () {
-      // We don't use the fixture here because we want a different deployment
-      const latestTime = await time.latest();
-      const Lock = await ethers.getContractFactory("Lock");
-      await expect(Lock.deploy(latestTime, { value: 1 })).to.be.revertedWith(
-        "Unlock time should be in the future"
-      );
-    });
-  });
-
-  describe("Withdrawals", function () {
-    describe("Validations", function () {
-      it("Should revert with the right error if called too soon", async function () {
-        const { lock } = await loadFixture(deployOneYearLockFixture);
-
-        await expect(lock.withdraw()).to.be.revertedWith(
-          "You can't withdraw yet"
-        );
-      });
-
-      it("Should revert with the right error if called from another account", async function () {
-        const { lock, unlockTime, otherAccount } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        // We can increase the time in Hardhat Network
-        await time.increaseTo(unlockTime);
-
-        // We use lock.connect() to send a transaction from another account
-        await expect(lock.connect(otherAccount).withdraw()).to.be.revertedWith(
-          "You aren't the owner"
-        );
-      });
-
-      it("Shouldn't fail if the unlockTime has arrived and the owner calls it", async function () {
-        const { lock, unlockTime } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        // Transactions are sent using the first signer by default
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw()).not.to.be.reverted;
-      });
-    });
-
-    describe("Events", function () {
-      it("Should emit an event on withdrawals", async function () {
-        const { lock, unlockTime, lockedAmount } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw())
-          .to.emit(lock, "Withdrawal")
-          .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
-      });
-    });
-
-    describe("Transfers", function () {
-      it("Should transfer the funds to the owner", async function () {
-        const { lock, unlockTime, lockedAmount, owner } = await loadFixture(
-          deployOneYearLockFixture
-        );
-
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw()).to.changeEtherBalances(
-          [owner, lock],
-          [lockedAmount, -lockedAmount]
-        );
-      });
-    });
+  it("should validate user op successfully ", async function (){
+    const { demoAccount, entryPointSigner, owner, owner2} = await deploy();
+    var aaProvider = await getAAProvider(entryPointSigner, demoAccount, owner, owner2);
+    //Convert transaction to userop
+    const tx = await demoAccount.populateTransaction.changeThreshold(1);
+    var userOperation = await aaProvider.smartAccountAPI.createSignedUserOp({
+      target: tx.to ?? '',
+      data: tx.data?.toString() ?? '',
+      value: tx.value,
+      gasLimit: tx.gasLimit
+    })
+    userOperation = await ethers.utils.resolveProperties(userOperation);
+    //Validate userop
+    const requestId = aaProvider.smartAccountAPI.getUserOpHash(userOperation);
+    var receipt = await (await demoAccount.connect(entryPointSigner).validateUserOp(userOperation, requestId, ethers.constants.AddressZero, 0)).wait();
+    // console.log(receipt);
   });
 });
+
+class MultiSignerAccountAPI extends BaseAccountAPI {
+  
+  constructor(params) {
+      super(params);
+      this.signers = params.signers;
+  }
+
+  async getAccountInitCode() {
+      //对应initCode字段
+      return "0x";
+  }
+  async getNonce() {
+      //对应nonce字段
+      const senderAddr = await this.getAccountAddress();
+      const accountContract = new ethers.Contract(senderAddr, abi);
+      const originalProvider = this.provider;
+      const nonce = await accountContract.connect(originalProvider).nonce();
+      return nonce;
+  }
+  async encodeExecute(target, value, data){
+      const senderAddr = await this.getAccountAddress();
+      const accountContract = new ethers.Contract(senderAddr, abi);
+      const ret = accountContract.interface.encodeFunctionData("viewCall", ["hello"]);
+      return data;
+  }
+  async signUserOpHash (userOpHash) {
+      //对应signature字段。你可以使用BLS等各式各样的签名手段，只要链上可以验证即可
+      var signatures = [];
+      const userOpHashBytes = ethers.utils.arrayify(userOpHash);
+      for (var signer of this.signers){
+        const addrStr = signer.address.substring(2);//remove 0x
+        const sigStr = (await signer.signMessage(userOpHashBytes)).substring(2);//remove 0x
+        signatures.push(addrStr);//remove 0x
+        signatures.push(sigStr);//remove 0x
+      }
+      return "0x"+ signatures.join('');
+  }
+}
+
+async function getAAProvider(entryPointSigner, accountContract, originalSigner, originalSigner2) {
+  const entryPointAddress = await entryPointSigner.getAddress();
+  const originalProvider = ethers.provider;
+  const clientConfig = {
+    entryPointAddress: entryPointAddress,
+    bundlerUrl: 'http://localhost:3000/rpc',
+    walletAddres: accountContract.address,
+  };
+
+  const chainId = await ethers.provider.getNetwork().then(net => net.chainId);
+  const httpRpcClient = new HttpRpcClient(clientConfig.bundlerUrl, clientConfig.entryPointAddress, chainId);
+  const entryPoint = EntryPoint__factory.connect(clientConfig.entryPointAddress, originalSigner);
+  
+  const smartAccountAPI = new MultiSignerAccountAPI(
+      {
+          provider: originalProvider,
+          entryPointAddress: clientConfig.entryPointAddress,
+          accountAddress: clientConfig.walletAddres,
+          signers: [originalSigner, originalSigner2]
+      }
+  );
+
+  const aaProvider = await new ERC4337EthersProvider(
+      chainId,
+      clientConfig,
+      originalSigner,
+      originalProvider,
+      httpRpcClient,
+      entryPoint,
+      smartAccountAPI
+  );
+  return aaProvider;
+}

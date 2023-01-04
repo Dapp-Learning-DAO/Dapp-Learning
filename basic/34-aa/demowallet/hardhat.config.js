@@ -1,7 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 
-require("./tasks/1_deploy_account");
-require("./tasks/2_fund_account");
+require("./tasks");
+
 
 // task("deploy", "")
 //   .addPositionalParam("param1")

@@ -1,6 +1,6 @@
 const {task} = require("hardhat/config");
-
-const ABI = "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"depositTo\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]";
+const { EntryPoint__factory} = require('@account-abstraction/contracts');
+const ABI = EntryPoint__factory.abi;
 
 task("fundaa", "")
   .addPositionalParam("account")
@@ -13,9 +13,10 @@ task("fundaa", "")
     const entryPointAddress = "0x1306b01bC3e4AD202612D3843387e94737673F53";
 
     const entryPointContract = new ethers.Contract(entryPointAddress, ABI);
+    
     const depositTx = await entryPointContract.connect(signer).depositTo(account, {value: ether});
-    const receipt = await depositTx.wait();
+    await depositTx.wait();
 
     const balance = await entryPointContract.connect(signer).balanceOf(account);
-    console.log(balance);
+    console.log(`balance of ${account} is: ${ethers.utils.formatEther(balance)}`);
   });

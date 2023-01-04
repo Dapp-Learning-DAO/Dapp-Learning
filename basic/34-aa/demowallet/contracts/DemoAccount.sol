@@ -11,7 +11,7 @@ contract DemoAccount is Ownable, IAccount{
     using ECDSA for bytes32;
     enum CallType {CALL, DELEGATECALL}
 
-    address payable private entryPoint;
+    address payable public entryPoint;
     uint8 public threshold;
     uint256 public nonce;
     uint256 private constant SIG_VALIDATION_FAILED = 1;
@@ -24,6 +24,11 @@ contract DemoAccount is Ownable, IAccount{
         _transferOwnership(_owner);
     }
     
+    modifier authorized() {
+        require(msg.sender == owner() || msg.sender == entryPoint || msg.sender == address(this), "Invalid caller");
+        _;
+    }
+
     function validateUserOp(UserOperation calldata userOp, bytes32 requestId, address aggregator, uint256 missingWalletFunds)
     external returns (uint256 deadline) {
         require(msg.sender == entryPoint, "Only entrypoint can call");
@@ -32,7 +37,7 @@ contract DemoAccount is Ownable, IAccount{
         require(requestId == expectedUserOpHash, "Invalid request id");
 
         bytes calldata signatures = userOp.signature;    
-        if (signatures.length != 85*uint256(threshold)) {
+        if (signatures.length < 85*uint256(threshold)) {
             return SIG_VALIDATION_FAILED;
         }
         bytes32 ethHash = requestId.toEthSignedMessageHash();
@@ -53,7 +58,7 @@ contract DemoAccount is Ownable, IAccount{
         }
         return 0;
     }
-    
+
     function execute(address to, CallType callType, bytes calldata data, uint256 value) external {
         require(msg.sender == entryPoint, "Only entrypoint can call");
         if (callType == CallType.CALL) {
@@ -78,6 +83,19 @@ contract DemoAccount is Ownable, IAccount{
             mstore(signature, 65)
             calldatacopy(add(signature, 32), add(ofs, 20), 65)
         }
+    }
+
+    function changeThreshold(uint8 newThreshold) public authorized {
+        threshold = newThreshold;
+    }
+
+    function setSigner(address signer, bool enabled) public authorized{
+        signers[signer] = enabled;
+    }
+
+    error ViewCall(string reason);
+    function viewCall(string calldata reason) external {
+        revert ViewCall(reason);
     }
 
     receive() external payable {
