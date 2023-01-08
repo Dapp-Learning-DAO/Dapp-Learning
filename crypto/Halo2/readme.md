@@ -15,7 +15,7 @@ halo2 tutorial& gitbook: https://erroldrummond.gitbook.io/halo2-tutorial/
 
 Halo2: ultraPlonk + 嵌套均摊技术
 three components: 
-arithmetisation , polynomial commitment scheme(inner product argument), accumulation scheme(recursion). 
+arithmetisation , polynomial commitment scheme(inner product argument), accumulation scheme(recursion)
 
 plonk -> TurboPlonk(with custom constraints) -> UltraPlonk(lookup table)
 **vanilla plonk**: 
