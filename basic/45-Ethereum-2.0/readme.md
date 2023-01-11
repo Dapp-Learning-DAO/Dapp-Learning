@@ -310,5 +310,8 @@ https://hackmd.io/yqfI6OPlRZizv9yPaD-8IQ
 
 EIP-4488降低calldata费用。
 
+## lido
+https://cnlido.notion.site/cnlido/Lido-d62ed54902d74f48b6ac139112d8bf89 
+
 ## 参考链接：
 - Data Availability Sampling: From Basics to Open Problems: https://www.paradigm.xyz/2022/08/das
