@@ -9,7 +9,6 @@ contract DemoAccount is Ownable, IAccount{
 
     using UserOperationLib for UserOperation;
     using ECDSA for bytes32;
-    enum CallType {CALL, DELEGATECALL}
 
     address payable public entryPoint;
     uint8 public threshold;
@@ -59,17 +58,10 @@ contract DemoAccount is Ownable, IAccount{
         return 0;
     }
 
-    function execute(address to, CallType callType, bytes calldata data, uint256 value) external {
+    function execute(address to, bytes calldata data, uint256 value) external {
         require(msg.sender == entryPoint, "Only entrypoint can call");
-        if (callType == CallType.CALL) {
-            (bool success, ) = to.call{value:value}(data);
-            require(success, "Call failed");
-        } else if(callType == CallType.DELEGATECALL){
-            (bool success, ) = to.delegatecall(data);
-            require(success, "Delegate call failed");
-        } else{
-            revert("Invalid target address");
-        }
+        (bool success, ) = to.call{value:value}(data);
+        require(success, "Call failed");
     }
 
     //signer(20bytes) + signature(65bytes)
@@ -91,11 +83,6 @@ contract DemoAccount is Ownable, IAccount{
 
     function setSigner(address signer, bool enabled) public authorized{
         signers[signer] = enabled;
-    }
-
-    error ViewCall(string reason);
-    function viewCall(string calldata reason) external {
-        revert ViewCall(reason);
     }
 
     receive() external payable {

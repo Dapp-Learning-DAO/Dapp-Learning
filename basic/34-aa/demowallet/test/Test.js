@@ -119,6 +119,13 @@ describe("Test contract from entrypoint", function () {
   });
 })
 
+describe("cnm", function() {
+  it ("should cnm", async function(){
+    const Factory = await ethers.getContractFactory("DemoAmount");
+    const instance = await Factory
+  })
+})
+
 class MultiSignerAccountAPI extends BaseAccountAPI {
   
   constructor(params) {
@@ -139,9 +146,7 @@ class MultiSignerAccountAPI extends BaseAccountAPI {
       return nonce;
   }
   async encodeExecute(target, value, data){
-      const senderAddr = await this.getAccountAddress();
-      const accountContract = new ethers.Contract(senderAddr, abi);
-      const ret = accountContract.interface.encodeFunctionData("viewCall", ["hello"]);
+      // const senderAddr = await this.getAccountAddress();
       return data;
   }
   async signUserOpHash (userOpHash) {

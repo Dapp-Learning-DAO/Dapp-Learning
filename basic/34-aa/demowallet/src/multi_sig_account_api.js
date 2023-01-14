@@ -1,4 +1,4 @@
-const { ERC4337EthersProvider, ERC4337EthersSigner, HttpRpcClient } = require("@account-abstraction/sdk");
+const { ERC4337EthersProvider, ERC4337EthersSigner, HttpRpcClient, DefaultGasOverheads } = require("@account-abstraction/sdk");
 const {BaseAccountAPI} = require("@account-abstraction/sdk/dist/src/BaseAccountAPI");
 const {EntryPoint__factory} =require("@account-abstraction/contracts");
 const { ethers } = require("ethers");
@@ -45,6 +45,13 @@ class MultiSigAccountAPI extends BaseAccountAPI {
         }
         return "0x"+ signatures.join('');
     }
+
+    //For debug
+    async createSignedUserOp (info){
+        const ret = await super.createSignedUserOp(info);
+        console.log(ret);
+        return ret;
+    }
 }
   
 
@@ -65,7 +72,11 @@ async function getAAProvider(entryPointAddress, accountContractAddress, bundlerU
             provider: originalProvider,
             entryPointAddress: clientConfig.entryPointAddress,
             accountAddress: clientConfig.walletAddres,
-            signers: [originalSigner, originalSigner2]
+            signers: [originalSigner, originalSigner2],
+            overheads: {
+                ...DefaultGasOverheads,
+                fixed: 30000
+              }
         }
     );
   
