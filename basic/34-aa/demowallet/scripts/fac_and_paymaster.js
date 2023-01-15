@@ -39,14 +39,15 @@ async function main(){
 
     // //3. simuate validation and execution
     console.log('start simulate');
-
-    // await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
+    //
+    //await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
+    // await simulateSendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
     //4. execute "changeThreshold" function in our aa account
     console.log('start send changeThreshold');
     await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
     //5. execute "setVal" function on target contract throught "execute" function in our aa account
     console.log('start send SetValToTargetContract');
-    await sendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
+    await sendSetValToTargetContract(targetContract, 666, 1000, aaProvider);
     
 }
 
@@ -83,10 +84,15 @@ async function createAndFundPaymaster(entryPointContract, signer, senderAddress)
     const paymasterContract = await Factory.deploy(senderAddress, entryPointContract.address);
     await paymasterContract.deployed();
     console.log(`paymaster deployed to ${paymasterContract.address}`);
-    //2. 调用Paymaster，冲入gas启动资金，后续EF会使用这笔资金来付账
-    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("5.0")})).wait();
+    //2. 调用Paymaster，冲入gas启动资金，后续EF会使用这笔资金来付gas
+    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("1.0")})).wait();
     const paymasterBalance = await entryPointContract.connect(signer).balanceOf(paymasterContract.address);
-    console.log(`Fund paymaster complete, now paymaster have ${ethers.utils.formatEther(paymasterBalance)} ether`);
+    console.log(`Fund paymaster for gas complete, now paymaster have ${ethers.utils.formatEther(paymasterBalance)} ether`);
+
+    //.3 为paymaster冲入一些其业务方面的启动资金，便于它在valiate阶段给sender充值
+    const tx = {to: paymasterContract.address, value: ethers.utils.parseEther("1.0")};
+    await (await signer.sendTransaction(tx)).wait();
+    console.log(`Fund paymaster for start-up complete, now paymaster have ${ethers.utils.formatEther(paymasterBalance)} ether`);
     return paymasterContract.address;
 }
 
@@ -118,6 +124,7 @@ async function simulateChangeThreshold(demoAccountContract, threshold, entryPoin
     //     console.log(e);
     // }
 }
+
 
 async function sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider){
     const aaSigner = aaProvider.getSigner();
