@@ -1,9 +1,11 @@
 const { EntryPoint__factory } = require("@account-abstraction/contracts");
 const { ethers } = require("hardhat");
 const {DeterministicDeployer, PaymasterAPI} = require('@account-abstraction/sdk');
-const {MultiSigAccountAPI, getAAProvider} = require("../src/multi_sig_account_api");
+const {MsigPaymasterAccountAPI, getAAProvider} = require("../src/api/msig_paymaster_api");
+const {PaymasterAPINaive} = require("../src/paymaster/paymaster_api_naive");
 const {computeAddress} = require("../src/utils/create2");
-
+const demoAccountABI = require("../artifacts/contracts/DemoAccount.sol/DemoAccount.json").abi;
+const entryPointAbi = require("../artifacts/contracts/EntryPointDbg.sol/EntryPointDbg.json").abi;
 //Please run this with --network localhost
 async function main(){    
 
@@ -14,16 +16,31 @@ async function main(){
     const bundlerUrl= "http://localhost:3000/rpc"
     const targetContract = await getTargetContract();
     //1. prepare factory and paymaster
-    const factoryAddress = await prepareAccountFactory(signer1);
-    const senderAddress = await computeSenderAddress(factoryAddress, entryPointContract.address, threshold, signer1.address);
-    await preparePaymaster(entryPointContract, signer1, senderAddress);
-
+    const factoryContract = await createAccountFactory(signer1);
+    const [senderAddress, senderInitCode, senderSalt] = await computeSenderAddress(factoryContract.address, entryPointContract.address, threshold, [signer1, signer2]);
+    const paymasterAddress = await createAndFundPaymaster(entryPointContract, signer1, senderAddress);
+    const demoAccountContract = new ethers.Contract(senderAddress, demoAccountABI);
+    //2. Prepare aa provider to interact with bundler.
+    const facInfo = {
+        factoryContract: factoryContract,
+        senderInitCode: senderInitCode,
+        senderSalt: senderSalt
+    };
     
-    // //2. Prepare aa provider to interact with bundler.
-    // const aaProvider = await getAAProvider(entryPointContract.address, demoAccountContract.address, bundlerUrl, ethers.provider, signer1, signer2);
+    const aaProvider = await getAAProvider(
+        entryPointContract.address, 
+        senderAddress, 
+        bundlerUrl, 
+        ethers.provider, 
+        [signer1, signer2],
+        facInfo,
+        new PaymasterAPINaive(paymasterAddress)
+        );
+
     // //3. simuate validation and execution
-    // console.log('start simulate');
-    // await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
+    console.log('start simulate');
+
+    await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
     // //4. execute "changeThreshold" function in our aa account
     // console.log('start send changeThreshold');
     // await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
@@ -33,36 +50,44 @@ async function main(){
     
 }
 
-async function computeSenderAddress(factoryAddress, entryPointAddress, threshold, owner) {
+async function computeSenderAddress(factoryAddress, entryPointAddress, threshold, signers) {
+    const signersAddr = [];
+    for(signer of signers){
+        signersAddr.push(signer.address);
+    }
+    
     const SenderFactory = await ethers.getContractFactory("DemoAccount");
     const creationCode = SenderFactory.bytecode;
     
-    const argsEncoded = ethers.utils.defaultAbiCoder.encode(["address", "uint8", "address"], [entryPointAddress, threshold, owner]);
+    const argsEncoded = ethers.utils.defaultAbiCoder.encode(["address", "uint8", "address", "address[]"], [entryPointAddress, threshold, signersAddr[0], signersAddr]);
     const initCode = ethers.utils.solidityPack(["bytes", "bytes"], [creationCode, argsEncoded]);
 
-    const salt = 0x1234;
-    return computeAddress(factoryAddress, initCode, salt);
+    const salt = ethers.utils.hexZeroPad(0x1234, 32);
+    const sender =  computeAddress(factoryAddress, initCode, salt);
+    console.log(`predicted sender addrss is ${sender}`);
+    return [sender, initCode, salt];
 }
 
-async function prepareAccountFactory(signer) {
+async function createAccountFactory(signer) {
     const Factory = await ethers.getContractFactory("ERC4337Factory", signer);
     const factoryContract = await Factory.deploy();
     await factoryContract.deployed();
 
     console.log(`factory deployed to ${factoryContract.address}`);
-    return factoryContract.address;
+    return factoryContract;
 }
 
-async function preparePaymaster(entryPointContract, signer, senderAddress) {
+async function createAndFundPaymaster(entryPointContract, signer, senderAddress) {
     //1. 将sender作为构造参数，部署Paymaster
     const Factory = await ethers.getContractFactory("GasPrefundPaymaster", signer);
     const paymasterContract = await Factory.deploy(senderAddress, entryPointContract.address);
     await paymasterContract.deployed();
     console.log(`paymaster deployed to ${paymasterContract.address}`);
     //2. 调用Paymaster，冲入gas启动资金，后续EF会使用这笔资金来付账
-    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("1.0")})).wait();
+    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("50.0")})).wait();
     const paymasterBalance = await entryPointContract.connect(signer).balanceOf(paymasterContract.address);
     console.log(`Fund paymaster complete, now paymaster have ${ethers.utils.formatEther(paymasterBalance)} ether`);
+    return paymasterContract.address;
 }
 
 async function simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler){
@@ -74,7 +99,7 @@ async function simulateChangeThreshold(demoAccountContract, threshold, entryPoin
       value: tx.value,
       gasLimit: tx.gasLimit
     });
-    console.log(userOperation);
+    // console.log(userOperation);
     try{
         await (await entryPointContract.connect(bundler).simulateValidation(userOperation)).wait();
     }
@@ -107,16 +132,17 @@ async function sendSetValToTargetContract(targetContract, val, value, aaProvider
 }
 
 async function getEntryPoint(entryPointAddress) {   
-    //目前这个版本有bug，但是确实是这么调用的，先注释掉
+    //目前这个版本有bug，但是确实是这么调用的，应该是ABI和实际代码不匹配，导致unrecgonized custom error先注释掉
     // const dep = new DeterministicDeployer(ethers.provider);
     // const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);
     // console.log(`ep deployed to ${address}`)
     // return new ethers.Contract(address, EntryPoint__factory.abi);
 
-    const dep = new DeterministicDeployer(ethers.provider);
-    const dbg = await ethers.getContractFactory("EntryPointDbg");
-    const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);//TODO: current
-    return new ethers.Contract(address, EntryPoint__factory.abi);
+
+    const DBG = await ethers.getContractFactory("EntryPointDbg");
+    const ep = await DBG.deploy();
+    await ep.deployed();
+    return ep;
 }
 
 async function getTargetContract(){

@@ -17,10 +17,13 @@ contract DemoAccount is Ownable, IAccount{
     
     mapping(address=>bool) public signers;
 
-    constructor(address payable _entryPoint, uint8 _threshold, address _owner) {
+    constructor(address payable _entryPoint, uint8 _threshold, address _owner, address[] memory _signers) {
+        _transferOwnership(_owner);
         entryPoint = _entryPoint;
         threshold = _threshold;
-        _transferOwnership(_owner);
+        for (uint256 i=0; i<_signers.length;i++){
+            signers[_signers[i]] = true;
+        }
     }
     
     modifier authorized() {
@@ -53,7 +56,8 @@ contract DemoAccount is Ownable, IAccount{
 
         if (missingWalletFunds != 0){
             (bool success,) = entryPoint.call{value: missingWalletFunds}("");
-            require(success, "Depositing failed");
+            //dont' throw ,
+            (success);
         }
         return 0;
     }

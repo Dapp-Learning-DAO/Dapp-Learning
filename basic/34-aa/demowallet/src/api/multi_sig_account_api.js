@@ -2,7 +2,7 @@ const { ERC4337EthersProvider, ERC4337EthersSigner, HttpRpcClient, DefaultGasOve
 const {BaseAccountAPI} = require("@account-abstraction/sdk/dist/src/BaseAccountAPI");
 const {EntryPoint__factory} =require("@account-abstraction/contracts");
 const { ethers } = require("ethers");
-const abi = require("../artifacts/contracts/DemoAccount.sol/DemoAccount.json").abi;
+const abi = require("../../artifacts/contracts/DemoAccount.sol/DemoAccount.json").abi;
 class MultiSigAccountAPI extends BaseAccountAPI {
   
     constructor(params) {
@@ -14,6 +14,7 @@ class MultiSigAccountAPI extends BaseAccountAPI {
         //对应initCode字段
         return "0x";
     }
+    
     async getNonce() {
         //对应nonce字段
         const senderAddr = await this.getAccountAddress();
@@ -49,7 +50,7 @@ class MultiSigAccountAPI extends BaseAccountAPI {
     //For debug
     async createSignedUserOp (info){
         const ret = await super.createSignedUserOp(info);
-        console.log(ret);
+        // console.log(ret);
         return ret;
     }
 }
