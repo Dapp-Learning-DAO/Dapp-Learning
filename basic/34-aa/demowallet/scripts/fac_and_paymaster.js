@@ -4,11 +4,11 @@ const {DeterministicDeployer, PaymasterAPI} = require('@account-abstraction/sdk'
 const {MsigPaymasterAccountAPI, getAAProvider} = require("../src/api/msig_paymaster_api");
 const {PaymasterAPINaive} = require("../src/paymaster/paymaster_api_naive");
 const {computeAddress} = require("../src/utils/create2");
+const {packUserOp} = require("@account-abstraction/utils");
 const demoAccountABI = require("../artifacts/contracts/DemoAccount.sol/DemoAccount.json").abi;
 const entryPointAbi = require("../artifacts/contracts/EntryPointDbg.sol/EntryPointDbg.json").abi;
 //Please run this with --network localhost
 async function main(){    
-
     const [signer1, signer2, bundler] = await ethers.getSigners();
     // entryPointContract: new ethers.Contract("0x1306b01bC3e4AD202612D3843387e94737673F53", EntryPoint__factory.abi),
     const entryPointContract = await getEntryPoint("0x1306b01bC3e4AD202612D3843387e94737673F53");
@@ -40,13 +40,13 @@ async function main(){
     // //3. simuate validation and execution
     console.log('start simulate');
 
-    await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
-    // //4. execute "changeThreshold" function in our aa account
-    // console.log('start send changeThreshold');
-    // await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
-    // //5. execute "setVal" function on target contract throught "execute" function in our aa account
-    // console.log('start send SetValToTargetContract');
-    // await sendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
+    // await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
+    //4. execute "changeThreshold" function in our aa account
+    console.log('start send changeThreshold');
+    await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
+    //5. execute "setVal" function on target contract throught "execute" function in our aa account
+    console.log('start send SetValToTargetContract');
+    await sendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
     
 }
 
@@ -84,7 +84,7 @@ async function createAndFundPaymaster(entryPointContract, signer, senderAddress)
     await paymasterContract.deployed();
     console.log(`paymaster deployed to ${paymasterContract.address}`);
     //2. 调用Paymaster，冲入gas启动资金，后续EF会使用这笔资金来付账
-    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("50.0")})).wait();
+    await (await paymasterContract.connect(signer).addDepositForSender({value: ethers.utils.parseEther("5.0")})).wait();
     const paymasterBalance = await entryPointContract.connect(signer).balanceOf(paymasterContract.address);
     console.log(`Fund paymaster complete, now paymaster have ${ethers.utils.formatEther(paymasterBalance)} ether`);
     return paymasterContract.address;
@@ -99,22 +99,24 @@ async function simulateChangeThreshold(demoAccountContract, threshold, entryPoin
       value: tx.value,
       gasLimit: tx.gasLimit
     });
-    // console.log(userOperation);
-    try{
-        await (await entryPointContract.connect(bundler).simulateValidation(userOperation)).wait();
-    }
-    catch(e){
-        //This should have "ValidationResult as error"
-        console.log(e);
-    }
+    
 
-    try{
-        await (await entryPointContract.connect(bundler).simulateHandleOp(userOperation)).wait();
-    }
-    catch(e){
-        //This should have "ExecutionResult as error"
-        console.log(e);
-    }
+    // try{
+    //     await (await entryPointContract.connect(bundler).simulateValidation(userOperation)).wait();
+    // }
+    // catch(e){
+    //     //This should have "ValidationResult as error"
+    //     console.log(e);
+    // }
+
+    // try{
+    //     await (await entryPointContract.connect(bundler).simulateHandleOp(userOperation)).wait();
+    //     console.log('complete')
+    // }
+    // catch(e){
+    //     //This should have "ExecutionResult as error"
+    //     console.log(e);
+    // }
 }
 
 async function sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider){
@@ -133,16 +135,16 @@ async function sendSetValToTargetContract(targetContract, val, value, aaProvider
 
 async function getEntryPoint(entryPointAddress) {   
     //目前这个版本有bug，但是确实是这么调用的，应该是ABI和实际代码不匹配，导致unrecgonized custom error先注释掉
-    // const dep = new DeterministicDeployer(ethers.provider);
-    // const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);
-    // console.log(`ep deployed to ${address}`)
-    // return new ethers.Contract(address, EntryPoint__factory.abi);
+    const dep = new DeterministicDeployer(ethers.provider);
+    const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);
+    console.log(`ep deployed to ${address}`)
+    return new ethers.Contract(address, EntryPoint__factory.abi);
 
-
-    const DBG = await ethers.getContractFactory("EntryPointDbg");
-    const ep = await DBG.deploy();
-    await ep.deployed();
-    return ep;
+    //可以本地调试，解决各种问题
+    // const DBG = await ethers.getContractFactory("EntryPointDbg");
+    // const ep = await DBG.deploy();
+    // await ep.deployed();
+    // return ep;
 }
 
 async function getTargetContract(){
@@ -156,6 +158,7 @@ try{
     main()
 }
 catch(e){
-    console.log(e)
+
+    // console.log(e)
 }
 

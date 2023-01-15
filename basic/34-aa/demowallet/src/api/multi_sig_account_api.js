@@ -21,11 +21,12 @@ class MultiSigAccountAPI extends BaseAccountAPI {
         const accountContract = new ethers.Contract(senderAddr, abi);
         const originalProvider = this.provider;
         const nonce = await accountContract.connect(originalProvider).nonce();
+        console.log('current nonce '+nonce);
         return nonce;
     }
     async encodeExecute(target, value, data){
         const senderAddr = await this.getAccountAddress();
-        if (senderAddr != target) {
+        if (senderAddr.toLowerCase() != target.toLowerCase() ) {
             //In this case this gonna call some other contract so we go through "execute"
             const senderContract = new ethers.Contract(ethers.constants.AddressZero, abi);
             return senderContract.interface.encodeFunctionData("execute", [target, data, value]);
@@ -53,6 +54,8 @@ class MultiSigAccountAPI extends BaseAccountAPI {
         // console.log(ret);
         return ret;
     }
+
+
 }
   
 

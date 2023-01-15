@@ -20,13 +20,13 @@ async function main(){
     const aaProvider = await getAAProvider(entryPointContract.address, demoAccountContract.address, bundlerUrl, ethers.provider, signer1, signer2);
     //4. simuate validation and execution
     console.log('start simulate');
-    await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
-    // //5. execute "changeThreshold" function in our aa account
-    // console.log('start send changeThreshold');
-    // await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
-    // //6. execute "setVal" function on target contract throught "execute" function in our aa account
-    // console.log('start send SetValToTargetContract');
-    // await sendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
+    // await simulateChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider, bundler);
+    //5. execute "changeThreshold" function in our aa account
+    console.log('start send changeThreshold');
+    await sendChangeThreshold(demoAccountContract, threshold, entryPointContract, aaProvider);
+    //6. execute "setVal" function on target contract throught "execute" function in our aa account
+    console.log('start send SetValToTargetContract');
+    await sendSetValToTargetContract(targetContract, 666, 2000, aaProvider);
     
 }
 
@@ -104,16 +104,16 @@ async function sendSetValToTargetContract(targetContract, val, value, aaProvider
 
 async function getEntryPoint(entryPointAddress) {   
     //目前这个版本有bug，但是确实是这么调用的，应该是ABI和实际代码不匹配，导致unrecgonized custom error先注释掉
-    // const dep = new DeterministicDeployer(ethers.provider);
-    // const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);
-    // console.log(`ep deployed to ${address}`)
-    // return new ethers.Contract(address, EntryPoint__factory.abi);
+    const dep = new DeterministicDeployer(ethers.provider);
+    const address = await dep.deterministicDeploy(EntryPoint__factory.bytecode);
+    console.log(`ep deployed to ${address}`)
+    return new ethers.Contract(address, EntryPoint__factory.abi);
 
 
-    const DBG = await ethers.getContractFactory("EntryPointDbg");
-    const ep = await DBG.deploy();
-    await ep.deployed();
-    return ep;
+    // const DBG = await ethers.getContractFactory("EntryPointDbg");
+    // const ep = await DBG.deploy();
+    // await ep.deployed();
+    // return ep;
 }
 
 async function getTargetContract(){

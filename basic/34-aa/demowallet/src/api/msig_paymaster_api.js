@@ -1,7 +1,7 @@
 const { ERC4337EthersProvider, ERC4337EthersSigner, HttpRpcClient, DefaultGasOverheads } = require("@account-abstraction/sdk");
 const {MultiSigAccountAPI} = require("./multi_sig_account_api");
 const {EntryPoint__factory} =require("@account-abstraction/contracts");
-const { ethers } = require("ethers");
+const { ethers , BigNumber} = require("ethers");
 
 class MsigPaymasterAccountAPI extends MultiSigAccountAPI {
   
@@ -20,16 +20,69 @@ class MsigPaymasterAccountAPI extends MultiSigAccountAPI {
 
     //Because address is not deployed yet, we cannot access the nonce in the contract directly
     async getNonce() {
-        if (await this.checkAccountPhantom()){
-            return 0;
+      if (await this.checkAccountPhantom()){
+          return 0;
+      }
+      return super.getNonce();
+  }
+
+    //I rewrite it because there are three potential defects on calculation of preVerificationGas in bundler of eth-infinitism.
+    //Here is the pull request:https://github.com/eth-infinitism/bundler/pull/43
+    async createUnsignedUserOp (info){
+        const {
+          callData,
+          callGasLimit
+        } = await this.encodeUserOpCallDataAndGasLimit(info)
+        const initCode = await this.getInitCode()
+    
+        const initGas = await this.estimateCreationGas(initCode)
+        const verificationGasLimit = BigNumber.from(await this.getVerificationGasLimit())
+          .add(initGas)
+    
+        let {
+          maxFeePerGas,
+          maxPriorityFeePerGas
+        } = info;
+
+        if (!maxFeePerGas || !maxPriorityFeePerGas) {
+          const feeData = await this.provider.getFeeData()
+          if (!maxFeePerGas) {
+            maxFeePerGas = feeData.maxFeePerGas ?? undefined
+          }
+          if (!maxPriorityFeePerGas) {
+            maxPriorityFeePerGas = feeData.maxPriorityFeePerGas ?? undefined
+          }
         }
-        //对应nonce字段
-        const senderAddr = await this.getAccountAddress();
-        const accountContract = new ethers.Contract(senderAddr, abi);
-        const originalProvider = this.provider;
-        const nonce = await accountContract.connect(originalProvider).nonce();
-        return nonce;
-    }
+    
+        var partialUserOp = {
+          sender: this.getAccountAddress(),
+          nonce: this.getNonce(),
+          initCode,
+          callData,
+          callGasLimit,
+          verificationGasLimit,
+          maxFeePerGas,
+          maxPriorityFeePerGas,
+          paymasterAndData: "0x"
+        }
+
+        let paymasterAndData;
+
+        if (this.paymasterAPI) {
+          // fill (partial) preVerificationGas (all except the cost of the generated paymasterAndData)
+          const userOpForPm = {
+            ...partialUserOp,
+            preVerificationGas: await this.getPreVerificationGas(partialUserOp)
+          }
+          paymasterAndData = await this.paymasterAPI.getPaymasterAndData(userOpForPm)
+        }
+        partialUserOp.paymasterAndData = paymasterAndData ?? '0x'
+        return {
+          ...partialUserOp,
+          preVerificationGas: this.getPreVerificationGas(partialUserOp),
+          signature: ''
+        }
+      }
 }
   
 
@@ -40,7 +93,7 @@ async function getAAProvider(entryPointAddress, accountContractAddress, bundlerU
       bundlerUrl: bundlerUrl,
       walletAddres: accountContractAddress,
     };
-    
+
     const chainId = await originalProvider.getNetwork().then(net => net.chainId);
     const httpRpcClient = new HttpRpcClient(clientConfig.bundlerUrl, clientConfig.entryPointAddress, chainId);
     const entryPoint = EntryPoint__factory.connect(clientConfig.entryPointAddress, signers[0]);

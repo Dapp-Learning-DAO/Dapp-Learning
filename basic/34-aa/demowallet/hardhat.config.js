@@ -7,6 +7,9 @@ module.exports = {
   networks:{
     hardhat:{
       allowUnlimitedContractSize: true
-    }
+    },
+    localhost:{
+      allowUnlimitedContractSize: true
+    },
   }
 };
