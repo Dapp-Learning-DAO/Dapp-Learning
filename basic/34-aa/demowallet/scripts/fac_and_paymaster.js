@@ -106,7 +106,7 @@ async function simulateChangeThreshold(demoAccountContract, threshold, entryPoin
       gasLimit: tx.gasLimit
     });
     
-
+    
     // try{
     //     await (await entryPointContract.connect(bundler).simulateValidation(userOperation)).wait();
     // }
