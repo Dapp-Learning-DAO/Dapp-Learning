@@ -3,7 +3,41 @@
 - 示例AA账户见contracts目录
 - js调用见scripts目录
 
+# 克隆bundler
 
+```
+git clone https://github.com/eth-infinitism/bundler
+cd bundler
+yarn
+```
+
+# 启动本地链
+
+```
+hardhat-node
+```
+
+# 启动bundler
+再开一个窗口，进入bundler目录，执行
+```
+yarn preprocess
+yarn hardhat-deploy --network localhost
+yarn run bundler --unsafe
+```
+
+# 运行测试
+
+进入本目录，如果想查看基本的全流程，执行
+```
+yarn
+yarn hardhat run scripts/basic.js 
+```
+
+如果想查看paymaster的使用，执行
+```
+yarn
+yarn hardhat run scripts/paymaster.js 
+```
 
 # 参考资料
 

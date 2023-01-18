@@ -119,12 +119,6 @@ describe("Test contract from entrypoint", function () {
   });
 })
 
-describe("cnm", function() {
-  it ("should cnm", async function(){
-    const Factory = await ethers.getContractFactory("DemoAmount");
-    const instance = await Factory
-  })
-})
 
 class MultiSignerAccountAPI extends BaseAccountAPI {
   
