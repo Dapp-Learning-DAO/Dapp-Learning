@@ -21,6 +21,8 @@
 **/yarn.lock
 **/artifacts
 **/cache
+**/debug
+**/target
 
 # testing
 coverage

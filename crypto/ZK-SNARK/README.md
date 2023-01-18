@@ -107,6 +107,9 @@ reference：
 2. Paradigm cite的paper：https://www.microsoft.com/en-us/research/publication/pipezk-accelerating-zero-knowledge-proof-with-a-pipelined-architecture/
 3. Justin Drake talk: https://www.youtube.com/watch?v=ffXgxvlCBvo
 
+
+## FFT基础
+ FFT基础： https://zhuanlan.zhihu.com/p/347091298?utm_campaign=shareopn&utm_medium=social&utm_oi=51691969839104&utm_psn=1581595683488063489&utm_source=wechat_session
 ## reference
 
 - 安比实验室 SECBIT blog zk-SNARK 系列文章
@@ -125,3 +128,4 @@ reference：
   - [0xparc -ZK学习资料](https://learn.0xparc.org/)
   - [tss-教程](https://github.com/ZenGo-X/awesome-tss)
   - [devcon What to know about Zero Knowledge](https://www.youtube.com/watch?v=hBupNf1igbY&t=1370s)
+  - [zkdoc](https://github.com/a16z/zkdocs)

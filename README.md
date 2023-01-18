@@ -46,7 +46,7 @@ For more **project management rules**, please see [how new members participate a
 - [notion](https://www.notion.so/dapplearning/Dapp-Learning-DAO-a5f7b5e29bb744578f1c1ce99783cf2d)
 - [Sharing Meeting](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
-- [Project Fund Management](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
+- [Project Fund Management](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
 - [linktr](https://linktr.ee/dapplearning)
 
 </details>
@@ -81,7 +81,10 @@ Refer to [recommended development tools](./docs/develop-tools-en.md) to view the
 
 **Recommended reading**
 We have collected a list of classic blockchain-related books to help developers know underlying philosophy behind blockchain.
-- *Sovereign Individuals*, Follow public account [Unknown Scripture](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1).
+- *[Sovereign Individuals](https://www.amazon.sg/Sovereign-Individual-Mastering-Transition-Information/dp/0684832720)*,   [Chinese translation download](https://drive.google.com/file/d/1f113cCsSKtH_05S5gJCmoBvqItufH-_j/view?usp=sharing). 
+You can also follow public account [Unknown Scripture](https://mp.weixin.qq.com/mp/homepage?__biz=MzU4NDQwMTc3MQ==&hid=7&sn=124258360d0a530008a41ea32e7c2bf2&scene=1&devicetype=android-29&version=28000b3b&lang=en&nettype=WIFI&ascene=7&session_us=gh_353f7f41a447&wx_header=1).
+- [The Network State](https://thenetworkstate.com), written by Balaji Srinivasan. [Chinese translation download](https://nishino.gitbook.io/wang-luo-guo-jia/).
+
 - *The Austrian School of Thought* is recommended, [Hayek Life introduction](https://mp.weixin.qq.com/s/p1UZdt5BAQVJ3kl_CniwKQ).
 - Series articles [Austrian economics school of thought for blockchain enthusiasts](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU0ODk1MTE1MA==&action=getalbum&album_id=1986143111768489985&scene=173&from_msgid=2247484102&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
@@ -146,16 +149,17 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
-38. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
+38. [ether-Rust](https://github.com/tomusdrw/rust-web3) ✅
 39. [Multicall](basic/39-Multicall) ✅
-40. [ether-Rust](https://github.com/tomusdrw/rust-web3) ⬜
-41. [Foundry](basic/49-foundry/README.md)
-42. [merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
-43. [snapshot](basic/40-snapshot) ⌛
+40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
+41. [Foundry](basic/41-foundry/README.md)
+42. [Merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
+43. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛ 
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
+48. [ZK Voting](basic/48-ZK-Voting) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -164,7 +168,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
 56. [IDO](https://github.com/gnosis/ido-contracts) ⬜
 57. [Orbit model](https://github.com/orbit-love/orbit-model) ⬜
-58. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛
+58. [snapshot](basic/40-snapshot) ⌛
 59. [wagmi and nextjs](basic/59-wagmi-and-nextjs) ⌛
 60. [Referral Code](https://developers.thundercore.com/docs/referral-contract/) ⬜
 61. [ENS](basic/61-ENS) ✅
@@ -183,7 +187,6 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
-77. [ZK Voting](basic/77-ZK-Voting) ⌛
 
 Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
@@ -314,7 +317,7 @@ Direct donation to our dev team's fund is also appreciated:
 0x1F7b953113f4dFcBF56a1688529CC812865840e1
 
 **We also have created multi-signature wallets on Polygon, managed by our core contributors**
-- Polygon [Multiple signature wallets](https://polygon.gnosis-safe.io/app/#/safes/0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
+- Polygon [Multiple signature wallets](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
 Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
 
@@ -346,8 +349,6 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 </div>
 <br>
 <div align="left">
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://thublockchain.org/">
     <img align="top" src="./docs/imgs/partners/THUBA-logo.png" />
   </a>
@@ -369,7 +370,7 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 ## Sponsor partner
 
-Shout out to the following organizations for their unconditional donations to us/the open source project.
+Shout out to the following organizations for their unconditional donations to us/the open source project (in no particular order).
 
 <br>
 <div align="left">
@@ -391,38 +392,47 @@ Shout out to the following organizations for their unconditional donations to us
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  <a href="https://web3q.io/home.w3q/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Web3Q-logo.png" />
-  </a>
-</div>
-<div align="left">
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
-  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://drklab.net/">
-    <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
-  </a>
-</div>
-<div align="left">
   <a href="https://scroll.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  <a href="https://www.bing-ventures.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
+  </a>
+  
+</div>
+<div align="left">
+  <a href="https://drklab.net/">
+    <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
+  </a>
   &nbsp;&nbsp;
+  <a href="https://capital.hashkey.com/en/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://eth-store.w3eth.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://bingx.com/en-us/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
+  </a>
 </div>
 <br>
 

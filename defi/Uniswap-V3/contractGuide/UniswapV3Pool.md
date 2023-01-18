@@ -194,7 +194,7 @@ mapping(int24 => Tick.Info) public override ticks;
 - [Tick.info](./Tick.md#Info)
 
 ### tickBitmap
-
+一个bitmap对应256个ticks, 所以这里mapping定义的时候用的是int16, ticks的mapping定义用的是int24, 因为2^16 * 256 = 2^24
 ```solidity
 /// @inheritdoc IUniswapV3PoolState
 mapping(int16 => uint256) public override tickBitmap;

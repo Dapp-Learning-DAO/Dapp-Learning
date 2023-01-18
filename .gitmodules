@@ -1,12 +1,6 @@
-[submodule "crypto/ECDSA-signature/secp256k1-example-rs"]
-	path = crypto/ECDSA-signature/secp256k1-example-rs
-	url = https://github.com/leeduckgo/secp256k1-example-rs
-[submodule "crypto/ECDSA-signature/eth_wallet"]
-	path = crypto/ECDSA-signature/eth_wallet
-	url = https://github.com/leeduckgo/eth_wallet
 [submodule "lib/openzeppelin-contracts"]
-	path = lib/openzeppelin-contracts
-	url = https://github.com/OpenZeppelin/openzeppelin-contracts
-[submodule "basic/34-aa/demowallet/account-abstraction"]
-	path = basic/34-aa/demowallet/account-abstraction
-	url = git@github.com:eth-infinitism/account-abstraction.git
+path = lib/openzeppelin-contracts
+url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "dao/dao/Openzeppelin-DAO"]
+path = dao/dao/Openzeppelin-DAO
+url = https://github.com/tamphill/openzeppelin_dao.git
