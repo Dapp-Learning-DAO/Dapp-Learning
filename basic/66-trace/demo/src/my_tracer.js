@@ -3,7 +3,7 @@
 function createTracer() {
     return {
         opCount:0,
-        //每一步opcode的执行都出现
+        //每一步opcode的执行都出现。
         step(log, db) {
             if (log.op.toString() == 'SSTORE'){
                 this.opCount++;

@@ -56,15 +56,28 @@ eth_getTransactionReceipt无法看到内部细节，包括内部产生了哪些�
 - exit：离开call、create、selfdestruct
 - fault：opcode报错时被触发
 
+这些接口还有对应的参数，包括了当前执行的环境，还有提供访问账户信息的能力。其中比较重要的参数：
+- log:包括执行环境。
+    - log.op: 当前的opcode
+    - log.contract：当前的contract
+    - log.memory：当前的内存
+    - log.slack：当前的栈
+- db:用于获取状态数据。
+    - getBalance(address): 获取余额
+    - getNonce(address)：获取账户nonce值
+    - ...
+
+具体的定义可以参考[Custom Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)。
+
 实现后，需要把tracer的代码文本塞入到debugXXX api中的tracer字段，传入到以太坊节点，
 
 在[示例](./demo/src/my_tracer.js)中，实现了一个简单的tracer，它追踪sstore指令的调用次数，并在[目录](./demo/src/main.js)的traceTransactionCustomTx函数被接入。
 
 
 # 参考资料
-[tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
-[Trace_call vs Debug_tracecall](https://docs.alchemy.com/reference/trace_call-vs-debug_tracecall)
-[EVM Traces](https://docs.alchemy.com/reference/what-are-evm-traces)
-[Built-in Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
-[Custom Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)
-[Geth Js Tracers](https://github.com/ethereum/go-ethereum/tree/master/eth/tracers/js/internal/tracers)
+- [tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
+- [Trace_call vs Debug_tracecall](https://docs.alchemy.com/reference/trace_call-vs-debug_tracecall)
+- [EVM Traces](https://docs.alchemy.com/reference/what-are-evm-traces)
+- [Built-in Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
+- [Custom Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)
+- [Geth Js Tracers](https://github.com/ethereum/go-ethereum/tree/master/eth/tracers/js/internal/tracers)
