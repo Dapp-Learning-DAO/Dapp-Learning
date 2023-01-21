@@ -75,9 +75,8 @@ eth_getTransactionReceipt无法看到内部细节，包括内部产生了哪些�
 
 
 # 参考资料
-- [tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
+- [EVM Traces Introduction](https://docs.alchemy.com/reference/what-are-evm-traces)
 - [Trace_call vs Debug_tracecall](https://docs.alchemy.com/reference/trace_call-vs-debug_tracecall)
-- [EVM Traces](https://docs.alchemy.com/reference/what-are-evm-traces)
 - [Built-in Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers)
 - [Custom Tracers](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)
 - [Geth Js Tracers](https://github.com/ethereum/go-ethereum/tree/master/eth/tracers/js/internal/tracers)
