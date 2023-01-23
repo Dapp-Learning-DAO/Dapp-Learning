@@ -106,7 +106,7 @@ verifier 提供加密值 $g^{s^0} ,g^{s^1} ,…,g^{s^d}$ 和他们的 α-shift �
 prover 选择一个随机值 δ 作为偏移量，将知识在加密域上进行偏移，这样即能保持 "ZeroKnowledge"，也能为 Verifier 提供有效验证
 
 $
-g^{\delta}⋅p=g δ⋅t(s)h \newline
+g^{\delta}⋅p=g δ⋅t(s)h \\
 g^{\delta αp} = g^{\delta p'}
 $
 
@@ -147,17 +147,20 @@ $e(g^a, g^b) = e(g, g)^{ab}$
     $\rho_o=\rho_l \cdot \rho_r, \space g_l=g^{\rho_l}, g_r=g^{\rho_r}, g_o=g^{\rho_o}$
 
   - Proving key:
-    $$
-    (\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, \\
-    \{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}}, \\
-    {\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)},
+
+    $(\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, $
+
+    $\{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}},$
+
+    ${\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)},
     g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)},
-    g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}})
-    $$
+    g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}})$
+
   - Verification key:
     $(g^1, g_o^{t(s)}, \{g_l^{l_i(s)}, g_r^{r_i(s)}, g_o^{o_i(s)}\}_{i \in \{0,...,m\}}, g^{\alpha_l}, g^{\alpha_r}, g^{\alpha_o}, g^{\gamma}, g^{\beta \gamma})$
 
 - Proving
+
   - 根据 f(u) , 赋值计算过程中的中间变量 $\{v_i\}_{m+1,..,n}$
   - 赋值操作数函数 $L(x)=l_o(x)+ \sum_{i=1}^{n}{v_i \cdot l_i(x)}$ , R(x), O(x) 同样操作
   - 选取秘密值 $\delta_l, \delta_r, \delta_o$
@@ -170,10 +173,13 @@ $e(g^a, g^b) = e(g, g)^{ab}$
     $g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}$
     $g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
   - 应用 β 生成变量一致性证明
-    $g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot
-      \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}$
+
+    $
+    g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}$
+
   - Proof
     $(g_l^{L_p(s)}, g_r^{R_p(s)}, g_o^{O_p(s)}, g^{h(s)}, g_l^{L_p'(s)}, g_r^{R_p'(s)}, g_o^{O_p'(s)}, g^{Z(s)})$
+
 - Verification
   - 解析 proof
   - 赋值 输入/输出 部分的多项式变量，计算加密域的
