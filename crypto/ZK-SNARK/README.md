@@ -45,7 +45,7 @@ Pairing 是 zk-SNARKs 中的重要运算工具，主要用于约束 prover 使�
 - prover 代入 x 到多项式计算并将结果给到 verifier
 - verifier 检查本地的计算结果和 prover 的计算结果是否相等，如果相等那就说明 prover 的陈述具有较高的可信度
 
-> 我们把 x 的取值范围定在 1 到 10⁷⁷, 那么计算结果不同的点的数量，就有 10⁷⁷ – d 个。因而 x 偶然“撞到”这 d 个结果相同的点中任意一个的概率就等于（可以认为是几乎不可能）：$\frac{d}{10^{77}}$
+> 我们把 x 的取值范围定在 1 到 10⁷⁷, 那么计算结果不同的点的数量，就有 10⁷⁷ – d 个。因而 x 偶然“撞到”这 d 个结果相同的点中任意一个的概率就等于（可以认为是几乎不可能） $\frac{d}{10^{77}}$
 
 ### 商式 h(X) 保持"ZeroKnowledge"
 
@@ -106,7 +106,7 @@ verifier 提供加密值 $g^{s^0} ,g^{s^1} ,…,g^{s^d}$ 和他们的 α-shift �
 prover 选择一个随机值 δ 作为偏移量，将知识在加密域上进行偏移，这样即能保持 "ZeroKnowledge"，也能为 Verifier 提供有效验证
 
 $
-g^{\delta}⋅p=g δ⋅t(s)h \\
+g^{\delta} \cdot p=g {\delta} \cdot t(s)h \\
 g^{\delta αp} = g^{\delta p'}
 $
 
@@ -148,34 +148,54 @@ $e(g^a, g^b) = e(g, g)^{ab}$
 
   - Proving key:
 
-    $(\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, $
+    ($\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, $
 
     $\{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}},$
 
-    ${\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)},
-    g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)},
-    g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}})$
+    ${\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)}, g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)}, g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}}$)
 
   - Verification key:
     $(g^1, g_o^{t(s)}, \{g_l^{l_i(s)}, g_r^{r_i(s)}, g_o^{o_i(s)}\}_{i \in \{0,...,m\}}, g^{\alpha_l}, g^{\alpha_r}, g^{\alpha_o}, g^{\gamma}, g^{\beta \gamma})$
 
 - Proving
 
-  - 根据 f(u) , 赋值计算过程中的中间变量 $\{v_i\}_{m+1,..,n}$
-  - 赋值操作数函数 $L(x)=l_o(x)+ \sum_{i=1}^{n}{v_i \cdot l_i(x)}$ , R(x), O(x) 同样操作
-  - 选取秘密值 $\delta_l, \delta_r, \delta_o$
-  - 计算 $h(x)=\frac{L(x)R(x)-O(x)}{t(x)} \color{red} + \delta_r L(x) + \delta_l R(x) + \delta_l \delta_r t(x) - \delta_o$
+  - 根据 f(u) , 赋值计算过程中的中间变量
+    $\{v_i\}_{m+1,..,n}$
+
+  - 赋值操作数函数
+    $$
+    L(x)=l_o(x)+ \sum_{i=1}^{n}{v_i \cdot l_i(x)}
+    $$
+
+    R(x), O(x) 同样操作
+
+  - 选取秘密值
+    $\delta_l, \delta_r, \delta_o$
+
+  - 计算
+    $h(x)=\frac{L(x)R(x)-O(x)}{t(x)} \color{red} + \delta_r L(x) + \delta_l R(x) + \delta_l \delta_r t(x) - \delta_o$
+
   - 将多项式赋值到加密域，并应用 δ-shift 偏移，使其变成”zero knowledge”, 无法被 Verifier 破解
-    $g_l^{L_p(s)}=
-      {\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}} \\
-      g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
-  - 应用 α-shift 生成操作数一致性证明
-    $g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}$
+
+    $$
+    g_l^{L_p(s)}={\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}}
+    $$
+
     $g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
+
+  - 应用 α-shift 生成操作数一致性证明
+
+    $$
+    g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}
+    $$
+
+    $g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
+
   - 应用 β 生成变量一致性证明
 
-    $
-    g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}$
+    $$
+    g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}
+    $$
 
   - Proof
     $(g_l^{L_p(s)}, g_r^{R_p(s)}, g_o^{O_p(s)}, g^{h(s)}, g_l^{L_p'(s)}, g_r^{R_p'(s)}, g_o^{O_p'(s)}, g^{Z(s)})$
@@ -183,10 +203,15 @@ $e(g^a, g^b) = e(g, g)^{ab}$
 - Verification
   - 解析 proof
   - 赋值 输入/输出 部分的多项式变量，计算加密域的
-    $g_l^{L_v(s)} = g_l^{l_0(s)} \cdot \prod_{i=1}^{m}{(g_l^{l_i(s)})^{v_i}}$
+
+    $$
+    g_l^{L_v(s)} = g_l^{l_0(s)} \cdot \prod_{i=1}^{m}{(g_l^{l_i(s)})^{v_i}}
+    $$
+
     $g_r^{R_v(s)}, g_o^{O_v(s)}$ 同样操作
+
   - 通过 pairing 验证变量多项式约束
-    $e(g_l^{L_p}, g^{\alpha_l})=e(g_l^{L_p'},g), \ g_r^{R_p}, g_o^{O_v(s)}$ 同样操作
+    $e(g_l^{L_p}, g^{\alpha_l})=e(g_l^{L_p'},g), \space g_r^{R_p}, g_o^{O_v(s)}$ 同样操作
   - 验证变量值的一致性
     $e(g_l^{L_p}, g_r^{R_p}, g_o^{O_p}, g^{\beta \gamma}) = e(g^Z, g^{\gamma})$
   - 验证结果合法性(h 不存在余数)
