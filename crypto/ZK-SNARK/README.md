@@ -163,9 +163,7 @@ $e(g^a, g^b) = e(g, g)^{ab}$
     $\{v_i\}_{m+1,..,n}$
 
   - 赋值操作数函数
-    $$
-    L(x)=l_o(x)+ \sum_{i=1}^{n}{v_i \cdot l_i(x)}
-    $$
+    $$L(x)=l_o(x)+ \sum_{i=1}^{n}{v_i \cdot l_i(x)}$$
 
     R(x), O(x) 同样操作
 
@@ -177,25 +175,20 @@ $e(g^a, g^b) = e(g, g)^{ab}$
 
   - 将多项式赋值到加密域，并应用 δ-shift 偏移，使其变成”zero knowledge”, 无法被 Verifier 破解
 
-    $$
-    g_l^{L_p(s)}={\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}}
-    $$
+    $$g_l^{L_p(s)}={\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}}$$
 
     $g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
 
   - 应用 α-shift 生成操作数一致性证明
 
-    $$
-    g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}
-    $$
+    $$g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}$$
 
     $g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
 
   - 应用 β 生成变量一致性证明
 
-    $$
-    g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}
-    $$
+    $$g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}
+$
 
   - Proof
     $(g_l^{L_p(s)}, g_r^{R_p(s)}, g_o^{O_p(s)}, g^{h(s)}, g_l^{L_p'(s)}, g_r^{R_p'(s)}, g_o^{O_p'(s)}, g^{Z(s)})$
@@ -204,9 +197,7 @@ $e(g^a, g^b) = e(g, g)^{ab}$
   - 解析 proof
   - 赋值 输入/输出 部分的多项式变量，计算加密域的
 
-    $$
-    g_l^{L_v(s)} = g_l^{l_0(s)} \cdot \prod_{i=1}^{m}{(g_l^{l_i(s)})^{v_i}}
-    $$
+    $$g_l^{L_v(s)} = g_l^{l_0(s)} \cdot \prod_{i=1}^{m}{(g_l^{l_i(s)})^{v_i}}$$
 
     $g_r^{R_v(s)}, g_o^{O_v(s)}$ 同样操作
 
