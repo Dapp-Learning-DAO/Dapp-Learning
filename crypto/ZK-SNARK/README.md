@@ -144,24 +144,26 @@ $e(g^a, g^b) = e(g, g)^{ab}$
 
 - Setup
 
-  - 选择一个生成元 g 和加密 pairing 函数 e - 对于函数 f(u)=y ，含有 n 个变量，其中有 m 个输入/输出变量，将其转换成 dgree 为 d，项数 n+1 的 QAP $(\{ l_i(x), r_i(x), o_i(x) \}_{i \in \{0,...,n\}}, t(x))$ - 选取随机值 $s, \rho_l, \rho_r, \alpha_l, \alpha_r, \alpha_o, \beta, \gamma$
+  - 选择一个生成元 g 和加密 pairing 函数 e
+
+  - 对于函数 f(u)=y ，含有 n 个变量，其中有 m 个输入/输出变量，将其转换成 dgree 为 d，项数 n+1 的 QAP $(\{ l_i(x), r_i(x), o_i(x) \}_{i \in \{0,...,n\}}, t(x))$
+
+  - 选取随机值 $s, \rho_l, \rho_r, \alpha_l, \alpha_r, \alpha_o, \beta, \gamma$
+
   - 设置
     $\rho_o=\rho_l \cdot \rho_r, \space g_l=g^{\rho_l}, g_r=g^{\rho_r}, g_o=g^{\rho_o}$
 
   - Proving key:
 
-    (
+$$(\{ g^{s^k} \}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}},$$
 
-    $ \{ g^{s^k} \}_{k \in \{d\}}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, $
+$$\{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}},$$
 
-    $\{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}},$
+$${\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)}, g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)}, g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}} ) $$
 
-    ${\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)}, g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)}, g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}}$
-    
-    )
+- Verification key:
 
-  - Verification key:
-    $(g^1, g_o^{t(s)}, \{g_l^{l_i(s)}, g_r^{r_i(s)}, g_o^{o_i(s)}\}_{i \in \{0,...,m\}}, g^{\alpha_l}, g^{\alpha_r}, g^{\alpha_o}, g^{\gamma}, g^{\beta \gamma})$
+  $(g^1, g_o^{t(s)}, \{g_l^{l_i(s)}, g_r^{r_i(s)}, g_o^{o_i(s)}\}_{i \in \{0,...,m\}}, g^{\alpha_l}, g^{\alpha_r}, g^{\alpha_o}, g^{\gamma}, g^{\beta \gamma})$
 
 - Proving
 
@@ -196,11 +198,13 @@ $e(g^a, g^b) = e(g, g)^{ab}$
     $$g^{Z(s)}={\color{red} (g_l^{\beta t(s)})^{\delta_l} (g_r^{\beta t(s)})^{\delta_r} (g_o^{\beta t(s)})^{\delta_o}} \cdot \prod_{i=m+1}^{n}{(g_l^{\beta l_i(s)} g_r^{\beta r_i(s) g_o^{\beta o_i(s)}})^{v_i}}$$
 
   - Proof
-    $(g_l^{L_p(s)}, g_r^{R_p(s)}, g_o^{O_p(s)}, g^{h(s)}, g_l^{L_p'(s)}, g_r^{R_p'(s)}, g_o^{O_p'(s)}, g^{Z(s)})$
+
+    $$(g_l^{L_p(s)}, g_r^{R_p(s)}, g_o^{O_p(s)}, g^{h(s)}, g_l^{L_p'(s)}, g_r^{R_p'(s)}, g_o^{O_p'(s)}, g^{Z(s)})$$
 
 - Verification
 
   - 解析 proof
+
   - 赋值 输入/输出 部分的多项式变量，计算加密域的
 
     $$g_l^{L_v(s)} = g_l^{l_0(s)} \cdot \prod_{i=1}^{m}{(g_l^{l_i(s)})^{v_i}}$$
@@ -212,6 +216,7 @@ $e(g^a, g^b) = e(g, g)^{ab}$
   - 验证变量值的一致性
     $e(g_l^{L_p}, g_r^{R_p}, g_o^{O_p}, g^{\beta \gamma}) = e(g^Z, g^{\gamma})$
   - 验证结果合法性(h 不存在余数)
+
     $e(g_l^{L_p},g_l^{L_v(s)}, g_r^{R_p}, g_r^{R_v(s)}) = e(g_o^{t(s)}, g^h) \cdot e(g_o^{O_p} g_o^{O_v(s)}, g)$
 
 ## paper
