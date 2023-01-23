@@ -106,7 +106,7 @@ verifier 提供加密值 $g^{s^0} ,g^{s^1} ,…,g^{s^d}$ 和他们的 α-shift �
 prover 选择一个随机值 δ 作为偏移量，将知识在加密域上进行偏移，这样即能保持 "ZeroKnowledge"，也能为 Verifier 提供有效验证
 
 $
-g^{\delta}⋅p=g δ⋅t(s)h \\\\
+g^{\delta}⋅p=g δ⋅t(s)h \newline
 g^{\delta αp} = g^{\delta p'}
 $
 
@@ -148,13 +148,11 @@ $e(g^a, g^b) = e(g, g)^{ab}$
 
   - Proving key:
     $$
-    (\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, \\\\
-    \{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}}, \\\\
-    \color{red}
-    g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)},
+    (\{g^{s^k}\}_{k \in [d]}, \{ g_l^{l_i(s)}, g_r^{r_i(s)}, g_r^{o_i(s)} \}_{i \in \{0,...,n\}}, \\
+    \{ g_l^{\alpha_l l_i(s)}, g_r^{\alpha_r r_i(s)}, g_o^{\alpha_o o_i(s)}, g_l^{\beta l_i(s)}, g_r^{\beta r_i(s)}, g_o^{\beta o_i(s)} \}_{i \in \{m+1,...,n\}}, \\
+    {\color{red} g_l^{t(s)}, g_r^{t(s)}, g_o^{t(s)},
     g_l^{\alpha_l t(s)}, g_r^{\alpha_r t(s)}, g_o^{\alpha_o t(s)},
-    g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)},
-    )
+    g_l^{\beta t(s)}, g_r^{\beta t(s)}, g_o^{\beta t(s)}})
     $$
   - Verification key:
     $(g^1, g_o^{t(s)}, \{g_l^{l_i(s)}, g_r^{r_i(s)}, g_o^{o_i(s)}\}_{i \in \{0,...,m\}}, g^{\alpha_l}, g^{\alpha_r}, g^{\alpha_o}, g^{\gamma}, g^{\beta \gamma})$
@@ -166,7 +164,7 @@ $e(g^a, g^b) = e(g, g)^{ab}$
   - 计算 $h(x)=\frac{L(x)R(x)-O(x)}{t(x)} \color{red} + \delta_r L(x) + \delta_l R(x) + \delta_l \delta_r t(x) - \delta_o$
   - 将多项式赋值到加密域，并应用 δ-shift 偏移，使其变成”zero knowledge”, 无法被 Verifier 破解
     $g_l^{L_p(s)}=
-      {\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}} \\\\
+      {\color{red}(g_l^{t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{l_i(s)})^{v_i}} \\
       g_r^{R_p(s)}, g_o^{O_p(s)}$ 同样操作
   - 应用 α-shift 生成操作数一致性证明
     $g_l^{L_p'(s)} = {\color{red} (g_l^{\alpha_l t(s)})^{\delta_l}} \cdot \prod_{i=m+1}^{n}{(g_l^{\alpha_l l_i(s)})^{v_i}}$
