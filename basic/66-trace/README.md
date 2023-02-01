@@ -22,8 +22,8 @@ eth_getTransactionReceipt无法看到内部细节，包括内部产生了哪些�
 - alchemy这样的服务，通常会支持两套接口，内部会进行路由处理。
 
 这里面，debug族的api，有两个比较重要的：
-- debug_transactionTrace：执行一个合约函数，但不生成交易。同时，根据传入的tracer，返回追踪结果。相当于给eth_call增加了trace功能。
-- debug_transaction：传入交易hash和tracer，该rpc会重放这个交易，并将结果
+- debug_traceCall：执行一个合约函数，但不生成交易。同时，根据传入的tracer，返回追踪结果。相当于给eth_call增加了trace功能。
+- debug_traceTransaction：传入交易hash和tracer，该rpc会重放这个交易，并将执行结果返回。
 
 在[目录](./demo/src/main.js)中，提供了这两个rpc的使用例子。下面例子中，使用debug_transaction，重放一笔交易，并且给出哪个地址的哪些存储槽位被使用了:
 
