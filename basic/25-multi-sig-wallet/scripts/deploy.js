@@ -11,17 +11,17 @@ async function main () {
     
     //部署MyToken.sol
     const MultiSigWalletContractFactory = await ethers.getContractFactory("MultiSigWallet");
-    const multiSigWalletReceipt = await MultiSigWalletContractFactory.deploy([Alice.address], 1);
-    await multiSigWalletReceipt.deployed();
+    const multiSigWallet = await MultiSigWalletContractFactory.deploy([Alice.address], 1);
+    await multiSigWallet.deployed();
     
-    console.log("MultiSigWallet Contract address:", multiSigWalletReceipt.address);
+    console.log("MultiSigWallet Contract address:", multiSigWallet.address);
 
     // Deploy Verify sol
     const verifyContractFactory = await ethers.getContractFactory("Verifier");
-    const verifyReceipt = await verifyContractFactory.deploy();
-    await verifyReceipt.deployed();
+    const verify = await verifyContractFactory.deploy();
+    await verify.deployed();
 
-    console.log("Verifier Contract address: ", verifyReceipt.address)
+    console.log("Verifier Contract address: ", verify.address)
 }
 
 main()
