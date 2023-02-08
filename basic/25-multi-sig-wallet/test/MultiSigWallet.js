@@ -68,6 +68,10 @@ describe("MultiSigWallet test",function(){
     console.log("confirmations number: ",confirmations1.length);
     expect(confirmations1.length.toString()).to.equal("1");
 
+    const isConfirmed1 = await multiSigWalletContract.isConfirmed(transactionId)
+    console.log("is confirmed: ", isConfirmed1);
+    expect(isConfirmed1).to.equal(false);
+
     //最小需要确认人数是 2
     const requiredCount = await multiSigWalletContract.required()
     console.log("required count: ", requiredCount);
@@ -85,6 +89,10 @@ describe("MultiSigWallet test",function(){
     const confirmations2 = await multiSigWalletContract.connect(Bob).getConfirmations(transactionId)
     console.log("confirmations number: ",confirmations2.length);
     expect(confirmations2.length.toString()).to.equal("2");
+
+    const isConfirmed2 = await multiSigWalletContract.connect(Bob).isConfirmed(transactionId)
+    console.log("is confirmed: ", isConfirmed2);
+    expect(isConfirmed2).to.equal(true);
 
     // 再次检查结果（通过） 当前有2人确认
     expect((await helloContract.balance()).toString()).to.equal("233");

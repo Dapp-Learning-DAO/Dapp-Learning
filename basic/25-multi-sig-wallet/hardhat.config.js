@@ -25,16 +25,9 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.6.12"
-      },
-      {
-        version: "0.8.0",
+        version: "0.8.17",
         settings: {}
       },
-      {
-        version: "0.7.6",
-        settings: {}
-      }
     ]
   },
   networks: {
@@ -46,23 +39,23 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    // goerli: {
-    //   url: "https://goerli.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
-    // mainnet: {
-    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
-    // ropsten: {
-    //   url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
+    goerli: {
+      url: "https://goerli.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [
+        mnemonic()
+      ],
+    },
+    mainnet: {
+      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [
+        mnemonic()
+      ],
+    },
+    ropsten: {
+      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: [
+        mnemonic()
+      ],
+    },
   }
 };

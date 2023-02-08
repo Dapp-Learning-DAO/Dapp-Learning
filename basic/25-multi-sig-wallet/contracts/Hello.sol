@@ -1,4 +1,5 @@
-pragma solidity ^0.6.12;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
 contract Hello {
     uint256 public balance;
@@ -7,7 +8,7 @@ contract Hello {
         balance = _newbalance;
     }
 
-    function get() public returns (uint256){
+    function get() public view returns (uint256){
         return balance;
     }
 }
