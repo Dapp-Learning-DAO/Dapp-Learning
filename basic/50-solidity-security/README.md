@@ -99,6 +99,23 @@ slither Suicidal.sol --solc /usr/bin/solc-v0.5.13
 输入结果如下
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/slither.png?raw=true" /></center>
 
+- [可选] 使用 [solc-select](https://github.com/crytic/solc-select) 切换/管理solidity(solc)版本 
+    - 安装
+        ```shell
+            pip3 install solc-select
+        ```
+    - 安装需要的版本 & 使用需要的版本
+        ```shell
+            solc-select install 0.8.17
+            solc-select use 0.8.17
+            solc --version
+        ```
+    - 使用slither（无需版本声明）
+        ```shell
+            cd /contracts
+            slither MyContract.sol
+        ```
+
 ## MythX
 
 mythX 是一个付费工具, 支持命令行, vscode 插件等形式进行分析.  
