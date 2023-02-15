@@ -1,4 +1,5 @@
-pragma solidity ^0.6.12;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
 
 /// @title Multisignature wallet - Allows multiple parties to agree on transactions before execution.
@@ -108,7 +109,6 @@ contract MultiSigWallet {
     /// @param _owners List of initial owners.
     /// @param _required Number of required confirmations.
     constructor(address[] memory _owners, uint _required)
-    public
     validRequirement(_owners.length, _required)
     {
         for (uint i=0; i<_owners.length; i++) {
@@ -232,9 +232,9 @@ contract MultiSigWallet {
         if (isConfirmed(transactionId)) {
             Transaction storage txn = transactions[transactionId];
             txn.executed = true;
-            if (external_call(txn.destination, txn.value, txn.data.length, txn.data))
+            if (external_call(txn.destination, txn.value, txn.data.length, txn.data)) {
                 emit Execution(transactionId);
-            else {
+            } else {
                 emit ExecutionFailure(transactionId);
                 txn.executed = false;
             }
@@ -243,8 +243,7 @@ contract MultiSigWallet {
 
     // call has been separated into its own function in order to take advantage
     // of the Solidity's code generator to produce a loop that copies tx.data into memory.
-    function external_call(address destination, uint value, uint dataLength, bytes memory data) internal returns (bool) {
-        bool result;
+    function external_call(address destination, uint value, uint dataLength, bytes memory data) internal returns (bool result) {
         assembly {
             let x := mload(0x40)   // "Allocate" memory for output (0x40 is where "free memory" pointer is stored by convention)
             let d := add(data, 32) // First 32 bytes are the padded length of data, so exclude that
@@ -260,23 +259,26 @@ contract MultiSigWallet {
             0                  // Output is ignored, therefore the output size is zero
             )
         }
-        return result;
     }
 
     /// @dev Returns the confirmation status of a transaction.
     /// @param transactionId Transaction ID.
-    /// @return Confirmation status.
+    /// @return result Confirmation status.
     function isConfirmed(uint transactionId)
     public
     view
-    returns (bool)
+    returns (bool result)
     {
         uint count = 0;
+        result = false;
         for (uint i=0; i<owners.length; i++) {
-            if (confirmations[transactionId][owners[i]])
+            if (confirmations[transactionId][owners[i]]) {
                 count += 1;
-            if (count == required)
-                return true;
+            }
+            if (count == required) {
+                result = true;
+                break;
+            }
         }
     }
 

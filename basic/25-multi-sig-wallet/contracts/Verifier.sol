@@ -1,4 +1,5 @@
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
 contract Verifier {
     function recoverSigner(bytes32 _ethSignedMessageHash, bytes memory _signature)
