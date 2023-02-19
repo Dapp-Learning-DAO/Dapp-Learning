@@ -42,7 +42,7 @@ describe('ERC1820 logic', async () => {
     console.log("ERC1820 deployed to ", receipt.contractAddress);
     erc1820 = new ethers.Contract(receipt.contractAddress, abi.abi, provider);
   });
-
+ 1
 
   it('Demo usage', async () => {
     let user = (await ethers.getSigners())[1];
