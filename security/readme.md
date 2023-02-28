@@ -1,6 +1,7 @@
 # Dapp Security
 
 ## Solidity security references
+
 - [EVM code](https://blog.trustlook.com/understand-evm-bytecode-part-1/)
 - [SWC Registry](https://swcregistry.io/)
 - [Decentralized Application Security Project](https://www.dasp.co/)
@@ -16,20 +17,26 @@
 - [Capture the Ether](https://capturetheether.com/challenges/)
 - [EtherHack](https://etherhack.positive.com/#/)
 - [Security Innovation Blockchain CTF](https://blockchain-ctf.securityinnovation.com/)
-- [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/)
+- [Damn Vulnerable DeFi V3](https://www.damnvulnerabledefi.xyz/)
+  - [Damn Vulnerable DeFi V3 solutions](https://github.com/BlueAlder/damn-vulnerable-defi)
 - [ChainFlag](https://chainflag.org/)
 
 ## Paper
+
 - [Diving Into Blockchain’s Weaknesses:
-An Empirical Study of Blockchain System Vulnerabilities](https://arxiv.org/pdf/2110.12162.pdf)
+  An Empirical Study of Blockchain System Vulnerabilities](https://arxiv.org/pdf/2110.12162.pdf)
 
 ## Security analysis tool
- - 反解析solidity https://www.4byte.directory/
-         https://tx.blocksecteam.com/
- - ethtx https://www.tofreedom.me/ethtxbscpolygon
-  https://github.com/EthTx/ethtx
- - 合约审计 https://www.trustlook.com/services/smart.html
+
+- 反解析 solidity
+  - <https://www.4byte.directory/>
+  - <https://tx.blocksecteam.com/>
+- ethtx
+  - <https://www.tofreedom.me/ethtxbscpolygon>
+  - <https://github.com/EthTx/ethtx>
+- 合约审计
+  - <https://www.trustlook.com/services/smart.html>
 
 ## 攻击事件
- -wvault: https://zhuanlan.zhihu.com/p/396525700    
- 
+
+-wvault: <https://zhuanlan.zhihu.com/p/396525700>

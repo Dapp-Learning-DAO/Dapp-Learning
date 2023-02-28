@@ -434,6 +434,12 @@ Shout out to the following organizations for their unconditional donations to us
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
 </div>
+<div align="left">
+  <a href="https://mapprotocol.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+</div>
 <br>
 
 ## Contributors
