@@ -459,6 +459,12 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
 </div>
+<div align="left">
+  <a href="https://mapprotocol.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/MapProtocal-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+</div>
 <br>
 
 ## 贡献者
