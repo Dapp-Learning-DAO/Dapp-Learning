@@ -436,7 +436,7 @@ Shout out to the following organizations for their unconditional donations to us
 </div>
 <div align="left">
   <a href="https://mapprotocol.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/MapProtocal-logo.png" />
+    <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
   </a>
   &nbsp;&nbsp;
 </div>
