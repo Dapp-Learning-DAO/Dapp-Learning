@@ -27,12 +27,77 @@ ERC875 与 ERC721 有两个最大的不同之处:
 - 一次买卖中, ERC875 只需要一次交易, 因此只需要支付一次 gas.（通过 magiclink 的方式，实现了原子交易）
 - 多个代币可以在一次交易中进行买卖.（比如卖家需要10张票打包销售）
 
-### 3. EIP712
+### 3. EIP712 & ERC-2612
 
 EIP712是一种更高级, 更安全的交易签名方法. 使用该标准不仅可以签署交易并且可以验证签名，而且可以将数据与签名一起传递到智能合约中,并且可以根据该数据验证签名以了解签名者是否是实际发送该签名的人要在交易中调用的数据.
 EIP712提出了数据的标准结构和从结构化消息生成散列的定义过程, 然后使用此散列生成签名. 通过这种方式, 为发送交易生成的签名与为验证身份或任何其他目的生成的签名之间就有了明显的区别.
 
 关于EIP712的签名与验证签名参考 [签名与验证签名](./Sign&Verify.md)
+
+EIP2162就是基于EIP712协议来实现的无gas以太坊交易。
+EIP2612描述了如何使用EIP712的签名应用于permit函数
+```
+function approve(address usr, uint wad) external returns (bool)
+{
+  allowance[msg.sender][usr] = wad;
+  …
+}
+
+function permit(
+  address holder, address spender,
+  uint256 nonce, uint256 expiry, bool allowed,
+  uint8 v, bytes32 r, bytes32 s
+) external {
+  …
+  allowance[holder][spender] = wad;
+  …
+}
+```
+
+EIP712签名它包含下面几个部分：
+
+1. 一个 DOMAIN_SEPARATOR  .
+2. 一个 PERMIT_TYPEHASH .
+3. 一个 nonces 变量.
+4. 一个 permit 函数.
+
+
+```
+string  public constant name     = "Dai Stablecoin";
+string  public constant version  = "1";
+bytes32 public DOMAIN_SEPARATOR;
+constructor(uint256 chainId_) public {
+  ...
+  DOMAIN_SEPARATOR = keccak256(abi.encode(
+    keccak256(
+      "EIP712Domain(string name,string version," + 
+      "uint256 chainId,address verifyingContract)"
+    ),
+    keccak256(bytes(name)),
+    keccak256(bytes(version)),
+    chainId_,
+    address(this)
+  ));
+}
+```
+
+而permit函数最终签名的内容如下：
+```
+bytes32 digest =
+  keccak256(abi.encodePacked(
+    "\x19\x01",
+    DOMAIN_SEPARATOR,
+    keccak256(abi.encode(
+      PERMIT_TYPEHASH,
+      holder,
+      spender,
+      nonce,
+      expiry,
+      allowed
+    ))
+  ));
+```
+这样用户就不用approve交易，而通过链下签名approve。
 
 ### 4. ERC777
 
