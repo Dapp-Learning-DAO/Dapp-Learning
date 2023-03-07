@@ -4,20 +4,18 @@
   "description": "Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接在以太坊基础层中构建，而是基于以太坊进行构建。好处在于可以规模化运行智能合约，同时还能受到共享以太坊的安全性。其构造类似于Plasma，虽然无法达到Plasma几近无限的扩容能力，OR选择使用与EVM兼容的OVM（Optimistic虚拟机），使其能够像以太坊一样运作。",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx hardhat compile",
+    "deploy-erc20": "npx hardhat run scripts/deploy.js",
+    "deploy-eth": "npx hardhat run scripts/deploy-eth.js",
+    "withdraw-eth": "npx hardhat run scripts/withdraw-eth.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "dotenv": "^12.0.4",
-    "hardhat": "^2.8.2"
-  },
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.0",
-    "@nomiclabs/hardhat-waffle": "^2.0.0",
-    "chai": "^4.2.0",
-    "ethereum-waffle": "^3.0.0",
-    "ethers": "^5.0.0"
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@openzeppelin/contracts": "^4.8.2",
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.13.0"
   }
 }

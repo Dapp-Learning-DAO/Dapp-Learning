@@ -11,8 +11,23 @@ Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接
 ## Bedrock
 
 - [OptimismBedrock.md](./OptimismBedrock.md)
+- [Optimism Bedrock Sharing meeting video (coming soon)](https://www.youtube.com/@DappLearning)
 
 Bedrock 是 Optimism 网络的下一个主要版本，计划于 2023 年第一季度发布（需经 Optimism 治理批准）。它将进一步减少 Optimism 和 L1 Ethereum (opens new window) 之间的差异。
+
+### Pre-Bedrock (before Q1 2023)
+
+所有 Optimism 区块都存储在以太坊上一个特殊的智能合约中，称为 CanonicalTransactionChain（或简称 CTC）。Optimism 块保存在 CTC 内的一个仅附加列表中。这个 append-only 列表形成了 Optimism 区块链。
+
+包括 CanonicalTransactionChain 保证现有区块列表不能被新的以太坊交易修改的代码。然而，如果以太坊区块链本身被重组并且过去以太坊交易的顺序发生变化，这种保证可能会被打破。Optimism 主网被配置为能够抵抗多达 50 个以太坊区块的区块重组。如果以太坊经历了比这更大的重组，Optimism 也会重组。
+
+当然，不经历这种重大的区块重组是以太坊的一个关键安全目标。因此，只要以太坊共识机制也是如此，乐观主义就可以抵御大型区块重组。正是通过这种关系（至少部分），Optimism 从以太坊中获得了安全属性。
+
+### Bedrock (Q1 2023)
+
+在 Bedrock L2 中，块使用非合约地址保存到以太坊区块链（`0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0001`), 以最小化 L1 气体费用。由于这些区块在以太坊上作为交易调用数据提交，因此在“交易”包含在具有足够证明的区块中后，无法修改或审查它们。这就是 Optimism 继承以太坊的可用性和完整性保证的方式。
+
+块以压缩格式写入 L1 （打开新窗口）以降低成本。这很重要，因为写入 L1 是Optimism 交易的主要成本。
 
 ## 测试步骤
 
@@ -29,7 +44,7 @@ Bedrock 是 Optimism 网络的下一个主要版本，计划于 2023 年第一�
 - 安装依赖
 
 ```bash
-yarn
+npm install
 ```
 
 - 配置环境变量  
