@@ -61,7 +61,7 @@ Advantages of this change include:
 - Reduced overhead for storing the blockchain.
 - No need to update the state trie root after each transaction.
 
-#### Epochs and the Sequencing Window
+### Epochs and the Sequencing Window
 
 The rollup chain is subdivided into epochs. There is a 1:1 correspondence between L1 block numbers and epoch numbers.
 

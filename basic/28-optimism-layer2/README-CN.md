@@ -1,10 +1,18 @@
 # Optimism
 
+中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/28-optimism-layer2/README.md)
+
 ## 简介
 
 Optimistic Rollups（OR）是一种第二层解决方案，也就是说不直接在以太坊基础层中构建，而是基于以太坊进行构建。好处在于可以规模化运行智能合约，同时还能受到共享以太坊的安全性。其构造类似于 Plasma，虽然无法达到 Plasma 几近无限的扩容能力，OR 选择使用与 EVM 兼容的 OVM（Optimistic 虚拟机），使其能够像以太坊一样运作。
 
 其名称“Opmistic Rollup”源自于这个解决方案本身的特征。之所以采用“Optimistic”（乐观），是因为聚合者仅发布最少量的所需信息，而无需提供任何证明，前提是聚合者没有实施欺诈行为，且仅在发生欺诈时提供证明。之所以使用“Rollups”，是因为交易以捆绑形式提交到主链（也即，交易被 rolled-up）
+
+## Bedrock
+
+- [OptimismBedrock.md](./OptimismBedrock.md)
+
+Bedrock 是 Optimism 网络的下一个主要版本，计划于 2023 年第一季度发布（需经 Optimism 治理批准）。它将进一步减少 Optimism 和 L1 Ethereum (opens new window) 之间的差异。
 
 ## 测试步骤
 

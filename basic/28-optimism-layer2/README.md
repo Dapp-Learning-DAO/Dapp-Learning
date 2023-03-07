@@ -1,10 +1,18 @@
 # Optimism
 
+[中文](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/basic/28-optimism-layer2/README-CN.md) / English
+
 ## Abstract
 
 Optimistic Rollups（OR）is a Layer2 solution，which means it's not an independent chain，but relys on Ethereum mainnet。The benefits of such construction are that it can not only run smart contracts at scale，but also enjoys the benefit of Ethereum security，just similar to Plasma，but have less capacity of transactions。OR chooses to use OVM（Optimistic Virtual Machine）compatible with EVM，allowing contracts to have same behavior on both sides.
 
 The name "Opmistic Rollup" comes from the characteristics of the solution itself。 Optimistic means less infomation for aggregator to publish ，and no need to provide any proof。 Rollup means transactions are submitted to L1 in bundles。
+
+## Bedrock
+
+- [OptimismBedrock.md](./OptimismBedrock.md)
+
+Bedrock is the next major release of the Optimism network, planned for the first quarter of 2023 (subject to approval by Optimism governance). It will further reduce the differences between Optimism and L1 Ethereum.
 
 ## Test steps
 
@@ -44,7 +52,7 @@ Token address: 0x0d29e73F0b1AE67e28495880636e2407e41480F2
   In addition to do cross-chain through UI，we can also do it with script。  
   In the following script，by calling cross-chain contract on Goerli side， ETH will be deposited to Optimism。
 
-```
+```sh
 npx hardhat run scripts/deposit-eth.js --network goerli
 
 ## It will takes about 5 minuts to finish the deposite，then it will add 0.0001 ETH to your account on Optimism side
@@ -54,7 +62,7 @@ npx hardhat run scripts/deposit-eth.js --network goerli
   After deposite ETH to Optimism，we can also withdraw it back to Goerli.  
   Similar to deposite，we just call cross-chain contract on Optimism side，ETH will be withdrawed to Goerli.
 
-```
+```sh
 npx hardhat run scripts/withdraw-eth.js --network optimism
 
 ## It will takes about 5 minuts to finish the withdraw，then it will add 0.0001 ETH to your account on Goerli side
@@ -62,9 +70,9 @@ npx hardhat run scripts/withdraw-eth.js --network optimism
 
 ## References
 
-optimism github: https://github.com/ethereum-optimism/optimism-tutorial  
-Optimistic Rollup contracts: https://medium.com/plasma-group/ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537  
-Optimism Rollup Principle Explanation : https://zhuanlan.zhihu.com/p/350541979  
-Optimism Cross Bridge : https://gateway.optimism.io/  
-Optimism Goerli deposite proxy contract : https://goerli.etherscan.io/address/0x636af16bf2f682dd3109e60102b8e1a089fedaa8#code  
-Optimism Goerli withdraw proxy contract : https://goerli-optimism.etherscan.io/address/0x4200000000000000000000000000000000000010
+- optimism github: <https://github.com/ethereum-optimism/optimism-tutorial>
+- Optimistic Rollup contracts: <https://medium.com/plasma-group/-ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537>
+- Optimism Rollup Principle Explanation : <https://zhuanlan.zhihu.com/p/350541979>
+- Optimism Cross Bridge : <https://gateway.optimism.io/>
+- Optimism Goerli deposite proxy contract : <https://goerli.etherscan.io/address/-0x636af16bf2f682dd3109e60102b8e1a089fedaa8#code>
+- Optimism Goerli withdraw proxy contract : <https://goerli-optimism.etherscan.io/-address/0x4200000000000000000000000000000000000010>
