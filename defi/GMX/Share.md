@@ -131,11 +131,13 @@ $$
 AUM_{stableToken}=PoolAmount_{token}\times Price_{token}
 $$
 
+</br>
+
 $$
 \begin{align*}
-AUM_{NonStableToken} & = PoolAmount \times Price + {P\&L_{long}} + {P\&L_{short}}\\
-P\&L_{long} & = GuranteedUSD - ReserveAmount \times Price\\
-P\&L_{short} & = \pm Size_{globalShort}\times \frac{\left | Price-avgPrice_{globalShort} \right |  }{avgPrice_{globalShort}}\\
+AUM_{NonStableToken} & = PoolAmount \times Price + {P\&L_{long}} + {P\&L_{short}} \\
+P\&L_{long} & = GuranteedUSD - ReserveAmount \times Price \\
+P\&L_{short} & = \pm Size_{globalShort}\times \frac{\left | Price-avgPrice_{globalShort} \right |  }{avgPrice_{globalShort}}
 \end{align*}
 $$
 
@@ -143,7 +145,7 @@ $$
 
 $$
 \begin{align*}
-Price > avgPrice_{globalShort}, {User亏损}, {LP盈利}, {P\&L_{short}}>0\\
+Price > avgPrice_{globalShort}, {User亏损}, {LP盈利}, {P\&L_{short}}>0 \\
 Price < avgPrice_{globalShort}, {User盈利}, {LP亏损}, {P\&L_{short}}<0
 \end{align*}
 $$
@@ -151,11 +153,11 @@ $$
 对于 long 部分：
 
 $$
-{\begin{align*}
-GuranteedUSD &: \text{用户开仓时，杠杆数超过1，而向LP借款的部分}\\
-ReserveAmount\times Price&: \text{LP预留给用户用以实现仓位的部分的当前时刻价值}\\
-ReserveAmount &: \text{用户开平仓时，那个时刻的仓位价值与那个时刻的价格比，即为LP预留的Token数量}\\
-\end{align*}}
+\begin{align*}
+GuranteedUSD &: \text{用户开仓时，杠杆数超过1，而向LP借款的部分} \\
+ReserveAmount\times Price&: \text{LP预留给用户用以实现仓位的部分的当前时刻价值} \\
+ReserveAmount &: \text{用户开平仓时，那个时刻的仓位价值与那个时刻的价格比，即为LP预留的Token数量}
+\end{align*}
 $$
 
 在合约中，对于 GLP 的定价部分在 GlpManager 中的 getAum 函数中：
@@ -219,8 +221,8 @@ reserveAmounts 记录的是开这个仓位的用户，该仓位的总价值兑�
 
 $$
 \begin{align*}
-Price_{avg} & = \frac{ Price \times Size}{Size+\Delta}\\
-\Delta & = Size^{before} \times \frac{\left | Price - Price_{avg}^{before} \right | }{Price_{avg}^{before}}\\
+Price_{avg} & = \frac{ Price \times Size}{Size+\Delta} \\
+\Delta & = Size^{before} \times \frac{\left | Price - Price_{avg}^{before} \right | }{Price_{avg}^{before}} \\
 Size & = Size^{before} + \delta Size
 \end{align*}
 $$
@@ -313,17 +315,19 @@ $$
 
 $$
 \begin{align*}
-USD^{out} &=\delta coll+\Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户获利： } price\ge  price_{avg}^{before} \\
-coll&=coll^{before} - \delta coll & \text{ 用户获利： } price\ge  price_{avg}^{before} \\
-realisedPnL&=realisedPnL^{before}+ \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户获利： } price\ge price_{avg}^{before} \\
+USD^{out} & = \delta coll+\Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户获利： } price\ge  price_{avg}^{before} \\
+coll & = coll^{before} - \delta coll & \text{ 用户获利： } price\ge  price_{avg}^{before} \\
+realisedPnL & = realisedPnL^{before}+ \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户获利： } price\ge price_{avg}^{before} \\
 \end{align*}
 $$
 
+</br>
+
 $$
 \begin{align*}
-USD^{out} &= \delta coll  & \text{ 用户亏损： } price<price_{avg}^{before} \\
-coll &= coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price<price_{avg}^{before} \\
-realisedPnL &= realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price<price_{avg}^{before} \\
+USD^{out}  & =  \delta coll  & \text{ 用户亏损： } price<price_{avg}^{before} \\
+coll  & =  coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price<price_{avg}^{before} \\
+realisedPnL  & =  realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price<price_{avg}^{before} \\
 \end{align*}
 $$
 
@@ -361,7 +365,7 @@ $$
 $$
 \begin{align*}
 poolAmount_{token} & = poolAmount_{token}^{before}-\Delta\\
-\Delta &= \frac{USD^{out}}{price_{max}}
+\Delta & = \frac{USD^{out}}{price_{max}}
 \end{align*}
 $$
 
