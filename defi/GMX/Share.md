@@ -1,6 +1,6 @@
 # GMX share
 
-- GMX项目分享视频回放
+- GMX 项目分享视频回放
   - YouTube
     - 1p <https://www.youtube.com/watch?v=_KyDkEu0sYs>
     - 2p <https://www.youtube.com/watch?v=7wTPIUw6iGo>
@@ -133,16 +133,19 @@ $$
 
 $$
 \begin{align*}
-AUM_{NonStableToken} & = PoolAmount\times Price+P\&L_{long}+P\&L_{short}\\
-P\&L_{long} & = GuranteedUSD-ReserveAmount\times Price\\
-P\&L_{short} &= \pm Size_{globalShort}\times \frac{\left | Price-avgPrice_{globalShort} \right |  }{avgPrice_{globalShort}}\\
+AUM_{NonStableToken} & = PoolAmount \times Price + {P\&L_{long}} + {P\&L_{short}}\\
+P\&L_{long} & = GuranteedUSD - ReserveAmount \times Price\\
+P\&L_{short} & = \pm Size_{globalShort}\times \frac{\left | Price-avgPrice_{globalShort} \right |  }{avgPrice_{globalShort}}\\
 \end{align*}
 $$
 
 对于 short 部分：
 
 $$
-\begin{align*}Price>avgPrice_{globalShort},User 亏损,LP 盈利,P\&L_{short}>0\\Price<avgPrice_{globalShort},User 盈利,LP 亏损,P\&L_{short}<0\\\end{align*}
+\begin{align*}
+Price > avgPrice_{globalShort}, {User亏损}, {LP盈利}, {P\&L_{short}}>0\\
+Price < avgPrice_{globalShort}, {User盈利}, {LP亏损}, {P\&L_{short}}<0
+\end{align*}
 $$
 
 对于 long 部分：
@@ -168,11 +171,12 @@ function getAum(bool maximise) public view returns (uint256)
 第七步：拿到该token的小数位数
 第八步：如果该token是稳定币，则aum+=poolAmount*Price
 第九步：如果该token不是稳定币，则统计该token的价值时，
-还需要考虑系统的在该token上的未实现盈亏，分别考虑多头和空头部分
+        还需要考虑系统的在该token上的未实现盈亏，分别考虑多头和空头部分
 第十步：需要首先拿到该token的globalShortSize，即vault在该token上的全局空仓头寸。
-第十一步：如果该空仓头寸大于0，则拿到该空仓头寸的平均价格avgPrice，计算delta=size*|price-avgPrice|/avgPrice
-如果当前价格比avgPrice价格高，则用户亏钱，LP赚钱，则aum+=delta
-如果当前价格比avgPrice价格低，则用户赚钱，LP亏钱，则aum-=delta
+第十一步：如果该空仓头寸大于0，则拿到该空仓头寸的平均价格avgPrice，
+        计算 delta = size * abs(price-avgPrice) / avgPrice
+        如果当前价格比avgPrice价格高，则用户亏钱，LP赚钱，则 aum+=delta
+        如果当前价格比avgPrice价格低，则用户赚钱，LP亏钱，则 aum-=delta
 第十二步：考虑多头部分，aum+=guranteedUsd[token]，即将用户从LP这里借的钱也算作LP的资产
 第十三步：拿到系统预留下的token数量，reserveAmount
 第十四步：从poolAmount中扣除reserveAmount后，在乘以price得到该token的净价值
@@ -217,7 +221,7 @@ $$
 \begin{align*}
 Price_{avg} & = \frac{ Price \times Size}{Size+\Delta}\\
 \Delta & = Size^{before} \times \frac{\left | Price - Price_{avg}^{before} \right | }{Price_{avg}^{before}}\\
-Size&= Size^{before}+\delta Size
+Size & = Size^{before} + \delta Size
 \end{align*}
 $$
 
@@ -230,23 +234,30 @@ $$
 $$
 \begin{align*}
 \delta token & = tokenBalance^{after}-tokenBalance^{before}\\
-collateral&=collateral+\delta token \times Price_{min}- fee_{margin}\\
-fee_{margin}&=fee_{position}+fee_{funding}\\
-fee_{position}&=\delta Size\times 0.1\%\\
-fee_{funding}&=Size^{before}\times\frac{FundingRate_{acc}-FundingRate_{entry}}{1000000}
+collateral & =collateral+\delta token \times Price_{min}- fee_{margin}\\
+fee_{margin} & =fee_{position}+fee_{funding}\\
+fee_{position} & =\delta Size\times 0.1\%\\
+fee_{funding} & =Size^{before}\times\frac{FundingRate_{acc}-FundingRate_{entry}}{1000000}
 \end{align*}
 $$
 
 然后分别更新仓位的 entry 和 size，time 等：
 
 $$
-\begin{align*}Size & = Size^{before}+\delta Size\\entryFundingRate&=FundingRate_{acc}\\lastIncreasedTime&=now\end{align*}
+\begin{align*}
+Size & = Size^{before}+\delta Size\\
+entryFundingRate & =FundingRate_{acc}\\
+lastIncreasedTime & = now
+\end{align*}
 $$
 
 最后是更新仓位的 reserveAmount：
 
 $$
-\begin{align*}\delta reserve & = \frac{\delta Size}{Price_{min}}\\reserve & = reserve^{before}+\delta reserve \end{align*}
+\begin{align*}
+\delta reserve & = \frac{\delta Size}{Price_{min}}\\
+reserve & = reserve^{before} + {\delta reserve}
+\end{align*}
 $$
 
 更新完 Position 的仓位数据后，对于做多，还需要更新如下账本：
@@ -279,7 +290,11 @@ $$
 然后是计算 margin 的手续费：
 
 $$
-\begin{align*}fee_{margin}&=fee_{position}+fee_{funding}\\fee_{position}&=\delta Size\times 0.1\%\\fee_{funding}&=Size^{before}\times\frac{FundingRate_{acc}-FundingRate_{entry}}{1000000} \end{align*}
+\begin{align*}
+fee_{margin} & = fee_{position}+fee_{funding}\\
+fee_{position} & = \delta Size\times 0.1\% \\
+fee_{funding} & = Size^{before} \times \frac{FundingRate_{acc}-FundingRate_{entry}}{1000000}
+\end{align*}
 $$
 
 平仓盈亏计算：
@@ -306,9 +321,9 @@ $$
 
 $$
 \begin{align*}
-USD^{out}&=\delta coll  & \text{ 用户亏损： } price<price_{avg}^{before} \\
-coll&=coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price<price_{avg}^{before} \\
-realisedPnL&=realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price<price_{avg}^{before} \\
+USD^{out} &= \delta coll  & \text{ 用户亏损： } price<price_{avg}^{before} \\
+coll &= coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price<price_{avg}^{before} \\
+realisedPnL &= realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price<price_{avg}^{before} \\
 \end{align*}
 $$
 
@@ -317,26 +332,37 @@ $$
 然后是扣除手续费，如果 USDout 大于手续费，则直接从 USDout 里面扣除，如果 USDout 小于手续费，则从保证金里扣除
 
 $$
-\begin{cases}USD^{out}&=USD^{out}-fee  & \text{ if:   } USD^{out}>fee \\coll&=coll-fee & \text{ if:   } USD^{out}\le fee \\\end{cases}
+\begin{cases}
+USD^{out}&=USD^{out}-fee  & \text{ if:   } USD^{out}>fee \\
+coll & = coll-fee & \text{ if:   } USD^{out}\le fee \\
+\end{cases}
 $$
 
 然后是更新头寸和 entryFoundingRate，
 
 $$
-\begin{align*}Size & = Size^{before}-\delta Size\\FoundingRate_{entry} & = FoundingRate_{acc}\\
+\begin{align*}
+Size & = Size^{before}-\delta Size\\
+FoundingRate_{entry} & = FoundingRate_{acc}\\
 \end{align*}
 $$
 
 对于做多，此时还需要更新 guranteedUSD 表
 
 $$
-\begin{align*}guranteedUSD_{token}^{after} & = guranteedUSD_{token}^{before}+\Delta\\\Delta & = coll^{before}-coll^{after}-\delta Size\end{align*}
+\begin{align*}
+guranteedUSD_{token}^{after} & = guranteedUSD_{token}^{before}+\Delta\\
+\Delta & = coll^{before}-coll^{after} - {\delta Size}
+\end{align*}
 $$
 
 在给用户转账 USDout 前，需要折算 USDout 等价的 token，并将其更新到 PoolAmount 账本中
 
 $$
-\begin{align*}poolAmount_{token} & = poolAmount_{token}^{before}-\Delta\\\Delta &= \frac{USD^{out}}{price_{max}} \end{align*}
+\begin{align*}
+poolAmount_{token} & = poolAmount_{token}^{before}-\Delta\\
+\Delta &= \frac{USD^{out}}{price_{max}}
+\end{align*}
 $$
 
 最后把折算好的 token 数量打给用户即可。
@@ -370,14 +396,21 @@ MethodID: 0x1d4e3740
 它的计算逻辑是：
 
 - 从 chainlink 里拿到 WETH 的价格 refPrice
-- 把 refPrice 传到 fastPriceFeed 合约里，进行如下计算： - 计算 minPrice = refPrice _ (1 - 2.5%) - 计算 maxPrice = refPrice _ (1 + 2.5%) - 从 fastPriceFeed 里拿到最新 updated 的价格：fastPrice - 如果 fastPrice 在[minPrice, maxPrice]之间，则返回 fastPrice - 如果 fastPrice < minPrice, maximise ? refPrice : minPrice - 如果 fastPrice > maxPrice, maximise ? maxPrice : refPrice
+- 把 refPrice 传到 fastPriceFeed 合约里，进行如下计算
 
-  3.非稳定币：UNI，LINK
-  对于 UNI 和 LINK，它的基本计算逻辑与 WETH，WBTC 的逻辑一致，只是在返回的 price 上要额外乘以一个系数：正负 0.07%
+  - 计算 `minPrice = refPrice _ (1 - 2.5%)`
+  - 计算 `maxPrice = refPrice _ (1 + 2.5%)`
+  - 从 fastPriceFeed 里拿到最新 updated 的价格：fastPrice
+  - 如果 fastPrice 在[minPrice, maxPrice]之间，则返回 fastPrice
+  - 如果 fastPrice < minPrice, maximise ? refPrice : minPrice
+  - 如果 fastPrice > maxPrice, maximise ? maxPrice : refPrice
 
-  $$
-  maximise ? price * 1.0007 : price * 0.9993
-  $$
+    3.非稳定币：UNI，LINK
+    对于 UNI 和 LINK，它的基本计算逻辑与 WETH，WBTC 的逻辑一致，只是在返回的 price 上要额外乘以一个系数：正负 0.07%
+
+    ```ts
+    maximise ? price * 1.0007 : price * 0.9993;
+    ```
 
   项目方设定了一个机器人，让机器人每两个块，调用一次 setCompactedPrices，来更新对应的 token 的价格，只包括 WBTC,WETH,UNI,LINK 的价格，不包括稳定币的价格. 如果两次更新价格的时间间隔超过了 300 秒，则不使用 fastPriceFeed，让其直接返回 chainlink 的价格。
 
@@ -386,11 +419,19 @@ MethodID: 0x1d4e3740
 在 GMX 里面设计了很多种 token，GMX，GLP，exGMX 等。其质押的核心逻辑还是 masterchef 方式。在多种 token 的交互中，主要的设计思路是质押，托管，兑现（vesting）
 
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/defi/GMX/2022-09-03-11-44-54.png?raw=true" /></center>
-质押逻辑：
-GMX related:
-    1. 首先质押GMX，得到sGMX，同时得到奖励代币esGMX
-    2. 拿sGMX质押到Bonus池子里，得到sbGMX，同时得到奖励代币bnGMX
-    3. 拿得到的sbGMX和奖励的bnGMX分别质押到手续费池子里，得到sbfGMX，获得奖励代币WETH，即手续费分成
-    4. 拿奖励代币esGMX配上sbfGMX代币，到GMX 兑换池中兑换成GMX
 
-GLP related: 1. 用 ETH 购买 GLP，得到 GLP 2. 用 GLP 质押到手续费池子中，得到 fGLP,同时获得手续费奖励 WETH 3. 用得到的 fGLP 质押到 GLP 池子中，得到 fsGLP，同时获得奖励代币 esGMX 4. 拿奖励代币 esGMX 配上 fsGLP，到 GMX 兑换池中兑换成 GMX
+### 质押逻辑
+
+GMX related:
+
+1. 首先质押GMX，得到sGMX，同时得到奖励代币esGMX
+2. 拿sGMX质押到Bonus池子里，得到sbGMX，同时得到奖励代币bnGMX
+3. 拿得到的sbGMX和奖励的bnGMX分别质押到手续费池子里，得到sbfGMX，获得奖励代币WETH，即手续费分成
+4. 拿奖励代币esGMX配上sbfGMX代币，到GMX 兑换池中兑换成GMX
+
+GLP related:
+
+1. 用 ETH 购买 GLP，得到 GLP
+2. 用 GLP 质押到手续费池子中，得到 fGLP,同时获得手续费奖励 WETH
+3. 用得到的 fGLP 质押到 GLP 池子中，得到 fsGLP，同时获得奖励代币 esGMX
+4. 拿奖励代币 esGMX 配上 fsGLP，到 GMX 兑换池中兑换成 GMX
