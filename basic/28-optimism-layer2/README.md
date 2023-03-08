@@ -15,19 +15,16 @@ The name "Opmistic Rollup" comes from the characteristics of the solution itself
 
 Bedrock is the next major release of the Optimism network, planned for the first quarter of 2023 (subject to approval by Optimism governance). It will further reduce the differences between Optimism and L1 Ethereum.
 
-### Pre-Bedrock (before Q1 2023)
+## Contracts
 
-All Optimism blocks are stored within a special smart contract on Ethereum called the CanonicalTransactionChain (or CTC for short). Optimism blocks are held within an append-only list inside of the CTC. This append-only list forms the Optimism blockchain.
+### System Overview
 
-The CanonicalTransactionChain includes code that guarantees that the existing list of blocks cannot be modified by new Ethereum transactions. However, this guarantee can be broken if the Ethereum blockchain itself is reorganized and the ordering of past Ethereum transactions is changed. The Optimism mainnet is configured to be robust against block reorganizations of up to 50 Ethereum blocks. If Ethereum experiences a reorg larger than this, Optimism will reorg as well.
+The smart contracts in the Optimism protocol can be separated into a few key components.
 
-Of course, it's a key security goal of Ethereum to not experience these sort of significant block reorganizations. Optimism is therefore secure against large block reorganizations as long as the Ethereum consensus mechanism is too. It's through this relationship (in part, at least) that Optimism derives its security properties from Ethereum.
-
-### Bedrock (Q1 2023)
-
-In Bedrock L2 blocks are saved to the Ethereum blockchain using a non-contract address (0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0001 (opens new window)), to minimize the L1 gas expense. As these blocks are submitted as transaction calldata on Ethereum, there is no way to modify or censor them after the "transaction" is included in a block that has enough attestations. This is the way that Optimism inherits the availability and integrity guarantees of Ethereum.
-
-Blocks are written to L1 in a compressed format (opens new window)to reduce costs. This is important because writing to L1 is the major cost of Optimism transactions.
+- **[Chain:](#chain-contracts)** Contracts on layer-1, which hold the ordering of layer-2 transactions, and commitments to the associated layer-2 state roots.
+- **[Verification:](#verification)** Contracts on layer-1 which implement the process for challenging a transaction result.
+- **[Bridge:](#bridge-contracts)** Contracts which facilitate message passing between layer-1 and layer-2.
+- **[Predeploys:](#predeployed-contracts)** A set of essential contracts which are deployed and available in the genesis state of the system. These contracts are similar to Ethereum's precompiles, however they are written in Solidity, and can be found at addresses prefixed with 0x42.
 
 ## Test steps
 
@@ -85,7 +82,8 @@ npx hardhat run scripts/withdraw-eth.js --network optimism
 
 ## References
 
-- optimism github: <https://github.com/ethereum-optimism/optimism-tutorial>
+- Optimism github: <https://github.com/ethereum-optimism/optimism-tutorial>
+- Optimism doc: <https://community.optimism.io/docs/protocol/protocol-2.0/>
 - Optimistic Rollup contracts: <https://medium.com/plasma-group/-ethereum-smart-contracts-in-l2-optimistic-rollup-2c1cef2ec537>
 - Optimism Rollup Principle Explanation : <https://zhuanlan.zhihu.com/p/350541979>
 - Optimism Cross Bridge : <https://gateway.optimism.io/>
