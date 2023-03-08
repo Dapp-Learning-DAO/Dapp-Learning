@@ -101,7 +101,7 @@ FRAX: 2%  -- 1.58%
     
 - 针对散户开空单，散户拿着3,000 USDC,开10倍的空单，也就是vaults中的LP借给散户27,000 USDC, 一共30,000 USDC的头寸，在ETH-USD:3000 的价格开空单。
 也可以理解为：散户拿着3,000 USDC，然后把这3,000 USDC卖给vaults，换成等值的3,000 usdg，然后vaults中的LP借给散户 27,000 usdg，一共 30,000 usdg的头寸，此时该仓位的平均价格是3,000 usdg.此时用户的开仓手续费，含资金费用（0 Usd）为 30 usdg。
-需要考虑到vaults中有足够的USDC来兑现散户的头寸，即`reserveAmounts(USDC⇒ 30,000 ether)`, 要求是用于兑现所有散户的头寸的reserve USDC数量必须小于vaults中持有的USDC数量 poolAmounts
+需要考虑到vaults中有足够的USDC来兑现散户的头寸，即`reservedAmounts(USDC⇒ 30,000 ether)`, 要求是用于兑现所有散户的头寸的reserve USDC数量必须小于vaults中持有的USDC数量 poolAmounts
 由于开空单，只能是稳定币, 这里为了解决用USDC开ETH-USD空单和用USDT开ETH-USD空单，FRAX开ETH-USD空单的问题，如果还是按照开多单的思路，就会导致流动性分散，这里为了集中流动性，把统一成了一个全局的稳定币头寸，按照不同的标的来记录，`globalShortSize(ETH⇒30,000)`
 ### Glp定价
 GLP最重要的是对于GLP的定价
