@@ -127,17 +127,19 @@ $$
 GLP_{price}=\frac{\sum AUM_{token}}{GLP_{totalSupply}}
 $$
 
+</br>
+
 $$
-AUM_{stableToken}=PoolAmount_{token}\times Price_{token}
+AUM_{stableToken} = PoolAmount_{token} \times Price_{token}
 $$
 
 </br>
 
 $$
 \begin{align*}
-AUM_{NonStableToken} & = PoolAmount \times Price + {P\&L_{long}} + {P\&L_{short}} \\
-P\&L_{long} & = GuranteedUSD - ReserveAmount \times Price \\
-P\&L_{short} & = \pm Size_{globalShort}\times \frac{\left | Price-avgPrice_{globalShort} \right |  }{avgPrice_{globalShort}}
+AUM_{NonStableToken} = PoolAmount \times Price + {PnL_{long}} + {PnL_{short}} \\
+PnL_{long} = GuranteedUSD - ReserveAmount \times Price \\
+PnL_{short} = \pm Size_{globalShort} \times \frac{\mid Price-avgPrice_{globalShort} \mid  }{avgPrice_{globalShort}}
 \end{align*}
 $$
 
@@ -145,8 +147,8 @@ $$
 
 $$
 \begin{align*}
-Price > avgPrice_{globalShort}, {User亏损}, {LP盈利}, {P\&L_{short}}>0 \\
-Price < avgPrice_{globalShort}, {User盈利}, {LP亏损}, {P\&L_{short}}<0
+Price > avgPrice_{globalShort}, & {User亏损}, {LP盈利}, {PnL_{short}}>0 \\
+Price < avgPrice_{globalShort}, & {User盈利}, {LP亏损}, {PnL_{short}}<0
 \end{align*}
 $$
 
