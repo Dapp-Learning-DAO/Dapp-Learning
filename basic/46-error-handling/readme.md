@@ -46,7 +46,7 @@ Error(String), 自定义错误，Panic(uint256),这三类异常都按照“异�
 
 ### 异常选择器
 - Error(string): bytes4(keccak256("Error(string)"))
-- 自定义错误例如CustomError(uint256 code, address caller): bytes4(keccak256("CustomError(uint256,address)"))
+- 自定义错误，CustomError(uint256 code, address caller): bytes4(keccak256("CustomError(uint256,address)"))
 - Panic(uint256): bytes4(keccak256("Panic(uint256)"))
 
 ### 异常数据
