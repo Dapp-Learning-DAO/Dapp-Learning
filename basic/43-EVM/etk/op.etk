@@ -1,0 +1,50 @@
+initstart:
+    push1 runtimeEnd-runtimeStart       #runtimesize                                # 60 29
+    returndatasize                      #0 runtimesize                              # 3d
+    dup2                                #runtimesize 0 runtimesize                  # 81
+    push1 runtimeStart-initstart        #runtimeoffset runtimesize 0 runtimesize    # 60 0a
+    returndatasize                      #0 runtimeoffset runtimesize 0 runtimesize  # 3d
+    codecopy                            #0 runtimesize                              # 39
+    return                                                                          # f3
+                                                                                    # 60293d81600d3d39f3
+initend:
+runtimeStart:
+    returndatasize                      #0 
+    returndatasize                      #0 0
+    returndatasize                      #0 0 0
+    returndatasize                      #0 0 0 0
+    calldatasize                        #calldatasize 0 0 0 0
+    returndatasize                      #0 calldatasize 0 0 0 0
+    returndatasize                      #0 0 calldatasize 0 0 0 0
+    calldatacopy                        #0 0 0 0                    [MEM] 0-calldatasize => calldata
+    push1 extradataEnd-extradataStart   #extradatasize 0 0 0 0
+    push1 extradataStart-runtimeStart   #extradataoffset extradatasize 0 0 0 0
+    calldatasize                        #calldatasize extradataoffset extradatasize 0 0 0 0
+    codecopy                            #0 0 0 0                    [MEM] calldatasize-end => extradata
+    push1 extradataEnd-extradataStart   #extradatasize 0 0 0 0
+    calldatasize                        #calldatasize extradatasize 0 0  0 0
+    add                                 #inputSize 0 0 0 0          inputsize = calldatasize+extradatasize
+    returndatasize                      #0 inputSize 0 0 0 0
+    push20 0x0000000000000000000000000000000000000000                       #addr 0 inputSize 0 0 0 0
+    gas                                 #gas addr 0 inputSize 0 0 0 0
+    delegatecall                        #success 0 0
+    returndatasize                      #returndatasize success 0 0
+    swap3                               #0 success 0 returndatasize
+    dup4                                #returndatasize 0 success 0 returndatasize
+    swap1                               #0 returndatasize success 0 returndatasize
+    dup1                                #0 0 returndatasize success 0 returndatasize
+    returndatacopy                      #success 0 returndatasize          [MEM] 0-returndatasize => returndata
+    push1 labelreturn-runtimeStart      #labelreturn success 0 returndatasize
+    jumpi                               #0 returndatasize
+    revert                              #
+labelreturn:    
+    jumpdest                            #0 returndatasize
+    return                              #
+
+
+
+extradataStart:
+%include_hex("extra.etk")
+extradataEnd:
+runtimeEnd:
+
