@@ -8,7 +8,7 @@
     - Error(无信息)：不包含错误信息的错误，例如revert(), require(condition), eth不足，gas不足等。由于于没有错误信息，发生后很难去定位出原因。
     - Error(String)：包含错误信息的错误，例如revert("invalid condition"), require(condition, "invalid condition")等
     - CustomError：包含自定义错误信息，例如revert CustomError(xxx,xxx)..
-- Panic：不该出现的错误，更多的和程序逻辑本身相关。发生后，仅回退状态，在0.8.0之前还会吞掉未使用的gas。
+- Panic：不该出现的错误，更多的和程序逻辑本身相关。发生后，仅回退状态，在0.8.0之前还会吞掉未使用的gas，因为0.8.0之前使用0xfe，之后则改为0xfd
 
 
 
