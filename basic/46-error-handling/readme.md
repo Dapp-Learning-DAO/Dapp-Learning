@@ -8,7 +8,7 @@
     - Error(无信息)：不包含错误信息的错误，例如revert(), require(condition), eth不足，gas不足等。由于于没有错误信息，发生后很难去定位出原因。
     - Error(String)：包含错误信息的错误，例如revert("invalid condition"), require(condition, "invalid condition")等
     - CustomError：包含自定义错误信息，例如revert CustomError(xxx,xxx)..
-- Panic：不该出现的错误，更多的和程序逻辑本身相关。发生后，仅回退状态，不回退未使用的gas。
+- Panic：不该出现的错误，更多的和程序逻辑本身相关。发生后，仅回退状态，在0.8.0之前还会吞掉未使用的gas，因为0.8.0之前使用0xfe，之后则改为0xfd
 
 
 
@@ -23,10 +23,10 @@
 | 转账无余额         | Error(无信息)                       | 0x                          | 回退状态，回退剩余gas                                       |
 | gas不足             | Error(无信息)                       | 0x                          | 回退状态，回退剩余gas                                       |
 | revert 自定义错误  | 自定义，如CustomError(uint256 a, uint256 b) | 异常选择器+自定义错误数据 | 回退状态，回退剩余gas                                       |
-| assert(condition)  | Panic(uint256)              | 异常选择器+错误码0x01       | 回退状态                                                     |
-| 算术溢出           | Panic(uint256)              | 异常选择器+错误码0x11       | 回退状态                                                     |
-| 除零               | Panic(uint256)              | 异常选择器+错误数据0x12     | 回退状态                                                     |
-| 数组越界           | Panic(uint256)              | 异常选择器+错误数据0x32     | 回退状态                                                     |
+| assert(condition)  | Panic(uint256)              | 异常选择器+错误码0x01       | 回退状态,吞掉剩余(<0.8.0)                                                     |
+| 算术溢出           | Panic(uint256)              | 异常选择器+错误码0x11       | 回退状态,吞掉剩余(<0.8.0)                                                  |
+| 除零               | Panic(uint256)              | 异常选择器+错误数据0x12     | 回退状态,吞掉剩余(<0.8.0)                                                     |
+| 数组越界           | Panic(uint256)              | 异常选择器+错误数据0x32     | 回退状态,吞掉剩余(<0.8.0)                                                    |
 | ...                | ...                         | ...                         | ...                                                          |
 
 更多panic对应的错误码，可以参阅[这里](https://docs.soliditylang.org/en/v0.8.0/control-structures.html#panic-via-assert-and-error-via-require)。
@@ -158,7 +158,7 @@ catch (bytes memory otherException){
         try ... {
         }
         catch(bytes memory exceptionData) {
-            if (exceptionData.length == 0){
+            if (exceptionData.length < 68){
                 //..
             } else{
                 bytes4 exceptionSelector = bytes4(exceptionData);
