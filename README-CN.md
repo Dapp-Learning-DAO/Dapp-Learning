@@ -224,7 +224,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 3. [Curve](defi/Curve/README.md) ⌛
 4. [Compound](defi/Compound/readme.md) ✅
 5. [Aave](https://docs.aave.com/portal/)  ✅
-6. [Liquity](defi/Liquity/readme.md) ⌛
+6. [Liquity](defi/Liquity/) ⌛
 7. [Euler](defi/Euler/readme.md) ⌛
 8. [SNX](https://github.com/Synthetixio)⌛
 9. [YFI](https://yearn.finance/)⌛

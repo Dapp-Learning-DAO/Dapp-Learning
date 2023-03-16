@@ -1,8 +1,5 @@
 # Reflexer GEB
 
-![](<https://1187825898-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M9jdHretGKCtWYz5jZR%2F-MZCEBuqpWiVDbzkVeUa%2F-MZCEJv2Xvz-xIw0JAwy%2FGEB_overview%20(1).png?alt=media&token=d1233706-ec95-443b-8d45-97f973d18208>)
-[GEB Overview Diagram](https://viewer.diagrams.net/?target=blank&highlight=0000ff&layers=1&nav=1&title=GEB_overview.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1nIcaY8N8StVCfyAL_ztbmETJX2bvY3a9%26export%3Ddownload)
-
 GEB 协议的核心仓库，是 MCD(MakerDAO-dss)的修改版，具有几个核心的改进：
 
 - 可以理解的变量名称
@@ -15,6 +12,136 @@ GEB 协议的核心仓库，是 MCD(MakerDAO-dss)的修改版，具有几个核�
 - 可以在盈余拍卖和其他类型的策略之间切换，以删除系统中的盈余
 - 每种抵押品类型有两个价格：一个用于生成债务，另一个专门用于清算 SAFE
 - stability fee treasury 可以支付 Oracle 调用或其他自动化系统的合约费用
+
+## Flow
+
+![GEB_overview](<https://1187825898-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M9jdHretGKCtWYz5jZR%2F-MZCEBuqpWiVDbzkVeUa%2F-MZCEJv2Xvz-xIw0JAwy%2FGEB_overview%20(1).png?alt=media&token=d1233706-ec95-443b-8d45-97f973d18208>)
+
+[GEB Overview Diagram](https://viewer.diagrams.net/?target=blank&highlight=0000ff&layers=1&nav=1&title=GEB_overview.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1nIcaY8N8StVCfyAL_ztbmETJX2bvY3a9%26export%3Ddownload)
+
+### build DSProxy
+
+`GebProxyRegistry.build(address owner)` 创建属于用户的 `DSProxy`, 注册 proxy 地址
+
+- `proxy = new DSProxy()`
+- `proxies[owner] = msg.sender`
+
+```solidity
+
+// geb-proxy-registry/
+// deploys a new proxy instance sets custom owner of proxy
+contract GebProxyRegistry {
+    function build(address owner) public returns (address payable proxy) {
+        require(proxies[owner] == DSProxy(0) || proxies[owner].owner() != owner); // Not allow new proxy if the user already has one and remains being the owner
+        proxy = factory.build(owner);
+        proxies[owner] = DSProxy(proxy);
+        emit Build(owner, proxy);
+    }
+}
+```
+
+### openLockETHAndGenerateDebt
+
+1. `DSProxy.execute(address _target, bytes memory _data)` 组装操作，调用 Proxy 执行交易
+2. `GebProxyActions.openLockETHAndGenerateDebt()` Actions 模块执行开仓, 抵押ETH，借出 RAI
+   - `GebProxyActions.openSAFE(address manager, bytes32 collateralType, address usr)`
+   - `GebSafeManager.openSAFE(bytes32 collateralType, address usr)`
+     - `new SAFEHandler(safeEngine)` 创建 SAFEHandler 合约
+   - `GebProxyActions.lockETHAndGenerateDebt()`
+     - `ethJoin_join(ethJoin, safeHandler, msg.value)` 通过 adaptor 转入 ETH 抵押资产
+     - `GebSafeManager.modifySAFECollateralization()` 创建 SAFE 仓位
+       - `GebSafeManager._getGeneratedDeltaDebt()` 增加SAFE债务，包含税收
+       - `SAFEEngine.modifySAFECollateralization()`
+     - `transferInternalCoins()` 将 RAI token 转给用户
+       - `BasicTokenAdapters.exit(address account, uint256 wad)`
+         - `SAFEEngine.modifyCollateralBalance()`
+
+```solidity
+// ds-proxy/src/proxy.sol
+contract DSProxy is DSAuth, DSNote {
+    // step 1
+    function execute(address _target, bytes memory _data) {
+        // target.delegatecall()
+    }
+}
+
+// geb-proxy-actions/src/GebProxyActions.sol
+contract GebProxyActions is BasicActions {
+    // step 2
+    function openLockETHAndGenerateDebt(
+        address manager,
+        address taxCollector,
+        address ethJoin,
+        address coinJoin,
+        bytes32 collateralType,
+        uint deltaWad
+    ) external payable returns (uint safe) {
+        safe = openSAFE(manager, collateralType, address(this));
+        lockETHAndGenerateDebt(manager, taxCollector, ethJoin, coinJoin, safe, deltaWad);
+    }
+
+    // step 3
+    /// @notice Opens a brand new Safe
+    /// @param manager address - Safe Manager
+    /// @param collateralType bytes32 - collateral type
+    /// @param usr address - Owner of the safe
+    function openSAFE(
+        address manager,
+        bytes32 collateralType,
+        address usr
+    ) public returns (uint safe) {
+        safe = ManagerLike(manager).openSAFE(collateralType, usr);
+    }
+}
+
+// geb-safe-manager/src/GebSafeManager.sol
+contract GebSafeManager {
+    // step 4
+    function openSAFE(
+        bytes32 collateralType,
+        address usr
+    ) public returns (uint) {
+        // safei is SAFE id
+        safes[safei] = address(new SAFEHandler(safeEngine));
+        ...
+        return safei;
+    }
+}
+
+// geb-proxy-actions/src/GebProxyActions.sol
+contract GebProxyActions is BasicActions {
+    // step 5
+    /// @notice Locks Eth, generates debt and sends COIN amount (deltaWad) to msg.sender
+    /// @param manager address
+    /// @param taxCollector address
+    /// @param ethJoin address
+    /// @param coinJoin address
+    /// @param safe uint - Safe Id
+    /// @param deltaWad uint - Amount
+    function lockETHAndGenerateDebt(
+        address manager,
+        address taxCollector,
+        address ethJoin,
+        address coinJoin,
+        uint safe,
+        uint deltaWad
+    ) public payable {
+    }
+}
+
+// geb-safe-manager/src/GebSafeManager.sol
+contract GebSafeManager {
+    // step 6
+    function modifySAFECollateralization(
+        uint safe,
+        int deltaCollateral,
+        int deltaDebt
+    ) public safeAllowed(safe) {
+        // SAFEEngine.modifySAFECollateralization()
+    }
+}
+
+```
 
 ## Core Module
 
@@ -338,5 +465,5 @@ Relevant smart contracts:
 
 Shutdown Module 负责在发生严重威胁时（如长期市场失序、黑客攻击或安全漏洞），对系统进行关机处理，并将所有抵押物资退还给用户。结算可以由紧急关机模块（ESM）触发，在这种情况下，治理需要存入（并销毁）一定数量的协议代币，或者如果治理方可以直接访问 GlobalSettlement，则可以绕过 ESM 并结算系统。
 
-- GlobalSettlement-该合约关闭GEB并确保SAFE和系统代币用户收到他们应得的资产净值。硬币持有人可以赎回的抵押品价值将根据结算时系统盈余或赤字而异。有可能，硬币持有人将获得少于或多于- OracleRelayer.redemptionPrice的抵押品价值。
-- ESM-如果足够的代币在ESM中存入（并随后被销毁），该合约可以触发全局结算。
+- GlobalSettlement-该合约关闭 GEB 并确保 SAFE 和系统代币用户收到他们应得的资产净值。硬币持有人可以赎回的抵押品价值将根据结算时系统盈余或赤字而异。有可能，硬币持有人将获得少于或多于- OracleRelayer.redemptionPrice 的抵押品价值。
+- ESM-如果足够的代币在 ESM 中存入（并随后被销毁），该合约可以触发全局结算。
