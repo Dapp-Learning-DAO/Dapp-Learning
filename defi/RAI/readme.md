@@ -27,7 +27,20 @@ RAI采用的是双代币机制，有单独的治理代币，其治理代币是FL
 2. V神文章 :  Two thought experiments to evaluate automated stablecoins
 3. RAI
 
+## 代码
+
+## RAI支持LSD的讨论
+https://community.reflexer.finance/t/can-oracles-double-as-co-stakers-how-rai-like-systems-might-safely-support-staked-eth/397
+
+## 稳定币不可能三角：
+https://stablecoins.wtf/resources/the-stablecoin-trillema#price-stability
+与前文提到的蒙代尔的三元悖论类似，在加密世界中，也有人提出了关于加密稳定币的三元悖论，即稳定币的资本效率、价格稳定性和去中心化三者也不能同时存在。笔者认为这种分类也有一定道理，试图同时获得这三者的ESD/BAC/UST最终都走向了灭亡。
+
+https://research.mintventures.fund/2023/03/10/zh-reflexer-finance-rai-non-pegged-over-colleteral-decentralized-stablecoin/
+
+
 ## 参考链接
 - 视频解析: https://www.youtube.com/watch?v=ADK91Zw4sJA&list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3
 - tokenengineeringcommunity: https://tokenengineeringcommunity.github.io/website/
 - RAI--升级版的DAI？ https://mirror.xyz/0x4011631B550E4c5C105FE90c2b7f03Fdbd344454/Bumv5mmOt8Sj85IpcGGMJvox4XLdrH0ce-4CJS_Wd6o
+- 基于BTC的稳定币：https://cryptohayes.medium.com/dust-on-crust-300d4b5cf3ec
