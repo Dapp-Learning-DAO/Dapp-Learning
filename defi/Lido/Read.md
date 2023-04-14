@@ -5,3 +5,4 @@ Lido 作为以太坊LSD (ETH Liquid Staking Derivatives)的龙头项目，对于
 
 References:
 - DefiLlama dashboard https://defillama.com/lsd 
+- contracts repo: https://github.com/lidofinance/lido-dao
