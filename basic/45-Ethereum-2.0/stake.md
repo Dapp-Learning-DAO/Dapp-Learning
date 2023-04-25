@@ -15,4 +15,13 @@ Participants
 当staker没有足够的余额支付给运营商时，通过向stakers发出信号，来保持网络的偿付能力。清算人因成功清算而获得SSV代币的补偿。
 
 
+## 参考链接
+- 了解合并后奖励： https://www.attestant.io/posts/understanding-post-merge-rewards/
+- 了解提款： https://www.attestant.io/posts/understanding-withdrawals/
+- Ethereum 2.0 – Here’s what you NEED to know： https://boxmining.com/ethereum-2/
+- 一文了解 4 种 Staking 方案之间的关系和异同: https://m.techflowpost.com/article/2046
+- Eth2 to Eth1 Validator’s withdrawal design [WIP]： https://hackmd.io/@zilm/withdrawal-spec
+- withdraw research:https://ethresear.ch/t/simple-eth1-withdrawals-beacon-chain-centric/8256
+
+
 

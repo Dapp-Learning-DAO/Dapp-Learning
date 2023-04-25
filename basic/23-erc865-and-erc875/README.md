@@ -27,12 +27,79 @@ ERC875 与 ERC721 有两个最大的不同之处:
 - 一次买卖中, ERC875 只需要一次交易, 因此只需要支付一次 gas.（通过 magiclink 的方式，实现了原子交易）
 - 多个代币可以在一次交易中进行买卖.（比如卖家需要10张票打包销售）
 
-### 3. EIP712
+### 3. EIP712 & ERC-2612
 
 EIP712是一种更高级, 更安全的交易签名方法. 使用该标准不仅可以签署交易并且可以验证签名，而且可以将数据与签名一起传递到智能合约中,并且可以根据该数据验证签名以了解签名者是否是实际发送该签名的人要在交易中调用的数据.
 EIP712提出了数据的标准结构和从结构化消息生成散列的定义过程, 然后使用此散列生成签名. 通过这种方式, 为发送交易生成的签名与为验证身份或任何其他目的生成的签名之间就有了明显的区别.
 
 关于EIP712的签名与验证签名参考 [签名与验证签名](./Sign&Verify.md)
+
+
+**ERC-2612**
+EIP2162就是基于EIP712协议来实现的无gas以太坊交易。
+EIP2612描述了如何使用EIP712的签名应用于permit函数
+```
+function approve(address usr, uint wad) external returns (bool)
+{
+  allowance[msg.sender][usr] = wad;
+  …
+}
+
+function permit(
+  address holder, address spender,
+  uint256 nonce, uint256 expiry, bool allowed,
+  uint8 v, bytes32 r, bytes32 s
+) external {
+  …
+  allowance[holder][spender] = wad;
+  …
+}
+```
+
+EIP712签名它包含下面几个部分：
+
+1. 一个 DOMAIN_SEPARATOR  .
+2. 一个 PERMIT_TYPEHASH .
+3. 一个 nonces 变量.
+4. 一个 permit 函数.
+
+
+```
+string  public constant name     = "Dai Stablecoin";
+string  public constant version  = "1";
+bytes32 public DOMAIN_SEPARATOR;
+constructor(uint256 chainId_) public {
+  ...
+  DOMAIN_SEPARATOR = keccak256(abi.encode(
+    keccak256(
+      "EIP712Domain(string name,string version," + 
+      "uint256 chainId,address verifyingContract)"
+    ),
+    keccak256(bytes(name)),
+    keccak256(bytes(version)),
+    chainId_,
+    address(this)
+  ));
+}
+```
+
+而permit函数最终签名的内容如下：
+```
+bytes32 digest =
+  keccak256(abi.encodePacked(
+    "\x19\x01",
+    DOMAIN_SEPARATOR,
+    keccak256(abi.encode(
+      PERMIT_TYPEHASH,
+      holder,
+      spender,
+      nonce,
+      expiry,
+      allowed
+    ))
+  ));
+```
+这样用户就不用approve交易，而通过链下签名approve。
 
 ### 4. ERC777
 
@@ -51,11 +118,14 @@ ERC1155 是游戏开发服务提供商 Enjin 发布的一个全新的代币标�
 由于现行的代币系统 ERC20 和 ERC721, 用户完成兑换交易需要经历四个独立的步骤, 操作繁琐耗时. 而如果采用 ERC1155 规则, 用户能够将他们想要交换的所有代币捆绑在一个合约中, 只需要一个批准步骤即可完成.
 
 
-### 6. EIP2929
+### 6. ERC-4626
+https://mirror.xyz/cryptocellguru.eth/E6cmnfIbAVwIXN3Wa1Hpn87uwLoS5bne85Xrp2FtGhI
+
+### 7. EIP2929
 
 EIP2929属于柏林分叉，其核心内容是: SLOAD 的 gas 开支从 800 增加到 2100, CALL 的 gas 开支 (包含STATICCALL 、 DELEGATECALL和其他操作码) 以及外部合约查询 (BALANCE、EXTCODESIZE 等) 从 700 增加到 2600。这种状况仅会在地址和存储 slot 在交易里首次被访问时发生。这样做的意图是进一步提高对 DoS攻击 的抵挡能力: 早期的研究显示, 以太坊目前最大的 DoS 漏洞在存储访问, 攻击者可以以较低的gas创立一些区块，它们对许多用户地址进行重复访问, 处理时刻可能长达 80 秒。 解决办法很简单: 使这些执行时间较长的存储访问操作（它们需要磁盘IO）耗费更多的 gas, 最终 DoS 问题会被削弱约 3 倍. 与此同时, 客户端团队进行了一些超卓的工作——实现磁盘存储缓存、削减存储加载所需的数据库查询次数、以及更长远地堵住这个漏洞.
 
-### 7. ERC1820
+### 8. ERC1820
 一个智能合约会包含一些函数。我们在编译一个智能合约时，这些函数将在编译的时候嵌入到合约binary中，并随合约一起部署到链上。这是一种静态的绑定关系：函数在编译期绑定到合约，而且只能限定绑定到合约账户；这种绑定关系不可改变。因此，一旦合约部署，你也无法升级你的函数了。
 
 有时，你可能需要动态绑定关系，比如我想为我的代币设置接收钩子函数，而且也可以随时更换、升级我的钩子。而且，显然我希望我的钩子也能够绑定到EOA上，而不仅仅是合约上。

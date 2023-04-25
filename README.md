@@ -154,7 +154,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 41. [Foundry](basic/41-foundry/README.md)
 42. [Merkle-distributor airdrop](basic/42-merkle-distributor-airdrop)  ✅
-43. [Ethereum Virtual Machine Opcodes](basic/58-EVM/readme.md) ⌛ 
+43. [Ethereum Virtual Machine Opcodes](basic/43-EVM) ⌛ 
 44. [JavaScript Cryptography](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c) ✅
 45. [Ethereum2.0](basic/45-Ethereum2.0) ⌛
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
@@ -218,7 +218,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 03. [Curve](defi/Curve/README.md) ⌛
 04. [Compound](defi/Compound/readme.md) ✅
 05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/readme.md) ✅
+06. [Liquity](defi/Liquity/) ✅
 07. [Euler](defi/Euler/readme.md) ⌛
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) ⌛
@@ -227,7 +227,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA& list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
+15. [RAI](defi/RAI/)⌛
 16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -433,6 +433,12 @@ Shout out to the following organizations for their unconditional donations to us
   <a href="https://bingx.com/en-us/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
+</div>
+<div align="left">
+  <a href="https://mapprotocol.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
+  </a>
+  &nbsp;&nbsp;
 </div>
 <br>
 
