@@ -33,6 +33,7 @@ Metamask 提供了几种不同的签名方法，整个历史变化如下：
 - signTypedData_v4
 
 后面出现的 signTypedData，都是基于 EIP-712 标准，专门针对于交易数据做的签名。
+注意 signTypedData 签名不会增加`\x19Ethereum Signed Message:\n`；
 
 ## 代码示例
 
