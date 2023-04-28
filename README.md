@@ -249,6 +249,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 - 04. [Rarible](https://docs.rarible.org/overview/union/)
 - 05. [Zora](https://docs.zora.co/)
 - 06. [Alchemy](https://www.alchemy.com/nft-api)
+- 07. [Infura](https://www.infura.io/platform/nft-api)
 
 ## DAO advanced tasks
 
