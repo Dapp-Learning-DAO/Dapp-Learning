@@ -8,6 +8,8 @@
     "circom_tester": "^0.0.19",
     "circomlib": "^2.0.5",
     "circomlibjs": "^0.1.7",
+    "fs": "^0.0.1-security",
+    "hardhat": "^2.14.0",
     "mocha": "^10.2.0"
   }
 }

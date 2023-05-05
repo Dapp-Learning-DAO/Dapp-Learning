@@ -64,14 +64,82 @@ javascript的poseidon，得出的哈希数据，默认情况下和go sdk、circo
 ## build电路
 
 build电路，是指生成如下内容：
+- wasm：生成电路的wasm文件，以用于计算见证。
 - zkey：所谓prooving key，proover使用它来生成证明。注意，它是公开的，不是秘密的！
 - vkey：所谓verification key，verifier使用它来验证证明。它也是公开的。
 - 合约：可以生成一个Verifier合约。
 
-这里不会介绍可信设置等内容，只需执行下面的命令：
+### 生成wasm
 ```
 circom circuit.circom --r1cs --wasm --sym
 
 ```
+### 生成zkey、vkey
+以groth16为例。生成zkey(circuit_final.zkey)和vkey(verification_key.json)：
+```
+snarkjs powersoftau new bn128 12 pot12_0000.ptau -v
+snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First contribution" -v
+snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v
+snarkjs groth16 setup circuit.r1cs pot12_final.ptau circuit_0000.zkey
+snarkjs zkey contribute circuit_0000.zkey circuit_final.zkey --name="First contribution" -v
+snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
+
+```
+
+---
+**Note**
+
+这个过程中，会让用户输入随机分量。这是因为，groth16的可信设置，是共同协商出一个随机数$g^s$，第i个贡献者自己准备一个随机数$s_i$, 然后对前i-1个贡献者产出的数据（记为$r_{i-1}$）$g^{s1s2..s_{i-1}}$进行计算：$r_i = r_{i-1}^{si} = g^{s1s2...si}$。直到所有贡献者都贡献完毕，就得到了$g^s$。如果任何一个用户删除了自己的随机分量，那么即使剩余用户合谋，那么也需要极大算力去暴力猜测缺失的分量。
+---
 
 
+### 导出合约
+导出合约(verifier.sol)：
+```
+snarkjs zkey export solidityverifier circuit_final.zkey verifier.sol
+```
+
+在示例中，已经在artifact目录存放了这些内容。
+
+## 编写dapp（以合约作为verifier为例）
+编写dapp通常包括两个内容：创建业务合约、调用合约。
+
+### 创建业务合约
+首先我们创建一个业务合约My.sol，它只有在哈希验证通过后，才执行某个逻辑。它继承了Verifier合约，因此也继承了verifyProof函数。可参考[contracts]目录。
+
+可以编译它们得到abi和bin。示例中，已经将abi和bin放在了artifact目录。
+
+---
+**Note**
+
+注意，zk证明分为pa，pb，pc, publicSignals几个部分，把他们交给verifyProof即可，如果该函数为true，则意味着验证通过。
+
+注意，还需要验证publicSignals的业务意义。另外，注意本例子中，publicSignals[0]是输出信号out，publicSignals[1]才是dataHash。
+---
+
+
+### 调用业务合约
+这里面我们使用ethers（v5版本）去调用业务合约。其中，snarkjs用于生成证明。
+
+在[scripts]中，我们：
+- 部署My合约
+- 生成zk证明，以在不披露data的情况下，证明我们持有dataHash的poseidon原像
+- 调用合约的execute函数。合约会验证如下内容后抛出Execute事件：
+    - 用户存在满足特定约束的一组输入
+    - 其中的dataHash和链上记录的一致
+
+用户可以在另一个终端启动一个本地节点(例如yarn hardhat node)，然后运行call_contract.js:
+
+```
+cd scripts
+node call_contract.js
+```
+
+如果打印出success，则为成功。读者还可以去修改代码，例如修改publicSignals的值，那么会导致交易失败。
+---
+**Note**
+
+注意，不管约束多复杂，证明都是常数时间，这也是zksnark的威力。
+
+此外，注意构造proof中pb的方式。
+---
