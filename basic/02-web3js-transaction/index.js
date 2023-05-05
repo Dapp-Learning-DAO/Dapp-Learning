@@ -5,6 +5,10 @@ const contractOfIncrementer = require('./compile');
 require('dotenv').config();
 const privatekey = process.env.PRIVATE_KEY;
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /*
    -- Define Provider --
 */
@@ -155,11 +159,8 @@ const Trans = async () => {
   // goerli don't support http protocol to event listen, need to use websocket
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
-    new Web3.providers.WebsocketProvider(
       'wss://goerli.infura.io/ws/v3/' + process.env.INFURA_ID
-    )
   );
-  incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
 
   // listen to  Increment event only once
   incrementer.once('Increment', (error, event) => {
@@ -167,9 +168,20 @@ const Trans = async () => {
   });
 
   // listen to Increment event continuously
-  incrementer.events.Increment(() => {
-    console.log('I am a longlive event listener, I get a event now');
-  });
+  web3Socket.eth.subscribe('logs',{
+    address: createReceipt.contractAddress,
+    topics: []
+  },(error,result) => {
+    if(error){
+      console.error(error)
+    }
+  }
+  ).on("data", (event) => {
+      console.log("New event: ", event);
+    })
+    .on("error", (error) => {
+      console.error("Error: ", error);
+    });
 
   for (let step = 0; step < 3; step++) {
     incrementTransaction = await web3.eth.accounts.signTransaction(
@@ -183,6 +195,9 @@ const Trans = async () => {
 
     await web3.eth.sendSignedTransaction(incrementTransaction.rawTransaction);
 
+    console.log("Waiting for events")
+    await sleep(3000);
+    
     if (step == 2) {
       // clear all the listeners
       web3Socket.eth.clearSubscriptions();

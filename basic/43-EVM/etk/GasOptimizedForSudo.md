@@ -84,7 +84,7 @@ runtimeStart:
     swap1                               #0 returndatasize success 0 returndatasize
     dup1                                #0 0 returndatasize success 0 returndatasize
     returndatacopy                      #success 0 returndatasize
-    push1 labelreturn                   #labelreturn success 0 returndatasize
+    push1 labelreturn-runtimeStart      #labelreturn success 0 returndatasize
     jumpi                               #0 returndatasize
     revert                              #
 labelreturn:    

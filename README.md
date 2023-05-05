@@ -218,7 +218,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 03. [Curve](defi/Curve/README.md) ⌛
 04. [Compound](defi/Compound/readme.md) ✅
 05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/readme.md) ✅
+06. [Liquity](defi/Liquity/) ✅
 07. [Euler](defi/Euler/readme.md) ⌛
 08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 09. [YFI](https://yearn.finance/) ⌛
@@ -227,7 +227,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 12. [OPYN](https://v2.opyn.co/)⌛
 13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
 14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](https://www.youtube.com/watch?v=ADK91Zw4sJA& list=PL-GxJch-YeZerVVV8dY8qU2VkJfbnSfdN&index=3)
+15. [RAI](defi/RAI/)⌛
 16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
@@ -249,6 +249,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 - 04. [Rarible](https://docs.rarible.org/overview/union/)
 - 05. [Zora](https://docs.zora.co/)
 - 06. [Alchemy](https://www.alchemy.com/nft-api)
+- 07. [Infura](https://www.infura.io/platform/nft-api)
 
 ## DAO advanced tasks
 
