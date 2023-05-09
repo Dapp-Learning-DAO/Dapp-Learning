@@ -8,12 +8,9 @@ circuit.sym
 circuit.json
 powersOfTau28_hez_final_10.ptau
 circuit_0000.zkey
-verification_key.json
+
 input.json
 witness.wtns
 witness.json
 proof.json
 proving_key.json
-public.json
-verifier.sol
-circuit_final.zkey
