@@ -276,6 +276,10 @@ SELECT DISTINCT(tablename) FROM pg_catalog.pg_tables
    contract_address = '\xc36442b4a4522e871399cd717abdd847ab11fe88';
 ```
 
+### mastering-chain-analytics
+https://sixdegreelab.gitbook.io/mastering-chain-analytics/
+
+入门教程：https://0xbi.mirror.xyz/6cbedGOx0GwZdvuxHeyTAgn333jaT34y-2qryvh8Fio
 ## 参考链接
 
 - 视频：https://www.bilibili.com/video/BV1ZK4y137Ce
