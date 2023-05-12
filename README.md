@@ -68,7 +68,7 @@ The project is divided into two parts: **Basic task** and **Project task**
 - **Basic task**
 Basic tools to familiarize and integrate blockchain development (e.g. ERC standard, Oracle, GRAPH, IPFS)
 - **Project task**
-Case studies of the mainstream DeFi, NFT, Dao and other crypto projects to enlighten developers to deep dive into dapp development. We will organzie study groups to discuss and study project together.
+Case studies of the mainstream DeFi, NFT, Dao and other crypto projects to enlighten developers to deep dive into dapp development. We will organize study groups to discuss and study project together.
 
 ## Preparatory Work
 **Ramp up**
@@ -162,7 +162,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 48. [ZK Voting](basic/48-ZK-Voting) ⌛
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
-52. [Governace](https://github.com/withtally/safeguard)  ⬜
+52. [Governance](https://github.com/withtally/safeguard)  ⬜
 53. [Freelancer's Smart Contract](basic/53-freelancer) ✅
 54. [Cryptovoxels](https://zhuanlan.zhihu.com/p/379249411) ⬜
 55. [PBFT](https://medium.com/loom-network-chinese/%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99-byzantine-fault-tolerance-8a1912c311ba) ⬜
@@ -188,7 +188,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
 
-Welcome to submit pull request,[Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+Welcome to submit pull request, [Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
 ## Advanced task
 
@@ -249,6 +249,7 @@ You can refer to our study group's learning roadmap, which is better with the vi
 - 04. [Rarible](https://docs.rarible.org/overview/union/)
 - 05. [Zora](https://docs.zora.co/)
 - 06. [Alchemy](https://www.alchemy.com/nft-api)
+- 07. [Infura](https://www.infura.io/platform/nft-api)
 
 ## DAO advanced tasks
 

@@ -16,6 +16,6 @@
 
 - **Request for test currency testnet**
 
-- Rinkeby [Apply for Rinkeby test currenc](https://faucet.rinkeby.io/)
+- Rinkeby [Apply for Rinkeby test currency](https://faucet.rinkeby.io/)
 - Kovan [Apply for Kovan test currency1](https://linkfaucet.protofire.io/kovan) [Apply for Kovan test currency2](https://faucet.kovan.network)
 - Ropsten [Apply for Ropsten test currency1](https://faucet.metamask.io/)
