@@ -100,7 +100,7 @@ const web3 = new Web3(
 | Note: The `INFURA_ID` is the `PROJECT ID` of the `Infura` project you created in **Preparation** part.
 
 ## 5. Get the `account` address
-On blockchain, each user has a `address`, which is unique for others, and you can get the `address` by the private key. In this task, you can use to `we3.eth.accounts.privateKeyToAccount` API to get your `account` address by passing the private key as a parameter.
+On blockchain, each user has a `address`, which is unique for others, and you can get the `address` by the private key. In this task, you can use to `web3.eth.accounts.privateKeyToAccount` API to get your `account` address by passing the private key as a parameter.
 ```js
 // Create account from privatekey
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
