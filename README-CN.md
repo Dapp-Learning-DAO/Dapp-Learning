@@ -464,6 +464,14 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
     <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
   </a>
   &nbsp;&nbsp;
+  <a href="https://www.optimism.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://minaprotocol.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Mina-logo.png" />
+  </a>
+  &nbsp;&nbsp;
 </div>
 <br>
 
