@@ -109,7 +109,7 @@ export class Dapp extends React.Component {
               Welcome <b>{this.state.selectedAddress}</b>, you have{' '}
               <b>
                 {/* show human read balance (deployed contract with precise 1 in /scripts/deploy.js) */}
-                {this.state.balance/10**this.state.decimals} {this.state.tokenData.symbol}
+                {ethers.utils.formatUnits(this.state.balance, this.state.decimals)} {this.state.tokenData.symbol}
               </b>
               .
             </p>
@@ -162,7 +162,7 @@ export class Dapp extends React.Component {
               <Transfer
                 transferTokens={(to, amount) =>
                   // convert to contract precise amount
-                  this._transferTokens(to, amount*10**this.state.decimals)
+                  this._transferTokens(to, ethers.utils.parseUnits(amount, this.state.decimals))
                 }
               />
             )}
