@@ -200,6 +200,24 @@ npx hardhat run ./scripts/deploy.js
 npx hardhat run ./scripts/deploy.js --network goerli
 ```
 
+### verify
+
+验证智能合约，这里以`goerli`举例。
+
+在 `hardhat.config.js` 添加配置：
+
+```js
+ etherscan: {
+   apiKey: "<etherscan的api key>",
+ }
+```
+
+运行脚本：
+
+```shell
+npx hardhat verify --network goerli <合约地址>
+```
+
 ### task
 
 hardhat 本身预设了一些程序任务，例如编译合约，运行测试文件，这些其实在 hardhat 中是预先配置好的任务。
@@ -276,6 +294,7 @@ contract Greeter {
 Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 ```
 
+
 ## 实操流程
 
 ### 编译和测试
@@ -299,6 +318,19 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
    ```
 
    这里的 `network-name` 替换成你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
+
+4. 验证智能合约
+
+   ```bash
+   npx hardhat verify --network goerli <network-name> <contract-address>
+   ```
+
+    `network-name` ：你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
+
+    `contract-address` ：上一步部署的合约地址。
+
+
+
 
 ## 参考文档
 
