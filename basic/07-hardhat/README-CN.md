@@ -1,24 +1,31 @@
 中文 / [English](./README.md)
 
-
 # Hardhat
 
 Hardhat 是一个编译、部署、测试和调试以太坊应用的开发环境。
 
-它可以帮助开发人员管理和自动化构建智能合约和 dApps 过程中固有的重复性任务，并围绕这一工作流程轻松引入更多功能。这意味着 hardhat 在最核心的地方是编译、运行和测试智能合约。
-Hardhat 内置了 Hardhat 网络，这是一个专为开发设计的本地以太坊网络。主要功能有 Solidity 调试，跟踪调用堆栈、console.log()和交易失败时的明确错误信息提示等。
+它可以帮助开发人员管理和自动化构建智能合约和 dApps 过程中固有的重复性任务，并围绕这一工作流程轻松引入更多功能。这意味着
+hardhat 在最核心的地方是编译、运行和测试智能合约。
+Hardhat 内置了 Hardhat 网络，这是一个专为开发设计的本地以太坊网络。主要功能有 Solidity 调试，跟踪调用堆栈、console.log()
+和交易失败时的明确错误信息提示等。
 
-Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务运行器。它是围绕任务和插件的概念设计的。每次你从 CLI 运行 Hardhat 时，你都在运行一个任务。例如，`npx hardhat compile` 运行的是内置的 compile 任务。任务可以调用其他任务，允许定义复杂的工作流程。用户和插件可以覆盖现有的任务，从而定制和扩展工作流程。
+Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务运行器。它是围绕任务和插件的概念设计的。每次你从 CLI 运行
+Hardhat 时，你都在运行一个任务。例如，`npx hardhat compile` 运行的是内置的 compile
+任务。任务可以调用其他任务，允许定义复杂的工作流程。用户和插件可以覆盖现有的任务，从而定制和扩展工作流程。
 
 ## 准备工作 - Preparatory Work
 
 在开始学习 hardhat 之前，你需要提前了解以下知识点：
 
-- dotenv 将私钥存放在 `.env` 文件中可以避免将私钥暴露在服务器上，格式为 "PRIVATE_KEY=xxxx", 然后代码自动从中读取，详情参考 [dotenv](https://www.npmjs.com/package/dotenv)
-- npx 想要解决的主要问题，就是调用项目内部安装的模块。详情参考 [npx 使用教程](https://www.ruanyifeng.com/blog/2019/02/npx.html)
-- ethers.js 与以太坊网络交互的工具库，相比 web3.js 接口设计更加易于使用（注意 v5 和 v4 接口差别较大） [ethers.js v5 文档](https://docs.ethers.io/v5/)
+- dotenv 将私钥存放在 `.env` 文件中可以避免将私钥暴露在服务器上，格式为 "PRIVATE_KEY=xxxx",
+  然后代码自动从中读取，详情参考 [dotenv](https://www.npmjs.com/package/dotenv)
+- npx
+  想要解决的主要问题，就是调用项目内部安装的模块。详情参考 [npx 使用教程](https://www.ruanyifeng.com/blog/2019/02/npx.html)
+- ethers.js 与以太坊网络交互的工具库，相比 web3.js 接口设计更加易于使用（注意 v5 和 v4
+  接口差别较大） [ethers.js v5 文档](https://docs.ethers.io/v5/)
 - mocha.js 测试框架，用于编写合约交互的测试案例 [mochajs 文档](https://mochajs.org/#getting-started)
-- chai.js 断言库，辅助测试脚本编写，使用方法参考 [ethereum-waffle chai 使用文档](https://ethereum-waffle.readthedocs.io/en/latest/matchers.html)
+- chai.js
+  断言库，辅助测试脚本编写，使用方法参考 [ethereum-waffle chai 使用文档](https://ethereum-waffle.readthedocs.io/en/latest/matchers.html)
 - infura 连接区块链的节点服务商，有免费的使用额度，足够开发调试使用 [infura 官网](https://infura.io/)
 
 ## 项目结构和配置 hardhat
@@ -79,50 +86,51 @@ require('@nomiclabs/hardhat-waffle');
 require('dotenv').config();
 
 module.exports = {
-  networks: {
-    // hardhat 内置测试网络（选填）
-    hardhat: {
-      // 可以设置一个固定的gasPrice，在测试gas消耗的时候会很有用
-      gasPrice: 1000000000,
-    },
-    // 你可以在这里配置任意网络
-    // goerli 测试网络
-    goerli: {
-      // 请将 INFURA_ID 替换成你自己的
-      // url: 'https://goerli.infura.io/v3/{INFURA_ID}',
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+    networks: {
+        // hardhat 内置测试网络（选填）
+        hardhat: {
+            // 可以设置一个固定的gasPrice，在测试gas消耗的时候会很有用
+            gasPrice: 1000000000,
+        },
+        // 你可以在这里配置任意网络
+        // goerli 测试网络
+        goerli: {
+            // 请将 INFURA_ID 替换成你自己的
+            // url: 'https://goerli.infura.io/v3/{INFURA_ID}',
+            url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
 
-      // 填写测试账户的私钥，可填写多个
-      accounts: [process.env.PRIVATE_KEY, ...]
+            // 填写测试账户的私钥，可填写多个
+            accounts: [process.env.PRIVATE_KEY, ...]
+        }
+    },
+    solidity: {
+        version: "0.8.0", // 合约编译的版本，必填
+        settings: { // 编译设置，选填
+            optimizer: {  // 优化设置
+                enabled: true,
+                runs: 200
+            }
+        }
+    },
+    // 项目路径配置，可指定任意路径，但下列是常用的一种结构
+    // sources, tests, scripts 下的目录文件会被自动逐一执行
+    paths: {
+        sources: "./contracts", // 合约目录
+        tests: "./test",  // 测试文件目录
+        cache: "./cache", // 缓存目录，由hardhat自动生成
+        artifacts: "./artifacts" // 编译结果目录，由hardhat自动生成
+    },
+    // 测试框架设置
+    mocha: {
+        timeout: 20000  // 运行单元测试的最大等待时间
     }
-  },
-  solidity: {
-    version: "0.8.0", // 合约编译的版本，必填
-    settings: { // 编译设置，选填
-      optimizer: {  // 优化设置
-        enabled: true,
-        runs: 200
-      }
-    }
-  },
-  // 项目路径配置，可指定任意路径，但下列是常用的一种结构
-  // sources, tests, scripts 下的目录文件会被自动逐一执行
-  paths: {
-    sources: "./contracts", // 合约目录
-    tests: "./test",  // 测试文件目录
-    cache: "./cache", // 缓存目录，由hardhat自动生成
-    artifacts: "./artifacts" // 编译结果目录，由hardhat自动生成
-  },
-  // 测试框架设置
-  mocha: {
-    timeout: 20000  // 运行单元测试的最大等待时间
-  }
 }
 ```
 
 ### 内置 hardhat 网络
 
-hardhat 内置了一个特殊的安全测试网络，其名称也叫 `hardhat`, 通常你不需要对他进行特殊配置。该网络会模拟真实区块链网络的运行机制，并为你生成好 10 个测试账户（和 truffle 类似）。
+hardhat 内置了一个特殊的安全测试网络，其名称也叫 `hardhat`, 通常你不需要对他进行特殊配置。该网络会模拟真实区块链网络的运行机制，并为你生成好
+10 个测试账户（和 truffle 类似）。
 
 ### 使用插件
 
@@ -188,6 +196,7 @@ npx hardhat test ./test/Greeter.test.js
 ```
 
 ### run
+
 运行指定脚本。如果不指定运行网络，会默认在 hardhat 内置网络内运行 (Hardhat Network)。
 
 ```sh
@@ -207,9 +216,9 @@ npx hardhat run ./scripts/deploy.js --network goerli
 在 `hardhat.config.js` 添加配置：
 
 ```js
- etherscan: {
-   apiKey: "<etherscan的api key>",
- }
+etherscan: {
+    apiKey: "<etherscan的api key>"
+}
 ```
 
 运行脚本：
@@ -229,11 +238,11 @@ hardhat 本身预设了一些程序任务，例如编译合约，运行测试文
 ...
 
 task('accounts', 'Prints the list of accounts', async () => {
-  const accounts = await ethers.getSigners();
+    const accounts = await ethers.getSigners();
 
-  for (const account of accounts) {
-    console.log(account.address);
-  }
+    for (const account of accounts) {
+        console.log(account.address);
+    }
 });
 
 ...
@@ -265,12 +274,14 @@ npx hardhat console
 ```js
 // hardhat console mode:
 // 可以直接使用 async/await 语法
-> await ethers.provider.getBlockNumber()  // 0
+>
+await ethers.provider.getBlockNumber()  // 0
 ```
 
 ### console.log debug
 
-hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印日志，方便调试和测试。**此方法仅在 hardhat 内置网络中运行有效。**
+hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印日志，方便调试和测试。**此方法仅在 hardhat 内置网络中运行有效。
+**
 
 在合约中引入 `hardhat/console.sol` 即可使用：
 
@@ -278,12 +289,12 @@ hardhat 提供了一个 `console.log()` 方法，可以在合约运行时打印�
 import "hardhat/console.sol";
 
 contract Greeter {
-  ...
+...
 
-  function setGreeting(string memory _greeting) public {
-    console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
-    greeting = _greeting;
-  }
+function setGreeting(string memory _greeting) public {
+console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
+greeting = _greeting;
+}
 
 }
 ```
@@ -293,7 +304,6 @@ contract Greeter {
 ```sh
 Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 ```
-
 
 ## 实操流程
 
@@ -325,12 +335,9 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
    npx hardhat verify --network goerli <network-name> <contract-address>
    ```
 
-    `network-name` ：你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
+   `network-name` ：你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
 
-    `contract-address` ：上一步部署的合约地址。
-
-
-
+   `contract-address` ：上一步部署的合约地址。
 
 ## 参考文档
 
