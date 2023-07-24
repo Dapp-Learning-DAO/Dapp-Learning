@@ -11,7 +11,7 @@ contract ERC1155Mintable is ERC1155 {
     bytes4 constant private INTERFACE_SIGNATURE_URI = 0x0e89341c;
 
     // id => creators
-    mapping (uint256 => address) public creators;
+    mapping(uint256 => address) public creators;
 
     // A nonce to ensure we have a unique id each time we mint.
     uint256 public nonce;
@@ -33,7 +33,7 @@ contract ERC1155Mintable is ERC1155 {
     }
 
     // Creates a new token type and assings _initialSupply to minter
-    function create(uint256 _initialSupply, string calldata _uri) external returns(uint256 _id) {
+    function create(uint256 _initialSupply, string calldata _uri) external returns (uint256 _id) {
 
         _id = ++nonce;
         creators[_id] = msg.sender;

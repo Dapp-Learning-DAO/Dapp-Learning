@@ -9,8 +9,8 @@ import "./ERC1155MixedFungible.sol";
 contract ERC1155MixedFungibleMintable is ERC1155MixedFungible {
 
     uint256 nonce;
-    mapping (uint256 => address) public creators;
-    mapping (uint256 => uint256) public maxIndex;
+    mapping(uint256 => address) public creators;
+    mapping(uint256 => uint256) public maxIndex;
 
     modifier creatorOnly(uint256 _id) {
         require(creators[_id] == msg.sender);
@@ -20,15 +20,15 @@ contract ERC1155MixedFungibleMintable is ERC1155MixedFungible {
     // This function only creates the type.
     function create(
         string calldata _uri,
-        bool   _isNF)
-    external returns(uint256 _type) {
+        bool _isNF)
+    external returns (uint256 _type) {
 
         // Store the type in the upper 128 bits
         _type = (++nonce << 128);
 
         // Set a flag if this is an NFI.
         if (_isNF)
-          _type = _type | TYPE_NF_BIT;
+            _type = _type | TYPE_NF_BIT;
 
         // This will allow restricted access to creators.
         creators[_type] = msg.sender;
@@ -51,7 +51,7 @@ contract ERC1155MixedFungibleMintable is ERC1155MixedFungible {
 
         for (uint256 i = 0; i < _to.length; ++i) {
             address dst = _to[i];
-            uint256 id  = _type | index + i;
+            uint256 id = _type | index + i;
 
             nfOwners[id] = dst;
 

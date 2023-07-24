@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 import "./ERC721.sol";
 import "./extensions/ERC721Enumerable.sol";
@@ -76,7 +76,6 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControlEnumerable, ERC
         _tokenIdTracker.increment();
     }
 
-
     /**
      * @dev Pauses all token transfers.
      *
@@ -122,7 +121,7 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControlEnumerable, ERC
     using Strings for uint256;
 
     // Optional mapping for token URIs
-    mapping (uint256 => string) private _tokenURIs;
+    mapping(uint256 => string) private _tokenURIs;
 
     /**
      * @dev See {IERC721Metadata-tokenURI}.
@@ -176,7 +175,7 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControlEnumerable, ERC
     }
 
     //
-    function mintWithTokenURI(address to, string memory tokenURI) public  returns (bool) {
+    function mintWithTokenURI(address to, string memory tokenURI) public returns (bool) {
         _mint(to, _tokenIdTracker.current());
         _setTokenURI(_tokenIdTracker.current(), tokenURI);
         _tokenIdTracker.increment();

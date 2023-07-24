@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 import "./AccessControl.sol";
 import "./EnumerableSet.sol";
@@ -10,6 +10,7 @@ import "./EnumerableSet.sol";
  */
 interface IAccessControlEnumerable {
     function getRoleMember(bytes32 role, uint256 index) external view returns (address);
+
     function getRoleMemberCount(bytes32 role) external view returns (uint256);
 }
 
@@ -19,7 +20,7 @@ interface IAccessControlEnumerable {
 abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
-    mapping (bytes32 => EnumerableSet.AddressSet) private _roleMembers;
+    mapping(bytes32 => EnumerableSet.AddressSet) private _roleMembers;
 
     /**
      * @dev See {IERC165-supportsInterface}.

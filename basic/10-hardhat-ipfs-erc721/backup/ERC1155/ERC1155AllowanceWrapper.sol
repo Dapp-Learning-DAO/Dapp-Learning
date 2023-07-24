@@ -62,7 +62,7 @@ contract AllowanceWrapper is IERC1155, ERC165
     external
     view
     returns (bool) {
-         ERC165(address(targetContract)).supportsInterface(_interfaceId);
+        ERC165(address(targetContract)).supportsInterface(_interfaceId);
     }
 
     /**

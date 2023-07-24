@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 import "./IERC721.sol";
 import "./extensions/IERC721Receiver.sol";
@@ -26,16 +26,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     string private _symbol;
 
     // Mapping from token ID to owner address
-    mapping (uint256 => address) private _owners;
+    mapping(uint256 => address) private _owners;
 
     // Mapping owner address to token count
-    mapping (address => uint256) private _balances;
+    mapping(address => uint256) private _balances;
 
     // Mapping from token ID to approved address
-    mapping (uint256 => address) private _tokenApprovals;
+    mapping(uint256 => address) private _tokenApprovals;
 
     // Mapping from owner to operator approvals
-    mapping (address => mapping (address => bool)) private _operatorApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /**
      * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
@@ -50,7 +50,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool) {
         return interfaceId == type(IERC721).interfaceId
-            || interfaceId == type(IERC721Metadata).interfaceId
+        || interfaceId == type(IERC721Metadata).interfaceId
             || super.supportsInterface(interfaceId);
     }
 
@@ -338,7 +338,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * @return bool whether the call correctly returned the expected magic value
      */
     function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory _data)
-        private returns (bool)
+    private returns (bool)
     {
         if (to.isContract()) {
             try IERC721Receiver(to).onERC721Received(_msgSender(), from, tokenId, _data) returns (bytes4 retval) {
@@ -372,5 +372,5 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual { }
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual {}
 }

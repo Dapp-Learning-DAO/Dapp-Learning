@@ -1,6 +1,5 @@
 pragma solidity ^0.5.0;
 
-
 /**
  * Utility library of inline functions on addresses
  */
@@ -22,7 +21,7 @@ library Address {
         // TODO Check this again before the Serenity release, because all addresses will be
         // contracts then.
         // solium-disable-next-line security/no-inline-assembly
-        assembly { size := extcodesize(account) }
+        assembly {size := extcodesize(account)}
         return size > 0;
     }
 

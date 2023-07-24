@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 /**
  * @dev Library for managing
@@ -42,7 +42,7 @@ library EnumerableSet {
 
         // Position of the value in the `values` array, plus 1 because index 0
         // means a value is not in the set.
-        mapping (bytes32 => uint256) _indexes;
+        mapping(bytes32 => uint256) _indexes;
     }
 
     /**
@@ -116,8 +116,8 @@ library EnumerableSet {
         return set._values.length;
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -170,8 +170,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -224,8 +224,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -237,7 +237,6 @@ library EnumerableSet {
     function at(AddressSet storage set, uint256 index) internal view returns (address) {
         return address(uint160(uint256(_at(set._inner, index))));
     }
-
 
     // UintSet
 
@@ -279,8 +278,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.

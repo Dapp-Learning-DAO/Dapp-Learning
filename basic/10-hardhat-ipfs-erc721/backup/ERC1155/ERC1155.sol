@@ -15,10 +15,10 @@ contract ERC1155 is IERC1155, ERC165
     bytes4 constant public ERC1155_BATCH_ACCEPTED = 0xac007889; // keccak256("accept_batch_erc1155_tokens()")
 
     // id => (owner => balance)
-    mapping (uint256 => mapping(address => uint256)) internal balances;
+    mapping(uint256 => mapping(address => uint256)) internal balances;
 
     // owner => (operator => approved)
-    mapping (address => mapping(address => bool)) internal operatorApproval;
+    mapping(address => mapping(address => bool)) internal operatorApproval;
 
 /////////////////////////////////////////// ERC165 //////////////////////////////////////////////
 
@@ -41,12 +41,12 @@ contract ERC1155 is IERC1155, ERC165
     public
     view
     returns (bool) {
-         if (_interfaceId == INTERFACE_SIGNATURE_ERC165 ||
-             _interfaceId == INTERFACE_SIGNATURE_ERC1155) {
+        if (_interfaceId == INTERFACE_SIGNATURE_ERC165 ||
+            _interfaceId == INTERFACE_SIGNATURE_ERC1155) {
             return true;
-         }
+        }
 
-         return false;
+        return false;
     }
 
 /////////////////////////////////////////// ERC1155 //////////////////////////////////////////////
@@ -73,7 +73,7 @@ contract ERC1155 is IERC1155, ERC165
         // SafeMath will throw with insuficient funds _from
         // or if _id is not valid (balance will be 0)
         balances[_id][_from] = balances[_id][_from].sub(_value);
-        balances[_id][_to]   = _value.add(balances[_id][_to]);
+        balances[_id][_to] = _value.add(balances[_id][_to]);
 
         emit TransferSingle(msg.sender, _from, _to, _id, _value);
 
@@ -110,7 +110,7 @@ contract ERC1155 is IERC1155, ERC165
             // SafeMath will throw with insuficient funds _from
             // or if _id is not valid (balance will be 0)
             balances[id][_from] = balances[id][_from].sub(value);
-            balances[id][_to]   = value.add(balances[id][_to]);
+            balances[id][_to] = value.add(balances[id][_to]);
         }
 
         // MUST emit event
@@ -135,7 +135,6 @@ contract ERC1155 is IERC1155, ERC165
         // there is no extra cost to also privide a querry function.
         return balances[_id][_owner];
     }
-
 
     /**
         @notice Get the balance of multiple account/token pairs
@@ -193,7 +192,7 @@ contract ERC1155 is IERC1155, ERC165
         );
         (success); // ignore warning on unused var
         bytes4 receiverRet = 0x0;
-        if(returnData.length > 0) {
+        if (returnData.length > 0) {
             assembly {
                 receiverRet := mload(add(returnData, 32))
             }
@@ -221,7 +220,7 @@ contract ERC1155 is IERC1155, ERC165
         );
         (success); // ignore warning on unused var
         bytes4 receiverRet = 0x0;
-        if(returnData.length > 0) {
+        if (returnData.length > 0) {
             assembly {
                 receiverRet := mload(add(returnData, 32))
             }

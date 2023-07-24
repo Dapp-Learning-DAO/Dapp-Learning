@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 import "./Context.sol";
 import "./Strings.sol";
@@ -11,9 +11,13 @@ import "../ERC165.sol";
  */
 interface IAccessControl {
     function hasRole(bytes32 role, address account) external view returns (bool);
+
     function getRoleAdmin(bytes32 role) external view returns (bytes32);
+
     function grantRole(bytes32 role, address account) external;
+
     function revokeRole(bytes32 role, address account) external;
+
     function renounceRole(bytes32 role, address account) external;
 }
 
@@ -57,11 +61,11 @@ interface IAccessControl {
  */
 abstract contract AccessControl is Context, IAccessControl, ERC165 {
     struct RoleData {
-        mapping (address => bool) members;
+        mapping(address => bool) members;
         bytes32 adminRole;
     }
 
-    mapping (bytes32 => RoleData) private _roles;
+    mapping(bytes32 => RoleData) private _roles;
 
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
 
@@ -130,7 +134,7 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
      *  /^AccessControl: account (0x[0-9a-f]{20}) is missing role (0x[0-9a-f]{32})$/
      */
     function _checkRole(bytes32 role, address account) internal view {
-        if(!hasRole(role, account)) {
+        if (!hasRole(role, account)) {
             revert(string(abi.encodePacked(
                 "AccessControl: account ",
                 Strings.toHexString(uint160(account), 20),
