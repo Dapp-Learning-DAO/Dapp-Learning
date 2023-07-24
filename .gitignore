@@ -42,3 +42,5 @@ yarn-error.log*
 .idea
 .vscode
 mnemonic.txt
+**/.idea
+

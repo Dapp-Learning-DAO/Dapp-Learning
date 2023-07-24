@@ -1,7 +1,7 @@
 // Sources flattened with hardhat v2.3.0 https://hardhat.org
 
 // File contracts/IERC20.sol
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
@@ -76,7 +76,6 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-
 // File contracts/extensions/IERC20Metadata.sol
 
 /**
@@ -101,9 +100,7 @@ interface IERC20Metadata is IERC20 {
     function decimals() external view returns (uint8);
 }
 
-
 // File contracts/utils/Context.sol
-
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -125,7 +122,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
 
 // File contracts/ERC20.sol
 
@@ -154,9 +150,9 @@ abstract contract Context {
  * allowances. See {IERC20-approve}.
  */
 contract ERC20 is Context, IERC20, IERC20Metadata {
-    mapping (address => uint256) private _balances;
+    mapping(address => uint256) private _balances;
 
-    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping(address => mapping(address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
 
@@ -431,9 +427,8 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {}
 }
-
 
 // File contracts/utils/Strings.sol
 
@@ -502,12 +497,7 @@ library Strings {
 
 }
 
-
 // File contracts/extensions/IERC165.sol
-
-
-
-
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -530,12 +520,7 @@ interface IERC165 {
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
 
-
 // File contracts/extensions/ERC165.sol
-
-
-
-
 
 /**
  * @dev Implementation of the {IERC165} interface.
@@ -560,7 +545,6 @@ abstract contract ERC165 is IERC165 {
     }
 }
 
-
 // File contracts/extensions/AccessControl.sol
 
 /**
@@ -568,9 +552,13 @@ abstract contract ERC165 is IERC165 {
  */
 interface IAccessControl {
     function hasRole(bytes32 role, address account) external view returns (bool);
+
     function getRoleAdmin(bytes32 role) external view returns (bytes32);
+
     function grantRole(bytes32 role, address account) external;
+
     function revokeRole(bytes32 role, address account) external;
+
     function renounceRole(bytes32 role, address account) external;
 }
 
@@ -614,11 +602,11 @@ interface IAccessControl {
  */
 abstract contract AccessControl is Context, IAccessControl, ERC165 {
     struct RoleData {
-        mapping (address => bool) members;
+        mapping(address => bool) members;
         bytes32 adminRole;
     }
 
-    mapping (bytes32 => RoleData) private _roles;
+    mapping(bytes32 => RoleData) private _roles;
 
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
 
@@ -687,7 +675,7 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
      *  /^AccessControl: account (0x[0-9a-f]{20}) is missing role (0x[0-9a-f]{32})$/
      */
     function _checkRole(bytes32 role, address account) internal view {
-        if(!hasRole(role, account)) {
+        if (!hasRole(role, account)) {
             revert(string(abi.encodePacked(
                 "AccessControl: account ",
                 Strings.toHexString(uint160(account), 20),
@@ -799,7 +787,6 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
     }
 }
 
-
 // File contracts/utils/EnumerableSet.sol
 
 /**
@@ -842,7 +829,7 @@ library EnumerableSet {
 
         // Position of the value in the `values` array, plus 1 because index 0
         // means a value is not in the set.
-        mapping (bytes32 => uint256) _indexes;
+        mapping(bytes32 => uint256) _indexes;
     }
 
     /**
@@ -916,8 +903,8 @@ library EnumerableSet {
         return set._values.length;
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -970,8 +957,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -1024,8 +1011,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -1037,7 +1024,6 @@ library EnumerableSet {
     function at(AddressSet storage set, uint256 index) internal view returns (address) {
         return address(uint160(uint256(_at(set._inner, index))));
     }
-
 
     // UintSet
 
@@ -1079,8 +1065,8 @@ library EnumerableSet {
         return _length(set._inner);
     }
 
-   /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    /**
+     * @dev Returns the value stored at position `index` in the set. O(1).
     *
     * Note that there are no guarantees on the ordering of values inside the
     * array, and it may change when more values are added or removed.
@@ -1094,19 +1080,14 @@ library EnumerableSet {
     }
 }
 
-
 // File contracts/extensions/AccessControlEnumerable.sol
-
-
-
-
-
 
 /**
  * @dev External interface of AccessControlEnumerable declared to support ERC165 detection.
  */
 interface IAccessControlEnumerable {
     function getRoleMember(bytes32 role, uint256 index) external view returns (address);
+
     function getRoleMemberCount(bytes32 role) external view returns (uint256);
 }
 
@@ -1116,7 +1097,7 @@ interface IAccessControlEnumerable {
 abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
-    mapping (bytes32 => EnumerableSet.AddressSet) private _roleMembers;
+    mapping(bytes32 => EnumerableSet.AddressSet) private _roleMembers;
 
     /**
      * @dev See {IERC165-supportsInterface}.
@@ -1183,7 +1164,6 @@ abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessCon
     }
 }
 
-
 // File contracts/extensions/draft-IERC20Permit.sol
 
 /**
@@ -1234,12 +1214,7 @@ interface IERC20Permit {
     function DOMAIN_SEPARATOR() external view returns (bytes32);
 }
 
-
 // File contracts/utils/cryptography/ECDSA.sol
-
-
-
-
 
 /**
  * @dev Elliptic Curve Digital Signature Algorithm (ECDSA) operations.
@@ -1353,12 +1328,7 @@ library ECDSA {
     }
 }
 
-
 // File contracts/utils/cryptography/draft-EIP712.sol
-
-
-
-
 
 /**
  * @dev https://eips.ethereum.org/EIPS/eip-712[EIP 712] is a standard for hashing and signing of typed structured data.
@@ -1457,12 +1427,7 @@ abstract contract EIP712 {
     }
 }
 
-
 // File contracts/utils/Counters.sol
-
-
-
-
 
 /**
  * @title Counters
@@ -1503,16 +1468,7 @@ library Counters {
     }
 }
 
-
 // File contracts/extensions/draft-ERC20Permit.sol
-
-
-
-
-
-
-
-
 
 /**
  * @dev Implementation of the ERC20 Permit extension allowing approvals to be made via signatures, as defined in
@@ -1527,7 +1483,7 @@ library Counters {
 abstract contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
     using Counters for Counters.Counter;
 
-    mapping (address => Counters.Counter) private _nonces;
+    mapping(address => Counters.Counter) private _nonces;
 
     // solhint-disable-next-line var-name-mixedcase
     bytes32 private immutable _PERMIT_TYPEHASH = keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
@@ -1593,13 +1549,7 @@ abstract contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
     }
 }
 
-
 // File contracts/extensions/ERC20Burnable.sol
-
-
-
-
-
 
 /**
  * @dev Extension of {ERC20} that allows token holders to destroy both their own
@@ -1637,12 +1587,7 @@ abstract contract ERC20Burnable is Context, ERC20 {
     }
 }
 
-
 // File contracts/extensions/ERC20Capped.sol
-
-
-
-
 
 /**
  * @dev Extension of {ERC20} that adds a cap to the supply of tokens.
@@ -1675,12 +1620,7 @@ abstract contract ERC20Capped is ERC20 {
     }
 }
 
-
 // File contracts/extensions/IERC3156.sol
-
-
-
-
 
 /**
  * @dev Interface of the ERC3156 FlashBorrower, as defined in
@@ -1745,15 +1685,9 @@ interface IERC3156FlashLender {
         uint256 amount,
         bytes calldata data
     ) external returns (bool);
- }
-
+}
 
 // File contracts/extensions/ERC20FlashMint.sol
-
-
-
-
-
 
 /**
  * @dev Implementation of the ERC3156 Flash loans extension, as defined in
@@ -1811,7 +1745,7 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
         uint256 amount,
         bytes calldata data
     )
-        public virtual override returns (bool)
+    public virtual override returns (bool)
     {
         uint256 fee = flashFee(token, amount);
         _mint(address(receiver), amount);
@@ -1824,12 +1758,7 @@ abstract contract ERC20FlashMint is ERC20, IERC3156FlashLender {
     }
 }
 
-
 // File contracts/extensions/Pausable.sol
-
-
-
-
 
 /**
  * @dev Contract module which allows children to implement an emergency stop
@@ -1916,13 +1845,7 @@ abstract contract Pausable is Context {
     }
 }
 
-
 // File contracts/extensions/ERC20Pausable.sol
-
-
-
-
-
 
 /**
  * @dev ERC20 token with pausable token transfers, minting and burning.
@@ -1946,12 +1869,7 @@ abstract contract ERC20Pausable is ERC20, Pausable {
     }
 }
 
-
 // File contracts/utils/Math.sol
-
-
-
-
 
 /**
  * @dev Standard math utilities missing in the Solidity language.
@@ -1992,19 +1910,14 @@ library Math {
     }
 }
 
-
 // File contracts/utils/Arrays.sol
-
-
-
-
 
 /**
  * @dev Collection of functions related to array types.
  */
 library Arrays {
-   /**
-     * @dev Searches a sorted `array` and returns the first index that contains
+    /**
+      * @dev Searches a sorted `array` and returns the first index that contains
      * a value greater or equal to `element`. If no such index exists (i.e. all
      * values in the array are strictly less than `element`), the array length is
      * returned. Time complexity O(log n).
@@ -2041,14 +1954,7 @@ library Arrays {
     }
 }
 
-
 // File contracts/extensions/ERC20Snapshot.sol
-
-
-
-
-
-
 
 /**
  * @dev This contract extends an ERC20 token with a snapshot mechanism. When a snapshot is created, the balances and
@@ -2096,7 +2002,7 @@ abstract contract ERC20Snapshot is ERC20 {
         uint256[] values;
     }
 
-    mapping (address => Snapshots) private _accountBalanceSnapshots;
+    mapping(address => Snapshots) private _accountBalanceSnapshots;
     Snapshots private _totalSupplySnapshots;
 
     // Snapshot ids increase monotonically, with the first value being 1. An id of 0 is invalid.
@@ -2155,7 +2061,7 @@ abstract contract ERC20Snapshot is ERC20 {
     /**
      * @dev Retrieves the total supply at the time `snapshotId` was created.
      */
-    function totalSupplyAt(uint256 snapshotId) public view virtual returns(uint256) {
+    function totalSupplyAt(uint256 snapshotId) public view virtual returns (uint256) {
         (bool snapshotted, uint256 value) = _valueAt(snapshotId, _totalSupplySnapshots);
 
         return snapshotted ? value : totalSupply();
@@ -2164,25 +2070,25 @@ abstract contract ERC20Snapshot is ERC20 {
     // Update balance and/or total supply snapshots before the values are modified. This is implemented
     // in the _beforeTokenTransfer hook, which is executed for _mint, _burn, and _transfer operations.
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override {
-      super._beforeTokenTransfer(from, to, amount);
+        super._beforeTokenTransfer(from, to, amount);
 
-      if (from == address(0)) {
-        // mint
-        _updateAccountSnapshot(to);
-        _updateTotalSupplySnapshot();
-      } else if (to == address(0)) {
-        // burn
-        _updateAccountSnapshot(from);
-        _updateTotalSupplySnapshot();
-      } else {
-        // transfer
-        _updateAccountSnapshot(from);
-        _updateAccountSnapshot(to);
-      }
+        if (from == address(0)) {
+            // mint
+            _updateAccountSnapshot(to);
+            _updateTotalSupplySnapshot();
+        } else if (to == address(0)) {
+            // burn
+            _updateAccountSnapshot(from);
+            _updateTotalSupplySnapshot();
+        } else {
+            // transfer
+            _updateAccountSnapshot(from);
+            _updateAccountSnapshot(to);
+        }
     }
 
     function _valueAt(uint256 snapshotId, Snapshots storage snapshots)
-        private view returns (bool, uint256)
+    private view returns (bool, uint256)
     {
         require(snapshotId > 0, "ERC20Snapshot: id is 0");
         require(snapshotId <= _getCurrentSnapshotId(), "ERC20Snapshot: nonexistent id");
@@ -2235,12 +2141,7 @@ abstract contract ERC20Snapshot is ERC20 {
     }
 }
 
-
 // File contracts/utils/SafeCast.sol
-
-
-
-
 
 /**
  * @dev Wrappers over Solidity's uintXX/intXX casting operators with added overflow
@@ -2479,15 +2380,7 @@ library SafeCast {
     }
 }
 
-
 // File contracts/extensions/ERC20Votes.sol
-
-
-
-
-
-
-
 
 /**
  * @dev Extension of ERC20 to support Compound-like voting and delegation. This version is more generic than Compound's,
@@ -2508,14 +2401,14 @@ library SafeCast {
  */
 abstract contract ERC20Votes is ERC20Permit {
     struct Checkpoint {
-        uint32  fromBlock;
+        uint32 fromBlock;
         uint224 votes;
     }
 
     bytes32 private constant _DELEGATION_TYPEHASH = keccak256("Delegation(address delegatee,uint256 nonce,uint256 expiry)");
 
-    mapping (address => address) private _delegates;
-    mapping (address => Checkpoint[]) private _checkpoints;
+    mapping(address => address) private _delegates;
+    mapping(address => Checkpoint[]) private _checkpoints;
     Checkpoint[] private _totalSupplyCheckpoints;
 
     /**
@@ -2622,7 +2515,7 @@ abstract contract ERC20Votes is ERC20Permit {
      * @dev Delegates votes from signer to `delegatee`
      */
     function delegateBySig(address delegatee, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
-        public virtual
+    public virtual
     {
         require(block.timestamp <= expiry, "ERC20Votes: signature expired");
         address signer = ECDSA.recover(
@@ -2707,7 +2600,7 @@ abstract contract ERC20Votes is ERC20Permit {
         function (uint256, uint256) view returns (uint256) op,
         uint256 delta
     )
-        private returns (uint256 oldWeight, uint256 newWeight)
+    private returns (uint256 oldWeight, uint256 newWeight)
     {
         uint256 pos = ckpts.length;
         oldWeight = pos == 0 ? 0 : ckpts[pos - 1].votes;
@@ -2732,12 +2625,7 @@ abstract contract ERC20Votes is ERC20Permit {
     }
 }
 
-
 // File contracts/extensions/ERC20VotesComp.sol
-
-
-
-
 
 /**
  * @dev Extension of ERC20 to support Compound's voting and delegation. This version exactly matches Compound's
@@ -2780,11 +2668,7 @@ abstract contract ERC20VotesComp is ERC20Votes {
     }
 }
 
-
 // File contracts/presets/ERC20PresetFixedSupply.sol
-
-
-
 
 /**
  * @dev {ERC20} token, including:
@@ -2844,7 +2728,7 @@ library Address {
 
         uint256 size;
         // solhint-disable-next-line no-inline-assembly
-        assembly { size := extcodesize(account) }
+        assembly {size := extcodesize(account)}
         return size > 0;
     }
 
@@ -2868,7 +2752,7 @@ library Address {
         require(address(this).balance >= amount, "Address: insufficient balance");
 
         // solhint-disable-next-line avoid-low-level-calls, avoid-call-value
-        (bool success, ) = recipient.call{ value: amount }("");
+        (bool success,) = recipient.call{value: amount}("");
         require(success, "Address: unable to send value, recipient may have reverted");
     }
 
@@ -2891,7 +2775,7 @@ library Address {
      * _Available since v3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
-      return functionCall(target, data, "Address: low-level call failed");
+        return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
@@ -2930,7 +2814,7 @@ library Address {
         require(isContract(target), "Address: call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success, bytes memory returndata) = target.call{ value: value }(data);
+        (bool success, bytes memory returndata) = target.call{value: value}(data);
         return _verifyCallResult(success, returndata, errorMessage);
     }
 
@@ -2982,7 +2866,7 @@ library Address {
         return _verifyCallResult(success, returndata, errorMessage);
     }
 
-    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns(bytes memory) {
+    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns (bytes memory) {
         if (success) {
             return returndata;
         } else {
@@ -3002,13 +2886,7 @@ library Address {
     }
 }
 
-
 // File contracts/utils/SafeERC20.sol
-
-
-
-
-
 
 /**
  * @title SafeERC20
@@ -3081,12 +2959,7 @@ library SafeERC20 {
     }
 }
 
-
 // File contracts/utils/TokenTimelock.sol
-
-
-
-
 
 /**
  * @dev A token holder contract that will allow a beneficiary to extract the
@@ -3150,12 +3023,7 @@ contract TokenTimelock {
     }
 }
 
-
 // File contracts/utils/cryptography/MerkleProof.sol
-
-
-
-
 
 /**
  * @dev These functions deal with verification of Merkle Trees proofs.
@@ -3193,16 +3061,7 @@ library MerkleProof {
     }
 }
 
-
 // File contracts/presets/ERC20PresetMinterPauser.sol
-
-
-
-
-
-
-
-
 
 /**
  * @dev {ERC20} token, including:
@@ -3229,10 +3088,10 @@ contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burna
      * See {ERC20-constructor}.
      */
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {
-    _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
 
-    _setupRole(MINTER_ROLE, _msgSender());
-    _setupRole(PAUSER_ROLE, _msgSender());
+        _setupRole(MINTER_ROLE, _msgSender());
+        _setupRole(PAUSER_ROLE, _msgSender());
     }
 
     /**
@@ -3245,8 +3104,8 @@ contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burna
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(address to, uint256 amount) public virtual {
-    require(hasRole(MINTER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have minter role to mint");
-    _mint(to, amount);
+        require(hasRole(MINTER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have minter role to mint");
+        _mint(to, amount);
     }
 
     /**
@@ -3259,8 +3118,8 @@ contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burna
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to pause");
-    _pause();
+        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to pause");
+        _pause();
     }
 
     /**
@@ -3273,15 +3132,14 @@ contract ERC20PresetMinterPauser is Context, AccessControlEnumerable, ERC20Burna
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to unpause");
-    _unpause();
+        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC20PresetMinterPauser: must have pauser role to unpause");
+        _unpause();
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Pausable) {
-    super._beforeTokenTransfer(from, to, amount);
+        super._beforeTokenTransfer(from, to, amount);
     }
 }
-
 
 
 contract SimpleToken is ERC20PresetMinterPauser {
@@ -3294,14 +3152,14 @@ contract SimpleToken is ERC20PresetMinterPauser {
     uint256 public  INITIAL_SUPPLY = 10000 * (10 ** uint256(18));
 
 
-    function decimals() public view  override returns (uint8) {
-    return _decimals;
+    function decimals() public view override returns (uint8) {
+        return _decimals;
     }
 
-    constructor(string memory name, string memory symbol, uint8  decimals, uint256  initial_supply) public  ERC20PresetMinterPauser(name, symbol){
-    _decimals = decimals;
-    INITIAL_SUPPLY = initial_supply * (10 ** uint256(decimals)) ;
-    _mint(msg.sender, INITIAL_SUPPLY);
+    constructor(string memory name, string memory symbol, uint8 decimals, uint256 initial_supply) public ERC20PresetMinterPauser(name, symbol){
+        _decimals = decimals;
+        INITIAL_SUPPLY = initial_supply * (10 ** uint256(decimals));
+        _mint(msg.sender, INITIAL_SUPPLY);
     }
 
 }
