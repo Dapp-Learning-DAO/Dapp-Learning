@@ -108,7 +108,7 @@ module.exports = {
         }
     },
     solidity: {
-        version: "0.8.0", // version of compiling contract, required
+        version: "0.8.12", // version of compiling contract, required
         settings: { // setting of compile, optional
             optimizer: {  // setting of optimizing
                 enabled: true,

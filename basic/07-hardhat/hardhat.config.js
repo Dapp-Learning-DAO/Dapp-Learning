@@ -19,15 +19,13 @@ function mnemonic() {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: '0.8.0',
+  solidity: '0.8.12',
   networks: {
     localhost: {
       url: 'http://localhost:8545',
       //gasPrice: 125000000000,  // you can adjust gasPrice locally to see how much it will cost on production
-      /*
-                                                  notice no mnemonic here? it will just use account 0 of the hardhat node to deploy
-                                                  (you can put in a mnemonic here to set the deployer locally)
-                                                */
+      // notice no mnemonic here? it will just use account 0 of the hardhat node to deploy
+      // (you can put in a mnemonic here to set the deployer locally)
     },
     goerli: {
       url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)

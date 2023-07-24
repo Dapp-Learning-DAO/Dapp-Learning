@@ -104,7 +104,7 @@ module.exports = {
         }
     },
     solidity: {
-        version: "0.8.0", // 合约编译的版本，必填
+        version: "0.8.12", // 合约编译的版本，必填
         settings: { // 编译设置，选填
             optimizer: {  // 优化设置
                 enabled: true,

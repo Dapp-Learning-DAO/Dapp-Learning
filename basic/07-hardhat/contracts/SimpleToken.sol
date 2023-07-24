@@ -1,7 +1,7 @@
 // Sources flattened with hardhat v2.3.0 https://hardhat.org
 
 // File contracts/IERC20.sol
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
