@@ -19,29 +19,35 @@ contract ERC1155MixedFungible is ERC1155 {
     // The top bit is a flag to tell if this is a NFI.
     uint256 constant TYPE_NF_BIT = 1 << 255;
 
-    mapping (uint256 => address) nfOwners;
+    mapping(uint256 => address) nfOwners;
 
     // Only to make code clearer. Should not be functions
-    function isNonFungible(uint256 _id) public pure returns(bool) {
+    function isNonFungible(uint256 _id) public pure returns (bool) {
         return _id & TYPE_NF_BIT == TYPE_NF_BIT;
     }
-    function isFungible(uint256 _id) public pure returns(bool) {
+
+    function isFungible(uint256 _id) public pure returns (bool) {
         return _id & TYPE_NF_BIT == 0;
     }
-    function getNonFungibleIndex(uint256 _id) public pure returns(uint256) {
+
+    function getNonFungibleIndex(uint256 _id) public pure returns (uint256) {
         return _id & NF_INDEX_MASK;
     }
-    function getNonFungibleBaseType(uint256 _id) public pure returns(uint256) {
+
+    function getNonFungibleBaseType(uint256 _id) public pure returns (uint256) {
         return _id & TYPE_MASK;
     }
-    function isNonFungibleBaseType(uint256 _id) public pure returns(bool) {
+
+    function isNonFungibleBaseType(uint256 _id) public pure returns (bool) {
         // A base type has the NF bit but does not have an index.
         return (_id & TYPE_NF_BIT == TYPE_NF_BIT) && (_id & NF_INDEX_MASK == 0);
     }
-    function isNonFungibleItem(uint256 _id) public pure returns(bool) {
+
+    function isNonFungibleItem(uint256 _id) public pure returns (bool) {
         // A base type has the NF bit but does has an index.
         return (_id & TYPE_NF_BIT == TYPE_NF_BIT) && (_id & NF_INDEX_MASK != 0);
     }
+
     function ownerOf(uint256 _id) public view returns (address) {
         return nfOwners[_id];
     }
@@ -61,7 +67,7 @@ contract ERC1155MixedFungible is ERC1155 {
             // balances[baseType][_to]   = balances[baseType][_to].add(_value);
         } else {
             balances[_id][_from] = balances[_id][_from].sub(_value);
-            balances[_id][_to]   = balances[_id][_to].add(_value);
+            balances[_id][_to] = balances[_id][_to].add(_value);
         }
 
         emit TransferSingle(msg.sender, _from, _to, _id, _value);
@@ -90,7 +96,7 @@ contract ERC1155MixedFungible is ERC1155 {
                 nfOwners[id] = _to;
             } else {
                 balances[id][_from] = balances[id][_from].sub(value);
-                balances[id][_to]   = value.add(balances[id][_to]);
+                balances[id][_to] = value.add(balances[id][_to]);
             }
         }
 
@@ -118,7 +124,7 @@ contract ERC1155MixedFungible is ERC1155 {
             if (isNonFungibleItem(id)) {
                 balances_[i] = nfOwners[id] == _owners[i] ? 1 : 0;
             } else {
-            	balances_[i] = balances[id][_owners[i]];
+                balances_[i] = balances[id][_owners[i]];
             }
         }
 

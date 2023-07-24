@@ -1,10 +1,16 @@
 {
-    "name": "",
-    "description": "XXXX",
-    "external_url": "ipfs",
-    "image": "ipfs/1.jpg",
-    "attributes": [
-      { "trait_type": "ATK", "value": "100" },
-      { "trait_type": "Nickname", "value": "NO1" }
-    ]
+  "name": "",
+  "description": "XXXX",
+  "external_url": "ipfs",
+  "image": "ipfs/1.jpg",
+  "attributes": [
+    {
+      "trait_type": "ATK",
+      "value": "100"
+    },
+    {
+      "trait_type": "Nickname",
+      "value": "NO1"
+    }
+  ]
 }

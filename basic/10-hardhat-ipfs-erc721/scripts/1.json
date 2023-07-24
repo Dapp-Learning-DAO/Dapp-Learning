@@ -1,15 +1,17 @@
 {
-    "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.", 
-    "external_url": "https://github.com", 
-    "image": "http://XX.XX.XX.XX/1.jpg", 
-    "name": "DL NFT",
-    "attributes": [ {
-        "trait_type": "Base", 
-        "value": "Starfish"
-      }, 
-      {
-        "trait_type": "Eyes", 
-        "value": "Big"
-      } 
-    ]
-  }
+  "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
+  "external_url": "https://github.com",
+  "image": "http://XX.XX.XX.XX/1.jpg",
+  "name": "DL NFT",
+  "attributes": [
+    {
+      "trait_type": "Base",
+      "value": "Starfish"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big"
+    }
+  ]
+}
+

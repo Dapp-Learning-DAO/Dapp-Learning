@@ -4,13 +4,23 @@
 
 It is designed to create persistent and distributed storage and shared files. It is a content-address
 
-Nodes in IPFS network build a distributed file systion. It is an open source project developed since 2014 by protocol Lab with the help of the open source community and originally designed by Juan Benet.
-IPFS is an equal distributed file system that tries to connect the same file system for all computing devices. In some ways, IPFS is similar to WWW.com and can also be regarded as an independent BitTorrent group and exchanged objects in the same Git warehouse. In other words, IPFS provides a high throughout, a block storage model with content addressing and related hyperlinks. This form a broad Merkle with a ringless chart(DAG).
+Nodes in IPFS network build a distributed file systion. It is an open source project developed since 2014 by protocol
+Lab with the help of the open source community and originally designed by Juan Benet.
+IPFS is an equal distributed file system that tries to connect the same file system for all computing devices. In some
+ways, IPFS is similar to WWW.com and can also be regarded as an independent BitTorrent group and exchanged objects in
+the same Git warehouse. In other words, IPFS provides a high throughout, a block storage model with content addressing
+and related hyperlinks. This form a broad Merkle with a ringless chart(DAG).
 
-IPFS combines distributed scattered lists, encouraging block exchange, and a self-certified name space.IPFS has no singlepoint failure, and nodes do not need to trust each other.Distributed content transmission can save bandwidth and prevent the HTTP scheme from DDOS attacks that may encounter.
+IPFS combines distributed scattered lists, encouraging block exchange, and a self-certified name space.IPFS has no
+singlepoint failure, and nodes do not need to trust each other.Distributed content transmission can save bandwidth and
+prevent the HTTP scheme from DDOS attacks that may encounter.
 
-This file system can be accessed in multiple ways, including Fuse and HTTP.Adding local files to the IPFS file system can make it available to the world.The file indicates that it is based on its hash, so it is conducive to cache.The distribution of the file adopts a BitTorrent protocol.Other users who look at the content also help to provide the content to the others on the Internet.
-IPFS has a name service called IPNS. It is a global name space based on PKI, which is used to build a trust chain. This is compatible with other NS and can map DNS, .onion, .bit and more to IPNS.
+This file system can be accessed in multiple ways, including Fuse and HTTP.Adding local files to the IPFS file system
+can make it available to the world.The file indicates that it is based on its hash, so it is conducive to cache.The
+distribution of the file adopts a BitTorrent protocol.Other users who look at the content also help to provide the
+content to the others on the Internet.
+IPFS has a name service called IPNS. It is a global name space based on PKI, which is used to build a trust chain. This
+is compatible with other NS and can map DNS, .onion, .bit and more to IPNS.
 
 todo 1155 left
 
@@ -19,7 +29,8 @@ todo 1155 left
 IPFS has multiple ways:
 
 - IPFS Desktop: Direct running applications for everyone
-- Command-line: The cli installation mode is selected. The following uses the MAC installation mode as an example. For other installation modes, refer to the documentation
+- Command-line: The cli installation mode is selected. The following uses the MAC installation mode as an example. For
+  other installation modes, refer to the documentation
 
 1. Download files
 
