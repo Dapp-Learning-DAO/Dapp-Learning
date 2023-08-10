@@ -1,8 +1,8 @@
 
-.profile {
+.homepage {
   position: relative;
-  width: 60%;
-  top: 20vh;
+  width: 30%;
+  top: 30vh;
   margin: auto;
   display: flex;
   flex-direction: column;
