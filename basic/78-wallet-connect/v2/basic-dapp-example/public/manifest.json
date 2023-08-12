@@ -1,0 +1,10 @@
+{
+  "short_name": "Wallet Connect Demo",
+  "name": "Wallet Connect Demo",
+  "icons": [
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
