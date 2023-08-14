@@ -34,8 +34,8 @@ const contractFile = compiledCode.contracts['Incrementer.sol']['Incrementer'];
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
-// Create web3 with goerli provider，you can change goerli to other testnet
-const web3 = new Web3('https://goerli.infura.io/v3/' + process.env.INFURA_ID);
+// Create web3 with sepolia provider，you can change sepolia to other testnet
+const web3 = new Web3('https://sepolia.infura.io/v3/' + process.env.INFURA_ID);
 
 // Create account from privatekey
 const accounts = web3.eth.accounts.wallet.add(privatekey);
@@ -61,8 +61,8 @@ const Deploy = async () => {
 
   try {
     // Deploy the contract to the Ganache network
-    // Your deployed contrac can be viewed at: https://goerli.etherscan.io/address/${tx.options.address}
-    // You can change goerli in above url to your selected testnet.
+    // Your deployed contrac can be viewed at: https://sepolia.etherscan.io/address/${tx.options.address}
+    // You can change sepolia in above url to your selected testnet.
     const tx = await deployTx.send({
       from: accounts[0].address,
       gas,
