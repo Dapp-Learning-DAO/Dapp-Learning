@@ -1,10 +1,11 @@
-let Web3 = require('web3');
+let { Web3 } = require('web3');
 let solc = require('solc');
 let fs = require('fs');
 
 // Get privatekey from environment
 require('dotenv').config();
-const privatekey = process.env.PRIVATE_KEY;
+let privatekey = process.env.PRIVATE_KEY;
+if (privatekey.slice(0, 2) !== '0x') privatekey = '0x' + privatekey;
 
 // Load contract
 const source = fs.readFileSync('Incrementer.sol', 'utf8');
@@ -26,8 +27,8 @@ const input = {
   },
 };
 
-const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
-const contractFile = tempFile.contracts['Incrementer.sol']['Incrementer'];
+const compiledCode = JSON.parse(solc.compile(JSON.stringify(input)));
+const contractFile = compiledCode.contracts['Incrementer.sol']['Incrementer'];
 
 // Get bin & abi
 const bytecode = contractFile.evm.bytecode.object;
@@ -37,11 +38,7 @@ const abi = contractFile.abi;
 const web3 = new Web3('https://goerli.infura.io/v3/' + process.env.INFURA_ID);
 
 // Create account from privatekey
-const account = web3.eth.accounts.privateKeyToAccount(privatekey);
-const account_from = {
-  privateKey: privatekey,
-  accountAddress: account.address,
-};
+const accounts = web3.eth.accounts.wallet.add(privatekey);
 
 /*
    -- Deploy Contract --
@@ -52,24 +49,29 @@ const Deploy = async () => {
 
   // Create Tx
   const deployTx = deployContract.deploy({
-    data: bytecode,
+    data: '0x' + bytecode,
     arguments: [0], // Pass arguments to the contract constructor on deployment(_initialNumber in Incremental.sol)
   });
 
-  // Sign Tx
-  const deployTransaction = await web3.eth.accounts.signTransaction(
-    {
-      data: deployTx.encodeABI(),
-      gas: 8000000,
-    },
-    account_from.privateKey
-  );
+  // optionally, estimate the gas that will be used for development and log it
+  const gas = await deployTx.estimateGas({
+    from: accounts,
+  });
+  console.log('estimated gas:', gas);
 
-  const deployReceipt = await web3.eth.sendSignedTransaction(deployTransaction.rawTransaction);
-
-  // Your deployed contrac can be viewed at: https://goerli.etherscan.io/address/${deployReceipt.contractAddress}
-  // You can change goerli in above url to your selected testnet.
-  console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+  try {
+    // Deploy the contract to the Ganache network
+    // Your deployed contrac can be viewed at: https://goerli.etherscan.io/address/${tx.options.address}
+    // You can change goerli in above url to your selected testnet.
+    const tx = await deployTx.send({
+      from: accounts[0].address,
+      gas,
+      // gasPrice: 10000000000,
+    });
+    console.log('Contract deployed at address: ' + tx.options.address);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // We recommend this pattern to be able to use async/await everywhere
