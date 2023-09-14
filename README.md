@@ -440,6 +440,14 @@ Shout out to the following organizations for their unconditional donations to us
     <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
   </a>
   &nbsp;&nbsp;
+  <a href="https://www.optimism.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://minaprotocol.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Mina-logo.png" />
+  </a>
+  &nbsp;&nbsp;
 </div>
 <br>
 

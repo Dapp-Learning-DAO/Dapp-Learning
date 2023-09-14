@@ -200,6 +200,24 @@ Run the specified network, such as the contract deployed on goerli test network(
 npx hardhat run ./scripts/deploy.js --network goerli
 ```
 
+### Verify
+
+Verify the smart contract, here is an example of `goerli`.
+
+Add the following configuration to `hardhat.config.js`:
+
+```js
+ etherscan: {
+   apiKey: "<etherscan的api key>",
+ }
+```
+
+Run script:
+
+```shell
+npx hardhat verify --network goerli <your contract address>
+```
+
 ### Task
 
 hardhat preset some task itself, such as compiling contract, running testing scripts. Those are build-in hardhat tasks.
@@ -299,6 +317,16 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
    ```
 
    `network-name` should be replaced with your networks, `goerli` is a choice which exists in the config file.
+
+4. Verify smart contract
+
+   ```bash
+   npx hardhat verify --network goerli <network-name> <contract-address>
+   ```
+
+    `network-name` : the name of the network you specify, here you can replace it with `goerli`, which corresponds to the network name in the configuration file.
+
+   `contract-address` : The address of the contract deployed in the previous step.
 
 ## Reference
 

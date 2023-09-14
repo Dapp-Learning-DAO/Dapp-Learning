@@ -1,0 +1,14 @@
+
+.homepage {
+  position: relative;
+  width: 30%;
+  top: 30vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: left;
+  font-size: 20px;
+  font-weight: 500;
+}
+
