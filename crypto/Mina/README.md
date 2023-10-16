@@ -10,7 +10,7 @@
 ## Reference
 
 - mina 介绍：<https://mp.weixin.qq.com/s/hgZBkDDhuWa4yxVtrbCpnA>
-- mina zk: https://o1-labs.github.io/proof-systems/introduction.html
+- mina zk: <https://o1-labs.github.io/proof-systems/introduction.html>
 - snapps： <https://minaprotocol.com/blog/what-are-snapps>
 - SnarkyJS: <https://docs.minaprotocol.com/en/snapps/snarkyjs-reference>
 - snapps:  
