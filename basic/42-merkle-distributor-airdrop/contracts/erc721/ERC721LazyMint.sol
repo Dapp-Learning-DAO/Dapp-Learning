@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 contract ERC721LazyMint is ERC721, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -11,7 +12,7 @@ contract ERC721LazyMint is ERC721, AccessControl {
     constructor(string memory name, string memory symbol)
     ERC721(name, symbol)
     {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl) returns (bool) {
@@ -28,7 +29,7 @@ contract ERC721LazyMint is ERC721, AccessControl {
     function _hash(address account, uint256 tokenId)
     internal pure returns (bytes32)
     {
-        return ECDSA.toEthSignedMessageHash(keccak256(abi.encodePacked(tokenId, account)));
+        return MessageHashUtils.toEthSignedMessageHash(keccak256(abi.encodePacked(tokenId, account)));
     }
 
     function _verify(bytes32 digest, bytes memory signature)
