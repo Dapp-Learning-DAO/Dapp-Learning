@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 
 contract ERC721LazyMintWith712SignatureChecker is ERC721, EIP712, AccessControl {
@@ -13,7 +13,7 @@ contract ERC721LazyMintWith712SignatureChecker is ERC721, EIP712, AccessControl 
     ERC721(name, symbol)
     EIP712(name, "1.0.0")
     {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl) returns (bool) {
