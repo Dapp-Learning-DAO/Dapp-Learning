@@ -5,6 +5,7 @@
 - 以太坊开发工具汇总: <https://learnblockchain.cn/article/2006>
 - metamask（浏览器钱包插件）: <https://www.jianshu.com/p/b5b2c05e9090>
 - Hardhat“安全帽”是针对专业人员的以太坊开发环境: <https://hardhat.org/>
+- solidity-framework 是快速安装和配置hardhat 和 foundry 的脚手架，内置基础脚本等: <https://github.com/VegieDoggie/solidity-framework>
 - Waffle 智能合约最先进的测试框架之一: <https://getwaffle.io/>
 - Foundry 用 Rust 编写的用于以太坊应用程序开发的极快、可移植和模块化的工具包: <https://book.getfoundry.sh/>
 - scaffold-eth (ETH + Hardhat + React)：构建由智能合约驱动的去中心化应用程序所需的常用框架 <https://github.com/scaffold-eth/scaffold-eth>
