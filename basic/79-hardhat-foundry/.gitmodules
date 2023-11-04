@@ -1,0 +1,6 @@
+[submodule "lib/forge-std"]
+	path = lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "contracts/diamond-2"]
+	path = contracts/diamond-2
+	url = https://github.com/mudgen/diamond-2-hardhat.git
