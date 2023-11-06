@@ -79,3 +79,5 @@ certora_*
 
 /typechain-types
 /**/*.js
+
+/lib
