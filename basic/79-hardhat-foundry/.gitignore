@@ -81,3 +81,4 @@ certora_*
 /**/*.js
 
 /lib
+/contracts/diamond-2
