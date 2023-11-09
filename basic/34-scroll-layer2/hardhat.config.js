@@ -78,6 +78,11 @@ module.exports = {
         mnemonic()
       ]
     },
+      polygonZkEVM: {
+      url: `https://rpc.public.zkevm-test.net`,
+      accounts: [ mnemonic()
+      ],
+      },
   },
   etherscan: {
     apiKey: {

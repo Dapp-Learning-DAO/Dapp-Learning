@@ -19,14 +19,12 @@
     "ts-node": "^9.1.1",
     "tsconfig": "^7.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typechain": "^4.0.0",
     "typescript": "^4.2.3",
     "@types/react": "17.0.24",
     "@types/react-dom": "17.0.9",
-    "urql": "2.0.5",
+ 
     "node-fetch": "3.2.10",
-    "graphql-request": "3.5.0",
-    "@aave/protocol-js": "4.1.0",
+  
     "@typechain/ethers-v5": "7.1.2"
   },
   "dependencies": {
