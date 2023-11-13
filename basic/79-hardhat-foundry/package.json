@@ -1,0 +1,27 @@
+{
+  "name": "79-hardhat-foundry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@nomicfoundation/hardhat-foundry": "^1.1.1",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@openzeppelin/contracts-upgradeable": "^5.0.0",
+    "@openzeppelin/hardhat-upgrades": "^2.3.3",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.19.0",
+    "hardhat-abi-exporter": "^2.10.1",
+    "hardhat-diamond-abi": "^3.0.1",
+    "hardhat-exposed": "^0.3.13",
+    "hardhat-ignore-warnings": "^0.2.9",
+    "uniswap-v2-deploy-plugin": "^0.0.4"
+  }
+}
