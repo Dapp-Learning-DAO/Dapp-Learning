@@ -4,3 +4,6 @@ url = https://github.com/OpenZeppelin/openzeppelin-contracts
 [submodule "dao/dao/Openzeppelin-DAO"]
 path = dao/dao/Openzeppelin-DAO
 url = https://github.com/tamphill/openzeppelin_dao.git
+[submodule "basic/79-hardhat-foundry/lib/openzeppelin-contracts"]
+	path = basic/79-hardhat-foundry/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
