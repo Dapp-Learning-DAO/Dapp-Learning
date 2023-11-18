@@ -23,5 +23,8 @@
     "hardhat-deploy-ethers": "^0.3.0-beta.13",
     "mocha": "^10.0.0",
     "sol-merger": "^3.1.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
   }
 }

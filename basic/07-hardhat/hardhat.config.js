@@ -21,6 +21,11 @@ function mnemonic() {
 module.exports = {
   solidity: '0.8.0',
   networks: {
+    hardhat: {
+      forking: {
+        url: 'https://mainnet.infura.io/v3/'+ process.env.INFURA_ID,
+      }
+    },
     localhost: {
       url: 'http://localhost:8545',
       //gasPrice: 125000000000,  // you can adjust gasPrice locally to see how much it will cost on production
