@@ -6,8 +6,7 @@ import "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract SmartWallet is Ownable, IERC1271 {
-    constructor(address initialOwner) {
-        transferOwnership(initialOwner);
+    constructor(address initialOwner) Ownable(initialOwner) {
     }
 
     function execute(address target, uint256 value, bytes memory data) external onlyOwner() returns (bytes memory) {

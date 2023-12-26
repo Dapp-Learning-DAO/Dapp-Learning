@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract SimpleToken is ERC20PresetMinterPauser {
+contract SimpleToken is ERC20 {
     /**
      * @dev Constructor that gives msg.sender all of existing tokens.
      */
@@ -20,7 +20,7 @@ contract SimpleToken is ERC20PresetMinterPauser {
         string memory symbol,
         uint8 decimals_,
         uint256 initial_supply
-    ) ERC20PresetMinterPauser(name, symbol) {
+    ) ERC20(name, symbol) {
         _decimals = decimals_;
         INITIAL_SUPPLY = initial_supply * (10**uint256(decimals_));
         _mint(msg.sender, initial_supply * (10**uint256(decimals_)));

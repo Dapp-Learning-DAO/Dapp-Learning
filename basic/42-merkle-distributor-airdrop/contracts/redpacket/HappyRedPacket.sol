@@ -13,10 +13,14 @@ import "../lib/IERC20.sol";
 import "../lib/SafeERC20.sol";
 import "../lib/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 contract HappyRedPacket is Initializable {
+<<<<<<< HEAD
   //  using SafeMath for uint256;
+=======
+>>>>>>> upstream/main
 
     struct RedPacket {
         Packed packed;
@@ -90,8 +94,14 @@ contract HappyRedPacket is Initializable {
             uint256 balance_before_transfer = IERC20(_token_addr).balanceOf(address(this));
             IERC20(_token_addr).safeTransferFrom(msg.sender, address(this), _total_tokens);
             uint256 balance_after_transfer = IERC20(_token_addr).balanceOf(address(this));
+<<<<<<< HEAD
             received_amount = balance_after_transfer - balance_before_transfer;
            require(received_amount >= _total_tokens, "#received > #packets");
+=======
+            // received_amount = balance_after_transfer.sub(balance_before_transfer);
+            received_amount = balance_after_transfer - balance_before_transfer;
+            require(received_amount >= _number, "#received > #packets");
+>>>>>>> upstream/main
         }
 
         bytes32 _id = keccak256(abi.encodePacked(msg.sender, block.timestamp, nonce, seed, _seed));
@@ -142,7 +152,11 @@ contract HappyRedPacket is Initializable {
                 // reserve minium amount => (total_number - claimed_number) * 0.1
                 uint reserve_amount = (total_number - claimed_number) * minium_value;
                 uint distribute_tokens = remaining_tokens - reserve_amount;
+<<<<<<< HEAD
                 claimed_tokens = random(seed, nonce) % (distribute_tokens * 2/ (total_number - claimed_number));
+=======
+                claimed_tokens = random(seed, nonce) % Math.mulDiv(distribute_tokens, 2, total_number - claimed_number);
+>>>>>>> upstream/main
                 // minium claimed_tokens for user is 0.1 ; and round the claimed_tokens to decimal 0.1
                 claimed_tokens = claimed_tokens < minium_value ? minium_value : (claimed_tokens - (claimed_tokens % minium_value));
             }
@@ -150,7 +164,11 @@ contract HappyRedPacket is Initializable {
             if (total_number - claimed_number == 1) 
                 claimed_tokens = remaining_tokens;
             else
+<<<<<<< HEAD
                 claimed_tokens = remaining_tokens/(total_number - claimed_number);
+=======
+                claimed_tokens = Math.ceilDiv(remaining_tokens, (total_number - claimed_number));
+>>>>>>> upstream/main
         }
 
         rp.packed.packed1 = rewriteBox(packed.packed1, 128, 96, remaining_tokens - claimed_tokens);
