@@ -12,10 +12,10 @@ async function main() {
 
   console.log('Account balance:', (await deployer.getBalance()).toString());
 
-  const Deploy = await ethers.getContractFactory('Deploy');
-  const deploy = await Deploy.deploy();
+  const Token = await ethers.getContractFactory('SimpleToken');
+  const token = await Token.deploy('SimpleToken', 'SimpleToken', 18, 10000000000);
 
-  console.log('deploy address:', deploy.address);
+  console.log('deploy address:', token.address);
 
  
 }

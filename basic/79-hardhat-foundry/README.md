@@ -547,4 +547,3 @@ XxxData[] memory t = abi.decode(bytesData, (XxxData[]));
 
 `Less is more.`
 
->>>>>>> upstream/main
