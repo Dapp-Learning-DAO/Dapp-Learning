@@ -1,3 +1,4 @@
+
 [profile.default]
 src = 'contracts'
 out = 'out'

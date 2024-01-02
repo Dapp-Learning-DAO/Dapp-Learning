@@ -21,7 +21,7 @@ function mnemonic() {
 module.exports = {
   solidity: {
     compilers: [
-      { version: '0.8.4',  settings },
+      { version: '0.8.8',  settings },
       { version: '0.7.6',  settings },
       { version: '0.6.11', settings },
       { version: '0.5.16', settings },

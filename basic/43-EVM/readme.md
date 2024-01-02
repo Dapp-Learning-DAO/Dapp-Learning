@@ -40,6 +40,7 @@
 
 ### EVM 
 [EVM](./EVM.md)
+https://github.com/Quillhash/EVM-Mastery#puzzles
 
 ## 参考链接
 - ethervm.io <https://ethervm.io/>

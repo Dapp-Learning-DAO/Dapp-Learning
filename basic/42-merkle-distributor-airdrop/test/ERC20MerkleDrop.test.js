@@ -25,13 +25,13 @@ describe('ERC20MerkleDrop', function () {
    let bob;
    let  tree;
    let distributor;
+   let distributorFactory;
    let distributorFile;
    let fileTree;
 
 
   
   // merkleTree = new MerkleTree(Object.entries(tokens).map(token => hashToken(...token)), keccak256, { sortPairs: true });
-  console.log("-------1")
  console.log(BalanceTree);
   describe('Mint all elements', function () {
     before(async function() {
@@ -69,8 +69,13 @@ describe('ERC20MerkleDrop', function () {
   
    
      
-      distributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
-      distributorFile = await deploy("MerkleDistributor", erc20.address, fileTree.getHexRoot());
+      distributorFactory = await deploy("MerkleDistributorFactory");
+
+      //distributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
+      //distributor = await deploy("MerkleDistributor", erc20.address, tree.getHexRoot());
+      await distributorFactory.createDistributor(erc20.address, tree.getHexRoot(), 3600,owner.address);
+      distributor = await ethers.getContractAt("MerkleDistributor", await distributorFactory.getDistributor(0));
+      distributorFile = await deploy("MerkleDistributor", erc20.address, fileTree.getHexRoot(), 3600, owner.address);
 
       await erc20.transfer(distributor.address, 201);
       await erc20.transfer(distributorFile.address, 1000);
