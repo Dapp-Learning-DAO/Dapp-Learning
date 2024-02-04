@@ -21,6 +21,7 @@ async function main() {
   );
 
   const quote = await response.json();
+  console.log(quote)
 
   console.info(`Received a quote  ${quote}`);
   console.info(`Received a quote with price ${quote.price}`);

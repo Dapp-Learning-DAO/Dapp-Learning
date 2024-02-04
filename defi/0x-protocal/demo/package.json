@@ -3,6 +3,10 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.12.4",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "dotenv": "^16.0.3",
+    "web3":"4.2.2",
+    "qs": "6.11.2",
+    "yesno": "0.4.0"
   }
 }
