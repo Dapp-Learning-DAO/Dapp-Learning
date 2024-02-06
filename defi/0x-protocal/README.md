@@ -47,7 +47,7 @@ https://docs.0x.org/0x-api-swap/guides/accessing-rfq-liquidity-on-0x-api
 
 
 ### How to Build NFT Exchange in Your DApp
-//todo
+https://0x.org/docs/0x-swap-api/guides/how-to-build-a-token-swap-dapp-with-0x-api 
 
 ### 限价单
 有两种类型的单子： limit order & RFQ order
@@ -60,4 +60,5 @@ https://docs.0x.org/0x-api-orderbook/introduction
 - github: <https://github.com/0xProject/0x-protocol-specification/blob/master/v2/v2-specification.md#exchange>
 - 0x文档: <https://0x.org/docs/guides/use-0x-api-liquidity-in-your-smart-contracts>
 - video: https://www.web3.university/tracks/road-to-web3/build-a-blockchain-betting-game
+- How to Get 0x and Matcha Data： https://0x.org/docs/developer-resources/how-to-get-0x-and-matcha-data
 

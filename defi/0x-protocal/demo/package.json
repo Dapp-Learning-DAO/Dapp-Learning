@@ -2,11 +2,18 @@
   "name": "hardhat-project",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@types/node": "^20.11.16",
+    "dotenv": "^16.0.3",
     "hardhat": "^2.12.4",
     "node-fetch": "^2.6.1",
-    "dotenv": "^16.0.3",
-    "web3":"4.2.2",
     "qs": "6.11.2",
+    "typescript": "^5.3.3",
     "yesno": "0.4.0"
+  },
+  "dependencies": {
+    "@1inch/limit-order-protocol-utils": "^4.0.13-alpha",
+    "@0x/protocol-utils":"11.24.2",
+    "@0x/contract-addresses":"8.13.0",
+    "web3": "4.2.2"
   }
 }

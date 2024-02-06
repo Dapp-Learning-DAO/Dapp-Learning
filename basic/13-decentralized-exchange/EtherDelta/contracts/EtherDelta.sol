@@ -232,12 +232,8 @@ contract EtherDelta {
         address give
     );
     event Deposit(address token, address user, uint256 amount, uint256 balance);
-    event Withdraw(
-        address token,
-        address user,
-        uint256 amount,
-        uint256 balance
-    );
+
+    event Withdraw(address token, address user, uint256 amount, uint256 balance);
 
     modifier adminOnly {
         require(msg.sender == admin, "No permission");
@@ -449,6 +445,10 @@ contract EtherDelta {
         uint256 feeMakeXfer = SafeMath.mul(amount, feeMake) / (1 ether);
         uint256 feeTakeXfer = SafeMath.mul(amount, feeTake) / (1 ether);
         uint256 feeRebateXfer = 0;
+
+         //0 = regular user (pays take fee and make fee)
+         //1 = market maker silver (pays take fee, no make fee, gets rebate)
+         //2 = market maker gold (pays take fee, no make fee, gets entire counterparty's take fee as rebate)
         if (accountLevelsAddr != address(0)) {
             uint256 accountLevel = AccountLevels(accountLevelsAddr)
             .accountLevel(user);
@@ -456,18 +456,22 @@ contract EtherDelta {
                 feeRebateXfer = SafeMath.mul(amount, feeRebate) / (1 ether);
             if (accountLevel == 2) feeRebateXfer = feeTakeXfer;
         }
+        // 对taker收费
         tokens[tokenGet][msg.sender] = SafeMath.sub(
             tokens[tokenGet][msg.sender],
             SafeMath.add(amount, feeTakeXfer)
         );
+        //对maker收费
         tokens[tokenGet][user] = SafeMath.add(
             tokens[tokenGet][user],
             SafeMath.sub(SafeMath.add(amount, feeRebateXfer), feeMakeXfer)
         );
+        //feeAccount 账户收费
         tokens[tokenGet][feeAccount] = SafeMath.add(
             tokens[tokenGet][feeAccount],
             SafeMath.sub(SafeMath.add(feeMakeXfer, feeTakeXfer), feeRebateXfer)
         );
+        // 对maker买入token收费，
         tokens[tokenGive][user] = SafeMath.sub(
             tokens[tokenGive][user],
             SafeMath.mul(amountGive, amount) / amountGet

@@ -34,7 +34,7 @@ module.exports = {
       accounts: [mnemonic()],
     },
     mainnet: {
-      url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
+      url: 'https://eth-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
       accounts: [mnemonic()],
     },
     ropsten: {
@@ -49,7 +49,7 @@ module.exports = {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.PROJECT_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
       accounts: [mnemonic()]
     },
-    optimism: {
+    op: {
       url: 'https://opt-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY,
       accounts: [mnemonic()],
     },

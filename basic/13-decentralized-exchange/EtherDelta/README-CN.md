@@ -57,8 +57,8 @@ EtherDelta 实现了简单的 token 合约，类似 ERC20 标准合约，用于�
 
 #### 交易流程
 
-1. 卖家挂单 `order()`，以挂单信息转换为 hash，作为键，存入 `orders` 合约变量
-2. 买家吃单 `trade()`，传入指定的挂单 hash
+1. 卖家（maker）挂单 `order()`，以挂单信息转换为 hash，作为键，存入 `orders` 合约变量
+2. 买家(taker)吃单 `trade()`，传入指定的挂单 hash, 并且需要拿到maker的订单签名信息。且支持部分成交。
 
 #### constructor
 
@@ -82,11 +82,21 @@ mapping(address => mapping(bytes32 => bool)) public orders; // 挂单列表 (tru
 mapping(address => mapping(bytes32 => uint256)) public orderFills; // 每一笔挂单完成的数量 (amount of order that has been filled)
 ```
 
-## todo list
+#### 手续费逻辑
+
+ 手续费都是收取maker的 tokenGet（即要买入的token）
+```
+         //0 = regular user (pays take fee and make fee)
+         //1 = market maker silver (pays take fee, no make fee, gets rebate)
+         //2 = market maker gold (pays take fee, no make fee, gets entire counterparty's take fee as rebate)
+```
+普通用户，需要付take fee和maker fee
+白银用户，付taker费用，并且有手续费返现
+黄金用户，付taker费用，但是可以获取对手方taker费用返现
 
 ### 测试流程补全
 
-目前只实现了核心功能的测试，还有部分测试流程未升级，老测试文件参见 `./backup/test.old.js`
+目前只实现了核心功能的测试，还有部分测试流程未升级，老测试文件参见 `../backup/etherdelta/test.old.js`
 **老版测试文件部分测试有误，建议以当前测试文件为准**
 
 ## 参考链接
