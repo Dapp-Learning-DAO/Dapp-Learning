@@ -4,6 +4,7 @@
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const { ethers } = require("hardhat");
+require('dotenv').config()
 
 async function main() {
 
@@ -18,7 +19,7 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const Token = await ethers.getContractFactory("SimpleToken");
-    const token = await Token.deploy("Dapp-Learning-scroll", "DL", 1, 100000000);
+    const token = await Token.deploy("Dapp-Learning-scroll", "DL", 18, 100000000);
 
     console.log("Token address:", token.address);
 }

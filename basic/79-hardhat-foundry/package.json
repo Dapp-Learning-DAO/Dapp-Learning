@@ -23,5 +23,6 @@
     "hardhat-exposed": "^0.3.13",
     "hardhat-ignore-warnings": "^0.2.9",
     "uniswap-v2-deploy-plugin": "^0.0.4"
-  }
+
+}
 }

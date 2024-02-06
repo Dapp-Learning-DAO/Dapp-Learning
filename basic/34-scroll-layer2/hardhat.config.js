@@ -78,6 +78,12 @@ module.exports = {
         mnemonic()
       ]
     },
+    scroll: {
+      url: "https://rpc.scroll.io",
+      accounts: [
+        mnemonic()
+      ]
+    },
       polygonZkEVM: {
       url: `https://rpc.public.zkevm-test.net`,
       accounts: [ mnemonic()

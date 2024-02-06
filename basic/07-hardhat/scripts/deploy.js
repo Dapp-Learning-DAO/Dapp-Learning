@@ -15,10 +15,9 @@ async function main() {
   const Token = await ethers.getContractFactory('SimpleToken');
   const token = await Token.deploy('SimpleToken', 'SimpleToken', 18, 10000000000);
 
-  console.log('Token address:', token.address);
+  console.log('deploy address:', token.address);
 
-  let balance = await token.balanceOf(deployer.address);
-  console.log(balance.toString());
+ 
 }
 
 // We recommend this pattern to be able to use async/await everywhere

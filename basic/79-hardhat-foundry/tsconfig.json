@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "target": "es2018",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["./tasks", "./test", "./typechain-types"],
+  "files": ["./hardhat.config.ts"]
 }
