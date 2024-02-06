@@ -120,20 +120,7 @@ contract Exchange is ERC20 {
         return getAmount(_tokenSold, tokenReserve, address(this).balance);
     }
 
-    // 使用eth购买token
-    // 拆分为 ethToToken 和 ethToTokenSwap
-    // function ethToTokenSwap(uint256 _minTokens) public payable {
-    //     uint256 tokenReserve = getReserve();
-    //     uint256 tokensBought = getAmount(
-    //         msg.value,
-    //         address(this).balance - msg.value,
-    //         tokenReserve
-    //     );
-
-    //     require(tokensBought >= _minTokens, "insufficient output amount");
-
-    //     IERC20(tokenAddress).transfer(msg.sender, tokensBought);
-    // }
+   
 
     function ethToToken(uint256 _minTokens, address recipient) private {
         uint256 tokenReserve = getReserve();

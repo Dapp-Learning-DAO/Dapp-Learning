@@ -86,7 +86,7 @@ mapping(address => mapping(bytes32 => uint256)) public orderFills; // amount of 
 
 ### Test Process Description
 
-At present, only the core functions have been tested, and part of the test process has not been upgraded. See `./backup/test.old.js` for the old test file
+At present, only the core functions have been tested, and part of the test process has not been upgraded. See `../backup/etherdelta/test.old.js` for the old test file
 **Some tests in the original test file are incorrect. You are advised to use the current test file**
 
 ## Refer to the link
