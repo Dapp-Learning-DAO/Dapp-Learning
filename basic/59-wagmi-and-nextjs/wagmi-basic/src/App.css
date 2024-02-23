@@ -1,0 +1,14 @@
+
+.profile {
+  position: relative;
+  width: 60%;
+  top: 20vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: left;
+  font-size: 20px;
+  font-weight: 500;
+}
+

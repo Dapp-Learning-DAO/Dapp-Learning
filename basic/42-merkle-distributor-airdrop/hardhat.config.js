@@ -21,14 +21,17 @@ function mnemonic() {
 module.exports = {
   solidity: {
     compilers: [
-      { version: '0.8.4',  settings },
+      { version: '0.8.8',  settings },
       { version: '0.7.6',  settings },
       { version: '0.6.11', settings },
       { version: '0.5.16', settings },
+      { version: '0.8.20', settings },
     ],
   },
   etherscan: {
-    apiKey: process.env.API_KEY
+    apiKey: {
+      optimisticEthereum: 'xxx'
+    },
   },
   networks: {
     localhost: {
@@ -57,6 +60,10 @@ module.exports = {
     },
     matic: {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic()
+    },
+    optim: {
+      url: "https://optimism-mainnet.infura.io/v3/" + process.env.INFURA_ID,
       accounts: mnemonic()
     },
   },

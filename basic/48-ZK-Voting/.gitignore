@@ -1,0 +1,38 @@
+target/
+
+# zk snarkjs
+
+*.zkey
+*.r1cs
+*.r1cs.json
+*.sym
+*.ptau
+*.wtns
+*.ptau
+
+verification_key.json
+proof*.json
+public*.json
+
+circuits/**/*.sol
+circuits/**/*_js/
+circuits/**/input_*.json
+
+# node
+node_modules/
+
+# hardhat
+artifacts/
+contracts/*Verifier.sol
+
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*
+/broadcast/*/31337/
+
+.DS_Store
+.env

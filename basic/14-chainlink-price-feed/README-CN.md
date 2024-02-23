@@ -3,6 +3,8 @@
 
 区块链是非常安全可靠的价值交换网络，但却无法安全防篡改地获取链下数据或将数据发送至链下系统。使用 Chainlink 预言机喂价, 通过预言机网络在链上直接获取实时金融市场价格数据
 
+首先，我们可以在[这里](https://docs.chain.link/data-feeds/price-feeds/addresses)找到各个网络的喂价合约地址。然后，以ETH_USD为例，表示一个ETH能兑换多少USD，注意不要理解反了，不是ETH per USD的意思。接下来无论链上还是链下，我们都需要通过读取喂价器合约的方式获取价格信息。
+
 ## 测试流程
 
 ### 配置私钥
@@ -28,7 +30,7 @@ npx hardhat run scripts/01-PriceConsumerV3Deploy.js --network goerli
 ```
 
 ### 链下调用喂价机
-
+#### 获取最新数据
 ```js
 // ./UsingDataFeedsByEthers.js
 require('dotenv').config();
@@ -72,6 +74,29 @@ Latest Round Data [
 ```
 
 - 完整示例看这里 [:point_right: UsingDataFeedsByEthers.js](./UsingDataFeedsByEthers.js)
+
+
+#### 链下获取历史数据
+
+Chainlink链上Api提供两个接口：
+- latestRoundData：获取最新价格数据
+- getRoundData：获取历史价格数据
+
+首先，了解什么round。chainlink会将链下聚合器的数据持续更新到链上，每次更新，就会更新roundId。更新的间隔是不定时的，快则几分钟更新一次，慢则几个小时，甚至几天更新一次价格。
+
+其次，roundId的构成，由两部分：phaseId和aggregatorRoundId. roundId生成方式如下：
+```
+roundId = (phaseId << 64)  | aggregatorRoundId
+```
+其中：
+- phaseId表示历史上聚合器的版本，从1开始，每次聚合器更新，就会让phase+1.
+- aggregatorRoundId表示对应聚合器版本下的轮数，每次更新一次喂价器数据，就会让这个编号加1.
+
+所以，遍历历史数据的思路如下：
+- 先根据latestRoundData，读取最新的phaseId.
+- phaseId从1开始，然后遍历aggregatorRoundId，也从1开始，如果遇到revert错误，就将phaseId+1.
+
+可以参考例子:[ethers获取历史数据](./scripts/04-HistoryData.js)
 
 
 
@@ -154,3 +179,6 @@ SubscriptionId=ddddd
 - https://learnblockchain.cn/article/2558
 - https://learnblockchain.cn/article/1056
 - https://mp.weixin.qq.com/s/h0uTWY7vzd-CMdr1pE7_YQ
+- https://docs.chain.link/data-feeds/examples
+- https://docs.chain.link/data-feeds/historical-data
+- https://docs.chain.link/data-feeds/price-feeds/addresses

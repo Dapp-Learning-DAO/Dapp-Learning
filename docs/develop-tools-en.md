@@ -3,6 +3,7 @@
 - Ethereum Development Tools Collection: <https://learnblockchain.cn/article/2006>
 - metamask (Wallet plug-in for browser): <https://www.jianshu.com/p/b5b2c05e9090>
 - Hardhat(Ethereum development environment for professionals): https://hardhat.org/
+- solidity-framework  is a scaffold for quickly installing and configuring Hardhat and Foundry, with built-in basic scripts and more: <https://github.com/VegieDoggie/solidity-framework>
 - Waffle(smart contracts testing tool): https://getwaffle.io/
 - Foundry(toolkit for Ethereum application development written in Rust): https://book.getfoundry.sh/
 - scaffold-eth (ETH + Hardhat + React): https://github.com/scaffold-eth/scaffold-eth

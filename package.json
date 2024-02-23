@@ -17,5 +17,8 @@
   "dependencies": {
     "create-next-app": "^12.3.1",
     "prettier": "^2.0.5"
+  },
+  "devDependencies": {
+    "hardhat": "^2.12.4"
   }
 }

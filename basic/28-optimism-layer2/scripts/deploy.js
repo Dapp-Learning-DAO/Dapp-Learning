@@ -17,7 +17,7 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const Token = await ethers.getContractFactory("SimpleToken");
-    const token = await Token.deploy("HEHE", "HH", 1, 100000000);
+    const token = await Token.deploy("DappLearning task28 optimism layer2", "DL28", 100000000);
 
     console.log("Token address:", token.address);
 }

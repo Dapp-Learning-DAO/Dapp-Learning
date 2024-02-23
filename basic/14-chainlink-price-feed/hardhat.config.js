@@ -40,8 +40,8 @@ module.exports = {
       // }
     },
     goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+       url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+       accounts: [mnemonic()],
     },
   },
   namedAccounts: {
