@@ -10,3 +10,34 @@ Ordinals是Satoshi比特币的最小单位，同下文聪）的一种编号方�
 总的来说，domo的这次实验不仅是一个技术上的突破，也是一个市场和社区层面的重大事件。它不仅为比特币网络上的资产发行开辟了新天地，还为整个加密资产生态系统的发展注入了新的活力和创新。
 ![brc20-experiment](./images/brc20-experiment.jpg)
 
+## 协议详情
+### Deploy
+```js
+{"p":"brc-20","op":"deploy","tick":"ordi","max":"21000000","lim":"1000"}
+```
+| Key  | Required? | Description                                                                                   |
+|------|-----------|-----------------------------------------------------------------------------------------------|
+| p    | Yes       | Protocol: Helps other systems identify and process BRC-20 events                              |
+| op   | Yes       | Operation: Type of event (Deploy, Mint, Transfer)                                             |
+| tick | Yes       | Ticker: 4 letter identifier of the BRC-20                                                     |
+| max  | Yes       | Max supply: set max supply of the BRC-20                                                      |
+| lim  | No        | Mint limit: If letting users mint to themselves, limit per ordinal (unisat not validate)     |
+| dec  | No        | Decimals: set decimal precision, default to 18                                               |
+
+### Mint
+```js
+{"p":"brc-20","op":"mint","tick":"ordi","amt":"100000"}
+```
+| Key  | Required? | Description                                                       |
+|------|-----------|-------------------------------------------------------------------|
+| p    | Yes       | Protocol: Helps other systems identify and process brc-20 events   |
+| op   | Yes       | Operation: Type of event (Deploy, Mint, Transfer)                 |
+| tick | Yes       | Ticker: 4 letter identifier of the brc-20                         |
+| amt  | Yes       | Amount to mint: States the amount of the brc-20 to mint. Has to be less than "lim" above if stated |
+
+### Transform
+- 铸造transfer铭文
+```js
+{"p":"brc-20","op":"transfer","tick":"ordi","amt":"10"}
+```
+- 将transfer铭文通过PSBT的方法转移给receiver
