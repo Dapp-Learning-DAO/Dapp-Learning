@@ -1,28 +1,26 @@
 # Circle CCTP
 
-[中文](./README-cn.md) / English
+中文 / [English](./README.md)
 
-## Overview
+## 概览
 
-Cross-Chain Transfer Protocol (CCTP) is a permissionless on-chain utility that facilitates USDC transfers securely between blockchains networks via native burning and minting. Circle created it to improve capital efficiency and minimize trust requirements when using USDC across blockchain networks. CCTP enables developers to build multi-chain applications that provide secure, 1:1 transfers of USDC across blockchains for their users.
+跨链转账协议（CCTP）是一个无需许可的链上工具，通过原生的 burn 和 mint 机制，在区块链网络之间安全地转移 USDC。提高使用跨区块链网络 USDC 时的资本效率。CCTP 使开发者能够构建多链应用，为用户提供跨区块链的安全、1:1 的 USDC 转账。
 
-## How it works
+## 工作原理
 
-USDC is burned on the source chain: Using an app, a user initiates a transfer of USDC from one blockchain to another, and specifies the recipient wallet address on the destination chain. The app facilitates a burn of the specified amount of USDC on the source chain.
-A signed attestation is fetched from Circle: Circle observes and attests to the burn event on the source chain. The app requests the attestation from Circle, which provides authorization to mint the specified amount of USDC on the destination chain.
-USDC is minted on the destination chain: The app uses the attestation to trigger the minting of USDC. The specified amount of USDC is minted on the destination chain and sent to the recipient wallet address.
+在源链上燃烧 USDC：在源链上燃烧指定数量的 USDC。
+从 Circle 获取签名的证明：Circle 观察并证明源链上的 brun 事件。从 Circle 请求证明，Circle 提供授权在目的链上铸造指定数量的 USDC。
+在目标链上铸造 USDC：使用证明触发 USDC 的 mint，并发送到接收者的钱包地址。
 
-Cross-Chain Transfer Protocol (CCTP) uses generalized message passing to facilitate the native burning and minting of USDC across supported blockchains, also known as domains. Message passing is a three-step process:
+跨链转账协议（CCTP）消息传递机制，在支持的区块链之间 burn 和 mint USDC，这一过程包括三个步骤：
 
-1. An on-chain component on source domain emits a message.
-2. Circle's off-chain attestation service signs the message.
-3. The on-chain component at the destination domain receives the message, and forwards the message body to the specified recipient.
-
-![CCTP_Smart_Contract_Flow](https://files.readme.io/fcb147b-Smart_Contract_Flow.png)
+1. 源域上的链上组件发出消息。
+2. Circle 的链下证明服务对消息进行签名。
+3. 目的域上的链上组件接收消息，并将消息体转发给指定的接收者。
 
 ## Get-Started
 
-Transfer USDC on testnet from Ethereum to Avalanche
+将 USDC 从 Ethereum 测试网 跨链到 Avalanche 测试网
 
 - install
 
@@ -202,7 +200,7 @@ ReceiveTxReceipt:  {
 Check USDC on Avax testnet balanceOf 10000
 ```
 
-## Referrence
+## 参考链接
 
 - doc <https://developers.circle.com/stablecoins/docs/transfer-usdc-on-testnet-from-ethereum-to-avalanche>
 
