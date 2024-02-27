@@ -1,0 +1,25 @@
+{
+  "name": "celerbridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.9.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "chai": "^4.4.1",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.7.2"
+  }
+}
