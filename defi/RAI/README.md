@@ -6,7 +6,7 @@ RAI具有非法币锚定、完全去中心化、以及最小化治理的极致�
 - site: <https://reflexer.finance/>
 
 V神和Dankrad都有文章介绍RAI的机制：
-- [Two thought experiments to evaluate automated stablecoins](https://vitalik.ca/general/2022/05/25/stable.html)
+- [Two thought experiments to evaluate automated stablecoins](https://vitalik.eth.limo/general/2022/05/25/stable.html)
 - [RAI -- one of the coolest experiments in crypto](https://dankradfeist.de/ethereum/2023/01/31/rai-crypto-experiment.html)
 
 RAI系统的这一套机制，正符合货币主义奠基人、诺贝尔经济学奖获得者米尔顿·弗里德曼理想情况下对美联储的预期。弗里德曼认为，"Abolish the FED.  Replace it with a computer."（这同时也是Reflexer社区的重要Meme）。

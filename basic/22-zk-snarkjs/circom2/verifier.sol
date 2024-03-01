@@ -152,7 +152,7 @@ contract PlonkVerifier {
             
             ///////
             // Computes the inverse of an array of values
-            // See https://vitalik.ca/general/2018/07/21/starks_part_3.html in section where explain fields operations
+            // See https://vitalik.eth.limo/general/2018/07/21/starks_part_3.html in section where explain fields operations
             //////
             function inverseArray(pVals, n) {
     
