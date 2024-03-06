@@ -20,28 +20,28 @@ function getCanonicalTransferID(userAddress,tokenAddress,transferAmount,destChai
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const sourceChainID = 10  // Op Mainnet
-  const destChainID = 56  // BNB Mainnet
-  const transferAmount = ethers.utils.parseEther("2")
-  const OpTokenAddress = "0x4200000000000000000000000000000000000042"
+  const sourceChainID = 137  // Polygon Mainnet
+  const destChainID = 1285  // Moonriver Mainnet
+  const transferAmount = ethers.utils.parseEther("21")
+  const tokenAddress = "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1"
   const nonce = new Date().getTime()
 
-  // Transfer for Op token, from Op to BNB
+  // Transfer for miMATIC token, from Polygon to Moonriver
   // for contract address, refer to https://cbridge-docs.celer.network/reference/contract-addresses
-  const canonicalBridgeContract = "0xbCfeF6Bb4597e724D720735d32A9249E0640aA11"
-  const opContract = await hre.ethers.getContractAt('IERC20', OpTokenAddress, deployer);
+  const canonicalBridgeContract = "0xc1a2D967DfAa6A10f3461bc21864C23C1DD51EeA"
+  const contract = await hre.ethers.getContractAt('IERC20', tokenAddress, deployer);
 
-  let tx = await opContract.approve(canonicalBridgeContract, transferAmount);
+  let tx = await contract.approve(canonicalBridgeContract, transferAmount);
   await tx.wait();
   console.log("Approve Op token to canonicalBridgeContract successfully")
 
   const bridge = await hre.ethers.getContractAt('OriginalTokenVault', canonicalBridgeContract, deployer);
-  let receipt = await bridge.deposit(OpTokenAddress,transferAmount,destChainID,deployer.address,nonce)
+  let receipt = await bridge.deposit(tokenAddress,transferAmount,destChainID,deployer.address,nonce)
   await receipt.wait()
 
   console.log("Send bridge request successfully")
 
-  let transferID = getCanonicalTransferID(deployer.address,OpTokenAddress,transferAmount,destChainID,nonce,sourceChainID)
+  let transferID = getCanonicalTransferID(deployer.address,tokenAddress,transferAmount,destChainID,nonce,sourceChainID)
   saveRedpacketDeployment({
     canonicalCelerBridgeTransferID: transferID,
   });
