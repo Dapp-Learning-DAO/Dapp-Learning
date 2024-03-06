@@ -59,7 +59,6 @@ async function main() {
   console.log("Try to getTransferConfigs")
   await getTransferConfigs()
 
-  return
   const sourceChainID = 10  // Op Mainnet
   const destChainID = 137  // Polygon Mainnet
   const tokenSymbol = "USDT" // transfer USDT

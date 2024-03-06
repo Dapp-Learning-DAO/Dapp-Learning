@@ -26,7 +26,7 @@ async function main() {
   const OpTokenAddress = "0x4200000000000000000000000000000000000042"
   const nonce = new Date().getTime()
 
-  // Pool Based Transfer for USDT, from Op to Polygon
+  // Transfer for Op token, from Op to Polygon
   // for contract address, refer to https://cbridge-docs.celer.network/reference/contract-addresses
   const canonicalBridgeContract = "0xbCfeF6Bb4597e724D720735d32A9249E0640aA11"
   const opContract = await hre.ethers.getContractAt('IERC20', OpTokenAddress, deployer);

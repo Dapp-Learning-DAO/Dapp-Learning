@@ -7,3 +7,5 @@ typechain
 #Hardhat files
 cache
 artifacts
+
+**/deployment.json
