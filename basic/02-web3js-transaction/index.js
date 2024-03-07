@@ -14,7 +14,7 @@ function sleep(ms) {
 */
 // Provider
 const providerRPC = {
-  development: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID,
+  development: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID,
   moonbase: 'https://rpc.testnet.moonbeam.network',
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -159,7 +159,7 @@ const Trans = async () => {
   // goerli don't support http protocol to event listen, need to use websocket
   // more details , please refer to  https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a
   const web3Socket = new Web3(
-      'wss://goerli.infura.io/ws/v3/' + process.env.INFURA_ID
+      'wss://sepolia.infura.io/ws/v3/' + process.env.INFURA_ID
   );
 
   // listen to  Increment event only once
