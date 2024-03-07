@@ -77,13 +77,13 @@ const input = {
   },
 };
 
-const tempFile = JSON.parse(solc.compile(JSON.stringify(input)));
+const compiledCode = JSON.parse(solc.compile(JSON.stringify(input)));
 ```
 
 3) 获取二进制对象  
 在上一步编译成功的 solidity 对象里面包含很多的属性/值, 而我们需要的是其中合约对象的二进制, abi 属性值. 如下, 我们通过属性提取方式进行获取. solidity 对象的其他属性可以通过代码调试方式进行调试, 这里不再赘述. 
 ```js
-const contractFile = tempFile.contracts["Incrementer.sol"]["Incrementer"];
+const contractFile = compiledCode.contracts["Incrementer.sol"]["Incrementer"];
 
 // Get bin & abi
 const bytecode = contractFile.evm.bytecode.object;
@@ -107,10 +107,7 @@ const web3 = new Web3(
 ```js
 // Create account from privatekey
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
-const account_from = {
-  privateKey: privatekey,
-  accountAddress: account.address,
-};
+
 ```
 
 6) 构造合约实例 
@@ -125,31 +122,20 @@ const deployContract = new web3.eth.Contract(abi);
 ```js
 // Create Tx
 const deployTx = deployContract.deploy({
-  data: bytecode,
-  arguments: [5],
+  data: '0x' + bytecode,
+  arguments: [0],
 });
 ```  
 
-8) 交易签名 
-如下使用私钥对交易进行签名,
-```js
-// Sign Tx
-const deployTransaction = await web3.eth.accounts.signTransaction(
-  {
-    data: deployTx.encodeABI(),
-    gas: 8000000,
-  },
-  account_from.privateKey
-);
-```
 
-9) 部署合约  
+8) 部署合约  
 这里使用发送签名后的交易到区块链网络, 同时会去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
 ```js
-const deployReceipt = await web3.eth.sendSignedTransaction(
-  deployTransaction.rawTransaction
-);
-console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+const tx = await deployTx.send({
+  from: accounts[0].address,
+  gas,
+  // gasPrice: 10000000000,
+});
 ```
 
 ## 参考文档
