@@ -10,6 +10,9 @@ zkRollup在链下利用Merkle tree存储账户状态，由Operator收集用户�
 Operator执行交易后本地的merkle tree root会由prev state root转换成post state root。  
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/30-zksync-layer2/zkrollup.png?raw=true" /></center>
 
+- Boojum Upgrade: 
+ https://zksync.mirror.xyz/HJ2Pj45EJkRdt5Pau-ZXwkV2ctPx8qFL19STM5jdYhc
+
 ## 基本架构
 
 Components of zkSync：
@@ -81,3 +84,4 @@ npx hardhat run scripts/main.js
 - NFT upload: https://app.pinata.cloud/  
 - zigzag introduction:  https://docs.zigzag.exchange/  
 - zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html
+- Boojum Upgrade: https://zksync.mirror.xyz/HJ2Pj45EJkRdt5Pau-ZXwkV2ctPx8qFL19STM5jdYhc

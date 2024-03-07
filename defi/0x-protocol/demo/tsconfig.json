@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true
+    },
+    "include": ["scripts/*.ts", "scripts/0xlimitswap.js"],
+    "exclude": ["node_modules"]
+  }
+  
