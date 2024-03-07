@@ -94,7 +94,7 @@ const privatekey = process.env.PRIVATE_KEY;
 ```js
 // Provider
 const providerRPC = {
-  development: "https://goerli.infura.io/v3/" + process.env.INFURA_ID,
+  development: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
   moonbase: "https://rpc.testnet.moonbeam.network",
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -138,7 +138,7 @@ const deployTx = deployContract.deploy({
 如下使用私钥对交易进行签名,
 ```js
 // Sign Tx
-const deployTransaction = await web3.eth.accounts.signTransaction(
+const createTransaction = await web3.eth.accounts.signTransaction(
   {
     data: deployTx.encodeABI(),
     gas: 8000000,
@@ -150,16 +150,16 @@ const deployTransaction = await web3.eth.accounts.signTransaction(
 9) 部署合约  
 这里使用发送签名后的交易到区块量网络, 同时回去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
 ```js
-const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
+const createReceipt = await web3.eth.sendSignedTransaction(
+    createTransaction.rawTransaction
 );
-console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+console.log(`Contract deployed at address: ${createReceipt.contractAddress}`);
 ```
 
 10) 通过已经部署的合约地址加载合约实例  
 上述, 我们是先构造了一个合约实例, 然后再通过发送合约部署交易, 实现合约实例的上链, 以便后续进行相应的交易操作. 但同时, 我们也可以直接加载一个已经上链的合约实例, 这样就可以直接对合约进行操作, 避免了中间的部署过程  
 ```js
-let incrementer = new web3.eth.Contract(abi, deployReceipt.contractAddress);
+let incrementer = new web3.eth.Contract(abi, createReceipt.contractAddress);
 ```
 
 11) 调用合约只读接口   
@@ -201,11 +201,8 @@ const incrementReceipt = await web3.eth.sendSignedTransaction(
 如下, 在合约实例上调用 once 接口, 传入监听的事件为 "Increment",  就生成了一个一次性的事件监听器. 当有 "Increment" 触发时, 就会打印相应的提示信息 
 ```js
 const web3Socket = new Web3(
-    new Web3.providers.WebsocketProvider(
-      "wss://goerli.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"
-    )
+      "wss://sepolia.infura.io/ws/v3/" ++ process.env.INFURA_ID
   );
-  incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
 
   // listen to  Increment event only once
   incrementer.once("Increment", (error, event) => {
@@ -219,13 +216,15 @@ const web3Socket = new Web3(
 incrementer.events.Increment(() => {
     console.log("I am a longlive event listner, I get a event now");
   });
+#以上持续监听代码已更新，新的代码参考 index.js中 第171行 ～ 第184行
+
 ```
 
 - 触发事件  
 如下, 构造交易, 调用 increment 接口, 触发 "Increment" 事件, 在终端上就可以看到相应的输出  
 ```js
 let incrementTx = incrementer.methods.increment(_value);
-
+//为了演示触发error的事件机制，index.js 中将上述 “_value”直接设定为0，触发'increment value should be positive number'事件
 
 incrementTransaction = await web3.eth.accounts.signTransaction(
       {
@@ -236,7 +235,10 @@ incrementTransaction = await web3.eth.accounts.signTransaction(
       account_from.privateKey
     );
 
-    await web3.eth.sendSignedTransaction(incrementTransaction.rawTransaction);
+    await web3.eth
+       .sendSignedTransaction(incrementTransaction.rawTransaction)
+      .on('error', console.error)
+
 ```
 
 ## 参考文章
