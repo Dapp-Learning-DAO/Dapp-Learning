@@ -95,7 +95,7 @@ At the same time, feel free to keep expanding this [book list](./docs/books-en.m
 We have collected some crypto courses from top universities and the Ethereum community to help developers systematically understand blockchain and cryptocurrencies.
 - [MIT Online Course: Blockchain and Money by Prof. Gary Gensler](https://ocw.mit.edu/courses/sloan-school-of-management/15-s12-blockchain-and-money-fall-2018/video-lectures/)
 - [Berkeley Online Course:](https://berkeley-defi.github.io/f21)   [Defi Learning](https://defi-learning.org/)
-- [Standford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
+- [Stanford Online Course: CS 251 Bitcoin and Cryptocurrencies](https://cs251.stanford.edu/syllabus.html)
 
 We have also organized a translation group to translate MIT course 'blockchain and money' into Chinese, and upload all the chinese note-taking on our WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzAwNTAxMzMzMA==&scene=1&album_id=2241099480056119298&count=3#wechat_redirect)
 
@@ -187,6 +187,10 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
+77. [orbit](basic/77-orbit)
+78. [wallet connect](basic/78-wallet-connect)
+79. [hardhat-foundry](basic/79-hardhat-foundry)
+80. [Circle CCTP](basic/80-circle-cctp)
 
 Welcome to submit pull request, [Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 
@@ -305,7 +309,7 @@ Dapp-learning has a series of derivative projects and joint maintenance projects
 Interested in participating? Check out this doc and find out how you can be a member of us: [How to contribute](./docs/dao-en.md).
 
 ## Frequently Asked Questions (FAQ)
-Please refer to [this link](./docs/TROUBLE_SHOOTING-en.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing etc.
+Please refer to [this link](./docs/TROUBLE_SHOOTING-en.md) to get some answers on how to set up dev environment, how to use the project, and how to get tokens for testing, etc.
 
 ## Donation Wanted
 Open-sourced projects are not easy to maintain so we'd love all kinds of donations. Dapp Learning team follows DAO's governance and all donations would be allocated to our community members as crypto rewards and/or NFTs based on their quality of contributions.
@@ -320,7 +324,7 @@ Direct donation to our dev team's fund is also appreciated:
 **We also have created multi-signature wallets on Polygon, managed by our core contributors**
 - Polygon [Multiple signature wallets](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779 ): 0x2A6D09B3b11E5455a37F907f2ec885E0Be704779
 
-Sponsorship grants are managed under a multi-sign-up wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
+Sponsorship grants are managed under a multi-signature wallet by core contributor team; the fund is available to all contributors for their stellar additions to the project. We look forward to see your contributions soon.
 
 ## Cooperative partner
 
@@ -371,7 +375,7 @@ Sponsorship grants are managed under a multi-sign-up wallet by core contributor 
 
 ## Sponsor partner
 
-Shout out to the following organizations for their unconditional donations to us/the open source project (in no particular order).
+Shout out to the following organizations for their unconditional donations to us/the open-source project (in no particular order).
 
 <br>
 <div align="left">

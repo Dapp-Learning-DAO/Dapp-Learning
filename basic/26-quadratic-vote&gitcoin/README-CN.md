@@ -79,7 +79,7 @@ cost to the voter = 2^(n-1)
 
 ### financingTool
 
-![quadratic_funding.png](https://vitalik.ca/images/qv-files/quadratic_funding.png)
+![quadratic_funding.png](https://vitalik.eth.limo/images/qv-files/quadratic_funding.png)
 
 每个用户针对某个提案投票都是总金额的开平方
 
@@ -160,7 +160,7 @@ struct UserVote {//每个用户每个提案会有一个实例
 
 ## 参考资料
 
-- [Quadratic Payments: A Primer](https://vitalik.ca/general/2019/12/07/quadratic.html)
+- [Quadratic Payments: A Primer](https://vitalik.eth.limo/general/2019/12/07/quadratic.html)
 - [二次方投票和二次方资助](https://www.matataki.io/p/6113)
 - [视频](https://www.bilibili.com/video/BV1Y5411w77b/)
 - [gitcoin](https://gitcoin.co/blog/gitcoin-grants-quadratic-funding-for-the-world/)

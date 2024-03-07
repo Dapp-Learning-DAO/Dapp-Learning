@@ -52,7 +52,7 @@ https://medium.com/infinitism/erc-4337-account-abstraction-without-ethereum-prot
 
 
 ## 参考链接
-- [vitalik文章](https://vitalik.ca/general/2022/01/26/soulbound.html)
+- [vitalik文章](https://vitalik.eth.limo/general/2022/01/26/soulbound.html)
 - [ Decentralized Society: Finding Web3's Soul ](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4105763)
 - [SBT综述](https://mirror.xyz/0x07599B7E947A4F6240F826F41768F76149F490D5/fbYA4BbpB8zxbFqO2FpyLEFprXMqhSfQQQIo_lU8LGE)
 - [DID总结文章1]（https://docs.qq.com/doc/DVGJFUWN6RGRZdWJo）
