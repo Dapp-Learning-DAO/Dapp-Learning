@@ -1,0 +1,22 @@
+{
+  "name": "layerzero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.21.0"
+  },
+  "dependencies": {
+    "@layerzerolabs/scan-client": "^0.0.8",
+    "@layerzerolabs/solidity-examples": "^1.1.0",
+    "@openzeppelin/contracts": "^4.4.1"
+  }
+}
