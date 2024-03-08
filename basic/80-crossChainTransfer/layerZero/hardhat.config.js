@@ -1,5 +1,11 @@
-require("@nomiclabs/hardhat-waffle");
+require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
+
+/** @type import('hardhat/config').HardhatUserConfig */
+// module.exports = {
+//   solidity: "0.8.24",
+// };
+
 
 const settings = {
   optimizer: {
@@ -12,12 +18,15 @@ function mnemonic() {
   return [process.env.PRIVATE_KEY];
 }
 
-/** @type import('hardhat/config').HardhatUserConfig */
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 module.exports = {
   solidity: {
     compilers: [
-      { version: '0.8.17',  settings },
-      { version: '0.8.9',  settings },
+      { version: '0.8.4',  settings },
+      { version: '0.4.21',  settings },
+      { version: '0.8.22', settings },
     ],
   },
   networks: {
@@ -29,8 +38,20 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
+    rinkeby: {
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: mnemonic(),
+    },
+    kovan: {
+      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: mnemonic(),
+    },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+      accounts: mnemonic(),
+    },
+    ropsten: {
+      url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: mnemonic(),
     },
     matic: {
@@ -53,12 +74,16 @@ module.exports = {
       url: "https://rpc.scroll.io",
       accounts: mnemonic()
     },
-    mumbai:{
-      url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
+    optim_sepolia: {
+      url: "https://optimism-sepolia.infura.io/v3/" + process.env.INFURA_ID,
       accounts: mnemonic()
-    }
+    },
+    
   },
   mocha: {
-    timeout: 20000
+    timeout: 200000
+  },
+  sourcify: {
+    enabled: true
   },
 };

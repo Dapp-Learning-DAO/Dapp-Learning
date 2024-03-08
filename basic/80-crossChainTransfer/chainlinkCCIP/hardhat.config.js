@@ -9,7 +9,7 @@ const settings = {
 };
 
 function mnemonic() {
-  return [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY1, process.env.PRIVATE_KEY2];
+  return [process.env.PRIVATE_KEY];
 }
 
 /**
@@ -69,11 +69,6 @@ module.exports = {
       url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
       accounts: mnemonic()
     }
-  },
-  gasReporter: {
-    currency: 'USD',
-    coinmarketcap: process.env.COINMARKETCAP,
-    gasPrice: 200,
   },
   mocha: {
     timeout: 20000
