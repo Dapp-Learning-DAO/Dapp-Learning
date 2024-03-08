@@ -18,6 +18,7 @@ async function main() {
   const oftv2 = await ethers.getContractAt('OFTV2', oftv2Address, deployer);
   const destinationEndpoindId =  10232
   const transferAmount = ethers.parseEther("2")
+  // more details, please refer to https://layerzero.gitbook.io/docs/evm-guides/advanced/relayer-adapter-parameters
   const adapterParams = ethers.solidityPacked(['uint16', 'uint256'], [1, 200000]);
   const toAddress = ethers.zeroPadValue("0xfB0Fb78244aa8e03bfA0eF464c176246040dCC86",32);
   
