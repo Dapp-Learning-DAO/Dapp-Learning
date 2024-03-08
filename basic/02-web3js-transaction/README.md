@@ -2,6 +2,8 @@
 # Abstract
 The demo code provides developers with an overview of how to sign, send, and receive receipt of transactions, and verify the results of their execution. The sample also provides the event monitoring code so that the developer can understand how to listen to an event one or more times.
 
+--Node Version：v20.11.0
+
 # Getting Started
 
 ## Understanding The Functions of the [Smart Contract](Incrementer.sol)
@@ -86,7 +88,7 @@ const privatekey = process.env.PRIVATE_KEY;
 ```js
 // Provider
 const providerRPC = {
-  development: "https://goerli.infura.io/v3/" + process.env.INFURA_ID,
+  development: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
   moonbase: "https://rpc.testnet.moonbeam.network",
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -124,13 +126,15 @@ const deployTx = deployContract.deploy({
     data: bytecode,
     arguments: [5],
 });
+
+#arguments: [5] -> incrementer.sol : function increment
 ```  
 
 ### 8. Sign the transaction
 Use your private key to sign the transaction.
 ```js
 // Sign Tx
-const deployTransaction = await web3.eth.accounts.signTransaction(
+const createTransaction = await web3.eth.accounts.signTransaction(
     {
         data: deployTx.encodeABI(),
         gas: 8000000,
@@ -142,10 +146,10 @@ const deployTransaction = await web3.eth.accounts.signTransaction(
 ### 9. Send the transaction / Deploy your smart contract
 Send your `deploy` transaction to the blockchain. You will receive a receipt, and get this contract address from the receipt.
 ```js
-const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
+const createReceipt = await web3.eth.sendSignedTransaction(
+    createTransaction.rawTransaction
 );
-console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+console.log(`Contract deployed at address: ${createReceipt.contractAddress}`);
 ```
 
 
@@ -195,12 +199,14 @@ In the interfaces, you retrieve the corresponding internal information by trigge
 ```js
 const web3Socket = new Web3(
 new Web3.providers.WebsocketProvider(
-    'wss://goerli.infura.io/ws/v3/' + process.env.INFURA_ID
+    'wss://sepolia.infura.io/ws/v3/' + process.env.INFURA_ID
 ));
-incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
+#Web3 can intital without assign Provider("new Web3.providers.WebsocketProvider"), it also work. check index.js line 162
 
 ```
-| goerli don't support http protocol to event listen, need to use websocket. More details , please refer to this [blog](https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a)
+
+#we use sepolia now, it you interest in goerli, view below :
+| sepolia don't support http protocol to event listen, need to use websocket. More details , please refer to this [blog](https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a)
 
 #### Listen to  Increment event only once
 ```js
@@ -213,8 +219,10 @@ incrementer.once('Increment', (error, event) => {
 incrementer.events.Increment(() => {
     console.log("I am a longlive event listener, I get a event now");
 });
+
+# event continuously code already change in index.js: from line 171~184, but above code also work.
 ```
 
 # References
 - Code part: https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
-- web3socket of Goerli: https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a 
+- web3socket of sepolia: https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a 

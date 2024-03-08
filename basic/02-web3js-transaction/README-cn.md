@@ -2,6 +2,8 @@
 ## 前言
 通过本样例代码，开发者了解到如何对交易进行签名，发送，接收交易回执，验证交易执行结果。同时，样例也提供了事件监听的逻辑代码，开发者可以了解如何对一个事件进行一次或多次监听
 
+--测试Node版本：v20.11.0
+
 ## 合约功能说明   
 constructor: 构造函数, 用于部署合约时调用, 同时在其中初始化了公共变量 number 的值  
 increment:   增值函数, 根据传入的数值 ( _value ), 对公共变量 number 进行增值 ( number + _value )   
@@ -88,13 +90,13 @@ const privatekey = process.env.PRIVATE_KEY;
 
 3) 构造 web3 对象   
 通过 web3 对象可以很方便的发送相应的交易到区块链网络, 同时获取区块链的处理结果. 
-构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 goerli 测试网络, 或是 mainnet 主网. 
-这里我们使用 goerli 测试网络. 如果没有 goerli 网络的测试币, 可以切换到其他的测试网络. 
+构造 web3 对象时, 主要需要传入一个参数, 就是对应的区块链网络, 包括 sepolia 测试网络, 或是 mainnet 主网. 
+这里我们使用 sepolia 测试网络. 如果没有 sepolia 网络的测试币, 可以切换到其他的测试网络. 
 同时需要注意的是, 这里我们通过 infura 向对应的区块链网络发送交易, 而 INFURA_ID 这个变量值也需要配置在 .env 文件中, 具体如何获取 infura_id, 可自行搜索查找相关文档 
 ```js
 // Provider
 const providerRPC = {
-  development: "https://goerli.infura.io/v3/" + process.env.INFURA_ID,
+  development: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
   moonbase: "https://rpc.testnet.moonbeam.network",
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -138,7 +140,7 @@ const deployTx = deployContract.deploy({
 如下使用私钥对交易进行签名,
 ```js
 // Sign Tx
-const deployTransaction = await web3.eth.accounts.signTransaction(
+const createReceipt = await web3.eth.accounts.signTransaction(
   {
     data: deployTx.encodeABI(),
     gas: 8000000,
@@ -150,16 +152,16 @@ const deployTransaction = await web3.eth.accounts.signTransaction(
 9) 部署合约  
 这里使用发送签名后的交易到区块量网络, 同时回去返回的交易回执. 从返回的交易回执中可以得到此次部署的合约的地址 
 ```js
-const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
+const createReceipt = await web3.eth.sendSignedTransaction(
+    createTransaction.rawTransaction
 );
-console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+console.log(`Contract deployed at address: ${createReceipt.contractAddress}`);
 ```
 
 10) 通过已经部署的合约地址加载合约实例  
 上述, 我们是先构造了一个合约实例, 然后再通过发送合约部署交易, 实现合约实例的上链, 以便后续进行相应的交易操作. 但同时, 我们也可以直接加载一个已经上链的合约实例, 这样就可以直接对合约进行操作, 避免了中间的部署过程  
 ```js
-let incrementer = new web3.eth.Contract(abi, deployReceipt.contractAddress);
+let incrementer = new web3.eth.Contract(abi, createReceipt.contractAddress);
 ```
 
 11) 调用合约只读接口   
@@ -201,11 +203,9 @@ const incrementReceipt = await web3.eth.sendSignedTransaction(
 如下, 在合约实例上调用 once 接口, 传入监听的事件为 "Increment",  就生成了一个一次性的事件监听器. 当有 "Increment" 触发时, 就会打印相应的提示信息 
 ```js
 const web3Socket = new Web3(
-    new Web3.providers.WebsocketProvider(
-      "wss://goerli.infura.io/ws/v3/0aae8358bfe04803b8e75bb4755eaf07"
-    )
+   "wss://sepolia.infura.io/ws/v3/" ++ process.env.INFURA_ID
   );
-  incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
+  
 
   // listen to  Increment event only once
   incrementer.once("Increment", (error, event) => {
@@ -219,6 +219,7 @@ const web3Socket = new Web3(
 incrementer.events.Increment(() => {
     console.log("I am a longlive event listner, I get a event now");
   });
+  #以上持续监听代码已更新，新的代码参考 index.js中 第171行 ～ 第184行
 ```
 
 - 触发事件  
@@ -226,6 +227,7 @@ incrementer.events.Increment(() => {
 ```js
 let incrementTx = incrementer.methods.increment(_value);
 
+//为了演示触发error的事件机制，index.js 中将上述 “_value”直接设定为0，触发'increment value should be positive number'事件
 
 incrementTransaction = await web3.eth.accounts.signTransaction(
       {
@@ -236,12 +238,14 @@ incrementTransaction = await web3.eth.accounts.signTransaction(
       account_from.privateKey
     );
 
-    await web3.eth.sendSignedTransaction(incrementTransaction.rawTransaction);
+   await web3.eth
+       .sendSignedTransaction(incrementTransaction.rawTransaction)
+      .on('error', console.error)
 ```
 
 ## 参考文章
 代码参考文章如下   
 https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
 
-goerli 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
+sepolia 测试网无法使用 http 进行 event 监听，需要使用 web3socket, 可参考如下文章  
 https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a

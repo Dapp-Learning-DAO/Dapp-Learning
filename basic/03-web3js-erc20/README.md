@@ -4,6 +4,8 @@
 
 This basic task is to show how to interact with ERC20 contract, so the developer can understand the basic interface of ERC20 contract.
 
+--Node Version：v20.11.0
+
 ## Getting started
 ### SimpleToken contract function description
 
@@ -113,7 +115,7 @@ const receiver = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 4. Build the `web3` object
 
 ```js
-const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/' + process.env.INFURA_ID));
+const web3 = new Web3(new Web3.providers.HttpProvider('https://sepolia.infura.io/v3/' + process.env.INFURA_ID));
 ```
 | Note: The `INFURA_ID` is the `PROJECT ID` of the `Infura` project you created in last [task](../01-web3js-deploy/README.md)
 
