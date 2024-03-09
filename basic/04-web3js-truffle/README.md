@@ -13,8 +13,6 @@
 - Configurable build pipeline with support for tight integration.
 - External script runner that executes scripts within a Truffle environment.
 
---Node Version：v20.11.0
-
 ### [Truffle Quickstart](https://www.trufflesuite.com/docs/truffle/quickstart)
 
 ## Introduction about Project
@@ -40,8 +38,9 @@
 
 1. Install `Truffle`
 
-   ```bash
+   ```js
    npm install -g truffle
+   // please use node v20.11.0
    ```
 
    > Note: If you are live in mainland China, you can change the registry to `taobao`:

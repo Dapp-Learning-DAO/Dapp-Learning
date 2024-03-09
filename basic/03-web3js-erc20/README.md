@@ -39,6 +39,7 @@ This basic task is to show how to interact with ERC20 contract, so the developer
 
 You can't use `.sol` files directly, you need to compile it to binary file firstly.
 
+
 1. Load the smart contract file `SimpleToken.sol` into `source` variable.
 
 ```js
