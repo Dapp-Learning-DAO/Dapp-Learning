@@ -30,6 +30,7 @@ You can't use `.sol` files directly, you need to compile it to binary file first
 
 ```js
 // Load contract
+// please use node v20.11.0 to run following commands
 const source = fs.readFileSync("Incrementer.sol", "utf8");
 ```
 ### Compile the smart contract file
