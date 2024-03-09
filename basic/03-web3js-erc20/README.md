@@ -4,8 +4,6 @@
 
 This basic task is to show how to interact with ERC20 contract, so the developer can understand the basic interface of ERC20 contract.
 
---Node Version：v20.11.0
-
 ## Getting started
 ### SimpleToken contract function description
 
@@ -24,14 +22,15 @@ This basic task is to show how to interact with ERC20 contract, so the developer
 
 
 ### How to run it
-1. Install dependencies: `npm install`
-2. Copy the configuration file: `cp .env.example .env`
-3. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
+1. Please use node v20.11.0 to run following commands
+2. Install dependencies: `npm install`
+3. Copy the configuration file: `cp .env.example .env`
+4. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
     ```text
     PRIVATE_KEY=YOUR_PRIVATE_KEY
     INFURA_ID=YOUR_PROJECT_ID
     ``` 
-4. Run the `index.js` file: `node index.js`
+5. Run the `index.js` file: `node index.js`
 
 ## Interpret Source Code
 

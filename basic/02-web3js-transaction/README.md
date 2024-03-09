@@ -2,8 +2,6 @@
 # Abstract
 The demo code provides developers with an overview of how to sign, send, and receive receipt of transactions, and verify the results of their execution. The sample also provides the event monitoring code so that the developer can understand how to listen to an event one or more times.
 
---Node Version：v20.11.0
-
 # Getting Started
 
 ## Understanding The Functions of the [Smart Contract](Incrementer.sol)
@@ -14,14 +12,15 @@ The demo code provides developers with an overview of how to sign, send, and rec
 
 ## How to run it
 
-1. Install dependencies: `npm install`
-2. Copy the configuration file: `cp .env.example .env`
-3. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
+1. Please use node v20.11.0 to run following commands
+2. Install dependencies: `npm install`
+3. Copy the configuration file: `cp .env.example .env`
+4. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
     ```text
     PRIVATE_KEY=YOUR_PRIVATE_KEY
     INFURA_ID=YOUR_PROJECT_ID
     ``` 
-4. Run the `index.js` file: `node index.js`
+5. Run the `index.js` file: `node index.js`
 
 # Interpret Source Code
 ## `compile.js`

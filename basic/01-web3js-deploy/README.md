@@ -27,7 +27,6 @@ Through this basic task, you can learn the processes of compiling and deploying 
 
 - If you know Chinese, you can check these tasks on [BILIBILI](https://www.bilibili.com/video/BV1Y44y1r7E6/).
 
-- Node Version：v20.11.0
 
 # Getting Started
 
@@ -40,14 +39,15 @@ Through this basic task, you can learn the processes of compiling and deploying 
 
 ## How to run it
 
-1. Install dependencies: `npm install`
-2. Copy the configuration file: `cp .env.example .env`
-3. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file
+1. Please use node v20.11.0 to run following commands
+2. Install dependencies: `npm install`
+3. Copy the configuration file: `cp .env.example .env`
+4. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file
    ```text
    PRIVATE_KEY=YOUR_PRIVATE_KEY
    INFURA_ID=YOUR_PROJECT_ID
    ```
-4. Run the `index.js` file: `node index.js`
+5. Run the `index.js` file: `node index.js`
 
 # Interpret the Code in `index.js`
 
