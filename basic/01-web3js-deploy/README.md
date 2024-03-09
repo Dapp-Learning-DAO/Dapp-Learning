@@ -27,6 +27,8 @@ Through this basic task, you can learn the processes of compiling and deploying 
 
 - If you know Chinese, you can check these tasks on [BILIBILI](https://www.bilibili.com/video/BV1Y44y1r7E6/).
 
+--Node Version：v20.11.0
+
 # Getting Started
 
 ## Understanding The Functions of the [Smart Contract](Incrementer.sol)
