@@ -12,14 +12,15 @@ The demo code provides developers with an overview of how to sign, send, and rec
 
 ## How to run it
 
-1. Install dependencies: `npm install`
-2. Copy the configuration file: `cp .env.example .env`
-3. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
+1. Please use node v20.11.0 to run following commands
+2. Install dependencies: `npm install`
+3. Copy the configuration file: `cp .env.example .env`
+4. Edit the configuration file: `vim .env`, copy your project ID and private key to the `.env` file.
     ```text
     PRIVATE_KEY=YOUR_PRIVATE_KEY
     INFURA_ID=YOUR_PROJECT_ID
     ``` 
-4. Run the `index.js` file: `node index.js`
+5. Run the `index.js` file: `node index.js`
 
 # Interpret Source Code
 ## `compile.js`
@@ -28,6 +29,7 @@ You can't use `.sol` files directly, you need to compile it to binary file first
 
 ```js
 // Load contract
+// please use node v20.11.0 to run following commands
 const source = fs.readFileSync("Incrementer.sol", "utf8");
 ```
 ### Compile the smart contract file
@@ -86,7 +88,7 @@ const privatekey = process.env.PRIVATE_KEY;
 ```js
 // Provider
 const providerRPC = {
-  development: "https://goerli.infura.io/v3/" + process.env.INFURA_ID,
+  development: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
   moonbase: "https://rpc.testnet.moonbeam.network",
 };
 const web3 = new Web3(providerRPC.development); //Change to correct network
@@ -124,13 +126,15 @@ const deployTx = deployContract.deploy({
     data: bytecode,
     arguments: [5],
 });
+
+#arguments: [5] -> incrementer.sol : function increment
 ```  
 
 ### 8. Sign the transaction
 Use your private key to sign the transaction.
 ```js
 // Sign Tx
-const deployTransaction = await web3.eth.accounts.signTransaction(
+const createTransaction = await web3.eth.accounts.signTransaction(
     {
         data: deployTx.encodeABI(),
         gas: 8000000,
@@ -142,10 +146,10 @@ const deployTransaction = await web3.eth.accounts.signTransaction(
 ### 9. Send the transaction / Deploy your smart contract
 Send your `deploy` transaction to the blockchain. You will receive a receipt, and get this contract address from the receipt.
 ```js
-const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
+const createReceipt = await web3.eth.sendSignedTransaction(
+    createTransaction.rawTransaction
 );
-console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+console.log(`Contract deployed at address: ${createReceipt.contractAddress}`);
 ```
 
 
@@ -195,12 +199,14 @@ In the interfaces, you retrieve the corresponding internal information by trigge
 ```js
 const web3Socket = new Web3(
 new Web3.providers.WebsocketProvider(
-    'wss://goerli.infura.io/ws/v3/' + process.env.INFURA_ID
+    'wss://sepolia.infura.io/ws/v3/' + process.env.INFURA_ID
 ));
-incrementer = new web3Socket.eth.Contract(abi, createReceipt.contractAddress);
+#Web3 can intital without assign Provider("new Web3.providers.WebsocketProvider"), it also work. check index.js line 162
 
 ```
-| goerli don't support http protocol to event listen, need to use websocket. More details , please refer to this [blog](https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a)
+
+#we use sepolia now, it you interest in goerli, view below :
+| sepolia don't support http protocol to event listen, need to use websocket. More details , please refer to this [blog](https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a)
 
 #### Listen to  Increment event only once
 ```js
@@ -213,8 +219,10 @@ incrementer.once('Increment', (error, event) => {
 incrementer.events.Increment(() => {
     console.log("I am a longlive event listener, I get a event now");
 });
+
+# event continuously code already change in index.js: from line 171~184, but above code also work.
 ```
 
 # References
 - Code part: https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
-- web3socket of Goerli: https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a 
+- web3socket of sepolia: https://medium.com/blockcentric/listening-for-smart-contract-events-on-public-blockchains-fdb5a8ac8b9a 
