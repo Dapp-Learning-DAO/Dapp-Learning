@@ -78,6 +78,10 @@ module.exports = {
       url: "https://optimism-sepolia.infura.io/v3/" + process.env.INFURA_ID,
       accounts: mnemonic()
     },
+    mantaPacific: {
+      url: "https://pacific-rpc.manta.network/http",
+      accounts: mnemonic(),
+    },
     
   },
   mocha: {
