@@ -764,6 +764,30 @@ O(n^2)。与之相关的 BIP 有：
 [bip-145]: https://github.com/bitcoin/bips/blob/master/bip-0145.mediawiki
 [bip-173]: https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki
 
+### P2TR
+Taproot 是 Bitcoin 的一次大升级，在区块 709632 处（2021 年 11 月 12 日）被激活。Taproot Output 是版本为 1 的隔离见证 Output，这类 Output 称为 Pay-to-Taproot (P2TR)。
+版本为 0 的隔离见证 Output 有两类（在 BIP141 中定义）：
+- Pay-to-Witness-Public-Key-Hash (P2WPKH)
+- Pay-to-Witness-Script-Hash (P2WSH)
+
+两类版本为 0 的隔离见证 Output 其 scriptPubKey 字段是不同的（不同点参见表 1），所以我们很容易区分某个 Output 到底是 P2WPKH 还是 P2WSH。
+版本为 1 隔离见证 Output（即 P2TR），统一了这两种形式，也就是说它们的 Output 的 scriptPubKey 字段是一样的，这样有更好的隐私。
+
+如下为P2WPKH/P2WSH/P2TR 的 scriptPubKey 字段及花费它们时的 Witness 字段
+
+| Type                | scriptPubKey                         | Witness                         |
+|---------------------|--------------------------------------|---------------------------------|
+| P2WPKH              | 0x0014{20-byte-key-hash}             | \<signature> \<pubkey>            |
+| P2WSH               | 0x0020{32-byte-hash}                 | ......                          |
+| P2TR (Key Path)     | 0x5120{32-byte-tweaked-public-key}   | <schnorr-signature>             |
+| P2TR (Script Path)  | 0x5120{32-byte-tweaked-public-key}   | ...... \<script> \<control-block> |  
+
+ 
+从表中可以看到创建一个 P2TR (Key Path) Output 时，要比创建 P2WPKH Output 要多占用更大的空间，因为 P2TR (Key Path) 的 scriptPubKey 直接含有 tweaked public key（32 字节），而 P2WPKH 则是公钥哈希（20 字节）。也就是说， 往 P2TR 转账比往 P2WPKH 地址转账要贵一点点。  
+不过， 花费 P2TR (Key Path) 比花费 P2WPKH 要省更多的费用， 原因有二：花费 P2TR (Key Path) 的 Witness 中不再包含公钥了；P2TR (Key Path) 采用的 schnorr 签名比 P2WPKH 采用的 DER 格式的 ECDSA 签名要更小。  
+
+综合考虑创建 Output 和花费 Output 两方面，P2TR (Key Path) 比 P2WPKH 更省费用，同时隐私性更好
+
 ## Block
 
 讲完 tx 和 script，就可以好好讲一下 bitcoin 中的 block 了。
