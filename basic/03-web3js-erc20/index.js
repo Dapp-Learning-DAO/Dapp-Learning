@@ -13,7 +13,7 @@ const receiver = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 // Provider
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://goerli.infura.io/v3/' + process.env.INFURA_ID
+    'https://sepolia.infura.io/v3/' + process.env.INFURA_ID
   )
 );
 

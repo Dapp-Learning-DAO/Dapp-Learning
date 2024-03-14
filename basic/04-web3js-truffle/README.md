@@ -38,8 +38,9 @@
 
 1. Install `Truffle`
 
-   ```bash
+   ```js
    npm install -g truffle
+   // please use node v20.11.0
    ```
 
    > Note: If you are live in mainland China, you can change the registry to `taobao`:
@@ -81,17 +82,21 @@
    In `truffle-config.js`, we can specify truffle to use the eth test network. However, after running `trffle migrate`, it reported there is no test network, so truffle didn't launch the built-in test network. We need to specify the test network as `goelri` to deploy contracts manually.
 
    ```bash
-   truffle migrate --network goerli
+   truffle migrate --network sepolia
+   #make sure your sepolia test token higher than 0.6
    ```
 
-   > If we run `truffle migrate` frequently, it may shows `Network update to date` and doesn't deploy the contracts. At that time, we need to run `truffle migrate --network goerli --reset` to reset the migration status.
+   > If we run `truffle migrate` frequently, it may shows `Network update to date` and doesn't deploy the contracts. At that time, we need to run `truffle migrate --network sepolia --reset` to reset the migration status.
 
 ## Test contracts on Infura
 
 Under `test` folder, there are two types, `sol` and `js`. `Truffle` supports both types, but if we use `infura`, we can't run `sol` file. So we only use `js` file as our test file. 
 
 ```bash
-truffle test ./test/simpletoken.js --network goerli
+truffle test ./test/simpletoken.js --network sepolia
+
+#If the prompt is “Error: Cannot find module '/ Uws_darwin-arm64_115. node '”, nvm use v16. x.x, switch to any v16 version, and then execute this command
+#Warning does not affect transactions and can be ignored
 ```
 
 ## Test in local
@@ -170,6 +175,7 @@ After finish the above steps, we can run `truffle compile`, `truffle migrate` an
 
 
   4 passing (32s)
+#Exit the develop mode and enter. exit<-- be careful not to forget
 
 ```
 
@@ -209,7 +215,10 @@ After you started the dashboard service, truffle will launch a network named `da
 
 
 ```bash
+#Open another terminal, re-enter this directory, truffle develop into development mode, and then enter the following command
 > truffle migrate --network dashboard
+
+#Exit development mode with. exit, then enter the following command to re-enter dashboard console mode
 > truffle console --network dashboard
 ```
 

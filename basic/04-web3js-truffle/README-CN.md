@@ -17,6 +17,7 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 - 可配的构建流程，支持持续集成。
 - 支持外部脚本的执行
 
+
 ## 文件说明
 
 ### 目录结构
@@ -37,8 +38,9 @@ truffle 开发框架提供了很多功能，简化了我们的开发、编译、
 
 ## 测试流程
 1. 安装 truffle  
-```bash
+```js
 npm install -g truffle
+// 本教程使用的 node 版本为 v20.11.0
 ```  
 
 如果下载速度过慢，可配置taobao的镜像地址来进行加速。
@@ -85,16 +87,18 @@ Writing artifacts to .\build\contracts
 5. 部署合约
 
 在 truffle-config.js 里面，可以配置 truffle 使用的以太网络，其中就包括 truffle test 使用的 "test" 网络。
-这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 goerli 进行 truffle 合约部署
+这里，直接执行 truffle migrate 报没有找到 test 网络，因为 truffle 不会启动内置的 test 网络。所以这里我们使用 sepolia 进行 truffle 合约部署
 
 ```bash
-truffle migrate --network goerli
+truffle migrate --network sepolia
+#确保你的sepolia 测试币不低于0.6
+
 ```
 
 当多次执行 truffle migrate 的时候，可能会出 "Network update to date", 然后不执行合约部署的情况，这个时候需要执行如下的 truffle 命令
 
 ```bash
-truffle migrate --network goerli --reset
+truffle migrate --network sepolia --reset
 ```
 
 ## 在 infura 测试合约
@@ -104,7 +108,9 @@ sol 的测试文件会报失败。所以，这里我们连接到 infura 进行�
 
 
 ```bash
-truffle test ./test/simpletoken.js --network goerli
+truffle test ./test/simpletoken.js --network sepolia
+
+#Warning 不影响交易可忽略
 ```
 
 ## 在本地测试合约
@@ -141,15 +147,15 @@ Private Keys:
 
 ```
 
-选择任意一个私钥，将其放置在 truffle-config.js 中 mnemonic 变量中。
+选择任意一个私钥，将其放置在 simpletoken.js 中 第21行
 
 例如，原代码是
 
-- const mnemonic = fs.readFileSync('./sk.txt').toString().trim()
+- const target = "0x5df22be367b95788cd51c7dbdf7c7ab70fe856ee";
 
-修改后的代码是
+将地址改成本机测试账户
 
-- const mnemonic = "0a8d9e2a470aedfabe279f16f629c5054a47d69b7d66d17ba65cdd7ca99876e1"
+
 
 接下来配置本地网络参数，将下面 network 属性中 development 注释打开，host 配置成本地，port 配置成 truffle develop 给出的端口地址，如本例中端口是 9545。network_id 保留原状。
 
@@ -162,6 +168,7 @@ Private Keys:
 ```
 
 配置好以后即可运行 truffle compile 进行编译，truffle migrate 进行部署，truffle test 进行测试
+
 
 ```bash
 > Artifacts written to C:\Users\Highland\AppData\Local\Temp\test--33840-ApHyOzehxOdp
@@ -181,6 +188,7 @@ Private Keys:
 
   4 passing (32s)
 
+#退出 develop模式，输入 .exit  <--注意不要忘记 .
 ```
 
 ## 使用 Truffle Dashboard 工具
@@ -214,7 +222,10 @@ dashboard 默认运行在 http://localhost:24012, 若不小心关闭了之前弹
 dashboard 服务开启之后，truffle 会内置一个名为 dashboard 的网络。我们后续的部署和脚本运行都可以使用这个网络，例如
 
 ```bash
+#开启另外一个终端，重新进入本目录，truffle develop进入开发模式，再输入以下命令
 > truffle migrate --network dashboard
+
+#.exit 退出开发模式，然后再输入以下命令，重新进入dashboard console模式
 > truffle console --network dashboard
 ```
 

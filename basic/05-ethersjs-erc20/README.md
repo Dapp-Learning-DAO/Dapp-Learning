@@ -21,8 +21,9 @@ Difference between `web3.js` and `ethers.js` can be seen [here](./web3-vs-ethers
 
 1. Install dependencies
 
-   ```bash
+   ```js
    npm install
+   // please use node v20.11.0
    ```
 
 2. Config `.env`

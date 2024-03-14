@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "script": "node dist/usdc_transfer_cctp.js",
+    "start": "npm run build && npm run script"
+  },
+  "dependencies": {
+    "viem": "^2.7.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.3.3"
+  }
+}
