@@ -15,6 +15,15 @@ async function main() {
   const Token = await ethers.getContractFactory('SimpleToken');
   const token = await Token.deploy('SimpleToken', 'SimpleToken', 18, 10000000000);
 
+   /** ---- for Greeter verify
+  const Greeter = await ethers.getContractFactory("Greeter");
+    const token = await Greeter.deploy("Hello, world");
+    await token.deployed();
+   */
+
+
+   //--- for Greeter & SimpleToken both need, not delete
+
   console.log('deploy address:', token.address);
 
  

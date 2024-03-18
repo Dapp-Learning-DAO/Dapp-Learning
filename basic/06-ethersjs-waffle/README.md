@@ -26,6 +26,8 @@ You can refer to the offical website of Waffle width the detailed usage(https://
 
 ```bash
 yarn install
+
+#node version v20.11.0
 ```
 
 - 2 compile contracts
@@ -52,6 +54,8 @@ yarn test
 
 ```bash
 node index.js
+
+## index.js Line 19:let address = "xxxxxxx" change account to self
 ```
 
 ## Note

@@ -92,6 +92,8 @@ ipfs daemon
 
    ```bash
    yarn install or npm install
+
+    #Node 版本： v20.11.0
    ```
 
 2. Configure private key and network
