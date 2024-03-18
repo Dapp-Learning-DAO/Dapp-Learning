@@ -43,7 +43,7 @@ describe('EtherDelta', () => {
     admin = owner.address;
     // 费率先toWei,后面需要再除以 toWei，保证整数运算
     feeMake = toWei(0.0005); // 买家佣金费率
-    feeTake = toWei(0.003); // 卖家佣金费率 g
+    feeTake = toWei(0.003); // 卖家佣金费率
     feeRebate = toWei(0.002); // 会员反佣费率
 
     // ReserveToken
