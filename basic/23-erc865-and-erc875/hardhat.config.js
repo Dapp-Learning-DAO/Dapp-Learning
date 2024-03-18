@@ -32,7 +32,7 @@ module.exports = {
   solidity: {
     compilers: [
       { version: '0.8.1', settings },
-      { version: '0.8.0', settings },
+      { version: '0.8.8', settings },
       { version: '0.6.2', settings },
       { version: '0.5.16', settings },
       { version: '0.4.25', settings },

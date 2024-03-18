@@ -318,7 +318,7 @@ contract ERC865Token is Initializable, ERC20, IERC865 {
 
 
     //   address spender = ECDSA.recover(hashedParams, _signature);
-    function getAddressFromSig( bytes _signature, bytes32 hashedParams)  public view returns (address){
+    function getAddressFromSig( bytes _signature, bytes32 hashedParams)  public pure returns (address){
         address signer =  ECDSA.recover(hashedParams, _signature);
 
         return signer;

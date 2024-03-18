@@ -100,9 +100,11 @@ function apiRequestUrl(methodName, queryParams) {
 
 async function buildTxForSwap(swapParams) {
     const url = apiRequestUrl("/swap", swapParams);
+    console.log(url);
     const headers = { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` } }
     // Fetch the swap transaction details from the API
     const response = await  fetch(url, headers);
+
     const data = await response.json();
     return data.tx;
 
@@ -150,9 +152,9 @@ const swapParams = {
 
 // await sleep(2000)
 
-  const swapTxHash = await signAndSendTransaction(swapTransaction);
-    console.log("Swap tx hash: ", swapTxHash);
-   console.log(`Swap transaction sent. Transaction Hash: ${transactionHash}`);
+  // const swapTxHash = await signAndSendTransaction(swapTransaction);
+  //   console.log("Swap tx hash: ", swapTxHash);
+  //  console.log(`Swap transaction sent. Transaction Hash: ${transactionHash}`);
 }
 
 main().catch((error) => console.error(error));

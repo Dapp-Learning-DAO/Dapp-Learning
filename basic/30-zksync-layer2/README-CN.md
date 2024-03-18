@@ -77,3 +77,4 @@ zksync 源码分析： https://www.jianshu.com/u/ac3aed07477e
 李星L2 - zkSync源代码导读： https://zhuanlan.zhihu.com/p/343212894  
 以太坊 Layer 2 扩容方案及用例综述： https://mp.weixin.qq.com/s/TxZ5W9rx6OF8qB4ZU9XrKA
 zkSync2.0 example : https://v2-docs.zksync.io/dev/guide/hello-world.html
+zksync-101: https://hacken.io/discover/zksync-101-everything-you-need-to-know-about-l2-blockchain/
