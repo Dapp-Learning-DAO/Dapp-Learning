@@ -1,45 +1,54 @@
 # 使用 Foundry 进行智能合约开发
 
-[Foundry](https://github.com/gakonst/foundry) 是用 Rust 写成的以太坊智能合约开发工具，它包括三个核心工具：
+[Foundry](https://github.com/gakonst/foundry) 是用 Rust 写成的以太坊智能合约开发工具，它包括三个核心工具 :
 
 - `forge`:  一套以太坊智能合约的测试框架
 - `cast`:  一组与 EVM 生态相关的实用工具，包括编码、解码、与智能合约交互等功能
 - `Anvil`: 本地以太坊节点
+- `Chisel`: Foundry 集成的 Solidity REPL。
 
-## 安装 forge、 cast 和 anvil
+## 安装 forge、 cast、 anvil 和 chisel
 
 首先安装 foundryup， 它是 foundry 的辅助安装工具
 
-```bash
-curl -L https://foundry.paradigm.xyz | bash
+```sh
+# macos
+brew install libusb
+curl -L https://foundry.paradigm.xyz | sh
+# zsh shell
+source ~/.zshenv
 ```
 
-再用 foundryup 安装 forge、 cast 和 anvil
+再用 foundryup 安装 forge、 cast、 anvil 和 chisel
 
-```bash
-brew install libusb
+foundryup 单独运行将安装最新的（每晚）预编译的二进制文件 :forge、 cast、 anvil 和 chisel
+
+```sh
 foundryup
 ```
 
 ## 用 forge 新建项目
 
-```bash
+```sh
 forge init my_project
 ```
 
-新建的项目结构如下：
+新建的项目结构如下 :
 
 ```
 my_project
 ├── foundry.toml
 ├── lib
 │   └── forge-std
-|   |  └── lib
-|   |  |  └── ds-test
-|   |  |     └── ...
+|   |  └── scripts
+|   |  |  └── vm.py
+|   |  └── test
+|   |  |  └── ...
 |   |  └── src
-|   |     └── ...
+|   |  |  └── ...
+|   |  └── ...
 │   └── ...
+├── README.md
 └── script
 |   └── Counter.s.sol
 ├── src
@@ -48,7 +57,7 @@ my_project
     └── Counter.t.sol
 ```
 
-其中：
+其中 :
 
 - `foundry.toml` 是配置文件
     - `forge config --basic` 可查看当前的基础设置
@@ -57,13 +66,15 @@ my_project
 - `test` 下面放合约对应的测试文件
 - `script` 下面放自定义测试通用文件
 - `lib` 目录里放开发依赖的库
-    - 新建项目安装了测试需要的 forge-std 库，将 ds-test 即成到其中
+    - 新建项目安装了测试需要的 forge-std 库 ~~将 ds-test 集成到其中(新版已移除此依赖)~~
 
 ### VSCode 集成
 
-Foundry 支持 VSCode 的集成开发，配置只需要进入项目目录然后执行：
+可以通过安装 [VSCode Solidity](https://github.com/juanfranblanco/vscode-solidity) 扩展来获得对 Visual Studio Code 的 Solidity 支持。
 
-```bash
+Foundry 支持 VSCode 的集成开发，配置只需要进入项目目录然后执行 :
+
+```sh
 cd my_project
 forge remappings > remappings.txt
 ```
@@ -72,27 +83,49 @@ forge remappings > remappings.txt
 
 foundry 可以直接安装调用 GitHub API 下载上面开源的三方库。
 
-安装第三方库 - OpenZeppelin：
+安装第三方库 - OpenZeppelin :
 
-```bash
+```sh
 forge install openzeppelin/openzeppelin-contracts
 ```
 
 其中 `openzeppelin` 为 GitHub 上的账号名，斜杠 `/` 后面
 接用户的 repo。
 
-安装后导入库需要在合约文件前面添加，如添加 openzeppelin 的 ERC20：
+安装后导入库需要在合约文件前面添加，如添加 openzeppelin 的 ERC20 :
 
-```bash
+```sh
 import "openzeppelin/contracts/token/ERC20/ERC20.sol"
 ```
 
-**NOTE**： 如果使用 VSCode 的话，需要重新执行
+安装第三方库 - solmate :
+
+```sh
+forge install transmissions11/solmate
+# 依赖的特定版本, 默认为 master
+forge install transmissions11/solmate@master
+forge install transmissions11/solmate@v7
+forge install transmissions11/solmate@c892309
+```
+
+**NOTE** : 如果使用 VSCode 的话，安装新的第三方库之后需要重新执行
 `forge remappings > remappings.txt`
+
+## 更新第三方库
+
+1. Update a dependency:
+```sh
+forge update lib/solmate
+```
+
+2. Update all dependencies:
+```sh
+forge update
+```
 
 ## 编译合约
 
-```bash
+```sh
 forge build
 ```
 
@@ -104,11 +137,11 @@ forge build
 // Contract.t.sol
 
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.10;
+pragma solidity ^0.8.13;
 
-import "ds-test/test.sol";
+import {Test} from "forge-std/Test.sol";
 
-contract ContractTest is DSTest {
+contract ContractTest is Test {
     function setUp() public {}
 
     function testExample() public {
@@ -130,7 +163,7 @@ Running 1 test for ContractTest.json:ContractTest
 [PASS] testExample() (gas: 120)
 ```
 
-forge 会搜索 src 下的所有合约，寻找含有以 test 开头函数的合约作为测试合约，对于每个测试合约：
+forge 会搜索 src 下的所有合约，寻找含有以 test 开头函数的合约作为测试合约，对于每个测试合约 :
 
 - 其中的 `setUp()` 函数会用作基本设置，在每个测试用例前运行
 - 以 `test` 开头的函数被用作测试用例
@@ -142,15 +175,15 @@ forge 会搜索 src 下的所有合约，寻找含有以 test 开头函数的合
 
 要测试具体某个合约或者某个用例，可以使用下面命令
 
-```bash
-// only run test methods in contracts matching regex
+```sh
+# only run test methods in contracts matching regex
 forge test --match-contract <CONTRACT_PATTERN>
 
-// only run test methods matching regex
+# only run test methods matching regex
 forge test --match-test <TEST_PATTERN>
 
-// only run test methods in source files at path matching regex.
-// Requires absolute path
+# only run test methods in source files at path matching regex.
+# Requires absolute path
 forge test --match-path <PATH_PATTERN>
 ```
 
@@ -207,13 +240,13 @@ forge test --match-path <PATH_PATTERN>
 
 另外，forge 支持在 forked 以太环境上进行测试
 
-```bash
+```sh
 forge test --fork-url <your_rpc_url>
 ```
 
 还可以进一步设定 fork 的区块
 
-```bash
+```sh
 forge test --fork-url <your_rpc_url> --fork-block-number <block-number>
 ```
 
@@ -221,7 +254,7 @@ forge test --fork-url <your_rpc_url> --fork-block-number <block-number>
 
 ```solidity
 // Contract
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
 contract OwnerUpOnly {
   address public immutable owner;
@@ -241,15 +274,15 @@ contract OwnerUpOnly {
 }
 
 // ContactTest
-import "ds-test/test.sol";
+import {Test} from "forge-std/Test.sol";
 
 interface CheatCodes {
   function prank(address) external;
 }
 
-contract OwnerUpOnlyTest is DSTest {
+contract OwnerUpOnlyTest is Test {
   CheatCodes cheats = CheatCodes(HEVM_ADDRESS);
-	OwnerUpOnly upOnly;
+  OwnerUpOnly upOnly;
 
   function setUp() public {
     upOnly = new OwnerUpOnly();
@@ -261,7 +294,7 @@ contract OwnerUpOnlyTest is DSTest {
     assertEq(upOnly.count(), 1);
   }
 
-	function testFailIncrementAsNotOwner() public {
+  function testFailIncrementAsNotOwner() public {
     cheats.prank(address(0));
     upOnly.increment();
   }
@@ -276,7 +309,7 @@ forge 还支持 fuzz testing
 
 ```solidity
 // Contract
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
 contract Safe {
   receive() external payable {}
@@ -287,9 +320,9 @@ contract Safe {
 }
 
 // Test
-import "ds-test/test.sol";
+import {Test} from "forge-std/Test.sol";
 
-contract SafeTest is DSTest {
+contract SafeTest is Test {
   Safe safe;
 
   // Needed so the test contract itself can receive ether
@@ -299,7 +332,7 @@ contract SafeTest is DSTest {
     safe = new Safe();
   }
 
-	function testWithdraw(uint256 amount) public {
+  function testWithdraw(uint256 amount) public {
     payable(address(safe)).transfer(amount);
     uint256 preBalance = address(this).balance;
     safe.withdraw();
@@ -313,22 +346,22 @@ contract SafeTest is DSTest {
 
 ## 部署合约
 
-```bash
+```sh
 forge create --rpc-url <your_rpc_url> --private-key <your_private_key> src/MyContract.sol:MyContract --constructor-args <arg0> <arg1> ...
 ```
 
 如果使用`-i 或 --interactive` flag，则不用将私钥写进命令里，按下回车之后会提示你输入私钥，这样可以避免私钥信息被 shell history 记录
 
-就目前阶段而言，foundry 在合约部署方面不如 Hardhat 方便，若想要在 Hardhat 项目中使用 foundry 进行代码测试，可以参考这篇文档：
+就目前阶段而言，foundry 在合约部署方面不如 Hardhat 方便，若想要在 Hardhat 项目中使用 foundry 进行代码测试，可以参考这篇文档 :
 
 +  [在 Hardhat 项目中配置 Foundry](use-foundry-in-hardhat/README.md)
 
 **UPDATE**: 目前 foundry 已经支持使用脚本部署合约了。只需要将一些变量设置好，然后
 添加一个新的 script 文件，就可以通过执行脚本部署。
 
-- 在项目目录中创建 `.env` 文件并设置对应的变量：
+- 在项目目录中创建 `.env` 文件并设置对应的变量 :
 
-```shell
+```sh
 PRIVATE_KEY=
 MAINNET_RPC_URL=
 RINKEBY_RPC_URL=
@@ -336,7 +369,7 @@ ANVIL_RPC_URL="http://localhost:8545"
 ETHERSCAN_KEY=
 ```
 
-- 在 `foundry.toml` 中添加配置：
+- 在 `foundry.toml` 中添加配置 :
 
 ```yaml
 [rpc_endpoints]
@@ -349,7 +382,7 @@ mainnet = { key = "${ETHERSCAN_KEY}" }
 rinkeby = { key = "${ETHERSCAN_KEY}" }
 ```
 
-- 在项目目录中创建一个 `script/MyNFT.s.sol`（以部署一个 NFT 合约为例）：
+- 在项目目录中创建一个 `script/MyNFT.s.sol`（以部署一个 NFT 合约为例） :
 
 ```solidity
 //SPDX-License-Identifier: UNLICENSED
@@ -375,9 +408,9 @@ contract DeployMyNFT is Script {
 }
 ```
 
-最后执行：
+最后执行 :
 
-```shell
+```sh
 # load the configs
 source .env
 # deploy
@@ -386,7 +419,7 @@ forge script DeployMyNFT --rep--url <RCP_URL> --broadcast --verify
 
 其中 `--verify` 参数是将合约代码开源。
 
-完整的示例代码见：[my_nft](https://github.com/oneforalone/my_nft)
+完整的示例代码见 :[my_nft](https://github.com/oneforalone/my_nft)
 
 ## Debug 合约
 
@@ -395,52 +428,52 @@ foundry 也支持 debug 合约，可 debug 本地的合约或链上的 tx，
 
 - Debug 本地合约
 
-```bash
+```sh
 forge test --debug <FunctionName>
 ```
 
-如：
+如 :
 
-```bash
+```sh
 forge test --debug --testSetter
 ```
 
-或：
+或 :
 
-```bash
+```sh
 forge debug --debug <contract-file> --sig <FunctionSignature>
 ```
 
-如：
+如 :
 
-```bash
+```sh
 forge debug --debug src/Hello.sol --sig "setter(string)" "hello"
 ```
 
 - Debug 链上 tx
 
-```bash
+```sh
 cast run --debug --rpc-url $ETH_RPC_URL <tx-hash>
 ```
 
 其中 `$ETH_RPC_URL` 就是调用的节点的 RPC，可以直接写或者将 RPC 设置为
 `ETH_RPC_URL` 变量。`<tx-hash>` 为需要 debug 的 tx 的哈希值.
 
-如：
+如 :
 
-```bash
+```sh
 cast run --debug $ETH_RPC_URL 0x1126aa5e5b648eebad1c88141e5142cf0a4082e6ccf9fed77d69a190c21724a3
 ```
 
-- debug 窗口的快捷键参考：[Foundry Debugger](https://book.getfoundry.sh/forge/debugger#navigating)
+- debug 窗口的快捷键参考 :[Foundry Debugger](https://book.getfoundry.sh/forge/debugger#navigating)
 
 ## 与合约交互
 
-```bash
-// perform a call
+```sh
+# perform a call
 cast call <contract-address> <func-sig> [args] --rpc-url <your_rpc_url>
 
-// perform a send
+# perform a send
 cast send <contract-address> <func-sig> <args> --rpc-url <your_rpc_url> --private-key <private_key>
 ```
 
@@ -448,25 +481,46 @@ cast send <contract-address> <func-sig> <args> --rpc-url <your_rpc_url> --privat
 
 Anvil 是 Foundry 提供的本地测试网节点，你可以将其用于测试前端或通过 RPC 进行交互的合约。
 
-启动测试节点：
+启动测试节点 :
 
-```bash
+```sh
 anvil
 ```
 
-这条命令启动一个本地节点，默认监听端口 `8545` RPC 连接，可以通过 `--port` 参数指定端口。使用 `--account <NUM>` 可以查看可使用的账户和私钥列表：
+这条命令启动一个本地节点，默认监听端口 `8545` RPC 连接，可以通过 `--port` 参数指定端口。使用 `--account <NUM>` 可以查看可使用的账户和私钥列表 :
 
-```bash
+```sh
 anvil --accounts 10
 ```
 
-同时，还可以使用 anvil 分叉以太坊进行测试：
+同时，还可以使用 anvil 分叉以太坊进行测试 :
 
-```bash
+```sh
 anvil --hardfork latest
 ```
 
 更多 `anvil` 的功能可以查看 [Anvil 文档](https://book.getfoundry.sh/reference/anvil/)。
+
+
+## Chisel 使用方法
+
+Chisel 是 Foundry 提供的高级 Solidity REPL。它可用于在本地或分叉网络上快速测试 Solidity 片段。
+
+要使用 Chisel，只需键入 chisel。然后开始编写 Solidity 代码！Chisel 会对每次输入提供详细反馈。
+
+Chisel 可在 Foundry 项目内外使用。如果二进制文件在 Foundry 项目根目录下执行，Chisel 将继承项目的配置选项。
+
+```sh
+# 进入 REPL
+chisel
+# Welcome to Chisel! Type `!help` to show available commands.
+# 编写 Solidity 代码
+uint val = 8
+# 打印变量
+val
+# keccak256 运算
+keccak256(abi.encodePacked(val))
+```
 
 ## 参考资料
 
