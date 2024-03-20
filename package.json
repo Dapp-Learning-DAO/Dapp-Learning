@@ -19,6 +19,12 @@
     "prettier": "^2.0.5"
   },
   "devDependencies": {
-    "hardhat": "^2.12.4"
+    "@commitlint/config-conventional": "^19.1.0",
+    "commitlint": "^19.2.1",
+    "hardhat": "^2.12.4",
+    "husky": "^9.0.11"
+  },
+  "scripts": {
+    "prepare": "husky"
   }
 }
