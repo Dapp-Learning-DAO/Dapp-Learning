@@ -25,6 +25,8 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
 
    ```bash
    yarn install
+
+   #node version v20.11.0
    ```
 
 2. Configure the private key
@@ -34,7 +36,7 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
 3. Deploy contracts(testing graph's simple contracts)
 
    ```bash
-   npx hardhat run ./scripts/deploy.js --network goerli
+   npx hardhat run ./scripts/deploy.js --network sepolia
    ```
 
    print info as follows:
@@ -78,11 +80,13 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
    ```bash
    graph init --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>
    ```
-
+   - Protocol Select Ethereum
    - choose "Subgraph name" and "Direction to create the subgraph", then enter it.
-   - choose goerli in Ethereum network
+   - choose sepolia in Ethereum network
    - input your contract address generated when the contract was deployed in Step 3 in "Contract address"
    - When it came to "fetch ABI from Etherscan", it will fail, then show "ABI file (path)" which prompt that input the path of abi, we should input the path of SimpleToken.json(`./abis/SimpleToken.json`)
+   . If task 07-hardhat has been successfully executed and ethyscan has been configured in hardhat.config.js, the execution here will pass through
+   -After the "fetch Start Block" execution fails, enter n for retry, "Start Block", and "Contract Name" default to carriage return. "Add another contract?" Enter n
    - If yarn install fails (network error), you can enter in the new directory and install npm dependencies manually.
 
 7. Modify the mode of defining
@@ -292,7 +296,7 @@ docker-compose -f docker-compose.yml up -d
 
    Enter the directory of subgraph to run the command
 
-   Because the command was executed in the previous step: `npx hardhat run ./scripts/deploy.js --network goerli`
+   Because the command was executed in the previous step: `npx hardhat run ./scripts/deploy.js --network sepolia`
 
    subgraph.yml need to be changed as follows:
 
@@ -300,7 +304,7 @@ docker-compose -f docker-compose.yml up -d
 dataSources:
   - kind: ethereum/contract
     name: SimpleToken
-    network: goerli
+    network: sepolia
 
 ```
 

@@ -25,6 +25,8 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
    ```bash
    yarn install
+  
+    #node版本 v20.11.0
    ```
 
 2. 配置私钥
@@ -35,7 +37,7 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 3. 部署合约(用于测试 graph 的简单合约)
 
    ```bash
-   npx hardhat run ./scripts/deploy.js --network goerli
+   npx hardhat run ./scripts/deploy.js --network sepolia
    ```
 
    输出信息类似如下:
@@ -81,10 +83,13 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
    graph init --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>
    ```
 
-   - 在 "Subgraph name" 和 "Directory to create the subgraph" 直接回车即可
-   - Ethereum network 这里选择 goerli
+  - Protocol 选择ethereum
+   - 在 "Subgraph slug" 和 "Directory to create the subgraph" 直接回车即可
+   - Ethereum network 这里选择 sepolia
    - "Contract address" 这里输入在步骤 3 中部署合约时生成的合约地址
    - 上面执行到 "fetch ABI from Etherscan" 时会报执行失败，然后出现 "ABI file (path)" 字样，提示输入本机中 abi 的文件路径，这里我们输入 SimpleToken.json 所在的路径即可(`./abis/SimpleToken.json`)
+   。如果已经成功执行 07-hardhat , 同时在hardhat.config.js 里配置了ethescan,此处执行会通过
+   -"fetch Start Block"执行失败后，retry输入n,“Start Block”，“Contract Name”默认回车。 “Add another contract?” 输入n
    - 如果 yarn install 失败(例如网络错误)，可以进入新生成的项目目录，手动安装 npm 依赖
 
 7. 修改定义模式
@@ -206,6 +211,8 @@ TheGraph 中定义如何为数据建立索引，称为 Subgraph，它包含三�
 
      ```bash
      graph auth --studio <DEPLOY KEY>
+
+     #注意需要按截图所示点击copy key按钮，并替换<DEPLOY KEY> , 不要直接copy 官网右侧的代码，因为key不全
      ```
 
      若使用 Hosted Service，则初始化命令如下：
@@ -278,7 +285,7 @@ graph-node:
     postgres_db: graph-node
     ipfs: 'ipfs:5001'
     ethereum: 'mainnet:http://127.0.0.1:8545' #此处的mainnet需要和subgraph.yml里network对应上
-    # ethereum: 'dev:https://goerli.infura.io/v3/INFURA_ID' # 也可以连测试网络
+    # ethereum: 'dev:https://sepolia.infura.io/v3/INFURA_ID' # 也可以连测试网络
     RUST_LOG: info
 ```
 
@@ -295,7 +302,7 @@ docker-compose -f docker-compose.yml up -d
 3. 编译 subgraph  
    进入 subgraph 的本地目录运行下列命令
 
-   由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network goerli
+   由于在前一步骤执行过命令 npx hardhat run ./scripts/deploy.js --network sepolia
 
    因此，此处修改 subgraph.yaml，修改内容如下：
 
@@ -303,7 +310,7 @@ docker-compose -f docker-compose.yml up -d
 dataSources:
   - kind: ethereum/contract
     name: SimpleToken
-    network: goerli
+    network: sepolia
 
 ```
 

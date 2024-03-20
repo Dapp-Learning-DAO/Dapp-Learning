@@ -92,6 +92,8 @@ ipfs daemon
 
     ```bash
     yarn install 或者 npm install
+
+     #Node 版本： v20.11.0
     ```
 
 2. 配置私钥和网络：
@@ -118,7 +120,7 @@ ipfs daemon
 3. 执行如下命令
 
 ```angular2html
-npx hardhat run scripts/deploy-ipfs.js --network goerli
+npx hardhat run scripts/deploy-ipfs.js --network sepolia
 ```
 
 运行结束后，在 console 输出的日志中，最后一行打印出了你上传文件独有的 hash

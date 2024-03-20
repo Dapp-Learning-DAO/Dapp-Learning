@@ -20,8 +20,8 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [PRIVATE_KEY],
     },
     mainnet: {
@@ -32,7 +32,17 @@ module.exports = {
       url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [PRIVATE_KEY],
     },
+  },  
+  etherscan: {
+    apiKey: {
+      sepolia: process.env.APIKEY
+    } ,
   },
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: true
+  }
 };
 
 // This is a sample Hardhat task. To learn how to create your own go to
