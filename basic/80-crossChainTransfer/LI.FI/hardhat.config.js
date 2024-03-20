@@ -26,7 +26,7 @@ module.exports = {
     compilers: [
       { version: '0.8.4',  settings },
       { version: '0.4.21',  settings },
-      { version: '0.8.22', settings },
+      { version: '0.8.24', settings },
     ],
   },
   networks: {
@@ -65,10 +65,6 @@ module.exports = {
     optim_sepolia: {
       url: "https://optimism-sepolia.infura.io/v3/" + process.env.INFURA_ID,
       accounts: mnemonic()
-    },
-    mantaPacific: {
-      url: "https://pacific-rpc.manta.network/http",
-      accounts: mnemonic(),
     },
     
   },

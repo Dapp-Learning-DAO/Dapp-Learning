@@ -33,6 +33,38 @@ const request = (url, params = {}, method = "GET") => {
   return fetch(url, options).then((response) => response.json());
 };
 
+async function getStatus (bridge, fromChain, toChain, txHash) {
+  const result = await request(
+    "https://li.quest/v1/status",
+    {
+      bridge,
+      fromChain,
+      toChain,
+      txHash,
+    }
+  )
+
+  return result;
+}
+
+async function getQuote (fromChain, toChain, fromToken, toToken, fromAmount, slippage, fromAddress, toAddress) {
+  const result = await request(
+    "https://li.quest/v1/quote",
+    {
+      fromChain,
+      toChain,
+      fromToken,
+      toToken,
+      fromAmount,
+      slippage,
+      fromAddress,
+      toAddress,
+    }
+  )
+
+  return result;
+}
+
 /*
  * deployment:
  *   redPacketAddress
@@ -125,4 +157,6 @@ module.exports = {
   saveRedpacketDeployment,
   hashToken,
   request,
+  getQuote,
+  getStatus,
 };

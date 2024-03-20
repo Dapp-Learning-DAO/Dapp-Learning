@@ -11,6 +11,7 @@ const {
 } = require("../../utils");
 
 async function main() {
+
   const [deployer] = await ethers.getSigners();
 
   // for sepolia, endpoint address is fixed, refer to : https://layerzero.gitbook.io/docs/technical-reference/testnet/testnet-addresses

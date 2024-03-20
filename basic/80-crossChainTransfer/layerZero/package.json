@@ -12,7 +12,8 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "dotenv": "^16.4.5",
-    "hardhat": "^2.21.0"
+    "hardhat": "^2.21.0",
+    "node-fetch": "^2.7.0"
   },
   "dependencies": {
     "@layerzerolabs/scan-client": "^0.0.8",
