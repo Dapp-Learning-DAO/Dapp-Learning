@@ -455,7 +455,7 @@ function balanceOf(address account) public view virtual override returns (uint25
   * @param onBehalfOf The address receiving the debt tokens
   * @param amount The amount of debt being minted
   * @param index The variable debt index of the reserve
-  * @return `true` if the the previous balance of the user is 0
+  * @return `true` if the  previous balance of the user is 0
   **/
 function mint(
   address user,
