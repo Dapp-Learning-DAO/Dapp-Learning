@@ -34,6 +34,8 @@
     "*.sol": [
       "solhint",
       "prettier --write --plugin=prettier-plugin-solidity"
-    ]
+    ],
+    "*.{js,jsx,ts,tsx}": "prettier --write",
+    "*.md": "prettier --write"
   }
 }
