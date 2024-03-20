@@ -22,9 +22,17 @@
     "@commitlint/config-conventional": "^19.1.0",
     "commitlint": "^19.2.1",
     "hardhat": "^2.12.4",
-    "husky": "^9.0.11"
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "solhint": "^4.5.2"
   },
   "scripts": {
     "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.sol": [
+      "solhint",
+      "prettier --write --plugin=prettier-plugin-solidity"
+    ]
   }
 }
