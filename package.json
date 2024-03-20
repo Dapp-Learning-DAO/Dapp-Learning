@@ -15,8 +15,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "create-next-app": "^12.3.1",
-    "prettier": "^2.0.5"
+    "create-next-app": "^12.3.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
@@ -24,6 +23,8 @@
     "hardhat": "^2.12.4",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-solidity": "^1.3.1",
     "solhint": "^4.5.2"
   },
   "scripts": {
