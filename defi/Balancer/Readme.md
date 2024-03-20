@@ -169,7 +169,7 @@ $\frac{LP'}{LP} = \frac{P_{supply} + P_{issue}}{P_{supply}}$
 
 ### Single Asset Withdraw: 等价于：
 
-1. withdrap lp eaqually, get A, B, C
+1. withdrap lp equally, get A, B, C
 2. swap B for A
 3. swap C for A
 

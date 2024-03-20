@@ -46,7 +46,7 @@ async function sendTx(zkWallet, newAddr, cost) { // L2 to L2
         // fee, fee is optional
     });
 
-    console.log("Transfr from L2 to L2 successfully");
+    console.log("Transfer from L2 to L2 successfully");
 
     return transfer
 }

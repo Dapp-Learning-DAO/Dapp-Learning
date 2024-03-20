@@ -26,7 +26,7 @@ crypto 不到一年的时间。如果其中有任何错误的话，可以尽情�
 
 在 crypto 中，有了 private key，才能打开 crypto 的大
 门。所以对于自己的 private key，一定不要大意，失去了这
-个 key，就会被 crypo 拒之门外。这里推荐看一下
+个 key，就会被 crypto 拒之门外。这里推荐看一下
 [区块链黑暗深林自救手册](https://github.com/slowmist/Blockchain-dark-forest-selfguard-handbook)。
 不求完全理解或者按照其中的每一个步骤去做，但是在 crypto
 这种新兴的产业中，你心中需要有这么一根弦。不要觉得安全事小，
