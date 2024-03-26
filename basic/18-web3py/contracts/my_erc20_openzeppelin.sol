@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./erc20.sol";
-import "./openzepplin/AccessControl.sol";
+import "./openzeppelin/AccessControl.sol";
 
 contract MyTokenOpenZeppelin is ERC20 {
     constructor(uint256 initialSupply) public ERC20("MyTokenOpenZeppelin", "MTOZ") {

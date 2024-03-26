@@ -356,7 +356,7 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 - https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
 - https://learnblockchain.cn/article/2566
 - https://blog.openzeppelin.com/subgraphs-announcement  
-  OpenZeppelin subgraphs 库: 为常用的 OpenZepplin 合约建立 subgraphs
+  OpenZeppelin subgraphs 库: 为常用的 OpenZeppelin 合约建立 subgraphs
 - https://github.com/graphprotocol/agora  
   成本模型
 - Subgraph 选择指南(分析节点成本，收益以及应该索引哪些 Subgraph):  
