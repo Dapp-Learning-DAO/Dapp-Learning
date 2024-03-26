@@ -9,22 +9,9 @@ const privatekey = process.env.PRIVATE_KEY;
 /*
    -- Define Provider & Variables --
 */
-// Provider
-const providerRPC = {
-  development: {
-    name: 'moonbeam-development',
-    rpc: 'http://localhost:8545',
-    chainId: 1281,
-  },
-  moonbase: {
-    name: 'moonbase-alpha',
-    rpc: 'https://rpc.testnet.moonbeam.network',
-    chainId: 1287,
-  },
-};
-const provider = new ethers.providers.InfuraProvider(
-  'sepolia',
-  process.env.INFURA_ID
+const provider = new ethers.JsonRpcProvider(
+  "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
+  'sepolia'
 ); //Change to correct network
 
 // Variables
@@ -56,9 +43,9 @@ const Trans = async () => {
     100000000,
     { gasLimit: 8000000 }
   );
-  await deployedContract.deployed();
 
-  console.log(`Contract deployed at address: ${deployedContract.address}`);
+  await deployedContract.waitForDeployment()
+  console.log(`Contract deployed at address: ${deployedContract.target}`);
 
   /*
    -- Send Function --
@@ -69,7 +56,7 @@ const Trans = async () => {
     '===============================2. Call Transaction Interface Of Contract'
   );
   const transactionContract = new ethers.Contract(
-    deployedContract.address,
+    deployedContract.target,
     abi,
     wallet
   );
@@ -96,7 +83,7 @@ const Trans = async () => {
     '===============================3. Call Read Interface Of Contract'
   );
   const providerContract = new ethers.Contract(
-    deployedContract.address,
+    deployedContract.target,
     abi,
     provider
   );
@@ -131,16 +118,10 @@ const Trans = async () => {
   });
 
   // Listen to events with filter
-  let topic = ethers.utils.id('Transfer(address,address,uint256)');
-  let filter = {
-    address: deployedContract.address,
-    topics: [topic],
-    fromBlock: await provider.getBlockNumber(),
-  };
-
-  providerContract.on(filter, (from, to, value) => {
+  const filter = providerContract.filters.Transfer(wallet.address)
+  providerContract.on(filter, (from) => {
     console.log(
-      `I am a filter Event Listener, I have got an event Transfer, from: ${from}   to: ${to}   value: ${value}`
+      `I am a filter Event Listener, I have got an event Transfer, from: ${from.ContractEventPayload.args[0]}   to: ${from.ContractEventPayload.args[1]}   value: ${from.ContractEventPayload.args[2]}`
     );
   });
 
