@@ -117,6 +117,13 @@ const Trans = async () => {
     );
   });
 
+  // Listen to events with filter
+  const filter = providerContract.filters.Transfer(wallet.address)
+  providerContract.on(filter, (from) => {
+    console.log(
+      `I am a filter Event Listener, I have got an event Transfer, from: ${from.ContractEventPayload.args[0]}   to: ${from.ContractEventPayload.args[1]}   value: ${from.ContractEventPayload.args[2]}`
+    );
+  });
 
   for (let step = 0; step < 3; step++) {
     let transferTransaction = await transactionContract.transfer(
