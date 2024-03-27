@@ -349,7 +349,7 @@ reference document for this project:
 - https://dev.to/dabit3/building-graphql-apis-on-ethereum-4poa
 - https://learnblockchain.cn/article/2566
 - https://blog.openzeppelin.com/subgraphs-announcement  
-  OpenZeppelin subgraphs libraray: set subgraphs for the usual contracts of OpenZepplin
+  OpenZeppelin subgraphs libraray: set subgraphs for the usual contracts of OpenZeppelin
 - https://github.com/graphprotocol/agora  
   cost model
 - Subgraph usage(Analyze node costs, benefits, and which subGraphs should be indexed):  

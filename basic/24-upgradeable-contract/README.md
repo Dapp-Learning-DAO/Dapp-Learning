@@ -304,9 +304,9 @@ ProxyAdmin 提供两个方法进行升级
 - 知乎王大锤：<https://zhuanlan.zhihu.com/p/40598039>
 - 知乎王大锤：<https://zhuanlan.zhihu.com/p/40598169>
 - 合约代码：<https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/tree/master/contracts/proxy>
-- openzepplin test: <https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable>
-- openzepplin: <https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies>
-- openzepplin: <https://blog.openzeppelin.com/proxy-patterns/>
+- openzeppelin test: <https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable>
+- openzeppelin: <https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies>
+- openzeppelin: <https://blog.openzeppelin.com/proxy-patterns/>
 - testcase: <https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-truffle/3579>
 - 原理介绍：<https://www.jianshu.com/p/3fa12d7ed76d>
 - compound: 合约升级

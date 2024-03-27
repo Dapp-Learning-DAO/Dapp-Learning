@@ -37,7 +37,7 @@ python scripts/1_deploy_using_web3.py
 ## 根据已存在的合约地址构造合约实例
 python scripts/2_play_around_on_existing_contract.py
 
-## 使用 openzepplin 合约演示转账
+## 使用 openzeppelin 合约演示转账
 python scripts/3_use_openzeppelin.py
 
 ## 演示 ERC20 合约的调用
