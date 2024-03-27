@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@flashbots/ethers-provider-bundle": "^0.4.2",
+    "@flashbots/ethers-provider-bundle": "0.6.0",
     "dotenv": "^10.0.0",
     "hardhat": "^2.6.8"
   },
