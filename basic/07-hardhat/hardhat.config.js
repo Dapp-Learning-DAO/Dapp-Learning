@@ -1,7 +1,5 @@
-require('@nomiclabs/hardhat-waffle');
+require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
-require('@nomicfoundation/hardhat-verify');
-
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -25,11 +23,6 @@ function mnemonic() {
 module.exports = {
   solidity: '0.8.20',
   networks: {
-    hardhat: {
-      forking: {
-        url: 'https://mainnet.infura.io/v3/'+ process.env.INFURA_ID,
-      }
-    },
     localhost: {
       url: 'http://localhost:8545',
       //gasPrice: 125000000000,  // you can adjust gasPrice locally to see how much it will cost on production

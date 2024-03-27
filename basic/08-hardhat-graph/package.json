@@ -1,30 +1,20 @@
 {
   "name": "08-hardhat-graph",
   "version": "1.0.0",
-  "description": "[中文](./README-CN.md) / English",
-  "main": "hardhat.config.js",
-  "directories": {
-    "test": "test"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-verify": "^2.0.4",
-    "@nomiclabs/hardhat-ethers": "^2.2.3",
-    "@nomiclabs/hardhat-waffle": "^2.0.6",
-    "@openzeppelin/contracts": "^4.9.6",
-    "chai": "^5.1.0",
-    "dotenv": "^16.4.5",
-    "ethereum-waffle": "^4.0.10",
-    "ethers": "^5.7.2",
-    "hardhat": "^2.21.0"
-  },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.9.6",
     "dotenv": "^16.4.5",
-    "@openzeppelin/contracts": "^4.4.2"
+    "hardhat": "^2.22.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
   }
 }

@@ -10,12 +10,13 @@ async function main() {
 
   console.log('Deploying contracts with the account:', deployer.address);
 
-  console.log('Account balance:', (await deployer.getBalance()).toString());
+  console.log('Account balance:', (await ethers.provider.getBalance(deployer.address)).toString());
 
   const Token = await ethers.getContractFactory('SimpleToken');
   const token = await Token.deploy('HHToken', 'HHT', 1, 100000000);
+  
 
-  console.log('Contract address:', token.address);
+  console.log('Contract address:', token.target);
 
   const receiver = '0x35D4A3Bd19382e5180824823E90312Be405c3707';
   console.log('Transfer 50 to receiver ', receiver);

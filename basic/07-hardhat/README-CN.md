@@ -76,7 +76,6 @@ hardhat.config.js
 ```js
 require('@nomiclabs/hardhat-waffle');
 require('dotenv').config();
-require('@nomicfoundation/hardhat-verify');
 module.exports = {
   networks: {
     // hardhat 内置测试网络（选填）
@@ -123,36 +122,26 @@ module.exports = {
 
 hardhat 内置了一个特殊的安全测试网络，其名称也叫 `hardhat`, 通常你不需要对他进行特殊配置。该网络会模拟真实区块链网络的运行机制，并为你生成好 10 个测试账户（和 truffle 类似）。
 
-### 使用插件
-
-Hardhat 的很多功能都来自于插件，而作为开发者，你可以自由选择想使用的插件。
-
-例如常用的 waffle 插件，使得 hardhat 可以集成 waffle 框架，进行开发，测试，部署。
-
-```js
-// hardhat.config.js
-require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
-...
-```
 
 ### 安装依赖
 
 1. 安装 nodejs （略）
 
  ```js
+ 安装 node
    //Node 版本 v20.11.0
-   ```
+  ```
 
 2. 安装项目依赖：
 
    ```sh
-    npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers @nomicfoundation/hardhat-verify ethers dotenv
+    npm install
    ```
 
    或使用 yarn 安装（需要先安装 yarn 依赖）
 
    ```sh
-    yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @nomicfoundation/hardhat-verify @types/mocha dotenv
+    yarn
    ```
 
 3. 配置私钥和网络：
@@ -222,8 +211,6 @@ npx hardhat run ./scripts/deploy.js --network sepolia
 https://etherscan.io/myapikey 官网创建账号，登陆之后，My Account(自己创建的账号实际名称) -> API Keys 菜单中创建
 
 确保 hardhat.config.js里配置
-require("@nomicfoundation/hardhat-verify");
-且已安装上述模块 npm install --save-dev @nomicfoundation/hardhat-verify
 
 运行脚本：
 
