@@ -97,7 +97,9 @@ const res = await flashbotsProvider.sendPrivateTransaction(privateTx)
 ```
 
 
-
+**查询交易状态** 
+https://protect-sepolia.flashbots.net/tx
+https://blocks.flashbots.net/
 
 ### 环境
 - ETHEREUM_RPC_URL - Ethereum RPC endpoint. Can not be the same as FLASHBOTS_RPC_URL
@@ -105,6 +107,12 @@ const res = await flashbotsProvider.sendPrivateTransaction(privateTx)
 - PRIVATE_KEY_SPONSOR - 付款给矿工gasfee的账户
 - RECIPIENT - Ethereum EOA to receive assets from ZERO_GAS account
 - FLASHBOTS_RELAY_SIGNING_KEY - Optional param, private key used to sign messages to Flashbots to establish reputation of profitability
+
+
+### run
+```
+ npx hardhat run scripts/send-1559-flashbot.js --network sepolia 
+``` 
 
 ### 代码
 https://github.com/flashbots/searcher-sponsored-tx?tab=readme-ov-file
@@ -117,6 +125,7 @@ https://github.com/flashbots/simple-arbitrage/blob/master/contracts/BundleExecut
 
 - MEV in 2021 - a year in review: https://www.youtube.com/watch?v=V_wlCeVWMgk
 - flashbots-bundle github: https://github.com/flashbots/ethers-provider-flashbots-bundle
+- flashbot youtube : https://www.youtube.com/watch?v=V_wlCeVWMgk
 - flashbots github: https://github.com/flashbots/pm#resources  
 - flashbots doc: https://docs.flashbots.net/new-to-mev
 - Eden Network 介绍: https://imtoken.fans/t/topic/41713
