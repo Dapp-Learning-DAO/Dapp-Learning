@@ -1,24 +1,23 @@
 require('@nomiclabs/hardhat-waffle');
 const { use, expect } = require('chai');
 
-// matic address
-//https://docs.aave.com/developers/v/2.0/deployed-contracts/matic-polygon-market
-let daiAddress = '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063';
-let wethAddress = '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'; //wmatic
+// https://docs.aave.com/developers/deployed-contracts/v3-mainnet/ethereum-mainnet
+let daiAddress = '0x6B175474E89094C44Da98b954EedeAC495271d0F';
+let wethAddress = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'; //weth
 let usdcAddress = '0x2791bca1f2de4661ed88a30c99a7a9449aa84174';
 
-let lendingPoolAddressesProviderAddress = '0xd05e3E715d945B59290df0ae8eF85c1BdB684744';
+let lendingPoolAddressesProviderAddress = '0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e';
 
-//sushi
-let uniswapRouterAddress = '0x1b02da8cb0d097eb8d57a175b88c7d8b47997506';
+//uniswap v3 router
+let uniswapRouterAddress = '0xE592427A0AEce92De3Edee1F18E0157C05861564';
 
-let wethGatewayAddress = '0xbEadf48d62aCC944a06EEaE0A9054A90E5A7dc97';
+let wethGatewayAddress = '0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9'; //WrappedTokenGatewayV3
 
 // Fill in your address
-const aaveApeAddress = '0xddb2d92d5a0EDcb03c013322c7BAe92734AA4597';
+const aaveApeAddress = '0x4Dd5336F3C0D70893A7a86c6aEBe9B953E87c891';
 
 const depositEthInAave = async (pooladdress, _userAddress, _amount) => {
-  const ethGateway = await ethers.getContractAt('WETHGateway', wethGatewayAddress);
+  const ethGateway = await ethers.getContractAt('IWrappedTokenGatewayV3', wethGatewayAddress);
   let metadata = {
     value: ethers.utils.parseEther(_amount),
   };
@@ -28,7 +27,7 @@ const depositEthInAave = async (pooladdress, _userAddress, _amount) => {
 };
 
 const withdrawEthInAave = async (pooladdress, _userAddress, _amount) => {
-  const ethGateway = await ethers.getContractAt('WETHGateway', wethGatewayAddress);
+  const ethGateway = await ethers.getContractAt('IWrappedTokenGatewayV3', wethGatewayAddress);
 
   let ethWithdraw = await ethGateway.withdrawETH(pooladdress, _amount, _userAddress);
   await ethWithdraw.wait();
@@ -36,9 +35,9 @@ const withdrawEthInAave = async (pooladdress, _userAddress, _amount) => {
 };
 
 const getLendingPool = async () => {
-  const lendingPoolAddressesProvider = await ethers.getContractAt('ILendingPoolAddressesProvider', lendingPoolAddressesProviderAddress);
-  let lendingPoolAddress = await lendingPoolAddressesProvider['getLendingPool']();
-  let lendingPool = await ethers.getContractAt('ILendingPool', lendingPoolAddress);
+  const lendingPoolAddressesProvider = await ethers.getContractAt('IPoolAddressesProvider', lendingPoolAddressesProviderAddress);
+  let lendingPoolAddress = await lendingPoolAddressesProvider['getPool']();
+  let lendingPool = await ethers.getContractAt('IPool', lendingPoolAddress);
 
   return lendingPool;
 };
@@ -77,13 +76,12 @@ const delegateCreditToTheApe = async (_asset, _interestRateMode = 2) => {
 };
 
 main = async () => {
-  const [deployer] = await ethers.getSigners();
-  let userAddress = deployer.address;
-  console.log(userAddress);
-  const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
-  let weth = await ethers.getContractAt('IERC20', wethAddress);
+  const [deployer] = await ethers.getSigners()
+  console.log("user address:", deployer.address)
 
-  //const lendingpool = await aaveApe.LENDING_POOL()
+  let userAddress = deployer.address;
+  const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
+
   const lendingpool = await getLendingPool();
   console.log('lendingpool:', lendingpool.address);
   let reserveData = await aaveApe.getAaveAssetReserveData(daiAddress);
@@ -91,8 +89,8 @@ main = async () => {
   // variable debt
   let interestRateMode = 2;
 
-  //0xbEadf48d62aCC944a06EEaE0A9054A90E5A7dc97
-  await depositEthInAave(lendingpool.address, deployer.address, '0.1');
+  //0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2
+  await depositEthInAave(lendingpool.address, deployer.address, '0.1'); 
 
   await delegateCreditToTheApe(daiAddress, interestRateMode);
 
@@ -105,9 +103,9 @@ main = async () => {
   await tx.wait();
 
   let aToken = await getAToken(wethAddress);
-  // console.log("aToken: ", aToken)
   let debtToken = await getDebtToken(daiAddress, interestRateMode, true);
   // console.log("debtToken: ", debtToken)
+
   tx = await aToken.approve(aaveApe.address, ethers.constants.MaxUint256);
   await tx.wait();
   console.log('atoken approve successfully. ');
@@ -116,7 +114,7 @@ main = async () => {
   console.log('aBalanceBefore: ', aBalanceBefore.toString());
   let debtBalanceBefore = await debtToken.balanceOf(userAddress);
   console.log('debtBalanceBefore: ', debtBalanceBefore.toString());
-
+  
   tx = await aaveApe['unwindApe'](wethAddress, daiAddress, interestRateMode);
   await tx.wait();
 

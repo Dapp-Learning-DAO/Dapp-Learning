@@ -17,9 +17,10 @@ const main = async () => {
     );
 
   let mainnetConfig = {
-    lendingPoolAddressesProvider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
-    uniswapRouterAddress: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+    lendingPoolAddressesProvider: "0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e",
+    uniswapRouterAddress: "0xE592427A0AEce92De3Edee1F18E0157C05861564"
   }  
+  
   let maticConfig = {
     lendingPoolAddressesProvider: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744",
     //sushi
@@ -32,17 +33,16 @@ const main = async () => {
     uniswapRouterAddress: "0xfcd87315f0e4067070ade8682fcdbc3006631441"
   }
 
-  let deployConfig = maticConfig 
+  let deployConfig = mainnetConfig
   console.log("lendingPoolAddressesProvider ", deployConfig.lendingPoolAddressesProvider)
  
   const aaveApe = await deploy("AaveApe",[deployConfig.lendingPoolAddressesProvider, deployConfig.uniswapRouterAddress])
-  
- console.log(
+
+  console.log(
     " 💾  Artifacts (address, abi, and args) saved to: ",
     chalk.blue("packages/hardhat/artifacts/"),
     "\n\n"
   );
-
 
   // Lengding pool deposite eth
 
