@@ -100,6 +100,19 @@ async function main() {
       );
       console.log("submitted for block # ", blockNumber + i);
 
+
+      //type 2
+      const minTimestamp = (await provider.getBlock(blockNumber)).timestamp
+      const maxTimestamp = minTimestamp + 120
+
+      const bundleReceipt = await flashbotsProvider.sendRawBundle(
+        signedTransactions, // bundle we signed above
+        blockNumber + 1, // block number at which this bundle is valid
+        {
+          minTimestamp, // optional minimum timestamp at which this bundle is valid (inclusive)
+          maxTimestamp, // optional maximum timestamp at which this bundle is valid (inclusive)
+       //   revertingTxHashes: [tx1, tx2] // optional list of transaction hashes allowed to revert. Without specifying here, any revert invalidates the entire bundle.
+        })
     
     // const bundleSubmission = await flashbotsProvider.sendRawBundle(
     //       signedTransactions,
