@@ -122,17 +122,6 @@ module.exports = {
 
 hardhat has a special, secure and build-in testing network, named `hardhat`, you don't need a special configuration for it. The network will follow the mechanism in real block chain network, and it will generate 10 test accounts for you (just like truffle).
 
-### Using plugins
-
-Plugins have many functions in Hardhat, you could choose arbitrary plugins as a developer
-
-Waffle plugins could make hardhat Integrated with waffle framework
-
-```js
-// hardhat.config.js
-require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
-...
-```
 
 ### Install dependencies
 
@@ -141,13 +130,13 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
 2. install project dependencies:
 
    ```sh
-  npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomicfoundation/hardhat-verify @nomiclabs/hardhat-ethers ethers dotenv
+  npm install
    ```
 
    or use yarn to intall (yarn installed firstly)
 
    ```sh
-  yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @nomicfoundation/hardhat-verify @types/mocha dotenv
+  yarn
    ```
 
 3. config private key and network:
@@ -218,11 +207,6 @@ Add the following configuration to `hardhat.config.js`:
 https://etherscan.io/myapikey Create an account on the official website. After logging in, go to My Account (the actual name of the account you created) ->API Key
 
 Ensure configuration in hardhat.config.js
-
-Require ("@nomofoundation/hardhat-verify");
-
-And the above module npm install --savedev @nomicfoundation/hardhat-verify has been installed
-
 
 Run script:
 

@@ -18,7 +18,7 @@ INFURA_ID=yyyyyyyy
 - 安装依赖
 
 ```bash
-yarn
+npm install
 ```
 
 - 编译合约
@@ -36,7 +36,7 @@ npx hardhat test
 - 部署合约
 
 ```bash
-npx hardhat run scripts/deploy_crowdfunding.js --network goerli
+npx hardhat run scripts/deploy_crowdfunding.js --network sepolia
 ```
 
 ## Crowdsale 类型

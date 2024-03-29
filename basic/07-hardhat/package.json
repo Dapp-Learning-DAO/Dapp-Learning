@@ -4,27 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.1.1",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@types/chai": "^4.3.3",
-    "@types/mocha": "^10.0.0",
-    "chai": "^4.3.6",
-    "chai-ethers": "^0.0.1",
-    "dotenv": "^16.0.3",
-    "ethereum-waffle": "^3.4.4",
-    "ethers": "^5.7.1",
-    "hardhat": "^2.9.0",
-    "hardhat-deploy-ethers": "^0.3.0-beta.13",
-    "mocha": "^10.0.0",
-    "sol-merger": "^3.1.0"
-  },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
   }
 }

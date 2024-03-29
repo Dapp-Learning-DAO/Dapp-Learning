@@ -12,7 +12,6 @@ const { resolve } = require("path");
 
 
 async function main() {
-
     const [deployer] = await ethers.getSigners();
 
 
@@ -23,8 +22,9 @@ async function main() {
 
     const contractfactory = await ethers.getContractFactory("MYERC721");
     const myerc721Ins = await contractfactory.deploy("MYERC721","TEST","");
+    await myerc721Ins.waitForDeployment();
 
-    console.log("ERC721 address:", myerc721Ins.address);
+    console.log("ERC721 address:", myerc721Ins.target);
 
     // 监听 Transfer 事件
     myerc721Ins.on("Transfer", (from, to , token) => {

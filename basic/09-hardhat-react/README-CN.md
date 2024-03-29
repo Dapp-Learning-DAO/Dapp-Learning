@@ -19,7 +19,7 @@ Dapp 开发中很重要的部分便是前端展示，本样例代码使用 hardh
 2. 部署合约
 
    ```sh
-   npx hardhat run scripts/deploy.js --network goerli
+   npx hardhat run scripts/deploy.js --network sepolia
    ```
 
 3. 启动 react
