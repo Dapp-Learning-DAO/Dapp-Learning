@@ -23,8 +23,9 @@ async function main() {
 
     const contractfactory = await ethers.getContractFactory("MYERC721");
     const myerc721Ins = await contractfactory.deploy("DLWM","DL","http://XX.XX.XX.XX/WaterMargin/");
+    await myerc721Ins.waitForDeployment();
 
-    console.log("ERC721 address:", myerc721Ins.address);
+    console.log("ERC721 address:", myerc721Ins.target);
 
 
     // 定义 tokenurl 
