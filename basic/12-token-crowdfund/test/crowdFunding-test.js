@@ -9,7 +9,6 @@ describe("CrowdFunding contract", function() {
         const crowdFundingContractFactory = await ethers.getContractFactory("CrowdFunding");
 
         crowdFundingContract = await crowdFundingContractFactory.deploy();
-        await crowdFundingContract.deployed();
 
         expect(crowdFundingContract.address).to.not.equal(null);
       });
