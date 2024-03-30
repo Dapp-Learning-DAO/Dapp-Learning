@@ -42,17 +42,17 @@ INFURA_ID=yyyyyyyy
 
 - 部署测试合约
 ```
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/deploy.js --network sepolia
 ```
 
 - 获取随机数  
 ```
-npx hardhat run scripts/random-number-vrf.js --network goerli
+npx hardhat run scripts/random-number-vrf.js --network sepolia
 ```
 
 - 生成随机  Character  
 ```
-npx hardhat run scripts/transaction.js --network goerli
+npx hardhat run scripts/transaction.js --network sepolia
 ``` 
 
 ## 参考链接

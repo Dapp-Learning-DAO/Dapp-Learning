@@ -42,6 +42,12 @@
    node index.js
    ```
 
+4. 查看 mempool 中 pending 的交易
+
+   ```sh
+   node mempool.js
+   ```
+
 ## 参考文档
 
 官方文档:
