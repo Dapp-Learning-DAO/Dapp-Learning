@@ -14,6 +14,11 @@ Participants
 3. Liquidators
 当staker没有足够的余额支付给运营商时，通过向stakers发出信号，来保持网络的偿付能力。清算人因成功清算而获得SSV代币的补偿。
 
+## verkel
+https://verkle.info/  
+https://www.youtube.com/watch?v=jqVaycBINdc 
+
+
 
 ## 参考链接
 - 了解合并后奖励： https://www.attestant.io/posts/understanding-post-merge-rewards/

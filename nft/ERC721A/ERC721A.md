@@ -2,10 +2,10 @@
 
 ## 参考链接：
 
-1. [Openzeppelin的EIP721实现](https://learnblockchain.cn/article/3041)
+1. [OpenZeppelin的EIP721实现](https://learnblockchain.cn/article/3041)
 2. [Azuki的EIP721A实现](https://www.azuki.com/erc721a)
 
-## OpenZepplin实现的缺点
+## OpenZeppelin实现的缺点
 
 在一个典型的NFT中，通常会利用OZ的EIP721模板来做如下实现：
 
@@ -63,7 +63,7 @@ function _mint(address to, uint256 tokenId) internal virtual {
 
 ## ERC721A的改进
 
-从Openzeppelin的实现缺点来看，其主要缺点在于没有提供批量Mint的API，使得用户批量Mint时，其算法复杂度达到O(N).故ERC721A提出了一种批量Mint的API，使得其算法复杂度降为O(1).
+从OpenZeppelin的实现缺点来看，其主要缺点在于没有提供批量Mint的API，使得用户批量Mint时，其算法复杂度达到O(N).故ERC721A提出了一种批量Mint的API，使得其算法复杂度降为O(1).
 
 ### 最简单的想法：
 
@@ -182,7 +182,7 @@ function tokenOfOwnerByIndex(address owner, uint256 index) public view override 
 
 ## ERC721A 算法的局限性
 
-从上面的分析可以看出，ERC721A算法相较于Openzeppelin的EIP721实现有比较大的突破，但是也有自身的局限性。还有部分我暂未理解清楚：
+从上面的分析可以看出，ERC721A算法相较于OpenZeppelin的EIP721实现有比较大的突破，但是也有自身的局限性。还有部分我暂未理解清楚：
 
 局限性：
 

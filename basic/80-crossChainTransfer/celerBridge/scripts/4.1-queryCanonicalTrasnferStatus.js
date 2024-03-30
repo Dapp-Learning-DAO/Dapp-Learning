@@ -5,24 +5,11 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const {ethers} = require("hardhat");
-const fetch = require("node-fetch");
 
 const {
   readRedpacketDeployment,
+  request,
 } = require("../utils");
-
-const request = (url, params = {}, method = "GET") => {
-  let options = {
-    method,
-  };
-  if ("GET" === method) {
-    url += "?" + new URLSearchParams(params).toString();
-  } else {
-    options.body = JSON.stringify(params);
-  }
-
-  return fetch(url, options).then((response) => response.json());
-};
 
 
 async function getTransferStatus(transferID){

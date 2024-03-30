@@ -2,6 +2,7 @@
 const path = require("path");
 const fs = require("fs");
 const hre = require("hardhat");
+const fetch = require("node-fetch");
 
 const currentNamework = hre.network.name;
 const DEPLOYMENGT_DIR = path.join(
@@ -18,6 +19,19 @@ async function deployContract(name, params, deployer = undefined) {
   contract.address = contract.target;
   return contract;
 }
+
+const request = (url, params = {}, method = "GET") => {
+  let options = {
+    method,
+  };
+  if ("GET" === method) {
+    url += "?" + new URLSearchParams(params).toString();
+  } else {
+    options.body = JSON.stringify(params);
+  }
+
+  return fetch(url, options).then((response) => response.json());
+};
 
 /*
  * deployment:
@@ -110,4 +124,5 @@ module.exports = {
   readRedpacketDeployment,
   saveRedpacketDeployment,
   hashToken,
+  request,
 };

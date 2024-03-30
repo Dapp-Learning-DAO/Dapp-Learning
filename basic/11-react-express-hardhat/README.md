@@ -9,6 +9,8 @@
 
 ```shell
 yarn
+
+#Node Version: v20.11.0
 ```
 
 - Create a simple project selected. Add contract names SimpleToken.sol to ./contracts and compile the contract to run testing.
@@ -34,10 +36,11 @@ yarn
 node app.js
 ```
 
-- Startup react
+- Startup react （open new terminal)
 
 ```shell
 cd frontend
+#Please ensure that it is already present the HARDHAT_NETWORK_ ID in src/components/Dapp.js has been modified to the corresponding network ID
 yarn
 yarn start
 ```

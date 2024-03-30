@@ -1,4 +1,4 @@
-require('@nomiclabs/hardhat-waffle');
+require("@nomicfoundation/hardhat-toolbox");
 const fs = require('fs');
 require('dotenv').config();
 
@@ -33,29 +33,13 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
-    },
-    ropsten: {
-      url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
-    },
-    matic: {
-      url: "https://polygon-mainnet.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: [
-        mnemonic()
-      ]
-    },
-    matic_mumbai: {
-      url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: [
-        mnemonic()
-      ]
     },
   },
 };

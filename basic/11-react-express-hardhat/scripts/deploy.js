@@ -17,13 +17,13 @@ async function main() {
     await deployer.getAddress()
   )
 
-  console.log('Account balance:', (await deployer.getBalance()).toString())
+  console.log('Account balance:', (await ethers.provider.getBalance(deployer.address)).toString())
 
   const Token = await ethers.getContractFactory('SimpleToken')
   const token = await Token.deploy('Test', 'SimpleToken', 1, 10000)
-  await token.deployed()
+  await token.waitForDeployment();
 
-  console.log('Token address:', token.address)
+  console.log('Token address:', token.target)
 
   // We also save the contract's artifacts and address in the frontend directory
   saveFrontendFiles(token)

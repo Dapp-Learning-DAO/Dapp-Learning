@@ -5,7 +5,6 @@ describe("Greeter", function() {
     const Greeter = await ethers.getContractFactory("Greeter");
     const greeter = await Greeter.deploy("Hello, world!");
     
-    await greeter.deployed();
     expect(await greeter.greet()).to.equal("Hello, world!");
 
     await greeter.setGreeting("hello Dapp-Learning!");

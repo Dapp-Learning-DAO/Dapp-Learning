@@ -1,23 +1,7 @@
-require("@nomiclabs/hardhat-waffle");
 const fs = require("fs");
-
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async () => {
-  const accounts = await ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
-
-function mnemonic() {
-
-  return process.env.PRIVATE_KEY
-
-}
-
-// 加载本地privateKeys到harhat本地测试网络
+require("@nomicfoundation/hardhat-ethers");
+require("@nomicfoundation/hardhat-chai-matchers");
+// load privateKeys to harhat network
 function loadTestAccounts() {
   const privateKyes = JSON.parse(fs.readFileSync("./testAccounts.json"));
   return privateKyes.map((_privateKey, index) => ({
@@ -42,30 +26,6 @@ module.exports = {
     },
     localhost: {
       url: "http://localhost:8545",
-    },
-    // rinkeby: {
-    //   url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //   mnemonic()
-    //   ],
-    // },
-    // kovan: {
-    //   url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
-    // mainnet: {
-    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
-    // ropsten: {
-    //   url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-    //   accounts: [
-    //     mnemonic()
-    //   ],
-    // },
+    }
   }
 };

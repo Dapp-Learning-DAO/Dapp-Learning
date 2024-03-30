@@ -1,15 +1,8 @@
-require("@nomiclabs/hardhat-waffle");
+// require("@nomiclabs/hardhat-waffle");
 const { expect } = require("chai");
-const { BigNumber, utils } = ethers;
-const { parseEther, formatEther, keccak256, toUtf8Bytes } = utils;
+const { BigNumber,keccak256,toUtf8Bytes } = ethers;
+// const { keccak256, toUtf8Bytes } = utils;
 
-const toWei = (value) => parseEther(value.toString());
-const fromWei = (value) =>
-  formatEther(
-    typeof value === "string" ? value : value.toString()
-  );
-
-const getBalance = ethers.provider.getBalance;
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 describe("MYERC721 contract", function () {
@@ -29,7 +22,7 @@ describe("MYERC721 contract", function () {
 
     const MYERC721_MOCK = await ethers.getContractFactory("MYERC721");
     token = await MYERC721_MOCK.deploy(name, symbol, baseURI);
-    await token.deployed();
+    await token.waitForDeployment();
   });
 
   it("token has correct name", async function () {
@@ -60,7 +53,7 @@ describe("MYERC721 contract", function () {
 
   describe("minting", function () {
     it("deployer can mint tokens", async function () {
-      const tokenId = BigNumber.from("0");
+      const tokenId = BigInt("0");
 
       expect(await token.balanceOf(other.address)).to.be.equal("0");
 
@@ -124,7 +117,7 @@ describe("MYERC721 contract", function () {
 
   describe("burning", function () {
     it("holders can burn their tokens", async function () {
-      const tokenId = BigNumber.from("0");
+      const tokenId = BigInt("0");
 
       await token.mint(other.address);
 

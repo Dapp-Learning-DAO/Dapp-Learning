@@ -36,7 +36,7 @@ interface IStableDebtToken {
    * @param user The address of the user
    * @param amount The amount being burned
    * @param currentBalance The current balance of the user
-   * @param balanceIncrease The the increase in balance since the last action of the user
+   * @param balanceIncrease the  increase in balance since the last action of the user
    * @param avgStableRate The new average stable rate after the burning
    * @param newTotalSupply The new total supply of the stable debt token after the action
    **/

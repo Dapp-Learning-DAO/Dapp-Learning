@@ -1,11 +1,13 @@
 中文 / [English](./README.md)
 # 钱包开发
 
-HD 钱包(分层确定性钱包)，钱包协议：BIP32、BIP44、BIP39
+HD 钱包(分层确定性钱包)，钱包协议：BIP32、BIP44、BIP39。 
+BIP32中提出的为了避免管理一堆私钥的麻烦提出的分层推导方案。
+而BIP44是给BIP32的分层增强了路径定义规范，同时增加了对多币种的支持。
+BIP39则通过定义助记词让种子的备份更友好。
 [钱包原理](https://learnblockchain.cn/2018/09/28/hdwallet/)
 
 ## 钱包类型
-
 1. 随机数创建
 2. 私钥创建
 3. 助记词创建
@@ -14,7 +16,6 @@ HD 钱包(分层确定性钱包)，钱包协议：BIP32、BIP44、BIP39
 5. 脑记忆钱包(etherjs 5 已经移除)
 
 ## provider 类型
-
 1. Etherscan Provider：连接 Etherscan API 的 provider，需要 2 个参数，一个是网络名称，一个查询 API 所需的 token（之前的文章 有讲过，查询 Etherscan 的 API 时 apitoken 不是必须的，但如果没有的话会受到每秒 5 次的调用限制）。
 2. Json Rpc Provider：连接本地以太坊网点的 Provider。
 3. Infura Provider：连接 Infura 网络的 Provider，Infura 是一套以太坊的基础设施服务，同样有以太坊的主网络和测试网络。

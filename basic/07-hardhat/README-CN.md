@@ -24,8 +24,7 @@ Hardhat Runner 是与 Hardhat 交互的 CLI 命令，是一个可扩展的任务
 ## 项目结构和配置 hardhat
 
 ```sh
-mkdir 07-hardhat                // 创建项目文件夹
-cd    07-hardhat                // 移动到项目文件夹下
+cd    07-hardhat                // 移到Hardhat项目文件夹
 npm install --save-dev hardhat  // 安装hardhat
 npx hardhat                     // 创建hardhat项目
 ```
@@ -42,17 +41,17 @@ npx hardhat                     // 创建hardhat项目
 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
 
-Welcome to Hardhat v2.9.0
+👷 Welcome to Hardhat v2.21.0 👷‍
 
-? What do you want to do? ...
-> Create a basic sample project
-  Create an advanced sample project
-  Create an advanced sample project that uses TypeScript
+? What do you want to do? … 
+❯ Create a JavaScript project
+  Create a TypeScript project
+  Create a TypeScript project (with Viem)
   Create an empty hardhat.config.js
   Quit
 ```
 
-我们使用'Create a basic sample project'选项，创建一个基础项目，后面的两个选项直接敲回车选择默认值。
+我们使用'Create a JavaScript project'选项，创建一个基础项目，后面的两个选项直接敲回车选择默认值。
 
 ### 项目结构
 
@@ -77,7 +76,6 @@ hardhat.config.js
 ```js
 require('@nomiclabs/hardhat-waffle');
 require('dotenv').config();
-
 module.exports = {
   networks: {
     // hardhat 内置测试网络（选填）
@@ -87,10 +85,10 @@ module.exports = {
     },
     // 你可以在这里配置任意网络
     // goerli 测试网络
-    goerli: {
+    sepolia: {
       // 请将 INFURA_ID 替换成你自己的
-      // url: 'https://goerli.infura.io/v3/{INFURA_ID}',
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+      // url: 'https://sepolia.infura.io/v3/{INFURA_ID}',
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
 
       // 填写测试账户的私钥，可填写多个
       accounts: [process.env.PRIVATE_KEY, ...]
@@ -124,32 +122,26 @@ module.exports = {
 
 hardhat 内置了一个特殊的安全测试网络，其名称也叫 `hardhat`, 通常你不需要对他进行特殊配置。该网络会模拟真实区块链网络的运行机制，并为你生成好 10 个测试账户（和 truffle 类似）。
 
-### 使用插件
-
-Hardhat 的很多功能都来自于插件，而作为开发者，你可以自由选择想使用的插件。
-
-例如常用的 waffle 插件，使得 hardhat 可以集成 waffle 框架，进行开发，测试，部署。
-
-```js
-// hardhat.config.js
-require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
-...
-```
 
 ### 安装依赖
 
 1. 安装 nodejs （略）
 
+ ```js
+ 安装 node
+   //Node 版本 v20.11.0
+  ```
+
 2. 安装项目依赖：
 
    ```sh
-   npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers dotenv
+    npm install
    ```
 
    或使用 yarn 安装（需要先安装 yarn 依赖）
 
    ```sh
-   yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @types/mocha dotenv
+    yarn
    ```
 
 3. 配置私钥和网络：
@@ -159,6 +151,7 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle 插件
    ```js
    PRIVATE_KEY = xxxxxxxxxxxxxxxx; // 替换为你的私钥
    INFURA_ID = yyyyyyyy; // 替换为infura节点
+   APIKEY=zzzzzz; //替换etherscan的apikey，下文有介绍
    ```
 
 ## usage
@@ -179,6 +172,7 @@ npx hardhat compile
 
 ```sh
 npx hardhat test
+#test网络使用本机网络，不需要指定 --network <network name>
 ```
 
 也可以指定运行某个特定测试文件
@@ -197,25 +191,33 @@ npx hardhat run ./scripts/deploy.js
 指定运行的网络，例如在 goerli 测试网部署合约(请确保钱包地址在 goerli 测试网有足够的 gas 才能成功部署)
 
 ```sh
-npx hardhat run ./scripts/deploy.js --network goerli
+npx hardhat run ./scripts/deploy.js --network sepolia
+
+#请记住此处运行完之后返回的 “deploy address“，下面 verify 在sepolia网络验证时会用到
 ```
 
 ### verify
 
-验证智能合约，这里以`goerli`举例。
+验证智能合约，这里以`sepolia`举例。
 
 在 `hardhat.config.js` 添加配置：
 
 ```js
  etherscan: {
-   apiKey: "<etherscan的api key>",
+   apiKey: "<etherscan的api key>",//用process.env.APIKEY 获取变量
  }
 ```
+
+https://etherscan.io/myapikey 官网创建账号，登陆之后，My Account(自己创建的账号实际名称) -> API Keys 菜单中创建
+
+确保 hardhat.config.js里配置
 
 运行脚本：
 
 ```shell
-npx hardhat verify --network goerli <合约地址>
+npx hardhat verify --contract "contracts/SimpleToken.sol:SimpleToken" --constructor-args ./arguments_SimpleToken.js  --network sepolia <合约地址>
+
+#arguments_SimpleToken.js 中的数据为 第207行运行deplo.js脚本时，构造SimpleToken合约时，设置的参数
 ```
 
 ### task
@@ -288,7 +290,7 @@ contract Greeter {
 }
 ```
 
-在运行测试文件时，可以看到打印出的日志：
+在运行测试文件时(命令:npx hardhat test ./test/greeter.test.js)，可以看到打印出的日志：
 
 ```sh
 Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
@@ -317,15 +319,15 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
    npx hardhat run scripts/deploy.js --network <network-name>
    ```
 
-   这里的 `network-name` 替换成你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
+   这里的 `network-name` 替换成你指定的网络名称，这里可以换成 `sepolia`，对应配置文件中的网络名称。
 
 4. 验证智能合约
 
    ```bash
-   npx hardhat verify --network goerli <network-name> <contract-address>
+   npx hardhat verify --contract "contracts/SimpleToken.sol:SimpleToken" --constructor-args ./arguments_SimpleToken.js  --network <network-name> <contract-address>
    ```
 
-    `network-name` ：你指定的网络名称，这里可以换成 `goerli`，对应配置文件中的网络名称。
+    `network-name` ：你指定的网络名称，这里可以换成 `sepolia`，对应配置文件中的网络名称。
 
     `contract-address` ：上一步部署的合约地址。
 
@@ -338,4 +340,4 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 - hardhat 中文文档: <https://learnblockchain.cn/docs/hardhat/getting-started/>
 - ethers.js 和 hardhat 基础使用讲解: <https://www.bilibili.com/video/BV1Pv411s7Nb>
 - <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>
-- erc20 openzepplin介绍: <https://segmentfault.com/a/1190000015400380>
+- erc20 openzeppelin介绍: <https://segmentfault.com/a/1190000015400380>

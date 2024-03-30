@@ -18,7 +18,7 @@ interface IAToken is IERC20, IScaledBalanceToken {
    * @param user The address receiving the minted tokens
    * @param amount The amount of tokens getting minted
    * @param index The new liquidity index of the reserve
-   * @return `true` if the the previous balance of the user was 0
+   * @return `true` if the  previous balance of the user was 0
    */
   function mint(
     address user,
