@@ -76,6 +76,12 @@ npx hardhat run scripts/transaction.js --network sepolia
 ``` 
 RandomWords 随机数生成之后，通过合约传入。./scripts/deployment.json 中保存的 requestID,再次获取之前获取的随机数。可以自定义随机数使用场景，本例只作为调用参考。
 
+随机数生成之后，可以在Ehterscan中查看
+<center><img src="./imgs/Consumer.png?raw=true" /></center> 
+<center><img src="./imgs/Events.png?raw=true" /></center> 
+<center><img src="./imgs/RequestAndResult.png?raw=true" /></center> 
+
+
 ## 参考链接
 github 样例代码:  https://github.com/PatrickAlphaC/dungeons-and-dragons-nft  
 Chainlink链下报告概览: https://learnblockchain.cn/article/2186  

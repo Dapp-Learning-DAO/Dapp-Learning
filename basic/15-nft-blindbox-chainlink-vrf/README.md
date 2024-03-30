@@ -74,6 +74,11 @@ npx hardhat run scripts/transaction.js --network sepolia
 ``` 
 RandomWords After the random number is generated, it is passed in through the contract. The requestID saved in ./scripts/deployment.json is used to obtain the random number obtained before. You can customize random number usage scenarios. This example is only used as a calling reference.
 
+After the random number is generated, it can be viewed in Ehterscan
+<center><img src="./imgs/Consumer.png?raw=true" /></center> 
+<center><img src="./imgs/Events.png?raw=true" /></center> 
+<center><img src="./imgs/RequestAndResult.png?raw=true" /></center> 
+
 
 ## Refer to the link
 Github sample code:  https://github.com/PatrickAlphaC/dungeons-and-dragons-nft  
