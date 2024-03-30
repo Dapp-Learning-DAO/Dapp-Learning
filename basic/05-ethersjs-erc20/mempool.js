@@ -27,8 +27,6 @@ async function main() {
             console.log(`[${(new Date).toLocaleTimeString()}] : ${txHash}`);
             console.log(tx);
             j++
-            }else{
-            finishFlag = true
         }
     }, 1000));
 
