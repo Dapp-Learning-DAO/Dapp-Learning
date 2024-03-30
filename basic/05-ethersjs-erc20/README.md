@@ -41,6 +41,12 @@ Difference between `web3.js` and `ethers.js` can be seen [here](./web3-vs-ethers
    node index.js
    ```
 
+4. check the pending transactions in mempool
+
+   ```sh
+   node mempool.js
+   ```
+
 ## References
 
 Official documentation:

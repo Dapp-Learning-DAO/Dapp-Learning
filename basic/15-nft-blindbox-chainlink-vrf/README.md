@@ -42,17 +42,17 @@ INFURA_ID=yyyyyyyy
 
 - Deployment test contract
 ```
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/deploy.js --network sepolia
 ```
 
 - Get random number 
 ```
-npx hardhat run scripts/random-number-vrf.js --network goerli
+npx hardhat run scripts/random-number-vrf.js --network sepolia
 ```
 
 - Generate random Character  
 ```
-npx hardhat run scripts/transaction.js --network goerli
+npx hardhat run scripts/transaction.js --network sepolia
 ``` 
 
 ## Refer to the link
