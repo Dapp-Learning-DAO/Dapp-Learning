@@ -1,11 +1,9 @@
-const hre = require('hardhat');
-require('@nomiclabs/hardhat-web3');
-const { BigNumber } = require('ethers');
+const { ethers } = require('hardhat');
 require('dotenv').config();
 const { readDeployment,saveDeployment } = require('./utils');
 
 async function main() {
-  const provider = new ethers.providers.WebSocketProvider(`wss://goerli.infura.io/ws/v3/${process.env.INFURA_ID}`);
+  const provider = new ethers.WebSocketProvider(`wss://sepolia.infura.io/ws/v3/${process.env.INFURA_ID}`);
   const { abi: DungeonsAndDragonsCharacterABI } = require('../artifacts/contracts/DungeonsAndDragonsCharacter.sol/DungeonsAndDragonsCharacter.json');
 
   const deployment = readDeployment();
@@ -23,31 +21,17 @@ async function main() {
 
   let random0ID, random0Res;
 
-    // 监听randomNumberConsumer 的请求随机数事件
-    const filterCall = {
-      address: addr,
-      topics: [ethers.utils.id('RequestId(address,uint256)')],
-    };
-
-    // 监听chainlink VRF Coordinator 的随机数回写事件
-    const filterRes = {
-      address: addr,
-      topics: [
-        ethers.utils.id('FulfillRandomness(uint256,uint256[])')
-      ],
-    };
-
     console.log(`Listen on random number call...`);
-    dndCharacter.on(filterCall, (sender, requestID) => {
+    dndCharacter.on("RequestId", (sender, requestID) => {
       console.log('event RequestId(address,uint256)');
       console.log(`Sender: ${sender}  requestID: ${requestID}`)
       random0ID = requestID;
     });
 
     console.log(`Listen on random number result...`);
-    dndCharacter.on(filterRes, (requestID, randomNumbers) => {
+    dndCharacter.on("FulfillRandomness", (requestID, randomNumbers) => {
       console.log('event FulfillRandomness(uint256,uint256[])');
-      if (BigNumber.from(requestID).eq(random0ID)) {
+      if (BigInt(requestID).eq(random0ID)) {
         random0Res = randomNumbers[0];
         console.log('random0Res: ', random0Res.toString());
       } else {
