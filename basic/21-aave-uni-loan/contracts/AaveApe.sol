@@ -46,7 +46,7 @@ contract AaveApe is AaveUniswapBase {
       // Approve the Uniswap Router on the borrowed asset
       IERC20(borrowAsset).approve(UNISWAP_ROUTER_ADDRESS, borrowAmount);
 
-      //we will set the uniswap pool fee to 0.3%.
+      //we will set the uniswap pool fee to 0.3%. best for most pairs
       uint24 poolFee = 3000;
 
       // Execute trade on Uniswap
@@ -176,7 +176,7 @@ contract AaveApe is AaveUniswapBase {
       IERC20(apeAsset).approve(UNISWAP_ROUTER_ADDRESS, maxCollateralAmount);
 
       // unsiwap v3 swap 
-      //we will set the uniswap pool fee to 0.3%.
+      //we will set the uniswap pool fee to 0.3%. best for most pairs
       uint24 poolFee = 3000;
 
       // Execute trade on Uniswap

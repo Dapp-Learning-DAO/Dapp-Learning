@@ -60,4 +60,9 @@ interface IInitializableDebtToken {
    * @param amount The maximum amount being delegated.
    */
   function approveDelegation(address delegatee, uint256 amount) external;
+
+  /**
+   * @dev Returns the amount of tokens owned by `account`.
+   */
+  function balanceOf(address account) external view returns (uint256);
 }

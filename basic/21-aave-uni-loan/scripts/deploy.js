@@ -2,7 +2,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
 const { config, ethers, tenderly } = require("hardhat");
-const { utils } = require("ethers");
 const R = require("ramda");
 
 const main = async () => {
@@ -22,9 +21,9 @@ const main = async () => {
   }  
   
   let maticConfig = {
-    lendingPoolAddressesProvider: "0xd05e3E715d945B59290df0ae8eF85c1BdB684744",
-    //sushi
-    uniswapRouterAddress: "0x1b02da8cb0d097eb8d57a175b88c7d8b47997506"
+    lendingPoolAddressesProvider: "0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb",
+    //uniswap
+    uniswapRouterAddress: "0xE592427A0AEce92De3Edee1F18E0157C05861564"
   }
 
   // Kovan Aave has a dedicated mock Uniswap contract... https://kovan.etherscan.io/address/0xC18451d36aA370fDACe8d45839bF975F48f7AEa1#readContract
@@ -33,7 +32,7 @@ const main = async () => {
     uniswapRouterAddress: "0xfcd87315f0e4067070ade8682fcdbc3006631441"
   }
 
-  let deployConfig = mainnetConfig
+  let deployConfig = maticConfig
   console.log("lendingPoolAddressesProvider ", deployConfig.lendingPoolAddressesProvider)
  
   const aaveApe = await deploy("AaveApe",[deployConfig.lendingPoolAddressesProvider, deployConfig.uniswapRouterAddress])
@@ -89,7 +88,8 @@ const abiEncodeArgs = (deployed, contractArgs) => {
   ) {
     return "";
   }
-  const encoded = utils.defaultAbiCoder.encode(
+
+  const encoded = ethers.utils.defaultAbiCoder.encode(
     deployed.interface.deploy.inputs,
     contractArgs
   );

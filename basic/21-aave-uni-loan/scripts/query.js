@@ -7,22 +7,22 @@ let exp = BigNumber.from("10").pow(18);
 let exp1 = BigNumber.from("10").pow(27);
 
 // matic address
-//https://docs.aave.com/developers/v/2.0/deployed-contracts/matic-polygon-market
-let daiAddress = '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063';
-let wmaticAddress = '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'; //wmatic
+//https://docs.aave.com/developers/deployed-contracts/v3-mainnet/polygon
+let daiAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063';
+let wmaticAddress = '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270'; //wmatic
  let wethAddress = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'; //weth
- let wbtcAddress = '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6'; //weth
-let usdcAddress = '0x2791bca1f2de4661ed88a30c99a7a9449aa84174';
+ let wbtcAddress = '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6'; //wbtc
+let usdcAddress = '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'; 
 
-let lendingPoolAddressesProviderAddress = '0xd05e3E715d945B59290df0ae8eF85c1BdB684744';
+let lendingPoolAddressesProviderAddress = '0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb';
 
 //sushi
-let uniswapRouterAddress = '0x1b02da8cb0d097eb8d57a175b88c7d8b47997506';
+let uniswapRouterAddress = '0xE592427A0AEce92De3Edee1F18E0157C05861564';
 
-let wethGatewayAddress = '0xbEadf48d62aCC944a06EEaE0A9054A90E5A7dc97';
+let wethGatewayAddress = '0xC1E320966c485ebF2A0A2A6d3c0Dc860A156eB1B';
 
 // Fill in your address
-const aaveApeAddress = '0xddb2d92d5a0EDcb03c013322c7BAe92734AA4597';
+const aaveApeAddress = '0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA';
 
 
 const getAToken = async (_asset) => {
@@ -34,9 +34,9 @@ const getAToken = async (_asset) => {
 };
 
 const getLendingPool = async () => {
-  const lendingPoolAddressesProvider = await ethers.getContractAt('ILendingPoolAddressesProvider', lendingPoolAddressesProviderAddress);
-  let lendingPoolAddress = await lendingPoolAddressesProvider['getLendingPool']();
-  let lendingPool = await ethers.getContractAt('ILendingPool', lendingPoolAddress);
+  const lendingPoolAddressesProvider = await ethers.getContractAt('IPoolAddressesProvider', lendingPoolAddressesProviderAddress);
+  let lendingPoolAddress = await lendingPoolAddressesProvider['getPool']();
+  let lendingPool = await ethers.getContractAt('IPool', lendingPoolAddress);
 
   return lendingPool;
 };
@@ -96,8 +96,8 @@ const querySql = `
 
 
 const url = {
-  matic: 'https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic',
-  mainnet: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v2',
+  matic: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-polygon',
+  mainnet: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3',
 }
 
 const getInterest = async (url, graphQuery,variables,interestRateMode) => { 
@@ -167,7 +167,10 @@ const getInterest = async (url, graphQuery,variables,interestRateMode) => {
         // console.log("Stable Debt: ",stableDebt)
       }
 
-    tota_interest[symbol] = (total_repay[symbol]["amount"] + currentDebt - total_borrow[symbol]["amount"]) / 10 ** total_borrow[symbol]["decimals"]
+    tota_interest[symbol] = (
+      total_repay[symbol]["amount"] 
+      + currentDebt 
+      - total_borrow[symbol]["amount"]) / 10 ** total_borrow[symbol]["decimals"]
   
   }
 
@@ -178,15 +181,14 @@ const getInterest = async (url, graphQuery,variables,interestRateMode) => {
 main = async () => {
   const [deployer] = await ethers.getSigners();
   let fish = process.env.TARGET_ADDRESS.toLowerCase()
-  console.log(fish)
+  console.log("target:", fish)
   
-
   const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
 
   const lendingPool = await getLendingPool();
   console.log('lendingPool:', lendingPool.address);
-  let reserveData = await aaveApe.getAaveAssetReserveData(usdcAddress);
-  //console.log("usdc reserveData: " , reserveData )
+  let reserveData = await aaveApe.getAaveAssetReserveData(daiAddress);
+  //console.log("dai reserveData: " , reserveData )
 
   // variable debt
   let interestRateMode = 2;
@@ -196,24 +198,24 @@ main = async () => {
 
  // console.log("userdata: ", useraccount); 
   console.log("healthFactor: ", useraccount.healthFactor.mul(BigNumber.from("100")).div(exp).toString()); 
-  console.log("totalCollateralETH: ", useraccount.totalCollateralETH.div(exp).toString()); 
-  console.log("currentLiquidationThreshold: ", useraccount.currentLiquidationThreshold.toString()); 
-  console.log("ltv: ", useraccount.ltv.toString()); 
-  
-  let reserveData1 =  await lendingPool.getReserveData(usdcAddress);
-  console.log("usdc borrow  variable rate: ", reserveData1.currentVariableBorrowRate.mul(BigNumber.from("10000")).div(exp1).toString());
+  console.log("totalCollateralBase: %f USD", useraccount.totalCollateralBase.mul(BigNumber.from(100)).div(10**8).toNumber() / 100); 
+  console.log("currentLiquidationThreshold: %f %", useraccount.currentLiquidationThreshold.toNumber() / 100); 
+  console.log("ltv: %f %", useraccount.ltv.toNumber() / 100); 
+
+  let reserveData1 =  await lendingPool.getReserveData(daiAddress);
+  console.log("dai borrow variable rate: %f %", reserveData1.currentVariableBorrowRate.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
   //console.log("usdc borrow stable rate: ", reserveData1.currentStableBorrowRate.mul(BigNumber.from("10000")).div(exp1).toString());
-  console.log("usdc deposit rate: ", reserveData1.currentLiquidityRate.mul(BigNumber.from("10000")).div(exp1).toString());
-  console.log("usdc borrow index: ", reserveData1.variableBorrowIndex.mul(BigNumber.from("10000")).div(exp1).toString());
+  console.log("dai supply rate: %f %", reserveData1.currentLiquidityRate.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
+  console.log("dai borrow index: ", reserveData1.variableBorrowIndex.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
 
-  let result = await aaveApe.getAvailableBorrowInAsset(usdcAddress, fish);
-  console.log('available borrow usdc: ', result.toString());
+  let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, fish);
+  console.log('user available borrow dai: %f USD', result.mul(BigNumber.from(1000)).div(exp).toNumber() / 1000);
 
 
-  let aToken = await getAToken(wethAddress);
-  let aTokenbtc = await getAToken(wbtcAddress);
+  let aToken = await getAToken(wmaticAddress);
+  // let aTokenbtc = await getAToken(wbtcAddress);
   // console.log("aToken: ", aToken)
-  let debtToken = await getDebtToken(usdcAddress, interestRateMode, true);
+  let debtToken = await getDebtToken(daiAddress, interestRateMode, true);
   // console.log("debtToken: ", debtToken)
  
   // let aBalanceBefore = await aToken.balanceOf(fish);

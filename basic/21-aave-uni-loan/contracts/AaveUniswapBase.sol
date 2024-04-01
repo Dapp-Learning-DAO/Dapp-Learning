@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity ^0.8.0;
 
-import {IERC20} from './dependencies/openzeppelin/contracts/IERC20.sol';
-import {SafeMath} from './dependencies/openzeppelin/contracts/SafeMath.sol';
+import {IERC20} from './interfaces/IERC20.sol';
+import {SafeMath} from './libraries/SafeMath.sol';
 import "./interfaces/IPool.sol";
 import "./interfaces/IPoolAddressesProvider.sol";
 import "./interfaces/IPoolDataProvider.sol";
@@ -24,7 +24,7 @@ contract AaveUniswapBase {
     UNISWAP_ROUTER_ADDRESS = uniswapRouterAddress;
   }
 
-  address public immutable _lendingPoolAddress =0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe; 
+  // address public immutable _lendingPoolAddress =0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe; 
   function LENDING_POOL() public view returns (IPool) {
     address _lendingPoolAddress = ADDRESSES_PROVIDER.getPool();
     return IPool(_lendingPoolAddress);
