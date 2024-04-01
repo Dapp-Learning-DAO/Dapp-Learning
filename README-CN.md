@@ -319,6 +319,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - [Gitcoin](https://gitcoin.co/hackathon/)
 - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 - [Immunefi 漏洞赏金平台](https://immunefi.com/)
+- [Code4rena 漏洞赏金平台](https://code4rena.com/)
 
 ## 如何参与以及DAO治理
 
