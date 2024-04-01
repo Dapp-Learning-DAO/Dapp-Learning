@@ -2,7 +2,6 @@
 
 > **CRYPTO IS HARD, DO NOT TRUST ANYONE, VERIFY YOURSELF !!!**
 
-(prodromes)=
 ## Prodromes
 
 正如开头引用的那句话，加密货币里面涉及到的知识太多了，而且经过十多年的发展，
