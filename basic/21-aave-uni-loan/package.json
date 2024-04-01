@@ -4,7 +4,6 @@
     "@uniswap/v3-core": "^1.0.1",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "dotenv": "^10.0.0",
-    "fs": "0.0.1-security",
     "hardhat": "^2.22.2"
   },
   "dependencies": {
