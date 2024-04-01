@@ -38,13 +38,14 @@ For more detail , please visit [aave-ape](https://azfuller20.medium.com/aave-ape
 
 ```shell
 // depoly aaveape
-hardhat run --network matic scripts/deploy.js   
+npx hardhat ignition deploy ./ignition/modules/AaveApe.js --network  matic
+ 
 
 // contract verify
 npx hardhat verify --network matic 0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA "0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb" "0xE592427A0AEce92De3Edee1F18E0157C05861564"
 
 // open maxposition on aave
-hardhat run --network matic scripts/loan.js   
+npx hardhat run --network matic scripts/loan.js   
 
 ```
 

@@ -1,5 +1,4 @@
-require("@nomiclabs/hardhat-waffle");
-const { use, expect } = require("chai");
+const { expect } = require("chai");
 
 // ethereum mainnet addresses
 let daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F"
@@ -12,10 +11,10 @@ let uniswapRouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
 let wethGatewayAddress = "0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9"
 
 const depositEthInAave = async (_poolAddress, _userAddress, _amount) => {
-
+  // console.log("isAddressable", _poolAddress, _userAddress, ethers.isAddressable(_poolAddress), ethers.isAddressable(_userAddress))
   const ethGateway = await ethers.getContractAt('IWrappedTokenGatewayV3', wethGatewayAddress)
   let metadata = {
-    value: ethers.utils.parseEther(_amount)
+    value: ethers.parseEther(_amount)
   }
 
   let ethDeposit = await ethGateway.depositETH(_poolAddress, _userAddress, 0, metadata)
@@ -61,7 +60,7 @@ const getDebtToken = async (_asset, _interestRateMode, erc20=false) => {
 const delegateCreditToTheApe = async (_asset, _interestRateMode = 2) => {
 
   let assetDebtToken = await getDebtToken(_asset, _interestRateMode)
-  let assetDebtApproval = await assetDebtToken['approveDelegation'](aaveApe.address, ethers.constants.MaxUint256)
+  let assetDebtApproval = await assetDebtToken['approveDelegation'](aaveApe.target, ethers.MaxUint256)
 }
 
 describe("AaveApe", function () {
@@ -73,8 +72,8 @@ describe("AaveApe", function () {
     const [user] = await ethers.getSigners();
     userAddress = user.address;
     const lendingpool = await getLendingPool();
-    pooladdress = lendingpool.address;
-    });
+    pooladdress = lendingpool.target;
+  });
 
   describe("Address verification", function () {
 
@@ -169,7 +168,7 @@ describe("AaveApe", function () {
       let aToken = await getAToken(wethAddress)
       let debtToken = await getDebtToken(daiAddress, interestRateMode, true)
 
-      await aToken.approve(aaveApe.address, ethers.constants.MaxUint256)
+      await aToken.approve(aaveApe.target, ethers.MaxUint256)
 
       let aBalanceBefore = await aToken.balanceOf(userAddress)
       let debtBalanceBefore = await debtToken.balanceOf(userAddress)

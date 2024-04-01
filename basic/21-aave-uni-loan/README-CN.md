@@ -53,7 +53,7 @@ cp .env.example .env
 - 部署合约  
 ```shell
 // depoly aaveape
-hardhat run scripts/deploy.js --network  matic
+npx hardhat ignition deploy ./ignition/modules/AaveApe.js --network  matic
 ```
 
 - 验证合约  
@@ -65,13 +65,13 @@ npx hardhat verify --network matic 0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA "0
 - 进行借贷  
 ```shell
 // open maxposition on aave
-hardhat run scripts/loan.js --network matic    
+npx hardhat run scripts/loan.js --network matic    
 ```
 
 - 查询用户支付利息总额    
 需要注意的是，应该在 matic 上，所有的可借贷币种的 APY 使用的都是浮动 APY，如果使用其他网络的话需要修改下代码中 “计算 interest” 部分传入 getDebtToken 接口的参数     
 ```shell
-hardhat run scripts/query.js --network matic
+npx hardhat run scripts/query.js --network matic
 ```
 
 

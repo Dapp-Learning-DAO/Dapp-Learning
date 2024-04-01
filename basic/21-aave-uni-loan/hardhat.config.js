@@ -1,12 +1,5 @@
 require("dotenv").config();
-
-require("@nomiclabs/hardhat-waffle");
-require("hardhat-gas-reporter");
-require("solidity-coverage");
-const { utils } = require("ethers");
-const fs = require("fs");
-
-const { isAddress, getAddress, formatUnits, parseUnits } = utils;
+require("@nomicfoundation/hardhat-toolbox");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html

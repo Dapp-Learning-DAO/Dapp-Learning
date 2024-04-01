@@ -1,10 +1,8 @@
-require('@nomiclabs/hardhat-waffle');
-const { BigNumber } = require('@ethersproject/bignumber');
 const axios = require('axios')
 require("dotenv").config();
 
-let exp = BigNumber.from("10").pow(18);
-let exp1 = BigNumber.from("10").pow(27);
+let exp = BigInt(10 ** 18);
+let exp1 = BigInt(10 ** 27);
 
 // matic address
 //https://docs.aave.com/developers/deployed-contracts/v3-mainnet/polygon
@@ -186,7 +184,7 @@ main = async () => {
   const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
 
   const lendingPool = await getLendingPool();
-  console.log('lendingPool:', lendingPool.address);
+  console.log('lendingPool:', lendingPool.target);
   let reserveData = await aaveApe.getAaveAssetReserveData(daiAddress);
   //console.log("dai reserveData: " , reserveData )
 
@@ -197,19 +195,19 @@ main = async () => {
 
 
  // console.log("userdata: ", useraccount); 
-  console.log("healthFactor: ", useraccount.healthFactor.mul(BigNumber.from("100")).div(exp).toString()); 
-  console.log("totalCollateralBase: %f USD", useraccount.totalCollateralBase.mul(BigNumber.from(100)).div(10**8).toNumber() / 100); 
-  console.log("currentLiquidationThreshold: %f %", useraccount.currentLiquidationThreshold.toNumber() / 100); 
-  console.log("ltv: %f %", useraccount.ltv.toNumber() / 100); 
+  console.log("healthFactor: ", Number(useraccount.healthFactor * BigInt(100) / exp) / 100); 
+  console.log("totalCollateralBase: %f USD", Number(useraccount.totalCollateralBase * BigInt(100) / BigInt(10**8)) / 100); 
+  console.log("currentLiquidationThreshold: %f %", Number(useraccount.currentLiquidationThreshold) / 100); 
+  console.log("ltv: %f %", Number(useraccount.ltv) / 100); 
 
   let reserveData1 =  await lendingPool.getReserveData(daiAddress);
-  console.log("dai borrow variable rate: %f %", reserveData1.currentVariableBorrowRate.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
+  console.log("dai borrow variable rate: %f %", Number(reserveData1.currentVariableBorrowRate * BigInt(10000) / exp1) / 100);
   //console.log("usdc borrow stable rate: ", reserveData1.currentStableBorrowRate.mul(BigNumber.from("10000")).div(exp1).toString());
-  console.log("dai supply rate: %f %", reserveData1.currentLiquidityRate.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
-  console.log("dai borrow index: ", reserveData1.variableBorrowIndex.mul(BigNumber.from("10000")).div(exp1).toNumber() / 100);
+  console.log("dai supply rate: %f %", Number(reserveData1.currentLiquidityRate * BigInt(10000) / exp1) / 100);
+  console.log("dai borrow index: ", Number(reserveData1.variableBorrowIndex * BigInt(10000) / exp1) / 100);
 
   let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, fish);
-  console.log('user available borrow dai: %f USD', result.mul(BigNumber.from(1000)).div(exp).toNumber() / 1000);
+  console.log('user available borrow dai: %f USD', Number(result * BigInt(1000) / exp) / 1000);
 
 
   let aToken = await getAToken(wmaticAddress);

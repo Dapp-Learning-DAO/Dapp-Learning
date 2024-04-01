@@ -1,6 +1,3 @@
-require('@nomiclabs/hardhat-waffle');
-const { use, expect } = require('chai');
-
 //https://docs.aave.com/developers/deployed-contracts/v3-mainnet/ethereum-mainnet
 // let daiAddress = '0x6B175474E89094C44Da98b954EedeAC495271d0F';
 // let wethAddress = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'; //weth
@@ -14,7 +11,7 @@ const { use, expect } = require('chai');
 // let wethGatewayAddress = '0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9'; //WrappedTokenGatewayV3
 
 // // Fill in your address
-// const aaveApeAddress = '0x4Dd5336F3C0D70893A7a86c6aEBe9B953E87c891';
+// const aaveApeAddress = '0x90A3B384F62f43Ba07938EA43aEEc35c2aBfeCa2';
 
 //https://docs.aave.com/developers/deployed-contracts/v3-mainnet/polygon
 let daiAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063';
@@ -34,7 +31,7 @@ const aaveApeAddress = '0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA';
 const depositEthInAave = async (pooladdress, _userAddress, _amount) => {
   const ethGateway = await ethers.getContractAt('IWrappedTokenGatewayV3', wethGatewayAddress);
   let metadata = {
-    value: ethers.utils.parseEther(_amount),
+    value: ethers.parseEther(_amount),
   };
   let ethDeposit = await ethGateway.depositETH(pooladdress, _userAddress, 0, metadata);
   await ethDeposit.wait();
@@ -84,30 +81,31 @@ const getDebtToken = async (_asset, _interestRateMode, erc20 = false) => {
 
 const delegateCreditToTheApe = async (_asset, _interestRateMode = 2) => {
   let assetDebtToken = await getDebtToken(_asset, _interestRateMode);
-  console.log('assetDebtToken: ', assetDebtToken.address);
-  let assetDebtApproval = await assetDebtToken['approveDelegation'](aaveApeAddress, ethers.constants.MaxUint256);
+  console.log('assetDebtToken: ', assetDebtToken.target);
+  let assetDebtApproval = await assetDebtToken['approveDelegation'](aaveApeAddress, ethers.MaxUint256);
   await assetDebtApproval.wait();
   console.log('assetDebtApproval successfully  ');
 };
 
 main = async () => {
   const [deployer] = await ethers.getSigners()
-  console.log("user address:", deployer.address)
 
   let userAddress = deployer.address;
+  console.log("user address:", userAddress)
+
   const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
 
   const lendingpool = await getLendingPool();
-  console.log('lendingpool:', lendingpool.address);
+  console.log('lendingpool:', lendingpool.target);
   let reserveData = await aaveApe.getAaveAssetReserveData(daiAddress);
 
   // variable debt
   let interestRateMode = 2;
 
-  await depositEthInAave(lendingpool.address, deployer.address, '0.1'); 
+  await depositEthInAave(lendingpool.target, userAddress, '0.1'); 
   await delegateCreditToTheApe(daiAddress, interestRateMode);
 
-  let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, deployer.address);
+  let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, userAddress);
   console.log('available borrow: ', result.toString());
   console.log('begin ape');
 
@@ -120,7 +118,7 @@ main = async () => {
   let debtToken = await getDebtToken(daiAddress, interestRateMode, true);
   // console.log("debtToken: ", debtToken)
   
-  tx = await aToken.approve(aaveApe.address, ethers.constants.MaxUint256);
+  tx = await aToken.approve(aaveApe.target, ethers.MaxUint256);
   await tx.wait();
   console.log('atoken approve successfully. ');
 
@@ -137,10 +135,10 @@ main = async () => {
   let debtBalanceAfter = await debtToken.balanceOf(userAddress);
   console.log('debtBalanceAfter: ', debtBalanceAfter.toString());
 
-  await aToken.approve(wethGatewayAddress,ethers.constants.MaxUint256 )
+  await aToken.approve(wethGatewayAddress,ethers.MaxUint256 )
   console.log('atoken approve successfully. ');
 
-  await withdrawEthInAave(lendingpool.address, userAddress, aBalanceAfter)
+  await withdrawEthInAave(lendingpool.target, userAddress, aBalanceAfter)
 };
 
 main()
