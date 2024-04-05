@@ -239,7 +239,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 18. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 19. [DODO](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 20. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
-21. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+21. [0x-protocol](defi/0x-protocol/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 22. [Bancor](https://bancor.network/)⌛
 23. [Set](https://www.tokensets.com/)
 24. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
