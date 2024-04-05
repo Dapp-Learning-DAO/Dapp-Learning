@@ -2,15 +2,20 @@
 pragma solidity ^0.8.0;
 
 import './AaveUniswapBase.sol';
+import './interfaces/IUniswapV3Factory.sol';
+import './interfaces/IUniswapV3Pool.sol';
 
-contract AaveApe is AaveUniswapBase {
   using SafeMath for uint256;
   event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount, uint256 interestRateMode);
+  
+  uint24[3] public v3Fees = [500, 3000, 10000];
 
+  IUniswapV3Factory public constant factory = IUniswapV3Factory(0x1F98431c8aD98523631AE4a59f267346ea31F984); // const value for all chains
+  
   constructor(
       address lendingPoolAddressesProviderAddress,
       address uniswapRouterAddress
-  ) public AaveUniswapBase(lendingPoolAddressesProviderAddress, uniswapRouterAddress) {}
+  ) AaveUniswapBase(lendingPoolAddressesProviderAddress, uniswapRouterAddress) {}
 
   // Gets the amount available to borrow for a given address for a given asset
   function getAvailableBorrowInAsset(address borrowAsset, address ape) public view returns (uint256) {
@@ -46,14 +51,11 @@ contract AaveApe is AaveUniswapBase {
       // Approve the Uniswap Router on the borrowed asset
       IERC20(borrowAsset).approve(UNISWAP_ROUTER_ADDRESS, borrowAmount);
 
-      //we will set the uniswap pool fee to 0.3%. best for most pairs
-      uint24 poolFee = 3000;
-
       // Execute trade on Uniswap
       ISwapRouter.ExactInputSingleParams memory params = ISwapRouter.ExactInputSingleParams({
           tokenIn: borrowAsset,
           tokenOut: apeAsset,
-          fee: poolFee,
+          fee: getBestPoolFee(borrowAsset, apeAsset),
           recipient: address(this),
           deadline: block.timestamp + 50,
           amountIn: borrowAmount,
@@ -175,15 +177,11 @@ contract AaveApe is AaveUniswapBase {
       // Make the swap on Uniswap
       IERC20(apeAsset).approve(UNISWAP_ROUTER_ADDRESS, maxCollateralAmount);
 
-      // unsiwap v3 swap 
-      //we will set the uniswap pool fee to 0.3%. best for most pairs
-      uint24 poolFee = 3000;
-
       // Execute trade on Uniswap
       ISwapRouter.ExactOutputSingleParams memory params = ISwapRouter.ExactOutputSingleParams({
           tokenIn: apeAsset,
           tokenOut: borrowAsset,
-          fee: poolFee,
+          fee: getBestPoolFee(apeAsset, borrowAsset),
           recipient: address(this),
           deadline: block.timestamp + 5,
           amountOut: amountOwing,
@@ -208,5 +206,26 @@ contract AaveApe is AaveUniswapBase {
       emit Ape(ape, 'close', apeAsset, borrowAsset, amountOwing, amountIn, rateMode);
 
       return true;
+  }
+
+  function getBestPoolFee(address token0, address token1) public view returns(uint24 bestPoolFee) {
+    uint128 poolLiquidity = 0;
+    uint128 maxLiquidity = 0;
+    uint24 bestPoolFee = 3000; //0.3%
+
+    for (uint256 i = 0; i < v3Fees.length; i++) {
+        address pool = factory.getPool(token0, token1, v3Fees[i]);
+
+        if (pool == address(0)) {
+            continue;
+        }
+
+        poolLiquidity = IUniswapV3Pool(pool).liquidity();
+
+        if (maxLiquidity < poolLiquidity) {
+            maxLiquidity = poolLiquidity;
+            bestPoolFee = v3Fees[i];
+        }
+    }
   }
 }

@@ -18,7 +18,7 @@ contract AaveUniswapBase {
 
   // bytes32 public constant PROTOCOL_DATA_PROVIDER_LOOKUP = 0x0100000000000000000000000000000000000000000000000000000000000000;
 
-  constructor(address lendingPoolAddressesProviderAddress, address uniswapRouterAddress) public {
+  constructor(address lendingPoolAddressesProviderAddress, address uniswapRouterAddress) {
     ADDRESSES_PROVIDER = IPoolAddressesProvider(lendingPoolAddressesProviderAddress);
     UNISWAP_ROUTER = ISwapRouter(uniswapRouterAddress);
     UNISWAP_ROUTER_ADDRESS = uniswapRouterAddress;
