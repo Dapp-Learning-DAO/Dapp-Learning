@@ -295,13 +295,22 @@ Item list:
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
  - [Immunefi ](https://immunefi.com/learn/)
 
- ## Cryptocurrency Jobs Websites
+## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
  - https://cryptocurrencyjobs.co/
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
  - https://web3.career/
  - https://portfoliojobs.a16z.com/jobs?markets=Crypto
+
+## Hackathons
+
+Participating in hackathons increases practical experience, you can participate in:
+
+- [Gitcoin](https://gitcoin.co/hackathon/)
+- [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
+- [Immunefi Bug Bounty Platform](https://immunefi.com/)
+- [Code4rena Bug Bounty Platform](https://code4rena.com/)
 
 ## Project Ecology
 Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.
