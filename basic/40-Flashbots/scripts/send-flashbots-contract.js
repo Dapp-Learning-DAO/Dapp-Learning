@@ -4,6 +4,7 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const { ethers } = require('hardhat');
+const { BigNumber } = require( 'ethers');
 const { FlashbotsBundleProvider } = require('@flashbots/ethers-provider-bundle');
 require('dotenv').config();
 
@@ -33,20 +34,20 @@ function getPayLoad(contractABI, functionName, param, paramType){
 
 async function main() {
   // Deploy Greeter.sol
-  /* const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello Boy");
+   const Greeter = await ethers.getContractFactory("Greeter");
+   const greeter = await Greeter.deploy("Hello Boy");
 
-  console.log("Contract address:" , greeter.address); */
+   console.log("Contract address:" , greeter.address); 
 
   // Config provider, the default is 
-  const provider = new ethers.providers.JsonRpcProvider({ url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID }, 5)
+  const provider = new ethers.providers.JsonRpcProvider({ url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID }, 11155111)
   //const provider = new ethers.getDefaultProvider("goerli");
   // Standard json rpc provider directly from ethers.js. For example you can use Infura, Alchemy, or your own node.
 
   // Singer
-  const signerWallet = new ethers.Wallet(process.env.PRIVATE_KEY,provider);
+  const signerWallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
-  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, signerWallet);
+  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, signerWallet, "https://relay-sepolia.flashbots.net", "sepolia" );
   // Flashbots provider requires passing in a standard provider and an auth signer
 
   // Get the playload
@@ -62,12 +63,27 @@ async function main() {
 
   console.log("userNonce: ", userNonce)
 
+  const GWEI = BigNumber.from(10).pow(9)
+  const ETHER = BigNumber.from(10).pow(18)
+  const LEGACY_GAS_PRICE = GWEI.mul(2000)
+
+  const block = await provider.getBlock("latest");
+
+  const maxBaseFeeInFutureBlock =
+  FlashbotsBundleProvider.getMaxBaseFeeInFutureBlock(block.baseFeePerGas, 1);
+  const priorityFee = BigNumber.from(2).pow(13);
+
+  let chainId = 11155111;
   // Config the transaction
   const contractTransaction = {
-    to: '0x87eCbC961193e833cB70B97E98053a76Ae458B94',  // Existing Greeter contract's address on goerli
-    gasPrice: 200,
+    to: greeter.address,  // Existing Greeter contract's address on goerli
+    type: 2,
+    maxFeePerGas: priorityFee.add(maxBaseFeeInFutureBlock),
+    maxPriorityFeePerGas: priorityFee,
     data: contractPayload,
-    nonce: userNonce
+    nonce: userNonce,
+    chainId: chainId,
+    value: 0 ,
   }
 
   const signedBundle = await flashbotsProvider.signBundle([
@@ -77,9 +93,11 @@ async function main() {
     }
   ])
 
+  const simulation = await flashbotsProvider.simulate(signedBundle, targetBlockNumber);
+  console.log(JSON.stringify(simulation, null, 2))
+
   const bundleReceipt = await flashbotsProvider.sendRawBundle(signedBundle, targetBlockNumber);
-  //const simulation = await flashbotsProvider.simulate(signedBundle, targetBlockNumber);
-  //console.log(JSON.stringify(simulation, null, 2))
+  
   await bundleReceipt.wait();
   console.log("Finish");
 

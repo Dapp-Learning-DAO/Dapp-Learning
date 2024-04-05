@@ -52,40 +52,20 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    rinkeby: {
-      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+  
+    sepolia: {
+      url: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [
         mnemonic(),
-        mnemonic_user1()
+        // mnemonic_user1()
       ],
     },
-    kovan: {
-      url: "https://kovan.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic(),
-        mnemonic_user1()
-      ],
-    },
-    goerli: {
-      url: "https://goerli.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic(),
-        mnemonic_user1()
-      ],
-    },
-    mainnet: {
-      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic(),
-        mnemonic_user1()
-      ],
-    },
-    ropsten: {
-      url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [
-        mnemonic(),
-        mnemonic_user1()
-      ],
-    },
+    // mainnet: {
+    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    //   accounts: [
+    //     mnemonic(),
+    //     mnemonic_user1()
+    //   ],
+    // },
   }
 };
