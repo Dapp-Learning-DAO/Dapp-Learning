@@ -1,19 +1,5 @@
 require("dotenv").config();
-
-require("@nomiclabs/hardhat-etherscan");
-require("@nomiclabs/hardhat-waffle");
-require("hardhat-gas-reporter");
-require("solidity-coverage");
-const { utils } = require("ethers");
-const fs = require("fs");
-
-
-const { isAddress, getAddress, formatUnits, parseUnits } = utils;
-
-//
-// Select the network you want to deploy to here:
-//
-const defaultNetwork = "matic";
+require("@nomicfoundation/hardhat-toolbox");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -32,14 +18,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  defaultNetwork: "matic",
   networks: {
     hardhat: {
       forking: {
-        url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID,
+        // url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID,
+        url: "https://eth-mainnet.g.alchemy.com/v2/" + process.env.ALCHEMY_ID,
       }
     },
     localhost: {
-      url: "http://localhost:8545"
+      url: "http://127.0.0.1:8545"
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID,
@@ -77,7 +65,14 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.1"
+        version: "0.8.20",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200
+          },
+          viaIR: true, // 启用通过IR编译
+        },
       },
       {
         version: "0.6.8"
