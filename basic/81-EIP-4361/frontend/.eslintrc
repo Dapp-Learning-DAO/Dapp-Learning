@@ -1,0 +1,29 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true, // 浏览器全局变量
+    "node": true, // Node.js 全局变量和 Node.js 作用域
+    "commonjs": true, // CommonJS 全局变量和 CommonJS 作用域 (启用此环境用于使用 Browserify/WebPack 的 browser-only 代码)
+    "es6": true, // 启用除 modules 以外的所有 ECMAScript 6 特性  (这会自动将 `ecmaVersion` 解析器选项设置为 6)
+    "es2017": true, // 添加所有 ECMAScript 2017 的全局变量并且自动设置 `ecmaVersion` 解析器选项设置为 8
+    "es2020": true, // 添加所有 ECMAScript 2020 的全局变量并且自动设置 `ecmaVersion` 解析器选项设置为 11
+    "es2021": true, // 添加所有 ECMAScript 2021 的全局变量并且自动设置 `ecmaVersion` 解析器选项设置为 12
+    "amd": true // 根据 amd 规范定义 `require()` 和 `define()` 作为全局变量
+  },
+  "globals": {
+    "WX": "readonly",
+    "Wang": "writable",
+    "window":"writable",
+    "document":"writable"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "no-console": "error",
+    "semi": "error",
+    "prefer-spread": "off"
+  }
+}
