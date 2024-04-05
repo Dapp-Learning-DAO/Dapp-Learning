@@ -56,6 +56,7 @@ npx hardhat run --network matic scripts/loan.js
 - aave-ape medium : https://azfuller20.medium.com/lend-with-aave-v2-20bacceedade
 - hardhat forkmainnet : https://hardhat.org/hardhat-network/guides/mainnet-forking.html
 - quick swap: https://github.com/QuickSwap
+- uniswapper : https://azfuller20.medium.com/swap-with-uniswap-wip-f15923349b3d
 - uniswap v3 swap : https://solidity-by-example.org/defi/uniswap-v3-swap/
 - https://github.com/austintgriffith/scaffold-eth/tree/defi-rtokens  
 - https://github.com/austintgriffith/scaffold-eth/tree/unifactory  

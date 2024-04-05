@@ -4,7 +4,9 @@ pragma solidity ^0.8.0;
 import './AaveUniswapBase.sol';
 import './interfaces/IUniswapV3Factory.sol';
 import './interfaces/IUniswapV3Pool.sol';
+// import 'hardhat/console.sol';
 
+contract AaveApe is AaveUniswapBase {
   using SafeMath for uint256;
   event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount, uint256 interestRateMode);
   
@@ -227,5 +229,7 @@ import './interfaces/IUniswapV3Pool.sol';
             bestPoolFee = v3Fees[i];
         }
     }
+
+    return bestPoolFee;
   }
 }

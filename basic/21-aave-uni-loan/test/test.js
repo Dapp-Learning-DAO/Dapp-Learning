@@ -89,6 +89,12 @@ describe("AaveApe", function () {
 
   })
 
+  describe("Best pool fee", function() {
+    it("WEH/DAI Pool fee 0.3%", async function() {
+      expect(Number(await aaveApe.getBestPoolFee(wethAddress, daiAddress))).to.be.oneOf([500, 3000, 10000]);
+    })
+  })
+
   describe("Going ape", function () {
     it("Revert if the user has no collateral", async function () {
 
