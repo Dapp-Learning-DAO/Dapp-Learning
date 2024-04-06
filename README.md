@@ -190,7 +190,8 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 77. [orbit](basic/77-orbit)
 78. [wallet connect](basic/78-wallet-connect)
 79. [hardhat-foundry](basic/79-hardhat-foundry)
-80. [Circle CCTP](basic/80-circle-cctp)
+80. [Circle CCTP](basic/80-crossChainTransfer)
+81. [Web3j-erc20](./basic/81-web3j-erc20/README-cn.md)
 
 Welcome to submit pull request, [Add a new basic task or update the above task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 

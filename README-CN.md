@@ -194,6 +194,12 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
 76. [Push Protocol](https://docs.epns.io/developers)
+77. [orbit](basic/77-orbit)
+78. [wallet connect](basic/78-wallet-connect)
+79. [hardhat-foundry](basic/79-hardhat-foundry)
+80. [Circle CCTP](basic/80-crossChainTransfer)
+81. [Web3j-erc20](./basic/81-web3j-erc20/README-cn.md)
+
 
 ## 项目任务
 
