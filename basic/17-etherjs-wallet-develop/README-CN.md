@@ -35,6 +35,10 @@ wallet.provider = provider;
 
 如果用普通的 JS number 对象来存储操作的话，可能会因为数据溢出而导致结果异常。
 
+执行测试用例
+```js
+hardhat test
+```
 ## 参考链接
 
 - https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
