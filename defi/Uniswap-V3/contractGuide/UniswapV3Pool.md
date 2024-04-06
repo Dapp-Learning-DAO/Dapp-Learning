@@ -263,7 +263,7 @@ struct StepComputations {
     // sqrt(price) for the next tick (1/0)
     // 目标价格(根号)
     uint160 sqrtPriceNextX96;
-    // how much is being swapped in in this step
+    // how much is being swapped in this step
     // 当前步交易了多少输入token
     uint256 amountIn;
     // how much is being swapped out
