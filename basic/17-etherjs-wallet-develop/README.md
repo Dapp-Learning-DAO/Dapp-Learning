@@ -38,6 +38,11 @@ wallet.provider = provider;
 
 If you use a normal JS number object to store the operation, it may cause abnormal results due to data overflow.
 
+Execute test case
+```js
+hardhat test
+```
+
 ## Reference link
 
 - <https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js>
