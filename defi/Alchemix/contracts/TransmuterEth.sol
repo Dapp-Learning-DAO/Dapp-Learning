@@ -275,7 +275,7 @@ contract TransmuterEth is Context {
             // NOTE: if last deposit was updated in the same block as the current call
             // then the below logic gates will fail
 
-            //calculate diffrence in time
+            //calculate difference in time
             uint256 deltaTime = _currentBlock.sub(_lastDepositBlock);
 
             // distribute all if bigger than timeframe
@@ -326,7 +326,7 @@ contract TransmuterEth is Context {
         _;
     }
 
-    /// @dev checks that the block delay since a user's last action is longer than the minium delay
+    /// @dev checks that the block delay since a user's last action is longer than the minimum delay
     ///
     modifier ensureUserActionDelay() {
         require(block.number.sub(lastUserAction[msg.sender]) >= minUserActionDelay, "action delay not met");
@@ -475,7 +475,7 @@ contract TransmuterEth is Context {
         // empty bucket
         tokensInBucket[toTransmute] = 0;
 
-        // calculaate diffrence
+        // calculaate difference
         uint256 diff = pendingz.sub(depositedAlTokens[toTransmute]);
 
         // remove overflow

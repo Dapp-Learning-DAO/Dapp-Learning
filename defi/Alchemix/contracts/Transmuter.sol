@@ -141,7 +141,7 @@ contract Transmuter is Context {
             // NOTE: if last deposit was updated in the same block as the current call
             // then the below logic gates will fail
 
-            //calculate diffrence in time
+            //calculate difference in time
             uint256 deltaTime = _currentBlock.sub(_lastDepositBlock);
 
             // distribute all if bigger than timeframe
@@ -297,7 +297,7 @@ contract Transmuter is Context {
         // empty bucket
         tokensInBucket[toTransmute] = 0;
 
-        // calculaate diffrence
+        // calculaate difference
         uint256 diff = pendingz.sub(depositedAlTokens[toTransmute]);
 
         // remove overflow
