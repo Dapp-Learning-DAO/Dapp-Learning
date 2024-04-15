@@ -105,13 +105,15 @@ main = async () => {
   await depositEthInAave(lendingpool.target, userAddress, '0.1'); 
   await delegateCreditToTheApe(daiAddress, interestRateMode);
 
-  let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, userAddress);
-  console.log('available borrow: ', result.toString());
+  // let result = await aaveApe.getAvailableBorrowInAsset(daiAddress, userAddress);
+  // console.log('available borrow: ', result.toString());
   console.log('begin ape');
 
   //tx =   await aaveApe['ape'](wethAddress, daiAddress, interestRateMode)
+  // tx = await aaveApe['superApe'](wethAddress, daiAddress, interestRateMode, 1);
 
-  tx = await aaveApe['superApe'](wethAddress, daiAddress, interestRateMode, 1);
+  let borrowAmount = ethers.parseEther("1000"); // 1000 DAI with 18 decimals 
+  tx = await aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode);
   await tx.wait();
 
   let aToken = await getAToken(wethAddress);

@@ -89,9 +89,9 @@ describe("AaveApe", function () {
 
   })
 
-  describe("Best pool fee", function() {
-    it("WEH/DAI Pool fee 0.3%", async function() {
-      expect(Number(await aaveApe.getBestPoolFee(wethAddress, daiAddress))).to.be.oneOf([500, 3000, 10000]);
+  describe("get max liquidity pool", function() {
+    it("get max liquidity pool of WEH/DAI", async function() {
+      expect(await aaveApe.getBestPool(wethAddress, daiAddress)).to.not.equal("0x0000000000000000000000000000000000000000");
     })
   })
 
@@ -120,13 +120,22 @@ describe("AaveApe", function () {
 
       let aBalanceBefore = await aToken.balanceOf(userAddress)
       let debtBalanceBefore = await debtToken.balanceOf(userAddress)
-      await expect(aaveApe['ape'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape');
+      await expect(aaveApe['ape'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape')
 
       let aBalanceAfter = await aToken.balanceOf(userAddress)
       let debtBalanceAfter = await debtToken.balanceOf(userAddress)
 
       expect(aBalanceAfter > aBalanceBefore)
       expect(debtBalanceAfter > debtBalanceBefore)
+    })
+
+    it("flash ape, looooooooooooping", async function () {
+      let interestRateMode = 2
+
+      await delegateCreditToTheApe(daiAddress, interestRateMode)
+
+      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
+      await expect(aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape')
     })
   })
 
