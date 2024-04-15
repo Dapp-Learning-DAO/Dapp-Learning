@@ -31,6 +31,7 @@ ganache-cli
 
 - execute script
 ```
+If the following command cannot be executed after installing Python 3 or above, use "python3" instead of "python"“
 ## Demonstrate contract construction and deployment
 python scripts/1_deploy_using_web3.py
 

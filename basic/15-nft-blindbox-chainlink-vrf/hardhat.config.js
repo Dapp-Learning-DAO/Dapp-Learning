@@ -1,7 +1,16 @@
 require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
+require("@nomicfoundation/hardhat-verify");
 
 /** @type import('hardhat/config').HardhatUserConfig */
+
+task("accounts", "Prints the list of accounts", async () => {
+  const accounts = await ethers.getSigners();
+  
+  for (const account of accounts) {
+    console.log(account.address);
+  }
+});
 function mnemonic() {
   
   return process.env.PRIVATE_KEY
@@ -36,6 +45,7 @@ module.exports = {
     sepolia: {
       url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- CONFIG YOUR INFURA ID IN .ENV! (or it won't work)
       accounts: [mnemonic()],
+      chainId: 11155111,
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
@@ -45,6 +55,6 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: "1324"
+    apiKey: process.env.APIKEY
   }
 };

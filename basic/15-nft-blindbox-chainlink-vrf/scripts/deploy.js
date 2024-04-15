@@ -5,17 +5,19 @@ const { saveDeployment } = require('./utils');
 
 async function main() {
     // We get the contract to deploy
-    const Dnd = await ethers.getContractFactory("DungeonsAndDragonsCharacter");
+    const RnvContractFactory = await ethers.getContractFactory("RandomNumberVRF");
     
-    const dnd = await Dnd.deploy(process.env.SubscriptionId, "http://81.69.8.95/WaterMarginJson/");
+    const rnv = await RnvContractFactory.deploy(process.env.SubscriptionId);
+    
+    console.log("deploying....");
 
-    await dnd.waitForDeployment()
+    await rnv.waitForDeployment()
 
-    console.log("dnd deployed to:", dnd.target);
+    console.log("rnv deployed to:", rnv.target);
 
     // save contract address to file
     saveDeployment({
-      dndAddress: dnd.target,
+      rnvAddress: rnv.target,
     });
    
 }
