@@ -97,6 +97,16 @@ module.exports = {
     timeout: 80000
   },
 
+  ignition: {
+    strategyConfig: {
+      create2: {
+        // To learn more about salts, see the CreateX documentation
+        // generate via ethers.keccak256(ethers.toUtf8Bytes("dapp-learning"))
+        salt: "0x262a460790f6b524b7fa041acd8d42a64d405de6fcf470a86d8b706fc6d18dd7", 
+      },
+    },
+  },
+
   networkAddressMapping: {
     matic: {
       daiAddress: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
@@ -118,7 +128,7 @@ module.exports = {
       wethGatewayAddress: '0xe9E52021f4e11DEAD8661812A0A6c8627abA2a54',
       aaveApeAddress: '0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA',
     },
-    mainnet: {
+    main: {
       daiAddress: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
       wmaticAddress: '',
       wethAddress: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',

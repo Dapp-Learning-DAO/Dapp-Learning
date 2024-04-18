@@ -92,7 +92,7 @@ const querySql = `
 
 const url = {
   matic: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-polygon',
-  mainnet: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3',
+  main: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3',
   optimism: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-optimism'
 }
 
@@ -231,7 +231,7 @@ main = async () => {
     'id': fish
   };
 
-  let interest = await getInterest(url.matic,querySql,variables)
+  let interest = await getInterest(url[network.name],querySql,variables)
   console.log("current total interest: ",interest)
 };
 
