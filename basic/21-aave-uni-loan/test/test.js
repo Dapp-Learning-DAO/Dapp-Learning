@@ -1,14 +1,21 @@
 const { expect } = require("chai");
+const {network, config} = require('hardhat');
 
-// ethereum mainnet addresses
-let daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F"
-let wethAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-let usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+const networkAddressMapping = config.networkAddressMapping;
 
-let lendingPoolAddressesProviderAddress = "0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e"
-let uniswapRouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+// check addressMapping has the network
+if (!networkAddressMapping[network.name]) {
+  throw new Error('network ' + network.name + ' dont config in the addressMapping, please add it');
+}
 
-let wethGatewayAddress = "0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9"
+const {
+  daiAddress,
+  wethAddress,
+ 
+  lendingPoolAddressesProviderAddress,
+  uniswapRouterAddress,
+  wethGatewayAddress
+} = networkAddressMapping[network.name];
 
 const depositEthInAave = async (_poolAddress, _userAddress, _amount) => {
   // console.log("isAddressable", _poolAddress, _userAddress, ethers.isAddressable(_poolAddress), ethers.isAddressable(_userAddress))

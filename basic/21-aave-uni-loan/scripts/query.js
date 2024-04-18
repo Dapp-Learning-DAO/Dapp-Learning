@@ -1,27 +1,24 @@
-const axios = require('axios')
+const axios = require('axios');
+const { network, config } = require('hardhat');
 require("dotenv").config();
 
-let exp = BigInt(10 ** 18);
-let exp1 = BigInt(10 ** 27);
+const exp = BigInt(10 ** 18);
+const exp1 = BigInt(10 ** 27);
 
-// matic address
-//https://docs.aave.com/developers/deployed-contracts/v3-mainnet/polygon
-let daiAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063';
-let wmaticAddress = '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270'; //wmatic
- let wethAddress = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'; //weth
- let wbtcAddress = '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6'; //wbtc
-let usdcAddress = '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'; 
+const networkAddressMapping = config.networkAddressMapping;
 
-let lendingPoolAddressesProviderAddress = '0xa97684ead0e402dC232d5A977953DF7ECBaB3CDb';
+// check addressMapping has the network
+if (!networkAddressMapping[network.name]) {
+  throw new Error('network ' + network.name + ' dont config in the addressMapping, please add it');
+}
 
-//sushi
-let uniswapRouterAddress = '0xE592427A0AEce92De3Edee1F18E0157C05861564';
-
-let wethGatewayAddress = '0xC1E320966c485ebF2A0A2A6d3c0Dc860A156eB1B';
-
-// Fill in your address
-const aaveApeAddress = '0x4699f609F4FD97A3cf74CB63EFf5cd1200Dfe3dA';
-
+const {
+  daiAddress,
+  wmaticAddress, 
+  wethAddress, 
+  lendingPoolAddressesProviderAddress, 
+  aaveApeAddress
+ } = networkAddressMapping[network.name];
 
 const getAToken = async (_asset) => {
   let lendingPool = await getLendingPool();
@@ -96,6 +93,7 @@ const querySql = `
 const url = {
   matic: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-polygon',
   mainnet: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3',
+  optimism: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-optimism'
 }
 
 const getInterest = async (url, graphQuery,variables,interestRateMode) => { 
@@ -210,7 +208,7 @@ main = async () => {
   console.log('user available borrow dai: %f USD', Number(result * BigInt(1000) / exp) / 1000);
 
 
-  let aToken = await getAToken(wmaticAddress);
+  let aToken = await getAToken(network.name == 'matic' ? wmaticAddress: wethAddress);
   // let aTokenbtc = await getAToken(wbtcAddress);
   // console.log("aToken: ", aToken)
   let debtToken = await getDebtToken(daiAddress, interestRateMode, true);
