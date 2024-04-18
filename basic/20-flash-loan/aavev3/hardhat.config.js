@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
-
+require('dotenv').config();
+const fs = require('fs');
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task('accounts', 'Prints the list of accounts', async () => {
@@ -15,9 +16,29 @@ function mnemonic() {
 }
 
 /** @type import('hardhat/config').HardhatUserConfig */
+const  PRIVATE_KEY = process.env.PRIVATE_KEY || "0x"
 module.exports = {
-  solidity: "0.8.10",
-  defaultNetwork: "goerli",
+  solidity: {
+    compilers: [
+      {
+        version: '0.8.20',
+        settings: {},
+      },
+      {
+        version: '0.8.0',
+        settings: {},
+      },
+      {
+        version: '0.8.9',
+        settings: {},
+      },
+      {
+        version: '0.8.10',
+        settings: {},
+      },
+    ],
+  },
+  defaultNetwork: "sepolia",
   networks: {
     localhost: {
       url: 'http://localhost:8545',
@@ -27,9 +48,11 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+       accounts : PRIVATE_KEY != undefined ? [PRIVATE_KEY] : [],
+      // accounts: [mnemonic()],
+      chainId: 11155111,
     }
   },
 };
