@@ -1,6 +1,0 @@
-{
-  "AaveApe": {
-    "lendingPoolAddressesProvider": "0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e",
-    "uniswapRouterAddress": "0xE592427A0AEce92De3Edee1F18E0157C05861564"
-  }
-}

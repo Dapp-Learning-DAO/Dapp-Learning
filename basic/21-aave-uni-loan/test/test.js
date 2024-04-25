@@ -1,14 +1,21 @@
 const { expect } = require("chai");
+const {network, config} = require('hardhat');
 
-// ethereum mainnet addresses
-let daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F"
-let wethAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-let usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+const networkAddressMapping = config.networkAddressMapping;
 
-let lendingPoolAddressesProviderAddress = "0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e"
-let uniswapRouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+// check addressMapping has the network
+if (!networkAddressMapping[network.name]) {
+  throw new Error('network ' + network.name + ' dont config in the addressMapping, please add it');
+}
 
-let wethGatewayAddress = "0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9"
+const {
+  daiAddress,
+  wethAddress,
+ 
+  lendingPoolAddressesProviderAddress,
+  uniswapRouterAddress,
+  wethGatewayAddress
+} = networkAddressMapping[network.name];
 
 const depositEthInAave = async (_poolAddress, _userAddress, _amount) => {
   // console.log("isAddressable", _poolAddress, _userAddress, ethers.isAddressable(_poolAddress), ethers.isAddressable(_userAddress))
@@ -89,9 +96,9 @@ describe("AaveApe", function () {
 
   })
 
-  describe("Best pool fee", function() {
-    it("WEH/DAI Pool fee 0.3%", async function() {
-      expect(Number(await aaveApe.getBestPoolFee(wethAddress, daiAddress))).to.be.oneOf([500, 3000, 10000]);
+  describe("get max liquidity pool", function() {
+    it("get max liquidity pool of WEH/DAI", async function() {
+      expect(await aaveApe.getBestPool(wethAddress, daiAddress)).to.not.equal("0x0000000000000000000000000000000000000000");
     })
   })
 
@@ -120,13 +127,22 @@ describe("AaveApe", function () {
 
       let aBalanceBefore = await aToken.balanceOf(userAddress)
       let debtBalanceBefore = await debtToken.balanceOf(userAddress)
-      await expect(aaveApe['ape'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape');
+      await expect(aaveApe['ape'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape')
 
       let aBalanceAfter = await aToken.balanceOf(userAddress)
       let debtBalanceAfter = await debtToken.balanceOf(userAddress)
 
       expect(aBalanceAfter > aBalanceBefore)
       expect(debtBalanceAfter > debtBalanceBefore)
+    })
+
+    it("flash ape, looooooooooooping", async function () {
+      let interestRateMode = 2
+
+      await delegateCreditToTheApe(daiAddress, interestRateMode)
+
+      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
+      await expect(aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape')
     })
   })
 
