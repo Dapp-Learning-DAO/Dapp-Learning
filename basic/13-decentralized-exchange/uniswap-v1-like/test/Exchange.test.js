@@ -21,7 +21,6 @@ const createExchange = async (factory, tokenAddress, sender) => {
 
   const address = await factory.connect(sender).getExchange(tokenAddress);
   console.log("token address-" + tokenAddress + "-exchange address-" + address);
-  console.log(address);
   const Exchange = await ethers.getContractFactory('Exchange');
   return Exchange.attach(address);
 };
