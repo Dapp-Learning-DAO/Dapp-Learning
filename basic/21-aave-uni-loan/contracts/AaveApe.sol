@@ -4,16 +4,9 @@ pragma solidity ^0.8.0;
 import './AaveUniswapBase.sol';
 import './interfaces/IUniswapV3Factory.sol';
 import './interfaces/IUniswapV3Pool.sol';
-import './libraries/ReserveConfiguration.sol';
-import './libraries/TickMath.sol';
-import './libraries/WadRayMath.sol';
-import './libraries/PercentageMath.sol';
 // import 'hardhat/console.sol';
 
 contract AaveApe is AaveUniswapBase {
-    using WadRayMath for uint256;
-    using PercentageMath for uint256;
-
     event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount, uint256 interestRateMode);
 
     uint24[4] public v3Fees = [100, 500, 3000, 10000];
@@ -89,67 +82,6 @@ contract AaveApe is AaveUniswapBase {
         }
 
         return true;
-    }
-
-    // lever up your position
-    function flashApe(address apeAsset, address borrowAsset, uint256 borrowAmount,uint256 interestRateMode) external returns (bool) {
-        require(borrowAmount > 0, "borrow amount should be greater than 0");
-        require(interestRateMode == 1 || interestRateMode == 2, "interestRateMode must be 1 for stable rate or 2 for variable rate");
-
-        //flashload
-        IUniswapV3Pool pool = getBestPool(apeAsset, borrowAsset);
-
-        //DAI/WETH   token0 DAI token1 WETH   zeroForOne false,  borrowAmount 0.1 ETH, balance:  336.6DAI WETH 0,         delta0 0,  delta1 0.1
-        //DAI/WETH   token0 DAI token1 WETH   zeroForOne true,   borrowAmount 0.1 DAI, balance:  0DAI     WETH 0.000297,  dele0 0.1  delta1 0
-        // borrowAmount > 0 exactInput else exactOutput
-        bool zeroForOne = pool.token0() == borrowAsset; // borrowAsset in apeAsset out
-
-        uint160 sqrtPriceX96 = zeroForOne == true ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1;
-        
-        (int256 amount0, int256 amount1) = pool.swap(
-            address(this), 
-            zeroForOne,
-            int256(borrowAmount),
-            sqrtPriceX96,
-            abi.encode(address(pool), zeroForOne, apeAsset, borrowAsset, interestRateMode, msg.sender)
-        );
-
-        uint256 newHealthFactor = getHealthFactor(
-            msg.sender,
-            apeAsset, 
-            borrowAsset,
-            uint256(zeroForOne == true ? amount0: amount1), //borrowAmount
-            uint256(zeroForOne == false ? amount1: amount0) //apeAssetAmount 
-        );
-
-        require(newHealthFactor > 1.1e18, "health factor < 1.1, risky!");
-
-        emit Ape(msg.sender, 'flashApe', apeAsset, borrowAsset, borrowAmount, zeroForOne == true ? uint256(amount0) : uint256(amount1), interestRateMode);
-
-        //check slippage， minAmountout
-        return true;
-    }
-
-    function getHealthFactor(address ape, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount) public view returns (uint256 healthFactor) {
-
-        (uint256 totalCollateralBase,uint256 totalDebtBase, ,uint256 currentLiquidationThreshold, ,) = LENDING_POOL().getUserAccountData(ape);
-
-        uint256 borrowAssetPrice = getPriceOracle().getAssetPrice(borrowAsset); 
-        (uint256 borrowAssetDecimals, , , , , , , , , ) = getProtocolDataProvider().getReserveConfigurationData(borrowAsset);
-        //borrow asset in base currency
-        uint256 borrowAssetBase = borrowAmount / 10**borrowAssetDecimals * borrowAssetPrice;
-
-
-        uint256 apeAssetPrice = getPriceOracle().getAssetPrice(apeAsset); 
-        (uint256 apeAssetDecimals, , , , , , , , , ) = getProtocolDataProvider().getReserveConfigurationData(apeAsset);
-        //borrow asset in base currency
-        uint256 apeAssetBase = apeAmount / 10**apeAssetDecimals * apeAssetPrice;
-
-
-        DataTypes.ReserveConfigurationMap memory apeAssetConfiguration = LENDING_POOL().getConfiguration(apeAsset);
-        uint256 apeAssetLiquidationThreshold = ReserveConfiguration.getLiquidationThreshold(apeAssetConfiguration);
-
-        healthFactor = (totalCollateralBase.percentMul(currentLiquidationThreshold) + apeAssetBase.percentMul(apeAssetLiquidationThreshold)).wadDiv(totalDebtBase + borrowAssetBase);
     }
 
     // Unwind a position (long apeAsset, short borrowAsset)
@@ -295,39 +227,6 @@ contract AaveApe is AaveUniswapBase {
                 maxLiquidity = poolLiquidity;
                 bestPool = IUniswapV3Pool(pool);
             }
-        }
-    }
-
-    function uniswapV3SwapCallback(
-        int256 amount0Delta, 
-        int256 amount1Delta, 
-        bytes calldata data
-    ) external {
-        // console.log("uniswapV3SwapCallback", uint256(amount0Delta), uint256(amount1Delta));
-        (
-            address _pool,
-            bool zeroForOne,
-            address apeAsset,
-            address borrowAsset,
-            uint256 interestRateMode,
-            address apeAddress // user address
-        ) = abi.decode(data, (address, bool, address, address, uint256, address));
-
-        uint256 repayAmount = uint256(zeroForOne == true ? amount0Delta: amount1Delta);
-
-        if (repayAmount > 0) {
-            IPool _lendingPool = LENDING_POOL();
-
-            uint256 swapedApeAssetBalance = IERC20(apeAsset).balanceOf(address(this));
-            IERC20(apeAsset).approve(ADDRESSES_PROVIDER.getPool(), swapedApeAssetBalance);
-
-            _lendingPool.supply(apeAsset, swapedApeAssetBalance, apeAddress, 0);
-
-            // Borrow from Aave
-            _lendingPool.borrow(borrowAsset, repayAmount, interestRateMode, 0, apeAddress);
-            
-            IERC20(borrowAsset).transfer(msg.sender, repayAmount);
-            // console.log("repay");
         }
     }
 }
