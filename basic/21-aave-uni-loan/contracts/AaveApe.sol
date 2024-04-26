@@ -99,9 +99,10 @@ contract AaveApe is AaveUniswapBase {
         //flashload
         IUniswapV3Pool pool = getBestPool(apeAsset, borrowAsset);
 
-        //DAI/WETH   token0 DAI token1 WETH   zeroForOne false    数量 0.1 余额  336.6DAI WETH 0  delta0 0 delta1 0.1
-        //DAI/WETH   zeroForOne true 借出  amount 0.1 数量 DAI   swap 成 0.000297 WETH     DAI 0  dele0 0.1  delta1 0
-        bool zeroForOne = pool.token0() == borrowAsset; // borrow apeAsset(token0)
+        //DAI/WETH   token0 DAI token1 WETH   zeroForOne false,  borrowAmount 0.1 ETH, balance:  336.6DAI WETH 0,         delta0 0,  delta1 0.1
+        //DAI/WETH   token0 DAI token1 WETH   zeroForOne true,   borrowAmount 0.1 DAI, balance:  0DAI     WETH 0.000297,  dele0 0.1  delta1 0
+        // borrowAmount > 0 exactInput else exactOutput
+        bool zeroForOne = pool.token0() == borrowAsset; // borrowAsset in apeAsset out
 
         uint160 sqrtPriceX96 = zeroForOne == true ? TickMath.MIN_SQRT_RATIO + 1 : TickMath.MAX_SQRT_RATIO - 1;
         
