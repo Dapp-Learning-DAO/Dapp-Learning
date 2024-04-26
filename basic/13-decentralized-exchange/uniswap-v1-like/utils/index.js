@@ -1,14 +1,14 @@
-const { ethers } = require("ethers");
-const { BigNumber } = ethers;
+const hre = require('hardhat');
+const ethers = hre.ethers;
 
-const GAS_PRICE = BigNumber.from("1000000000");
+const GAS_PRICE = 1000000000n;
 
 const getGasFeeFromTx = async (tx) => {
   if (tx && typeof tx.wait === 'function') {
     const { gasUsed } = await tx.wait()
-    return gasUsed.mul(GAS_PRICE)
+    return gasUsed * GAS_PRICE
   }
-  return BigNumber.from(0)
+  return 0n
 }
 
 module.exports = {
