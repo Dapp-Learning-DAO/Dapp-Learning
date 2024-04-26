@@ -1,5 +1,6 @@
 const { expect } = require("chai");
-
+const hre = require('hardhat');
+const ethers = hre.ethers;
 describe("Token", () => {
   let owner;
   let token;
@@ -9,7 +10,7 @@ describe("Token", () => {
 
     const Token = await ethers.getContractFactory("Token");
     token = await Token.deploy("Test Token", "TKN", 31337);
-    await token.deployed();
+    await token.waitForDeployment();
   });
 
   it("sets name and symbol when created", async () => {
@@ -22,3 +23,4 @@ describe("Token", () => {
     expect(await token.balanceOf(owner.address)).to.equal(31337);
   });
 });
+

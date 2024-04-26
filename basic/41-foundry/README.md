@@ -66,7 +66,7 @@ my_project
 - `test` 下面放合约对应的测试文件
 - `script` 下面放自定义测试通用文件
 - `lib` 目录里放开发依赖的库
-    - 新建项目安装了测试需要的 forge-std 库 ~~将 ds-test 集成到其中(新版已移除此依赖)~~
+    - 新建项目安装了测试需要的 forge-std 库(DSTest的超集) ~~将 ds-test 集成到其中(新版已移除此依赖)~~
 
 ### VSCode 集成
 
@@ -506,6 +506,10 @@ anvil --hardfork latest
 
 Chisel 是 Foundry 提供的高级 Solidity REPL。它可用于在本地或分叉网络上快速测试 Solidity 片段。
 
+REPL（Read-Eval-Print Loop）是一种交互式命令行工具，它允许用户输入命令并立即查看结果。也是一种编程环境，通常用于解释性语言，如Python，Ruby和JavaScript。
+
+在一个REPL环境中，用户可以输入一行代码或一条命令，然后该代码或命令会被解释器或编译器立即执行，并将结果返回给用户。用户可以根据返回的结果进行进一步的操作或输入新的代码。这种即时反馈的能力使得REPL成为学习和调试代码的有用工具。
+
 要使用 Chisel，只需键入 chisel。然后开始编写 Solidity 代码！Chisel 会对每次输入提供详细反馈。
 
 Chisel 可在 Foundry 项目内外使用。如果二进制文件在 Foundry 项目根目录下执行，Chisel 将继承项目的配置选项。
@@ -520,6 +524,8 @@ uint val = 8
 val
 # keccak256 运算
 keccak256(abi.encodePacked(val))
+# 退出 Chisel !quit 或 !q
+!q
 ```
 
 ## 参考资料
