@@ -1,4 +1,4 @@
-[中文](./README-CN.md) / English
+[中文](./README-cn.md) / English
 
 ## Preface
 
@@ -93,7 +93,12 @@ afer changed:
 
 - waffle offical document: <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
 
-- etherjs offical document: <https://docs.ethers.io/v4/api-providers.html>  
-  <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+- etherjs offical document: 
+  - v4 <https://docs.ethers.io/v4/api-providers.html>  
+  - v5 <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+  - v6 <https://docs.ethers.org/v6/getting-started>
 
-- Chinese document: <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+- Chinese document: 
+  - v4 <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+  - v5 <https://learnblockchain.cn/ethers_v5/getting-started>
+  - v6 <https://www.wtf.academy/docs/ethers-101/HelloVitalik/>

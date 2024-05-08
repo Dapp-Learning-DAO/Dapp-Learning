@@ -92,7 +92,12 @@ $ yarn --versionyarn --version
 
 - waffle 官方文档： <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
 
-- ehterjs 官方文档： <https://docs.ethers.io/v4/api-providers.html>  
-<https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+- ehterjs 官方文档： 
+  - v4 <https://docs.ethers.io/v4/api-providers.html>  
+  - v5 <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+  - v6 <https://docs.ethers.org/v6/getting-started>
 
-- 中文文档： <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+- 中文文档： 
+  - v4 <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+  - v5 <https://learnblockchain.cn/ethers_v5/getting-started>
+  - v6 <https://www.wtf.academy/docs/ethers-101/HelloVitalik/>
