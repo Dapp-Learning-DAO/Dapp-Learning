@@ -131,7 +131,7 @@ contract AaveApePlus is AaveUniswapBase {
          //uniswap
         IUniswapV3Pool pool = getBestPool(apeAsset, borrowAsset);
 
-        // consider swap fee, slippage  0.5%    uniswap 3000 是0.3%, aave 3000 是 30% , 50 是 1%
+        // consider swap fee, slippage  0.5%    uniswap 3000 是0.3%, aave 3000 是 30% , 50 是 0.5%
         apeAssetToDebtAmount = apeAssetToDebtAmount - apeAssetToDebtAmount.percentMul(pool.fee() / 100 + 50);
 
         if (apeAssetToDebtAmount < borrowAmountToRepay) {
