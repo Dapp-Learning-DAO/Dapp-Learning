@@ -26,22 +26,6 @@ contract AaveApePlus is AaveUniswapBase {
         address uniswapRouterAddress
     ) AaveUniswapBase(lendingPoolAddressesProviderAddress, uniswapRouterAddress) {}
 
-    // Gets the amount available to borrow for a given address for a given asset
-    function getAvailableBorrowInAsset(address borrowAsset, address ape) public view returns (uint256) {
-        // availableBorrowsBase V3 USD based
-        (, , uint256 availableBorrowsBase, , , ) = LENDING_POOL().getUserAccountData(ape);
-        return getAssetAmount(borrowAsset, availableBorrowsBase);
-    }
-
-    // return asset amount with its decimals
-    function getAssetAmount(address asset, uint256 amountIn) public view returns (uint256) {
-        //All V3 markets use USD based oracles which return values with 8 decimals.
-        uint256 assetPrice = getPriceOracle().getAssetPrice(asset); 
-        (uint256 decimals, , , , , , , , , ) = getProtocolDataProvider().getReserveConfigurationData(asset);
-        uint256 assetAmount = amountIn * 10**decimals / assetPrice;
-        return assetAmount;
-    }
-
     // lever up your position
     function flashApe(address apeAsset, address borrowAsset, uint256 borrowAmount,uint256 interestRateMode) external returns (bool) {
         require(borrowAmount > 0, "borrow amount should be greater than 0");
@@ -147,8 +131,8 @@ contract AaveApePlus is AaveUniswapBase {
          //uniswap
         IUniswapV3Pool pool = getBestPool(apeAsset, borrowAsset);
 
-        // consider swap fee, slippage  0.5%
-        apeAssetToDebtAmount = apeAssetToDebtAmount - apeAssetToDebtAmount.percentMul(pool.fee() + 5000);
+        // consider swap fee, slippage  0.5%    uniswap 3000 是0.3%, aave 3000 是 30% , 50 是 1%
+        apeAssetToDebtAmount = apeAssetToDebtAmount - apeAssetToDebtAmount.percentMul(pool.fee() / 100 + 50);
 
         if (apeAssetToDebtAmount < borrowAmountToRepay) {
             borrowAmountToRepay = apeAssetToDebtAmount;
