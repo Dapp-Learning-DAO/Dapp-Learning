@@ -6,7 +6,7 @@ const { ethers } = require("ethers");
 require("dotenv").config();
 const privateKey = process.env.PRIVATE_KEY;
 
-// const web3 = new Web3.providers.HttpProvider('https://sepolia.infura.io/v3' + process.env.INFURA_ID);
+// const web3 = new Web3.providers.HttpProvider(`https://sepolia.infura.io/v3${process.env.INFURA_ID}`);
 //  let web3Provider = new ethers.providers.Web3Provider(web3)
 
 const web3Provider = new ethers.InfuraProvider(
