@@ -1,39 +1,39 @@
-## 在 Hardhat 项目中配置 Foundry
+## Configuring Foundry in a Hardhat project
 
-Foundry 框架在代码测试方面相比 Hardhat 有诸多优势，例如
+The Foundry framework has many advantages over Hardhat in terms of code testing, for example.
 
-- 能使用 solidity 写测试
-- 能进行 fuzz testing
-- 运行速度快
+- Can write tests using Solidity 
+- Can perform fuzz testing 
+- And it Runs fast
 
-但在代码部署方面，Foundry 在现阶段还是没有 Hardhat 方便，而作为开发者，我们当然是优势都想要
+But in terms of code deployment, Foundry is not as convenient as Hardhat at the current stage. As developers, we naturally want all the advantages.
 
-本文就将介绍如何在 Hardhat 项目中配置 Foundry
+This article will introduce how to configure Foundry in a Hardhat project.
 
-## 初始化一个 Hardhat 项目
+## Initializing a Hardhat project
 
 ```bash
 mkdir with-hardhat
 cd with-hardhat
-# 使用 pnpm 初始化项目
+# Initialize a project using pnpm
 pnpm init
-# 安装 hardhat
+# Install hardhat
 pnpm add -D hardhat
-# 初始化项目
+# Initialize project
 pnpm hardhat init
 ```
 
-## 安装 hardhat-foundry 插件
+## Install the hardhat-foundry plugin
 
 ```bash
 pnpm add -D @nomicfoundation/hardhat-foundry
-# hardhat 工具包插件
+# hardhat Toolbox plugin
 pnpm add -D @nomicfoundation/hardhat-toolbox
-# chai 断言库插件
+# chai Assertion library plugin
 pnpm add -D @nomicfoundation/hardhat-chai-matchers
 ```
 
-## 在 hardhat.config.ts 配置文件中添加 hardhat-foundry 插件
+## Add the hardhat-foundry plugin to the hardhat.config.ts configuration file.
 
 ```typescript
 import '@nomicfoundation/hardhat-toolbox';
@@ -47,19 +47,19 @@ const config: HardhatUserConfig = {
 export default config;
 ```
 
-## 初始化 foundry.toml 文件并安装 forge-std 库
+## Initialize the foundry.toml file and install the forge-std library.
 
 ```bash
 pnpm hardhat init-foundry
 ```
 
-## 编写测试用例
+## Write test cases
 
 ```bash
 mkdir contracts/test
 ```
 
-以 Hardhat 默认项目的 `Greeter.sol` 合约为例，编写一个测试文件 `contracts/test/Greeter.t.sol` ，测试文件通常以 t.sol 结尾
+For example, using the `Greeter.sol `contract from the default Hardhat project as an example, write a test file called `contracts/test/Greeter.t.sol`. Test files usually end with t.sol.
 
 ```solidity
 //SPDX-License-Identifier: Unlicense
@@ -86,15 +86,15 @@ contract GreeterTest is Test {
 }
 ```
 
-注：[the Foundry Book](https://book.getfoundry.sh/forge/writing-tests) 文档里介绍使用 forge-std 库的方法是先在 foundry.toml 或 remappings.txt 里设置好 forge-std 的路径，然后在测试文件中用 `import {Test} from "forge-std/Test.sol";` 来导入。
+Note: In the [Foundry Book](https://book.getfoundry.sh/forge/writing-tests) documentation, the method described for using the forge-std library is to first set the path for forge-std in foundry.toml or remappings.txt, and then `import {Test} from "forge-std/Test.sol";` in the test file.
 
-值得注意的是，上述的 testFuzz_SetGreeting 测试项是个 fuzz 测试，测试文件里并没有写定测试的输入，而是由 forge 喂入随机信息作为输入。
+It is worth noting that the test item testFuzz_SetGreeting above is a fuzz test, and the test file does not specify the input of the test, but randomly feeds information into the forge as input.
 
-## 运行测试
+## Run test.
 
 ```bash
 forge test --root .
-# 打印详细信息
+# Print detailed information
 forge test -vvvv
 ```
 
@@ -108,7 +108,7 @@ Running 2 tests for GreeterTest.json:GreeterTest
 [PASS] testFuzz_SetGreeting(string) (runs: 256, μ: 46948, ~: 67196)
 ```
 
-想更省事的话，可以将该命令写入 `package.json` 里
+If you want to make it easier, you can write this command in the `package.json`.
 
 ```bash
 # package.json
@@ -121,10 +121,10 @@ Running 2 tests for GreeterTest.json:GreeterTest
 }
 ```
 
-之后用 `pnpm test` 进行测试
+Afterwards, use `'pnpm test'` for testing.
 
-同时，Hardhat 原本的测试文件可以用 `pnpm hardhat test` 进行测试。
+At the same time, the original test files of Hardhat can be tested using `pnpm hardhat test`.
 
-## 参考文献
+## References
 
 - [the Foundry Book](https://book.getfoundry.sh/forge/writing-tests)
