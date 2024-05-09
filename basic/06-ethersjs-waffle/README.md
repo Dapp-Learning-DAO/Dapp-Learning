@@ -93,12 +93,13 @@ afer changed:
 
 - waffle offical document: <https://ethereum-waffle.readthedocs.io/en/latest/getting-started.html>
 
-- etherjs offical document: 
-  - v4 <https://docs.ethers.io/v4/api-providers.html>  
-  - v5 <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+- etherjs offical document:
   - v6 <https://docs.ethers.org/v6/getting-started>
+  - v5 <https://docs.ethers.io/v5/getting-started/#getting-started--contracts>
+  - v4 <https://docs.ethers.io/v4/api-providers.html>  
 
-- Chinese document: 
-  - v4 <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
-  - v5 <https://learnblockchain.cn/ethers_v5/getting-started>
+- Chinese document:
   - v6 <https://www.wtf.academy/docs/ethers-101/HelloVitalik/>
+  - v5 <https://learnblockchain.cn/ethers_v5/getting-started>
+  - v4 <https://learnblockchain.cn/docs/ethers.js/api-providers.html>
+ 
