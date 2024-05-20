@@ -390,23 +390,15 @@ Shout out to the following organizations for their unconditional donations to us
 
 <br>
 <div align="left">
-  <a href="https://ethereum.foundation/">
+  <a href="https://ethereum.foundation/" style="display: inline-block; ">
     <img align="top" src="./docs/imgs/sponsor-partners/ethereum-foundation-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.optimism.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.starknet.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/starknet-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://scroll.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
   </a>
@@ -414,19 +406,13 @@ Shout out to the following organizations for their unconditional donations to us
 <div align="left">
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
@@ -434,17 +420,13 @@ Shout out to the following organizations for their unconditional donations to us
 <div align="left">
   <a href="https://snzholding.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.bing-ventures.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
@@ -452,19 +434,16 @@ Shout out to the following organizations for their unconditional donations to us
 <div align="left">
   <a href="https://eth-store.w3eth.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://bingx.com/en-us/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
   <a href="https://mapprotocol.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://minaprotocol.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Mina-logo.png" />
   </a>
-  &nbsp;&nbsp;
 </div>
 <br>
 
