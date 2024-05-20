@@ -1,7 +1,7 @@
 中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README.md)
 
 <div align="center">
-  <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
+  <img src="./DappLearning-logo.png" style="margin: 0 auto 40px;" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
     区块链 Dapp 开发教程
@@ -404,24 +404,33 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://snzholding.com/">
-    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
+  <a href="https://www.optimism.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   &nbsp;&nbsp;
+  <a href="https://www.starknet.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/starknet-logo.png" />
+  </a>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <a href="https://scroll.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+  </a>
+</div>
+<div align="left">
   <a href="https://www.nervos.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
-  &nbsp;&nbsp;
   <a href="https://t.me/planckeropencommunity/">
     <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
   </a>
-</div>
-<div align="left">
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://degate.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
   </a>
@@ -430,19 +439,17 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://loopring.org/">
     <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://scroll.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
+</div>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
   </a>
   &nbsp;&nbsp;
   &nbsp;&nbsp;
   <a href="https://www.bing-ventures.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
   </a>
-  
-</div>
-<div align="left">
+  &nbsp;&nbsp;
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>
@@ -450,7 +457,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://eth-store.w3eth.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
   </a>
@@ -458,14 +466,8 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://bingx.com/en-us/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
-</div>
-<div align="left">
   <a href="https://mapprotocol.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://www.optimism.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
   </a>
   &nbsp;&nbsp;
   <a href="https://minaprotocol.com/">
