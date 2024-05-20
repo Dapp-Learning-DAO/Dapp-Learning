@@ -880,7 +880,7 @@ export function useV3DerivedMintInfo(
             tickLower,
             tickUpper,
             amount0: independentAmount.quotient,
-            useFullPrecision: true, // we want full precision for the theoretical position
+            useFullPrecision: true, // we want full precision for the oretical position
           })
         : Position.fromAmount1({
             pool: poolForPosition,
@@ -949,7 +949,7 @@ export function useV3DerivedMintInfo(
         tickUpper,
         amount0,
         amount1,
-        useFullPrecision: true, // we want full precision for the theoretical position
+        useFullPrecision: true, // we want full precision for the oretical position
       });
     } else {
       return undefined;

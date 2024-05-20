@@ -122,6 +122,7 @@ await exchange.getEthAmount(toWei(2000)); // 500
 注意：我们最初基于汇率的定价函数没有错（恒定和公式的 AMM）。事实上，当我们交易的代币数量相对数量非常小时。但是要提供 AMM，我们需要更复杂的东西。
 
 ## Exchange 合约实现
+![uniswap-exchange函数列表](./images/uniswap-exchange.png)
 
 V1 的 Exchange 合约包含了定价、交易、添加/移除流动性、分发 LP token 代币功能。
 

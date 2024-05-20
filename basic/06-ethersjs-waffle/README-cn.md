@@ -27,6 +27,8 @@ Waffle 详细使用方法可以参考 [Waffle 官网](https://ethereum-waffle.re
 
 ```bash
 yarn install
+
+#node 版本 v20.11.0
 ```
 
 - 2 编译合约
@@ -53,6 +55,8 @@ yarn test
 
 ```bash
 node index.js
+
+## index.js 第19行 let address = "xxxxxxx" 修改成自己地址
 ```
 ## 说明
 在使用命yarn install命令，提示无法找到yarn命令时（比如在VMware上跑），可以尝试执行：

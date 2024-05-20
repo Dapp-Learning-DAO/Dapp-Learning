@@ -21,8 +21,9 @@
 
 1. 安装依赖
 
-   ```sh
+   ```js
    npm install
+   // 本教程使用的 node 版本为 v20.11.0
    ```
 
 2. 配置 .env
@@ -39,6 +40,12 @@
 
    ```sh
    node index.js
+   ```
+
+4. 查看 mempool 中 pending 的交易
+
+   ```sh
+   node mempool.js
    ```
 
 ## 参考文档

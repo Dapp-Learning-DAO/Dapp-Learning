@@ -1,21 +1,23 @@
 
-const hre = require("hardhat");
+const { ethers } = require('hardhat');
 require('dotenv').config();
 const { saveDeployment } = require('./utils');
 
 async function main() {
     // We get the contract to deploy
-    const Dnd = await hre.ethers.getContractFactory("DungeonsAndDragonsCharacter");
+    const RnvContractFactory = await ethers.getContractFactory("RandomNumberVRF");
     
-    const dnd = await Dnd.deploy(process.env.SubscriptionId, "http://81.69.8.95/WaterMarginJson/");
+    const rnv = await RnvContractFactory.deploy(process.env.SubscriptionId);
+    
+    console.log("deploying....");
 
-    await dnd.deployed();
+    await rnv.waitForDeployment()
 
-    console.log("dnd deployed to:", dnd.address);
+    console.log("rnv deployed to:", rnv.target);
 
     // save contract address to file
     saveDeployment({
-      dndAddress: dnd.address,
+      rnvAddress: rnv.target,
     });
    
 }

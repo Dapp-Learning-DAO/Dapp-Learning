@@ -471,7 +471,6 @@ contract EtherDelta {
             tokens[tokenGet][feeAccount],
             SafeMath.sub(SafeMath.add(feeMakeXfer, feeTakeXfer), feeRebateXfer)
         );
-        // 对maker买入token收费，
         tokens[tokenGive][user] = SafeMath.sub(
             tokens[tokenGive][user],
             SafeMath.mul(amountGive, amount) / amountGet

@@ -1,4 +1,7 @@
-const { expect } = require("chai");
+
+const {ethers} = require("hardhat");
+const { expect } = import("chai");
+
 
 describe("Token contract", function() {
   it("create wallet", async function() {

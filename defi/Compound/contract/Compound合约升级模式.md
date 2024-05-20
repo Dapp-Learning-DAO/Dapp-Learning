@@ -4,7 +4,7 @@
 
 > 本文为原创文章，如需转载请联系作者。
 
-在keegan小钢的文章：https://learnblockchain.cn/article/2618 提到了compound的合约升级模式，但是它并未详细的说明compound到底是怎样实现合约升级的，以及与openzepplin的合约升级对比，有什么优势。借助本篇文章，我们就详细讨论下compound的合约升级是如何实现，以及它的优缺点。
+在keegan小钢的文章：https://learnblockchain.cn/article/2618 提到了compound的合约升级模式，但是它并未详细的说明compound到底是怎样实现合约升级的，以及与penzepplin的合约升级对比，有什么优势。借助本篇文章，我们就详细讨论下compound的合约升级是如何实现，以及它的优缺点。
 
 本文的参考链接如下：https://blog.openzeppelin.com/the-state-of-smart-contract-upgrades/
 
@@ -356,7 +356,7 @@ contract Vault {
 
 ### **透明代理合约**
 
-为了解决升级管理函数中提到的函数选择器碰撞问题，openzeplin提出了透明代理合约。即在fallback函数和proxy中的其他函数中添加一个路由，以此确定合约的正确调用。确保用户只能够调用代理合约中的fallback函数，而admin不能够调用代理合约中的fallback函数，用户在调用到代理合约的其他函数时，会被自动转向到fallback函数中去。
+为了解决升级管理函数中提到的函数选择器碰撞问题，openzeppelin提出了透明代理合约。即在fallback函数和proxy中的其他函数中添加一个路由，以此确定合约的正确调用。确保用户只能够调用代理合约中的fallback函数，而admin不能够调用代理合约中的fallback函数，用户在调用到代理合约的其他函数时，会被自动转向到fallback函数中去。
 
 ```
 //proxy contract
@@ -500,7 +500,7 @@ contract Impl{
 
 但是这样做的缺点也很明显：添加了多余的不需要的全局变量。并且降低了重复利用率，且容易遗忘出错。
 
-为了解决这个问题，Openzepplin提出了非结构化存储的解决方案，即设定一个固定的slot用于存储impl地址，与合约中的其他全局变量顺序无关。
+为了解决这个问题，OpenZeppelin提出了非结构化存储的解决方案，即设定一个固定的slot用于存储impl地址，与合约中的其他全局变量顺序无关。
 
 在EIP-1967中，该固定的slot地址被标准化为：
 

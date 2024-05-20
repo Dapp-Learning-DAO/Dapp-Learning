@@ -1,4 +1,0 @@
-[default]
-src = 'contracts'
-out = 'artifacts/contracts'
-libs = ['node_modules']

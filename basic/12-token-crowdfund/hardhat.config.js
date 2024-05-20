@@ -1,5 +1,4 @@
-require('@nomiclabs/hardhat-waffle');
-const fs = require('fs');
+require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -44,16 +43,12 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
     },
     mainnet: {
       url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-      accounts: [mnemonic()],
-    },
-    ropsten: {
-      url: 'https://ropsten.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
       accounts: [mnemonic()],
     },
   },

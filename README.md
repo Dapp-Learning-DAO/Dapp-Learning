@@ -160,6 +160,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [ZK Voting](basic/48-ZK-Voting) ⌛
+49. [Account Abstraction](basic/49-aa)  ✅
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governance](https://github.com/withtally/safeguard)  ⬜
@@ -219,28 +220,29 @@ You can refer to our study group's learning roadmap, which is better with the vi
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-03. [Curve](defi/Curve/README.md) ⌛
-04. [Compound](defi/Compound/readme.md) ✅
-05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/) ✅
-07. [Euler](defi/Euler/readme.md) ⌛
-08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) ⌛
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
-11. [Sushi](https://docs.sushi.com/) ✅
-12. [OPYN](https://v2.opyn.co/)⌛
-13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
-14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](defi/RAI/)⌛
-16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
-20. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/)⌛
-22. [Set](https://www.tokensets.com/)
-23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
-24. [Element](https://app.element.fi/fixedrates)
+03. [CurveV1](defi/Curve-V1/README.md) ⌛
+04. [CurveV2](defi/Curve-V2/readme.md) ⌛
+05. [Compound](defi/Compound/readme.md) ✅
+06. [Aave](https://docs.aave.com/portal/)  ✅
+07. [Liquity](defi/Liquity/) ✅
+08. [Euler](defi/Euler/readme.md) ⌛
+09. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+10. [YFI](https://yearn.finance/) ⌛
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
+12. [Sushi](https://docs.sushi.com/) ✅
+13. [OPYN](https://v2.opyn.co/)⌛
+14. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+15. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+16. [RAI](defi/RAI/)⌛
+17. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+18. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+19. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+20. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
+21. [0x-protocol](defi/0x-protocol/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+22. [Bancor](https://bancor.network/)⌛
+23. [Set](https://www.tokensets.com/)
+24. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+25. [Element](https://app.element.fi/fixedrates)
 
 ![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
@@ -294,13 +296,22 @@ Item list:
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
  - [Immunefi ](https://immunefi.com/learn/)
 
- ## Cryptocurrency Jobs Websites
+## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
  - https://cryptocurrencyjobs.co/
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
  - https://web3.career/
  - https://portfoliojobs.a16z.com/jobs?markets=Crypto
+
+## Hackathons
+
+Participating in hackathons increases practical experience, you can participate in:
+
+- [Gitcoin](https://gitcoin.co/hackathon/)
+- [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
+- [Immunefi Bug Bounty Platform](https://immunefi.com/)
+- [Code4rena Bug Bounty Platform](https://code4rena.com/)
 
 ## Project Ecology
 Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.

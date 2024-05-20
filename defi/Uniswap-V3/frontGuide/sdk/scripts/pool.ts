@@ -7,11 +7,7 @@ import { BigNumber } from 'ethers';
 // usdc/eth
 const poolAddress = '0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8';
 
-const poolContract = new ethers.Contract(
-  poolAddress,
-  IUniswapV3PoolABI,
-  ethers.provider
-);
+const poolContract = new ethers.Contract(poolAddress, IUniswapV3PoolABI, ethers.provider);
 
 interface Immutables {
   factory: string;
@@ -66,14 +62,7 @@ async function main() {
   const TokenA = new Token(1, immutables.token0, 6, 'USDC', 'USD Coin');
   const TokenB = new Token(1, immutables.token1, 18, 'WETH', 'Wrapped Ether');
 
-  const poolExample = new Pool(
-    TokenA,
-    TokenB,
-    immutables.fee,
-    state.sqrtPriceX96.toString(),
-    state.liquidity.toString(),
-    state.tick
-  );
+  const poolExample = new Pool(TokenA, TokenB, immutables.fee, state.sqrtPriceX96.toString(), state.liquidity.toString(), state.tick);
   console.log(poolExample);
 }
 

@@ -31,13 +31,15 @@ ganache-cli
 
 - 执行脚本
 ```
+如果安装完python 3 以上版本，以下命令执不通时，使用 “python3" 代替 "python"
 ## 演示合约构造及部署
 python scripts/1_deploy_using_web3.py
+
 
 ## 根据已存在的合约地址构造合约实例
 python scripts/2_play_around_on_existing_contract.py
 
-## 使用 openzepplin 合约演示转账
+## 使用 openzeppelin 合约演示转账
 python scripts/3_use_openzeppelin.py
 
 ## 演示 ERC20 合约的调用

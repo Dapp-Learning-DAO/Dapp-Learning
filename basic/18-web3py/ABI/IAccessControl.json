@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "IAccessControl",
-  "sourceName": "contracts/openzepplin/AccessControl.sol",
+  "sourceName": "contracts/openzeppelin/AccessControl.sol",
   "abi": [
     {
       "inputs": [

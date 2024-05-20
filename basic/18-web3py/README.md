@@ -31,13 +31,14 @@ ganache-cli
 
 - execute script
 ```
+If the following command cannot be executed after installing Python 3 or above, use "python3" instead of "python"“
 ## Demonstrate contract construction and deployment
 python scripts/1_deploy_using_web3.py
 
 ## Construct a contract instance based on the existing contract address
 python scripts/2_play_around_on_existing_contract.py
 
-## Demo of transfer using openzepplin contract
+## Demo of transfer using openzeppelin contract
 python scripts/3_use_openzeppelin.py
 
 ## Demonstrate the call of the ERC20 contract

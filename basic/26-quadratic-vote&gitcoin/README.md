@@ -81,7 +81,7 @@ Using both eth and Token for voting is not implemented for now.
 
 ### FinancingTool
 
-![quadratic_funding.png](https://vitalik.ca/images/qv-files/quadratic_funding.png)
+![quadratic_funding.png](https://vitalik.eth.limo/images/qv-files/quadratic_funding.png)
 
 Each user vote on a proposal is the square root of the total amount ().
 
@@ -161,7 +161,7 @@ Case: Each person can donate to multiple proposals within a certain period of ti
 
 ## Reference
 
-- [Quadratic Payments: A Primer (by vitalik)](https://vitalik.ca/general/2019/12/07/quadratic.html)
+- [Quadratic Payments: A Primer (by vitalik)](https://vitalik.eth.limo/general/2019/12/07/quadratic.html)
 - [Quadratic vote and quadratic funde (from zhihu)](https://www.matataki.io/p/6113)
 - [video intro](https://www.bilibili.com/video/BV1Y5411w77b/)
 - [gitcoin](https://gitcoin.co/blog/gitcoin-grants-quadratic-funding-for-the-world/)

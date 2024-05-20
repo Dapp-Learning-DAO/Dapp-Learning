@@ -8,7 +8,7 @@ const { expect } = require("chai");
 // The callback must define the tests of that section. This callback can't be
 // an async function.
 describe("Token contract", function () {
-  // Mocha has four functions that let you hook into the the test runner's
+  // Mocha has four functions that let you hook into the  test runner's
   // lifecyle. These are: `before`, `beforeEach`, `after`, `afterEach`.
 
   // They're very useful to setup the environment for tests, and to clean it
@@ -88,7 +88,7 @@ describe("Token contract", function () {
 
       // Check balances.
       const finalOwnerBalance = await hardhatToken.balanceOf(owner.address);
-      expect(finalOwnerBalance).to.equal(initialOwnerBalance - 150);
+      expect(BigInt(finalOwnerBalance)).to.equal(BigInt(initialOwnerBalance) - BigInt(150));
 
       const addr1Balance = await hardhatToken.balanceOf(addr1.address);
       expect(addr1Balance).to.equal(100);

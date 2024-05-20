@@ -167,6 +167,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [ZK Voting](basic/48-ZK-Voting) ⌛
+49. [Account Abstraction](basic/49-aa)  ✅
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜
@@ -221,28 +222,29 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 
 1. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 2. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-3. [Curve](defi/Curve/README.md) ⌛
-4. [Compound](defi/Compound/readme.md) ✅
-5. [Aave](https://docs.aave.com/portal/)  ✅
-6. [Liquity](defi/Liquity/) ⌛
-7. [Euler](defi/Euler/readme.md) ⌛
-8. [SNX](https://github.com/Synthetixio)⌛
-9. [YFI](https://yearn.finance/)⌛
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm)⌛
-11. [Sushi](https://docs.sushi.com/) ✅
-12. [OPYN](https://v2.opyn.co/)⌛
-13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
-14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-15. [RAI](defi/RAI/)⌛
-16. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-18. [DODO](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
-20. [0x-protocol](defi/0x-protocal/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/)⌛
-22. [Set](https://www.tokensets.com/)
-23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
-24. [Element](https://app.element.fi/fixedrates)
+3. [CurveV1](defi/Curve-V1/README.md) ⌛
+4. [CurveV2](defi/Curve-V2/readme.md) ⌛
+5. [Compound](defi/Compound/readme.md) ✅
+6. [Aave](https://docs.aave.com/portal/)  ✅
+7. [Liquity](defi/Liquity/) ⌛
+8. [Euler](defi/Euler/readme.md) ⌛
+9. [SNX](https://github.com/Synthetixio)⌛
+10. [YFI](https://yearn.finance/)⌛
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm)⌛
+12. [Sushi](https://docs.sushi.com/) ✅
+13. [OPYN](https://v2.opyn.co/)⌛
+14. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+15. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+16. [RAI](defi/RAI/)⌛
+17. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+18. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+19. [DODO](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+20. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
+21. [0x-protocol](defi/0x-protocol/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+22. [Bancor](https://bancor.network/)⌛
+23. [Set](https://www.tokensets.com/)
+24. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+25. [Element](https://app.element.fi/fixedrates)
 
 ![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
@@ -319,6 +321,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - [Gitcoin](https://gitcoin.co/hackathon/)
 - [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
 - [Immunefi 漏洞赏金平台](https://immunefi.com/)
+- [Code4rena 漏洞赏金平台](https://code4rena.com/)
 
 ## 如何参与以及DAO治理
 

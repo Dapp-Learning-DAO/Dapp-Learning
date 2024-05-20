@@ -1,5 +1,6 @@
 const fs = require('fs')
 const HDWalletProvider = require('truffle-hdwallet-provider')
+const mnemonic = "35b08a65b9269c23c470963bc3203778e1c20d49f91e4b98b48fc6cf02575a33"
 
 require('dotenv').config();
 
@@ -16,44 +17,28 @@ module.exports = {
     },
   },
   networks: {
-    //  development: {
-    //    host: "127.0.0.1",
-    //    port: 7545,
-    //    network_id: "*"
-    //  },
+      development: {
+        host: "127.0.0.1",
+        port: 9545,
+        network_id: "*"
+     },
     //  test: {
     //    host: "127.0.0.1",
     //    port: 7545,
     //    network_id: "*"
     //  }
     //},
-    ropsten: {
+
+    sepolia: {
+      networkCheckTimeout: 10000,
       provider: () =>
-        new HDWalletProvider(
-          process.env.PRIVATE_KEY,
-          'https://ropsten.infura.io/v3/' + process.env.INFURA_ID
-        ),
+      new HDWalletProvider(
+        process.env.PRIVATE_KEY,
+        'https://sepolia.infura.io/v3/' + process.env.INFURA_ID
+      ),
       network_id: '*',
-      gas: 3000000,
+      gas: 30000000,
       gasPrice: 10000000000,
-    },
-    kovan: {
-      provider: () =>
-        new HDWalletProvider(
-          process.env.PRIVATE_KEY,
-          'https://kovan.infura.io/v3/' + process.env.INFURA_ID
-        ),
-      network_id: '*',
-    },
-    rinkeby: {
-      provider: () =>
-        new HDWalletProvider(
-          process.env.PRIVATE_KEY,
-          'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID
-        ),
-      network_id: '*',
-      gas: 3000000,
-      gasPrice: 10000000000,
-    },
+    },          
   },
 }

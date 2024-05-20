@@ -6,11 +6,11 @@ const { ethers } = require("ethers");
 require("dotenv").config();
 const privateKey = process.env.PRIVATE_KEY;
 
-// const web3 = new Web3.providers.HttpProvider('https://kovan.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07');
+// const web3 = new Web3.providers.HttpProvider('https://sepolia.infura.io/v3/0aae8358bfe04803b8e75bb4755eaf07');
 //  let web3Provider = new ethers.providers.Web3Provider(web3)
 
 const web3Provider = new ethers.providers.InfuraProvider(
-  "goerli",
+  "sepolia",
   process.env.INFURA_ID
 );
 

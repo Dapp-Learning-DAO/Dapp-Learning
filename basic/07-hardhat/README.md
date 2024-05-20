@@ -22,7 +22,6 @@ Before learning hardhat, you need to understand some Knowledge points as follows
 ## Project structure and configuration hardhat
 
 ```sh
-mkdir 07-hardhat                // create folder
 cd    07-hardhat                // move to folder
 npm install --save-dev hardhat  // install hardhat
 npx hardhat                     // initialize hardhat
@@ -40,17 +39,17 @@ Finished in inputing `npx hardhat`, it will show in the terminal:
 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
 
-Welcome to Hardhat v2.9.0
+👷 Welcome to Hardhat v2.21.0 👷‍
 
-? What do you want to do? ...
-> Create a basic sample project
-  Create an advanced sample project
-  Create an advanced sample project that uses TypeScript
+? What do you want to do? … 
+❯ Create a JavaScript project
+  Create a TypeScript project
+  Create a TypeScript project (with Viem)
   Create an empty hardhat.config.js
   Quit
 ```
 
-We select 'Create a basic sample project' options to initialize a basic project, click enter directly in the next 2 steps.
+We select 'Create a JavaScript project' options to initialize a basic project, click enter directly in the next 2 steps.
 
 ### Project stucture
 
@@ -85,10 +84,10 @@ module.exports = {
     },
     // you could config arbitrary network
     // goerli testing network
-    goerli: {
+    sepolia: {
       // place INFURA_ID to yours
-      // url: 'https://goerli.infura.io/v3/{INFURA_ID}',
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
+      // url: 'https://sepolia.infura.io/v3/{INFURA_ID}',
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID, //<---- 在.env文件中配置自己的INFURA_ID
 
       //  place multiple privateKeyX to yours
       accounts: [process.env.PRIVATE_KEY, ...]
@@ -123,32 +122,21 @@ module.exports = {
 
 hardhat has a special, secure and build-in testing network, named `hardhat`, you don't need a special configuration for it. The network will follow the mechanism in real block chain network, and it will generate 10 test accounts for you (just like truffle).
 
-### Using plugins
-
-Plugins have many functions in Hardhat, you could choose arbitrary plugins as a developer
-
-Waffle plugins could make hardhat Integrated with waffle framework
-
-```js
-// hardhat.config.js
-require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
-...
-```
 
 ### Install dependencies
 
 1. install nodejs (ignore)
-
+   # Node version v20.11.0
 2. install project dependencies:
 
    ```sh
-   npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers dotenv
+  npm install
    ```
 
    or use yarn to intall (yarn installed firstly)
 
    ```sh
-   yarn add -D hardhat-deploy-ethers ethers chai chai-ethers mocha @types/chai @types/mocha dotenv
+  yarn
    ```
 
 3. config private key and network:
@@ -158,6 +146,7 @@ require('@nomiclabs/hardhat-waffle'); // hardhat waffle plugin
    ```js
    PRIVATE_KEY = xxxxxxxxxxxxxxxx; // place your private key
    INFURA_ID = yyyyyyyy; // place infura node
+    APIKEY=zzzzzz; //replace etherscan apikey，will introduce below
    ```
 
 ## Usage
@@ -178,6 +167,7 @@ Run the command, hardhat will compile all test files in directory of `tests`, th
 
 ```sh
 npx hardhat test
+#test network no need assign --network <network name>
 ```
 
 you could also specify some test files to run it
@@ -197,7 +187,10 @@ npx hardhat run ./scripts/deploy.js
 Run the specified network, such as the contract deployed on goerli test network(make sure that the wallet could pay the gas)
 
 ```sh
-npx hardhat run ./scripts/deploy.js --network goerli
+npx hardhat run ./scripts/deploy.js --network sepolia
+
+
+#Please remember the "deploy address" returned after running here, which will be used by verify in Sepolia network verification below
 ```
 
 ### Verify
@@ -207,15 +200,20 @@ Verify the smart contract, here is an example of `goerli`.
 Add the following configuration to `hardhat.config.js`:
 
 ```js
- etherscan: {
-   apiKey: "<etherscan的api key>",
+  etherscan: {
+   apiKey: "<etherscan的api key>", //Use process.env.APIKEY Get Variables
  }
 ```
+https://etherscan.io/myapikey Create an account on the official website. After logging in, go to My Account (the actual name of the account you created) ->API Key
+
+Ensure configuration in hardhat.config.js
 
 Run script:
 
 ```shell
-npx hardhat verify --network goerli <your contract address>
+npx hardhat verify --contract "contracts/SimpleToken.sol:SimpleToken" --constructor-args ./arguments_SimpleToken.js  --network sepolia <contract address>
+
+##The data in arguments SimpleToken.js are the parameters set during the construction of the SimpleToken contract when running the deploy. js script on line 207
 ```
 
 ### Task
@@ -316,15 +314,15 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
    npx hardhat run scripts/deploy.js --network <network-name>
    ```
 
-   `network-name` should be replaced with your networks, `goerli` is a choice which exists in the config file.
+   `network-name` should be replaced with your networks, `sepolia` is a choice which exists in the config file.
 
 4. Verify smart contract
 
    ```bash
-   npx hardhat verify --network goerli <network-name> <contract-address>
+    npx hardhat verify --contract "contracts/SimpleToken.sol:SimpleToken" --constructor-args ./arguments_SimpleToken.js  --network <network-name>  <contract-address>
    ```
 
-    `network-name` : the name of the network you specify, here you can replace it with `goerli`, which corresponds to the network name in the configuration file.
+    `network-name` : the name of the network you specify, here you can replace it with `sepolia`, which corresponds to the network name in the configuration file.
 
    `contract-address` : The address of the contract deployed in the previous step.
 
@@ -334,4 +332,4 @@ Changing greeting from 'Hello, world!' to 'hello Dapp-Learning!'
 - hardhat chinese document: <https://learnblockchain.cn/docs/hardhat/getting-started/>
 - the usage of ethers.js and hardhat : <https://www.bilibili.com/video/BV1Pv411s7Nb>
 - <https://rahulsethuram.medium.com/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae>
-- erc20 openzepplin introduction: <https://segmentfault.com/a/1190000015400380>
+- erc20 openzeppelin introduction: <https://segmentfault.com/a/1190000015400380>
