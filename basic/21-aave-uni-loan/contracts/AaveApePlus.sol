@@ -2,13 +2,13 @@
 pragma solidity ^0.8.0;
 
 import './AaveUniswapBase.sol';
-import './interfaces/IUniswapV3Factory.sol';
-import './interfaces/IUniswapV3Pool.sol';
+import './interfaces/uniswap-v3/IUniswapV3Factory.sol';
+import './interfaces/uniswap-v3/IUniswapV3Pool.sol';
+import './interfaces/aave-v3/IAToken.sol';
 import './libraries/ReserveConfiguration.sol';
 import './libraries/TickMath.sol';
 import './libraries/WadRayMath.sol';
 import './libraries/PercentageMath.sol';
-import  './interfaces/IAToken.sol';
 // import 'hardhat/console.sol';
 
 contract AaveApePlus is AaveUniswapBase {
@@ -50,42 +50,13 @@ contract AaveApePlus is AaveUniswapBase {
             abi.encode(address(pool), zeroForOne, apeAsset, borrowAsset, interestRateMode, msg.sender, false)
         );
 
-        uint256 newHealthFactor = getHealthFactor(
-            msg.sender,
-            apeAsset, 
-            borrowAsset,
-            uint256(zeroForOne == true ? amount0: amount1), //borrowAmount
-            uint256(zeroForOne == false ? amount1: amount0) //apeAssetAmount 
-        );
-
-        require(newHealthFactor > 1.1e18, "health factor < 1.1, risky!");
+       (, , , , , uint256 newHealthFactor) = LENDING_POOL().getUserAccountData(msg.sender);
+        require(newHealthFactor > 1e18, "health factor < 1!");
 
         emit Ape(msg.sender, 'flashApe', apeAsset, borrowAsset, borrowAmount, zeroForOne == true ? uint256(amount0) : uint256(amount1), interestRateMode);
 
         //check slippage， minAmountout
         return true;
-    }
-
-    function getHealthFactor(address ape, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 apeAmount) public view returns (uint256 healthFactor) {
-
-        (uint256 totalCollateralBase,uint256 totalDebtBase, ,uint256 currentLiquidationThreshold, ,) = LENDING_POOL().getUserAccountData(ape);
-
-        uint256 borrowAssetPrice = getPriceOracle().getAssetPrice(borrowAsset); 
-        (uint256 borrowAssetDecimals, , , , , , , , , ) = getProtocolDataProvider().getReserveConfigurationData(borrowAsset);
-        //borrow asset in base currency
-        uint256 borrowAssetBase = borrowAmount / 10**borrowAssetDecimals * borrowAssetPrice;
-
-
-        uint256 apeAssetPrice = getPriceOracle().getAssetPrice(apeAsset); 
-        (uint256 apeAssetDecimals, , , , , , , , , ) = getProtocolDataProvider().getReserveConfigurationData(apeAsset);
-        //borrow asset in base currency
-        uint256 apeAssetBase = apeAmount / 10**apeAssetDecimals * apeAssetPrice;
-
-
-        DataTypes.ReserveConfigurationMap memory apeAssetConfiguration = LENDING_POOL().getConfiguration(apeAsset);
-        uint256 apeAssetLiquidationThreshold = ReserveConfiguration.getLiquidationThreshold(apeAssetConfiguration);
-
-        healthFactor = (totalCollateralBase.percentMul(currentLiquidationThreshold) + apeAssetBase.percentMul(apeAssetLiquidationThreshold)).wadDiv(totalDebtBase + borrowAssetBase);
     }
 
     function flashUnwind(address apeAsset, address borrowAsset, uint256 borrowAmountToRepay, uint256 interestRateMode) public {

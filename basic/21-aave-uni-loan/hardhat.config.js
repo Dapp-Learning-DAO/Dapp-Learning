@@ -119,6 +119,8 @@ module.exports = {
       uniswapRouterAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
       wethGatewayAddress: '0xC1E320966c485ebF2A0A2A6d3c0Dc860A156eB1B',
       aaveApeAddress: '0xc21d6197Bef9E34af555Ec6373D5a4F1a25BD730',
+
+      augustusRegistryAddress: '0xca35a4866747Ff7A604EF7a2A7F246bb870f3ca1',
     },
     optimism: {
       daiAddress: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
@@ -131,6 +133,8 @@ module.exports = {
       uniswapRouterAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
       wethGatewayAddress: '0xe9E52021f4e11DEAD8661812A0A6c8627abA2a54',
       aaveApeAddress: '0xc21d6197Bef9E34af555Ec6373D5a4F1a25BD730',
+
+      augustusRegistryAddress: '0x6e7bE86000dF697facF4396efD2aE2C322165dC3',
     },
     main: {
       daiAddress: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
@@ -143,6 +147,8 @@ module.exports = {
       uniswapRouterAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
       wethGatewayAddress: '0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9',
       aaveApeAddress: '0xc21d6197Bef9E34af555Ec6373D5a4F1a25BD730',
+
+      augustusRegistryAddress: '0xa68bEA62Dc4034A689AA0F58A76681433caCa663',
     },
     localhost: {
       daiAddress: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
@@ -155,6 +161,8 @@ module.exports = {
       uniswapRouterAddress: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
       wethGatewayAddress: '0x893411580e590D62dDBca8a703d61Cc4A8c7b2b9',
       aaveApeAddress: '0xc21d6197Bef9E34af555Ec6373D5a4F1a25BD730',
+
+      augustusRegistryAddress: '0xa68bEA62Dc4034A689AA0F58A76681433caCa663',
     }
   }
 };

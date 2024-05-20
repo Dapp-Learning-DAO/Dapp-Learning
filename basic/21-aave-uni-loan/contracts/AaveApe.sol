@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 import './AaveUniswapBase.sol';
-import './interfaces/IUniswapV3Factory.sol';
-import './interfaces/IUniswapV3Pool.sol';
+import './interfaces/uniswap-v3/IUniswapV3Factory.sol';
+import './interfaces/uniswap-v3/IUniswapV3Pool.sol';
 // import 'hardhat/console.sol';
 
 contract AaveApe is AaveUniswapBase {
