@@ -13,11 +13,9 @@ import './interfaces/aave-v3/IAToken.sol';
 import './interfaces/IERC20.sol';
 import './libraries/DataTypes.sol';
 import './libraries/ReserveConfiguration.sol';
-import './libraries/SafeERC20.sol';
 // import 'hardhat/console.sol';
 
 contract AaveApePlusV2 is IFlashLoanRecipient {
-    using SafeERC20 for IERC20;
 
     event Ape(address ape, string action, address apeAsset, address borrowAsset, uint256 borrowAmount, uint256 interestRateMode);
 
