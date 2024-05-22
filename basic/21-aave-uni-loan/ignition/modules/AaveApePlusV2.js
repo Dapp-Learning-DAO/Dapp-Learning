@@ -10,11 +10,10 @@ if (!networkAddressMapping[network.name]) {
 
 const {
   lendingPoolAddressesProviderAddress,
-  uniswapRouterAddress,
   augustusRegistryAddress
 } = networkAddressMapping[network.name];
 
 module.exports = buildModule("AaveApePlusV2", (m) => {
-  const aaveApePlus = m.contract("AaveApePlusV2", [lendingPoolAddressesProviderAddress, uniswapRouterAddress, augustusRegistryAddress]);
+  const aaveApePlus = m.contract("AaveApePlusV2", [lendingPoolAddressesProviderAddress, augustusRegistryAddress]);
   return { aaveApePlus };
 });
