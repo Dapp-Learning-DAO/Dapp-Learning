@@ -3,11 +3,11 @@ pragma solidity ^0.8.0;
 
 import {IERC20} from './interfaces/IERC20.sol';
 import {SafeMath} from './libraries/SafeMath.sol';
-import "./interfaces/IPool.sol";
-import "./interfaces/IPoolAddressesProvider.sol";
-import "./interfaces/IPoolDataProvider.sol";
-import "./interfaces/IPriceOracleGetter.sol";
-import "./interfaces/ISwapRouter.sol";
+import "./interfaces/aave-v3/IPool.sol";
+import "./interfaces/aave-v3/IPoolAddressesProvider.sol";
+import "./interfaces/aave-v3/IPoolDataProvider.sol";
+import "./interfaces/aave-v3/IPriceOracleGetter.sol";
+import "./interfaces/uniswap-v3/ISwapRouter.sol";
 import { DataTypes } from './libraries/DataTypes.sol';
 
 contract AaveUniswapBase {

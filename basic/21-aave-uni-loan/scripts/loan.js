@@ -83,7 +83,7 @@ main = async () => {
   let userAddress = deployer.address;
   console.log("user address:", userAddress)
 
-  const aaveApe = await ethers.getContractAt('AaveApe', aaveApeAddress);
+  const aaveApe = await ethers.getContractAt('AaveApePlus', aaveApeAddress);
 
   const lendingpool = await getLendingPool();
   console.log('lendingpool:', lendingpool.target);
@@ -119,7 +119,7 @@ main = async () => {
   let debtBalanceBefore = await debtToken.balanceOf(userAddress);
   console.log('debtBalanceBefore: ', debtBalanceBefore.toString());
 
-  tx = await aaveApe['unwindApe'](wethAddress, daiAddress, interestRateMode);
+  tx = await aaveApe['flashUnwind'](wethAddress, daiAddress, borrowAmount, interestRateMode);
   await tx.wait();
 
   let aBalanceAfter = await aToken.balanceOf(userAddress);
