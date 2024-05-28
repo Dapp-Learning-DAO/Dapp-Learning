@@ -7,6 +7,7 @@
 
 Mythril 是一个以太坊官方推荐的智能合约安全分析工具，使用符合执行来检测智能合约中的各种安全漏洞，在 Remix、Truffle 等 IDE 里都有集成。
 其包含的安全分析模型如下,具体可参考 [链接](https://learnblockchain.cn/article/1283)  
+
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/securityModule.png?raw=true" /></center>
 
 - 安装 ( docker 方式 )
@@ -73,10 +74,12 @@ cd /oyente/oyente && python oyente.py -s greeter.sol
 Slither 是一个用 Python 3 编写的智能合约静态分析框架，提供如下功能：
 
 1. 自动化漏洞检测。提供超 30 多项的漏洞检查模型，模型列表详见: https://github.com/crytic/slither#detectors
-2. 自动优化检测。Slither 可以检测编译器遗漏的代码优化项并给出优化建议
-3. 代码理解。Slither 能够绘制合约的继承拓扑图，合约方法调用关系图等，帮助开发者理解代码
-4. 辅助代码审查。用户可以通过 API 与 Slither 进行交互
 
+2. 自动优化检测。Slither 可以检测编译器遗漏的代码优化项并给出优化建议
+
+3. 代码理解。Slither 能够绘制合约的继承拓扑图，合约方法调用关系图等，帮助开发者理解代码
+
+4. 辅助代码审查。用户可以通过 API 与 Slither 进行交互
 - 安装 ( docker 方式 )
 
 ```shell
@@ -97,24 +100,31 @@ slither Suicidal.sol --solc /usr/bin/solc-v0.5.13
 ```
 
 输入结果如下
+
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/slither.png?raw=true" /></center>
 
 - [可选] 使用 [solc-select](https://github.com/crytic/solc-select) 切换/管理solidity(solc)版本 
-    - 安装
-        ```shell
-            pip3 install solc-select
-        ```
-    - 安装需要的版本 & 使用需要的版本
-        ```shell
-            solc-select install 0.8.17
-            solc-select use 0.8.17
-            solc --version
-        ```
-    - 使用slither（无需版本声明）
-        ```shell
-            cd /contracts
-            slither MyContract.sol
-        ```
+  
+  - 安装
+    
+    ```shell
+        pip3 install solc-select
+    ```
+  
+  - 安装需要的版本 & 使用需要的版本
+    
+    ```shell
+        solc-select install 0.8.17
+        solc-select use 0.8.17
+        solc --version
+    ```
+  
+  - 使用slither（无需版本声明）
+    
+    ```shell
+        cd /contracts
+        slither MyContract.sol
+    ```
 
 ## MythX
 
@@ -122,6 +132,7 @@ mythX 是一个付费工具, 支持命令行, vscode 插件等形式进行分析
 可参考 [官网](https://docs.mythx.io/) 操作指导进行操作.  
 进行正确配置后, 就可以进行 solidity 文件漏洞扫描了, 这里以 vscode 为例, 扫描结果如下.  
 总的来说, 毕竟是付费的, 体验还是很不错的 ^\_^
+
 <center><img src="https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/basic/50-solidity-security/scanResult.png?raw=true" /></center>
 
 ## Solgraph
@@ -157,12 +168,13 @@ dot -Tpng GraphContract.dot -o GraphContract.png
 manticore 是基于**符号执行**方法的合约分析工具，它实际上也是通过断言，来判断是否满足某种属性。
 
 - 特点：
-
 1. 给定输入，搜索可能的状态。
-2. 自动生成输入信息。
-3. 检测执行失败或者崩溃的地方。
-4. 通过事件或者指令钩子，更精确的控制搜索路径。
 
+2. 自动生成输入信息。
+
+3. 检测执行失败或者崩溃的地方。
+
+4. 通过事件或者指令钩子，更精确的控制搜索路径。
 - 安装：
 
 ```bash
@@ -190,6 +202,32 @@ pip install "manticore[native]"
 ## [vscode-solidity-auditor](https://github.com/ConsenSys/vscode-solidity-auditor)
 
 这是一个 vscode 的插件，通过可视化的方式辅助分析合约。建议使用时换成它自定义的主题，可能显示效果会好一些。使用方法请看标题的官方网站，介绍的很清楚，也有动图演示。
+
+## [Aderyn](https://github.com/Cyfrin/aderyn)
+
+Aderyn是一个用 Rust 编写的开源 solidity 智能合约静态分析框架，可以快速检测潜在漏洞，生成分析报告，使安全审计人员有时间专注于更复杂的漏洞。
+
+Aderyn可以根据需要构建自定义检测器，具体参考[Detectors Quickstart](https://docs.cyfrin.io/aderyn-custom-detectors/detectors-quickstart)。
+
+- 安装：
+
+```bash
+cargo install aderyn
+```
+
+- 使用：
+
+```bash
+aderyn path/to/your/project
+```
+
+- 举例（Overflow_Add.sol）：
+
+```bash
+aderyn Overflow_Add.sol
+```
+
+分析报告见[report.md](report.md)
 
 ## 参考链接
 
