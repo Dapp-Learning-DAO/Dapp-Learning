@@ -278,7 +278,7 @@ interface CheatCodes {
 }
 
 contract OwnerUpOnlyTest is Test {
-  CheatCodes cheats = CheatCodes(HEVM_ADDRESS);
+  CheatCodes cheats = CheatCodes(VM_ADDRESS);
   OwnerUpOnly upOnly;
 
   function setUp() public {
