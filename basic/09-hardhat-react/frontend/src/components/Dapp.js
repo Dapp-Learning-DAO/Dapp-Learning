@@ -381,7 +381,7 @@ export class Dapp extends React.Component {
     }
 
     this.setState({
-      networkError: 'Please connect Metamask to goerli',
+      networkError: 'Please connect Metamask to Sepolia',
     })
 
     return false
