@@ -27,7 +27,7 @@
 
 ## P2PKH - 546
 
-### Ouptut
+### Output
 
 ```js
 Size = Amout + ScriptPubKey Size + ScriptPubKey = 8 + 1 + 25 = 34
@@ -73,7 +73,7 @@ dust = (input + output) * feeRate = (34 + 148) * 3 = 546
 
 ## P2SH-P2PKH - 540 1%⬇️
 
-### Ouptut
+### Output
 
 ```js
 Size = Amout + ScriptPubKey Size + ScriptPubKey = 8 + 1 + 23 = 32
@@ -119,7 +119,7 @@ dust = (input + output) * feeRate = (32 + 148) * 3 = 540
 
 ## P2WPKH - 294 46%⬇️
 
-### Ouptut
+### Output
 
 ```js
 Size = Amout + ScriptPubKey Size + ScriptPubKey = 8 + 1 + 22 = 31
@@ -163,7 +163,7 @@ dust = (input + output) * feeRate = (31 + 67) * 3 = 294
 
 ## P2TR(key path) - 300 26.7%⬇️
 
-### Ouptut
+### Output
 
 ```js
 Size = Amout + ScriptPubKey Size + ScriptPubKey = 8 + 1 + 34 = 43
