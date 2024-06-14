@@ -92,3 +92,93 @@ console.log("Decoded Bech32:", decoded);
 4. **解析数据部分以获取原始的哈希或密钥信息：**
    - 解码后的数据通常是某种形式的哈希值或公钥信息，这取决于具体的应用场景（如P2WPKH或P2WSH）。
 
+
+`PolyMod`是一种特别设计用于Bech32编码系统中的多项式模运算算法。在Bech32地址格式中，`PolyMod`算法用于生成一个校验码，该校验码具有高错误检测能力，能够帮助确认地址在传输或书写过程中是否被错误修改。此算法是Bech32提案（BIP 173）的核心部分，对于保证地址的完整性和准确性至关重要。
+
+### PolyMod算法的作用
+
+在Bech32中，`PolyMod`算法的主要作用是计算一个校验码，这个校验码能够：
+- 检测到任何单一的错误。
+- 检测到任何相邻字符的交换。
+- 检测到最多四个错误的错误组合。
+
+### PolyMod算法的实现步骤
+
+`PolyMod`算法的计算可以分为以下几个步骤：
+
+1. **初始化**：设置一个初始变量`c`为1。
+
+2. **处理HRP**：对于HRP（人类可读部分）中的每个字符，进行以下操作：
+   - 将`c`向右移动5位。
+   - 将字符的值与`c`进行异或（XOR）运算。
+   - 对`c`进行一系列的模2多项式运算，通常这涉及到与几个固定的常数进行XOR运算，这些常数由Bech32规范定义。
+
+3. **处理数据部分**：类似地处理数据部分中的每个5位值，包括：
+   - 将`c`向右移动5位。
+   - 将数据值与`c`进行异或运算。
+   - 对`c`进行类似上述的模2多项式运算。
+
+4. **生成校验码**：完成所有字符的处理后，将`c`与一个常数进行XOR运算，得到最终的校验码。这一步确保了校验码能够有效地反映整个地址的完整性。
+
+** 示例代码 **
+```js
+function polymod(values) {
+    let generator = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+    let chk = 1;
+    for (let value of values) {
+        let top = chk >> 25;
+        chk = (chk & 0x1ffffff) << 5 ^ value;
+        for (let i = 0; i < 5; i++) {
+            if ((top >> i) & 1) {
+                chk ^= generator[i];
+            }
+        }
+    }
+    return chk;
+}
+
+function hrpExpand(hrp) {
+    let ret = [];
+    for (let p = 0; p < hrp.length; p++) {
+        ret.push(hrp.charCodeAt(p) >> 5);
+    }
+    ret.push(0);
+    for (let p = 0; p < hrp.length; p++) {
+        ret.push(hrp.charCodeAt(p) & 31);
+    }
+    return ret;
+}
+
+function createChecksum(hrp, data) {
+    const values = hrpExpand(hrp).concat(data).concat([0, 0, 0, 0, 0, 0]);
+    const polymodValue = polymod(values) ^ 1;
+    let checksum = [];
+    for (let i = 0; i < 6; i++) {
+        checksum.push((polymodValue >> 5 * (5 - i)) & 31);
+    }
+    return checksum;
+}
+
+// Example usage
+let hrp = "bc";
+let data = [2, 3, 4, 5, 6]; // Example data part (this should be your actual converted data)
+let checksum = createChecksum(hrp, data);
+console.log("Checksum:", checksum);
+```
+
+### 数学原理
+
+`PolyMod`算法本质上是一个使用特定生成多项式的循环冗余校验（CRC）算法。这个生成多项式是经过选择的，能够最大化常见错误模式的检测能力，例如拼写错误、字符遗漏、错误插入等。
+
+
+### 使用场景
+
+Bech32地址主要用于比特币的SegWit交易，其中包括了P2WPKH（Pay to Witness Public Key Hash）和P2WSH（Pay to Witness Script Hash）类型的地址。这些地址类型通过减少交易大小来降低交易费用，同时提高交易的隐私性和效率。
+
+### 优点
+
+- **更高的错误检测能力：** Bech32的设计提供了强大的错误检测和纠正能力。
+- **用户友好：** 地址全小写，易于阅读和抄写。
+- **效率与兼容性：** 地址长度更短，适用于QR码等多种场景。
+
+Bech32编码为比特币地址提供了一个更加安全和用户友好的格式，是比特币网络中SegWit技术的一个重要组成部分。
