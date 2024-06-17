@@ -61,7 +61,7 @@ type Terms = {
 };
 ```
 
-## 示例
+### 示例
 
 ｜ DOG•GO•TO•THE•MOON 蚀刻交易
 https://mempool.space/zh/tx/e79134080a83fe3e0e06ed6990c5a9b63b362313341745707a2bff7d788a1375
@@ -126,7 +126,7 @@ type Mint = {
 }
 ```
 
-## 示例
+### 示例
 
 ｜ GOLD•RUNE•STONE 铸造交易
 https://mempool.space/zh/tx/b4da683f34fa2a159f887012a67a14e56dbbf8e38e2da991be45869413544e0b
@@ -175,5 +175,73 @@ OP_PUSHBYTES_16 14cfa43314b80400cfa433b804e80700
     "tx": "568"
   },
   "pointer": null
+}
+```
+
+## 转账
+
+### 数据结构
+
+```js
+type Mint = {
+    block: U64;
+    tx: U32;
+}
+```
+
+### 示例
+
+｜ DOG•GO•TO•THE•MOON 转移交易
+https://mempool.space/zh/tx/966aff320562acd491458bded8fc9010590285aa3abd4801fe06192c242544ee
+
+**1. Raw OP_RETURN**
+
+```js
+OP_RETURN
+OP_PUSHNUM_13
+OP_PUSHBYTES_21 160b00c0a2330380ea8ed51f0b00008094ebdc030d
+```
+
+**2. ULEB128解码**
+
+```js
+[
+  { decimal: 22n, hex: '16' },
+  { decimal: 11n, hex: '0b' },
+  { decimal: 0n, hex: '00' },
+  { decimal: 840000n, hex: 'c0a233' },
+  { decimal: 3n, hex: '03' },
+  { decimal: 8500000000n, hex: '80ea8ed51f' },
+  { decimal: 11n, hex: '0b' },
+  { decimal: 0n, hex: '00' },
+  { decimal: 0n, hex: '00' },
+  { decimal: 1000000000n, hex: '8094ebdc03' },
+  { decimal: 13n, hex: '0d' },
+];
+```
+
+**3. 对照码表翻译**
+
+```js
+{
+  "edicts": [
+    {
+      "id": {
+        "block": "840000",
+        "tx": "3"
+      },
+      "amount": "8500000000",
+      "output": "11"
+    },
+    {
+      "id": {
+        "block": "840000",
+        "tx": "3"
+      },
+      "amount": "1000000000",
+      "output": "13"
+    }
+  ],
+  "pointer": "11"
 }
 ```
