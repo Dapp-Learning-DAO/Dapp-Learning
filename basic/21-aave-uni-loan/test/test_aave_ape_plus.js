@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const {network, config} = require('hardhat');
+const {network, config, ethers} = require('hardhat');
 
 const networkAddressMapping = config.networkAddressMapping;
 
@@ -11,6 +11,8 @@ if (!networkAddressMapping[network.name]) {
 const {
   daiAddress,
   wethAddress,
+  usdcAddress,
+  wbtcAddress,
  
   lendingPoolAddressesProviderAddress,
   uniswapRouterAddress,
@@ -26,6 +28,31 @@ const depositEthInAave = async (_poolAddress, _userAddress, _amount) => {
 
   let ethDeposit = await ethGateway.depositETH(_poolAddress, _userAddress, 0, metadata)
   // console.log('eth deposit successfully');
+}
+
+const supplyWbtcInAave = async (_userAddress, _amount) => {
+  const lendingPool = await getLendingPool();
+  await lendingPool['supply'](wbtcAddress, _amount, _userAddress, 0);
+}
+
+const swapEthToWbtc = async (_amount, _userAddress) => {
+  const uniswapRouter = await ethers.getContractAt('ISwapRouter', uniswapRouterAddress)
+  //swap use uniswap v3 ISwapRouter exactOutputSingle
+  const deadline = Math.floor(Date.now() / 1000) + 60;
+  const recipient = _userAddress;
+  const sqrtPriceLimitX96 = 0;
+  const amountIn = await uniswapRouter.exactOutputSingle({
+    tokenIn: wethAddress,
+    tokenOut: wbtcAddress,
+    fee: 3000,
+    recipient,
+    deadline,
+    amountOut: _amount,
+    amountInMaximum: ethers.MaxUint256,
+    sqrtPriceLimitX96,
+  });
+
+  return amountIn;
 }
 
 const getLendingPool = async () => {
@@ -70,11 +97,11 @@ const delegateCreditToTheApe = async (_asset, _interestRateMode = 2) => {
   let assetDebtApproval = await assetDebtToken['approveDelegation'](aaveApe.target, ethers.MaxUint256)
 }
 
-describe("AaveApe", function () {
+describe("AaveApePlus", function () {
 
   beforeEach(async () => {
 
-    const AaveApe = await ethers.getContractFactory("AaveApe");
+    const AaveApe = await ethers.getContractFactory("AaveApePlus");
     aaveApe = await AaveApe.deploy(lendingPoolAddressesProviderAddress, uniswapRouterAddress);
     const [user] = await ethers.getSigners();
     userAddress = user.address;
@@ -102,21 +129,22 @@ describe("AaveApe", function () {
     })
   })
 
-  describe("Going ape", function () {
+  describe("Going flash ape", function () {
     it("Revert if the user has no collateral", async function () {
 
-      await expect(aaveApe['ape'](wethAddress, daiAddress, 2)).to.be.reverted;
+      await expect(aaveApe['flashApe'](wethAddress, daiAddress, 1, 2)).to.be.reverted;
 
     })
 
     it("Revert if the user has not delegated credit to the Ape", async function () {
 
       await depositEthInAave(pooladdress, userAddress, "5")
-      await expect(aaveApe['ape'](wethAddress, daiAddress, 2)).to.be.reverted;
+      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
+      await expect(aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, 2)).to.be.reverted;
 
     })
 
-    it("Succeeds if the user has collateral & has delegated credit", async function () {
+    it("Succeeds flash ape, looooooooooooping", async function () {
       let interestRateMode = 2
 
       await depositEthInAave(pooladdress, userAddress, "5")
@@ -127,7 +155,9 @@ describe("AaveApe", function () {
 
       let aBalanceBefore = await aToken.balanceOf(userAddress)
       let debtBalanceBefore = await debtToken.balanceOf(userAddress)
-      await expect(aaveApe['ape'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape')
+
+      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
+      await expect(aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape')
 
       let aBalanceAfter = await aToken.balanceOf(userAddress)
       let debtBalanceAfter = await debtToken.balanceOf(userAddress)
@@ -135,33 +165,28 @@ describe("AaveApe", function () {
       expect(aBalanceAfter > aBalanceBefore)
       expect(debtBalanceAfter > debtBalanceBefore)
     })
-
-    it("flash ape, looooooooooooping", async function () {
-      let interestRateMode = 2
-
-      await delegateCreditToTheApe(daiAddress, interestRateMode)
-
-      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
-      await expect(aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape')
-    })
   })
 
-  describe("Unwinding an ape", function () {
+  describe("flash unwind an ape", function () {
+    it("Revert if there is no collateral", async function () {
+      await expect(aaveApe['flashUnwind'](wethAddress, daiAddress, 1, 2)).to.be.reverted;
+    })
+
     it("Revert if there is no debt to repay", async function () {
-
-      await expect(aaveApe['unwindApe'](wethAddress, daiAddress, 2)).to.be.reverted;
-
+      await depositEthInAave(pooladdress, userAddress, "5")
+      await expect(aaveApe['flashUnwind'](wethAddress, daiAddress, 1, 2)).to.be.reverted;
     })
 
     it("Revert if the user has not given Aave Ape an allowance on the aToken", async function () {
-
       let interestRateMode = 2
 
       await depositEthInAave(pooladdress, userAddress, "5")
       await delegateCreditToTheApe(daiAddress, interestRateMode)
-      await aaveApe['ape'](wethAddress, daiAddress, interestRateMode)
-      await expect(aaveApe['unwindApe'](wethAddress, daiAddress, interestRateMode)).to.be.reverted;
 
+      let borrowAmount = ethers.parseEther('40000') //borrow 40000 DAI
+      await aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)
+
+      await expect(aaveApe['flashUnwind'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.be.reverted;
     })
 
     it("Revert if the user does not have enough apeAsset collateral to repay the debt", async function () {
@@ -171,11 +196,13 @@ describe("AaveApe", function () {
       await depositEthInAave(pooladdress, userAddress, "5")
       await delegateCreditToTheApe(daiAddress, interestRateMode)
 
+      let daiAmount = ethers.parseEther('40000')
+
       // Go long USDC, which we don't have deposited
-      await aaveApe['ape'](usdcAddress, daiAddress, interestRateMode)
+      await aaveApe['flashApe'](usdcAddress, daiAddress, daiAmount, interestRateMode)
 
       // When we go to unwind, we don't have enough USDC to pay our debt
-      await expect(aaveApe['unwindApe'](usdcAddress, daiAddress, interestRateMode)).to.be.reverted;
+      await expect(aaveApe['flashUnwind'](usdcAddress, daiAddress, daiAmount, interestRateMode)).to.be.reverted;
 
     })
 
@@ -185,7 +212,9 @@ describe("AaveApe", function () {
 
       await depositEthInAave(pooladdress, userAddress, "5")
       await delegateCreditToTheApe(daiAddress, interestRateMode)
-      await aaveApe['ape'](wethAddress, daiAddress, interestRateMode)
+
+      let borrowAmount = ethers.parseEther('40000')
+      await aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)
 
       let aToken = await getAToken(wethAddress)
       let debtToken = await getDebtToken(daiAddress, interestRateMode, true)
@@ -195,15 +224,57 @@ describe("AaveApe", function () {
       let aBalanceBefore = await aToken.balanceOf(userAddress)
       let debtBalanceBefore = await debtToken.balanceOf(userAddress)
 
-      await expect(aaveApe['unwindApe'](wethAddress, daiAddress, interestRateMode)).to.emit(aaveApe, 'Ape');
+      await expect(aaveApe['flashUnwind'](wethAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape');
 
       let aBalanceAfter = await aToken.balanceOf(userAddress)
       let debtBalanceAfter = await debtToken.balanceOf(userAddress)
 
       expect(aBalanceAfter < aBalanceBefore)
       expect(debtBalanceAfter === 0)
-
     })
+
+
+    it("Success if has two ape assets, unwind debt amount greater than one", async function () {
+
+      let interestRateMode = 2
+
+      await depositEthInAave(pooladdress, userAddress, "5")
+
+      //wrap eth to weth
+      const weth = await ethers.getContractAt('IWETH', wethAddress)
+      await weth.deposit({ value: ethers.parseEther('100') })
+
+      await weth.approve(uniswapRouterAddress, ethers.MaxUint256)
+
+      let btcAmount = ethers.parseUnits('0.1', 8)
+      await swapEthToWbtc(btcAmount, userAddress)
+
+      let wbtc = await ethers.getContractAt('IERC20', wbtcAddress)
+      await wbtc.approve(pooladdress, ethers.MaxUint256)
+
+      await supplyWbtcInAave(userAddress, btcAmount)
+      await delegateCreditToTheApe(daiAddress, interestRateMode)
+
+      let borrowAmount = ethers.parseEther('40000')
+      await aaveApe['flashApe'](wethAddress, daiAddress, borrowAmount, interestRateMode)
+
+      let aToken = await getAToken(wbtcAddress)
+      let debtToken = await getDebtToken(daiAddress, interestRateMode, true)
+
+      await aToken.approve(aaveApe.target, ethers.MaxUint256)
+
+      let aBalanceBefore = await aToken.balanceOf(userAddress)
+      let debtBalanceBefore = await debtToken.balanceOf(userAddress)
+
+      await expect(aaveApe['flashUnwind'](wbtcAddress, daiAddress, borrowAmount, interestRateMode)).to.emit(aaveApe, 'Ape');
+
+      let aBalanceAfter = await aToken.balanceOf(userAddress)
+      let debtBalanceAfter = await debtToken.balanceOf(userAddress)
+
+      expect(aBalanceAfter < aBalanceBefore)
+      expect(debtBalanceAfter === 0)
+    })
+
   })
 
 });
