@@ -114,3 +114,66 @@ OP_PUSHBYTES_33 02010487a1c3f0c0ebf7fb9d01010503d4040595e80706808084fea6dee11116
   "flags": "1",
 }
 ```
+
+## 铸造
+
+### 数据结构
+
+```js
+type Mint = {
+    block: U64;
+    tx: U32;
+}
+```
+
+## 示例
+
+｜ GOLD•RUNE•STONE 铸造交易
+https://mempool.space/zh/tx/b4da683f34fa2a159f887012a67a14e56dbbf8e38e2da991be45869413544e0b
+
+**1. Raw OP_RETURN**
+
+```js
+OP_RETURN
+OP_PUSHNUM_13
+OP_PUSHBYTES_16 14cfa43314b80400cfa433b804e80700
+```
+
+**2. ULEB128解码**
+
+```js
+[
+  { decimal: 20n, hex: '14' },
+  { decimal: 840271n, hex: 'cfa433' },
+  { decimal: 20n, hex: '14' },
+  { decimal: 568n, hex: 'b804' },
+  { decimal: 0n, hex: '00' },
+  { decimal: 840271n, hex: 'cfa433' },
+  { decimal: 568n, hex: 'b804' },
+  { decimal: 1000n, hex: 'e807' },
+  { decimal: 0n, hex: '00' },
+];
+```
+
+**3. 对照码表翻译**
+
+```js
+{
+  "edicts": [
+    {
+      "id": {
+        "block": "840271",
+        "tx": "568"
+      },
+      "amount": "1000",
+      "output": "0"
+    }
+  ],
+  "etching": null,
+  "mint": {
+    "block": "840271",
+    "tx": "568"
+  },
+  "pointer": null
+}
+```
