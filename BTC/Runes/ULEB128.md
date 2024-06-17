@@ -28,3 +28,89 @@ ULEB128 解码需要观察每个字节的最高位（也称为继续位），在
 - 第三个字节 33（二进制：00110011），数据位：0110011（二进制），十进制值为 51。
 
 相加得到 79 + 36 _ 128 + 51 _ 128^2 = 840271
+
+## 在Runes中应用
+
+## 蚀刻
+
+### 数据结构
+
+```js
+type Etching = {
+  divisibility?: U8;
+  premine?: U128;
+  rune?: Rune;
+  spacers?: U32;
+  symbol?: Symbol;
+  terms?: Terms;
+};
+
+type Rune = u128;
+
+type Terms = {
+  amount?: U128;
+  cap?: U128;
+  height?: {
+    start?: U64;
+    end?: U64;
+  };
+  offset?: {
+    start?: U64;
+    end?: U64;
+  };
+};
+```
+
+## 示例
+
+｜ DOG•GO•TO•THE•MOON 蚀刻交易
+https://mempool.space/zh/tx/e79134080a83fe3e0e06ed6990c5a9b63b362313341745707a2bff7d788a1375
+
+**1. Raw OP_RETURN**
+
+```js
+OP_RETURN
+OP_PUSHNUM_13
+OP_PUSHBYTES_33 02010487a1c3f0c0ebf7fb9d01010503d4040595e80706808084fea6dee1111601
+```
+
+**2. ULEB128解码**
+
+```js
+[
+  { decimal: 2n, hex: '02' },
+  { decimal: 1n, hex: '01' },
+  { decimal: 4n, hex: '04' },
+  { decimal: 11382812169668186247n, hex: '87a1c3f0c0ebf7fb9d01' },
+  { decimal: 1n, hex: '01' },
+  { decimal: 5n, hex: '05' },
+  { decimal: 3n, hex: '03' },
+  { decimal: 596n, hex: 'd404' },
+  { decimal: 5n, hex: '05' },
+  { decimal: 128021n, hex: '95e807' },
+  { decimal: 6n, hex: '06' },
+  { decimal: 10000000000000000n, hex: '808084fea6dee111' },
+  { decimal: 22n, hex: '16' },
+  { decimal: 1n, hex: '01' },
+];
+```
+
+**3. 对照码表翻译**
+
+```js
+{
+  "edicts": [],
+  "etching": {
+    "divisibility": "5",
+    "premine": "10000000000000000",
+    "rune": "11382812169668186247",
+    "spacers": "596",
+    "symbol": "128021",
+    "turbo": false,
+    "terms": null
+  },
+  "mint": null,
+  "pointer": "1",
+  "flags": "1",
+}
+```
