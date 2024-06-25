@@ -49,6 +49,60 @@ Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-
 
 [(Polygon Data Avail)](https://blog.polygon.technology/introducing-avail-by-polygon-a-robust-general-purpose-scalable-data-availability-layer-98bc9814c048) Avail 是一个通用的、可扩展的、专注于数据可用性的区块链，针对独立链、侧链和链外扩展解决方案。
 
+## maticjs-ethers例子
+
+maticjs-ethers集成了ethers.js，可以用于交互Polygon的主链和子链，下面我们使用hardhat分别在8545端口和8546端口启动节点，来模拟Layer1和Layer2
+
+启动L1节点
+
+```bash
+npx hardhat node
+```
+
+在另一个终端启动L2节点
+
+```bash
+npx hardhat node --port 8546
+```
+
+在L1和L2上都部署一个ERC20合约
+
+```bash
+npx hardhat run scripts/sample-script.js --network localhost
+
+npx hardhat run scripts/sample-script.js --network localhostl2
+```
+
+![Alt text](./images/image.png)
+
+部署完成后，将合约地址填写到maticjs-ethers/src/config.js文件中
+
+![Alt text](./images/image2.png)
+
+进入maticjs-ethers目录
+
+```bash
+cd maticjs-ethers
+cp .env.example .env
+```
+
+将下面的内容填写到`.env`文件中，这里我们选择hardhat测试账户的前两个账户分别作为from和to
+
+```
+USER1_FROM=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+USER1_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+USER2_FROM=0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+PARENT_RPC=http://localhost:8545
+CHILD_RPC=http://localhost:8546
+```
+
+测试余额和转账操作
+```bash
+node src/index.js
+```
+
+![Alt text](./images/image3.png)
+
 <br/>
 <br/>
 
