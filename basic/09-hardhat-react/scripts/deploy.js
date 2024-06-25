@@ -1,12 +1,12 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 // yours, or create new ones.
-async function main() {
+async function main () {
   // This is just a convenience check
   if (network.name === 'hardhat') {
     console.warn(
       'You are trying to deploy a contract to the Hardhat Network, which' +
-        'gets automatically created and destroyed every time. Use the Hardhat' +
-        " option '--network localhost'"
+      'gets automatically created and destroyed every time. Use the Hardhat' +
+      " option '--network localhost'"
     )
   }
 
@@ -29,7 +29,7 @@ async function main() {
   saveFrontendFiles(token, deployer)
 }
 
-function saveFrontendFiles(token, deployerAccount) {
+function saveFrontendFiles (token, deployerAccount) {
   const fs = require('fs')
   const contractsDir = __dirname + '/../frontend/src/contracts'
 
@@ -39,7 +39,7 @@ function saveFrontendFiles(token, deployerAccount) {
 
   fs.writeFileSync(
     contractsDir + '/contract-address.json',
-    JSON.stringify({ contractAddress: token.address }, undefined, 2)
+    JSON.stringify({ contractAddress: token.target }, undefined, 2)
   )
 
   const TokenArtifact = artifacts.readArtifactSync('SimpleToken')
