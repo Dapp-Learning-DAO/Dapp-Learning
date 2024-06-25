@@ -149,7 +149,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
-38. [ether-Rust](https://github.com/tomusdrw/rust-web3) ✅
+38. [alloy-Rust](basic/38-alloy-rust) ✅
 39. [Multicall](basic/39-Multicall) ✅
 40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 41. [Foundry](basic/41-foundry/README.md)
