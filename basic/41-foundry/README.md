@@ -410,7 +410,7 @@ Last executed:
 # load the configs
 source .env
 # deploy
-forge script DeployMyNFT --rep--url <RCP_URL> --broadcast --verify
+forge script DeployMyNFT --rpc--url <RCP_URL> --broadcast --verify
 ```
 
 The --verify parameter is to open source the contract code. 
