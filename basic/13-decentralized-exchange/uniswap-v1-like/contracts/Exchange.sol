@@ -120,7 +120,7 @@ contract Exchange is ERC20 {
         return getAmount(_tokenSold, tokenReserve, address(this).balance);
     }
 
-   
+
 
     function ethToToken(uint256 _minTokens, address recipient) private {
         uint256 tokenReserve = getReserve();
@@ -186,6 +186,7 @@ contract Exchange is ERC20 {
             address(this).balance
         );
 
+        //给 owner打钱
         IERC20(tokenAddress).transferFrom(
             msg.sender,
             address(this),

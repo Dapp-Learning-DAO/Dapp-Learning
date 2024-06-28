@@ -24,7 +24,7 @@ TheGraph defines that how to create data index, which is called Subgraph, includ
 1. Install related dependencies
 
    ```bash
-   yarn install
+   npm install
 
    #node version v20.11.0
    ```

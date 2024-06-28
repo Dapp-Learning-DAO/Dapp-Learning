@@ -1,5 +1,4 @@
-require('@nomiclabs/hardhat-waffle');
-const fs = require('fs');
+require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to

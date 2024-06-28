@@ -77,7 +77,7 @@ contract HappyRedPacket is Initializable {
         require(_number < 256, "At most 255 recipients");
         require(_token_type == 0 || _token_type == 1, "Unrecognizable token type");
 
-        // require minium 0.1 for each user
+        // require minimum 0.1 for each user
         require(_total_tokens > 10**(IERC20(_token_addr).decimals() - 1) * _number , "At least 0.1 for each user");
         
         uint256 received_amount = _total_tokens;
@@ -139,12 +139,12 @@ contract HappyRedPacket is Initializable {
             if (total_number - claimed_number == 1)
                 claimed_tokens = remaining_tokens;
             else{
-                // reserve minium amount => (total_number - claimed_number) * 0.1
+                // reserve minimum amount => (total_number - claimed_number) * 0.1
                 uint reserve_amount = (total_number - claimed_number) * minium_value;
                 uint distribute_tokens = remaining_tokens - reserve_amount;
                 claimed_tokens = random(seed, nonce) % (distribute_tokens * 2/ (total_number - claimed_number));
 
-                // minium claimed_tokens for user is 0.1 ; and round the claimed_tokens to decimal 0.1
+                // minimum claimed_tokens for user is 0.1 ; and round the claimed_tokens to decimal 0.1
                 claimed_tokens = claimed_tokens < minium_value ? minium_value : (claimed_tokens - (claimed_tokens % minium_value));
             }
         } else {

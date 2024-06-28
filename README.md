@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./DappLearning-logo.svg" style="margin: 0 auto 40px;" width="380" />
+  <img src="./DappLearning-logo.png" style="margin: 0 auto 40px;" />
   <!-- <h1>Dapp Learning</h1> -->
   <h4 align="center">
     Definitive Guide for Decentralized-app(Dapp) Development on Blockchain
@@ -26,11 +26,11 @@ We are designed for developers to step into blockchain DAPP development, where t
 
 We are a decentralized learning group to study the mainstream DAPP projects together and share thoughts every week. The weekly sharing will be recorded and uploaded to  [Youtube](https://www.youtube.com/c/DappLearning/videos).
 
-We adhere to the concept of [open source university](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
+We adhere to the concept of [open source university](https://dapplearning.org/sharing) and follow DAO's governance. Currently, we are sponsored by [Ethereum foundation](https://esp.ethereum.foundation/en/), and accept grants in [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1). All the funds will be awarded to whoever makes valuable contributions to us. Please follow us on Twitter [@Dapp_Learning](https://twitter.com/Dapp_Learning) or WeChat Official Account [Welcome to Dapp-Learning](https://mp.weixin.qq.com/s/xcH7b4jVIagoVby9Ci6-kA) to keep track of our latest progress.
 
 We need more builders to help make our community grow -- contributors are welcomed from all backgrounds! Feel free to send us pull requests to set up new tutorials or improve our current tutorial projects. Correcting spelling errors is also  helpful to us 🤗.
 
-Join our developer community by submitting PR or sharing at [dapp learning university](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
+Join our developer community by submitting PR or sharing at [dapp learning university](https://dapplearning.org/sharing). Once you submit three PRs, you will be promoted to be a pull request reviewer who could participate in our Dao's governance. Join our [Discord](https://discord.gg/cRYNYXqPeR) or [Telegram](https://t.me/joinchat/48Mp2jy4Yw40MmI1) if you want to communicate  any technical issues  with us.
 For more **project management rules**, please see [how new members participate and project governance rules](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/dao-en.md). Welcome to join us if you share the same value.
 
 <details>
@@ -44,7 +44,7 @@ For more **project management rules**, please see [how new members participate a
 - Wechat Official Account: Dapp Learning
 - [Bilibili](https://space.bilibili.com/2145417872)
 - [notion](https://www.notion.so/dapplearning/Dapp-Learning-DAO-a5f7b5e29bb744578f1c1ce99783cf2d)
-- [Sharing Meeting](https://dapplearning.notion.site/b37a0a4ab4e646e3af5758bc977c5bc8?v=f8c3344b344d45a6b1517ba90262c308)
+- [Sharing Meeting](https://dapplearning.org/sharing)
 - [Gitcoin](https://gitcoin.co/grants/3414/dapp-learning-developer-group-1)
 - [Project Fund Management](https://app.safe.global/matic:0x2A6D09B3b11E5455a37F907f2ec885E0Be704779/balances)
 - [linktr](https://linktr.ee/dapplearning)
@@ -149,7 +149,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
-38. [ether-Rust](https://github.com/tomusdrw/rust-web3) ✅
+38. [alloy-Rust](basic/38-alloy-rust) ✅
 39. [Multicall](basic/39-Multicall) ✅
 40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 41. [Foundry](basic/41-foundry/README.md)
@@ -160,6 +160,7 @@ You are welcome to PR improvements to existing tutorial projects or to create mo
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [ZK Voting](basic/48-ZK-Voting) ⌛
+49. [Account Abstraction](basic/49-aa)  ✅
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governance](https://github.com/withtally/safeguard)  ⬜
@@ -219,28 +220,29 @@ You can refer to our study group's learning roadmap, which is better with the vi
 
 01. [UniswapV2](defi/Uniswap-V2/readme.md) ✅
 02. [UniswapV3](defi/Uniswap-V3/readme.md) ✅
-03. [Curve](defi/Curve/README.md) ⌛
-04. [Compound](defi/Compound/readme.md) ✅
-05. [Aave](https://docs.aave.com/portal/)  ✅
-06. [Liquity](defi/Liquity/) ✅
-07. [Euler](defi/Euler/readme.md) ⌛
-08. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-09. [YFI](https://yearn.finance/) ⌛
-10. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
-11. [Sushi](https://docs.sushi.com/) ✅
-12. [OPYN](https://v2.opyn.co/)⌛
-13. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
-14. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-15. [RAI](defi/RAI/)⌛
-16. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-17. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-18. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-19. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
-20. [0x-protocol](defi/0x-protocal/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
-21. [Bancor](https://bancor.network/)⌛
-22. [Set](https://www.tokensets.com/)
-23. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
-24. [Element](https://app.element.fi/fixedrates)
+03. [CurveV1](defi/Curve-V1/README.md) ⌛
+04. [CurveV2](defi/Curve-V2/readme.md) ⌛
+05. [Compound](defi/Compound/readme.md) ✅
+06. [Aave](https://docs.aave.com/portal/)  ✅
+07. [Liquity](defi/Liquity/) ✅
+08. [Euler](defi/Euler/readme.md) ⌛
+09. [SNX](https://github.com/Synthetixio) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+10. [YFI](https://yearn.finance/) ⌛
+11. [Perpetual Protocol](https://www.chainnews.com/articles/163436212237.htm) ⌛
+12. [Sushi](https://docs.sushi.com/) ✅
+13. [OPYN](https://v2.opyn.co/)⌛
+14. [Alchemix](https://github.com/alchemix-finance/alchemix-protocol) ✅
+15. [AMPL](https://roninchow.gitbook.io/ampleforth-cn/technology) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+16. [RAI](defi/RAI/)⌛
+17. [DYDX](https://dydx.exchange/)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+18. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+19. [DODO Trading API](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+20. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
+21. [0x-protocol](defi/0x-protocol/README.md) [👉 Pick up this Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
+22. [Bancor](https://bancor.network/)⌛
+23. [Set](https://www.tokensets.com/)
+24. [Dhedge](https://docs.dhedge.org/dhedge-protocol/managing-on-v2)
+25. [Element](https://app.element.fi/fixedrates)
 
 ![Defi-Roadmap](./docs/imgs/Defi-Roadmap.png)
 
@@ -294,13 +296,22 @@ Item list:
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
  - [Immunefi ](https://immunefi.com/learn/)
 
- ## Cryptocurrency Jobs Websites
+## Cryptocurrency Jobs Websites
 Feel like a career in the crypto industry? The following websites fyi:
  - https://cryptocurrencyjobs.co/
  - https://angel.co/jobs
  - https://www.paradigm.xyz/opportunities/
  - https://web3.career/
  - https://portfoliojobs.a16z.com/jobs?markets=Crypto
+
+## Hackathons
+
+Participating in hackathons increases practical experience, you can participate in:
+
+- [Gitcoin](https://gitcoin.co/hackathon/)
+- [boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate)
+- [Immunefi Bug Bounty Platform](https://immunefi.com/)
+- [Code4rena Bug Bounty Platform](https://code4rena.com/)
 
 ## Project Ecology
 Dapp-learning has a series of derivative projects and joint maintenance projects. Refer to [related projects](./docs/relative-projects-en.md). Learn more about the ecology of the Dapp-Learning project.
@@ -379,79 +390,60 @@ Shout out to the following organizations for their unconditional donations to us
 
 <br>
 <div align="left">
-  <a href="https://ethereum.foundation/">
+  <a href="https://ethereum.foundation/" style="display: inline-block; ">
     <img align="top" src="./docs/imgs/sponsor-partners/ethereum-foundation-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://snzholding.com/">
-    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.nervos.org/">
-    <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://t.me/planckeropencommunity/">
-    <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
-  </a>
-</div>
-<div align="left">
-  <a href="https://degate.com/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://loopring.org/">
-    <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.optimism.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.starknet.io/">
+    <img align="top" src="./docs/imgs/sponsor-partners/starknet-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://scroll.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/Scroll-logo.png" />
   </a>
-  &nbsp;&nbsp;
-  &nbsp;&nbsp;
-  <a href="https://www.bing-ventures.com/">
-    <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
-  </a>
-  
 </div>
 <div align="left">
+  <a href="https://www.nervos.org/">
+    <img align="top" src="./docs/imgs/sponsor-partners/nervos-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/planckeropencommunity/">
+    <img align="top" src="./docs/imgs/sponsor-partners/plancker-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://degate.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Degate-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://loopring.org/">
+    <img align="top" src="./docs/imgs/sponsor-partners/Loopring-logo.png" />
+  </a>
+</div>
+<div align="left">
+  <a href="https://snzholding.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/SNZ-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.bing-ventures.com/">
+    <img align="top" src="./docs/imgs/sponsor-partners/BingVentures-logo.png" />
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://capital.hashkey.com/en/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
-  &nbsp;&nbsp;
+</div>
+<div align="left">
   <a href="https://eth-store.w3eth.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/EthStorage-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://bingx.com/en-us/">
     <img align="top" src="./docs/imgs/sponsor-partners/BingX-logo.png" />
   </a>
-</div>
-<div align="left">
   <a href="https://mapprotocol.io/">
     <img align="top" src="./docs/imgs/sponsor-partners/MapProtocol-logo.png" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://www.optimism.io/">
-    <img align="top" src="./docs/imgs/sponsor-partners/OP-logo.png" />
-  </a>
-  &nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://minaprotocol.com/">
     <img align="top" src="./docs/imgs/sponsor-partners/Mina-logo.png" />
   </a>
-  &nbsp;&nbsp;
 </div>
 <br>
 

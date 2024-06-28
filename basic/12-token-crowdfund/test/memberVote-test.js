@@ -17,14 +17,13 @@ describe("MemberVote contract", function () {
         voteContractFactory = await ethers.getContractFactory('MembersVote')
 
         ownerContract = await voteContractFactory.deploy(100, 100, 2)
-        await ownerContract.deployed()
 
         artifact = artifacts.readArtifactSync('MembersVote')
-        memberContract = new ethers.Contract(ownerContract.address, artifact.abi, Bob)
-        cartContract = new ethers.Contract(ownerContract.address, artifact.abi, Cart) 
-        dogContract = new ethers.Contract(ownerContract.address, artifact.abi, Dog)
+        memberContract = new ethers.Contract(ownerContract.target, artifact.abi, Bob)
+        cartContract = new ethers.Contract(ownerContract.target, artifact.abi, Cart) 
+        dogContract = new ethers.Contract(ownerContract.target, artifact.abi, Dog)
 
-        expect(ownerContract.address).to.not.equal(null)
+        expect(ownerContract.target).to.not.equal(null)
     })
 
     it('Contribute to the club', async function () {

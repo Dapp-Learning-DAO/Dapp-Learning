@@ -3,25 +3,25 @@
 //
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-const hre = require("hardhat");
+const { ethers } = require('hardhat');
 const { readDeployment } = require('./utils');
 
 async function main() {
     const deployment = readDeployment();
-    const addr = deployment.dndAddress;
+    const addr = deployment.rnvAddress;
     const requestID = deployment.requestID;
+   
+    const random = await ethers.getContractAt("RandomNumberVRF",addr);
 
-    const dnd = await hre.ethers.getContractAt("DungeonsAndDragonsCharacter",addr);
+    // get RequestStatus 
+    console.log("Going to get RequestStatus");
+    const requests = await random.getRequestStatus(requestID);
+  
+    console.log(requests);
 
-    // Do the blindCharacter 
-    console.log("Going to do blindCharacter");
-    const tx1 = await dnd.blindCharacter(requestID);
-    await tx1.wait();
-    console.log("BlindCharacter finished");
-
-    // get character 
-    console.log("Going to get characters");
-    const overview = await dnd.characters(0)
+    // get randomWords 
+    console.log("Going to get randomWords");
+    const overview = await requests.randomWords;
     console.log(overview);
     
 }

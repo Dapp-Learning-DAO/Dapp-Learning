@@ -249,7 +249,7 @@ abstract contract ERC404 is Ownable {
             _owned[from].pop();
             // update index for the moved id
             _ownedIndex[updatedId] = _ownedIndex[amountOrId];
-            // push token to to owned
+            // push token to owned
             _owned[to].push(amountOrId);
             // update index for to owned
             _ownedIndex[amountOrId] = _owned[to].length - 1;

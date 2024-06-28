@@ -23,7 +23,7 @@ import { NoTokensMessage } from './NoTokensMessage'
 // This is the Hardhat Network id, you might change it in the hardhat.config.js
 // Here's a list of network ids https://docs.metamask.io/guide/ethereum-provider.html#properties
 // to use when deploying to other networks.
-const HARDHAT_NETWORK_ID = '5'
+const HARDHAT_NETWORK_ID = '11155111'
 
 // This is an error code that indicates that the user canceled a transaction
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001
@@ -67,7 +67,7 @@ export class Dapp extends React.Component {
     this.state = this.initialState
   }
 
-  render() {
+  render () {
     // Ethereum wallets inject the window.ethereum object. If it hasn't been
     // injected, we instruct the user to install MetaMask.
     if (window.ethereum === undefined) {
@@ -109,7 +109,7 @@ export class Dapp extends React.Component {
               Welcome <b>{this.state.selectedAddress}</b>, you have{' '}
               <b>
                 {/* show human read balance (deployed contract with precise 1 in /scripts/deploy.js) */}
-                {ethers.utils.formatUnits(this.state.balance, this.state.decimals)} {this.state.tokenData.symbol}
+                {ethers.formatUnits(this.state.balance, this.state.decimals)} {this.state.tokenData.symbol}
               </b>
               .
             </p>
@@ -147,7 +147,7 @@ export class Dapp extends React.Component {
             {/*
               If the user has no tokens, we don't show the Tranfer form
             */}
-            {this.state.balance.eq(0) && (
+            {this.state.balance === 0 && (
               <NoTokensMessage deployContract={() => this._deployContract()} />
             )}
             {this.state.deployBegin && <Loading />}
@@ -158,11 +158,11 @@ export class Dapp extends React.Component {
               The component doesn't have logic, it just calls the transferTokens
               callback.
             */}
-            {this.state.balance.gt(0) && (
+            {this.state.balance > 0 && (
               <Transfer
                 transferTokens={(to, amount) =>
                   // convert to contract precise amount
-                  this._transferTokens(to, ethers.utils.parseUnits(amount, this.state.decimals))
+                  this._transferTokens(to, ethers.parseUnits(amount, this.state.decimals))
                 }
               />
             )}
@@ -172,13 +172,13 @@ export class Dapp extends React.Component {
     )
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     // We poll the user's balance, so we have to stop doing that when Dapp
     // gets unmounted
     this._stopPollingData()
   }
 
-  async _connectWallet() {
+  async _connectWallet () {
     // This method is run when the user clicks the Connect. It connects the
     // dapp to the user's wallet, and initializes it.
 
@@ -216,7 +216,7 @@ export class Dapp extends React.Component {
     })
   }
 
-  _initialize(userAddress) {
+  _initialize (userAddress) {
     // This method initializes the dapp
 
     // We first store the user's address in the component's state
@@ -234,18 +234,21 @@ export class Dapp extends React.Component {
     this._startPollingData()
   }
 
-  async _intializeEthers() {
+  async _intializeEthers () {
     // We first initialize ethers by creating a provider using window.ethereum
-    this._provider = new ethers.providers.Web3Provider(window.ethereum)
+    this._provider = new ethers.BrowserProvider(window.ethereum)
+    const signer = await this._provider.getSigner();
 
     // When, we initialize the contract using that provider and the token's
     // artifact. You can do this same thing with your contracts.
+    console.log('signer', signer, simpleTokenContractAddress,)
     this._simpleToken = new ethers.Contract(
       simpleTokenContractAddress,
       simpleTokenArtifact.abi,
-      this._provider.getSigner(0)
+      signer
     )
-    this.setState({decimals: await this._simpleToken.decimals()})
+    console.log('simpleToken', this._simpleToken)
+    this.setState({ decimals: await this._simpleToken.decimals() })
   }
 
   // The next to methods are needed to start and stop polling data. While
@@ -255,38 +258,41 @@ export class Dapp extends React.Component {
   // Note that if you don't need it to update in near real time, you probably
   // don't need to poll it. If that's the case, you can just fetch it when you
   // initialize the app, as we do with the token data.
-  _startPollingData() {
+  _startPollingData () {
     this._pollDataInterval = setInterval(() => this._updateBalance(), 1000)
 
     // We run it once immediately so we don't have to wait for it
     this._updateBalance()
   }
 
-  _stopPollingData() {
+  _stopPollingData () {
     clearInterval(this._pollDataInterval)
     this._pollDataInterval = undefined
   }
 
   // The next two methods just read from the contract and store the results
   // in the component state.
-  async _getTokenData() {
-    const name = await this._simpleToken.name()
-    const symbol = await this._simpleToken.symbol()
+  async _getTokenData () {
 
+    const name = await this._simpleToken?.name()
+    const symbol = await this._simpleToken?.symbol()
+    console.log('name', name, symbol)
     this.setState({ tokenData: { name, symbol } })
   }
 
-  async _updateBalance() {
-    const balance = await this._simpleToken.balanceOf(
+  async _updateBalance () {
+    const balance = await this._simpleToken?.balanceOf(
       this.state.selectedAddress
     )
+    console.log('balance', balance)
+    // ethers.BigNumber.isBigNumber(balance)
     this.setState({ balance })
   }
 
   // This method sends an ethereum transaction to transfer tokens.
   // While this action is specific to this application, it illustrates how to
   // send a transaction.
-  async _transferTokens(to, amount) {
+  async _transferTokens (to, amount) {
     // Sending a transaction is a complex operation:
     //   - The user can reject it
     //   - It can fail before reaching the ethereum network (i.e. if the user
@@ -344,18 +350,18 @@ export class Dapp extends React.Component {
   }
 
   // This method just clears part of the state.
-  _dismissTransactionError() {
+  _dismissTransactionError () {
     this.setState({ transactionError: undefined })
   }
 
   // This method just clears part of the state.
-  _dismissNetworkError() {
+  _dismissNetworkError () {
     this.setState({ networkError: undefined })
   }
 
   // This is an utility method that turns an RPC error into a human readable
   // message.
-  _getRpcErrorMessage(error) {
+  _getRpcErrorMessage (error) {
     if (error.data) {
       return error.data.message
     }
@@ -364,24 +370,24 @@ export class Dapp extends React.Component {
   }
 
   // This method resets the state
-  _resetState() {
+  _resetState () {
     this.setState(this.initialState)
   }
 
   // This method checks if Metamask selected network is Localhost:8545
-  _checkNetwork() {
+  _checkNetwork () {
     if (window.ethereum.networkVersion === HARDHAT_NETWORK_ID) {
       return true
     }
 
     this.setState({
-      networkError: 'Please connect Metamask to goerli',
+      networkError: 'Please connect Metamask to Sepolia',
     })
 
     return false
   }
 
-  async _deployContract() {
+  async _deployContract () {
     this.setState({ deployBegin: true })
     let simpleTokenContractFactory = new ethers.ContractFactory(
       simpleTokenArtifact.abi,

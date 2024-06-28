@@ -17,7 +17,7 @@ INFURA_ID=yyyyyyyy
 - Install Dependencies
 
 ```bash
-yarn
+npm install
 ```
 
 - Compile Contract
@@ -35,7 +35,7 @@ npx hardhat test
 - Deploy Contract
 
 ```bash
-npx hardhat run scripts/deploy_crowdfunding.js --network goerli
+npx hardhat run scripts/deploy_crowdfunding.js --network sepolia
 ```
 
 ## Crowdsale Type

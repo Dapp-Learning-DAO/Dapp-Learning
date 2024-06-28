@@ -14,14 +14,14 @@ async function main() {
         deployer.address
     );
 
-    console.log("Account balance:", (await deployer.getBalance()).toString());
+    console.log("Account balance:", (await ethers.provider.getBalance(deployer.address)).toString());
 
     //deploy Crowdfunding
     const crowdFundingContractFactory = await ethers.getContractFactory("CrowdFunding");
     const crowdFundingContract = await crowdFundingContractFactory.deploy();
-    await crowdFundingContract.deployed()
+    await crowdFundingContract.waitForDeployment();
 
-    console.log("CrowdFundingContract address:", crowdFundingContract.address);
+    console.log("CrowdFundingContract address:", crowdFundingContract.target);
 
     //start Project
     await crowdFundingContract.startProject("Buy toys","Buy toys",1,100)
