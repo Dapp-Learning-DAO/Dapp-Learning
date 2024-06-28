@@ -10,8 +10,9 @@ https://docs.dydx.exchange/#general
 
 #### 一、DYDX合约
 
-`// 全局 Storage
-contract P1Storage is
+`// 全局 Storage  
+```
+contract P1Storage is  
     Adminable,
     ReentrancyGuard
 {
@@ -89,12 +90,14 @@ struct TradeResult { // Trade以后返回的结构
     bool isBuy; // Taker方向
     bytes32 traderFlags; // 1-交易  2-清算  4-去杠杆
 }`
+```
 
 ## （一）Margin
 
 **1、存**
 
 `// 结算全局Funding - 结算用户Funding - 转账 - 修改用户Balance信息
+``` 
 function deposit(
     address account,
     uint256 amount
@@ -166,9 +169,11 @@ function withdraw(
         balance.toBytes32()
     );
 }`
+```
 
 ## （二）Trade
 
+```
 **1、入参**
 
 `参数1：address[] memory accounts
@@ -219,6 +224,8 @@ if (tradeResult.isBuy) { // Taker是买（开多）
     takerBalance.subFromPosition(tradeResult.positionAmount);
 }
 // 检查逻辑（检查参与交易的所有账户）
+```
+
 1、要么账户满足抵押率
 2、如果账户不满足抵押率，必须满足 
 [仓位大小没有增加+仓位方向未变+抵押率没有恶化]`
@@ -243,7 +250,8 @@ if (tradeResult.isBuy) { // Taker是买（开多）
 
 根据Order 和 Fill  计算好 两方需要相互划转的保证金和仓位，并返回结果
 
-`// 逻辑步骤
+```
+// 逻辑步骤
 // 确权 - 验签 - 参数验证 - 交换 - 返回结果
 // 订单结构
 // Hash(Order) 验证签名
@@ -280,7 +288,8 @@ if (taker != sender) {
         P1Getters(perpetual).hasAccountPermissions(taker, sender),
         "Sender does not have permissions for the taker"
     );
-}`
+}
+```
 
 **2、P1Liquidation**
 
@@ -480,7 +489,7 @@ Perp和Solo的转移
 **抵押率Ok：Positive部分 >= Negative部分*系数**
 
 **underWarter：Negative > Positive**
-
+```
 `// 系数
 // Admin   setMinCollateral  方法可修改 
 uint256 internal _MIN_COLLATERAL_;
@@ -499,12 +508,14 @@ function _isCollateralized(
     // 正的部分 必须满足大于 负的部分 * 系数
     return positive.mul(BaseMath.base()) >= negative.mul(context.minCollateral);
 }`
+```
 
 ## （二）撮合逻辑
 
 计算出撮合结果，Margin和Postion增减的数量
 
 然后分别更改Taker和Maker的 Margin和Positon
+```
 
 `if (tradeResult.isBuy) { // Taker为开多
     // Maker 增加Margin
@@ -521,11 +532,12 @@ function _isCollateralized(
     takerBalance.addToMargin(tradeResult.marginAmount);
     takerBalance.subFromPosition(tradeResult.positionAmount);
 }`
+```
 
 ## （三）资金费率逻辑
 
 1、全局资金费率
-
+```
 `// 数据结构
 struct Index {
     uint32 timestamp; // 结算时间
@@ -565,11 +577,13 @@ struct Index {
 // 计算资金费率的margin变动方法
 // 根据index的方向和开仓方向相同，付出资金费率；反之收取资金费率
 deltaMargin = (newValue - oldValue) * position`
+```
+
 
 ## （四）停止状态的结算逻辑
 
 计算用户仓位对应的数量 - 取出最大可取的值 - 修改用户Balance（如有没取的记录在抵押品数量）
-
+```
 `function withdrawFinalSettlement()
     external
     onlyFinalSettlement
@@ -627,8 +641,8 @@ deltaMargin = (newValue - oldValue) * position`
         amountToWithdraw,
         balance.toBytes32()
     );
-}`
-
+}
+```
 StarkEx采用的是有效性证明。
 
 ## StarkEX
