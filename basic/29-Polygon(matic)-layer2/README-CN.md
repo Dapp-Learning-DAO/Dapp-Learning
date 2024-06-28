@@ -68,16 +68,32 @@ npx hardhat node --port 8546
 在L1和L2上都部署一个ERC20合约
 
 ```bash
-npx hardhat run scripts/sample-script.js --network localhost
+$ npx hardhat run scripts/sample-script.js --network localhost 
+# result
+Compiled 34 solidity files successfully(evm target: paris).
+Greeter deployed to:0x5FbDB2315678afecb367f032d93F642f64180aa3
+myToken deployed to:0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
 
-npx hardhat run scripts/sample-script.js --network localhostl2
+$ npx hardhat run scripts/sample-script.js --network localhost12
+# result
+Greeter deployed to:0x5FbDB2315678afecb367f032d93F642f64180aa3
+myToken deployed to:0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
 ```
-
-![Alt text](./images/image.png)
 
 部署完成后，将合约地址填写到maticjs-ethers/src/config.js文件中
 
-![Alt text](./images/image2.png)
+```javascript
+ERC20: {
+    parent: {
+      ether: '0x0000000000000000000000000000000000000000',
+      erc20: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+    },
+    child: {
+      ether: '0x0000000000000000000000000000000000000000',
+      erc20: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+    },
+  },
+```
 
 进入maticjs-ethers目录
 
@@ -86,7 +102,7 @@ cd maticjs-ethers
 cp .env.example .env
 ```
 
-将下面的内容填写到`.env`文件中，这里我们选择hardhat测试账户的前两个账户分别作为from和to
+将下面的内容填写到`.env`文件中，这里我们选择hardhat测试账户的前两个账户分别作为USER1和USER2
 
 ```
 USER1_FROM=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
@@ -96,12 +112,18 @@ PARENT_RPC=http://localhost:8545
 CHILD_RPC=http://localhost:8546
 ```
 
-测试余额和转账操作
+测试余额和转账操作，可能由于浮点数的问题，erc20TokenL1Balance0fTo在第一次的结果不为0，但是之后就正常了。
 ```bash
-node src/index.js
+$ node src/index.js
+# result
+erc20TokenL1Balance:10000
+erc20TokenL2Balance:10000
+erc20TokenL1Balance0fTo:1e-16
+txHash 0x00a78e8b274c491a2ace68c51f021b5fff5bce4e165cad58ca8ac4d6035b26ac
+erc20TokenL1Balance0fTo after transfer:10
+erc20TokenL1Balance after transfer:9990
 ```
-
-![Alt text](./images/image3.png)
+如果希望在L1和L2之间实现资产的跨链，还需要部署相关的bridge合约，maticjs-ethers也支持相关的deposit操作和withdraw操作，有兴趣可以尝试下。
 
 <br/>
 <br/>
