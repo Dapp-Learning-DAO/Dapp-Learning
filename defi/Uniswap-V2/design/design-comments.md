@@ -11,10 +11,10 @@
 
 参考
 
-- [Uniswap Docs V1](https://docs.uniswap.org/protocol/V1/introduction)
+- [Uniswap Docs V1](https://docs.uniswap.org/contracts/v1/overview)
 - [Formal Specification of Constant Product (x × y = k) Market Maker Model and Implementation](https://github.com/runtimeverification/verified-smart-contracts/blob/master/uniswap/x-y-k.pdf)
-- [Uniswap Docs V2: Advanced Topics](https://uniswap.org/docs/v2/advanced-topics/)
-- [Uniswap V2 Audit Report](https://uniswap.org/audit.html)
+- [Uniswap Docs V2: Advanced Topics](https://docs.uniswap.org/contracts/v2/overview)
+- [Uniswap V2 Audit Report](https://dapp.org.uk/reports/uniswapv2.html#org03a620d)
 
 ## 首次铸币的漏洞
 
@@ -26,21 +26,23 @@
 
 然后，发送大额 token (比如 2000 ether) 到交易对，但不调用 `mint()`，而是直接调用 `sync()`，此时池子中 `totalSuppy` 为 1 wei，`reserve0` 和 `reserve1` 分别为 1 wei + 2000 ether
 
-攻击结束，此时流动性单价为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1%20%2B%202000%20\times%2010^{18})}{1}%20\approx%202000%20\times%2010^{18}" /> ，即约为 `2000 ether`
+
+
+攻击结束，此时流动性单价为 $\frac{(1 + 2000 \times 10^{18})}{1} \approx 2000 \times 10^{18}$ ，即约为 `2000 ether`
 
 换句话说，散户即使只想提供最小单位的 1 wei 流动性，也要付出 2000 ether 的 token，只能望洋兴叹了..
 
 根据白皮书公式 (7)
 
-<img src="https://render.githubusercontent.com/render/math?math=s_{m}%20=%20\frac{\sqrt{k_{2}}%20-%20\sqrt{k_{1}}}{5%20\cdot%20\sqrt{k_{2}}%20%2B%20\sqrt{k_{1}}}%20\cdot%20s_{1}" />
+$s_{m} = \frac{\sqrt{k_{2}} - \sqrt{k_{1}}}{5 \cdot \sqrt{k_{2}} + \sqrt{k_{1}}} \cdot s_{1}$
 
-又有 <img src="https://render.githubusercontent.com/render/math?math=\sqrt{k_{2}}%20\ggg%20\sqrt{k_{1}}" />，且 <img src="https://render.githubusercontent.com/render/math?math=s_{1}" /> 为 1，且计算时整数相除
+又有 $\sqrt{k_{2}} \ggg \sqrt{k_{1}}$，且 $s_{1}$ 为 1，且计算时整数相除
 
 所以
 
-<img src="https://render.githubusercontent.com/render/math?math=s_{m}%20\approx%20\left\lfloor%20\frac{\sqrt{k_{2}}}{5%20\cdot%20\sqrt{k_{2}}}%20\cdot%20s_{1}%20\right\rfloor%20=%20\left\lfloor%20\frac{1}{5}%20\cdot%201%20\right\rfloor%20=%200" />
+$s_{m} \approx \left\lfloor \frac{\sqrt{k_{2}}}{5 \cdot \sqrt{k_{2}}} \cdot s_{1} \right\rfloor = \left\lfloor \frac{1}{5} \cdot 1 \right\rfloor = 0$
 
-好家伙，手续费的平台部分 (<img src="https://render.githubusercontent.com/render/math?math=\frac{1}{6}" />) 为 0，羊毛都被薅秃了...
+好家伙，手续费的平台部分 ($\frac{1}{6}$) 为 0，羊毛都被薅秃了...
 
 为了解决这个问题，必须降低参与门槛，即降低流动性单价；换句话说，必须限制总流动性的下限
 
@@ -65,7 +67,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
 
 为了避免攻击者通过 `burn()` 将流动性销毁，导致总流动性不低于 1000 的限制被绕过，代码还会从首次铸币者本应获得的流动性中扣除 1000 ，将其发往 `address(0)` 锁住，以此达成限制
 
-在这种限制下，如果重新执行攻击流程，流动性单价最大值为 <img src="https://render.githubusercontent.com/render/math?math=\frac{(1001%20%2B%202000%20\times%2010^{18})}{1001}%20\approx%202%20\times%2010^{18}" /> ，即约为 `2 ether`
+在这种限制下，如果重新执行攻击流程，流动性单价最大值为 $\frac{(1001 + 2000 \times 10^{18})}{1001} \approx 2 \times 10^{18}$ ，即约为 `2 ether`
 
 对散户而言，比起 `2000 ethen` 的单价，友好很多，终于可以参与了
 
@@ -77,7 +79,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
 
 至于首次铸币者的损失么，好像没什么人会关心..
 
-不过即使交易对的 token 都非常非常值钱，比如说 1 个 token 值 <img src="https://render.githubusercontent.com/render/math?math={10}^{18}" /> 美元，首次铸币者也就损失 2000 美元而已..
+不过即使交易对的 token 都非常非常值钱，比如说 1 个 token 值 ${10}^{18}$ 美元，首次铸币者也就损失 2000 美元而已..
 
 换句话说，平台从被薅，摇身一变，薅起了大户的九羊一毛
 
@@ -231,28 +233,44 @@ Uniswap V2 使用基于时间权重的算数平均数，所以无法像 V1 一�
 
 priceA 算数平均数
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WAM}_{priceA}%20=%20\frac{10200}{1000}%20\times%20\frac{7}{20}%20%2B%20\frac{10300}{1000}%20\times%20\frac{8}{20}%20%2B%20\frac{10500}{1000}%20\times%20\frac{5}{20}%20\\%20=%20\frac{10200%20\times%207%20%2B%2010300%20\times%208%20%2B%2010500%20\times%205}{1000%20*%2020}%20\end{aligned}" />
+$$
+\begin{aligned} \small\text{WAM}_{priceA} = \frac{10200}{1000} \times \frac{7}{20} + \frac{10300}{1000} \times \frac{8}{20} + \frac{10500}{1000} \times \frac{5}{20} \\ = \frac{10200 \times 7 + 10300 \times 8 + 10500 \times 5}{1000 * 20} \end{aligned}
+$$
 
 PriceB 调和平均数
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{aligned}%20\small\text{WHM}_{PriceB}%20=%20\frac{1}{\frac{\frac{7}{20}}{\frac{1000}{10200}}%20%2B%20\frac{\frac{8}{20}}{\frac{1000}{10300}}%20%2B%20\frac{\frac{5}{20}}{\frac{1000}{10500}}}%20=%20\frac{20}{\frac{7}{\frac{1000}{10200}}%20%2B%20\frac{8}{\frac{1000}{10300}}%20%2B%20\frac{5}{\frac{1000}{10500}}}%20\\%20=%20\frac{1000%20*%2020}{10200%20\times%207%20%2B%2010300%20\times%208%20%2B%2010500%20\times%205}%20\end{aligned}" />
+$$
+\begin{aligned} \small\text{WHM}_{PriceB} = \frac{1}{\frac{\frac{7}{20}}{\frac{1000}{10200}} + \frac{\frac{8}{20}}{\frac{1000}{10300}} + \frac{\frac{5}{20}}{\frac{1000}{10500}}} = \frac{20}{\frac{7}{\frac{1000}{10200}} + \frac{8}{\frac{1000}{10300}} + \frac{5}{\frac{1000}{10500}}} \\ = \frac{1000 * 20}{10200 \times 7 + 10300 \times 8 + 10500 \times 5} \end{aligned}
+$$
 
 
 可见二者互为倒数
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WAM}_{priceA}%20=%20\frac{1}{\small\text{WHM}_{priceB}}" />
+
+$$
+WAM_{priceA}=\frac{1}{WHM_{priceB}}
+$$
+
 
 反之，priceA 调和平均数 与 priceB 算数平均数 也互为倒数
 
 当然，假设使用几何平均数，那么存储一个价格足以，例如
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceA}%20=%20\sqrt[7%2B8%2B5]{{\frac{10200}{1000}}^7%20\times%20{\frac{10300}{1000}}^8%20\times%20{\frac{10500}{1000}}^5}" />
+$$
+\small\text{WGM}_{priceA} = \sqrt[7+8+5]{{\frac{10200}{1000}}^7 \times {\frac{10300}{1000}}^8 \times {\frac{10500}{1000}}^5}
+$$
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceB}%20=%20\sqrt[7%2B8%2B5]{{\frac{1000}{10200}}^7%20\times%20{\frac{1000}{10300}}^8%20\times%20{\frac{1000}{10500}}^5}" />
+$$
+\small\text{WGM}_{priceB} = \sqrt[7+8+5]{{\frac{1000}{10200}}^7 \times {\frac{1000}{10300}}^8 \times {\frac{1000}{10500}}^5}
+$$
 
 可见
 
-<img src="https://render.githubusercontent.com/render/math?math=\small\text{WGM}_{priceA}%20=%20\frac{1}{\small\text{WGM}_{priceB}}" />
+$$
+WGM_{priceA}=\frac{1}{{WGM}_{priceB}}
+$$
+
+
 
 只是在这里，前后区块的价格无复合关系，几何平均数并不适用
 

@@ -22,7 +22,7 @@
 
 ![](./images/uniswap_v2_swap.gif)
 
-<img src="https://render.githubusercontent.com/render/math?math=\Delta%20X" /> 越大，实际成交价格越偏离市场价格
+$\Delta%20X$ 越大，实际成交价格越偏离市场价格
 
 ## 调整手续费
 
