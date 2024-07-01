@@ -1,9 +1,9 @@
 import ecpair from 'ecpair';
-import * as tinysecp from "tiny-secp256k1";
+import * as tinysecp from 'tiny-secp256k1';
 import crypto from 'crypto';
 
-/// In this example, we first generate a new private key and corresponding public key. 
-/// We then create a simulated transaction hash (in a real application, this would be the actual hash of the transaction) and use the private key to sign this hash. 
+/// In this example, we first generate a new private key and corresponding public key.
+/// We then create a simulated transaction hash (in a real application, this would be the actual hash of the transaction) and use the private key to sign this hash.
 /// Finally, we verify that the signature is valid.
 
 const { ECPairFactory } = ecpair;
