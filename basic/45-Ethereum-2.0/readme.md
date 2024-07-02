@@ -60,6 +60,16 @@ gas 的平均价格超过 16 gwei 的话，那么 ETH 的通缩就会加速。
 
 ### 节点架构改变
 
+#### 客户端
+执行层客户端及其采用的编程语言：
+
+@go_ethereum(Go), @NethermindEth(C#), @HyperledgerBesu(Java), @ErigonEth(Go),  reth - alpha 阶段 (Rust), silkwarm - pre-alpha 阶段 (C++), ethereumjs - alpha 阶段 (TypeScript)
+
+共识层客户端及其采用的编程语言：
+
+@prylabs(go), lighthouse@sigp_io(Rust), @Teku_Consensys(Java), @ethnimbus(Nim), @lodestar_eth(TypeScript)
+
+
 因为共识机制的改变，所以节点架构也就不得不变了。The Merge 前
 只需要执行一个程序，就能进行挖矿。The Merge 后需要执行两个程序：
 一个执行层，一个共识层。其中执行层的是原有的 PoW 的软件的，用来
@@ -290,20 +300,33 @@ Danksharding会把以太坊转变为一个统一的结算和数据可用性（DA
 提议者-构建者（数据生成者）分离 (PBS:proposer/builder separation PBS)
 Builders（数据生成者）是一种新角色，它会聚合所有以太坊L1交易以及来自rollup的原始数据。使用crList，区块提议者可以强制Builders包含交易。
 
+MEV
+https://mevboost.pics/
+
 
 **纠删码(Erasure coding)**
 
 **DA证明数据层**
 
+**RANDO**
+主要为信标链提供随机性
+随机性是通过使用 RANDAO 算法实现的，该算法将区块提议者的哈希与每个区块更新的种子混合。这个值用于从总验证者集合中选择特定的验证者。验证者的选择在两个纪元前就固定下来，以此作为防止某些种子操纵的方式。
+https://github.com/randao/randao
+
 **Celestia**
 模块化区块链分成三部分：执行、安全性以及数据可用性。
 
+**BLS**
+Justin Drake 关于 BLS 实用签名聚合的研究：https://ethresear.ch/t/pragmatic-signature-aggregation-with-bls/2105
 
 **verkel**
-
+https://notes.ethereum.org/@domothy/verkle_links
+https://www.youtube.com/watch?v=Q7rStTKwuYs 
+https://www.youtube.com/watch?v=F1Ne19Vew6w
 
 **KZG承诺**
 https://hackmd.io/yqfI6OPlRZizv9yPaD-8IQ
+https://scroll.io/blog/kzg
 
 
 ### Appendix C. EIP-4488
@@ -315,3 +338,6 @@ https://cnlido.notion.site/cnlido/Lido-d62ed54902d74f48b6ac139112d8bf89
 
 ## 参考链接：
 - Data Availability Sampling: From Basics to Open Problems: https://www.paradigm.xyz/2022/08/das
+- Teku: https://www.youtube.com/watch?v=1PHZHpVPLk4
+- eth2book: https://eth2book.info/
+- 以太坊技术实现： https://learnblockchain.cn/books/geth/part3/sign-and-valid.html
