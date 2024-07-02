@@ -1,6 +1,6 @@
 import ecpair from 'ecpair';
-import * as tinysecp from "tiny-secp256k1";
-import bitcoin from "bitcoinjs-lib";
+import * as tinysecp from 'tiny-secp256k1';
+import bitcoin from 'bitcoinjs-lib';
 
 /// In this example, We create a new private key and its corresponding public key.
 /// We then construct a transaction with one input (which you're spending) and one output (where you're sending bitcoins).
