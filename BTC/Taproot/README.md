@@ -68,3 +68,28 @@
 | **P2WSH**               | 0x0020{32-byte-hash}                           | \<script\> \<witness\>                      | 支付到复杂脚本哈希，适用于多重签名或其他复杂脚本。|
 | **P2TR (Key Path)**     | 0x5120{32-byte-tweaked-public-key}             | \<schnorr-signature\>                       | 使用Taproot支付到单一公钥，简化的单签名。       |
 | **P2TR (Script Path)**  | 0x5120{32-byte-tweaked-public-key}             | \<schnorr-signature\> \<script\> \<control-block\> | 使用Taproot支付到复杂脚本路径，支持复杂的条件支付。|
+
+### 锁定脚本(scriptPubKey)
+对于隔离见证 Output，其 scriptPubKey 为 **OP_n tweaked-public-key**  
+#### OP_n
+OP_n 表示隔离见证版本，版本 0 隔离见证 Output 的 scriptPubKey 的首个字节是 0x00，而版本 1 隔离见证 Output 的 scriptPubKey 的首个字节是 0x51
+```js
+OP_0: 0x00
+OP_1: 0x51
+OP_2: 0x52
+...
+
+See: https://github.com/bitcoin/bitcoin/blob/v22.0/src/script/script.h#L68
+```
+
+#### tweaked-public-key
+tweaked-public-key的计算比较复杂，有internal public key和script tree的Merkle Root组成，然后再进行Bech32m编码就能得到Taproot地址
+##### script path
+script path是Taproot中比较灵活、同时比较复杂的一种方式  
+tweaked-public-key的计算比较如下图：$$Q = P + t*G$$
+![$$Q = P + t*G$$](https://aandds.com/blog/images/taproot_tweak.gif)
+
+#### key path
+key path不需要 Script Path，则可以去掉 Script 相关的哈希
+即：$$Q = P + t*G = P + TaggedHash('TapTweak', P)G$$
+钱包中的taproot地址就是基于**用户公钥做P**代入上方公式推导得到
