@@ -265,6 +265,7 @@ console.log('MAST Root:', mast.getMerkleRoot().toString('hex'));
    - `buildTree(leaves)`: 递归构建 Merkle 树。
 
 ### Taproot地址计算
+生成Taproot地址，实际上是对Tweaked 公钥的X坐标编码为 Bech32m 格式
 **流程**
 - 初始化 MAST 并添加叶子节点。
 - 构建 Merkle 树并计算根节点。
@@ -286,4 +287,33 @@ const taprootAddress = payments.p2tr({
 }).address;
 
 console.log('Taproot Address:', taprootAddress);
+```
+
+### 锁定脚本(scriptPubKey)
+Taproot的锁定脚本比较简单，含了单字节 OP_1 和 Tweaked 公钥的 X 坐标。
+**代码如下**
+```js
+const mast = new MAST();
+mast.addLeaf(Buffer.from('OP_DUP OP_HASH160 <Alice\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG'));
+mast.addLeaf(Buffer.from('OP_DUP OP_HASH160 <Bob\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG'));
+mast.addLeaf(Buffer.from('OP_2 <Alice\'s pubkey> <Bob\'s pubkey> OP_2 OP_CHECKMULTISIG'));
+
+// 生成内部公钥
+const keyPair = bip32.fromSeed(crypto.randomBytes(32));
+const internalPubkey = keyPair.publicKey.slice(1, 33); // 移除 0x02 或 0x03 前缀
+
+// 计算 Taproot 公钥
+const mastRoot = mast.getMerkleRoot();
+const { tweakedPubkey } = tapTweakPubkey(internalPubkey, mastRoot);
+
+// 获取 Tweaked 公钥的 X 坐标
+const tweakedPubkeyX = tweakedPubkey.slice(1, 33);
+
+// 生成锁定脚本（P2TR 地址的锁定脚本）
+const lockingScript = bitcoin.script.compile([
+  bitcoin.opcodes.OP_1,
+  tweakedPubkeyX
+]);
+
+console.log('Locking Script:', lockingScript.toString('hex'));
 ```
