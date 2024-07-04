@@ -57,3 +57,112 @@ Merkelized Alternative Script Tree (MAST) 是比特币的一种增强功能，�
 4. 比对计算得到的 Root 和交易中提供的 Root，如果匹配，则验证通过。
 
 这种结构使得未使用的条件（例如 A 和 B）保持隐藏，提高了交易的隐私性，同时提供了高效的验证机制。
+
+## MAST的创建、更新和移除
+实现 MAST（Merkelized Alternative Script Tree） 的创建、插入和删除功能，可以使用 JavaScript 结合一些加密库来完成。以下是一个基本的示例，演示如何创建、插入和删除 MAST 中的节点。
+
+```javascript
+const crypto = require('crypto');
+
+class MAST {
+  constructor() {
+    this.leaves = [];
+    this.tree = [];
+  }
+
+  // 计算哈希值
+  hash(data) {
+    return crypto.createHash('sha256').update(data).digest('hex');
+  }
+
+  // 将叶子节点添加到树中
+  addLeaf(data) {
+    const hashedData = this.hash(data);
+    this.leaves.push(hashedData);
+    this.buildTree();
+  }
+
+  // 删除叶子节点并重建树
+  removeLeaf(data) {
+    const hashedData = this.hash(data);
+    const index = this.leaves.indexOf(hashedData);
+    if (index > -1) {
+      this.leaves.splice(index, 1);
+      this.buildTree();
+    }
+  }
+
+  // 构建 Merkle 树
+  buildTree() {
+    if (this.leaves.length === 0) {
+      this.tree = [];
+      return;
+    }
+
+    let level = this.leaves.slice().sort(); // 字典序排序
+    this.tree = [level];
+
+    while (level.length > 1) {
+      level = this.getNextLevel(level);
+      this.tree.unshift(level);
+    }
+  }
+
+  // 计算下一层节点
+  getNextLevel(level) {
+    const nextLevel = [];
+    for (let i = 0; i < level.length; i += 2) {
+      if (i + 1 < level.length) {
+        nextLevel.push(this.hash(level[i] + level[i + 1]));
+      } else {
+        nextLevel.push(level[i]); // 如果没有配对节点，直接移动到下一层
+      }
+    }
+    return nextLevel;
+  }
+
+  // 获取 Merkle 树的根
+  getRoot() {
+    return this.tree.length ? this.tree[0][0] : null;
+  }
+
+  // 打印 Merkle 树
+  printTree() {
+    console.log(JSON.stringify(this.tree, null, 2));
+  }
+}
+
+// 示例用法
+const mast = new MAST();
+mast.addLeaf('Condition A');
+mast.addLeaf('Condition B');
+mast.addLeaf('Condition C');
+console.log('Initial MAST:');
+mast.printTree();
+console.log('Root:', mast.getRoot());
+
+mast.removeLeaf('Condition B');
+console.log('After removing Condition B:');
+mast.printTree();
+console.log('Root:', mast.getRoot());
+
+mast.addLeaf('Condition D');
+console.log('After adding Condition D:');
+mast.printTree();
+console.log('Root:', mast.getRoot());
+```
+
+### 解释
+- **hash(data)**: 计算给定数据的 SHA-256 哈希值。
+- **addLeaf(data)**: 添加叶子节点，添加后重建 Merkle 树。
+- **removeLeaf(data)**: 删除叶子节点，删除后重建 Merkle 树。
+- **buildTree()**: 根据当前叶子节点构建 Merkle 树。
+- **getNextLevel(level)**: 计算当前层次节点的哈希值以生成下一层节点。
+- **getRoot()**: 获取 Merkle 树的根节点。
+- **printTree()**: 打印整个 Merkle 树。
+
+### 注意事项
+1. **排序**: 每次构建树时，叶子节点都根据其哈希值进行字典序排序，以确保树的唯一性和确定性。
+2. **树结构**: `tree` 属性是一个数组，存储从叶子节点到根节点的所有层次。
+
+这个示例实现了基本的 MAST 功能，包括创建、插入和删除叶子节点。
