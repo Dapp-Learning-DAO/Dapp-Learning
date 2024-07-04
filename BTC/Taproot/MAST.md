@@ -166,3 +166,125 @@ console.log('Root:', mast.getRoot());
 2. **树结构**: `tree` 属性是一个数组，存储从叶子节点到根节点的所有层次。
 
 这个示例实现了基本的 MAST 功能，包括创建、插入和删除叶子节点。
+
+## Taproot中的应用
+![$$Q = P + t*G$$](https://aandds.com/blog/images/taproot_tweak.gif)
+如上图，在Taproot中需要在MAST中针对叶子结点、树结点和根结点分别引入TapLeaf、TapBranch和TapTweak去计算hash。
+
+### 代码示例
+
+```javascript
+const bitcoin = require('bitcoinjs-lib');
+const crypto = require('crypto');
+const ecc = require('tiny-secp256k1');
+const { BIP32Factory } = require('bip32');
+const bip32 = BIP32Factory(ecc);
+const { payments } = bitcoin;
+
+// 创建 Tagged Hash 函数
+function taggedHash(tag, data) {
+  const tagHash = crypto.createHash('sha256').update(tag).digest();
+  return crypto.createHash('sha256').update(Buffer.concat([tagHash, tagHash, data])).digest();
+}
+
+// Taproot Tweak 函数
+function tapTweakPubkey(pubkey, h) {
+  const tweak = taggedHash('TapTweak', Buffer.concat([pubkey, h]));
+  const tweakedPubkey = Buffer.from(ecc.pointAddScalar(pubkey, tweak));
+  return { tweakedPubkey, tweak };
+}
+
+// TapLeaf 计算函数
+function tapLeaf(version, script) {
+  const leafVersion = Buffer.from([version]);
+  return taggedHash('TapLeaf', Buffer.concat([leafVersion, script]));
+}
+
+// TapBranch 计算函数
+function tapBranch(h1, h2) {
+  return taggedHash('TapBranch', Buffer.concat([h1, h2].sort(Buffer.compare)));
+}
+
+class MAST {
+  constructor() {
+    this.leaves = [];
+  }
+
+  // 添加叶子节点
+  addLeaf(script, version = 0xc0) {
+    const hashedLeaf = tapLeaf(version, script);
+    this.leaves.push(hashedLeaf);
+    this.leaves.sort(Buffer.compare); // 字典序排序
+  }
+
+  // 构建 Merkle 树并返回根节点
+  getMerkleRoot() {
+    if (this.leaves.length === 0) {
+      return Buffer.alloc(32, 0);
+    }
+    return this.buildTree(this.leaves);
+  }
+
+  // 递归构建 Merkle 树
+  buildTree(leaves) {
+    if (leaves.length === 1) {
+      return leaves[0];
+    }
+
+    const nextLevel = [];
+    for (let i = 0; i < leaves.length; i += 2) {
+      if (i + 1 < leaves.length) {
+        nextLevel.push(tapBranch(leaves[i], leaves[i + 1]));
+      } else {
+        nextLevel.push(leaves[i]); // 如果没有配对节点，直接移动到下一层
+      }
+    }
+
+    return this.buildTree(nextLevel);
+  }
+}
+
+// 示例用法
+const mast = new MAST();
+mast.addLeaf(Buffer.from('Condition A'));
+mast.addLeaf(Buffer.from('Condition B'));
+mast.addLeaf(Buffer.from('Condition C'));
+console.log('Initial MAST:');
+console.log(mast.leaves.map(leaf => leaf.toString('hex')));
+console.log('MAST Root:', mast.getMerkleRoot().toString('hex'));
+```
+
+### 代码说明
+1. **taggedHash(tag, data)**: 创建 Tagged Hash 函数，用于 Taproot Tweak 和 TapLeaf/TapBranch。
+2. **tapTweakPubkey(pubkey, h)**: 使用 Tagged Hash 和内部公钥计算 Tweaked 公钥。
+3. **tapLeaf(version, script)**: 计算 TapLeaf 的哈希值。
+4. **tapBranch(h1, h2)**: 计算两个子树的 TapBranch 哈希值。
+5. **MAST 类**:
+   - `addLeaf(script, version)`: 添加叶子节点并对其哈希值进行字典序排序。
+   - `getMerkleRoot()`: 构建 Merkle 树并返回根节点。
+   - `buildTree(leaves)`: 递归构建 Merkle 树。
+
+### Taproot地址计算
+生成Taproot地址，实际上是对Tweaked 公钥的X坐标编码为 Bech32m 格式
+**流程**
+- 初始化 MAST 并添加叶子节点。
+- 构建 Merkle 树并计算根节点。
+- 生成内部公钥并计算 Tweaked 公钥。
+- 生成并输出 Taproot 地址。
+```js
+// 生成内部公钥
+const keyPair = bip32.fromSeed(crypto.randomBytes(32));
+const internalPubkey = keyPair.publicKey.slice(1, 33); // 移除 0x02 或 0x03 前缀
+
+// 计算 Taproot 公钥
+const mastRoot = mast.getMerkleRoot();
+const { tweakedPubkey } = tapTweakPubkey(internalPubkey, mastRoot);
+
+// 生成 Taproot 地址
+const taprootAddress = payments.p2tr({
+  internalPubkey: tweakedPubkey.slice(1, 33),
+  network: bitcoin.networks.bitcoin,
+}).address;
+
+console.log('Taproot Address:', taprootAddress);
+```
