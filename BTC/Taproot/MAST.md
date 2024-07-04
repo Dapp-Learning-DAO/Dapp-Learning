@@ -316,3 +316,111 @@ const lockingScript = bitcoin.script.compile([
 
 console.log('Locking Script:', lockingScript.toString('hex'));
 ```
+### 解锁脚本（witnessScript）
+在 Taproot 中，解锁脚本可以使用 Taproot Tree 的任意路径之一来满足条件。
+下面代码以解锁一个script tree中的2-2多签叶子结点C为例：
+**代码如下**  
+```js
+class MAST {
+  // ...
+  // 获取叶子节点的路径
+  getLeafPath(leaf) {
+    const index = this.leaves.indexOf(leaf);
+    if (index === -1) return null;
+
+    let path = [];
+    let level = this.leaves.slice();
+
+    while (level.length > 1) {
+      const nextLevel = [];
+      for (let i = 0; i < level.length; i += 2) {
+        if (i + 1 < level.length) {
+          nextLevel.push(tapBranch(level[i], level[i + 1]));
+        } else {
+          nextLevel.push(level[i]);
+        }
+        if (i === index || i + 1 === index) {
+          path.push(i === index ? level[i + 1] : level[i]);
+          index = Math.floor(i / 2);
+        }
+      }
+      level = nextLevel;
+    }
+    return path;
+  }
+}
+
+const mast = new MAST();
+const scriptA = Buffer.from('OP_DUP OP_HASH160 <Alice\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG');
+const scriptB = Buffer.from('OP_DUP OP_HASH160 <Bob\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG');
+const scriptC = Buffer.from('OP_2 <Alice\'s pubkey> <Bob\'s pubkey> OP_2 OP_CHECKMULTISIG');
+mast.addLeaf(scriptA);
+mast.addLeaf(scriptB);
+mast.addLeaf(scriptC);
+
+// 生成内部公钥
+const keyPairAlice = bip32.fromSeed(crypto.randomBytes(32));
+const keyPairBob = bip32.fromSeed(crypto.randomBytes(32));
+const internalPubkey = keyPairAlice.publicKey.slice(1, 33); // 移除 0x02 或 0x03 前缀
+
+// 计算 Taproot 公钥
+const mastRoot = mast.getMerkleRoot();
+const { tweakedPubkey } = tapTweakPubkey(internalPubkey, mastRoot);
+
+// 获取 Tweaked 公钥的 X 坐标
+const tweakedPubkeyX = tweakedPubkey.slice(1, 33);
+
+// 构建交易以花费 Taproot 输出
+const txb = new bitcoin.TransactionBuilder(bitcoin.networks.bitcoin);
+const value = 100000; // 假设输出金额为 100000 satoshis
+const inputIndex = 0; // 输入索引
+const prevTx = bitcoin.Transaction.fromHex('<previous transaction hex>'); // 上一个交易的对象
+const prevTxId = prevTx.getId(); // 上一个交易的 ID
+const outputIndex = 0; // 上一个交易输出的索引
+
+// 添加输入和输出
+txb.addInput(prevTxId, outputIndex);
+txb.addOutput('<destination address>', value - 1000); // 减去交易费用
+
+// 假设要花费 scriptC
+const leafToSpend = tapLeaf(0xc0, scriptC);
+const leafPath = mast.getLeafPath(leafToSpend);
+
+// 构建 controlBlock
+const controlBlock = Buffer.concat([
+  Buffer.from([0xc0]), // 脚本版本
+  internalPubkey,
+  ...leafPath
+]);
+
+// 签名交易
+const hashType = bitcoin.Transaction.SIGHASH_ALL;
+const signatureHash = txb.buildIncomplete().hashForWitnessV1(inputIndex, [lockingScript], [value], hashType);
+const signatureAlice = bitcoin.script.signature.encode(keyPairAlice.sign(signatureHash), hashType);
+const signatureBob = bitcoin.script.signature.encode(keyPairBob.sign(signatureHash), hashType);
+
+// 构建解锁脚本（witness script）
+const witnessScript = [
+  signatureAlice,
+  signatureBob,
+  scriptC,
+  controlBlock
+];
+
+// 设置 witness
+txb.setWitness(inputIndex, witnessScript);
+
+// 构建并输出交易
+const tx = txb.build();
+console.log('Transaction:', tx.toHex());
+```
+
+**构建和签名交易:**
+- 创建一个交易以花费 Taproot 输出。
+- 添加输入和输出。
+- 获取要花费的脚本（例如 scriptC）的 TapLeaf 哈希值和 Merkle 路径。
+- 构建 controlBlock，包含脚本版本、内部公钥和 Merkle 路径。
+- 使用 Alice 和 Bob 的密钥分别对交易进行签名。
+- 构建包含两个签名和其他信息的解锁脚本（witness script）。
+- 设置交易的 witness。
+
