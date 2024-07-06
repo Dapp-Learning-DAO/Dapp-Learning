@@ -2,7 +2,29 @@ PSBT（Partially Signed Bitcoin Transaction）的编码和解码是一个关键�
 
 ### PSBT格式
 
-PSBT的基本格式是一个序列化的数据结构，包含所有必要的信息，使多个参与者能够独立进行交易签名和验证。这个格式遵循一定的编码规则，通常以Base64或十六进制形式进行传输。
+PSBT的基本格式是一个序列化的数据结构，包含所有必要的信息，使多个参与者能够独立进行交易签名和验证。这个格式遵循一定的编码规则，详细见[BIP174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki)，通常以Base64或十六进制形式进行传输。
+
+**The Partially Signed Bitcoin Transaction (PSBT) format**
+```bash
+ # whole structure
+ <psbt> := <magic> <global-map> <input-map>* <output-map>*
+
+ # start with magic number
+ # 0x70 0x73 0x62 0x74 encode of PSBT
+ <magic> := 0x70 0x73 0x62 0x74 0xFF
+ <global-map> := <keypair>* 0x00
+ <input-map> := <keypair>* 0x00
+ <output-map> := <keypair>* 0x00
+
+ # keyPair structure
+ <keypair> := <key> <value>
+
+ # key structure
+ <key> := <keylen> <keytype> <keydata>
+
+ # value structure
+ <value> := <valuelen> <valuedata>
+```
 
 PSBT数据主要分为以下几部分：
 
