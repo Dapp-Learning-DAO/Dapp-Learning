@@ -1,9 +1,10 @@
 # Polygon
 
-Polygon 的目标不是提供一两个扩展解决方案，而是创建一个生态系统，使其能够轻松连接多个不同的扩展解决方案——从具有不同共识机制的侧链到第二层网络，如 Plasma、Optimistic rollups 和 ZK rollups。  
+Polygon 的目标不是提供一两个扩展解决方案，而是创建一个生态系统，使其能够轻松连接多个不同的扩展解决方案——从具有不同共识机制的侧链到第二层网络，如 Plasma、Optimistic rollups 和 ZK rollups。
 
 Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-alone network）和安全链（secured chain）
-- 独立网络依赖于它们自己的安全性，例如，它们可以有自己的共识模型，如权益证明（PoS）或委托权益证明（DPoS）  
+
+- 独立网络依赖于它们自己的安全性，例如，它们可以有自己的共识模型，如权益证明（PoS）或委托权益证明（DPoS）
 - 安全链使用“安全即服务”模型。它可以由以太坊直接提供，例如通过 Plasma 使用的欺诈证明（fraud proofs），或由专业验证节点提供。这些验证节点运行在 Polygon 生态系统中，可以被多个项目共享——这个概念类似于波卡的共享安全模型
 
 当谈到 Polygon 的架构时，我们需要关注的主要要点是它被刻意地设计成通用和抽象的。这允许其他希望扩展的应用程序选择最适合其需求的扩展解决方案。
@@ -16,7 +17,7 @@ Polygon 支持与以太坊兼容的两种区块链网络：独立网络（stand-
 ## Polygon 扩容方案
 
 <center>
-    <img src="https://img.chainnews.com/material/images/a0172d4158f8e2529fd3d04d8142e818.jpg-article" alt="matic.jpeg" style="zoom:50%;" />
+    <img src="./img/scalling.jpg" alt="matic.jpeg" style="zoom:50%;" />
 </center>
 
 ## Matic Plasma Chain

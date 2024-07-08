@@ -1,7 +1,7 @@
-[default]
-src = 'src'
-out = 'out'
-libs = ['lib']
-remappings = ['ds-test/=lib/ds-test/src/']
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = ['forge-std/=lib/forge-std/src/']
 
-# See more config options https://github.com/gakonst/foundry/tree/master/config
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
