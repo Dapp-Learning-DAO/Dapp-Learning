@@ -288,9 +288,31 @@ const taprootAddress = payments.p2tr({
 
 console.log('Taproot Address:', taprootAddress);
 ```
+
 ### 锁定脚本(scriptPubKey)
-Taproot的锁定脚本比较简单，含了单字节 OP_1 和 Tweaked 公钥的 X 坐标。  
-**代码如下**
+对于隔离见证 Output，其 scriptPubKey 为 **OP_n tweaked-public-key**  
+##### OP_n
+OP_n 表示隔离见证版本，版本 0 隔离见证 Output 的 scriptPubKey 的首个字节是 0x00，而版本 1 隔离见证 Output 的 scriptPubKey 的首个字节是 0x51
+```js
+OP_0: 0x00  // segwitV0
+OP_1: 0x51  // segwitV1，即Taproot
+OP_2: 0x52
+...
+
+See: https://github.com/bitcoin/bitcoin/blob/v22.0/src/script/script.h#L68
+```
+#### tweaked-public-key
+tweaked-public-key的计算比较复杂，有internal public key和script tree的Merkle Root组成，然后再进行Bech32m编码就能得到Taproot地址
+##### script path
+script path是Taproot中比较灵活、同时比较复杂的一种方式  
+tweaked-public-key的计算比较如上图：$$Q = P + t*G$$
+
+#### key path
+key path不需要 Script Path，则可以去掉 Script 相关的哈希
+即：$$Q = P + t*G = P + TaggedHash('TapTweak', P)G$$
+钱包中的taproot地址就是基于**用户公钥做P**代入上方公式推导得到
+
+#### **代码实现**
 ```js
 const mast = new MAST();
 mast.addLeaf(Buffer.from('OP_DUP OP_HASH160 <Alice\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG'));
@@ -316,10 +338,15 @@ const lockingScript = bitcoin.script.compile([
 
 console.log('Locking Script:', lockingScript.toString('hex'));
 ```
+
+
 ### 解锁脚本（witnessScript）
-在 Taproot 中，解锁脚本可以使用 Taproot Tree 的任意路径之一来满足条件。
+Taproot属于Segwit v1版本，其相关解锁脚本放在Witness位置
+如果在花费 P2TR UTXO 时，Witness 只包含一个元素，则是 P2TR (Key Path)，如果在花费 P2TR UTXO 时，Witness 至少包含两个元素，则是 P2TR (Script Path)。在花费一个 P2TR UTXO 时，是通过 Witness 中元素的个数来决定使用 Key Path（Witness 元素个数为 1）还是 Script Path（Witness 元素个数大于等于 2）。   
+在 Taproot 中，解锁script path可以使用 Taproot Tree 的任意路径之一来满足条件。
 下面代码以解锁一个script tree中的2-2多签叶子结点C为例：
-**代码如下**  
+
+#### **代码实现**  
 ```js
 class MAST {
   // ...
@@ -424,3 +451,54 @@ console.log('Transaction:', tx.toHex());
 - 构建包含两个签名和其他信息的解锁脚本（witness script）。
 - 设置交易的 witness。
 
+
+
+#### script path
+[905ecdf95a84804b192f4dc221cfed4d77959b81ed66013a7e41a6e61e7ed530](https://blockchain.info/rawtx/905ecdf95a84804b192f4dc221cfed4d77959b81ed66013a7e41a6e61e7ed530)是花费 P2TR (Script Path) 的例子（它是一个 2-of-2 多签脚本），它的 Witness 为
+```js
+044123b1d4ff27b16af4b0fcb9672df671701a1a7f5a6bb7352b051f461edbc614aa6068b3e5313a174f90f3d95dc4e06f69bebd9cf5a3098fde034b01e69e8e788901400fd4a0d3f36a1f1074cb15838a48f572dc18d412d0f0f0fc1eeda9fa4820c942abb77e4d1a3c2b99ccf4ad29d9189e6e04a017fe611748464449f681bc38cf394420febe583fa77e49089f89b78fa8c116710715d6e40cc5f5a075ef1681550dd3c4ad20d0fa46cb883e940ac3dc5421f05b03859972639f51ed2eccbf3dc5a62e2e1b15ac41c02e44c9e47eaeb4bb313adecd11012dfad435cd72ce71f525329f24d75c5b9432774e148e9209baf3f1656a46986d5f38ddf4e20912c6ac28f48d6bf747469fb1
+```
+根据编码我们得知有4个元素
+```js
+0070: .. .. .. .. .. .. 04 .. .. .. .. .. .. .. .. .. vin0 Witness Count: 4
+0070: .. .. .. .. .. .. .. 41 23 b1 d4 ff 27 b1 6a f4 vin0 Witness 0 Length:65 (0x41)
+0080: b0 fc b9 67 2d f6 71 70 1a 1a 7f 5a 6b b7 35 2b
+0090: 05 1f 46 1e db c6 14 aa 60 68 b3 e5 31 3a 17 4f
+00a0: 90 f3 d9 5d c4 e0 6f 69 be bd 9c f5 a3 09 8f de
+00b0: 03 4b 01 e6 9e 8e 78 89 01 .. .. .. .. .. .. ..
+00b0: .. .. .. .. .. .. .. .. .. 40 0f d4 a0 d3 f3 6a vin0 Witness 1 Length:64 (0x40)
+00c0: 1f 10 74 cb 15 83 8a 48 f5 72 dc 18 d4 12 d0 f0
+00d0: f0 fc 1e ed a9 fa 48 20 c9 42 ab b7 7e 4d 1a 3c
+00e0: 2b 99 cc f4 ad 29 d9 18 9e 6e 04 a0 17 fe 61 17
+00f0: 48 46 44 49 f6 81 bc 38 cf 39 .. .. .. .. .. ..
+00f0: .. .. .. .. .. .. .. .. .. .. 44 20 fe be 58 3f vin0 Witness 2 Length:68 (0x44)
+0100: a7 7e 49 08 9f 89 b7 8f a8 c1 16 71 07 15 d6 e4
+0110: 0c c5 f5 a0 75 ef 16 81 55 0d d3 c4 ad 20 d0 fa
+0120: 46 cb 88 3e 94 0a c3 dc 54 21 f0 5b 03 85 99 72
+0130: 63 9f 51 ed 2e cc bf 3d c5 a6 2e 2e 1b 15 ac ..
+0130: .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. 41 vin0 Witness 3 Length:65 (0x41)
+0140: c0 2e 44 c9 e4 7e ae b4 bb 31 3a de cd 11 01 2d
+0150: fa d4 35 cd 72 ce 71 f5 25 32 9f 24 d7 5c 5b 94
+0160: 32 77 4e 14 8e 92 09 ba f3 f1 65 6a 46 98 6d 5f
+0170: 38 dd f4 e2 09 12 c6 ac 28 f4 8d 6b f7 47 46 9f
+0180: b1
+```
+
+
+#### key path
+[dbef583962e13e365a2069d451937a6de3c2a86149dc6a4ac0d84ab450509c91](https://blockchain.info/rawtx/dbef583962e13e365a2069d451937a6de3c2a86149dc6a4ac0d84ab450509c91)是花费 P2TR (Key Path) 的例子，它的 witness 为：
+```js
+044123b1d4ff27b16af4b0fcb9672df671701a1a7f5a6bb7352b051f461edbc614aa6068b3e5313a174f90f3d95dc4e06f69bebd9cf5a3098fde034b01e69e8e788901400fd4a0d3f36a1f1074cb15838a48f572dc18d412d0f0f0fc1eeda9fa4820c942abb77e4d1a3c2b99ccf4ad29d9189e6e04a017fe611748464449f681bc38cf394420febe583fa77e49089f89b78fa8c116710715d6e40cc5f5a075ef1681550dd3c4ad20d0fa46cb883e940ac3dc5421f05b03859972639f51ed2eccbf3dc5a62e2e1b15ac41c02e44c9e47eaeb4bb313adecd11012dfad435cd72ce71f525329f24d75c5b9432774e148e9209baf3f1656a46986d5f38ddf4e20912c6ac28f48d6bf747469fb1
+```
+```js
+0141e6e1fe41524e65e3040bc3d080a136345c2c806eb7f336dd6a7a79e9054b0d1fc6a8d836667ef6e9f2188cd1270ab28e5e0eb642eac89f2ec50a32ca54aaf9d601
+
+01 .. .. .. .. .. .. .. .. .. .. .. .. .. .. vin0 Witness Count: 1
+.. 41 .. .. .. .. .. .. .. .. .. .. .. .. .. vin0 Witness 0 Length:65, schnorr_sig (64 bytes) + sig_hash (1 bytes)
+.. .. e6 e1 fe 41 52 4e 65 e3 04 0b c3 d0 80 schnorr_sig
+a1 36 34 5c 2c 80 6e b7 f3 36 dd 6a 7a 79 e9 
+05 4b 0d 1f c6 a8 d8 36 66 7e f6 e9 f2 18 8c 
+d1 27 0a b2 8e 5e 0e b6 42 ea c8 9f 2e c5 0a 
+32 ca 54 aa f9 d6
+.. .. .. .. .. .. 01                                     sig_hash: SIGHASH_ALL (0x01)
+```

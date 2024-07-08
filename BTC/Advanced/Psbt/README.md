@@ -2,7 +2,7 @@ PSBT（Partially Signed Bitcoin Transaction，部分签名比特币交易）是�
 
 ### PSBT的目的和应用场景
 
-PSBT（Partially Signed Bitcoin Transactions）是一种格式，用于Bitcoin交易的离线或多方签名。这种格式在[BIP 174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki)中被详细定义，该BIP是由Andrew Chow于2017年提出的。
+PSBT（Partially Signed Bitcoin Transactions）是一种格式，用于Bitcoin交易的离线或多方签名。这种格式在[BIP 174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki)中被详细定义，该BIP是由Andrew Chow于2017年提出的，PSBT编码和解析参考[PSBT encode](./encode.md)。
 
 在PSBT出现之前，Bitcoin的交易签名过程通常需要交易的所有参与者在线，并能够直接交互以产生完全签名的交易。这在多方需要合作创建一个交易，尤其是在使用硬件钱包或冷存储方案时，会变得复杂和不安全。此外，对于复杂的交易类型（如多重签名或条件交易），简单的交易签名数据结构并不足以容纳所需的全部信息，如前一交易的脚本或其他元数据。
 
