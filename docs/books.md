@@ -11,12 +11,14 @@
 - [《货币未来》](https://book.douban.com/subject/35178904/)
 - [战争与国家形成：春秋战国与近代早期欧洲之比较](https://book.douban.com/tag/%E8%AE%B8%E7%94%B0%E6%B3%A2)
 - [《第四次转折》](http://m.ishare.iask.sina.com.cn/f/9679610.html)
-- [《乌合之众》](https://book.douban.com/subject/6966569/)
+- [《致命的自负》](https://book.douban.com/subject/1070007/)
 - [《娱乐至死》](https://book.douban.com/subject/1062193/)
 - [《聪明的投资者》](https://book.douban.com/subject/5243775/)
 - [《罗伯特议事规则（第11版）》](https://book.douban.com/subject/26651699/)
 - [软件定义战争](https://www.secrss.com/articles/47280)
 - [《历代经济变革得失》](https://book.douban.com/subject/24851460/)
+- [《乌合之众》](https://book.douban.com/subject/6966569/)
+
 
 ## 文章推荐
 - [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/) 
