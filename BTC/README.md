@@ -1,86 +1,83 @@
 # Bitcoin (BTC)
 
-This knowledge base aims to provide comprehensive information on Bitcoin (BTC) technology, covering basic features to advanced applications, as well as various protocols and tools within its ecosystem. Whether you are a beginner or an experienced developer, this guide will help you better understand and utilize Bitcoin technology.
+本知识库旨在提供有关比特币（BTC）技术的全面信息，涵盖从基本功能到高级应用，以及其生态系统中的各个协议和工具。无论您是初学者还是有经验的开发者，本指南都能帮助您更好地理解和利用比特币技术。
 
-## Introduction
+## 简介
+比特币（BTC）是世界上第一个去中心化的加密货币，自2009年由中本聪（Satoshi Nakamoto）发布以来，已经对全球金融体系产生了深远的影响。其重大意义包括但不限于以下几点：
 
-### The Significance of Bitcoin
+1. **金融民主化**：比特币通过去中心化的区块链技术，实现了无需中介的点对点交易，赋予了个人更多的金融控制权和自由。
 
-Bitcoin (BTC) is the world's first decentralized cryptocurrency. Since its release by Satoshi Nakamoto in 2009, it has had a profound impact on the global financial system. Its significance includes but is not limited to the following points:
+2. **安全和透明**：比特币网络利用密码学技术确保了交易的安全性和不可篡改性，并且所有交易记录公开透明，可供任何人验证。
 
-1. **Financial Democratization**: Bitcoin achieves peer-to-peer transactions without intermediaries through decentralized blockchain technology, giving individuals more financial control and freedom.
+3. **有限供应**：比特币总量被永久限定在2100万枚，这一稀缺性使得它成为一种抗通胀的资产储备手段，被誉为“数字黄金”。
 
-2. **Security and Transparency**: The Bitcoin network uses cryptographic technology to ensure transaction security and immutability. All transaction records are publicly transparent and can be verified by anyone.
+4. **全球流动性**：作为一种全球性货币，比特币可以跨越国界进行交易和转移，促进了国际贸易和跨境支付的发展。
 
-3. **Limited Supply**: The total supply of Bitcoin is permanently capped at 21 million, making it a deflationary asset and earning it the title of "digital gold".
+5. **技术创新**：比特币引领了区块链技术的发展，推动了智能合约、去中心化金融（DeFi）等创新应用，开启了新的互联网时代。
 
-4. **Global Liquidity**: As a global currency, Bitcoin can be traded and transferred across borders, promoting international trade and cross-border payments.
-
-5. **Technological Innovation**: Bitcoin has pioneered blockchain technology, driving innovations such as smart contracts and decentralized finance (DeFi), ushering in a new era of the internet.
-
-Through this knowledge base, you will learn about the basic features, advanced characteristics, and ecosystem applications of Bitcoin, helping you stay ahead in this rapidly evolving field.
+通过本知识库，您将学习到比特币的基本功能、高级特性以及生态系统应用，帮助您在这一快速发展的领域中保持领先。
 
 ## 1. Basic Features
 
 ### 1.1 Payment Addresses
-Types of Bitcoin addresses and their encoding methods:
+比特币地址类型及其编码方式：
 - [x] **P2PKH** (Pay to Public Key Hash)
 - [x] **P2SH-P2PKH** (Pay to Script Hash - Pay to Public Key Hash)
 - [x] **P2WPKH** (Pay to Witness Public Key Hash)
 - [x] **P2TR** (Pay to Taproot)
-- [x] **Base58** Encoding
-- [x] **Bech32** Encoding
-- [x] **Bech32m** Encoding
+- [x] **Base58** 编码
+- [x] **Bech32** 编码
+- [x] **Bech32m** 编码
 
 ### 1.2 Wallets
-Types and features of Bitcoin wallets:
-- [ ] **Standard Wallets** Standard wallets
-- [ ] **HD Wallets** Hierarchical Deterministic wallets
+比特币钱包类型及其特性：
+- [ ] **Standard Wallets** 标准钱包
+- [ ] **HD Wallets** 分层确定性钱包
 
 ### 1.3 Transactions
-Knowledge related to Bitcoin transactions:
-- [x] **Signature Algorithms** Signature algorithms
-- [ ] **Transaction Construction** Transaction construction
-- [ ] **Fee Estimation** Fee estimation
+比特币交易的相关知识：
+- [x] **Signature Algorithms** 签名算法
+- [ ] **Transaction Construction** 交易构建
+- [ ] **Fee Estimation** 费用估算
 
 ### 1.4 Tools
-Common tools in the Bitcoin ecosystem:
-- [ ] **Blockchain Explorers** Blockchain explorers
-- [ ] **API Services** API services
-- [ ] **Data Analysis Tools** Data analysis tools
+比特币生态系统中常用的工具：
+- [ ] **Blockchain Explorers** 区块链浏览器
+- [ ] **API Services** API 服务
+- [ ] **Data Analysis Tools** 数据分析工具
 
 ## 2. Advanced Features
 
 ### 2.1 PSBT (Partially Signed Bitcoin Transaction)
-Introduction and usage of Partially Signed Bitcoin Transactions (PSBT):
-- [x] **PSBT Protocol Introduction** PSBT protocol introduction
-- [x] **Creating and Parsing PSBT** Creating and parsing PSBT
+部分签名比特币交易（PSBT）的介绍和使用：
+- [x] **PSBT Protocol Introduction** PSBT 协议简介
+- [x] **Creating and Parsing PSBT** 创建和解析 PSBT
 
 ### 2.2 Taproot
-Introduction and advantages of Taproot technology:
-- [x] **Schnorr Signatures** Schnorr signatures
+Taproot 技术的介绍及其优势：
+- [x] **Schnorr Signatures** 施诺尔签名
 - [x] **MAST** (Merkelized Abstract Syntax Tree)
-- [ ] **Privacy and Efficiency Improvements** Privacy and efficiency improvements
+- [ ] **Privacy and Efficiency Improvements** 隐私和效率改进
 
 ### 2.3 Multisig Addresses
-Process of using multisig addresses:
-- [x] **Multisig Address Intro** Multisig address introduction
-- [ ] **OP_CHECKMULTISIG**
-- [ ] **OP_CHECKMULTISIGVERIFY**
-- [ ] **OP_CHECKSIGADD**
+多重签名地址的使用过程：
+- [x] **Multisig Address Intro** 多重签名简介
+- [ ] **OP_CHECKMULTISIG** 
+- [ ] **OP_CHECKMULTISIGVERIFY** 
+- [ ] **OP_CHECKSIGADD** 
 
 ## 3. Ecosystem Applications
 
 ### 3.1 BRC20
-- [x] Protocol introduction
+- [x] 协议介绍
 
 ### 3.2 ARC20
-- [x] Protocol introduction
+- [x] 协议介绍
 
 ### 3.3 Runes
-- [x] Protocol introduction
+- [x] 协议介绍
 
 ### 3.4 Lightning Network
-Introduction and core logic of the Lightning Network:
-- [ ] **Protocol Introduction** Protocol introduction
-- [ ] **Core Logic** Core logic
+闪电网络的介绍和核心逻辑：
+- [ ] **Protocol Introduction** 协议介绍
+- [ ] **Core Logic** 核心逻辑
