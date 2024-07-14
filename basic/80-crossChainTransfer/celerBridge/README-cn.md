@@ -26,7 +26,7 @@ cp .env.example .env
 ```
 
 ## 执行跨链   
-- 以流动性池方式进行跨链   
+- 以流动性池方式进行跨链    
 ```
 npx hardhat run scripts/1-poolBasedTransfer.js --network optim
 ```
