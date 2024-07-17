@@ -123,82 +123,82 @@
 示例代码参考[bitcoinjs-lib](https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/transactions.spec.ts#L204-L250)。
 
 1. **构建锁定脚本**：
-   以上面的示例脚本为例：
+  以上面的示例脚本为例：
 
-   ```javascript
-   2 <AlicePubKey> <BobPubKey> <CharliePubKey> 3 OP_CHECKMULTISIG
+  ```javascript
+  2 <AlicePubKey> <BobPubKey> <CharliePubKey> 3 OP_CHECKMULTISIG
 
-   const output = bscript.compile(
-     ([] as Stack).concat(
-       OP_INT_BASE + a.m,
-       a.pubkeys,
-       OP_INT_BASE + o.n,
-       OPS.OP_CHECKMULTISIG,
-     )
-   );
+  const output = bscript.compile(
+    ([] as Stack).concat(
+      OP_INT_BASE + a.m,
+      a.pubkeys,
+      OP_INT_BASE + o.n,
+      OPS.OP_CHECKMULTISIG,
+    )
+  );
 
-   // 其中
-   m = 2;
-   pubkeys = [<AlicePubKey>, <BobPubKey>, <CharliePubKey>];
-   n = 3;
-   ```
+  // 其中
+  m = 2;
+  pubkeys = [<AlicePubKey>, <BobPubKey>, <CharliePubKey>];
+  n = 3;
+  ```
 
 2. **签名过程**：
 
-   ```javascript
-   const multisig = createPayment('p2sh-p2ms(2 of 4)');
-   const inputData1 = await getInputData(2e4, multisig.payment, false, 'p2sh');
+  ```javascript
+  const multisig = createPayment('p2sh-p2ms(2 of 4)');
+  const inputData1 = await getInputData(2e4, multisig.payment, false, 'p2sh');
 
-   const psbt = new bitcoin.Psbt({ network: regtest })
-     .addInput(inputData1)
-     .addOutput({
-       address: regtestUtils.RANDOM_ADDRESS,
-       value: 1e4,
-     })
-     .signInput(0, multisig.keys[0])
-     .signInput(0, multisig.keys[2]);
-   ```
+  const psbt = new bitcoin.Psbt({ network: regtest })
+    .addInput(inputData1)
+    .addOutput({
+      address: regtestUtils.RANDOM_ADDRESS,
+      value: 1e4,
+    })
+    .signInput(0, multisig.keys[0])
+    .signInput(0, multisig.keys[2]);
+  ```
 
-   签名之后会得到签名信息，多签对应多个元素的签名数组：
+  签名之后会得到签名信息，多签对应多个元素的签名数组：
 
-   ```javascript
-   const partialSig = [
-     {
-       pubkey: AlicePubKey,
-       signature: bscript.signature.encode(Alice.sign(hash), sighashType),
-     },
-     {
-       pubkey: BobPubKey,
-       signature: bscript.signature.encode(Bob.sign(hash), sighashType),
-     },
-   ];
-   ```
+  ```javascript
+  const partialSig = [
+    {
+      pubkey: AlicePubKey,
+      signature: bscript.signature.encode(Alice.sign(hash), sighashType),
+    },
+    {
+      pubkey: BobPubKey,
+      signature: bscript.signature.encode(Bob.sign(hash), sighashType),
+    },
+  ];
+  ```
 
 3. **排序签名**：
 
-   ```javascript
-   function getSortedSigs(script: Buffer, partialSig: PartialSig[]): Buffer[] {
-     const p2ms = payments.p2ms({ output: script });
-     // for each pubkey in order of p2ms script
-     return p2ms
-       .pubkeys!.map(pk => {
-         // filter partialSig array by pubkey being equal
-         return (
-           partialSig.filter(ps => {
-             return ps.pubkey.equals(pk);
-           })[0] || {}
-         ).signature;
-         // Any pubkey without a match will return undefined
-         // this last filter removes all the undefined items in the array.
-       })
-       .filter(v => !!v);
-   }
-   ```
+  ```javascript
+  function getSortedSigs(script: Buffer, partialSig: PartialSig[]): Buffer[] {
+    const p2ms = payments.p2ms({ output: script });
+    // for each pubkey in order of p2ms script
+    return p2ms
+      .pubkeys!.map(pk => {
+        // filter partialSig array by pubkey being equal
+        return (
+          partialSig.filter(ps => {
+            return ps.pubkey.equals(pk);
+          })[0] || {}
+        ).signature;
+        // Any pubkey without a match will return undefined
+        // this last filter removes all the undefined items in the array.
+      })
+      .filter(v => !!v);
+  }
+  ```
 
-4. **构建解锁脚
+4. **构建解锁脚本**：
 
-本**：
+  ```javascript
+  bscript.compile(([OPS.OP_0] as Stack).concat(a.signatures))
+  ```
 
-   ```javascript
-   bscript.compile(([OPS.OP_0] as Stack).concat(a.signatures))
-   ```
+  
