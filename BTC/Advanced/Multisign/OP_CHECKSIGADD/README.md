@@ -1,3 +1,89 @@
 ## OP_CHECKSIGADD
+`OP_CHECKSIGADD` 是比特币脚本语言中的一个操作码（opcode），其引入主要目的是为了优化和简化多重签名验证过程。它在 Taproot 和 Schnorr 签名方案中扮演了重要角色，允许更高效地实现多重签名和复杂交易。
 
+### BIP 提出的背景
+
+`OP_CHECKSIGADD` 的引入是为了配合 Taproot 和 Schnorr 签名的实现，这两个方案显著优化了比特币的签名机制，提高了隐私性和效率。
+
+#### 具体的 BIP
+1. **BIP 340**：
+  - 标题：`Schnorr Signatures for secp256k1`
+  - 提案作者：Pieter Wuille, Jonas Nick, Tim Ruffing
+  - 提出时间：2020 年 1 月
+  - 内容：介绍了 Schnorr 签名算法，为比特币带来了更简洁的签名和更高的验证效率。
+
+2. **BIP 341**：
+  - 标题：`Taproot: SegWit version 1 spending rules`
+  - 提案作者：Pieter Wuille, Jonas Nick, Anthony Towns
+  - 提出时间：2020 年 1 月
+  - 内容：定义了 Taproot 升级，引入了一种新的输出类型，使得复杂的交易更加高效和隐私。
+
+3. **BIP 342**：
+  - 标题：`Validation of Taproot Scripts`
+  - 提案作者：Pieter Wuille
+  - 提出时间：2020 年 1 月
+  - 内容：引入了 `OP_CHECKSIGADD` 操作码，用于在 Taproot 中实现更高效的多重签名验证。
+
+### 关键人物
+
+1. **Pieter Wuille**：
+   - 比特币核心开发者，BIP 340、BIP 341 和 BIP 342 的主要作者，对 Taproot 和 Schnorr 签名的引入和实施起到了关键作用。
+
+2. **Jonas Nick**：
+   - 比特币核心开发者，参与了 Schnorr 签名和 Taproot 的研究和开发。
+
+3. **Tim Ruffing**：
+   - 密码学研究者，参与了 Schnorr 签名和多重签名方案的研究和开发。
+
+4. **Anthony Towns**：
+   - 比特币核心开发者，参与了 Taproot 的设计和实现。
+
+### 激活过程
+为了激活 Taproot 升级，比特币网络采用了一种称为“Speedy Trial”的激活机制。这种机制允许矿工通过在区块中设置特定的标志位（version bits）来表示他们对 Taproot 升级的支持。
+
+- **信号期**：矿工在每个区块中设置信号位，表示对 Taproot 升级的支持。
+- **激活门槛**：在一个难度调整周期（2016 个区块）内，需要至少 90% 的区块（即 1815 个区块）设置信号位，以表示对升级的支持。
+- **锁定期**：如果在一个信号期内达到了激活门槛，Taproot 升级会进入“锁定期”（lock-in period），再经过一个难度调整周期后，升级正式生效。
+
+#### 5. 正式激活
+
+Taproot 升级在 2021 年 6 月达到了激活门槛，随后在 2021 年 11 月正式激活。从这个时间点开始，`OP_CHECKSIGADD` 和其他相关的新功能在比特币网络上正式生效。
+
+### 关键时间点
+
+- **2020 年 1 月**：BIP 340、BIP 341 和 BIP 342 提出。
+- **2021 年 6 月**：Taproot 升级达到了激活门槛。
+- **2021 年 11 月 14 日**：Taproot 升级正式激活。
+
+### 工作原理
+
+`OP_CHECKSIGADD` 操作码的主要功能是验证单个签名并将结果（0 或 1）与现有的累计值相加。这在构建多重签名验证时尤其有用，因为它允许逐步累积签名验证的结果，然后在最后进行总和检查。
+
+#### 操作步骤
+
+1. 从堆栈中弹出一个公钥。
+2. 从堆栈中弹出一个签名。
+3. 从堆栈中弹出一个累计值。
+4. 验证公钥和签名：
+   - 如果签名有效，返回 1；否则返回 0。
+5. 将验证结果与累计值相加。
+6. 将新的累计值压回堆栈。
+
+### 示例脚本
+
+假设我们有三个公钥和三个对应的签名，我们希望验证至少两个签名，脚本如下：
+
+```
+<sig1> <sig2> <sig3> <0> <pubKey1> OP_CHECKSIGADD <pubKey2> OP_CHECKSIGADD <pubKey3> OP_CHECKSIGADD <2> OP_EQUAL
+```
+
+在这个脚本中：
+- `<sig1> <sig2> <sig3>` 是签名。
+- `<0>` 是初始累计值。
+- `<pubKey1> <pubKey2> <pubKey3>` 是公钥。
+- `OP_CHECKSIGADD` 执行单个签名验证并累加结果。
+- `<2> OP_EQUAL` 检查累加值是否等于 2。
+
+
+`OP_CHECKSIGADD` 是比特币脚本语言中用于优化多重签名验证的新操作码。它简化了多重签名的实现，使得复杂交易更加高效。它的引入与 BIP 340、BIP 341 和 BIP 342 紧密相关，标志着比特币在隐私性和效率方面的显著提升。通过 `OP_CHECKSIGADD`，比特币能够更灵活地实现多重签名验证，同时保持较高的安全性和性能。
 
