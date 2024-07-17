@@ -87,3 +87,105 @@ Taproot 升级在 2021 年 6 月达到了激活门槛，随后在 2021 年 11 �
 
 `OP_CHECKSIGADD` 是比特币脚本语言中用于优化多重签名验证的新操作码。它简化了多重签名的实现，使得复杂交易更加高效。它的引入与 BIP 340、BIP 341 和 BIP 342 紧密相关，标志着比特币在隐私性和效率方面的显著提升。通过 `OP_CHECKSIGADD`，比特币能够更灵活地实现多重签名验证，同时保持较高的安全性和性能。
 
+### 案例
+这里以上面示例中taproot script-path脚本中的2-3多签为例
+
+1. 随机生成internal public key和三份多签用户的私钥
+```js
+const internalKey = bip32.fromSeed(rng(64), regtest);
+
+const leafKeys = [];
+const leafPubkeys = [];
+for (let i = 0; i < 3; i++) {
+  const leafKey = bip32.fromSeed(rng(64), regtest);
+  leafKeys.push(leafKey);
+  leafPubkeys.push(toXOnly(leafKey.publicKey).toString('hex'));
+}
+```
+
+2. 构造锁定脚本
+```js
+ const leafScriptAsm = `${leafPubkeys[2]} OP_CHECKSIG ${leafPubkeys[1]} OP_CHECKSIGADD ${leafPubkeys[0]} OP_CHECKSIGADD OP_3 OP_NUMEQUAL`;
+```
+
+3. 构造MAST
+```js
+const leafScript = bitcoin.script.fromASM(leafScriptAsm);
+
+const scriptTree: Taptree = [
+  {
+    output: bitcoin.script.fromASM(
+      '50929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0 OP_CHECKSIG',
+    ),
+  },
+  [
+    {
+      output: bitcoin.script.fromASM(
+        '50929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0 OP_CHECKSIG',
+      ),
+    },
+    {
+      output: leafScript,
+    },
+  ],
+];
+const redeem = {
+  output: leafScript,
+  redeemVersion: LEAF_VERSION_TAPSCRIPT,
+};
+
+const { output, address, witness } = bitcoin.payments.p2tr({
+  internalPubkey: toXOnly(internalKey.publicKey),
+  scriptTree,
+  redeem,
+  network: regtest,
+});
+```
+
+4. 构造PSBT交易
+```js
+// amount from faucet
+const amount = 42e4;
+// amount to send
+const sendAmount = amount - 1e4;
+// get faucet
+const unspent = await regtestUtils.faucetComplex(wallet.output, amount);
+
+const psbt = new bitcoin.Psbt({ network: regtest });
+
+// Adding an input is a bit special in this case,
+// So we contain it in the wallet class
+// Any wallet can do this, wallet2 or wallet3 could be used.
+wallet.addInput(psbt, unspent.txId, unspent.vout, unspent.value);
+
+psbt.addOutput({ value: sendAmount, address: wallet.address });
+
+```
+
+5. 签名交易
+```js
+// Sign with at least 2 of the 3 wallets.
+// Verify that there is a matching leaf script
+// (which includes the unspendable internalPubkey,
+// so we verify that no one can key-spend it)
+wallet3.verifyInputScript(psbt, 0);
+wallet2.verifyInputScript(psbt, 0);
+psbt.signInput(0, wallet3);
+psbt.signInput(0, wallet2);
+
+// Before finalizing, we need to add dummy signatures for all that did not sign.
+// Any wallet can do this, wallet2 or wallet3 could be used.
+wallet.addDummySigs(psbt);
+```
+这里需要注意
+OP_CHECKSIGADD需要**完整的三个签名**，我们需要对未签名的公钥补一个无效签名，即一个字节的0x00
+
+6. 提取广播
+```js
+psbt.finalizeAllInputs();
+const tx = psbt.extractTransaction();
+const rawTx = tx.toBuffer();
+const hex = rawTx.toString('hex');
+
+await regtestUtils.broadcast(hex);
+```
