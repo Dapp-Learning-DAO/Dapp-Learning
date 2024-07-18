@@ -144,4 +144,6 @@ ipfs ls or ipfs object links：显示所有的子块和块的大小
 - ipfs private network  build and use :  https://zhuanlan.zhihu.com/p/35141862
 - local first: https://www.inkandswitch.com/local-first/
 - sharding :https://github.com/Alexcitten/ShardingIPFS/blob/main/index.js
+- orbitdb: https://github.com/orbitdb/orbitdb#browser-script-tag
+
 
