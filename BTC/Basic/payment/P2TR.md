@@ -51,11 +51,11 @@ P2TR地址包含key path和script path两种情况，目前常见的钱包支持
 获取用户公钥的`internalPubkey`坐标 `P`  
  $P = toXOnly(internalPubkey)$
 
-### 步骤1: 计算扭曲公钥
+### 步骤2: 计算扭曲公钥
 
 $Q = P + t\*G = P + TaggedHash('TapTweak', P)G$
 
-### 步骤2: Bech32m编码
+### 步骤3: Bech32m编码
 
 使用Bech32m编码方案将曲公钥编码为一个P2TR地址。这种编码格式提供了比Bech32更好的错误校验能力。
 
