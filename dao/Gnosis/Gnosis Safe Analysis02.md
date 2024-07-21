@@ -255,7 +255,7 @@ function createProxy(address singleton, bytes memory data) public returns (Gnosi
 
 在上面的创建Proxy合约的过程中，其实质是调用了create这一opcode。又因为create这一个opcode的创建合约的地址仅与Factory合约的地址和nonce有关，故导致钱包地址可被人手动推算出来。导致任何通过Factory合约这一方法创建钱包的人的钱包地址都可以被推断，出现安全隐患。
 
-$$
+<!-- $$
 \begin{eqnarray}
 a & \equiv & A(s, \boldsymbol{\sigma}[s]_{\mathrm{n}} - 1, \zeta, \mathbf{i}) \\
 \label{eq:new-address} A(s, n, \zeta, \mathbf{i}) & \equiv & \mathcal{B}_{96..255}\Big(\mathtt{KEC}\big(B(s, n, \zeta, \mathbf{i})\big)\Big) \\
@@ -264,7 +264,9 @@ B(s, n, \zeta, \mathbf{i}) & \equiv & \begin{cases}
 (255) \cdot s \cdot \zeta \cdot \mathtt{KEC}(\mathbf{i}) & \text{otherwise}
 \end{cases}
 \end{eqnarray}
-$$
+$$ -->
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right center left" columnspacing="0 thickmathspace" rowspacing="3pt"><mtr><mtd><mi>a</mi></mtd><mtd><mi></mi><mo>≡</mo></mtd><mtd><mi>A</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi mathvariant="bold-italic">σ</mi><mo stretchy="false">[</mo><mi>s</mi><msub><mo stretchy="false">]</mo><mrow><mrow><mi mathvariant="normal">n</mi></mrow></mrow></msub><mo>−</mo><mn>1</mn><mo>,</mo><mi>ζ</mi><mo>,</mo><mrow><mi mathvariant="bold">i</mi></mrow><mo stretchy="false">)</mo></mtd></mtr><mtr><mtd><mi>A</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>ζ</mi><mo>,</mo><mrow><mi mathvariant="bold">i</mi></mrow><mo stretchy="false">)</mo></mtd><mtd><mi></mi><mo>≡</mo></mtd><mtd><msub><mrow><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">B</mi></mrow><mrow><mn>96.</mn><mn>.255</mn></mrow></msub><mrow data-mjx-texclass="ORD"><mo minsize="1.623em" maxsize="1.623em">(</mo></mrow><mrow><mi mathvariant="monospace">K</mi><mi mathvariant="monospace">E</mi><mi mathvariant="monospace">C</mi></mrow><mrow data-mjx-texclass="ORD"><mo minsize="1.2em" maxsize="1.2em">(</mo></mrow><mi>B</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>ζ</mi><mo>,</mo><mrow><mi mathvariant="bold">i</mi></mrow><mo stretchy="false">)</mo><mrow data-mjx-texclass="ORD"><mo minsize="1.2em" maxsize="1.2em">)</mo></mrow><mrow data-mjx-texclass="ORD"><mo minsize="1.623em" maxsize="1.623em">)</mo></mrow></mtd></mtr><mtr><mtd><mi>B</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>n</mi><mo>,</mo><mi>ζ</mi><mo>,</mo><mrow><mi mathvariant="bold">i</mi></mrow><mo stretchy="false">)</mo></mtd><mtd><mi></mi><mo>≡</mo></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="left left" columnspacing="1em" rowspacing=".2em"><mtr><mtd><mrow><mi mathvariant="monospace">R</mi><mi mathvariant="monospace">L</mi><mi mathvariant="monospace">P</mi></mrow><mrow data-mjx-texclass="ORD"><mo minsize="1.2em" maxsize="1.2em">(</mo></mrow><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mrow data-mjx-texclass="ORD"><mo minsize="1.2em" maxsize="1.2em">)</mo></mrow></mtd><mtd><mtext>if</mtext><mtext>&nbsp;</mtext><mi>ζ</mi></mtd><mtd></mtd><mtd><mo>=</mo></mtd><mtd></mtd><mtd><mi data-mjx-alternate="1">∅</mi></mtd></mtr><mtr><mtd><mo stretchy="false">(</mo><mn>255</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>s</mi><mo>⋅</mo><mi>ζ</mi><mo>⋅</mo><mrow><mi mathvariant="monospace">K</mi><mi mathvariant="monospace">E</mi><mi mathvariant="monospace">C</mi></mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="bold">i</mi></mrow><mo stretchy="false">)</mo></mtd><mtd><mtext>otherwise</mtext></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></mtd></mtr></mtable></math>
 
 地址的推算方法如下：
 
