@@ -2,8 +2,6 @@
 ## 介绍
 Polymarket是一个基于Matic Network的去中心化预测市场平台，允许用户对各种公共事件进行预测下注。由纽约大学的辍学生Shayne Coplan创建,本文将详细介绍Polymarket的使用与智能合约交互部分，以及如何完成预测清算。
 
-![image](./img/polymarket.png)
-
 
 随着美国新一届大选的临近,关于新的总统候选人的讨论越来越火爆,而围绕着总统候选人展开博弈的去中心化预测市场平台也受到越来越多人们的关注
 
@@ -27,6 +25,9 @@ Polymarket通过去中心化的方式，使用户能够参与各种公共事件�
 
 用户只需在本地生成transaction的signature 并发出，无需直接与区块链交互。Polymarket接收到签名交易后，验证签名的有效性并执行诸如approve/buy/sell等操作。这种机制确保了交易的便利性和安全性，同时用户私钥也不存储在服务器上。同时，也使polymarket可以将多笔交易打包为一笔交易同时执行以大大降低gas消耗。
 
+![image](./img/proxy_wallet.png)
+
+上图是polymarket在一笔交易中同时处理多笔预测交易并调用多个Proxy账户中的USDC购买Positions(ERC1155)的交易截图
 
 #### CTF结果代币
 
