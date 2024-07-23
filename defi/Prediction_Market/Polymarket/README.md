@@ -1,4 +1,5 @@
-# 介绍
+# Polymarket
+## 介绍
 Polymarket是一个基于Matic Network的去中心化预测市场平台，允许用户对各种公共事件进行预测下注。由纽约大学的辍学生Shayne Coplan创建,本文将详细介绍Polymarket的使用与智能合约交互部分，以及如何完成预测清算。
 
 ![image](./img/polymarket.png)
@@ -6,20 +7,16 @@ Polymarket是一个基于Matic Network的去中心化预测市场平台，允许
 
 随着美国新一届大选的临近,关于新的总统候选人的讨论越来越火爆,而围绕着总统候选人展开博弈的去中心化预测市场平台也受到越来越多人们的关注
 
-![image](./img/dune.png)
 
 
-
-
-
-# 机制及原理
+## 机制及原理
 
 
 Polymarket通过去中心化的方式，使用户能够参与各种公共事件的预测，并在事件结果确定后进行清算。用户可以通过智能合约创建市场、参与交易和结算收益。Polymarket的核心实现方法由以下几个部分组合而成。
 
 
 
-### Proxy钱包
+#### Proxy钱包
 当用户首次进行交易前，他们会被提示创建一个钱包。用户会被引导在 Polygon 上部署一个1 of 1 多签钱包，这个钱包由用户钱包（EOA）控制和拥有（例如MetaMask）该多签钱包用于存放用户的所有positions（预测，以ERC1155形式存在）和 USDC。
 
 使用Proxy钱包能够提升用户体验，尤其在处理交易费用、批量交易处理以及交易执行的安全性和便利性方面表现突出，主要为以下几个方面:
@@ -30,11 +27,8 @@ Polymarket通过去中心化的方式，使用户能够参与各种公共事件�
 
 用户只需在本地生成transaction的signature 并发出，无需直接与区块链交互。Polymarket接收到签名交易后，验证签名的有效性并执行诸如approve/buy/sell等操作。这种机制确保了交易的便利性和安全性，同时用户私钥也不存储在服务器上。同时，也使polymarket可以将多笔交易打包为一笔交易同时执行以大大降低gas消耗。
 
-![image](./img/proxy_wallet.png)
 
-上图是polymarket在一笔交易中同时处理多笔预测交易并调用多个Proxy账户中的USDC购买Positions(ERC1155)的交易截图
-
-### CTF结果代币
+#### CTF结果代币
 
 Polymarket 利用条件代币为用户提供了一个独特且动态的预测方式。在 Polymarket 上，所有的预测结果都通过 Gnosis 的条件代币框架（Conditional Tokens Framework, CTF）在 Polygon 上进行代币化。这些结果代币为二元结果，代表“YES”和“NO”，使用 ERC1155 代币实现。
 
@@ -72,7 +66,7 @@ Polymarket 利用条件代币为用户提供了一个独特且动态的预测方
 
 通过使用结果代币的方式,Polymarket将去中心化预测市场与其他金融产品非常完美的结合起来.用户不仅可以买入代币用于预测,还可以使用金融杠杆做空认为不会发生的事情.应对预测期很长的项目时,用户也可以将他们认同的预测结果通过代币打包成复合资产,这使得polymarket灵活度大大提升
 
-### UMA
+#### UMA
 
 Polymarket 上大部分预测都是"抽象预测",其结果不能通过传统链上预言机来喂价实现(区别于传统对币价的预测)，所以通过整合 UMA 的乐观预言机 (Optimistic Oracle, OO) 来实现去中心化的市场决议。UMA 的预言机系统提供了一种机制，使合约能够请求并接收数据信息，以此支持对抽象问题的预测和解决。
 
@@ -90,12 +84,12 @@ UMA 通常以乐观的方式处理数据验证,这意味着:当一个数据请�
 
 
 
-### 5. 总结
+#### 5. 总结
 
 Polymarket利用Proxy钱包/CTF代币和UMA等合约实现了去中心化预测市场的创建、交易和清算。用户可以方便地参与预测市场，并在事件结果确定后获得相应收益。希望本文能帮助你更好地理解Polymarket的技术实现和使用方法。
 
 
-## 参考链接
+### 参考链接
 
 - Polymarket: https://polymarket.com/
 - Polymarket相关报道: https://foresightnews.pro/search?search=polymarket&search_type=website&params_type=article
