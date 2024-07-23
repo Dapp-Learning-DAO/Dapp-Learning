@@ -1,5 +1,6 @@
-# Celer Bridge 
 [中文](./README-cn.md) / English
+
+# Celer Bridge 
 
 ## Overview
 cBridge introduces the best cross-chain token bridging experience, providing users with deep liquidity, efficient and easy-to-use liquidity management for cBridge node operators and liquidity providers who do not want to operate cBridge nodes. It also offers exciting developer-oriented features such as a universal message bridging for scenarios like cross-chain DEX and NFT.

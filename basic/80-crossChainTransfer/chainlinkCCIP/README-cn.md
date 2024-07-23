@@ -1,5 +1,6 @@
+中文 / [English](./README.md)
+
 # Chainlink CCIP 跨链
-中文 / [English](./README.md)  
 
 ## 概览 
 Chainlink CCIP 提供了一个简单的接口，dApp 和 web3 企业家可以通过它安全地满足他们所有的跨链需求。用户可以使用 CCIP 传输数据，代币，或是二者一起传输。 
