@@ -1,6 +1,6 @@
-# PMThings
+[中文](./README_CN.md) / English
 
-[**中文版**](https://github.com/Whisker17/PMThings/blob/main/README_CN.md) / [**English**](https://github.com/Whisker17/PMThings/blob/main/README.md)
+# PMThings
 
 This repo contains something about Prediction Market
 
