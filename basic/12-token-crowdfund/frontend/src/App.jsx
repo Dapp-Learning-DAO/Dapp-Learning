@@ -23,16 +23,14 @@ const { VITE_INFURA_ID, VITE_PRIVATE_KEY, VITE_CONTRACT_ADDRESS } = import.meta.
 //
 // const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
 // const wallet = web3Provider.getSigner();
-const web3Provider = new ethers.providers.InfuraProvider('rinkeby', VITE_INFURA_ID);
+const web3Provider = new ethers.InfuraProvider('sepolia', VITE_INFURA_ID);
 const wallet = new ethers.Wallet(VITE_PRIVATE_KEY, web3Provider);
-
 // Get instance of our crowdFund contract
-const instance = new ethers.Contract(VITE_CONTRACT_ADDRESS, crowdFundABI.abi, wallet);
-
+const instance = new ethers.Contract(VITE_CONTRACT_ADDRESS, crowdFundABI?.abi, wallet);
 // In this component let us make a form element easier
 // save us from duplicate works   
 // You can put any form element in children
-function IptItem({ label, children }) {
+function IptItem ({ label, children }) {
   return (
     <div className="field">
       <label className="label has-text-left	">{label}</label>
@@ -45,11 +43,11 @@ function IptItem({ label, children }) {
 // it has two props:
 // 1. data is from each fund project
 // 2. onFund can calling the function that let you can make fund to your favour project
-function ProjectItem({ data, onFund }) {
+function ProjectItem ({ data, onFund }) {
 
   // These are the variable we need from data
   const { projectTitle, projectStarter, projectDesc, currentState, currentAmount, deadline, goalAmount } = data;
-  
+
   // This can us get value from input element
   const fundEl = useRef(null);
 
@@ -115,14 +113,14 @@ function ProjectItem({ data, onFund }) {
               at this time current amount should be the same as goal amount so it can be hidden
            */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span className="has-text-weight-bold">{currentState !== 2 && `${ethers.utils.formatEther(currentAmount)} ETH`}</span>
-            <span className="has-text-weight-bold">{ethers.utils.formatEther(goalAmount)} ETH</span>
+            <span className="has-text-weight-bold">{currentState !== 2 && `${ethers.formatEther(currentAmount)} ETH`}</span>
+            <span className="has-text-weight-bold">{ethers.formatEther(goalAmount)} ETH</span>
           </div>
           {/* progress element makes the project fund progress more visualize */}
           <progress
             style={{ margin: '0 10px' }}
             className="progress is-success"
-            value={currentState === 2 ? 100 : (ethers.utils.formatEther(currentAmount) / ethers.utils.formatEther(goalAmount)) * 100}
+            value={currentState === 2 ? 100 : (ethers.formatEther(currentAmount) / ethers.formatEther(goalAmount)) * 100}
             max="100"
           ></progress>
         </div>
@@ -131,7 +129,7 @@ function ProjectItem({ data, onFund }) {
   );
 }
 
-function App() {
+function App () {
 
   // This is the main part of project, 
   // saving the all state we need :
@@ -191,8 +189,8 @@ function App() {
   // and save them to projectCon
   const getProjects = async () => {
     let arr = await instance.returnAllProjects();
-    console.log('updating...');
-    setProjectCon(arr.map((e) => new ethers.Contract(e, projectABI.abi, wallet)));
+    console.log('updating...', projectABI?.abi);
+    setProjectCon(arr.map((e) => new ethers.Contract(e, projectABI?.abi, wallet)));
   };
 
   // clear all the input, the timing is when project start successfully
@@ -217,14 +215,14 @@ function App() {
         throw '';
       }
       if (typeof (iptAmount.current.value * 1) === 'number' && iptAmount.current.value * 1 > 0) {
-        amount = ethers.utils.parseEther(iptAmount.current.value);
+        amount = ethers.parseEther(iptAmount.current.value);
       } else {
         alert('You have to input right amount');
         throw '';
       }
 
       // start the project, set a interval to update the list
-      let re = await instance.startProject(...res, ethers.utils.parseEther(iptAmount.current.value));
+      let re = await instance.startProject(...res, ethers.parseEther(iptAmount.current.value));
       clearInterval(projectInterval);
       setProjectInterval(setInterval(getProjects, 800));
       switchModal(false);
@@ -239,7 +237,7 @@ function App() {
     // we will calling a payable method of contract
     // thus we should set the value to declare how much fund we want supply
     let overrides = {
-      value: ethers.utils.parseEther(val),
+      value: ethers.parseEther(val),
     };
 
     // waiting for the transaction has been made
