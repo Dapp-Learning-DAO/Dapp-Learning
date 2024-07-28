@@ -55,8 +55,10 @@ function calculateLinearInterest(uint256 rate, uint40 lastUpdateTimestamp)
 
 但在 solidity 中不支持指数运算，如果用遍历实现，将非常消耗 gas，固这里使用 [Binomial approximation](https://en.wikipedia.org/wiki/Binomial_approximation) (二项式近似) 原理，求近似值。即：
 
-<!-- $(1+x)^{n}=1+nx+\frac{1}{2}n(n-1)x^2+\frac{1}{6}n(n-1)(n-2)x^3+...$ -->
-<img src="https://render.githubusercontent.com/render/math?math=(1%2Bx)^{n}=1%2Bnx%2B\frac{1}{2}n(n-1)x^2%2B\frac{1}{6}n(n-1)(n-2)x^3%2B..." style="display: block;margin: 24px auto;" />
+$$
+(1+x)^{n}=1+nx+\frac{1}{2}n(n-1)x^2+\frac{1}{6}n(n-1)(n-2)x^3+...
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=(1%2Bx)^{n}=1%2Bnx%2B\frac{1}{2}n(n-1)x^2%2B\frac{1}{6}n(n-1)(n-2)x^3%2B..." style="display: block;margin: 24px auto;" /> -->
 
 我们只取前三项，即到 x 的三次方为止，后面的项由于已经很小，所以可以舍弃，对总体结果影响不大(实际结果略少于理论值)。这样就是兼具节省 gas 和准确性的计算方案。
 
