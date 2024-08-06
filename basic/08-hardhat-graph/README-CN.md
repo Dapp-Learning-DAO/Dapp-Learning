@@ -289,7 +289,61 @@ graph-node:
     RUST_LOG: info
 ```
 
-> 注意： graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
+> 注意 1: graph-node 连接的节点需要开启 archive 模式（启动节点时，添加 flag --syncmode full --gcmode archive）。
+> 注意 2: 当需要在一个机器中启动多个 graph-node, 并且每个 graph-node 连接到不同的链时，只需要在 docker-compose.yml 添加对应的 graph-node service 即可。如下，配置里 sepolia 和 optimism 的 graph node 服务，同时修改 graph-node-optimism 对外暴露的端口为 8100，8101，8120，8130，8140。修改的时候特别需要注意的是，只能修改暴露的本地端口 (8100/8101/8120/8130/8140), 容器内部的端口 (8000/8001/8020/8030/8040) 千万不要修改，不然会启动报错
+
+```yaml
+version: '3'
+services:
+  graph-node-sepolia:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'sepolia:http://infura.sepolia.com/xxxx'
+      GRAPH_LOG: info
+  graph-node-optimism:
+    image: graphprotocol/graph-node
+    ports:
+      - '8100:8000'
+      - '8101:8001'
+      - '8120:8020'
+      - '8130:8030'
+      - '8140:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'optimism:http://infura.optimism.com/yyy'
+      GRAPH_LOG: info
+  ipfs:
+    image: ipfs/kubo:v0.17.0
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./data/ipfs:/data/ipfs:Z
+```
 
 2. graph-node 启动
 

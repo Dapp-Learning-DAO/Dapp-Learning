@@ -103,7 +103,8 @@ npx hardhat run scripts/sendTokens/7-checkResultOnOpsepolia.js --network optim_s
 
 
 # 参考文档 
-- 官方文档: https://docs.layerzero.network/contracts/getting-started
+- 官方文档 v1: https://docs.layerzero.network/contracts/getting-started
+- 官方文档 v2: https://docs.layerzero.network/v2
 - example for OmniCounter: https://github.com/LayerZero-Labs/solidity-examples/blob/main/test/examples/OmniCounter.test.js  
 - blog: https://senn.fun/layerzero-v1  
 - layerzero scan: https://testnet.layerzeroscan.com/  
