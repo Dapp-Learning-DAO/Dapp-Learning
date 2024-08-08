@@ -1,32 +1,33 @@
 const hre = require("hardhat");
 require("@nomiclabs/hardhat-web3");
 
-async function main() {
+async function main () {
 
-    const [deployer] = await ethers.getSigners();
+  const [deployer] = await ethers.getSigners();
 
-    console.log(
-        "Deploying contracts with the account:",
-        deployer.address
-    );
+  console.log(
+    "Deploying contracts with the account:",
+    deployer.address
+  );
 
-    // PRICE_FEED_CONTRACT 在 goerli 上的合约地址  
-    const PRICE_FEED_CONTRACT="0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e";
+  // PRICE_FEED_CONTRACT 在 sepolia 上的合约地址  
+  const PRICE_FEED_CONTRACT = "0x694AA1769357215DE4FAC081bf1f309aDC325306";
 
-    // 部署 PriceConsumerV3 合约
-    const priceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");
-    const PriceConsumerV3Ins = await priceConsumerV3.deploy(PRICE_FEED_CONTRACT);
+  // 部署 PriceConsumerV3 合约
+  const priceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");
+  const PriceConsumerV3Ins = await priceConsumerV3.deploy(PRICE_FEED_CONTRACT);
 
-    console.log("----------------------------------------------------")
-    console.log("PriceConsumerV3 address:", PriceConsumerV3Ins.address);
+  console.log("----------------------------------------------------")
+  console.log("PriceConsumerV3 address:", PriceConsumerV3Ins.address);
 
-    //await priceConsumerV3.deployed()
-    console.log("Read Price from  PRICE_FEED")
+  //await priceConsumerV3.deployed()
+  console.log("Read Price from  PRICE_FEED")
 
-    await PriceConsumerV3Ins.getLatestPrice().then(function (data) {
-        console.log('Current price of ETH / USD is: ', web3.utils.hexToNumber(data._hex))
-      })
-    
+  await PriceConsumerV3Ins.getChainlinkDataFeedLatestAnswer().then(function (data) {
+    console.log('data', data)
+    console.log('Current price of ETH / USD is: ', web3.utils.hexToNumber(data._hex))
+  })
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

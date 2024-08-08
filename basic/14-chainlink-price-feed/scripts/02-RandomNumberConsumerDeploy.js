@@ -4,13 +4,14 @@ require('dotenv').config();
 const { saveDeployment } = require('./utils');
 
 
-async function main() {
+async function main () {
   const [deployer] = await ethers.getSigners();
 
   console.log('Deploying contracts with the account:', deployer.address);
 
   // 部署 RandomNumberConsumer 合约
   const RandomNumberConsumer = await ethers.getContractFactory('RandomNumberConsumer');
+  console.log('process.env.SubscriptionId', process.env.SubscriptionId)
   const instance = await RandomNumberConsumer.deploy(process.env.SubscriptionId);
   await instance.deployed();
 

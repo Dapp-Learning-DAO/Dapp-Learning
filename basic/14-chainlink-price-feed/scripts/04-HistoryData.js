@@ -57,7 +57,7 @@ const aggregatorV3InterfaceABI = [
   },
 ]
 
-async function main() {
+async function main () {
 
   const { ethers, BigNumber } = require("ethers") // for nodejs only
 
@@ -75,14 +75,15 @@ async function main() {
   const latestPhaseId = latestRound.roundId.shr(64);
   const latestAggregatorRoundId = latestRound.roundId.and(mask);
 
-  console.log('latesPhaseId '+latestPhaseId.toString())
-  console.log('latestAggregatorRoundId '+latestAggregatorRoundId.toString())
+  console.log('latesPhaseId ' + latestPhaseId.toString())
+  console.log('latestAggregatorRoundId ' + latestAggregatorRoundId.toString())
 
-  for (var phase = BigNumber.from(1);phase.lte(latestPhaseId);phase=phase.add(1)){
-    for (var agRound = BigNumber.from(1); agRound.lte(mask) ; agRound=agRound.add(1)){
-     
+  for (var phase = BigNumber.from(1); phase.lte(latestPhaseId); phase = phase.add(1)) {
+    for (var agRound = latestAggregatorRoundId; agRound.gte(1); agRound = agRound.sub(1)) {
+
       const [inPhase, roundData] = await downloadRoundData(priceFeed, phase, agRound);
-      if (!inPhase){
+      console.log('inPhase', inPhase)
+      if (!inPhase) {
         console.log('should start a new phase')
         break;
       }
@@ -93,19 +94,20 @@ async function main() {
   }
 }
 
-async function downloadRoundData(priceFeed, phase, agRound){
+async function downloadRoundData (priceFeed, phase, agRound) {
   const roundId = phase.shl(64).or(agRound);
   const maxRetries = 10
   var tries = 1;
-  while (tries <= maxRetries){
-    try{
+  while (tries <= maxRetries) {
+    try {
       const roundData = await priceFeed.getRoundData(roundId);
+      console.log('roundData', roundData)
       return [true, roundData] //still same phase, rounddata
     }
-    catch(e){
-      if(e.message.includes('Transaction reverted')){
+    catch (e) {
+      if (e.message.includes('Transaction reverted')) {
         return [false, undefined]//out of the current phase, should start new one
-      } else{
+      } else {
         console.log(e.message)
         tries++;//just retry, may be network connection issues
         await new Promise(r => setTimeout(r, 1000));
@@ -116,12 +118,12 @@ async function downloadRoundData(priceFeed, phase, agRound){
 
 
 }
-function processRoundData(phase, agRound, roundData){
+function processRoundData (phase, agRound, roundData) {
   //Todo:insert it into database
   //目前只是打印
   console.log(`phase:${phase}, agRound:${agRound}`);
   console.log(`answer:${ethers.utils.formatUnits(roundData.answer, 8)}`);
-  console.log(`updatedAt:${moment(roundData.updatedAt*1000).format('YYYY-MM-DD HH:mm:ss')}`);      
+  console.log(`updatedAt:${moment(roundData.updatedAt * 1000).format('YYYY-MM-DD HH:mm:ss')}`);
 
 }
 
