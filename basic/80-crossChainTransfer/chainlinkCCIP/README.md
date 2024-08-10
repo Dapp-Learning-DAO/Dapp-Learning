@@ -110,7 +110,7 @@ After getting the transaction hash, you can visit https://ccip.chain.link/ to ch
 7. Transfer 0.01 arbitrum-sepolia eth to the contract
 8. Call the function transferTokensPayNative
 
-## Execute Token Cross-Chain
+## Execute Token and Data Cross-Chain
 This is cross-chain with token and data, so the contract needs to be deployed on two chains, one for the sender and the other for the receiver.
 
 #### Deploy the Transfer contract on Sepolia 
