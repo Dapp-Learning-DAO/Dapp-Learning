@@ -24,7 +24,8 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 ## 测试流程:
 1)  安装依赖
 ```js
-npm install
+npm install node
+npm install web3
 // 本教程使用的 node 版本为 v20.11.0
 ```
 
