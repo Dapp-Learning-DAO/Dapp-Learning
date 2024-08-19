@@ -1,0 +1,38 @@
+name: Unit Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  sol:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: Build the contracts and print their size
+        working-directory: ./contracts
+        run: forge build --sizes
+
+      - name: Ensure files are the same as forge fmt
+        working-directory: ./contracts
+        run: forge fmt --check
+
+      - name: Run the tests
+        working-directory: ./contracts
+        run: forge test
+
+      - name: Add test summary
+        run: |
+          echo "## Tests result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
