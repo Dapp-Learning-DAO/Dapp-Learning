@@ -56,6 +56,9 @@ cargo risczero new my_project --guest-name guest_code_for_zk_proof
 
 
 ### 生成证明
+
+执行 host 代码，运行 host/src/main.rs 文件
+
 ```
 cargo run --release
 ```

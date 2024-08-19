@@ -20,7 +20,7 @@ cd fibonacci
 ```
 
 也可以使用官方项目模板
-[sp1-project-template](https://github.com/succinctlabs/sp1-project-template/tree/main)
+[sp1-project-template](https://github.com/succinctlabs/sp1-project-template)
 
 ### 项目结构
 
@@ -53,11 +53,20 @@ script：包含证明生成和验证代码的代码。其中evm.rs 用于与evm 
 
 
 ### 生成证明
+执行 zkVM，并生成 ZKP 证明 , 默认 --bin 参数位 main,  实际执行 script/src/bin/main.rs文件 
+
 ```
 cd script
 RUST_LOG=info cargo run --release -- --execute
 
 RUST_LOG=info cargo run --release -- --prove
+```
+
+生成用于 evm 链上验证的证明, 实际执行 script/src/bin/evm.rs 文件
+
+
+```
+cargo run --release --bin evm
 ```
 
 ## 官方 Prover Network
