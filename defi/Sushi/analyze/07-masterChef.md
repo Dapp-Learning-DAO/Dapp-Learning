@@ -19,26 +19,39 @@
 分发速率F应该如何定义？即token对于单位LP数量，单位时间的分发速率应该是一个常数，
 
 即分发速率F应该等于单位区块总共分发出的sushiPerBlock数量乘以这个LP资金池的sushi分配额度占据所有池子的分配额度总和的百分比，得到这个池子在这个块应该能分到的sushi总数。然后再除以这个池子中此时的LP总的流动性，得到每一份流动性LPtoken提供者应该在一个区块中分配到sushi数量, 即：
-               
-<img src="https://render.githubusercontent.com/render/math?math=f=\frac{sushiPerBlock\times\frac{pool.allocPoint}{totalAllocPoint}}{lpSupply}">
 
+<!--<img src="https://render.githubusercontent.com/render/math?math=f=\frac{sushiPerBlock\times\frac{pool.allocPoint}{totalAllocPoint}}{lpSupply}">-->
+$$
+f=\frac{sushiPerBlock\times\frac{pool.allocPoint}{totalAllocPoint}}{lpSupply}
+$$
 
 即：rewardIndex_b = rewardIndex_a + (deltaBlocks * F )
 
-<img src="https://render.githubusercontent.com/render/math?math=Index(N)=Index(N-1)%2B\deltaN\times\frac{sushiPerBlock}{lpSupply(N-1)}\times\frac{pool.allocPoint}{totalAllocPoint}">
-
+<!--<img src="https://render.githubusercontent.com/render/math?math=Index(N)=Index(N-1)%2B\deltaN\times\frac{sushiPerBlock}{lpSupply(N-1)}\times\frac{pool.allocPoint}{totalAllocPoint}">-->
+$$
+Index(N)=Index(N-1)%2B\deltaN\times\frac{sushiPerBlock}{lpSupply(N-1)}\times\frac{pool.allocPoint}{totalAllocPoint}
+$$
 
 > 与compound中的borrowIndex不同的是: 
 > borrowIndex中，借贷利率不是一个常数，而是一个随着资金利用率变化的一个值。而这里的分发速率是一个定值；
 > 不同点之二在于：borrowindex事实上是复利的一个实现，即FV=PV*(1 + borrowRate)^t, 而masterchef中，应该采用累加，而不是borrowIndex中的累乘。因为它只是奖励sushi，把每一个区块的奖励都累加到用户上即可，不需要累乘的逻辑
 
 在sushi中，定义了一个accSushiPerShare的概念，类似于这里的index。
+
+<!--<img src="https://render.githubusercontent.com/render/math?math=deltaBlocks=block.number-pool.lastRewardBlock">-->
+$$
+deltaBlocks = block.number - pool.lastRewardBlock
+$$
+
+<!--<img src="https://render.githubusercontent.com/render/math?math=sushiReward=deltaBlocks*sushiPerBlock*pool.allocPoint/totalAllocPoint">-->
+$$
+sushiReward = deltaBlocks * sushiPerBlock * pool.allocPoint / totalAllocPoint
+$$
   
-<img src="https://render.githubusercontent.com/render/math?math=deltaBlocks=block.number-pool.lastRewardBlock">
-  
-<img src="https://render.githubusercontent.com/render/math?math=sushiReward=deltaBlocks*sushiPerBlock*pool.allocPoint/totalAllocPoint">
-  
-<img src="https://render.githubusercontent.com/render/math?math=pool.accSushiPerShare_b=pool.accSushiPerShare_a%2BsushiRewardlpSupply">
+<!--<img src="https://render.githubusercontent.com/render/math?math=pool.accSushiPerShare_b=pool.accSushiPerShare_a%2BsushiRewardlpSupply">-->
+$$
+pool.accSushiPerShare_b = pool.accSushiPerShare_a + sushiRewardlpSupply
+$$
 
 比较trick的一点是，sushi在计算deltaBlocks中，其设计了一个bonus时间，在bonus时间内的LP提供者，其奖励会乘以10倍。
 

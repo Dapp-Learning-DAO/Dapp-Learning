@@ -1,6 +1,6 @@
-# PMThings
+中文 / [English](./README.md)
 
-[**中文版**](https://github.com/Whisker17/PMThings/blob/main/README_CN.md) / [**English**](https://github.com/Whisker17/PMThings/blob/main/README.md)
+# PMThings
 
 本仓库包含预测市场及其相关领域资料，欢迎大家提交 PR ！
 

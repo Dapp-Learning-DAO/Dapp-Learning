@@ -1,7 +1,9 @@
 # Bech32m
+
 `Bech32m` 是一种新的编码格式，用于比特币地址。它是 `Bech32` 格式的修改版本，主要用于支持 SegWit v1+ 的比特币地址（例如 Taproot 地址）。`Bech32m` 是为了解决原始 `Bech32` 编码中发现的一个错误而被提出和实现的。
 
 ## 简介
+
 ### 背景
 
 `Bech32` 格式最初是在 [BIP 173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki) 中提出的，用于编码 SegWit（隔离见证）地址，这种格式的地址以 `bc1` 开头。然而，当 `Bech32` 用于新的 SegWit 版本时（即版本1及以上），由于错误检测机制存在问题，导致部分无效地址不会被正确地检测出来。
@@ -14,19 +16,17 @@
 
 主要区别在于校验和的计算方式。`Bech32` 使用的是一个固定的常数，而 `Bech32m` 使用了一个不同的常数来计算校验和。这一改变使得 `Bech32m` 能够更有效地捕捉到一些特定的错误，这些错误在原始的 `Bech32` 格式中可能无法检测到。
 
-| 特性                 | Bech32m                 | Bech32                  | Base58                      |
-|---------------------|-------------------------|-------------------------|-----------------------------|
-| **描述**            | 改进的 SegWit 地址格式  | SegWit 地址格式         | 传统的比特币地址格式        |
-| **BIP**             | BIP 350                 | BIP 173                 | 无特定BIP，但参考 BIP 13/16 |
-| **错误检测**        | 改进的错误检测能力      | 强错误检测能力          | 较弱的错误检测能力          |
-| **字符集**          | 32字符集，不包括易混淆字符 | 32字符集，不包括易混淆字符 | 58字符集                    |
-| **地址前缀**        | `bc1p`                  | `bc1`                   | `1` 或 `3`                  |
-| **用途**            | 支持 SegWit v1+ (如 Taproot) | 支持 SegWit v0 (P2WPKH 和 P2WSH) | 非 SegWit 和 SegWit P2SH    |
-| **校验和算法**      | 修改的贝奇校验和算法    | 贝奇校验和算法          | Base58Check                 |
-| **可读性和可扫描性** | 同 Bech32                | 更优的可读性和较低的打字错误率 | 较低的可读性和较高的打字错误率 |
-| **推广程度**        | Taproot更新后推广       | SegWit 地址的标准格式    | 比特币早期广泛使用          |
-
-
+| 特性                 | Bech32m                      | Bech32                           | Base58                         |
+| -------------------- | ---------------------------- | -------------------------------- | ------------------------------ |
+| **描述**             | 改进的 SegWit 地址格式       | SegWit 地址格式                  | 传统的比特币地址格式           |
+| **BIP**              | BIP 350                      | BIP 173                          | 无特定BIP，但参考 BIP 13/16    |
+| **错误检测**         | 改进的错误检测能力           | 强错误检测能力                   | 较弱的错误检测能力             |
+| **字符集**           | 32字符集，不包括易混淆字符   | 32字符集，不包括易混淆字符       | 58字符集                       |
+| **地址前缀**         | `bc1p`                       | `bc1`                            | `1` 或 `3`                     |
+| **用途**             | 支持 SegWit v1+ (如 Taproot) | 支持 SegWit v0 (P2WPKH 和 P2WSH) | 非 SegWit 和 SegWit P2SH       |
+| **校验和算法**       | 修改的贝奇校验和算法         | 贝奇校验和算法                   | Base58Check                    |
+| **可读性和可扫描性** | 同 Bech32                    | 更优的可读性和较低的打字错误率   | 较低的可读性和较高的打字错误率 |
+| **推广程度**         | Taproot更新后推广            | SegWit 地址的标准格式            | 比特币早期广泛使用             |
 
 ### 格式和使用
 
@@ -34,6 +34,7 @@
 - **使用**：自从 Bitcoin Core 0.21.1 版本开始支持 `Bech32m` 格式后，它被用于 Taproot 地址（即以 `bc1p` 开头的地址）。
 
 ## 编解码
+
 在 JavaScript 中，使用 `bech32` 库来处理 `Bech32m` 的编码和解码同样非常直接。首先，你需要安装 `bech32` 库，它支持在 Node.js 环境中执行 `Bech32` 和 `Bech32m` 相关操作。
 
 ### 安装 `bech32` 库
@@ -54,11 +55,11 @@ yarn add bech32
 const bech32 = require('bech32');
 
 function encodeBech32m(data, hrp = 'bc') {
-    // 将数据从8位字节数组转换为5位数组
-    const words = bech32.toWords(Buffer.from(data));
+  // 将数据从8位字节数组转换为5位数组
+  const words = bech32.toWords(Buffer.from(data));
 
-    // 使用 bech32m 规范进行编码
-    return bech32.encode(hrp, words, bech32.encodings.BECH32M);
+  // 使用 bech32m 规范进行编码
+  return bech32.encode(hrp, words, bech32.encodings.BECH32M);
 }
 
 // 示例数据
@@ -66,7 +67,7 @@ const data = [0x01, 0x02, 0x03, 0x04, 0x05];
 
 // 编码
 const encoded = encodeBech32m(data);
-console.log("Encoded Bech32m:", encoded);
+console.log('Encoded Bech32m:', encoded);
 ```
 
 ### 解码示例
@@ -75,23 +76,24 @@ console.log("Encoded Bech32m:", encoded);
 
 ```javascript
 function decodeBech32m(bech32mStr) {
-    const decoded = bech32.decode(bech32mStr, bech32.encodings.BECH32M);
+  const decoded = bech32.decode(bech32mStr, bech32.encodings.BECH32M);
 
-    // 将5位数组转换回8位字节
-    const bytes = Buffer.from(bech32.fromWords(decoded.words));
-    
-    return {
-        hrp: decoded.prefix,
-        data: bytes
-    };
+  // 将5位数组转换回8位字节
+  const bytes = Buffer.from(bech32.fromWords(decoded.words));
+
+  return {
+    hrp: decoded.prefix,
+    data: bytes,
+  };
 }
 
 // 使用上面的编码结果进行解码
 const decoded = decodeBech32m(encoded);
-console.log("Decoded data:", decoded.data);
+console.log('Decoded data:', decoded.data);
 ```
 
 ## 编解码步骤
+
 为了更深入理解 `Bech32m` 的编解码过程，让我们详细探讨其背后的数学和逻辑步骤。这种编码方式旨在提供更强的错误检测能力，并针对地址等用途进行优化。
 
 ### 核心组件和步骤
@@ -146,6 +148,7 @@ console.log("Decoded data:", decoded.data);
 提取数据，剔除校验和，返回原始数据和HRP。
 
 ## 拆解实现
+
 ### 1. 基础组件
 
 首先，我们需要实现一些基础函数，包括多项式校验和计算和数据转换。
@@ -159,65 +162,65 @@ const CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 
 // 将字符转换为数值
 function charToValue(char) {
-    const index = CHARSET.indexOf(char);
-    if (index === -1) {
-        throw new Error('Invalid character');
-    }
-    return index;
+  const index = CHARSET.indexOf(char);
+  if (index === -1) {
+    throw new Error('Invalid character');
+  }
+  return index;
 }
 
 // 将数值转换为字符
 function valueToChar(value) {
-    return CHARSET[value];
+  return CHARSET[value];
 }
 
 // 多项式模数计算 Bech32 校验和
 function polymod(values) {
-    let checksum = 1;
-    for (let value of values) {
-        const top = checksum >> 25;
-        checksum = ((checksum & 0x1ffffff) << 5) ^ value;
-        for (let i = 0; i < 5; i++) {
-            if ((top >> i) & 1) {
-                checksum ^= (0x3b6a57b2 >> (5 * i)) & 0x1ffffff;
-            }
-        }
+  let checksum = 1;
+  for (let value of values) {
+    const top = checksum >> 25;
+    checksum = ((checksum & 0x1ffffff) << 5) ^ value;
+    for (let i = 0; i < 5; i++) {
+      if ((top >> i) & 1) {
+        checksum ^= (0x3b6a57b2 >> (5 * i)) & 0x1ffffff;
+      }
     }
-    return checksum;
+  }
+  return checksum;
 }
 
 // 扩展人类可读部分（HRP, Human-Readable Part）以帮助计算校验和
 function hrpExpand(hrp) {
-    const ret = [];
-    // 先将每个字符转换为其ASCII码除以32的余数
-    for (let i = 0; i < hrp.length; i++) {
-        ret.push(hrp.charCodeAt(i) >> 5);
-    }
-    // 添加分隔符
-    ret.push(0);
-    // 再将每个字符转换为其ASCII码的低5位
-    for (let i = 0; i < hrp.length; i++) {
-        ret.push(hrp.charCodeAt(i) & 31);
-    }
-    return ret;
+  const ret = [];
+  // 先将每个字符转换为其ASCII码除以32的余数
+  for (let i = 0; i < hrp.length; i++) {
+    ret.push(hrp.charCodeAt(i) >> 5);
+  }
+  // 添加分隔符
+  ret.push(0);
+  // 再将每个字符转换为其ASCII码的低5位
+  for (let i = 0; i < hrp.length; i++) {
+    ret.push(hrp.charCodeAt(i) & 31);
+  }
+  return ret;
 }
 
 // 计算校验和的最终值（Bech32m）
 function createChecksum(hrp, data) {
-    const values = hrpExpand(hrp).concat(data).concat([0, 0, 0, 0, 0, 0]);
-    const polymodValue = polymod(values) ^ 0x2bc830a3; // Bech32m 标识多项式
-    let result = [];
-    for (let i = 0; i < 6; ++i) {
-        result.push((polymodValue >> (5 * (5 - i))) & 31);
-    }
-    return result;
+  const values = hrpExpand(hrp).concat(data).concat([0, 0, 0, 0, 0, 0]);
+  const polymodValue = polymod(values) ^ 0x2bc830a3; // Bech32m 标识多项式
+  let result = [];
+  for (let i = 0; i < 6; ++i) {
+    result.push((polymodValue >> (5 * (5 - i))) & 31);
+  }
+  return result;
 }
 
 // 验证校验和
 function verifyChecksum(hrp, data) {
   const expandedHrp = hrpExpand(hrp);
   const values = expandedHrp.concat(data);
-  return polymod(values) === 0x2bc830a3;  // 对于 Bech32, 有效校验和会返回1, 对于 Bech32m 需要验证不同的常量
+  return polymod(values) === 0x2bc830a3; // 对于 Bech32, 有效校验和会返回1, 对于 Bech32m 需要验证不同的常量
 }
 ```
 
@@ -227,30 +230,30 @@ function verifyChecksum(hrp, data) {
 
 ```javascript
 function convertBits(data, fromBits, toBits, pad = true) {
-    let acc = 0;
-    let bits = 0;
-    const ret = [];
-    const maxv = (1 << toBits) - 1;
-    for (let i = 0; i < data.length; ++i) {
-        let value = data[i];
-        if (value < 0 || (value >> fromBits) !== 0) {
-            return null;
-        }
-        acc = (acc << fromBits) | value;
-        bits += fromBits;
-        while (bits >= toBits) {
-            bits -= toBits;
-            ret.push((acc >> bits) & maxv);
-        }
+  let acc = 0;
+  let bits = 0;
+  const ret = [];
+  const maxv = (1 << toBits) - 1;
+  for (let i = 0; i < data.length; ++i) {
+    let value = data[i];
+    if (value < 0 || value >> fromBits !== 0) {
+      return null;
     }
-    if (pad) {
-        if (bits > 0) {
-            ret.push((acc << (toBits - bits)) & maxv);
-        }
-    } else if (bits >= fromBits || ((acc << (toBits - bits)) & maxv)) {
-        return null;
+    acc = (acc << fromBits) | value;
+    bits += fromBits;
+    while (bits >= toBits) {
+      bits -= toBits;
+      ret.push((acc >> bits) & maxv);
     }
-    return ret;
+  }
+  if (pad) {
+    if (bits > 0) {
+      ret.push((acc << (toBits - bits)) & maxv);
+    }
+  } else if (bits >= fromBits || (acc << (toBits - bits)) & maxv) {
+    return null;
+  }
+  return ret;
 }
 ```
 
@@ -262,12 +265,12 @@ function convertBits(data, fromBits, toBits, pad = true) {
 
 ```javascript
 function encodeBech32m(hrp, data) {
-    const combined = data.concat(createChecksum(hrp, data));
-    let result = hrp + '1';
-    for (let datum of combined) {
-        result += valueToChar(datum);
-    }
-    return result;
+  const combined = data.concat(createChecksum(hrp, data));
+  let result = hrp + '1';
+  for (let datum of combined) {
+    result += valueToChar(datum);
+  }
+  return result;
 }
 ```
 
@@ -275,18 +278,16 @@ function encodeBech32m(hrp, data) {
 
 ```javascript
 function decodeBech32m(bech32mStr) {
-    const pos = bech32mStr.lastIndexOf('1');
-    const hrp = bech32mStr.slice(0, pos);
-    const data = [];
-    for (let i = pos + 1; i < bech32mStr.length; ++i) {
-        data.push(charToValue(bech32mStr[i]));
-    }
-    if (!verifyChecksum(hrp, data)) {
-        throw new Error('Invalid checksum');
-   
-
- }
-    return { hrp, data: data.slice(0, data.length - 6) };
+  const pos = bech32mStr.lastIndexOf('1');
+  const hrp = bech32mStr.slice(0, pos);
+  const data = [];
+  for (let i = pos + 1; i < bech32mStr.length; ++i) {
+    data.push(charToValue(bech32mStr[i]));
+  }
+  if (!verifyChecksum(hrp, data)) {
+    throw new Error('Invalid checksum');
+  }
+  return { hrp, data: data.slice(0, data.length - 6) };
 }
 ```
 
@@ -307,15 +308,18 @@ console.log('Decoded:', decoded);
 ## 在BTC中的应用
 
 #### SegWit 地址支持
+
 - **SegWit v0 地址**：使用 `Bech32` 编码，这些地址以 `bc1q` 开头。
 - **SegWit v1+ 地址（包括 Taproot）**：使用 `Bech32m` 编码，这些地址以 `bc1p` 开头。
 
 #### 优点
+
 1. **更低的交易费用**：SegWit 地址允许比特币交易以更低的费用进行，因为它们更有效地利用区块空间。
 2. **增强的错误检测能力**：`Bech32m` 改进了校验和算法，提供了更强的错误检测能力，减少了地址输入错误的风险。
 3. **更好的用户体验**：地址全小写，易于手工抄写和阅读，减少了错误输入的机会。
 
 #### Taproot 与 `Bech32m`
+
 Taproot 是比特币的一个重要升级，它引入了 Schnorr 签名和 Merklized Abstract Syntax Trees (MAST)，增强了隐私、扩展性和效率。`Bech32m` 是支持 Taproot 地址的推荐编码方式，因为 Taproot 主要使用 SegWit v1。这种新的地址格式使得利用 Taproot 所提供的所有优势变得更加高效和安全。
 
 `Bech32m` 格式的引入是比特币协议持续进化的一部分，它不仅提高了地址的错误校验能力，还通过支持如 Taproot 这样的先进特性，推动了整个网络向前发展。对于用户和开发者而言，了解并适应这种新的地址格式是非常重要的，它将帮助他们最大化比特币的潜力。

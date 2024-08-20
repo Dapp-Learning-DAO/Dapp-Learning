@@ -87,13 +87,13 @@ x∗y=k
 
 每一笔交易都会改变两个代币的数量，无论数量如何变化，`k` 都应该保持不变。
 
-<!-- $$(x + \Delta x)(y - \Delta y) = xy$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=(x%2B\Delta x)(y-\Delta y)=xy" />
+$$(x + \Delta x)(y - \Delta y) = xy$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=(x%2B\Delta x)(y-\Delta y)=xy" /> -->
 
 这里的意思是用 `Delta x` 数量的`token x` 交换出 `Delta y` 数量的 `token y`。所以计算 `Delta y` 的公式为：
 
-<!-- $$\Delta y = \frac{y \Delta x} {x + \Delta x}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=\Delta y=\frac{y \Delta x}{x %2B \Delta x}" />
+$$\Delta y = \frac{y \Delta x} {x + \Delta x}$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=\Delta y=\frac{y \Delta x}{x %2B \Delta x}" /> -->
 
 请注意，我们现在得到的 `Delta y` 是数量而不是价格。计算数量的方法对应 `Exchange.getAmount()`。
 
