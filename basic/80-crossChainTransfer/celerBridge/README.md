@@ -28,7 +28,7 @@ cp .env.example .env
 ```
 
 ## Executing Cross-Chain Operations    
-- Cross-chain operation in Pool-Based mode     
+- Cross-chain operation in Pool-Based mode       
 ```
 npx hardhat run scripts/1-poolBasedTransfer.js --network optim
 ```
