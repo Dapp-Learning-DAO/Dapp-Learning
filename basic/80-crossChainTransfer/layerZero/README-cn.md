@@ -1,5 +1,6 @@
+中文 / [English](./README.md)
+
 # Layerzero 跨链
-中文 / [English](./README.md)  
 
 ## 概览 
 LayerZero 是一种全链互操作性协议，专注于链与链之间的数据消息传递，允许任何数据，包括代币、链的状态、合约调用、NFT 或治理投票等，从链 A 转移到链 B。
@@ -102,7 +103,8 @@ npx hardhat run scripts/sendTokens/7-checkResultOnOpsepolia.js --network optim_s
 
 
 # 参考文档 
-- 官方文档: https://docs.layerzero.network/contracts/getting-started
+- 官方文档 v1: https://docs.layerzero.network/contracts/getting-started
+- 官方文档 v2: https://docs.layerzero.network/v2
 - example for OmniCounter: https://github.com/LayerZero-Labs/solidity-examples/blob/main/test/examples/OmniCounter.test.js  
 - blog: https://senn.fun/layerzero-v1  
 - layerzero scan: https://testnet.layerzeroscan.com/  

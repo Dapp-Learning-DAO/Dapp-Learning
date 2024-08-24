@@ -27,4 +27,12 @@ OP_DUP OP_HASH160 <Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG
 
 # 常见支付方式
 
-- [P2PKH](./P2PKH.md)
+| 支付方式 | 全称                    | 地址前缀 | 脚本类型 | 主要特点                                        | 示例地址      |
+|----------|-------------------------|----------|----------|-------------------------------------------------|---------------|
+| [P2PKH](./P2PKH.md)    | Pay-to-Public-Key-Hash  | 1        | P2PKH    | 最常用，公钥哈希方式，隐私性好，地址以 "1" 开头 | 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa |
+| [P2SH](./P2SH-P2PKH.md)     | Pay-to-Script-Hash      | 3        | P2SH    | 支付到脚本的哈希值，支持复杂的脚本，地址以 "3" 开头 | 3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy |
+| [P2WPKH](./P2WPKH.md)   | Pay-to-Witness-Public-Key-Hash | bc1q    | P2WPKH  | 使用隔离见证（SegWit），更低交易费用，地址以 "bc1q" 开头 | bc1qar0srrr7xf6h4g1ks7zft6wz7x4n7pkjkcn6lq |
+| P2WSH    | Pay-to-Witness-Script-Hash   | bc1q    | P2WSH   | 使用隔离见证，支持复杂脚本，地址以 "bc1q" 开头 | bc1qrp33g0q0s6fphxtww9g4ndzsd74ny3rps6m74dxg7mjsg5c0z9rhdj |
+| [P2TR](./P2TR.md)     | Pay-to-Taproot          | bc1p    | P2TR    | 使用 Taproot 功能，优化脚本执行和隐私，地址以 "bc1p" 开头 | bc1p4gr63h6fp9hrkwpf4sjwx4s34a5w6b6ptfhl5k7vph3ykq6s5h7gx5m |
+
+

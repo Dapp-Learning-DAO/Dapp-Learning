@@ -284,7 +284,62 @@ graph-node:
     RUST_LOG: info
 ```
 
-> Note: the node in graph-node need start archive mode(when start the node, add flag --syncmode full --gcmode archive). 2. graph-node startup
+> Note 1: the node in graph-node need start archive mode(when start the node, add flag --syncmode full --gcmode archive). 2. graph-node startup
+> Note 1: When you need to start multiple graph-nodes in one machine, and each graph-node is connected to a different chain, you only need to add the corresponding graph-node service in docker-compose. Configure the sepolia and optimism graph node services as follows, and change the ports exposed to graph-node-optimism to 8100,8101,8120,8130,8140. Note that you can only modify the exposed local port (8100/8101/8120/8130/8140). Do not modify the port (8000/8001/8020/8030/8040) in the container. Otherwise, an error will be reported.
+
+```yaml
+version: '3'
+services:
+  graph-node-sepolia:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'sepolia:http://infura.sepolia.com/xxxx'
+      GRAPH_LOG: info
+  graph-node-optimism:
+    image: graphprotocol/graph-node
+    ports:
+      - '8100:8000'
+      - '8101:8001'
+      - '8120:8020'
+      - '8130:8030'
+      - '8140:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'optimism:http://infura.optimism.com/yyy'
+      GRAPH_LOG: info
+  ipfs:
+    image: ipfs/kubo:v0.17.0
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./data/ipfs:/data/ipfs:Z
+```
+
 
 2. Startup with docker compose directly
 

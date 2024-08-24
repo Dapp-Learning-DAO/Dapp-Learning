@@ -12,7 +12,7 @@ IPFS combines distributed scattered lists, encouraging block exchange, and a sel
 This file system can be accessed in multiple ways, including Fuse and HTTP.Adding local files to the IPFS file system can make it available to the world.The file indicates that it is based on its hash, so it is conducive to cache.The distribution of the file adopts a BitTorrent protocol.Other users who look at the content also help to provide the content to the others on the Internet.
 IPFS has a name service called IPNS. It is a global name space based on PKI, which is used to build a trust chain. This is compatible with other NS and can map DNS, .onion, .bit and more to IPNS.
 
-todo 1155 left
+<!-- todo 1155 left -->
 
 ## IPFS Installation
 
