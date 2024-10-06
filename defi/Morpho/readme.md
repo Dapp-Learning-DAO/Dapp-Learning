@@ -422,3 +422,7 @@ liquiate(user, amount):
 
 - 清算逻辑  
 Morpho 使用和 Compound 同样的 oracle，closeFactor 和 liquidationIncentive 进行清算，即保持和 Compound 完全相同的清算处理
+
+
+## 参考链接
+- https://github.com/etherhood/Morpho-Looper/blob/main/src/MorphoLooper.sol

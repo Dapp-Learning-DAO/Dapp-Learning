@@ -125,7 +125,9 @@ S' * ( (t2 - t1) * f2 * i2)   // (t1, t2) with size S'
 
 一个阶段的 funding payment 是 头寸规模 S 乘以 `Δtime * Index price * Funding Rate`，前提是 头寸规模 S 期间不会发生改变。
 
-$\sum_{t=1}^{t'}{S_{t}*I_{t}*F_{t}*(\Delta(t)-\Delta(t-1))}$
+<!--$\sum_{t=1}^{t'}{S_{t}*I_{t}*F_{t}*(\Delta(t)-\Delta(t-1))}$-->
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msup><mi>t</mi><mo>′</mo></msup></mrow></munderover><mrow><msub><mi>S</mi><mrow><mi>t</mi></mrow></msub><mo>∗</mo><msub><mi>I</mi><mrow><mi>t</mi></mrow></msub><mo>∗</mo><msub><mi>F</mi><mrow><mi>t</mi></mrow></msub><mo>∗</mo><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>−</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></math>
+
 
 - S: position size
 - I: index price

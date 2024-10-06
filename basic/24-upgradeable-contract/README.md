@@ -250,7 +250,7 @@ abstract contract UUPSProxiable {
 
 ```
 
-### 实战 demo
+### 实战 TransparentUpgradeableProxy demo  
 
 #### 首次部署
 
@@ -287,9 +287,62 @@ ProxyAdmin 提供两个方法进行升级
 - 继承的父合约也需要能满足升级，本例中的 Ownable 采用 OwnableUpgradeable，支持升级
 - 可使用 OpenZeppelin 插件验证合约是否为可升级合约，以及升级时是否有冲突
 
+![Alt text](image.png)
+https://blog.logrocket.com/using-uups-proxy-pattern-upgrade-smart-contracts/ 
 ### 升级到 Gonsis 合约
 
 代理的管理员（可以执行升级）是 ProxyAdmin 合约。 只有 ProxyAdmin 的所有者可以升级代理。可以调用：proxyadmin.transferOwnership 转移到自己的多签合约地址上。
+
+
+### 实战 UUPS demo  
+https://eips.ethereum.org/EIPS/eip-1822
+
+UUPS 升级方法在逻辑合约里，相比透明代理无需部署proxyadmin合约，减少了一个合约的部署。
+但是逻辑合约里要实现_authorizeUpgrade方法。
+
+```
+function _authorizeUpgrade(address newImplementation) internal override virtual {
+        require(msg.sender == owner, "Unauthorized Upgrade");
+    }
+```
+
+具体可以参考此教程：
+https://medium.com/@pearliboy1/how-to-implement-an-upgradeable-smart-contract-with-uups-242c57f671ee
+
+### 钻石代理模式
+https://eips.ethereum.org/EIPS/eip-2535
+合约大小目前限制在24KB，这个就比较难解决，一般是使用库函数和业务拆解成多个合约，但是不是所有的业务都适合，并且拆解难度也很大，最后很可能造成代码结构过于复杂。
+在这个场景下，就提出了EIP-2535。
+一个Proxy有多个Implementation合约，做法就是改造fallback，之前的proxy模式都是fallback到一个固定的实现合约，Diamond把fallback函数改造成根据函数签名，把delegatecall路由到不同的Implementation合约，这样Implementation合约的数量基本就没有限制了。一个合约可以有多个实现，就像一个钻石可以有很多个切面，这就是Diamond名字的来源。
+所以原理上就是通过函数签名把调用路由到不同的Implementation合约。
+那我们就需要记录这个路由表，并且能有方法暴露这个路由表进行查看和管理。这个在Diamond的标准实现里是实现了一个DiamondCutFacet，这个合约会保存这个路由表，并由LibDiamond库实现了维护这张路由表的方法（增删改查）。
+
+#### Diamond 概念介绍
+Diamond其实就是proxy合约，负责数据存储和通过fallback函数转发函数调用到实现合约。这一点和别的proxy合约没有什么质的区别。一般我们不会再手动构造这个合约，直接使用标准合约即可。核心功能：
+
+根据路由表执行的fallback函数
+初始化Diamond
+Diamond -> Proxy
+Facet(s) -> Implementation(s)
+Cut -> Upgrade
+Loupe -> Function list
+
+
+配置diamondCutFacet，给Diamond增加diamondCut方法;
+配置loupe，给Diamond增加loupe相关方法;
+配置ERC165，给Diamond增加ERC165（supportInterfaces）相关支持;
+配置ERC173，给Diamond增加ERC173（ownership）相关支持; 
+
+参考文章： https://juejin.cn/post/7179066816419856443
+
+#### 实操
+https://guides.quicknode.com/guides/ethereum-development/smart-contracts/the-diamond-standard-eip-2535-explained-part-2
+https://louper.dev/
+
+
+### ds-proxy
+https://github.com/dapphub/ds-proxy?tab=readme-ov-file
+https://dapp.tools/ 
 
 ## 参考文档
 
@@ -312,3 +365,8 @@ ProxyAdmin 提供两个方法进行升级
 - compound: 合约升级
 - MinimalProxy: <https://github.com/optionality/clone-factory>
 - creat2 contract upgrade: https://github.com/0age/metamorphic
+- 钻石代理：https://juejin.cn/post/7179066816419856443
+- The Diamond Standard : https://www.quicknode.com/guides/ethereum-development/smart-contracts/the-diamond-standard-eip-2535-explained-part-1
+- Proxy contract设计总览： https://medium.com/taipei-ethereum-meetup/proxy-contract-variations-6f9d359d35bf
+- Diamond hardhat: https://github.com/mudgen/diamond-1-hardhat/tree/main
+- quicknode Diamond description: https://www.quicknode.com/guides/ethereum-development/smart-contracts/the-diamond-standard-eip-2535-explained-part-1

@@ -5,16 +5,20 @@
 相关项目：https://github.com/SuperCV/Book  
  
 - [《中央帝国的财政密码》](https://book.douban.com/subject/27007549/)
+- [《金融百年--从袁大头到互联网金融》](https://book.douban.com/subject/26937414/?dt_platform=wechat_friends&dt_dapp=1)
 - [《密码朋克--自由与互联网的未来》](https://book.douban.com/subject/27054249/)   
 - [《精通比特币》](https://github.com/inoutcode/bitcoin_book_2nd)
 - [《货币未来》](https://book.douban.com/subject/35178904/)
-- [《历代经济变革得失》](https://book.douban.com/subject/24851460/)
 - [战争与国家形成：春秋战国与近代早期欧洲之比较](https://book.douban.com/tag/%E8%AE%B8%E7%94%B0%E6%B3%A2)
 - [《第四次转折》](http://m.ishare.iask.sina.com.cn/f/9679610.html)
-- [《乌合之众》](https://book.douban.com/subject/6966569/)
+- [《致命的自负》](https://book.douban.com/subject/1070007/)
 - [《娱乐至死》](https://book.douban.com/subject/1062193/)
 - [《聪明的投资者》](https://book.douban.com/subject/5243775/)
 - [《罗伯特议事规则（第11版）》](https://book.douban.com/subject/26651699/)
+- [软件定义战争](https://www.secrss.com/articles/47280)
+- [《历代经济变革得失》](https://book.douban.com/subject/24851460/)
+- [《乌合之众》](https://book.douban.com/subject/6966569/)
+
 
 ## 文章推荐
 - [Nick Szabo：货币，区块链与社会可扩展性](https://www.btcstudy.org/2021/10/27/money-blockchains-and-social-scalability-echo-edition/) 
@@ -28,6 +32,8 @@
 - [开源社区的暗面](https://mp.weixin.qq.com/s/2kYb93_V3TMdgKFAV3HG4Q)
 - [打造受欢迎的社区](https://opensource.guide/zh-hans/building-community/)
 - [公司形式：从实体官僚到算法信任](https://mirror.xyz/0xf67Bd51BAF48C05A53af61aF66DB86ADd7A825C0/bYzwwnUL3i2gY6ygakX8FJFwcGSm9uNU4JZ_Y9G8zNE)
+
+- [a16z Crypto的人都在读什么书](https://www.theblockbeats.info/news/54039)
 ## 英语提高篇
 - [《英语魔法师之语法俱乐部》](https://book.douban.com/subject/1014914/)
 - [《赖世雄美语音标》](https://book.douban.com/subject/4201317/)

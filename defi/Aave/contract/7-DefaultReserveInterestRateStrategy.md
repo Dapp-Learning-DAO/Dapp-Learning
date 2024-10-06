@@ -14,13 +14,13 @@
 
 当 `U < U_optimal` 时：
 
-<!-- $R_{t}=R_{base}+\frac{U_t}{U_{optimal}}R_{slope1}$ -->
-<img src="https://render.githubusercontent.com/render/math?math=R_{t}=R_{base}%2B\frac{U_t}{U_{optimal}}R_{slope1}" style="display: block;margin: 24px auto;" />
+$R_{t}=R_{base}+\frac{U_t}{U_{optimal}}R_{slope1}$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=R_{t}=R_{base}%2B\frac{U_t}{U_{optimal}}R_{slope1}" style="display: block;margin: 24px auto;" /> -->
 
 当 `U >= U_optimal` 时：
 
-<!-- $R_{t}=R_{base}+R_{slope1}+\frac{U_t-U_{optimal}}{1-U_{optimal}}R_{slope2}$ -->
-<img src="https://render.githubusercontent.com/render/math?math=R_{t}=R_{base}%2BR_{slope1}%2B\frac{U_t-U_{optimal}}{1-U_{optimal}}R_{slope2}" style="display: block;margin: 24px auto;" />
+$R_{t}=R_{base}+R_{slope1}+\frac{U_t-U_{optimal}}{1-U_{optimal}}R_{slope2}$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=R_{t}=R_{base}%2BR_{slope1}%2B\frac{U_t-U_{optimal}}{1-U_{optimal}}R_{slope2}" style="display: block;margin: 24px auto;" /> -->
 
 ## 公式相关变量
 
