@@ -396,6 +396,72 @@ subgraph 定义了你希望通过 GraphQL API 提供的数据、数据源和数�
 4. 通过@derivedFrom 建立关系  
    通过@derivedFrom 字段在实体上定义反向查询，这样就在实体上创建了一个虚拟字段，使它可以被查询，但不能通过映射 API 手动设置。实际上，这是从另一个实体上定义的关系中衍生出来的。这样的关系，对存储关系的两者意义不大，如果只存储一方而派生另一方，则索引和查询性能都会更好。
 
+## Thegraph 的同类产品  
+除了 Thegraph, 还有其他同类的产品，以便我们可以根据产品特点，费用等选择最优的产品。  
+
+### Alchemy  
+Alchemy 也提供了 Subgraph 功能，用户可以轻松的从 Thegraph 上把 Subgraph 迁移到 Alchemy 上来。 
+
+- 部署  
+部署流程和 thegraph host service 流程一样，编写完 ts 代码后进行 codegen、build，最后deploy 的时候需要输入 deploy-key 这个参数，这个 key 需要在 Dashboard 界面获取
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Alchemy_Subgraph.jpg?raw=true" /></center>
+
+参考: https://docs.alchemy.com/reference/subgraphs-quickstart   
+
+
+2. Alchemy Subgraph Pricing  
+默认情况下，使用的是 Free Plan， 对于开发者自己使用是足够的，当用于项目时，需要升级 Plan，解锁更都的查询次数  
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Alchemy_Pricing.jpg?raw=true" /></center>        
+
+
+3. Thegraph Pricing    
+Growth Plan 一个月 $49, 有 100,0000 的查询次数，平均 $0.000049/次，而 thegraph 查询 100,0000 次，需要约 186 GRT,  GRT 按照 $0.2 计算的话，thegraph 平均 $0.000037/次  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Thegraph_Pricing.jpg?raw=true" /></center>
+
+参考：https://www.alchemy.com/pricing
+
+
+### Envio  
+1. 本地构建  
+使用 `envio init` 初始化项目目录，然后使用 `envio dev` 启动本地 Indexer。
+envio 本地 indexer 启动很快，启动后便可通过 [http://localhost:8080/](http://localhost:8080/console) 进行访问  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_start.jpg?raw=true" /></center>   
+
+
+2. 部署 Host Service   
+把使用 envio init 初始化后的项目上传到 github, 然后对授权这个 repo 的访问权限个 envio，那么提交 commit 后，envio 就会自动进行部署  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_init.jpg?raw=true" /></center>  
+
+3. 部署成功
+部署成功后，即可在 envio 的 Host Service 处查看访问   
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_dashboard.jpg?raw=true" /></center>  
+
+参考：https://docs.envio.dev/docs/HyperIndex/hosted-service-deployment
+
+
+#### Envio 优势  
+- 本地构建速度很快  
+- Host Service 目前是免费使用  
+
+### Ponder  
+1. 本地构建  
+Ponder 也可以本地进行构建，但是他需要使用 Ethereum RPC 到节点去获取数据，类似 Alchemy 的 subgraph ，受限于 Ethereum RPC 节点的访问频率。官方网站推荐使用 Alchemy 的 RPC， 但根据上面介绍的，Alchemy 的 RPC 有访问限制  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/ponder_build.jpg?raw=true" /></center> 
+
+2. Host Service 构建  
+目前 ponder 只在 [Railway](https://railway.app/) 上进行了全面的测试兼容，对于其他的平台，没有进行完整的测试。
+
+参考：https://ponder.sh/docs/production/deploy   
+
+#### Ponder 不足  
+1. 本地构建的时候，在 .env.local 文件中需要输入 `PONDER_RPC_URL_1` 变量，用以拉取 Ethereum node 数据。这里使用 infura 或是 Alchemy 的 PRC_URL 都是有 limite_rate 限制的  
+2. 对于 Uniswap V2, V3 这类的 factory 合约，只支持监听 10,000 个子合约。同时当工厂合约发出事件创建子合约的时候，event 事件里面的数值类型不能是 array 或是 struct
+3. 开发 subgraph 的结构与语法不同与 thegraph, 对于已有 subgraph 进行迁移的话，需要重新进行适配  
+
+
+
 ## 参考文档
 
 官方文档：
