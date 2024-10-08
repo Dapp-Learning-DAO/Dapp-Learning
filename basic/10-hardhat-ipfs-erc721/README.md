@@ -4,7 +4,7 @@
 
 It is designed to create persistent and distributed storage and shared files. It is a content-address
 
-Nodes in IPFS network build a distributed file systion. It is an open source project developed since 2014 by protocol Lab with the help of the open source community and originally designed by Juan Benet.
+Nodes in IPFS network build a distributed file system. It is an open source project developed since 2014 by protocol Lab with the help of the open source community and originally designed by Juan Benet.
 IPFS is an equal distributed file system that tries to connect the same file system for all computing devices. In some ways, IPFS is similar to WWW.com and can also be regarded as an independent BitTorrent group and exchanged objects in the same Git warehouse. In other words, IPFS provides a high throughout, a block storage model with content addressing and related hyperlinks. This form a broad Merkle with a ringless chart(DAG).
 
 IPFS combines distributed scattered lists, encouraging block exchange, and a self-certified name space.IPFS has no singlepoint failure, and nodes do not need to trust each other.Distributed content transmission can save bandwidth and prevent the HTTP scheme from DDOS attacks that may encounter.
