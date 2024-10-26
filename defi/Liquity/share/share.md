@@ -9,9 +9,19 @@
 
 1. 单个Trove风险指标：MCR，ICR ⇒ 若 ICR < MCR, 该trove会被清算
 2. 平台所有Trove风险指标：CCR，TCR ⇒ 若 TCR < CCR, liquify平台会进入恢复模式，进行全局清算。
+   
 $$
-\begin{align*}TCR & = \frac{\sum_{i}^{n}ETH_{collateral}\times Price}{\sum_{i}^{n}LUSD_{debt}}&\\netDebt & = LUSD_{borrow}+LUSD_{borrowFee}&\\composeDebt & = LUSD_{borrow}+LUSD_{borrowFee}+LUSD_{gas}&\\LUSD_{borrowFee} & = b_t \times LUSD_{borrow}&\\b_t & = b_{t-1}+\alpha \times \frac{m}{n}\\b_t & = b_{t-1}\times\delta^{\Delta t}\\ICR & = \frac{ETH_{collateral}\times Price}{composeDebt}\\NICR & = \frac{ETH_{collateral}}{composeDebt}\end{align*}
+\begin{align*} TCR & = \frac{\sum_{i}^{n}ETH_{collateral}\times Price}{\sum_{i}^{n}LUSD_{debt}}& \\
+  netDebt & = LUSD_{borrow}+LUSD_{borrowFee}& \\
+  composeDebt & = LUSD_{borrow}+LUSD_{borrowFee}+LUSD_{gas}& \\ 
+  LUSD_{borrowFee} & = b_t \times LUSD_{borrow}& \\ 
+  b_t & = b_{t-1}+\alpha \times \frac{m}{n} \\ 
+  b_t & = b_{t-1}\times\delta^{\Delta t} \\ 
+  ICR & = \frac{ETH_{collateral}\times Price}{composeDebt} \\ 
+  NICR & = \frac{ETH_{collateral}}{composeDebt}
+\end{align*}
 $$
+
 ### 主要用户交互：
 
 开仓，平仓，调仓
@@ -88,8 +98,18 @@ msg.value = 8.5 ether
 用户调用该方法是，会调用borrowOperations的openTrove方法：
 
 涉及到的数学公式有：
+
 $$
-\begin{align}TCR & = \frac{\sum_{i}^{n}ETH_{collateral}\times Price}{\sum_{i}^{n}LUSD_{debt}}&\\netDebt & = LUSD_{borrow}+LUSD_{borrowFee}&\\composeDebt & = LUSD_{borrow}+LUSD_{borrowFee}+LUSD_{gas}&\\LUSD_{borrowFee} & = b_t \times LUSD_{borrow}&\\b_t & = b_{t-1}+\alpha \times \frac{m}{n}\\b_t & = b_{t-1}\times\delta^{\Delta t}\\ICR & = \frac{ETH_{collateral}\times Price}{composeDebt}\\NICR & = \frac{ETH_{collateral}}{composeDebt}\end{align}
+\begin{align}
+  TCR & = \frac{\sum_{i}^{n}ETH_{collateral}\times Price}{\sum_{i}^{n}LUSD_{debt}}& \\ 
+  netDebt & = LUSD_{borrow}+LUSD_{borrowFee}& \\ 
+  composeDebt & = LUSD_{borrow}+LUSD_{borrowFee}+LUSD_{gas}& \\ 
+  LUSD_{borrowFee} & = b_t \times LUSD_{borrow}& \\ 
+  b_t & = b_{t-1}+\alpha \times \frac{m}{n} \\ 
+  b_t & = b_{t-1}\times\delta^{\Delta t} \\ 
+  ICR & = \frac{ETH_{collateral}\times Price}{composeDebt} \\ 
+  NICR & = \frac{ETH_{collateral}}{composeDebt}
+\end{align}
 $$
 
 ```js
@@ -131,30 +151,45 @@ MethodID: 0xc6a6cf20
 ```
 
 涉及到的公式有：
+
 $$
 TCR=\frac{\sum_{i}^{n}ETH_{coll}\times Price_t}{\sum_{i}{n}LUSD_{debt}}\\ 
 $$
+
 $$
 \delta netDebt=\left\{\begin{matrix} 
   \delta LUSD+borrowFee &\text{新增债务}\\  
   \delta LUSD &
 \end{matrix}\right. 
 $$
+
 $$
 \begin{align*}
 ICR_{t,old} & = \frac{ETH_{collateral}\times Price_t}{composeDebt}\\
 ICR_{t,new} & = \frac{(ETH_{collateral}\pm \delta collateral)\times Price_t}{composeDebt\pm \delta netDebt}
 \end{align*}
 $$
+
 $$
-\begin{cases} ICR_{t,new} > ICR_{t,old}\ ,ICR_{t,new} > CCR & \text{ recovery mode}\\  ICR_{t,new} > MCR\ , TCR_{t,new} >CCR & \text{ non recovery mode }\end{cases}
+\begin{cases} 
+  ICR_{t,new} > ICR_{t,old}\ ,ICR_{t,new} > CCR & \text{ recovery mode}\\ 
+  ICR_{t,new} > MCR\ , TCR_{t,new} >CCR & \text{ non recovery mode }
+\end{cases}
 $$
+
 $$
-\begin{cases} ICR_{t,new} > ICR_{t,old}\ ,ICR_{t,new} > CCR & \text{ recovery mode}\\  ICR_{t,new} > MCR\ , TCR_{t,new} >CCR & \text{ non recovery mode }\end{cases}
+\begin{cases} 
+  ICR_{t,new} > ICR_{t,old}\ ,ICR_{t,new} > CCR & \text{ recovery mode} \\  
+  ICR_{t,new} > MCR\ , TCR_{t,new} >CCR & \text{ non recovery mode }
+\end{cases}
 $$
+
 $$
-\begin{cases}isDebtIncrease=false,\delta LUSD > 0  & \text{ 偿还债务 }\\isDebtIncrease=true,\delta LUSD > 0  & \text{ 新增债务 }\\\end{cases} 
+\begin{cases} isDebtIncrease=false, \delta LUSD > 0  & \text{ 偿还债务 } \\
+isDebtIncrease=true,\delta LUSD > 0  & \text{ 新增债务 } \\
+\end{cases} 
 $$
+
 $$
 \begin{cases}
 collWithdrawl > 0,msg.value > 0  & \text{ 禁止同存同取 } \chi \\
@@ -162,16 +197,16 @@ collWithdrawl = 0,msg.value > 0  & \text{ 存入ETH }\\
 collWithdrawl > 0,msg.value = 0  & \text{ 取出ETH }\\
 \end{cases}
 $$
+
 $$
-\begin{align*}
-\text{偿还债务要求}\\
-\begin{cases}
+\begin{align*} \text{偿还债务要求} \\ \begin{cases}
  composeDebt-\delta LUSD \ge minDebt & \text{ 债务最小值 }\\
  composeDebt \ge  \delta LUSD & \text{ 债务偿还上限 }\\
  LUSD_{userBalance} \ge \delta LUSD & \text{ 足够余额 } 
 \end{cases}
 \end{align*}
 $$
+
 ```js
 function _adjustTrove(address _borrower, uint _collWithdrawal, uint _LUSDChange, bool _isDebtIncrease, address _upperHint, address _lowerHint, uint _maxFeePercentage) internal {
 
@@ -253,7 +288,7 @@ d_2 &= d_1\times(1-\frac{Q_2}{D_1} )\\
 &\cdots \\
 d_n &= d_{n-1}\times(1-\frac{Q_n}{D_{n-1}} )\\
 \frac{d_n}{d_{n-1}} &=  1-\frac{Q_n}{D_{n-1}} \\
-&=>\\
+&=> \\
 \frac{d_n}{d_0} &= \prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) &\text{要求：}1>\frac{Q_i}{D_{i-1}}
 \end{align*}
 $$
@@ -271,7 +306,17 @@ $$
 对于一个用户alice，其在第i次清算后，其能获得的ETH累计收益为：
 
 $$
-\begin{align*}e_1 & = \frac{d_0}{D_0} \times E_1 \\e_2 & = e_1 +\frac{d_1}{D_1} \times E_2 \\&\cdots \\e_n & = e_{n-1} + \frac{d_{n-1}}{D_{n-1}}\times E_n \\&=>\\e_n &= \sum_{i=1}^{n}(\frac{d_{i-1}}{D_{i-1}}\times E_i) \\d_{i-1} &= d_0 \times \frac{P_{i-1}}{P_0}  \\P_0 &= 1   \\&=>\\e_n &= d_0\times \sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1}) \\\frac{e_n}{d_0} &=  \sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1}) \\
+\begin{align*}e_1 & = \frac{d_0}{D_0} \times E_1 \\
+  e_2 & = e_1 +\frac{d_1}{D_1} \times E_2 \\
+  &\cdots \\ 
+  e_n & = e_{n-1} + \frac{d_{n-1}}{D_{n-1}}\times E_n \\
+  &=> \\ 
+  e_n &= \sum_{i=1}^{n}(\frac{d_{i-1}}{D_{i-1}}\times E_i) \\
+  d_{i-1} &= d_0 \times \frac{P_{i-1}}{P_0}  \\
+  P_0 &= 1   \\
+  &=>\\ 
+  e_n &= d_0\times \sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1}) \\
+  \frac{e_n}{d_0} &=  \sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1}) \\ 
 \end{align*}
 $$
 
@@ -305,7 +350,9 @@ $$
 如果清算时，稳定池的LUSD全部用完，此时D=Q，这属于一个特殊情况。需要设置P值为1，而不是0. liquity中采取记录一个epoch的方式，即每次稳定池的LUSD全部用完时，其记录一个epoch，并将P值重置，S值也重置。将epoch之前的值通过snapshot的方式记录下来。
 
 $$
-P_n =  \begin{cases}\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}})  & \text{ if } D_{i-1}<Q_i \\ 1 & \text{ if } D_{i-1} = Q_i\end{cases}
+P_n = \begin{cases} \prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) & \text{ if } D_{i-1} < Q_i \\ 
+  1 & \text{ if } D_{i-1} = Q_i 
+\end{cases}
 $$
 
 针对问题2，采取Epoch的方式，存在如下几种情况：
@@ -315,7 +362,10 @@ $$
 当每次deposit时，都会给一个snapshot：P值，S值，currentEpoch，currentScale等
 
 $$
-d_n=\begin{cases}0   &  Epoch_{current} > Epoch_{snapshot}   \\d_t \times \frac{P}{P_t}  & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}\\d_t \times \frac{P}{P_t}  / 1e^9 & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}+1\\0 & Epoch_{current} = Epoch_{snapshot},Scale_{current}>Scale_{snampshot}+1\\
+d_n = \begin{cases} 0 & Epoch_{current} > Epoch_{snapshot} \\
+  d_t \times \frac{P}{P_t} & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot} \\
+  d_t \times \frac{P}{P_t} / 1e^9 & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}+1 \\
+  0 & Epoch_{current} = Epoch_{snapshot},Scale_{current}>Scale_{snampshot}+1 \\
 \end{cases}
 $$
 
@@ -335,14 +385,16 @@ $$
 $$
 P_n =  
 \begin{cases}
-\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) & & \text{ if } D_{i-1}<Q_i,P_i>1e9 \\
-\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}})*1e9,& Scale_{i}=Scale_{i-1}+1  & \text{ if } D_{i-1}<Q_i,P_i<1e9 \\
- 1,&Epoch_{i}=Epoch_{i-1}+1 & \text{ if } D_{i-1} = Q_i
+\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) & & \text{ if } D_{i-1}<Q_i,P_i > 1e9 \\
+\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}})*1e9,& Scale_{i}=Scale_{i-1}+1  & \text{ if } D_{i-1} < Q_i,P_i < 1e9 \\
+ 1,&Epoch_{i} = Epoch_{i-1}+1 & \text{ if } D_{i-1} = Q_i
 \end{cases}
 $$
 
 $$
-S_n=\begin{cases}\sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1})  &  ,Epoch_{i}=Epoch_{i-1} \\0  &  ,Epoch_i=Epoch_{i-1}+1\\\end{cases}
+S_n = \begin{cases}\sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1})  &  ,Epoch_{i} = Epoch_{i-1} \\
+0  &  ,Epoch_i = Epoch_{i-1}+1 \\
+\end{cases}
 $$
 
 ### 代码实现部分
@@ -437,7 +489,10 @@ _getETHGainFromSnapshots(uint initialDeposit, Snapshots memory snapshots):
 对应的公式为：
 
 $$
-d_n=\begin{cases}0   &  Epoch_{current} > Epoch_{snapshot}   \\d_t \times \frac{P}{P_t}  & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}\\d_t \times \frac{P}{P_t}  / 1e^9 & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}+1\\0 & Epoch_{current} = Epoch_{snapshot},Scale_{current}>Scale_{snampshot}+1\\
+d_n=\begin{cases}0   &  Epoch_{current} > Epoch_{snapshot}   \\
+d_t \times \frac{P}{P_t}  & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}\\
+d_t \times \frac{P}{P_t}  / 1e^9 & Epoch_{current} = Epoch_{snapshot},Scale_{current}=Scale_{snampshot}+1\\
+0 & Epoch_{current} = Epoch_{snapshot},Scale_{current}>Scale_{snampshot}+1\\
 \end{cases}
 $$
 
@@ -478,7 +533,8 @@ _updateDepositAndSnapshots(address _depositor, uint _newValue)：
 该函数的主要作用是计算每单位需要消耗的LUSD和每单位预期获得的ETH奖励，函数里面有先➗后✖️
 
 $$
-LUSD_{loss}=\frac{Q_i}{D_{i-1}}\\ETH_{gain}=\frac{E_i}{D_{i-1}}
+LUSD_{loss}=\frac{Q_i}{D_{i-1}} \\
+ETH_{gain}=\frac{E_i}{D_{i-1}}
 $$
 
 ```jsx
@@ -499,16 +555,17 @@ function _computeRewardsPerUnitStaked(
 主要作用是更新P值和S值
 
 $$
-P_n =  
-\begin{cases}
-\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) & & \text{ if } D_{i-1}<Q_i,P_i>1e9 \\
-\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}})*1e9,& Scale_{i}=Scale_{i-1}+1  & \text{ if } D_{i-1}<Q_i,P_i<1e9 \\
- 1,&Epoch_{i}=Epoch_{i-1}+1 & \text{ if } D_{i-1} = Q_i
+P_n = \begin{cases}
+\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}}) & & \text{ if } D_{i-1} < Q_i , P_i > 1e9 \\
+\prod_{i=1}^{n} (1-\frac{Q_i}{D_{i-1}})*1e9, & Scale_{i} = Scale_{i-1}+1  & \text{ if } D_{i-1} < Q_i, P_i < 1e9 \\
+ 1,& Epoch_{i} = Epoch_{i-1}+1 & \text{ if } D_{i-1} = Q_i
 \end{cases}
 $$
 
 $$
-S_n=\begin{cases}\sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1})  &  ,Epoch_{i}=Epoch_{i-1} \\0  &  ,Epoch_i=Epoch_{i-1}+1\\\end{cases}
+S_n = \begin{cases} \sum_{i=1}^{n} (\frac{E_i}{D_{i-1}} \times P_{i-1})  & , Epoch_{i}=Epoch_{i-1} \\
+0  & , Epoch_i=Epoch_{i-1}+1 \\
+\end{cases}
 $$
 
 Calculate the new S first, before we update P.

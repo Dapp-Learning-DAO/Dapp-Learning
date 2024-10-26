@@ -203,9 +203,11 @@ debtVal,colVal,hf
 ### reserve 部分计算：
 Euler 选择将reserve换成eToken存放在池子里，这样可以持续的吃利息。类比于compound，就是将compound的reserve部分重新deposit到池子中。
 同样的，问题的核心是保证exchange rate不变：
+
 $$
 r = \frac{casth+borrow-reserve}{totalSupply_0}=\frac{cash+borrow}{totalSupply_1}
 $$
+
 ```python
 r1 = (cash + borrow - reserve) / totalSupply
 r2 = (cash + borrow) / totalSupply'
@@ -221,14 +223,18 @@ newReserveBalance += newTotalBalances - assetCache.totalBalances;
 ### liquidation process中如果不是同一种token清算，保证用户健康度>1.25的计算公式推导
 
 推导的核心是：
+
 $$ 
  hf = \frac{collVal - \delta \cdot cf \cdot cr}{debtVal - \delta / bf} > 1.25
 $$
-其中，$\delta$是需要偿还的债务价值，即dToken数量 * p， bf是borrow factor，cf是collaterall factory， cr是清算的激励因子
+
+其中， $\delta$ 是需要偿还的债务价值，即dToken数量 * p， bf是borrow factor，cf是collaterall factory， cr是清算的激励因子
 则：
+
 $$
 \delta > \frac{1.25 * debtVal - collVal}{1.25/bf - cr \cdot cf}
 $$
+
 对应于代码：
 ```python
 borrowAdj = 1.25 / bf

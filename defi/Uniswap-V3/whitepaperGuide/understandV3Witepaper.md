@@ -510,8 +510,10 @@ V2 的方式是直接记录价格的累加值，而使用时再除以时间间�
 
 `a(t)` 是时间 t 时，预言机记录的值（累加价格的 log 值）。
 
-<!-- $$a_t=\sum_{i=0}^tlog(p_i, 1.0001)$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=a_t=\sum_{i=0}^tlog(p_i, 1.0001)" />
+$$
+a_t = \sum_{i=0}^tlog(p_i, 1.0001)
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=a_t=\sum_{i=0}^tlog(p_i, 1.0001)" /> -->
 
 这里的 log 数值后面其实还有一个 `* 1s` 即以每秒作为时间间隔。然而实际情况中，合约中是以区块的时间戳作为标记时间的，所以合约中的代码跟公式不同。每个区块的头一笔交易时更新，此时距离上一次更新时间间隔肯定大于 1s，所以需要将更新值乘以两个区块的时间戳的差。`tickCumulative` 是 tick 序号的累计值，tick 的序号就是 `log(√price, 1.0001)`。
 
@@ -522,14 +524,20 @@ tickCumulative += tick_current * (blocktimestamp_current - blocktimestamp_before
 
 当外部用户使用时，求 t1 到 t2 时间内的时间加权价格 `p(t1,t2)` ，需要计算两个时间点的累计值的差 `a(t2) - a(t1)` 除以时间差。
 
-<!-- $$a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+$$
+a_{t2}-a_{t1} = \frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=a_{t2}-a_{t1}=\frac{\sum_{i=t1}^{t2}log_{1.0001}(p_i)}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" /> -->
 
-<!-- $$log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+$$
+log_{1.0001}(p_{t1,t2}) = \frac{a_{t2}-a_{t1}}{t2-t1}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=log_{1.0001}(p_{t1,t2})=\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" /> -->
 
-<!-- $$p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}$$ -->
-<img src="https://render.githubusercontent.com/render/math?math=p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" />
+$$
+p_{t1,t2} = {1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=p_{t1,t2}={1.0001}^\frac{a_{t2}-a_{t1}}{t2-t1}" style="display: block;margin: 24px auto;width: 260px;" /> -->
 
 使用几何平均的原因：
 
