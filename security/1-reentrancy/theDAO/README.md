@@ -175,3 +175,31 @@ contract SafeVault3 is IVault {
 npm install
 npx hardhat test
 ```
+
+## 测试流程
+
+1. **设置签名人**：在 `before` 钩子中初始化 `vaultOwner`、`maliciousUser`、`user2` 和 `user3` 作为测试参与者的地址。
+
+2. **第一部分 - 攻击成功测试**：
+   - 部署 `BuggyVault` 合约（存在重入攻击漏洞）并部署 `Malicious` 恶意合约，指向 `BuggyVault` 合约地址。
+   - `maliciousUser`、`user2` 和 `user3` 分别向 `vault` 合约存款。
+   - `maliciousUser` 使用恶意合约进行重入攻击调用 `withdrawFromVault` 函数。
+   - 检查恶意合约的余额，确认重入攻击成功，并显示 `user2` 和 `user3` 无法再取回他们的资金。
+
+3. **第二部分 - 因重入保护失败的攻击**：
+   - 部署 `SafeVault1` 合约（带重入保护机制），并将恶意合约连接到该 `vault` 合约。
+   - 三个用户（`maliciousUser`、`user2` 和 `user3`）分别进行存款。
+   - 尝试使用恶意合约进行重入攻击调用 `withdrawFromVault`。
+   - 确认余额未被恶意用户提取，确认重入攻击失败。
+
+4. **第三部分 - 因检查-效果-交互模式失败的攻击**：
+   - 部署 `SafeVault2` 合约（使用“检查-效果-交互”模式）。
+   - 设置并进行存款操作。
+   - 尝试使用恶意合约进行重入攻击，确认攻击失败并验证合约余额和恶意用户余额。
+
+5. **第四部分 - 因使用 `call()` 防范失败的攻击**：
+   - 部署 `SafeVault3` 合约（使用限制性 `call()` 模式）。
+   - 设置并进行存款操作。
+   - 尝试使用恶意合约进行重入攻击，预期重入调用将会失败。
+
+这些测试通过验证不同的合约防范措施，能够有效检测 `BuggyVault` 中的重入攻击漏洞并确认防御的有效性。
