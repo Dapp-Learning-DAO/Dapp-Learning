@@ -1,11 +1,9 @@
 const hre = require('hardhat');
-require('@nomiclabs/hardhat-web3');
-const { BigNumber } = require('ethers');
-require('dotenv').config();
+const ethers = hre.ethers;
 const { readDeployment } = require('./utils');
 
 async function main () {
-  const provider = new ethers.providers.WebSocketProvider(`wss://sepolia.infura.io/ws/v3/${process.env.INFURA_ID}`);
+  const provider = new ethers.WebSocketProvider(`wss://eth-sepolia.g.alchemy.com/v2/${process.env.API_KEY}`);
   const { abi: RandomNumberConsumerABI } = require('../artifacts/contracts/RandomNumberConsumer.sol/RandomNumberConsumer.json');
   const deployment = readDeployment();
   console.log('deployment:', deployment);
@@ -18,25 +16,25 @@ async function main () {
 
   let randomNumberConsumer, user1, iface;
 
-  randomNumberConsumer = new ethers.Contract(addr, RandomNumberConsumerABI, provider);
-  iface = new ethers.utils.Interface(RandomNumberConsumerABI);
-  [user1] = await ethers.getSigners();
+  randomNumberConsumer = new ethers.BaseContract(addr, RandomNumberConsumerABI);
+  iface = randomNumberConsumer.interface;
+  user1 = await ethers.getSigner(process.env.PUBLIC_ADDRESS);
 
   let random0ID, random0Res;
 
   // 监听randomNumberConsumer 的请求随机数事件
   const filterCall = {
     address: addr,
-    topics: [ethers.utils.id('RequestSent(address,uint256,uint32)')],
+    topics: [ethers.keccak256(ethers.toUtf8Bytes('RequestSent(address,uint256,uint32)'))],
   };
   // 监听chainlink VRF Coordinator 的随机数回写事件
   const filterRes = {
     address: addr,
-    topics: [ethers.utils.id('RequestFulfilled(uint256,uint256[])')],
+    topics: [ethers.keccak256(ethers.toUtf8Bytes('RequestFulfilled(uint256,uint256[])'))],
   };
 
   console.log(`Listen on random number call...`);
-  provider.on(filterCall, (log, event) => {
+  await provider.on(filterCall, (log, event) => {
     console.log('event RequestSent(address,uint256)');
     const { args } = iface.parseLog(log);
     if (args[0] === user1.address) {
@@ -48,11 +46,11 @@ async function main () {
   });
 
   console.log(`Listen on random number result...`);
-  provider.on(filterRes, (log, event) => {
+  await provider.on(filterRes, (log, event) => {
     console.log('event RequestFulfilled(uint256,uint256[])');
     const { args } = iface.parseLog(log);
     console.log('random0ID', random0ID)
-    if (random0ID && BigNumber.from(args[0]).eq(random0ID)) {
+    if (random0ID && BigInt.from(args[0]).eq(random0ID)) {
       random0Res = args[1];
       console.log('random0Res: ', random0Res.toString());
     } else {
