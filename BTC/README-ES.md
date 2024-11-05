@@ -1,105 +1,90 @@
 # Bitcoin (BTC)
 
-This knowledge base aims to provide comprehensive information on Bitcoin (BTC) technology, covering basic features to advanced applications, as well as various protocols and tools within its ecosystem. Whether you are a beginner or an experienced developer, this guide will help you better understand and utilize Bitcoin technology.
+This repository is designed to offer comprehensive information on Bitcoin (BTC) technology, covering its basic functionalities, advanced applications, and the various protocols and tools within its ecosystem. Whether you're a beginner or an experienced developer, this guide will help you better understand and utilize Bitcoin.
 
 ## Introduction
 
-### The Significance of Bitcoin
+Bitcoin (BTC), the world’s first decentralized cryptocurrency, was introduced by Satoshi Nakamoto in 2009 and has since made a significant impact on the global financial landscape. Key highlights of its significance include:
 
-Bitcoin (BTC) is the world's first decentralized cryptocurrency. Since its release by Satoshi Nakamoto in 2009, it has had a profound impact on the global financial system. Its significance includes but is not limited to the following points:
+- **Financial Democratization**: Bitcoin’s decentralized blockchain enables peer-to-peer transactions without intermediaries, granting individuals more financial control and freedom.
+- **Security and Transparency**: The network’s cryptographic mechanisms ensure secure, immutable transactions, with all records openly verifiable by anyone.
+- **Limited Supply**: The total supply of Bitcoin is capped at 21 million, creating a scarcity that positions it as an inflation-resistant asset, often dubbed "digital gold."
+- **Global Liquidity**: Bitcoin’s cross-border nature facilitates international trade and cross-border payments.
+- **Technological Innovation**: Bitcoin has paved the way for blockchain development, inspiring smart contracts, decentralized finance (DeFi), and new web technologies.
 
-1. **Financial Democratization**: Bitcoin achieves peer-to-peer transactions without intermediaries through decentralized blockchain technology, giving individuals more financial control and freedom.
+This knowledge repository will help you explore Bitcoin's core functions, advanced features, and ecosystem applications to stay at the forefront of this evolving field.
 
-2. **Security and Transparency**: The Bitcoin network uses cryptographic technology to ensure transaction security and immutability. All transaction records are publicly transparent and can be verified by anyone.
+## Task Status Legend:
 
-3. **Limited Supply**: The total supply of Bitcoin is permanently capped at 21 million, making it a deflationary asset and earning it the title of "digital gold".
-
-4. **Global Liquidity**: As a global currency, Bitcoin can be traded and transferred across borders, promoting international trade and cross-border payments.
-
-5. **Technological Innovation**: Bitcoin has pioneered blockchain technology, driving innovations such as smart contracts and decentralized finance (DeFi), ushering in a new era of the internet.
-
-Through this knowledge base, you will learn about the basic features, advanced characteristics, and ecosystem applications of Bitcoin, helping you stay ahead in this rapidly evolving field.
+⬜ Not Started ⌛ In Progress ✅ Completed
 
 ## 1. Basic Features
 
 ### 1.1 Payment Addresses
 
-Types of Bitcoin addresses and their encoding methods:
+An overview of Bitcoin address types and encoding:
 
-- [x] **P2PKH** (Pay to Public Key Hash)
-- [x] **P2SH-P2PKH** (Pay to Script Hash - Pay to Public Key Hash)
-- [x] **P2WPKH** (Pay to Witness Public Key Hash)
-- [x] **P2TR** (Pay to Taproot)
-- [x] **Base58** Encoding
-- [x] **Bech32** Encoding
-- [x] **Bech32m** Encoding
+- **P2PKH** (Pay to Public Key Hash) ✅
+- **P2SH-P2PKH** (Pay to Script Hash - Pay to Public Key Hash) ✅
+- **P2WPKH** (Pay to Witness Public Key Hash) ✅
+- **P2TR** (Pay to Taproot) ✅
+- **Base58 Encoding** ✅
+- **Bech32 Encoding** ✅
+- **Bech32m Encoding** ✅
 
 ### 1.2 Wallets
 
-Types and features of Bitcoin wallets:
+Types of Bitcoin wallets and their characteristics:
 
-- [ ] **Standard Wallets** Standard wallets
-- [ ] **HD Wallets** Hierarchical Deterministic wallets
+- **Standard Wallets** ⌛
+- **HD Wallets** (Hierarchical Deterministic Wallets) ✅
 
 ### 1.3 Transactions
 
-Knowledge related to Bitcoin transactions:
+Essential knowledge about Bitcoin transactions:
 
-- [x] **Signature Algorithms** Signature algorithms
-- [ ] **Transaction Construction** Transaction construction
-- [ ] **Fee Estimation** Fee estimation
+- **Signature Algorithms** ✅
+- **Transaction Construction** ⬜
+- **Fee Estimation** ⬜
 
 ### 1.4 Tools
 
-Common tools in the Bitcoin ecosystem:
+Common tools within the Bitcoin ecosystem:
 
-- [ ] **Blockchain Explorers** Blockchain explorers
-- [ ] **API Services** API services
-- [ ] **Data Analysis Tools** Data analysis tools
+- **Blockchain Explorers** ⌛
+- **API Services** ⬜
+- **Data Analysis Tools** ⬜
 
 ## 2. Advanced Features
 
 ### 2.1 PSBT (Partially Signed Bitcoin Transaction)
 
-Introduction and usage of Partially Signed Bitcoin Transactions (PSBT):
+Details on PSBT usage and protocols:
 
-- [x] **PSBT Protocol Introduction** PSBT protocol introduction
-- [x] **Creating and Parsing PSBT** Creating and parsing PSBT
+- **PSBT Protocol Introduction** ✅
+- **Creating and Parsing PSBT** ✅
 
 ### 2.2 Taproot
 
-Introduction and advantages of Taproot technology:
+Introduction to Taproot and its advantages:
 
-- [x] **Schnorr Signatures** Schnorr signatures
-- [x] **MAST** (Merkelized Abstract Syntax Tree)
-- [ ] **Privacy and Efficiency Improvements** Privacy and efficiency improvements
+- **Schnorr Signatures** ✅
+- **MAST** (Merkelized Abstract Syntax Tree) ✅
+- **Privacy and Efficiency Improvements** ⬜
 
 ### 2.3 Multisig Addresses
 
-Process of using multisig addresses:
+Usage and benefits of multisig addresses:
 
-- [x] **Multisig Address Intro** Multisig address introduction
-- [ ] **OP_CHECKMULTISIG**
-- [ ] **OP_CHECKMULTISIGVERIFY**
-- [ ] **OP_CHECKSIGADD**
+- **Multisig Address Intro** ✅
+- **OP_CHECKMULTISIG** ✅
+- **OP_CHECKMULTISIGVERIFY** ✅
+- **OP_CHECKSIGADD** ✅
 
 ## 3. Ecosystem Applications
 
-### 3.1 BRC20
-
-- [x] Protocol introduction
-
-### 3.2 ARC20
-
-- [x] Protocol introduction
-
-### 3.3 Runes
-
-- [x] Protocol introduction
-
-### 3.4 Lightning Network
-
-Introduction and core logic of the Lightning Network:
-
-- [ ] **Protocol Introduction** Protocol introduction
-- [ ] **Core Logic** Core logic
+- **BRC20 Protocol Overview** ✅
+- **ARC20 Protocol Overview** ✅
+- **Runes Protocol Overview** ✅
+- **Lightning Network Introduction** ⌛
+- **Core Logic of Lightning Network** ⌛
