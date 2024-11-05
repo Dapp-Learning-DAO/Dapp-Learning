@@ -18,7 +18,14 @@
 8. 什么时候去更新链表顺序
 - 更新NICR的时候
 9. stake 和 collateral 的区别
-- $S_i=\begin{cases}c_i  & \text{ if } C_\phi=0\\c_i \cdot \frac{S_\phi }{C_\phi }   & \text{ if } C_\phi>0\end{cases}$
+
+$$
+S_i = \begin{cases} c_i  & \text{ if } C_\phi = 0 \\ 
+  c_i \cdot \frac{S_\phi}{C_\phi} & \text{ if } C_\phi >0 
+\end{cases}
+$$
+
+
 
 ### Redeem
 
@@ -137,54 +144,57 @@ closeTrove中做的事情是：与BorrowOperation中不同的是，
 作为liquity的两段式清算的重要一段：重分配债务，在liquity的清算中起着至关重要的作用。
 
 - 最为简单的O(n)复杂度想法：
+
+  每一次redistribute时，都按照ETH的比例来分配相应的reward。(reward 指的是将拆掉的trove中得到的ETH和相应的债务，按照剩余trove的ETH比例分配的基数)。由系统为每一个trove都去添加一下trove的奖励
+
+$$
+  (x_i,y_i) = (\frac{c_i}{C}\cdot c_k , \frac{c_i}{C}\cdot d_k)
+$$
     
-    每一次redistribute时，都按照ETH的比例来分配相应的reward。(reward 指的是将拆掉的trove中得到的ETH和相应的债务，按照剩余trove的ETH比例分配的基数)。由系统为每一个trove都去添加一下trove的奖励
+  ICR定义为:
     
-    $$
-    (x_i,y_i)=(\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)
-    $$
+$$
+\gamma _i=\frac{c_i}{d_i} 
+$$
     
-    ICR定义为:
+  需要保证的一个问题是：经过redistribute之后，剩余所有trove的顺序不能发生变化。
     
-    $$
-    \gamma _i=\frac{c_i}{d_i} 
-    $$
+  证明如下：
     
-    需要保证的一个问题是：经过redistribute之后，剩余所有trove的顺序不能发生变化。
+  设 $\gamma _i，\gamma _j$ 分别是trove i，trove j的ICR，且：
     
-    证明如下：
+$$
+\gamma _i>\gamma _j
+$$
     
-    设$\gamma _i，\gamma _j$分别是trove i，trove j的ICR，且：
+  进行redistribute的时候，每个trove需要分配得到的reward是
     
-    $$
-    \gamma _i>\gamma _j
-    $$
+$$
+\begin{align*}
+  (x_i,y_i) & = (\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)\\
+  (x_j,y_j) & = (\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)
+\end{align*}
+$$
     
-    进行redistribute的时候，每个trove需要分配得到的reward是
+  在得到分配的reward之后，新的ICR分别是：
     
-    $$
-    \begin{align*}
-    (x_i,y_i) & = (\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)\\
-    (x_j,y_j) & = (\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)
-    \end{align*}
-    $$
+$$
+\begin{align*}
+  \gamma _i^` & = \frac{c_i+x_i}{d_i+y_i} \\
+  \gamma _j^` & = \frac{c_j+x_j}{d_j+y_j} \\
+\end{align*}
+$$
     
-    在得到分配的reward之后，新的ICR分别是：
+  其中 $\gamma _i^`，\gamma _j^`$ 可以变形为：
     
-    $$
-    \begin{align*}\gamma _i^` & = \frac{c_i+x_i}{d_i+y_i} \\\gamma _j^` & = \frac{c_j+x_j}{d_j+y_j} \\\end{align*}
-    $$
+$$
+  \begin{align*}
+  \gamma _i^` & = \frac{1+\frac{c_k}{C} }{\frac{d_i}{c_i}+\frac{d_k}{C}} \\
+  \gamma _j^` & = \frac{1+\frac{c_k}{C} }{\frac{d_j}{c_j}+\frac{d_k}{C}} \\
+  \end{align*}
+$$
     
-    其中$\gamma _i^`，\gamma _j^`$可以变形为：
-    
-    $$
-    \begin{align*}
-    \gamma _i^` & = \frac{1+\frac{c_k}{C} }{\frac{d_i}{c_i}+\frac{d_k}{C}} \\
-    \gamma _j^` & = \frac{1+\frac{c_k}{C} }{\frac{d_j}{c_j}+\frac{d_k}{C}} \\
-    \end{align*}
-    $$
-    
-    由于公式中，$\frac{c_k}{C} ，\frac{d_k}{C}$都是一个定值，且$\gamma _i>\gamma _j$，所以新得到的$\gamma _i^` > \gamma _j^`$. 故按照按比例分配reward的方式，可以保证trove在分配之后的顺序不变。
+  由于公式中， $\frac{c_k}{C} ，\frac{d_k}{C}$ 都是一个定值，且 $\gamma _i>\gamma _j$，所以新得到的 $\gamma _i^` > \gamma _j^`$. 故按照按比例分配reward的方式，可以保证trove在分配之后的顺序不变。
     
 - 降低复杂度为O(1)的算法
     
@@ -250,42 +260,45 @@ closeTrove中做的事情是：与BorrowOperation中不同的是，
     
     stake的定义如下：
     
-    $$
-    S_i=\begin{cases}c_i  & \text{ if } C_\phi=0\\c_i \cdot \frac{S_\phi }{C_\phi }   & \text{ if } C_\phi>0\end{cases}
-    $$
+$$
+    S_i = \begin{cases} c_i  & \text{ if } C_\phi=0 \\
+    c_i \cdot \frac{S_\phi }{C_\phi }   & \text{ if } C_\phi > 0
+    \end{cases}
+$$
     
-    从公式的定义中，可以看到，如果totalCollateralSnapshot=0时，stake就是collateral，即该trove中的ETH数值。如果totalCollateralSnapshot>0,则stake是collateral按照比例缩放得到的值。
+  从公式的定义中，可以看到，如果totalCollateralSnapshot=0时，stake就是collateral，即该trove中的ETH数值。如果totalCollateralSnapshot>0,则stake是collateral按照比例缩放得到的值。
     
-    而totalCollateralSnapshot这个值在每一次系统进行清算时都会更新，其更新的逻辑为：
+  而totalCollateralSnapshot这个值在每一次系统进行清算时都会更新，其更新的逻辑为：
     
-    $$
-    C_\phi=ETH_{activePool}+ETH_{defaultPool}-ETH_{gas}
-    $$
+$$
+  C_\phi = ETH_{activePool}+ETH_{defaultPool}-ETH_{gas}
+$$
     
-    这里需要减去ETH_gas的原因是：作为补偿的 ETH 必须排除在外，因为它总是在清算序列的最后发出.
+  这里需要减去ETH_gas的原因是：作为补偿的 ETH 必须排除在外，因为它总是在清算序列的最后发出.
     
-    totalStakesSnapshot这个值的更新也在每一次系统进行清算时进行更新，其更新的逻辑为：
+  totalStakesSnapshot这个值的更新也在每一次系统进行清算时进行更新，其更新的逻辑为：
     
-    $$
-    S_\phi=\sum stake_i
-    $$
+$$
+    S_\phi = \sum stake_i
+$$
     
-    而stake的更新是清算，Redeem和remove stake中都会更新。
+  而stake的更新是清算，Redeem和remove stake中都会更新。
     
-    liquity中，为了将redistribute过程的O(n)复杂度降低为O(1),其采取了类似于masterchef的思想，即维护一个全局变量，然后在需要redistribute的时候，计算一个全局的reward 参数，该reward中包含了此次redistribute的ETH和债务。
+  liquity中，为了将redistribute过程的O(n)复杂度降低为O(1),其采取了类似于masterchef的思想，即维护一个全局变量，然后在需要redistribute的时候，计算一个全局的reward 参数，该reward中包含了此次redistribute的ETH和债务。
     
-    即系统维护了一个全局变量 Qt：
+  即系统维护了一个全局变量 Qt：
     
-    $$
-    \begin{array}{c}\frac{R_t}{S_t} = \begin{bmatrix}\frac{c_k}{S_t}  , &\frac{d_k}{S_t} \end{bmatrix}\\Q_t = \sum_{k = 0}^{t}\frac{R_t}{S_t}
-    \end{array}
-    $$
+$$
+  \begin{array}{c}\frac{R_t}{S_t} = \begin{bmatrix}\frac{c_k}{S_t}  , &\frac{d_k}{S_t} \end{bmatrix} \\
+    Q_t = \sum_{k = 0}^{t} \frac{R_t}{S_t}
+  \end{array}
+$$
     
-    针对单个trove，其应该分配得到的reward为：
+  针对单个trove，其应该分配得到的reward为：
     
-    $$
-    r_i=s_i\times (Q-Q_{t1})
-    $$
+$$
+  r_i = s_i\times (Q-Q_{t1})
+$$
     
 
 涉及到的方法有：
@@ -298,9 +311,9 @@ closeTrove中做的事情是：与BorrowOperation中不同的是，
 
 $$
 \begin{array}{c}
-(x_i,y_i)=(\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k)\\
-\frac{R_t}{S_t} = \begin{bmatrix}\frac{c_k}{S_t}  , &\frac{d_k}{S_t} \end{bmatrix}\\
-r_i=s_i\times \frac{R_t}{S_t} \\
+(x_i,y_i)=(\frac{c_i}{C}\cdot c_k,\frac{c_i}{C}\cdot d_k) \\
+\frac{R_t}{S_t} = \begin{bmatrix}\frac{c_k}{S_t}  , &\frac{d_k}{S_t} \end{bmatrix} \\
+r_i = s_i\times \frac{R_t}{S_t} \\
 Q_t = \sum_{k = 0}^{t}\frac{R_t}{S_t}
 \end{array}
 $$
@@ -373,7 +386,8 @@ hasPendingRewards(address _borrower)
 涉及到的公式：
 
 $$
-\begin{align*}\delta ETH_{perStake} & = Q_t^{ETH}-Snapshot_{trove}^{ETH}\\\delta ETH & = \delta ETH_{perStake} \times Stake_{trove}\end{align*}
+\begin{align*}\delta ETH_{perStake} & = Q_t^{ETH}-Snapshot_{trove}^{ETH} \\ 
+\delta ETH & = \delta ETH_{perStake} \times Stake_{trove}\end{align*}
 $$
 
 ```jsx

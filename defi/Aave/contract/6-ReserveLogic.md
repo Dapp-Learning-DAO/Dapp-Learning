@@ -8,13 +8,11 @@
 
 ### 时间间隔的计算
 
-`delta_T_year` 是时间 间隔的秒数 / 一年的总秒数
+`delta_T_year` 是时间 间隔的秒数 / 一年的总秒数 $T_{year}=31536000$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=T_{year}=31536000" style="display: block;margin: 24px auto;" /> -->
 
-<!-- $T_{year}=31536000$ -->
-<img src="https://render.githubusercontent.com/render/math?math=T_{year}=31536000" style="display: block;margin: 24px auto;" />
-
-<!-- $\Delta{T_{year}}=\Delta{T}/T_{year}$ -->
-<img src="https://render.githubusercontent.com/render/math?math=\Delta{T_{year}}=\Delta{T}/T_{year}" style="display: block;margin: 24px auto;" />
+$\Delta{T_{year}}=\Delta{T}/T_{year}$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=\Delta{T_{year}}=\Delta{T}/T_{year}" style="display: block;margin: 24px auto;" /> -->
 
 ### 固定利率借贷 StableBorrowRate
 
@@ -44,8 +42,8 @@ Reserve 的主要变量
 
 `liquidity cumulative index` 每单位 liquidity (用户往协议中注入的抵押资产)累计的本息总额。 `R_t` 是总的利率，即固定利率和浮动利率的加权平均。
 
-<!-- ${LI}_t=(1+\Delta{T_{year}}*R_t)*{LI}_{t-1}$ -->
-<img src="https://render.githubusercontent.com/render/math?math={LI}_t=(1%2B\Delta{T_{year}}*R_t)*{LI}_{t-1}" style="display: block;margin: 24px auto;" />
+${LI}_t=(1+\Delta{T_{year}}*R_t)*{LI}_{t-1}$
+<!-- <img src="https://render.githubusercontent.com/render/math?math={LI}_t=(1%2B\Delta{T_{year}}*R_t)*{LI}_{t-1}" style="display: block;margin: 24px auto;" /> -->
 
 **注意：** liquidty 池子资产流动性的数量是 amountScaled ，即任意时刻存入的抵押资产数量，都会被缩放至 t_0 池子创建时刻的数量，详细逻辑参考 [amount and amountScaled](./3-AToken.md#amount%20and%20amountScaled)
 
@@ -53,8 +51,8 @@ Reserve 的主要变量
 
 `variable borrow index` 累计每单位浮动利率类型债务的本息总额。`VR_t` 代表当前的浮动利率.
 
-<!-- ${VI}_t=(1+\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}$ -->
-<img src="https://render.githubusercontent.com/render/math?math={VI}_t=(1%2B\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}" style="display: block;margin: 24px auto;" />
+${VI}_t=(1+\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}$
+<!-- <img src="https://render.githubusercontent.com/render/math?math={VI}_t=(1%2B\frac{{VR}_t}{T_{year}})^{\Delta{T}}{VI}_{t-1}" style="display: block;margin: 24px auto;" /> -->
 
 > 这里没有 StableBorrowIndex, 因为每个用户的固定利率都不同，不是跟随池子的全局变量实时变化，因此每个借贷了固定利率债务的用户都会单独维护一个平均的固定利率变量。 在 StableDebtToken 合约 `mapping(address => uint256) _usersStableRate`
 

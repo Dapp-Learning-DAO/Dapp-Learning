@@ -1,37 +1,12 @@
-require("@nomiclabs/hardhat-waffle")
-require("@nomiclabs/hardhat-ethers")
-require("@nomiclabs/hardhat-web3")
-require("@nomiclabs/hardhat-truffle5")
-require("@nomiclabs/hardhat-etherscan");
-require("hardhat-deploy")
-const fs = require("fs");
-require('dotenv').config()
-
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async () => {
-  const accounts = await ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
+require("@nomicfoundation/hardhat-ethers");
+require('dotenv').config({'path': './.env'});
 
 function mnemonic() {
-
-  return process.env.PRIVATE_KEY
-
+  return process.env.PRIVATE_KEY;
 }
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-
 module.exports = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: "sepolia",
   networks: {
     hardhat: {
       // // If you want to do some forking, uncomment this
@@ -39,19 +14,14 @@ module.exports = {
       //   url: mainnetRpcUrl
       // }
     },
-    goerli: {
-       url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID, //<---- YOUR INFURA ID! (or it won't work)
-       accounts: [mnemonic()],
+    sepolia: {
+      url: 'https://eth-sepolia.g.alchemy.com/v2/' + process.env.API_KEY, //<---- YOUR alchemy ID! (or it won't work)
+      accounts: [mnemonic()],
+      ignition: {
+        maxFeePerGasLimit: 10_000_000_000_000n,
+        maxPriorityFeePerGas: 20_000_000_000n,
+      }
     },
-  },
-  namedAccounts: {
-    deployer: {
-      default: 0, // here this will by default take the first account as deployer
-      1: 0 // similarly on mainnet it will take the first account as deployer. Note though that depending on how hardhat network are configured, the account 0 on one network can be different than on another
-    },
-    feeCollector: {
-      default: 1
-    }
   },
   solidity: {
     compilers: [
@@ -67,5 +37,3 @@ module.exports = {
     timeout: 6000000000000000
   }
 }
-
-

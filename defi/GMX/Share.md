@@ -303,7 +303,7 @@ $$
 
 平仓盈亏计算：
 
-对于用户，用户可以部分平仓，也可以全平。部分平仓时，用户可以指定需要取出的 coll 数量,用 USD 计价，即$\delta coll$和需要平掉的仓位大小$\delta size$。
+对于用户，用户可以部分平仓，也可以全平。部分平仓时，用户可以指定需要取出的 coll 数量,用 USD 计价，即 $\delta coll$ 和需要平掉的仓位大小 $\delta size$。
 
 对于部分平多：
 
@@ -327,9 +327,9 @@ $$
 
 $$
 \begin{align*}
-USD^{out}  & =  \delta coll  & \text{ 用户亏损： } price<price_{avg}^{before} \\
-coll  & =  coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price<price_{avg}^{before} \\
-realisedPnL  & =  realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price<price_{avg}^{before} \\
+USD^{out}  & =  \delta coll  & \text{ 用户亏损： } price < price_{avg}^{before} \\
+coll  & =  coll^{before}- \Delta \times \frac{\delta Size}{Size^{before}} - \delta coll& \text{ 用户亏损： } price < price_{avg}^{before} \\
+realisedPnL  & =  realisedPnL^{before}- \Delta \times \frac{\delta Size}{Size^{before}}  & \text{ 用户亏损： } price < price_{avg}^{before} \\
 \end{align*}
 $$
 
@@ -339,7 +339,7 @@ $$
 
 $$
 \begin{cases}
-USD^{out}&=USD^{out}-fee  & \text{ if:   } USD^{out}>fee \\
+USD^{out} & = USD^{out}-fee  & \text{ if:   } USD^{out}>fee \\
 coll & = coll-fee & \text{ if:   } USD^{out}\le fee \\
 \end{cases}
 $$
