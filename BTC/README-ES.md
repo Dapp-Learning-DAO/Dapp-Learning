@@ -1,20 +1,20 @@
 # Bitcoin (BTC)
 
-This repository is designed to offer comprehensive information on Bitcoin (BTC) technology, covering its basic functionalities, advanced applications, and the various protocols and tools within its ecosystem. Whether you're a beginner or an experienced developer, this guide will help you better understand and utilize Bitcoin.
+This repository aims to provide comprehensive information on Bitcoin (BTC) technology, covering its basic functions, advanced applications, and various protocols and tools in its ecosystem. Whether you are a beginner or an experienced developer, this guide will help you gain a deeper understanding and make efficient use of Bitcoin technology.
 
 ## Introduction
 
-Bitcoin (BTC), the world’s first decentralized cryptocurrency, was introduced by Satoshi Nakamoto in 2009 and has since made a significant impact on the global financial landscape. Key highlights of its significance include:
+Bitcoin (BTC), the world's first decentralized cryptocurrency, was introduced by Satoshi Nakamoto in 2009 and has had a profound impact on the global financial system. Its main advantages include:
 
-- **Financial Democratization**: Bitcoin’s decentralized blockchain enables peer-to-peer transactions without intermediaries, granting individuals more financial control and freedom.
-- **Security and Transparency**: The network’s cryptographic mechanisms ensure secure, immutable transactions, with all records openly verifiable by anyone.
-- **Limited Supply**: The total supply of Bitcoin is capped at 21 million, creating a scarcity that positions it as an inflation-resistant asset, often dubbed "digital gold."
-- **Global Liquidity**: Bitcoin’s cross-border nature facilitates international trade and cross-border payments.
-- **Technological Innovation**: Bitcoin has paved the way for blockchain development, inspiring smart contracts, decentralized finance (DeFi), and new web technologies.
+- **Financial Democratization**: Bitcoin enables peer-to-peer transactions without intermediaries through decentralized blockchain technology, enhancing individual financial control and freedom.
+- **Security and Transparency**: The network employs cryptographic techniques to ensure secure, tamper-proof transactions, with all records being publicly transparent and verifiable by anyone.
+- **Limited Supply**: With a capped total supply of 21 million coins, Bitcoin's scarcity makes it an inflation-resistant store of value, often called "digital gold."
+- **Global Liquidity**: As a borderless currency, Bitcoin facilitates international transactions and payments.
+- **Technological Innovation**: Bitcoin has pioneered blockchain technology, driving the development of smart contracts, decentralized finance (DeFi), and new tech applications.
 
-This knowledge repository will help you explore Bitcoin's core functions, advanced features, and ecosystem applications to stay at the forefront of this evolving field.
+This knowledge repository will guide you through Bitcoin's basic functionalities, advanced features, and ecosystem applications, helping you stay at the forefront of this rapidly evolving field.
 
-## Task Status Legend:
+## Task Status Legend
 
 ⬜ Not Started ⌛ In Progress ✅ Completed
 
@@ -22,7 +22,7 @@ This knowledge repository will help you explore Bitcoin's core functions, advanc
 
 ### 1.1 Payment Addresses
 
-An overview of Bitcoin address types and encoding:
+Types of Bitcoin addresses and their encoding:
 
 - **P2PKH** (Pay to Public Key Hash) ✅
 - **P2SH-P2PKH** (Pay to Script Hash - Pay to Public Key Hash) ✅
@@ -37,21 +37,25 @@ An overview of Bitcoin address types and encoding:
 Types of Bitcoin wallets and their characteristics:
 
 - **Standard Wallets** ⌛
-- **HD Wallets** (Hierarchical Deterministic Wallets) ✅
+- **HD Wallets (Hierarchical Deterministic Wallets)** ✅
 
 ### 1.3 Transactions
 
-Essential knowledge about Bitcoin transactions:
+Key knowledge about Bitcoin transactions:
 
-- **Signature Algorithms** ✅
+- **UTXO Analysis** ⬜
+- **Coinbase Transactions** ⬜
 - **Transaction Construction** ⬜
 - **Fee Estimation** ⬜
+- **Signature Algorithms** ✅
+- **Transaction Acceleration** ⬜
 
 ### 1.4 Tools
 
-Common tools within the Bitcoin ecosystem:
+Common tools in the Bitcoin ecosystem:
 
 - **Blockchain Explorers** ⌛
+- **Network Hash Rate Tools** ⬜
 - **API Services** ⬜
 - **Data Analysis Tools** ⬜
 
@@ -59,24 +63,26 @@ Common tools within the Bitcoin ecosystem:
 
 ### 2.1 PSBT (Partially Signed Bitcoin Transaction)
 
-Details on PSBT usage and protocols:
+Introduction and usage of PSBT:
 
 - **PSBT Protocol Introduction** ✅
 - **Creating and Parsing PSBT** ✅
+- **PSBT V2** ⬜
 
 ### 2.2 Taproot
 
-Introduction to Taproot and its advantages:
+Introduction to Taproot and its benefits:
 
 - **Schnorr Signatures** ✅
 - **MAST** (Merkelized Abstract Syntax Tree) ✅
 - **Privacy and Efficiency Improvements** ⬜
+- **Key Path vs. Script Path Differences** ⬜
 
 ### 2.3 Multisig Addresses
 
-Usage and benefits of multisig addresses:
+Usage and advantages of multisig addresses:
 
-- **Multisig Address Intro** ✅
+- **Multisig Address Introduction** ✅
 - **OP_CHECKMULTISIG** ✅
 - **OP_CHECKMULTISIGVERIFY** ✅
 - **OP_CHECKSIGADD** ✅
@@ -87,4 +93,6 @@ Usage and benefits of multisig addresses:
 - **ARC20 Protocol Overview** ✅
 - **Runes Protocol Overview** ✅
 - **Lightning Network Introduction** ⌛
-- **Core Logic of Lightning Network** ⌛
+- **Core Logic of the Lightning Network** ⌛
+- **OP_CAT** ✅
+- **Babylon | BTC Staking** ⬜
