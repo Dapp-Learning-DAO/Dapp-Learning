@@ -1,13 +1,16 @@
 {
   "name": "hardhat-project",
   "devDependencies": {
+    "@maticnetwork/maticjs": "2.0.43",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "chai": "^4.3.4",
+    "dotenv": "10.0.0",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.3.1",
-    "hardhat": "^2.3.3",
-    "@maticnetwork/maticjs": "2.0.43",
-    "dotenv": "10.0.0"
+    "hardhat": "^2.3.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
   }
 }

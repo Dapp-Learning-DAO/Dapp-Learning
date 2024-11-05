@@ -1,0 +1,15 @@
+{
+  "name": "maticjs-ethers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@maticnetwork/maticjs-ethers": "^1.1.0",
+    "hardhat": "^2.22.5"
+  }
+}

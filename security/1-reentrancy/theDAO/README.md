@@ -1,23 +1,21 @@
 # Reentrancy
 
-Reentrancy attack can lead to great loss. How it works? Basicly, when contract A interact with contract B, contract B can reenter into contract A, exposing vulnerabilities.
+A reentrancy attack can lead to significant asset loss. How does this attack occur? Essentially, when Contract A calls Contract B, if Contract B calls back into a function in Contract A, it exposes a potential vulnerability.
 
-Here is a bad designed code:
+Here’s an example of poorly designed code:
 
-```
+```solidity
 import "./IVault.sol";
 import "hardhat/console.sol";
 
-
 contract BuggyVault is IVault {
-
-    mapping(address=>uint256) public balances;
+    mapping(address => uint256) public balances;
     
-    function deposit() external override payable{
+    function deposit() external override payable {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw() external override{
+    function withdraw() external override {
         address payable target = payable(msg.sender);
         (bool success,) = target.call{gas:500000, value:balances[msg.sender]}("");
         console.log(success);
@@ -26,15 +24,15 @@ contract BuggyVault is IVault {
 }
 ```
 
-if there is a malicious contract with a malicious receive() or fallback():
-```
+If a malicious contract includes a harmful `receive()` or `fallback()` function:
+
+```solidity
 pragma solidity ^0.8.7;
 
-
 import "./IVault.sol";
 import "hardhat/console.sol";
-contract Malicious {
 
+contract Malicious {
     IVault public vault;
 
     constructor(IVault _vault) {
@@ -45,196 +43,163 @@ contract Malicious {
         vault.deposit{value: msg.value}();
     }
 
-    function withdrawFromVault() external  {
+    function withdrawFromVault() external {
         vault.withdraw();
     }
 
-    fallback() external payable{
-        vault.withdraw();
-    }
-}pragma solidity ^0.8.7;
-
-
-import "./IVault.sol";
-import "hardhat/console.sol";
-contract Malicious {
-
-    IVault public vault;
-
-    constructor(IVault _vault) {
-        vault = _vault;
-    }
-
-    function addDeposit() external payable {
-        vault.deposit{value: msg.value}();
-    }
-
-    function withdrawFromVault() external  {
-        vault.withdraw();
-    }
-
-    fallback() external payable{
-        vault.withdraw();
-    }
-}pragma solidity ^0.8.7;
-
-
-import "./IVault.sol";
-import "hardhat/console.sol";
-contract Malicious {
-
-    IVault public vault;
-
-    constructor(IVault _vault) {
-        vault = _vault;
-    }
-
-    function addDeposit() external payable {
-        vault.deposit{value: msg.value}();
-    }
-
-    function withdrawFromVault() external  {
-        vault.withdraw();
-    }
-
-    fallback() external payable{
+    fallback() external payable {
         vault.withdraw();
     }
 }
 ```
 
-When malicious contract calls withdraw() in BuggyVault, the money transfer reenterer into receive() of malicious receive, causing keeping sending ether to malicious contract.
+When the malicious contract calls the `withdraw()` function of `BuggyVault`, funds are transferred to the malicious contract’s `receive()` function, triggering repeated `withdraw()` calls and continuously transferring Ether to the malicious contract.
 
-Though reentrancy attack could potentially cause great, great loss, it is not that easy to happen. If we use "transfer" or "send" instead of "call", it would not happen.
+While reentrancy attacks can cause significant loss, using `transfer` or `send` instead of `call` can prevent such attacks.
 
-- what if we use "transfer": transfer has a limit gas of 2300 only to emit events, and failure of transfer would cause revert.
-- what if we use "send": send has a limit gas of 2300 only to emit events, but failure of "send" would not revert, causing the attacker lost all his vault balance and not withdrawing any ether from the vault!Loosing everything :)
-  
-# Analysis
+- **Using `transfer`**: `transfer` has a gas limit of 2300, which is enough to trigger an event, and if the transfer fails, it reverts the transaction.
+- **Using `send`**: `send` also has a 2300 gas limit, but it does not revert on failure, so attackers cannot withdraw any Ether if they don’t have sufficient balance in the Vault.
 
-The reentrancy attack is caused by many factors:
-- it has reentrancies: When withdraw() in BuggyVault is called, it transfer money to Malicious contract, activating its fallback which enters into "withdraw()" again.
-- it does not check balance: Before transfering money, withdraw() function does not check money.
-- it doesn't specify gas limit: The default gas of "call" is 63*gas()/64, which is sufficient for malicious contract to do bad stuffs.
-- it doen't check transfer result: Transfering ethers using "call" would not panic on failure, so you should alway check whether your call is success.
+## Analysis
 
+The causes of a reentrancy attack include the following factors:
+- **Existence of a reentrancy path**: The `withdraw()` function of `BuggyVault` calls into the malicious contract, which activates its `fallback()` function to re-enter `withdraw()`.
+- **Lack of balance check**: No balance verification is done before the transfer.
+- **Insufficient gas restriction**: `call` provides ample gas by default, enabling the malicious contract to execute the attack.
+- **No transfer result check**: `call` doesn’t trigger an error on failed transfers, so it’s essential to verify whether the transfer succeeded.
 
-# Best practices
+## Best Practices
 
-According to the analysis above, we can do several things:
+Based on the analysis, the following measures can prevent reentrancy attacks:
 
-## Use reentrancy guard(Only use it in risks)
-We can mark additional status from reentrancy. Several libraries like openzeppelin can be helpful. Refer to SafeVault1.sol for more details.
+### Use a Reentrancy Guard (only when necessary)
 
-```
+Prevent reentrant calls by using state flags. Libraries like OpenZeppelin provide this functionality. Refer to `SafeVault1.sol`:
+
+```solidity
 pragma solidity ^0.8.7;
-
 
 import "./IVault.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract SafeVault1 is IVault, ReentrancyGuard {
-
-    mapping(address=>uint256) public balances;
+    mapping(address => uint256) public balances;
     
-    function deposit() external override payable{
+    function deposit() external override payable {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw() external override nonReentrant{
+    function withdraw() external override nonReentrant {
         address payable target = payable(msg.sender);
-        (bool success,) = target.call{value:balances[msg.sender]}("");
+        (bool success,) = target.call{value: balances[msg.sender]}("");
         balances[msg.sender] = 0;
     }
 }
 ```
 
-Note that use this manner only when there is a risk of reentering since it costs more gas to maintain reentering status.
+### Follow the "Check-Effect-Interaction" Pattern (recommended)
 
-You may find that in test "2 attack failed due to reentrancy", the malicious call is not reverted. Could you explain it? :)
+The "Check-Effect-Interaction" pattern effectively prevents reentrancy attacks:
 
-## Keep Check-Effect-Interact pattern(Recommended)
+1. **Check**: Strictly verify conditions.
+2. **Effect**: Update internal state.
+3. **Interaction**: Interact with external contracts.
 
-Always keep Check-Effect-Interact pattern where:
-- Check: strictly check your preconditions before your next move.
-- Effect: modify your inner states.
-- Interact: interact with other accounts.
- 
- Following this style, the attack would not success because the vault balance has been changes. Refer to SafeVault2.sol for more details.
+Here’s an example of `SafeVault2.sol`:
 
-```
+```solidity
 pragma solidity ^0.8.7;
 
-
 import "./IVault.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract SafeVault2 is IVault {
-
-    mapping(address=>uint256) public balances;
+    mapping(address => uint256) public balances;
     
-    function deposit() external override payable{
+    function deposit() external override payable {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw() external override nonReentrant{
-        //Checks
-        require(balances[msg.sender] > 0, "Insufficient money");
-        //Effects
+    function withdraw() external override {
+        // Check
+        require(balances[msg.sender] > 0, "Insufficient balance");
+        // Effect
+        uint256 balance = balances[msg.sender];
         balances[msg.sender] = 0;
-        //Interact
+        // Interaction
         address payable target = payable(msg.sender);
-        (bool success,) = target.call{value:balances[msg.sender]}("");
+        (bool success,) = target.call{value: balance}("");
+        require(success, "Transfer failed");
     }
 }
 ```
 
-You may find that in test "3 attack failed due to check-effects-interact", the malicious call is not reverted. Could you explain it? :)
+### Carefully Use `call` for Transfers (recommended)
 
-## Careful use of call when transfering(Recommended)
+There are three ways to transfer funds:
 
-There are three ways of transfering native token:
-- transfer: call "fallback()" or "receive()" if target is contract; only deliver 2300 gas;  panic on failure.
-- send: call "fallback()" or "receive()" if target is contract; only deliver 2300 gas;  No panic on failure.
-- call: call whatever function you want and gather return data; By default deliver gas()*63/64, and you can specify it. No panic on failure.
+1. **`transfer`**: Calls `fallback()` or `receive()` with a 2300 gas limit and reverts on failure.
+2. **`send`**: Calls `fallback()` or `receive()` with a 2300 gas limit but does not revert on failure.
+3. **`call`**: Allows specifying gas and checking the return value. Be sure to specify gas and check success.
 
-The "transfer" manner could fulfill most cases while maintaining safety; The "call" manner is strong, but be sure to specifiy the gas and CHECK THE RESULT!! Refer to GoodVault3.sol for more details.
+Here’s an example of `SafeVault3.sol`:
 
-
-```
+```solidity
 pragma solidity ^0.8.7;
 
-
 import "./IVault.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract SafeVault3 is IVault {
-
-    mapping(address=>uint256) public balances;
+    mapping(address => uint256) public balances;
     
-    function deposit() external override payable{
+    function deposit() external override payable {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw() external override nonReentrant{
+    function withdraw() external override {
         address payable target = payable(msg.sender);
-        (bool success,) = target.call{gas:2300, value:balances[msg.sender]}("");
-        require(success, "transfer failed!");
+        (bool success,) = target.call{gas: 2300, value: balances[msg.sender]}("");
+        require(success, "Transfer failed!");
         balances[msg.sender] = 0;
 
-        //Or simply use transfer:
-        //target.transfer(balances[msg.sender]);
+        // Alternatively, use transfer:
+        // target.transfer(balances[msg.sender]);
     }
 }
 ```
 
-# How to use
+## Instructions
 
-```
+Install dependencies and run tests:
+
+```bash
 npm install
-```
-
-
-```
 npx hardhat test
 ```
+
+## Test Flow
+
+1. **Setup Signers**: Initialize `vaultOwner`, `maliciousUser`, `user2`, and `user3` as test participants in the `before` hook.
+
+2. **Part 1 - Successful Attack Test**:
+   - Deploy the `BuggyVault` contract (with reentrancy vulnerability) and the `Malicious` contract pointing to the `BuggyVault` address.
+   - Have `maliciousUser`, `user2`, and `user3` deposit funds to the `vault`.
+   - `maliciousUser` initiates a reentrancy attack using the `withdrawFromVault` function.
+   - Verify that `user2` and `user3` are unable to recover their funds due to the attack.
+
+3. **Part 2 - Attack Failure due to Reentrancy Protection**:
+   - Deploy the `SafeVault1` contract (with reentrancy guard) and connect the malicious contract to this vault.
+   - Each user (`maliciousUser`, `user2`, and `user3`) makes a deposit.
+   - Attempt a reentrancy attack through the malicious contract’s `withdrawFromVault` function.
+   - Verify that the malicious user cannot extract their balance, confirming the attack failed.
+
+4. **Part 3 - Attack Failure due to Check-Effect-Interaction Pattern**:
+   - Deploy the `SafeVault2` contract (using "Check-Effect-Interaction" pattern).
+   - Setup and make deposits.
+   - Attempt a reentrancy attack using the malicious contract, and verify that the attack failed, confirming contract and malicious user balances.
+
+5. **Part 4 - Attack Failure due to Restricted `call()` Use**:
+   - Deploy the `SafeVault3` contract (using restrictive `call()`).
+   - Setup and make deposits.
+   - Attempt a reentrancy attack, expecting the reentrancy call to fail.
+
+These tests effectively detect the reentrancy vulnerability in `BuggyVault` and confirm the efficacy of the defensive measures.

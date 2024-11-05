@@ -30,7 +30,7 @@ Compound是以太坊上的一系列合约，它建立了一组资金池，每个
 
 此处与Uniswap中LP token的增值逻辑类似, cToken的增值是这段时间中的利息的积累。
 
-> 在Uniswap中，LP token在mint中被铸造出来，在burn中销毁。除开首次铸造，非首次铸造的LP token数量都是与LP token的当前总量成线性关系。LP token的价值来源于流动性的提供，即mint方法。LP token的增值逻辑是时间段($t_1$,$t_2$)间的swap交易手续费的累计。swap的交易手续费又可以表现为时间段($t_1$,$t_2$)对应的($\sqrt{k_1}$,$\sqrt{k_2}$​​)的增值。
+> 在 Uniswap 中，LP token 在 mint 中被铸造出来，在 burn 中销毁。除开首次铸造，非首次铸造的 LP token 数量都是与 LP token 的当前总量成线性关系。LP token 的价值来源于流动性的提供，即 mint 方法。LP token 的增值逻辑是时间段 ( $t_1$, $t_2$) 间的 swap 交易手续费的累计。swap 的交易手续费又可以表现为时间段( $t_1$, $t_2$)对应的( $\sqrt{k_1}$, $\sqrt{k_2}$​​)的增值。
 
 ### 借贷流动性
 
@@ -106,9 +106,9 @@ $$
 
 | Function ABI                                                 | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| $mint(uint256 \ amountUnderlying) $                          | 将一个标的资产转入市场，更新msg.sender的cToken余额。         |
-| $ redeem(uint256 \  amount) \\ redeemUnderlying(uint256 \ amountUnderlying)   $ | 将一个标的资产转出市场，更新msg.sender的cToken余额。         |
-| $  borrow(uint \ amount)   $                                 | 检查msg.sender的抵押品价值，如果足够，将标的资产转出市场至msg.sender，并更新msg.sender的借款余额。 |
+| $mint(uint256 \ amountUnderlying)$                          | 将一个标的资产转入市场，更新msg.sender的cToken余额。         |
+| $redeem(uint256 \  amount) \\ redeemUnderlying(uint256 \ amountUnderlying)$ | 将一个标的资产转出市场，更新msg.sender的cToken余额。         |
+| $borrow(uint \ amount)$                                 | 检查msg.sender的抵押品价值，如果足够，将标的资产转出市场至msg.sender，并更新msg.sender的借款余额。 |
 | $repayBorrow(uint \ amount) \\ repayBorrowBehalf(address \ account, uint \  amount)   $ | 将标的资产转入市场，更新借款人的借款余额。                   |
 | $liquidate(address \ borrower,\\ address \  collateralAsset, uint \ closeAmount)   $ | 将标的资产转入市场，更新借款人的借款余额，然后将cToken抵押品从借款人转移到msg.sender。 |
 

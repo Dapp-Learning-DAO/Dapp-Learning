@@ -156,7 +156,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 35. [duneanalytics & nansen](basic/35-dune-analytics-nansen) ⬜
 36. [zk-rollup](https://github.com/rollupnc/RollupNC) ✅
 37. [Charm.fi](basic/37-charm.fi) ✅
-38. [ether-Rust](basic/38-ether-rust) ✅
+38. [alloy-Rust](basic/38-alloy-rust) ✅
 39. [Multicall](basic/39-Multicall) ✅
 40. [Flashbots provider with ethers.js](basic/38-Flashbots-and-Eden) ⬜
 41. [Foundry](basic/41-foundry/README.md)

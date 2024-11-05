@@ -41,9 +41,12 @@ contract ComptrollerV6Storage is ComptrollerV5Storage {
 
 `compBorrowSpeeds` 和 `comSupplySpeeds` 为 `cToken` 到每区块产出 COMP 数量的映射
 
-比如对 `cUSDC` 来说，它在两个映射表中的值都为 67000000000000000 (COMP 的精度为 <img src="https://render.githubusercontent.com/render/math?math={10}^{18}" />)
+比如对 `cUSDC` 来说，它在两个映射表中的值都为 67000000000000000 (COMP 的精度为 ${10}^{18}$ <!--<img src="https://render.githubusercontent.com/render/math?math={10}^{18}" />-->)
 
-<img src="https://render.githubusercontent.com/render/math?math=\frac{2%20\times%2067000000000000000%20\times%2086400}{15}%20\approx%20880.38%20\times%20{10}^{18}" />
+<!--<img src="https://render.githubusercontent.com/render/math?math=\frac{2%20\times%2067000000000000000%20\times%2086400}{15}%20\approx%20880.38%20\times%20{10}^{18}" />-->
+$$
+\frac{2 \times 67000000000000000 \times 86400}{15} \approx 880.38 \times {10}^{18}
+$$
 
 ### 存款挖矿
 
@@ -327,9 +330,9 @@ function fetchAnchorPrice(bytes32 symbolHash, TokenConfig memory config, uint co
 
 接下来，简单看下 Uniswap 询价逻辑
 
-首先通过 `fetchEthAnchorPrice()` 从交易对 [USDC-WETH](https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc) 获得按 USDC 计价 (单位 <img src="https://render.githubusercontent.com/render/math?math={10}^{6}" />) 的 WETH 的价格，比如为 4351156768
+首先通过 `fetchEthAnchorPrice()` 从交易对 [USDC-WETH](https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc) 获得按 USDC 计价 (单位 ${10}^{6}$ <!--<img src="https://render.githubusercontent.com/render/math?math={10}^{6}" />-->) 的 WETH 的价格，比如为 4351156768
 
-然后通过 `fetchAnchorPrice()` 从交易对 [DAI-WETH](https://etherscan.io/address/0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11) 获得按 WETH 计价 (单位 <img src="https://render.githubusercontent.com/render/math?math={10}^{18}" />) 的 DAI 的价格，比如为 230097482692738
+然后通过 `fetchAnchorPrice()` 从交易对 [DAI-WETH](https://etherscan.io/address/0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11) 获得按 WETH 计价 (单位 ${10}^{18}$ <!--<img src="https://render.githubusercontent.com/render/math?math={10}^{18}" />-->) 的 DAI 的价格，比如为 230097482692738
 
 上面两个价格相乘，得到 1001190219118269813150784
 
