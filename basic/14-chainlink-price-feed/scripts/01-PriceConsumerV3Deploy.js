@@ -1,32 +1,30 @@
 const hre = require("hardhat");
-require("@nomiclabs/hardhat-web3");
+const ethers = hre.ethers;
 
 async function main() {
+    const singer = await ethers.getSigner(process.env.PUBLIC_ADDRESS);
+    console.log("Deploying contracts with the account:", singer.address);
 
-    const [deployer] = await ethers.getSigners();
+    // PRICE_FEED_CONTRACT 在 sepolia 上的合约地址
+    const PRICE_FEED_CONTRACT = "0x694AA1769357215DE4FAC081bf1f309aDC325306";
 
-    console.log(
-        "Deploying contracts with the account:",
-        deployer.address
-    );
+    // deploy PriceConsumerV3 Contract
+    const PriceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");
+    const PriceConsumerV3Ins = await PriceConsumerV3.deploy(PRICE_FEED_CONTRACT);
+    await PriceConsumerV3Ins.waitForDeployment();
 
-    // PRICE_FEED_CONTRACT 在 goerli 上的合约地址  
-    const PRICE_FEED_CONTRACT="0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e";
+    console.log("----------------------------------------------------");
+    console.log("PriceConsumerV3 address:", await PriceConsumerV3Ins.getAddress());
 
-    // 部署 PriceConsumerV3 合约
-    const priceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3");
-    const PriceConsumerV3Ins = await priceConsumerV3.deploy(PRICE_FEED_CONTRACT);
+    // 读取价格
+    console.log("Read Price from PRICE_FEED");
+    const latestPrice = await PriceConsumerV3Ins.getLatestPrice();
+    console.log('Current price of ETH / USD is: ', latestPrice.toString());
 
-    console.log("----------------------------------------------------")
-    console.log("PriceConsumerV3 address:", PriceConsumerV3Ins.address);
-
-    //await priceConsumerV3.deployed()
-    console.log("Read Price from  PRICE_FEED")
-
-    await PriceConsumerV3Ins.getLatestPrice().then(function (data) {
-        console.log('Current price of ETH / USD is: ', web3.utils.hexToNumber(data._hex))
-      })
-    
+    // 使用 singer 获取合约
+    const contract = await ethers.getContractAt("PriceConsumerV3", await PriceConsumerV3Ins.getAddress(), singer);
+    const latestPriceFromContract = await contract.getLatestPrice();
+    console.log('Current price of ETH / USD from contract is: ', latestPriceFromContract.toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -34,6 +32,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch(error => {
-    console.error(error);
-    process.exit(1);
+      console.error(error);
+      process.exit(1);
   });
