@@ -1,0 +1,9 @@
+[package]
+name = "guest_code_for_zk_proof"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+risc0-zkvm = { version = "1.0.5", default-features = false, features = ['std'] }

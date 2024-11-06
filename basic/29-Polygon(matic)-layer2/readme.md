@@ -15,7 +15,7 @@ The main point to focus on when it comes to Polygon's architecture is that it is
 ## Polygon scaling solution  
 
 <center>
-    <img src="https://img.chainnews.com/material/images/a0172d4158f8e2529fd3d04d8142e818.jpg-article" alt="matic.jpeg" style="zoom:50%;" />
+    <img src="./img/scalling.jpg" alt="matic.jpeg" style="zoom:50%;" />
 </center>
 
 ## Polygon Plasma Chain

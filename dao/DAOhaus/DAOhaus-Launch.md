@@ -44,16 +44,16 @@ DAOhaus 一直是敢作敢为和社区第一。大约 20 人的“核心 DAO”�
 
 为了**在 DAO 治理上**引导这个**DAO**，DAOHaus 正在向 Moloch 生态系统中的 DAO空投**10.3% 的 HAUS**，包括：[MetaCartel](https://www.metacartel.org/)、[Raid Guild](https://raidguild.org/)、[Meta Gamma Delta](https://twitter.com/metagammadelta)、[Venture DAO](https://metacartel.xyz/)和另外 70 多个 DAO！通过向 DAO 空投 HAUS，DAOHaus 可以在它们之间强制执行某种“最低级别的协作”，让每个 DAO 选择自己的路径。**DAO 协作的新实验！**
 
-在 DAO 分配之外，HAUS 将通过**社区贡献机会**进行分配**，**在那里获得**“DAO 证明”**状态的地址将能够向 CCO 贡献多达 5000 个 xDAI。查看[HAUS 页面](https://daohaus.club/token)并[在此处](https://app.daohaus.club/cco)检查[地址资格](https://app.daohaus.club/cco)！
+在 DAO 分配之外，HAUS 将通过 **社区贡献机会** 进行分配，在那里获得 **“DAO 证明”** 状态的地址将能够向 CCO 贡献多达 5000 个 xDAI。查看[HAUS 页面](https://daohaus.club/token)并[在此处](https://app.daohaus.club/cco)检查[地址资格](https://app.daohaus.club/cco)！
 
-在**3月15日**，HAUS将推出世界，用4天缴款期开放给**所有符合条件的地址。**HAUS CCO 的目标是收集 888,888 美元的 xDAI，在达到 111 万美元的 xDAI（HAUS 的 12.5%）上限后，或贡献期结束后，销售将结束。然后 HAUS 将分发给所有参与者，他们将能够从几种前进的道路中进行选择。**HAUS 将在 3 月 29 日开始销售两周后分发。**
+在**3月15日**，HAUS将推出世界，用4天缴款期开放给 **所有符合条件的地址。** HAUS CCO 的目标是收集 888,888 美元的 xDAI，在达到 111 万美元的 xDAI（HAUS 的 12.5%）上限后，或贡献期结束后，销售将结束。然后 HAUS 将分发给所有参与者，他们将能够从几种前进的道路中进行选择。**HAUS 将在 3 月 29 日开始销售两周后分发。**
 
 ## HAUS 代币详情
 
 **总供应量：** 1,000,000 HAUS
 **流通供应量：** 387,000 HAUS
 
-** Haus分布：**
+**Haus 分布：**
 
 ![hard-mode](images/haus-distribution.png)
 
@@ -82,7 +82,7 @@ DAOhaus 一直是敢作敢为和社区第一。大约 20 人的“核心 DAO”�
 
 ## 社区贡献2：DAO的证明
 
-DAOhaus 开始将 HAUS 分发给更广泛的**以太坊治理参与者**群体**。**“DAO 证明”是将 HAUS 分发给愿意协作的人的最佳方式之一，确保项目在启动后保持参与优先的心态！
+DAOhaus 开始将 HAUS 分发给更广泛的 **以太坊治理参与者**群体。**“DAO 证明”** 是将 HAUS 分发给愿意协作的人的最佳方式之一，确保项目在启动后保持参与优先的心态！
 
 **有大约 122k 个地址已经“证明”符合 HAUS 分配的条件，以下所有行为都表明愿意在以太坊生态系统内进行治理，因此包括在内：**
 
@@ -113,8 +113,8 @@ HAUS 将在主网上启动，并在贡献窗口桥接到 xDAI。任何参与 HAU
 
 ![hard-mode](images/farm.png)
 
-- **其次**，通过**“幕府将军”**质押 HAUS 持有者可以为[HoneySwap](https://honeyswap.org/)上的 ETH/HAUS 提供流动性，并通过快照获得“软”信号能力，以及 HAUS 奖励。
-- **最后**，**“Ronin”**质押允许 HAUS 持有者仅“质押”他们的代币以获得“软”信号能力和 HAUS 奖励。
+- **其次**，通过 **“幕府将军”** 质押 HAUS 持有者可以为[HoneySwap](https://honeyswap.org/)上的 ETH/HAUS 提供流动性，并通过快照获得“软”信号能力，以及 HAUS 奖励。
+- **最后**，**“Ronin”** 质押允许 HAUS 持有者仅“质押”他们的代币以获得“软”信号能力和 HAUS 奖励。
 
 所有这三种激励结构都将在HAUS 发布后运行**一个月**，届时 HAUS 持有者和 DAO 贡献者将决定下一步的最佳步骤，无论是继续当前的激励措施还是开发新的激励措施！
 

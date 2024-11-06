@@ -14,6 +14,7 @@ async function main() {
   const [deployer] = await ethers.getSigners();
 
   // for sepolia, endpoint address is fixed, refer to : https://layerzero.gitbook.io/docs/technical-reference/testnet/testnet-addresses
+  // for mainnet endpoint address, please refer to : https://docs.layerzero.network/v1/developers/evm/technical-reference/mainnet/mainnet-addresses
   const omniCounter = await ethers.deployContract("OmniCounter", ["0x55370E0fBB5f5b8dAeD978BA1c075a499eB107B8"]);
 
   await omniCounter.waitForDeployment();

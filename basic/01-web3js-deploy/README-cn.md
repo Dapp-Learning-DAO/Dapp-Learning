@@ -11,9 +11,6 @@ https://ithelp.ithome.com.tw/articles/10202794 在成功创建 Infura Project �
  
 - 为方便代码测试, 在 .env 中放入私钥和Infura Project ID，格式为 "PRIVATE_KEY=xxxx" "INFURA_ID=yyyyyyyy", index.js代码会自动从中读取, 样例文件可参考 .env.example  
 
-- 同时在 BiliBili 上有上传本样例代码的讲解演示:   
-https://www.bilibili.com/video/BV1Y44y1r7E6/
-
 
 ## 合约功能说明   
 constructor: 构造函数, 用于部署合约时调用, 同时在其中初始化了公共变量 number 的值  

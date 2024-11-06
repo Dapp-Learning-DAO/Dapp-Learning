@@ -1,12 +1,11 @@
-const { ethers }  = require('hardhat');
-const {
-  deployContract,
-  saveRedpacketDeployment,
-} = require("../../utils");
+const { ethers } = require('hardhat');
+const { deployContract, saveRedpacketDeployment } = require('../../utils');
 
-const {
-  readRedpacketDeployment,
-} = require("../../utils");
+const { readRedpacketDeployment } = require('../../utils');
+
+const mumbaiRouter = '0x1035CabC275068e0F4b745A29CEDf38E13aF41b1';
+const numbaiLinkTokenAddress = '0x326C977E6efc84E512bB9C30f76E30c160eD06FB';
+const destinationChainSelector = '16015286601757825753'; // 目标区块链的 CCIP 链标识符。 Sepolia
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -14,14 +13,10 @@ async function main() {
 
   console.log('Deploying contracts with the account:', deployer.address);
 
-  console.log('Account balance:', (await ethers.provider.getBalance(deployer.address)));
+  console.log('Account balance:', await ethers.provider.getBalance(deployer.address));
 
   // for mumbai, the route address and LINK address are fixed, see: https://docs.chain.link/ccip/getting-started
-  const tokenTransferor = await deployContract(
-    "ProgrammableTokenTransfers",
-    ["0x1035CabC275068e0F4b745A29CEDf38E13aF41b1", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB"],
-    deployer,
-  );
+  const tokenTransferor = await deployContract('ProgrammableTokenTransfers', [mumbaiRouter, numbaiLinkTokenAddress], deployer);
 
   console.log('deploy ProgrammableTokenTransfers successfully, and contract address is ', tokenTransferor.target);
 
@@ -30,15 +25,15 @@ async function main() {
   });
 
   // allowlistDestinationChain
-  let recepit = await tokenTransferor.allowlistSourceChain(ethers.toBigInt("16015286601757825753"), true) 
-  await recepit.wait()
+  let recepit = await tokenTransferor.allowlistSourceChain(ethers.toBigInt(destinationChainSelector), true);
+  await recepit.wait();
 
-  console.log("set allowlistSourceChain successfully")
+  console.log('set allowlistSourceChain successfully');
 
-  recepit = await tokenTransferor.allowlistSender(deployment.tokenTransferorSenderAddress,true) 
-  await recepit.wait()
+  recepit = await tokenTransferor.allowlistSender(deployment.tokenTransferorSenderAddress, true);
+  await recepit.wait();
 
-  console.log("set allowlistSender successfully")
+  console.log('set allowlistSender successfully');
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -49,4 +44,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-

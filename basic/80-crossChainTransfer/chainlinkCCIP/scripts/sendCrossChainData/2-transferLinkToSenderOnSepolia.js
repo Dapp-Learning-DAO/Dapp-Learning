@@ -1,7 +1,7 @@
-const { ethers }  = require('hardhat');
-const {
-  readRedpacketDeployment,
-} = require("../../utils");
+const { ethers } = require('hardhat');
+const { readRedpacketDeployment } = require('../../utils');
+
+const linkTokenAddress = '0x779877A7B0D9E8603169DdbD7836e478b4624789';
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -9,12 +9,11 @@ async function main() {
 
   // transfer link to Sender
   // link token address is fixed in sepolia
-  const linkToken = await ethers.getContractAt('SimpleToken', "0x779877A7B0D9E8603169DdbD7836e478b4624789", deployer);
-  let recepit = await linkToken.transfer(deployment.senderAddress, ethers.parseEther("0.1")) // 0.1 link
-  await recepit.wait()
+  const linkToken = await ethers.getContractAt('SimpleToken', linkTokenAddress, deployer);
+  let recepit = await linkToken.transfer(deployment.senderAddress, ethers.parseEther('0.1')); // 0.1 link
+  await recepit.wait();
 
-  console.log("transfer 0.1 link token successfully")
-
+  console.log('transfer 0.1 link token successfully');
 }
 
 // We recommend this pattern to be able to use async/await everywhere
