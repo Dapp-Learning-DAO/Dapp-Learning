@@ -25,9 +25,7 @@ $b'=T(b,p)=(b_0 p_0,b_1 p_1,b_2 p_2 ...)$
 
 v2 中对于 D 的定义如下
 
-$
-D=N x_{eq}
-$
+$D=N x_{eq}$
 
 当池子价格处于平衡点时(例如首次注入流动性时)，每个资产的价值相等，其值为 `x_eq`
 
@@ -60,7 +58,7 @@ $\frac{\gamma^2}{(\gamma+1-K_0)^2}$
 
 `price_oracle` 预言机价格以时间加权的方式更新，即 EMA (Exponential Moving Average)
 
-price_oracle:  $p^*=p_{last}(1-\alpha)+\alpha p^*_{prev}$
+price_oracle: $p^* = p_{last}(1-\alpha)+\alpha p^*_{prev}$
 
 只有当 LP 每单位收益超过之前收益的一半时，进行 repegging，反言之，跌到之前收益一半以下，将不进行价格调整。
 

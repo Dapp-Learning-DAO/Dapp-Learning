@@ -1,0 +1,25 @@
+{
+  "name": "sbt",
+  "version": "1.0.0",
+  "description": "sbt deploy、mint example",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "node compile.js",
+    "deploy": "node deploySBT.js"
+  },
+  "keywords": [
+    "sbt",
+    "mint",
+    "deplot",
+    "erc721"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.1.0",
+    "solc": "^0.8.28",
+    "web3": "^4.14.0"
+  }
+}

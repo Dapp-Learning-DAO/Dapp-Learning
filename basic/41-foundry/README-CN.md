@@ -414,7 +414,7 @@ contract DeployMyNFT is Script {
 # load the configs
 source .env
 # deploy
-forge script DeployMyNFT --rep--url <RCP_URL> --broadcast --verify
+forge script DeployMyNFT --rpc--url <RCP_URL> --broadcast --verify
 ```
 
 其中 `--verify` 参数是将合约代码开源。
