@@ -71,7 +71,7 @@ intentHashes: [bobIntentHash] -> []
 3. conversionRate 决定了买方需要通过 Venmo 支付多少美元
 4. 每个意图都会锁定一定数量的 USDC，直到意图完成或过期
 
-至于`packedVenmoId`字段为什么用一个长度为3的数组存储而不是用一个uint256存储是因为hash的输入是一个数组形式，后面会做这方面的更详细分析。
+至于`packedVenmoId`字段为什么用一个长度为3的数组存储而不是用一个uint256存储是因为hash的输入是一个数组形式，是因为Venmo Id一共有19个数据，后续需要算Poseidon hash，如果把这个Venmo Id直接转换成有限域数值，会超出circom 限制，所以要先拆成3个小块，之后再转换。        
 
 ```ts
 interface IPoseidon {
@@ -100,7 +100,7 @@ struct DepositWithAvailableLiquidity {
 - 其中有一个过期的意图锁定了 300 USDC
 那么这个 DepositWithAvailableLiquidity 会是：
 
-```json
+```js
 {
     depositId: 1,
     depositorIdHash: "0x...",  // 存款人的 venmoIdHash
@@ -277,25 +277,9 @@ function processProof(
 4. 提取用户 ID
 ```
 
+为什么电路验证完合约还要验证？在于proof可能是假的proof，然后输入的public数据也是假的，联合起来一起欺骗验证电路就可以通过验证，所以需要合约再验证一下输入的public信息是否是真的。
+
 `this.verifyProof`函数使用的是继承自`Groth16Verifier`函数的方法，该方法是由snarkjs生成的，我们不需要去管。
-
-接着向后看是`isMailServerKeyHash()`，它实际上是
-
-```js
-mapping(bytes32 => bool) public isMailServerKeyHash;
-```
-
-就是做一个数据的查找操作，如果在就说明确实如此。这里有一个问题是`isMailServerKeyHash()`是一个函数，为什么里面是一个map？答案是在 Solidity 中,当你声明一个 public 的状态变量(state variable)时,编译器会自动为这个变量创建一个同名的 getter 函数。类似这样
-
-```js
-function isMailServerKeyHash(bytes32 _key) public view returns (bool) {
-    return isMailServerKeyHash[_key];
-}
-```
-
-所以不需要我们自己去写了。
-
-在这里`isMailServerKeyHash`使用适配器模式的作用是`isMailServerKeyHash`的具体实现代码可能未来会更改，或者更准确的说，这是一种模块化设计思想，任何独立成一个体系的功能都应该用接口的方式解耦，这样方便测试和维护。
 
 继续向后看`_parseSignalArray()`函数，
 
@@ -392,7 +376,6 @@ bytes32 venmoIdHash = bytes32(poseidon.poseidon(_packedVenmoId));
 require(getAccountVenmoIdHash(msg.sender) == venmoIdHash, "Sender must be the account owner");
 ```
 
-此处的hash输入的pack数据不是原始的venmo id，而是经过一定转换之后的数据。
 
 #### On-ramp
 
@@ -457,7 +440,7 @@ function _calculateIntentHash(
 }
 ```
 
-该函数的作用就是想要on ramp的用户的venmo id和和一些信息计算出来`intentHash`。mod运算得到的`intentHash`是应该这个数据会用于去做零知识证明。
+该函数的作用就是想要on ramp的用户的venmo id和和一些信息计算出来`intentHash`。
 
 继续往后看代码，注意到`_getPrunableIntents`和`_pruneIntents`，看来如果deposit的资金量不够，去做deposit的过期intent修剪工作是由on ramp来承担。
 
@@ -533,7 +516,7 @@ function _verifyOnRampProof(
 }
 ```
 
-`sendProcessor.processProof`是一个外部实现，具体实现代码位于`venmo-v1/VenmoSendProcessor.sol`。进入到这个代码里面去看看，可以发现这里面首先做了Groth16的验证工作，别的没什么可说的，就是一些各种的验证工作，然后把on ramp和off ramp的venmo id以及其他数据返回。
+`sendProcessor.processProof`是一个外部实现，具体实现代码位于`venmo-v1/VenmoSendProcessor.sol`。进入到这个代码里面去看看，可以发现这里面首先做了Groth16的验证工作，以及其他验证工作，然后把on ramp和off ramp的venmo id以及其他数据返回。
 
 回到`_verifyOnRampProof`函数，deposit的venmo id需要和off ramp id一样，intent venmo id需要和上链 off ramp id一样。
 
@@ -549,45 +532,7 @@ function _verifyOnRampProof(
 
 这次通过测试代码来学习电路，测试代码位于`circuits/venmo/test/venmo_registration.spec.ts`
 
-先从电路初始化的`beforeAll()`函数开始，
-
-```ts
-poseidon = await buildPoseidon();
-mimcSponge = await buildMimcSponge();
-```
-
-第一行代码是初始化poseidon hash，该hash函数将来会用在后续执行中，用于生成venmoIdHash。
-
-接下来是MimcSponge，是一个zk friendly的hash函数，可以认为就是类似一种sha3的sponge。我们以它为例来分析一下circom代码编写：
-
-```c
-template M1MCSponge(nInputs, nRounds, nOutputs) {...}
-
-component hasher = MiMCSponge(k, 220, 1);
-hasher.ins <== pubkey;
-hasher.k <== 123;
-pubkey_hash <== hasher.outs[0];
-```
-
-template关键字相当于class，component相当于实例对象，所以hasher就是MiMCSponge的实例对象，然后`(k, 220, 1)`是初始化的时候输入参数，我这里只是截取的代码片段，`(k, 220, 1)`里面的k是外部提前定义好了作为输入，同`hasher.k`的k不是同一个k，最终`hasher.outs[0]`要和`pubkey_hash`数据一致。
-
-然后是`it("Should generate witnesses", async () => {`
-
-这个测试验证电路能否正确生成witness。`witness[0] === 1`表示电路约束满足。在ZK电路中,witness包含了满足电路约束的所有信号值。这里从JSON文件加载测试输入数据。这个输入文件包含了电路需要的所有输入信号值。
-
-调用calculateWitness来运行电路并生成witness。第二个参数true表示在计算过程中检查约束。
-
-```js
-const witness = await cir.calculateWitness(
-	input,
-	true
-);
-```
-
-- 如果witness[0] = 1,表示所有约束都满足
-- 如果witness[0] ≠ 1,表示存在约束不满足
-
-继续向后看，`it("Should return the correct modulus hash", async () => {`
+`it("Should return the correct modulus hash", async () => {`
 
 这个测试用例,它验证了电路计算的modulus hash是否正确。modulus是指DKIM(DomainKeys Identified Mail)验证中的RSA公钥模数。
 
@@ -655,7 +600,7 @@ assert.equal(JSON.stringify(mimcSponge.F.e(modulus_hash)), JSON.stringify(expect
 
 这里不是用mimcSponge来计算hash，而是`mimcSponge.F.e()` 这个函数是将数字转换为MiMC使用的有限域表示，`witness[1]` 和 expected_hash 可能有不同的数字表示形式，通过将它们都转换到相同的有限域表示，我们可以正确比较它们的值。
 
-继续向后看，`it("Should return the correct packed from email", async () => {`
+`it("Should return the correct packed from email", async () => {`
 
 该测试的作用是验证电路是否正确提取和打包了发件人邮箱地址。邮件发件人格式通常是`from:<venmo@venmo.com>`，我们期望从json中在固定位置能够提取出来`venmo@venmo.com`信息，并且和witness对应的数据是一样的。
 
@@ -663,7 +608,7 @@ assert.equal(JSON.stringify(mimcSponge.F.e(modulus_hash)), JSON.stringify(expect
 const packed_from_email = witness.slice(2, 5);
 ```
 
-从`witness[2]`到`witness[4]`获取电路计算的打包邮箱地址。注释说明这是因为15/7≈3,所以需要3个witness值来存储。
+从`witness[2]`到`witness[4]`获取电路计算的打包邮箱地址。注释说明这是因为15/7≈3,所以需要3个witness值来存储（字符串要先转成ASCII码，之后转成数值，如果数据太大就超过有限域范围了，所以要做分割）。
 
 `from_email_array`最终会得到`venmo@venmo.com`，`venmo@venmo.com`字符串总长度是15，我们按照尺寸7对这个15做一下划分，一共会分成3块。这样最后一个数据划分之后就只有一个值，不够7，所以就在后面补0，`chunkArray()`就是计算得到划分数组。
 
@@ -702,7 +647,7 @@ chunkedArrays.map((arr, i) => {
 
 通过上述的计算和比较确保`packed_from_email`里面的内容确实是`venmo@venmo.com`。
 
-继续向后看，`it("Should return the correct hashed actor id", async () => {`
+`it("Should return the correct hashed actor id", async () => {`
 
 这个测试验证电路是否正确计算了actor_id的哈希值。
 
@@ -788,23 +733,6 @@ const actor_id_selector = Buffer.from('&actor_id=3D');
 const expected_hash_contract = await poseidonContract["poseidon(uint256[3])"](packed_actor_id);
 ```
 
-这里面函数调用有一点奇怪，写成的是`["poseidon(uint256[3])"]`这种形式，在js语法中，函数调用可以是有下面这两种形式
-
-```js
-// 点号语法
-contract.someFunction()
-
-// 方括号语法
-contract["someFunction"]()
-```
-
-`poseidonContract`是一个智能合约实例对象，在 Solidity（智能合约语言）中，函数的完整名称包括参数类型，所以 poseidon(uint256[3]) 表示：
-
-- 函数名: poseidon
-- 参数类型: uint256[3] (一个长度为3的无符号256位整数数组)
-
-可见Solidity代码写起来并不是这样，但是前端调用的时候是把他们混起来调用的，所以看起来好像有一点奇怪。
-
 最后的验证操作进行了两个验证：
 
 1. 验证电路输出的哈希值与本地 JS 计算的哈希值相同
@@ -814,7 +742,6 @@ contract["someFunction"]()
 
 1.  一致性验证：
 	- 确保在不同环境（JS、智能合约、ZK 电路）中 Poseidon 哈希的实现是一致的
-	- 这很重要，因为最终我们需要在链上验证这些哈希值
 
 2. 安全性保证：
 	- 本地 JS 验证提供了快速的测试反馈
@@ -1255,28 +1182,6 @@ graph TD
     E --> F[输出modulus_hash]
 ```
 
-还有一点是一些数据书写的便利性
-
-```js
-signal input signature[k];     // 长度为k的数组
-
-// 约束赋值
-EV.signature <== signature; // 自动对所有k个元素建立约束
-
-// 显式循环写法
-for (var i = 0; i < k; i++) {
-    EV.signature[i] <== signature[i];
-}
-```
-
-可以看到在约束赋值的时候。不需要显式写出数组索引，Circom会自动对数组中的每个元素建立约束关系。省去了一些编写的麻烦。但是要注意，这种情况能简化是需要长度匹配才行，比如
-
-```js
-// ❌ 错误：数组长度不匹配
-signal input a[5];
-signal input b[3];
-b <== a;  // 编译错误！
-```
 
 继续向后看，接下来进入 **FROM HEADER REGEX**
 
@@ -1297,7 +1202,7 @@ var max_email_from_packed_bytes = count_packed(max_email_from_len, pack_size);
 
 ```js
 signal input email_from_idx;  // From字段在邮件头中的位置
-signal output reveal_email_from_packed[max_email_from_packed_bytes]; // 打包后的From地址
+signal output reveal_email_from_packed[max_email_from_packed_bytes]; // 打包后的From邮件值
 ```
 
 然后去做正则匹配和验证：
@@ -1577,15 +1482,16 @@ graph TD
         K --> L[Poseidon哈希]
     end
 
-    subgraph 输出
-        B --> M[输出modulus_hash]
-        L --> N[输出packed_actor_id_hashed]
+    subgraph 验证
+        B --> M[验证modulus_hash]
+        G --> O[验证packed_email]
+        L --> N[验证packed_actor_id_hashed]
     end
 
     style 输入验证 fill:#f9f,stroke:#333
     style From处理 fill:#bbf,stroke:#333
     style ActorID处理 fill:#bfb,stroke:#333
-    style 输出 fill:#fbb,stroke:#333
+    style 验证 fill:#fbb,stroke:#333
 ```
 
 
@@ -1628,280 +1534,10 @@ graph TD
 系统 -> 验证支付证明 -> 释放对应的代币
 ```
 
-### 测试代码
-
-测试代码位于`contracts-ramp/test/ramps/revolut`
-
-#### Account Registration Processor
-
-先从类型开始看起，
-
-```js
-export type Account = {
-  address: Address;
-  wallet: SignerWithAddress;
-};
-```
-
-address是一个以太坊地址（20字节的十六进制字符串），wallet是一个包含私钥的签名者对象，用于签名交易和消息。
-
-然后
-
-```js
-let owner: Account;
-let verifier: Account;
-let attacker: Account;
-let ramp: Account;
-```
-
-- owner: 合约所有者账户，有管理权限
-- verifier: 验证者账户，用于验证证明
-- attacker: 模拟攻击者账户，用于测试安全限制
-- ramp: Ramp 合约的管理账户
-
-```js
-let nullifierRegistry: NullifierRegistry;
-let registrationProcessor: RevolutAccountRegistrationProcessor;
-```
-
-`nullifierRegistry`是一个防重放攻击的注册表合约。它的主要功能是：
-
-- 记录已经使用过的证明
-- 防止同一个证明被重复使用
-- 提供查询接口验证证明是否已被使用
-
-`registrationProcessor`是 Revolut 账户注册处理器合约
-
-- 处理用户注册请求
-- 验证 TLS 证明
-- 验证 API 端点和主机
-- 管理验证者签名密钥
-- 与 nullifierRegistry 交互防止重放攻击
-
-这两个合约的交互流程是：
-
-1. 用户提交注册请求和证明
-2. registrationProcessor 验证证明的有效性
-3. registrationProcessor 通过 nullifierRegistry 检查证明是否已被使用
-4. 如果验证通过，将证明记录到 nullifierRegistry 中
-5. 完成注册流程
-
-```js
-let deployer: DeployHelper;
-```
-
-`deployer: DeployHelper` 是一个部署助手工具，用于简化合约部署过程。
-
-```js
-[
-  verifier,
-  owner,
-  attacker,
-  ramp
-] = await getAccounts();
-```
-
-这是自动生成一些测试账户。
-
-继续向后看
-
-```js
-registrationProcessor = await deployer.deployRevolutAccountRegistrationProcessor(
-  ramp.address,
-  "0x166338393593e85bfde8B65358Ec5801A3445D12",
-  BigNumber.from("113116629262703480258914951290401242193028831780154554089583031844538369800942").toHexString(),
-  nullifierRegistry.address,
-  "GET https://app.revolut.com/api/retail/user/current",
-  "app.revolut.com"
-);
-```
-
-解释一下这些参数含义：
-
-1. 第一个参数`ramp.address`：Ramp 合约的地址
-2. 第二个参数verifierSigningKey: 验证者的签名密钥
-	- 用于验证 TLS 证明的有效性
-	- 这是一个固定的地址，用于 Revolut 的验证
-3. 第三个参数notaryKeyHash: 公证人密钥的哈希值
-	- 用于验证 TLS 证明中的公证人
-	- 这是一个大数，转换为十六进制字符串
-4. 第四个参数`nullifierRegistry.address`
-	- 记录已使用的证明
-	- 用于防止重放攻击
-5. 第五个参数`"GET https://app..."`
-	- endpoint: API 端点
-	- 指定要验证的 Revolut API 端点
-	- 用于确保 TLS 证明来自正确的 API 调用
-6. 第六个参数`"app.revolut.com"`
-	- host: 主机名
-	- 指定要验证的 Revolut 主机
-	- 用于确保 TLS 证明来自正确的域名
-
-```js
-await nullifierRegistry          // nullifier注册表合约
-    .connect(owner.wallet)       // 使用owner的钱包连接合约
-    .addWritePermission(        // 调用添加写入权限的方法
-        registrationProcessor.address  // 给注册处理器合约地址授权
-    );
-```
-
-这个是nullifierRegistry合约有一个方法是addWritePermission，用于允许其他合约有向该nullifierRegistry合约添加写入能力。
-
-```mermaid
-graph LR
-    A[Owner] -->|controls| B[NullifierRegistry]
-    C[RegistrationProcessor] -->|needs write access| B
-```
-
-这是一种分层的设计思想，也即关注点分离。registrationProcessor是应用层，专注于业务逻辑。nullifierRegistry是数据存储曾，专注于存储和权限管理。
-
-```mermaid
-graph TD
-    A[Application Layer<br>RegistrationProcessor] -->|calls| B[Storage Layer<br>NullifierRegistry]
-    C[Owner] -->|manages permissions| B
-```
-
-还有一点是可重用性
-
-```js
-// 其他处理器也可以使用同一个 NullifierRegistry
-garantiProcessor = await deployer.deployGarantiRegistrationProcessor(...);
-await nullifierRegistry.connect(owner.wallet).addWritePermission(garantiProcessor.address);
-
-wiseProcessor = await deployer.deployWiseRegistrationProcessor(...);
-await nullifierRegistry.connect(owner.wallet).addWritePermission(wiseProcessor.address);
-```
-
-以及可维护性，就是存储和业务分离，业务合约将来随时更新，并不会影响存储合约的数据存储。
-
-```js
-// 可以轻松更新处理器而不影响存储
-newProcessor = await deployer.deployNewVersionProcessor(...);
-await nullifierRegistry.connect(owner.wallet).addWritePermission(newProcessor.address);
-await nullifierRegistry.connect(owner.wallet).removeWritePermission(oldProcessor.address);
-```
-
-向后看，进入测试案例。`it("should set the correct state", async () => {`
-
-这是验证registrationProcessor合约初始化后状态是否正确。
-
-```js
-let subjectProof: RevolutRegistrationProof;
-let subjectCaller: Account;
-```
-
-subjectProof是 Revolut 注册过程中的证明数据，包含了用户注册所需的所有信息，我们可以在后面的内容更明确的看到这些数据
-
-```js
-subjectProof = {
-public_values: {
-  endpoint: "GET https://app.revolut.com/api/retail/user/current",
-  host: "app.revolut.com",
-  profileId: "21441300878620834626555326528464320548303703202526115662730864900894611908769",
-  userAddress: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  notaryKeyHash: BigNumber.from("113116629262703480258914951290401242193028831780154554089583031844538369800942")
-} as RevolutRegistrationData,
-proof: "0x0517fbc6fc6738b6ad1c0c638f635f4ad4e01616b92bb87b102fe9000c5b58f27eda7bf373636af301fbfaaf3b6f267d82ca0ec8b089cbd4d42159e1a957cdc11b"
-} as RevolutRegistrationProof;
-```
-
-- endpoint: Revolut API 端点
-- host: Revolut 主机名
-- profileId: 用户的 Revolut ID
-- userAddress: 用户的以太坊地址
-- notaryKeyHash: 公证人密钥哈希
-- proof: 签名证明（就是数字签名的签名数据r,s,v）v: 恢复位（用于从签名中恢复出签名者地址）
-
-```js
-subjectCaller = ramp;
-```
-
-这是一种模块化测试的功能，后面可以专注于维护subjectCaller，替换subjectCaller会很容易，甚至可以对调用做集中维护，像是这样
-
-```js
-// 可以轻松测试不同调用者
-let testCases = [
-    { caller: owner, shouldSucceed: false },
-    { caller: ramp, shouldSucceed: true },
-    { caller: attacker, shouldSucceed: false }
-];
-```
-
-继续向后看，`it("should add the hash of the proof inputs to the nullifier registry", async () => {`
-
-这段代码测试了 nullifier（防重放标识符）的记录功能。
-
-```js
-// 将用户地址和 profileId 编码并哈希，生成唯一标识符
-const expectedNullifier = ethers.utils.keccak256(
-    abiCoder.encode(
-        ["address", "string"],  // 数据类型
-        [
-            subjectProof.public_values.userAddress,  // 用户的以太坊地址
-            subjectProof.public_values.profileId     // Revolut 账户 ID
-        ]
-    )
-);
-```
-
-这个设计的目的是防止重复注册。
-
-#### Account Registry
-
-说一下这几个合约之间的关系
-
-```
-RevolutAccountRegistry (注册表) <-> RevolutAccountRegistrationProcessor (注册处理器) <-> NullifierRegistry (防重放注册表)
-```
-
-主要功能：
-
-- RevolutAccountRegistry: 维护已注册用户的记录，管理用户间的白名单/黑名单关系
-- RevolutAccountRegistrationProcessor: 处理注册请求，验证用户提供的证明
-- NullifierRegistry: 防止重放攻击，确保每个注册证明只能使用一次
-
-看新的测试代码。
-
-```js
-return accountRegistry.connect(subjectCaller.wallet).initialize(
-        subjectAccountRegistrationProcessor,
-      );
-```
-
-从这个代码可以知道，Registry合约要和RegistrationProcessor合约地址绑定。而且后面代码可以知道，只有合约的owner有执行`initialize`的能力。
-
-#### Send Processor
-
-该测试文件用于处理和验证转账证明。看一下proof字段的数据信息
-
-1. public_values 包含了 Revolut 转账交易的公开信息：
-	- endpoint: Revolut API 的端点，用于获取特定交易的详情
-		 - 格式: GET `https://app.revolut.com/api/retail/transaction/{transactionId}`
-	- host: Revolut 的主机名，用于验证请求来源
-	- transferId: 转账交易的唯一标识符
-	- recipientId: 收款人的 Revolut ID
-	- amount: 转账金额（负值表示这是一笔出账交易，如-100）
-	- currencyId: 货币类型
-	- status: 交易状态
-	- timestamp: 交易时间戳（毫秒）
-	- intentHash: 意图哈希，用于验证交易的预期结果（一个大数值，确保交易匹配预期的接收方和金额）
-	- notaryKeyHash: 公证人密钥哈希，用于验证交易的合法性（一个大数值，用于验证交易的签名）
-2. proof: 交易证明的签名（一个 65 字节的 ECDSA 签名）
-3. subjectVerifierSigningKey: 验证者的公钥地址（用于验证交易证明签名的有效性）
-
-
 
 ### 合约
 
 #### Account Registration Processor
-
-```js
-function processProof(
-...
-onRampId = bytes32(_proof.public_values.profileId.stringToUint(0));
-```
-
-onRampId只是profileId简单数据转换之后的结果，可以认为onRampId和profileId等价。
 
 从这个`verifyProof`函数设计上面来看，所有的签名和验证工作都是由一个公正的第三方作为Verifier来去实现签名。
 
@@ -1923,8 +1559,6 @@ onRampId只是profileId简单数据转换之后的结果，可以认为onRampId�
 - 由可信的 verifier 来验证 API 响应
 - verifier 对验证过的数据进行签名
 - 合约验证 verifier 的签名来确保数据真实性
-
-而邮件的方式不存在这方面的问题，就不需要引入Verifier了。
 
 ####  Account Registry
 
@@ -1970,73 +1604,6 @@ function register(
 - 用户调用register函数,提交注册信息和verifier的签名
 
 后续的`_verifyRegistrationProof`可以验证一些公开信息，比如说Revolut 的endpoint，host等信息，最重要的是验证签名就是验证这个签名是否是verifier签的。验证完之后就把用户Revoult的profileId作为 accountId，和用户以太坊地址绑定，一个以太坊地址只能对应一个Revoult的profileId。
-
-#### Send Processor
-
-```js
-function processProof(
-	IRevolutSendProcessor.SendProof calldata _proof,
-	address _verifierSigningKey
-)
-	public
-	override
-	onlyRamp
-	returns(
-		uint256 amount,
-		uint256 timestamp,
-		bytes32 offRamperId,
-		bytes32 currencyId,
-		bytes32 notaryKeyHash
-	)
-{
-	_validateProof(_verifierSigningKey, _proof.public_values, _proof.proof);
-
-	_validateTLSEndpoint(
-		endpoint.replaceString("*", _proof.public_values.transferId),
-		_proof.public_values.endpoint
-	);
-	_validateTLSHost(host, _proof.public_values.host);
-	
-	// Validate status
-	require(
-		keccak256(abi.encodePacked(_proof.public_values.status)) == PAYMENT_STATUS,
-		"Payment status not confirmed as sent"
-	);
-	_validateAndAddNullifier(keccak256(abi.encodePacked("Revolut", _proof.public_values.transferId)));
-
-	amount = _parseAmount(_proof.public_values.amount);
-
-	// Add the buffer to build in flexibility with L2 timestamps
-	timestamp = _proof.public_values.timestamp.stringToUint(0) / 1000 + timestampBuffer;
-
-	offRamperId = keccak256(abi.encodePacked(_proof.public_values.recipientId));
-	currencyId = keccak256(abi.encodePacked(_proof.public_values.currencyId));
-	notaryKeyHash = bytes32(_proof.public_values.notaryKeyHash);
-}
-```
-
-从代码中可以看出，ramp 实际上是指 Registry 合约（如 RevolutAccountRegistry）。让我解释这个架构：
-
-合约角色：
-
-- Registry 合约（Ramp）：用户直接交互的主合约，如 RevolutAccountRegistry
-- Processor 合约：处理验证逻辑的合约，如 RevolutAccountRegistrationProcessor
-
-设计`onlyRamp`的目的是保证该合约只能被指定合约调用而不能被其他合约调用。
-
-这里的设计模式是：
-
-1. 用户只能与 Registry(Ramp) 交互
-2. Registry 作为中间层调用 Processor
-3. Processor 通过 onlyRamp 修饰器确保只有 Registry 可以调用它
-
-这种分层设计的好处是：
-
-- 关注点分离：Registry 负责状态管理，Processor 负责验证逻辑
-- 安全性：用户不能直接调用验证逻辑
-- 可升级性：可以更换 Processor 而不影响状态存储
-
-所以 "ramp" 不是用户，而是指代 Registry 合约本身，它作为用户和验证逻辑之间的桥梁。
 
 #### Ramp
 
@@ -2585,7 +2152,7 @@ const notaryUrl = await get(NOTARY_API_LS_KEY);
 const websocketProxyUrl = await get(PROXY_API_LS_KEY);
 ```
 
-之所以使用websocket是因为浏览器无法直接建立TCP连接，所以用浏览器先和proxy服务器建立websocket连接，随后proxy服务器再和notary服务器建立TCP连接。
+之所以使用websocket是因为浏览器无法直接建立TCP连接，所以用浏览器先和proxy服务器建立websocket连接，随后proxy服务器再和server服务器建立TCP连接。
 
 主要流程是：
 
@@ -2632,3 +2199,129 @@ import { prove, verify } from 'tlsn-js';
 服务器处理完数据后返回 proof，然后 Offscreen 组件通过 `BackgroundActiontype.finish_prove_request` 消息通知后台。
 
 后台接收到这个消息后，会在 `handleFinishProveRequest` 函数中处理（rpc中定义）
+
+## tlsn-js
+
+以这个example使用为例，做源代码分析。
+
+```ts
+// app.ts
+import { NotaryServer } from 'tlsn-js';
+const { init, Prover, NotarizedSession, TlsProof }: any = Comlink.wrap(
+  new Worker(new URL('./worker.ts', import.meta.url)),
+);
+
+// To create a proof
+await init({ loggingLevel: 'Debug '});
+const notary = NotaryServer.from(`http://localhost:7047`);
+const prover = await new Prover({ serverDns: 'swapi.dev' });
+
+// Connect to verifier
+await prover.setup(await notary.sessionUrl());
+
+// Submit request
+await prover.sendRequest('ws://localhost:55688', {
+  url: 'https://swapi.dev/api/people/1',
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: {
+    hello: 'world',
+    one: 1,
+  },
+});
+
+// Get transcript and precalculated ranges
+const transcript = await prover.transcript();
+
+// Select ranges to commit 
+const commit: Commit = {
+  sent: [
+    transcript.ranges.sent.info!,
+    transcript.ranges.sent.headers!['content-type'],
+    transcript.ranges.sent.headers!['host'],
+    ...transcript.ranges.sent.lineBreaks,
+  ],
+  recv: [
+    transcript.ranges.recv.info!,
+    transcript.ranges.recv.headers!['server'],
+    transcript.ranges.recv.headers!['date'],
+    transcript.ranges.recv.json!['name'],
+    transcript.ranges.recv.json!['gender'],
+    ...transcript.ranges.recv.lineBreaks,
+  ],
+};
+
+// Notarize selected ranges
+const serializedSession = await prover.notarize(commit);
+
+// Instantiate NotarizedSession
+// note: this is necessary because workers can only post messages in serializable values
+const notarizedSession = await new NotarizedSession(serializedSession);
+
+
+// Create proof for commited ranges
+// note: this will reveal the selected ranges
+const serializedProof = await notarizedSession.proof(commit);
+
+// Instantiate Proof
+// note: necessary due to limitation with workers
+const proof = await new TlsProof(serializedProof);
+
+// Verify a proof
+const proofData = await proof.verify({
+  typ: 'P256',
+  key: await notary.publicKey(),
+});
+```
+
+```ts
+const { init, Prover, NotarizedSession, TlsProof }: any = Comlink.wrap(
+  new Worker(new URL('./worker.ts', import.meta.url)),
+);
+```
+
+首先建立web worker，将计算密集任务都交给web worker执行，防止阻塞主线程（主线程主要用于ui渲染），这些函数都是来自于Rust编译后转的wasm，是来自tlsn的主仓库，不在tlsn-js里定义。
+
+```js
+await prover.setup(await notary.sessionUrl());
+```
+
+向notary服务器请求websocket session id，然后由prover正式建立同notary服务器之间的websocket连接。
+
+当 Prover 调用 setup(verifierUrl) 时，WASM 模块会使用这个 URL 建立 WebSocket 连接，并开始 MPC-TLS 协议的初始化过程。
+
+```js
+await prover.sendRequest('ws://localhost:55688', {
+```
+
+是向代理服务器发送请求，让代理服务器建立TCP连接，因为websocket本身无法建立TCP连接，所以需要代理服务器。
+
+```
+Browser -> WebSocket -> Proxy(55688) -> TCP -> swapi.dev:443
+```
+
+数据发送给代理服务器之前已经经过加密处理，所以代理服务器应该只是做一个通信转换，没有办法真的知道通信具体内容。具体的发送代码逻辑还是在wasm里面
+
+```js
+async sendRequest(wsProxyUrl: string, request: {...}) {
+    // 当 Prover 发送请求时
+    const resp = await this.#prover.send_request(wsProxyUrl, {
+        uri: url,
+        method,
+        headers: headerMap,
+        body,
+    });
+}
+```
+
+这个过程中：
+- Prover 和 Notary 共同参与 TLS 握手
+- 所有的通信数据都会被 Notary 见证
+- Notary 获得部分 TLS 密钥信息
+
+实际架构应该是这样
+
+```
+Prover (Browser/WASM) <--WebSocket--> Notary
