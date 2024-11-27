@@ -38,7 +38,7 @@ GEB 的每个组件都有不同程度的治理最小化潜力。
 
 - 清算引擎 - 可选合约，以系统货币减去会计引擎和稳定费用库中的剩余依据为百分比自动设置 onAuctionSystemCoinLimit。
 
-- 会计引擎 - 可选合约可能会设置 surplusBuffer，以覆盖系统货币未偿还供应量的特定百分比，不包括会计引擎和稳定费用库中的剩余金还有稳定费用库/，一个强制性的合约，根据协议令牌和系统币市场价格定期设置 initialDebtAuctionMintedTokens 和 debtAuctionBidSize。
+- 会计引擎 - 可选合约可能会设置 surplusBuffer，以覆盖系统货币未偿还供应量的特定百分比，不包括会计引擎和稳定费用库中的剩余金还有稳定费用库，一个强制性的合约，根据协议令牌和系统币市场价格定期设置 initialDebtAuctionMintedTokens 和 debtAuctionBidSize。
 
 - ESM - thresholdSetter，自动将 triggerThreshold 设置为当前协议令牌未偿还供应量的百分比。
 
@@ -84,6 +84,6 @@ GEB（例如 RAI）将经历三个级别（或阶段）的治理最小化：
 - ProtocolTokenPrintingPermissions
 - Auto Surplus Buffer Setter
 
-## Level 3
+### Level 3
 
 此时，所有剩余的治理必须由社区掌握。社区将评估完全从更多合约中删除控制的可行性（例如 PID）。
