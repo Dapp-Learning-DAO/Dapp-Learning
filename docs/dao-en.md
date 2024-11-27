@@ -24,7 +24,7 @@ Advanced tasks, such as DeFi, Dao, and NFT project research, adopt group learnin
 1.  Developers who submit more than one PR can participate in the group study;
 2.  In principle, the subtask research of the team shall not exceed 3 people, and the team members shall have a clear division of labor and supervise each other;
 3.  Front end and graph are optional, White papers and smart contracts are mandatory;
-4.  In principle, it needs to be shared once a week, which can be postponed once.
+4.  In principle, it needs to be shared once a week, but it can be postponed once.
 
 Study in groups and show results (reference)：  
  White paper/contract/front-end/GRAPH: Deployment, documentation and Rebase video sharing
