@@ -5,6 +5,7 @@ PSBT（Partially Signed Bitcoin Transaction）的编码和解码是一个关键�
 PSBT的基本格式是一个序列化的数据结构，包含所有必要的信息，使多个参与者能够独立进行交易签名和验证。这个格式遵循一定的编码规则，详细见[BIP174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki)，通常以Base64或十六进制形式进行传输。
 
 **The Partially Signed Bitcoin Transaction (PSBT) format**
+
 ```bash
  # whole structure
  <psbt> := <magic> <global-map> <input-map>* <output-map>*
@@ -51,6 +52,7 @@ PSBT的编码过程包括将交易的各个部分转换成可序列化的格式�
 4. **验证和签名**：在交易数据完全恢复后，参与者可以验证交易的有效性，并在必要时添加自己的签名。
 
 ## PSBT 创建
+
 以下是一个使用JavaScript和`bitcoinjs-lib`库来处理PSBT（Partially Signed Bitcoin Transaction）的基本示例。这个例子展示了如何创建一个PSBT，添加输入和输出，进行签名，并最终导出为可以广播的比特币交易。
 
 ### 环境设置
@@ -80,22 +82,22 @@ let psbt = new bitcoin.Psbt({ network: network });
 
 // 假设这是UTXO的详细信息，你需要从区块链或钱包获取这些信息
 const utxo = {
-    hash: 'transaction-hash-of-utxo-here',  // 事务哈希
-    index: 0,                               // 输出索引
-    value: 100000                           // Satoshis
+  hash: 'transaction-hash-of-utxo-here', // 事务哈希
+  index: 0, // 输出索引
+  value: 100000, // Satoshis
 };
 
 // 添加输入，这里假设UTXO已经知道
 psbt.addInput({
-    hash: utxo.hash,
-    index: utxo.index,
-    nonWitnessUtxo: Buffer.from('raw-transaction-hex-here', 'hex')
+  hash: utxo.hash,
+  index: utxo.index,
+  nonWitnessUtxo: Buffer.from('raw-transaction-hex-here', 'hex'),
 });
 
 // 添加输出，指定接收地址和金额（satoshis）
 psbt.addOutput({
-    address: 'recipient-address-here',
-    value: 90000  // 减去手续费
+  address: 'recipient-address-here',
+  value: 90000, // 减去手续费
 });
 
 // 对PSBT进行签名
@@ -124,8 +126,8 @@ console.log(`Transaction ready to be broadcasted: ${tx}`);
 7. **完成PSBT**：完成所有输入，锁定PSBT，使之准备好转换为最终的交易格式。
 8. **导出交易**：将PSBT转换为一个标准的比特币交易，并将其转换为hex格式，准备广播到网络。
 
-
 ## PSBT 解析
+
 要解析PSBT（Partially Signed Bitcoin Transaction）并查看其详细内容，你可以使用`bitcoinjs-lib`库在JavaScript环境中执行这一任务。下面的示例将展示如何读取一个PSBT，解析其内容，以及如何查看关键信息，如输入和输出详情。
 
 ### 示例：解析PSBT
@@ -134,20 +136,21 @@ console.log(`Transaction ready to be broadcasted: ${tx}`);
 const bitcoin = require('bitcoinjs-lib');
 
 // 假设这是一个已经存在的PSBT的Base64编码字符串
-const psbtBase64 = 'cHNidP8BAHECAAAAAZtuEiavDmeZR6WUjIhjFbkFh7m+yywCfHlni6uTrgH/////AZD+GwAAAAAAF6kU9BeD5tGIzjL0VzU3+kEUNw+HME3/////8C0wbdQAAAAAAF6kUAAAAAAAAiACATWsYQSE/C85hv5jZVDezl0l4AAAAAAAEBKxAnAAAAAAAAFgAUjVv8Fy0Qdk84W/oBhiMllC+HIHg=';
+const psbtBase64 =
+  'cHNidP8BAHECAAAAAZtuEiavDmeZR6WUjIhjFbkFh7m+yywCfHlni6uTrgH/////AZD+GwAAAAAAF6kU9BeD5tGIzjL0VzU3+kEUNw+HME3/////8C0wbdQAAAAAAF6kUAAAAAAAAiACATWsYQSE/C85hv5jZVDezl0l4AAAAAAAEBKxAnAAAAAAAAFgAUjVv8Fy0Qdk84W/oBhiMllC+HIHg=';
 
 // 将Base64编码的PSBT解码
 const psbt = bitcoin.Psbt.fromBase64(psbtBase64);
 
 // 遍历PSBT的输入和输出
 psbt.data.inputs.forEach((input, index) => {
-    console.log(`Input ${index}:`);
-    console.log(input);
+  console.log(`Input ${index}:`);
+  console.log(input);
 });
 
 psbt.data.outputs.forEach((output, index) => {
-    console.log(`Output ${index}:`);
-    console.log(output);
+  console.log(`Output ${index}:`);
+  console.log(output);
 });
 
 // 如果需要更详细地查看某个特定的输入或输出，可以根据实际需要提取更多信息
@@ -160,6 +163,7 @@ psbt.data.outputs.forEach((output, index) => {
 3. **打印信息**：在控制台打印每个输入和输出的详细信息，这有助于开发者理解和调试PSBT。
 
 ## 原生解析
+
 在比特币的PSBT（Partially Signed Bitcoin Transaction）处理中，原生编码和解码是指不使用任何外部库直接操作PSBT格式数据的方法。这通常涉及到直接处理PSBT的二进制表示，理解其结构，并根据规范来手动解析或构建数据。由于PSBT规范的复杂性，这一过程比较繁琐，但非常重要，因为它能提供对PSBT工作原理的深入理解。
 
 ### PSBT数据结构
@@ -189,4 +193,3 @@ PSBT是一种包含多个键值对的数据结构，每个部分都有其特定�
 3. **逐个解析输入部分**：对于每个输入，读取其键值对，直到遇到分隔符。
 4. **逐个解析输出部分**：对于每个输出，同样读取其键值对。
 5. **验证完整性**：确保所有必要的数据都已正确解析，并且数据结构符合PSBT的规范。
-
