@@ -1,6 +1,4 @@
-中文 / [English](https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/basic-knowledge-en.md)
-
-## 中文版
+中文 / [English](./basic-knowledge-en.md)
 
 ### 基础知识预备
 - 阅读[《精通以太坊》](https://github.com/inoutcode/ethereum_book) 理解 **以太坊** 的基本原理。
