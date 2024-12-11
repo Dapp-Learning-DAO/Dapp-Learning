@@ -19,6 +19,8 @@ npm install
 Node版本：v20.11.0
 ```
 
+### 生成随机数
+
 - 创建 ChainLink SubscriptionID  
 登陆 [ChainLink VRF 测试网](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , 点击 "Create Subscription" 创建 SubscriptionID , 之后可以在 "My Subscriptions" 中看到创建的 SubscriptionID
 <center><img src="./imgs/CreateSubscription.png?raw=true" /></center>  
@@ -80,6 +82,18 @@ RandomWords 随机数生成之后，通过合约传入。./scripts/deployment.js
 <center><img src="./imgs/Consumer.png?raw=true" /></center> 
 <center><img src="./imgs/Events.png?raw=true" /></center> 
 <center><img src="./imgs/RequestAndResult.png?raw=true" /></center> 
+
+### 生成nft
+
+- 部署nft721 合约
+```sh
+  npx hardhat run scripts/deployDungeonsAndDragonsCharacter.js --netwrok sepolia
+```
+
+- mint nft
+```sh
+  npx hardhat run scripts/blindCharacter.js --netwrok sepolia
+```
 
 
 ## 参考链接

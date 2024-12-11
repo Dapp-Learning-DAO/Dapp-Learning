@@ -291,7 +291,7 @@ Item list:
  - [Paradigm-ctf](https://github.com/paradigm-operations/paradigm-ctf-2021)
  - [Smart Contract CTF](https://blockchain-ctf.securityinnovation.com)
 3. Safe development practices
- - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns-chinese.md)
+ - [Safety development practice of Solidity](https://github.com/slowmist/Knowledge-Base/blob/master/translations/solidity-security-comprehensive-list-of-known-attack-vectors-and-common-anti-patterns_zh-cn.md)
 4. Integration of learning resources
  - [Awesome Blockchain Security](https://github.com/xxxeyJ/Awesome-Blockchain-Security)
  - [Immunefi ](https://immunefi.com/learn/)

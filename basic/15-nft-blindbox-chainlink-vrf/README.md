@@ -19,6 +19,8 @@ npm install
 Node Version：v20.11.0
 ```
 
+### Generate random number
+
 - Create ChainLink SubscriptionID  
 Login [ChainLink VRF Test network](https://vrf.chain.link/?_ga=2.225785050.1950508783.1645630272-1230768383.1643005305) , Click on "Create Subscription" to Create a SubscriptionID and you can see the created SubscriptionID under "My Subscriptions"
 <center><img src="./imgs/CreateSubscription.png?raw=true" /></center>  
@@ -78,6 +80,18 @@ After the random number is generated, it can be viewed in Ehterscan
 <center><img src="./imgs/Consumer.png?raw=true" /></center> 
 <center><img src="./imgs/Events.png?raw=true" /></center> 
 <center><img src="./imgs/RequestAndResult.png?raw=true" /></center> 
+
+### generate NFT
+
+- Sacking the NFT721 contract
+```sh
+  npx hardhat run scripts/deployDungeonsAndDragonsCharacter.js --netwrok sepolia
+```
+
+- Mint NFT
+```sh
+  npx hardhat run scripts/blindCharacter.js --netwrok sepolia
+```
 
 
 ## Refer to the link

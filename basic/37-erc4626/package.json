@@ -1,0 +1,12 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@aave/core-v3": "1.19.3",
+    "@aave/periphery-v3": "2.5.2",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts-upgradeable": "5.0.2",
+    "dotenv": "^16.0.0",
+    "hardhat": "^2.22.6"
+  }
+}

@@ -1,6 +1,6 @@
-# Circle CCTP
-
 [中文](./README-cn.md) / English
+
+# Circle CCTP
 
 ## Overview
 

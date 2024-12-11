@@ -14,9 +14,9 @@ OP_DUP OP_HASH160 <Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG
 
 OP_DUP // 复制栈顶的元素
 OP_HASH160 // 弹出栈顶元素，计算其SHA-256散列，然后计算RIPEMD-160散列
-OP_PUSHBYTES_20 // 推送20字节到栈顶
+OP_PUSHBYTES_20 // 推送20字节的公钥哈希到栈顶
 18e1fad25b2983d5dbb2e2b96e3ce756a69b3bc2 // 公钥哈希
-OP_EQUALVERIFY // 比较栈顶元素
+OP_EQUALVERIFY // 比较栈顶元素是否匹配
 OP_CHECKSIG // 验证数字签名
 
 ```
