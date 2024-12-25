@@ -1,9 +1,11 @@
 ## MAST简介
+
 Merkelized Alternative Script Tree (MAST) 是比特币的一种增强功能，它利用 Merkle 树结构将不同的花费条件（脚本）组织起来，只公开实际使用的脚本分支，提高隐私性和效率。在 MAST 中，有几个关键角色（或身份），它们在构建和验证 Merkle 树时扮演重要作用：
 
 ### 关键角色
 
 1. **叶子节点（Leaf Nodes）**
+
    - **定义**: 叶子节点是 Merkle 树中的基础节点，每个叶子节点代表一个具体的花费条件或脚本。叶子节点通常哈希值进行字典序（lexicographical order）排序。排序的目的是确保 Merkle 树的结构和哈希值是唯一且确定的，这样不同的参与者在构建相同的 Merkle 树时可以得到相同的根哈希值，从而确保交易的一致性和可验证性。
    - **功能**: 包含实际的比特币脚本（例如条件 A、B、C），这些脚本定义了不同的花费条件。
    - **示例**:
@@ -12,11 +14,13 @@ Merkelized Alternative Script Tree (MAST) 是比特币的一种增强功能，�
      - 条件 C: Alice 和 Bob 联合签名可以立即花费。
 
 2. **内部节点（Internal Nodes）**
+
    - **定义**: 内部节点是 Merkle 树中的中间节点，每个内部节点是其子节点哈希值的组合。
    - **功能**: 通过将其子节点的哈希值组合在一起，内部节点形成了从叶子节点到根节点的路径。
    - **示例**: 如果 `A` 和 `B` 是叶子节点，那么 `H1 = Hash(A, B)` 是内部节点。
 
 3. **根节点（Root Node）**
+
    - **定义**: 根节点是 Merkle 树的顶层节点，代表整个树的哈希值。
    - **功能**: 根节点的哈希值用于验证整个 Merkle 树的完整性和有效性。
    - **示例**: 如果 `H1` 和 `H2` 是内部节点，那么 `Root = Hash(H1, H2)` 是根节点。
@@ -59,6 +63,7 @@ Merkelized Alternative Script Tree (MAST) 是比特币的一种增强功能，�
 这种结构使得未使用的条件（例如 A 和 B）保持隐藏，提高了交易的隐私性，同时提供了高效的验证机制。
 
 ## MAST的创建、更新和移除
+
 实现 MAST（Merkelized Alternative Script Tree） 的创建、插入和删除功能，可以使用 JavaScript 结合一些加密库来完成。以下是一个基本的示例，演示如何创建、插入和删除 MAST 中的节点。
 
 ```javascript
@@ -153,6 +158,7 @@ console.log('Root:', mast.getRoot());
 ```
 
 ### 解释
+
 - **hash(data)**: 计算给定数据的 SHA-256 哈希值。
 - **addLeaf(data)**: 添加叶子节点，添加后重建 Merkle 树。
 - **removeLeaf(data)**: 删除叶子节点，删除后重建 Merkle 树。
@@ -162,12 +168,14 @@ console.log('Root:', mast.getRoot());
 - **printTree()**: 打印整个 Merkle 树。
 
 ### 注意事项
+
 1. **排序**: 每次构建树时，叶子节点都根据其哈希值进行字典序排序，以确保树的唯一性和确定性。
 2. **树结构**: `tree` 属性是一个数组，存储从叶子节点到根节点的所有层次。
 
 这个示例实现了基本的 MAST 功能，包括创建、插入和删除叶子节点。
 
 ## Taproot中的应用
+
 ![$$Q = P + t*G$$](https://aandds.com/blog/images/taproot_tweak.gif)
 如上图，在Taproot中需要在MAST中针对叶子结点、树结点和根结点分别引入TapLeaf、TapBranch和TapTweak去计算hash。
 
@@ -184,7 +192,10 @@ const { payments } = bitcoin;
 // 创建 Tagged Hash 函数
 function taggedHash(tag, data) {
   const tagHash = crypto.createHash('sha256').update(tag).digest();
-  return crypto.createHash('sha256').update(Buffer.concat([tagHash, tagHash, data])).digest();
+  return crypto
+    .createHash('sha256')
+    .update(Buffer.concat([tagHash, tagHash, data]))
+    .digest();
 }
 
 // Taproot Tweak 函数
@@ -250,11 +261,12 @@ mast.addLeaf(Buffer.from('Condition A'));
 mast.addLeaf(Buffer.from('Condition B'));
 mast.addLeaf(Buffer.from('Condition C'));
 console.log('Initial MAST:');
-console.log(mast.leaves.map(leaf => leaf.toString('hex')));
+console.log(mast.leaves.map((leaf) => leaf.toString('hex')));
 console.log('MAST Root:', mast.getMerkleRoot().toString('hex'));
 ```
 
 ### 代码说明
+
 1. **taggedHash(tag, data)**: 创建 Tagged Hash 函数，用于 Taproot Tweak 和 TapLeaf/TapBranch。
 2. **tapTweakPubkey(pubkey, h)**: 使用 Tagged Hash 和内部公钥计算 Tweaked 公钥。
 3. **tapLeaf(version, script)**: 计算 TapLeaf 的哈希值。
@@ -265,12 +277,15 @@ console.log('MAST Root:', mast.getMerkleRoot().toString('hex'));
    - `buildTree(leaves)`: 递归构建 Merkle 树。
 
 ### Taproot地址计算
+
 生成Taproot地址，实际上是对Tweaked 公钥的X坐标编码为 Bech32m 格式
 **流程**
+
 - 初始化 MAST 并添加叶子节点。
 - 构建 Merkle 树并计算根节点。
 - 生成内部公钥并计算 Tweaked 公钥。
 - 生成并输出 Taproot 地址。
+
 ```js
 // 生成内部公钥
 const keyPair = bip32.fromSeed(crypto.randomBytes(32));
@@ -290,9 +305,13 @@ console.log('Taproot Address:', taprootAddress);
 ```
 
 ### 锁定脚本(scriptPubKey)
-对于隔离见证 Output，其 scriptPubKey 为 **OP_n tweaked-public-key**  
+
+对于隔离见证 Output，其 scriptPubKey 为 **OP_n tweaked-public-key**
+
 ##### OP_n
+
 OP_n 表示隔离见证版本，版本 0 隔离见证 Output 的 scriptPubKey 的首个字节是 0x00，而版本 1 隔离见证 Output 的 scriptPubKey 的首个字节是 0x51
+
 ```js
 OP_0: 0x00  // segwitV0
 OP_1: 0x51  // segwitV1，即Taproot
@@ -301,23 +320,29 @@ OP_2: 0x52
 
 See: https://github.com/bitcoin/bitcoin/blob/v22.0/src/script/script.h#L68
 ```
+
 #### tweaked-public-key
+
 tweaked-public-key的计算比较复杂，有internal public key和script tree的Merkle Root组成，然后再进行Bech32m编码就能得到Taproot地址
+
 ##### script path
+
 script path是Taproot中比较灵活、同时比较复杂的一种方式  
 tweaked-public-key的计算比较如上图：$$Q = P + t*G$$
 
 #### key path
+
 key path不需要 Script Path，则可以去掉 Script 相关的哈希
 即：$$Q = P + t*G = P + TaggedHash('TapTweak', P)G$$
 钱包中的taproot地址就是基于**用户公钥做P**代入上方公式推导得到
 
 #### **代码实现**
+
 ```js
 const mast = new MAST();
-mast.addLeaf(Buffer.from('OP_DUP OP_HASH160 <Alice\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG'));
-mast.addLeaf(Buffer.from('OP_DUP OP_HASH160 <Bob\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG'));
-mast.addLeaf(Buffer.from('OP_2 <Alice\'s pubkey> <Bob\'s pubkey> OP_2 OP_CHECKMULTISIG'));
+mast.addLeaf(Buffer.from("OP_DUP OP_HASH160 <Alice's pubkey hash> OP_EQUALVERIFY OP_CHECKSIG"));
+mast.addLeaf(Buffer.from("OP_DUP OP_HASH160 <Bob's pubkey hash> OP_EQUALVERIFY OP_CHECKSIG"));
+mast.addLeaf(Buffer.from("OP_2 <Alice's pubkey> <Bob's pubkey> OP_2 OP_CHECKMULTISIG"));
 
 // 生成内部公钥
 const keyPair = bip32.fromSeed(crypto.randomBytes(32));
@@ -331,22 +356,20 @@ const { tweakedPubkey } = tapTweakPubkey(internalPubkey, mastRoot);
 const tweakedPubkeyX = tweakedPubkey.slice(1, 33);
 
 // 生成锁定脚本（P2TR 地址的锁定脚本）
-const lockingScript = bitcoin.script.compile([
-  bitcoin.opcodes.OP_1,
-  tweakedPubkeyX
-]);
+const lockingScript = bitcoin.script.compile([bitcoin.opcodes.OP_1, tweakedPubkeyX]);
 
 console.log('Locking Script:', lockingScript.toString('hex'));
 ```
 
-
 ### 解锁脚本（witnessScript）
+
 Taproot属于Segwit v1版本，其相关解锁脚本放在Witness位置
-如果在花费 P2TR UTXO 时，Witness 只包含一个元素，则是 P2TR (Key Path)，如果在花费 P2TR UTXO 时，Witness 至少包含两个元素，则是 P2TR (Script Path)。在花费一个 P2TR UTXO 时，是通过 Witness 中元素的个数来决定使用 Key Path（Witness 元素个数为 1）还是 Script Path（Witness 元素个数大于等于 2）。   
+如果在花费 P2TR UTXO 时，Witness 只包含一个元素，则是 P2TR (Key Path)，如果在花费 P2TR UTXO 时，Witness 至少包含两个元素，则是 P2TR (Script Path)。在花费一个 P2TR UTXO 时，是通过 Witness 中元素的个数来决定使用 Key Path（Witness 元素个数为 1）还是 Script Path（Witness 元素个数大于等于 2）。  
 在 Taproot 中，解锁script path可以使用 Taproot Tree 的任意路径之一来满足条件。
 下面代码以解锁一个script tree中的2-2多签叶子结点C为例：
 
-#### **代码实现**  
+#### **代码实现**
+
 ```js
 class MAST {
   // ...
@@ -378,9 +401,9 @@ class MAST {
 }
 
 const mast = new MAST();
-const scriptA = Buffer.from('OP_DUP OP_HASH160 <Alice\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG');
-const scriptB = Buffer.from('OP_DUP OP_HASH160 <Bob\'s pubkey hash> OP_EQUALVERIFY OP_CHECKSIG');
-const scriptC = Buffer.from('OP_2 <Alice\'s pubkey> <Bob\'s pubkey> OP_2 OP_CHECKMULTISIG');
+const scriptA = Buffer.from("OP_DUP OP_HASH160 <Alice's pubkey hash> OP_EQUALVERIFY OP_CHECKSIG");
+const scriptB = Buffer.from("OP_DUP OP_HASH160 <Bob's pubkey hash> OP_EQUALVERIFY OP_CHECKSIG");
+const scriptC = Buffer.from("OP_2 <Alice's pubkey> <Bob's pubkey> OP_2 OP_CHECKMULTISIG");
 mast.addLeaf(scriptA);
 mast.addLeaf(scriptB);
 mast.addLeaf(scriptC);
@@ -417,7 +440,7 @@ const leafPath = mast.getLeafPath(leafToSpend);
 const controlBlock = Buffer.concat([
   Buffer.from([0xc0]), // 脚本版本
   internalPubkey,
-  ...leafPath
+  ...leafPath,
 ]);
 
 // 签名交易
@@ -427,12 +450,7 @@ const signatureAlice = bitcoin.script.signature.encode(keyPairAlice.sign(signatu
 const signatureBob = bitcoin.script.signature.encode(keyPairBob.sign(signatureHash), hashType);
 
 // 构建解锁脚本（witness script）
-const witnessScript = [
-  signatureAlice,
-  signatureBob,
-  scriptC,
-  controlBlock
-];
+const witnessScript = [signatureAlice, signatureBob, scriptC, controlBlock];
 
 // 设置 witness
 txb.setWitness(inputIndex, witnessScript);
@@ -443,6 +461,7 @@ console.log('Transaction:', tx.toHex());
 ```
 
 **构建和签名交易:**
+
 - 创建一个交易以花费 Taproot 输出。
 - 添加输入和输出。
 - 获取要花费的脚本（例如 scriptC）的 TapLeaf 哈希值和 Merkle 路径。
@@ -451,14 +470,16 @@ console.log('Transaction:', tx.toHex());
 - 构建包含两个签名和其他信息的解锁脚本（witness script）。
 - 设置交易的 witness。
 
-
-
 #### script path
+
 [905ecdf95a84804b192f4dc221cfed4d77959b81ed66013a7e41a6e61e7ed530](https://blockchain.info/rawtx/905ecdf95a84804b192f4dc221cfed4d77959b81ed66013a7e41a6e61e7ed530)是花费 P2TR (Script Path) 的例子（它是一个 2-of-2 多签脚本），它的 Witness 为
+
 ```js
 044123b1d4ff27b16af4b0fcb9672df671701a1a7f5a6bb7352b051f461edbc614aa6068b3e5313a174f90f3d95dc4e06f69bebd9cf5a3098fde034b01e69e8e788901400fd4a0d3f36a1f1074cb15838a48f572dc18d412d0f0f0fc1eeda9fa4820c942abb77e4d1a3c2b99ccf4ad29d9189e6e04a017fe611748464449f681bc38cf394420febe583fa77e49089f89b78fa8c116710715d6e40cc5f5a075ef1681550dd3c4ad20d0fa46cb883e940ac3dc5421f05b03859972639f51ed2eccbf3dc5a62e2e1b15ac41c02e44c9e47eaeb4bb313adecd11012dfad435cd72ce71f525329f24d75c5b9432774e148e9209baf3f1656a46986d5f38ddf4e20912c6ac28f48d6bf747469fb1
 ```
+
 根据编码我们得知有4个元素
+
 ```js
 0070: .. .. .. .. .. .. 04 .. .. .. .. .. .. .. .. .. vin0 Witness Count: 4
 0070: .. .. .. .. .. .. .. 41 23 b1 d4 ff 27 b1 6a f4 vin0 Witness 0 Length:65 (0x41)
@@ -484,21 +505,23 @@ console.log('Transaction:', tx.toHex());
 0180: b1
 ```
 
-
 #### key path
+
 [dbef583962e13e365a2069d451937a6de3c2a86149dc6a4ac0d84ab450509c91](https://blockchain.info/rawtx/dbef583962e13e365a2069d451937a6de3c2a86149dc6a4ac0d84ab450509c91)是花费 P2TR (Key Path) 的例子，它的 witness 为：
+
 ```js
 044123b1d4ff27b16af4b0fcb9672df671701a1a7f5a6bb7352b051f461edbc614aa6068b3e5313a174f90f3d95dc4e06f69bebd9cf5a3098fde034b01e69e8e788901400fd4a0d3f36a1f1074cb15838a48f572dc18d412d0f0f0fc1eeda9fa4820c942abb77e4d1a3c2b99ccf4ad29d9189e6e04a017fe611748464449f681bc38cf394420febe583fa77e49089f89b78fa8c116710715d6e40cc5f5a075ef1681550dd3c4ad20d0fa46cb883e940ac3dc5421f05b03859972639f51ed2eccbf3dc5a62e2e1b15ac41c02e44c9e47eaeb4bb313adecd11012dfad435cd72ce71f525329f24d75c5b9432774e148e9209baf3f1656a46986d5f38ddf4e20912c6ac28f48d6bf747469fb1
 ```
+
 ```js
 0141e6e1fe41524e65e3040bc3d080a136345c2c806eb7f336dd6a7a79e9054b0d1fc6a8d836667ef6e9f2188cd1270ab28e5e0eb642eac89f2ec50a32ca54aaf9d601
 
 01 .. .. .. .. .. .. .. .. .. .. .. .. .. .. vin0 Witness Count: 1
 .. 41 .. .. .. .. .. .. .. .. .. .. .. .. .. vin0 Witness 0 Length:65, schnorr_sig (64 bytes) + sig_hash (1 bytes)
 .. .. e6 e1 fe 41 52 4e 65 e3 04 0b c3 d0 80 schnorr_sig
-a1 36 34 5c 2c 80 6e b7 f3 36 dd 6a 7a 79 e9 
-05 4b 0d 1f c6 a8 d8 36 66 7e f6 e9 f2 18 8c 
-d1 27 0a b2 8e 5e 0e b6 42 ea c8 9f 2e c5 0a 
+a1 36 34 5c 2c 80 6e b7 f3 36 dd 6a 7a 79 e9
+05 4b 0d 1f c6 a8 d8 36 66 7e f6 e9 f2 18 8c
+d1 27 0a b2 8e 5e 0e b6 42 ea c8 9f 2e c5 0a
 32 ca 54 aa f9 d6
 .. .. .. .. .. .. 01                                     sig_hash: SIGHASH_ALL (0x01)
 ```

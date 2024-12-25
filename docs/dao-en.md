@@ -40,7 +40,7 @@ Study in groups and show results (reference)：
 
 ## Available PR Title Types
 
-eEnsuring the title follows a specific format helps us manage and review code more effectively, please refer to the available types below:
+Ensuring the title follows a specific format helps us manage and review code more effectively, please refer to the available types below:
 
 - **feat**: A new feature
 - **fix**: A bug fix

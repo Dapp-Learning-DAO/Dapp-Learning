@@ -6,7 +6,7 @@ Tl;NR
 
 Idena is a technique to prove YOU are a HUMAN without KYC.
 
-**maybe the most important usage for Idena currently is the gitcoin trust, it worth 50% trust.**
+**maybe the most important usage for Idena currently is the gitcoin trust, it is worth 50% trust.**
 
 
 
@@ -93,7 +93,7 @@ maybe this is what most people care about. After you finish one validation sessi
 
 
 
-## what can you get from validation?
+## What can you get from validation?
 
 ### Identities, rewards and penalties in Idena
 
