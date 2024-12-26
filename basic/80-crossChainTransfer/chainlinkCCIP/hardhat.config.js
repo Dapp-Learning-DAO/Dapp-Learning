@@ -1,5 +1,7 @@
-require("@nomicfoundation/hardhat-toolbox");
+require('@nomicfoundation/hardhat-toolbox');
 require('dotenv').config();
+const fs = require('fs');
+require('./tasks');
 
 const settings = {
   optimizer: {
@@ -18,8 +20,8 @@ function mnemonic() {
 module.exports = {
   solidity: {
     compilers: [
-      { version: '0.8.8',  settings },
-      { version: '0.7.6',  settings },
+      { version: '0.8.8', settings },
+      { version: '0.7.6', settings },
       { version: '0.6.11', settings },
       { version: '0.5.16', settings },
       { version: '0.8.20', settings },
@@ -29,7 +31,7 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      optimisticEthereum: 'xxx'
+      optimisticEthereum: 'xxx',
     },
   },
   networks: {
@@ -47,30 +49,31 @@ module.exports = {
     },
     matic: {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: mnemonic()
+      accounts: mnemonic(),
     },
     optim: {
-      url: "https://optimism-mainnet.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://optimism-mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
     sepolia: {
-      url: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
     arbitrum: {
-      url: "https://arbitrum-mainnet.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://arbitrum-mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
-    scroll: {
-      url: "https://rpc.scroll.io",
-      accounts: mnemonic()
+    mumbai: {
+      url: 'https://polygon-mumbai.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
-    mumbai:{
-      url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
-    }
+    arbitrumSepolia: {
+      url: 'https://arbitrum-sepolia.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
+      chainId: 421614,
+    },
   },
   mocha: {
-    timeout: 20000
+    timeout: 20000,
   },
 };

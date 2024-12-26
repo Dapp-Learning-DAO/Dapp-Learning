@@ -55,11 +55,9 @@ yarn add mocha
 ```
 yarn mocha test/test.js
 ```
----
-**NOTE**
 
-javascript的poseidon，得出的哈希数据，默认情况下和go sdk、circomlib生成的不一致，这是因为javascript的poseidon哈希没有进行montgomery格式转换。可以参考test/test.js中的goodPoseidon，它得到的哈希值是正确的。
----
+> [!NOTE]
+> javascript的poseidon，得出的哈希数据，默认情况下和go sdk、circomlib生成的不一致，这是因为javascript的poseidon哈希没有进行montgomery格式转换。可以参考test/test.js中的goodPoseidon，它得到的哈希值是正确的。
 
 ## build电路
 
@@ -86,11 +84,9 @@ snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
 
 ```
 
----
-**Note**
 
-这个过程中，会让用户输入随机分量。这是因为，groth16的可信设置，是共同协商出一个随机数$g^s$，第i个贡献者自己准备一个随机数$s_i$, 然后对前i-1个贡献者产出的数据（记为$r_{i-1}$）$g^{s1s2..s_{i-1}}$进行计算：$r_i = r_{i-1}^{si} = g^{s1s2...si}$。直到所有贡献者都贡献完毕，就得到了$g^s$。如果任何一个用户删除了自己的随机分量，那么即使剩余用户合谋，那么也需要极大算力去暴力猜测缺失的分量。
----
+> [!NOTE]
+> 这个过程中，会让用户输入随机分量。这是因为，groth16 的可信设置，是共同协商出一个随机数 $g^s$，第i个贡献者自己准备一个随机数 $s_i$, 然后对前 i-1 个贡献者产出的数据（记为 $r_{i-1}$） $g^{s1s2..s_{i-1}}$ 进行计算： $r_i = r_{i-1}^{si} = g^{s1s2...si}$。直到所有贡献者都贡献完毕，就得到了 $g^s$。如果任何一个用户删除了自己的随机分量，那么即使剩余用户合谋，那么也需要极大算力去暴力猜测缺失的分量。
 
 
 ### 导出合约
@@ -109,13 +105,10 @@ snarkjs zkey export solidityverifier circuit_final.zkey verifier.sol
 
 可以编译它们得到abi和bin。示例中，已经将abi和bin放在了artifact目录。
 
----
-**Note**
-
-注意，zk证明分为pa，pb，pc, publicSignals几个部分，把他们交给verifyProof即可，如果该函数为true，则意味着验证通过。
-
-注意，还需要验证publicSignals的业务意义。另外，注意本例子中，publicSignals[0]是输出信号out，publicSignals[1]才是dataHash。
----
+> [!NOTE]
+> 注意，zk证明分为 pa、pb、pc、publicSignals 几个部分，把他们交给 verifyProof 即可，如果该函数为 true，则意味着验证通过。
+> 
+> 注意，还需要验证 publicSignals 的业务意义。另外，注意本例子中，publicSignals[0] 是输出信号 out，publicSignals[1] 才是 dataHash。
 
 
 ### 调用业务合约

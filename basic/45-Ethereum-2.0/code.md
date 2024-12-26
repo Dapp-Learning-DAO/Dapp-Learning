@@ -23,5 +23,15 @@ State树是一棵全局的树，它的key是sha3(ethereumAddress),即账户地�
 
 
 
+
+## Trace
+5中trace API 
+- Trace Transaction: 了解交易详情（gas used, outputs, why it failed, etc）
+- Trace Block： 了解一个block的所有交易
+- Trace Call： Trace Call 类似于Trace Transaction， 但是返回任何状态diff
+- Trace Call Many： traces multiple calls at once.
+
+https://geth.ethereum.org/docs/developers/evm-tracing/built-in-tracers
+
 ## 参考链接：
 以太坊技术与实现：https://learnblockchain.cn/books/geth/part3/statedb.html
