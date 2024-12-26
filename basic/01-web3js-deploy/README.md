@@ -25,7 +25,6 @@ Through this basic task, you can learn the processes of compiling and deploying 
 
   | Note: You can check the `.env.example` file.
 
-- If you know Chinese, you can check these tasks on [BILIBILI](https://www.bilibili.com/video/BV1Y44y1r7E6/).
 
 
 # Getting Started

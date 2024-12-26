@@ -284,7 +284,62 @@ graph-node:
     RUST_LOG: info
 ```
 
-> Note: the node in graph-node need start archive mode(when start the node, add flag --syncmode full --gcmode archive). 2. graph-node startup
+> Note 1: the node in graph-node need start archive mode(when start the node, add flag --syncmode full --gcmode archive). 2. graph-node startup
+> Note 1: When you need to start multiple graph-nodes in one machine, and each graph-node is connected to a different chain, you only need to add the corresponding graph-node service in docker-compose. Configure the sepolia and optimism graph node services as follows, and change the ports exposed to graph-node-optimism to 8100,8101,8120,8130,8140. Note that you can only modify the exposed local port (8100/8101/8120/8130/8140). Do not modify the port (8000/8001/8020/8030/8040) in the container. Otherwise, an error will be reported.
+
+```yaml
+version: '3'
+services:
+  graph-node-sepolia:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'sepolia:http://infura.sepolia.com/xxxx'
+      GRAPH_LOG: info
+  graph-node-optimism:
+    image: graphprotocol/graph-node
+    ports:
+      - '8100:8000'
+      - '8101:8001'
+      - '8120:8020'
+      - '8130:8030'
+      - '8140:8040'
+    depends_on:
+      - ipfs
+      - postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'optimism:http://infura.optimism.com/yyy'
+      GRAPH_LOG: info
+  ipfs:
+    image: ipfs/kubo:v0.17.0
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./data/ipfs:/data/ipfs:Z
+```
+
 
 2. Startup with docker compose directly
 
@@ -335,6 +390,69 @@ subgraph provide the data, data sources and the mode of querying with GraphQL AP
    AssemblyScripts mappings allows you to use the type of entities defined in schema to store indexed data. Graph CLI also uses the combination of schema and ABI of smart contract to generate the type of AssemblyScript
 4. establish relationship with @derivedFrom
    Define reverse queries on entities with the @derivedfrom field to create a virtual field in entities which coule be queried. But you can not configure it manually by mapping API. Actually, it is grew from the relationship defined on another entity. The relation do not make sence to the relation of store, if you only store one and grow another, the performance of indexing and querying will be better.
+
+## Thegraph's equivalent  
+In addition to Thegraph, there are other similar products, so that we can choose the best products according to product characteristics, costs, etc.
+
+### Alchemy  
+Alchemy also provides Subgraph functionality, users can easily migrate Subgraph from Thegraph to Alchemy.
+
+- Deploy    
+The deployment process is the same as that of the thegraph host service. codegen and build are performed after the ts code is written. At last, you need to enter the deploy-key parameter when deploying is performed
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Alchemy_Subgraph.jpg?raw=true" /></center>
+
+Reference: https://docs.alchemy.com/reference/subgraphs-quickstart   
+
+
+2. Alchemy Subgraph Pricing  
+By default, Free Plan is used, which is sufficient for developers to use themselves, and when used for projects, Plan needs to be upgraded to unlock the number of queries  
+
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Alchemy_Pricing.jpg?raw=true" /></center>        
+
+
+3. Thegraph Pricing    
+The Growth Plan is $49 a month, with 1,000,000 query times, averaging $0.000049/ time, while thegraph queries 1,000,000 times, requiring about 186 GRT. If GRT is calculated according to $0.2, thegraph average $0.000037/ time  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/Thegraph_Pricing.jpg?raw=true" /></center>
+
+Reference：https://www.alchemy.com/pricing
+
+
+### Envio  
+1. Build locally  
+Initialize the project directory with 'envio init' and then start the local Indexer with 'envio dev'. Envio local indexer start soon, start after can through [http://localhost:8080/] (http://localhost:8080/console) for a visit   
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_start.jpg?raw=true" /></center>   
+
+
+2. Host Service Mode
+Upload the project initialized with envio init to github, then envio will assign access to the repo, and after committing, envio will automatically deploy    
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_init.jpg?raw=true" /></center>  
+
+3. Deploy Successfully
+Once the deployment is successful, you can view the access in envio's Host Service    
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/envio_dashboard.jpg?raw=true" /></center>  
+
+Reference：https://docs.envio.dev/docs/HyperIndex/hosted-service-deployment
+
+
+#### Envio Advantages   
+- Local builds are fast  
+- The Host Service is currently free to use 
+
+### Ponder  
+1. Local build  
+Ponder can also be built locally, but he needs to use Ethereum RPC to get data to nodes, similar to Alchemy's subgraph, which is limited by the frequency of Ethereum RPC nodes. The official website recommends using Alchemy's RPC, but as described above, Alchemy's RPC has access restrictions  
+<center><img src="https://github.com/Dapp-Learning-DAO/Imgs-for-tasks/blob/main/basic%20task/ponder_build.jpg?raw=true" /></center> 
+
+2. Host Service construction 
+At present ponder has only been fully tested for compatibility on [Railway](https://railway.app/), and has not been fully tested on other platforms.
+
+Reference：https://ponder.sh/docs/production/deploy   
+
+#### Ponder Disadvantages  
+1. When building locally, the PONDER RPC URL 1 variable needs to be entered into the.env.local file to pull Ethereum node data. There is a limite rate limit for using infura or Alchemy's PRC URL 
+2. For factory contracts such as Uniswap V2 and V3, only 10,000 sub-contracts are supported. When a factory contract issues an event to create a subcontract, the numeric type in the event event cannot be array or struct 
+3. The structure and syntax of developing subgraph is different from thegraph, and it needs to be re-adapted if the existing subgraph is migrated   
 
 ## Reference
 

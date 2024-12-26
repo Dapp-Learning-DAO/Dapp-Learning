@@ -1,0 +1,8 @@
+[submodule "contracts/lib/forge-std"]
+	path = contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+	tag = v1.8.2
+[submodule "contracts/lib/sp1-contracts"]
+	path = contracts/lib/sp1-contracts
+	url = https://github.com/succinctlabs/sp1-contracts
+	tag = v1.1.0

@@ -1,22 +1,17 @@
-const { ethers }  = require('hardhat');
-const {
-  deployContract,
-  saveRedpacketDeployment,
-} = require("../../utils");
+const { ethers } = require('hardhat');
+const { deployContract, saveRedpacketDeployment } = require('../../utils');
+
+const mumbaiRouter = '0x1035CabC275068e0F4b745A29CEDf38E13aF41b1';
 
 async function main() {
   const [deployer] = await ethers.getSigners();
 
   console.log('Deploying contracts with the account:', deployer.address);
 
-  console.log('Account balance:', (await ethers.provider.getBalance(deployer.address)));
+  console.log('Account balance:', await ethers.provider.getBalance(deployer.address));
 
   // for sepolia, the route address and LINK address are fixed, see: https://docs.chain.link/ccip/getting-started
-  const receiver = await deployContract(
-    "Receiver",
-    ["0x1035CabC275068e0F4b745A29CEDf38E13aF41b1"],
-    deployer,
-  );
+  const receiver = await deployContract('Receiver', [mumbaiRouter], deployer);
 
   console.log('Receiver address:', receiver.target);
 
@@ -33,4 +28,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-

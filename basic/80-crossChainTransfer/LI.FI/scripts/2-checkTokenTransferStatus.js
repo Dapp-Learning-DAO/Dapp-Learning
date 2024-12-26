@@ -10,6 +10,7 @@ require('dotenv').config();
 const {
   readRedpacketDeployment,
   getStatus,
+  request,
 } = require("../utils");
 
 async function getQuote (fromChain, toChain, fromToken, toToken, fromAmount, slippage, fromAddress, toAddress) {
@@ -33,6 +34,21 @@ async function getQuote (fromChain, toChain, fromToken, toToken, fromAmount, sli
 
 async function main() {
   const [deployer] = await ethers.getSigners();
+
+  // Bridge From Op to Zksync ERA
+  // const fromChain = 'OPT';
+  // const fromToken = 'USDT';
+  // const toChain = 'ERA';
+  // const toToken = 'USDT';
+  // const fromAmount = '1000000';
+  // const slippage = 0.03;
+  // const fromAddress = deployer.address;
+  // const toAddress = deployer.address;
+  // let quote = await getQuote(fromChain, toChain, fromToken, toToken, fromAmount, slippage,fromAddress,toAddress);
+  // console.log(quote.transactionRequest)
+
+
+  // Bridge From Op to ARB
   const fromChain = 'OPT';
   const fromToken = 'USDT';
   const toChain = 'ARB';
@@ -41,8 +57,6 @@ async function main() {
   const slippage = 0.03;
   const fromAddress = deployer.address;
   const toAddress = deployer.address;
-  const signer = await ethers.provider.getSigner()
-  const OPUSDTaddress = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
   let quote = await getQuote(fromChain, toChain, fromToken, toToken, fromAmount, slippage,fromAddress,toAddress);
   // console.log(quote.transactionRequest)
 

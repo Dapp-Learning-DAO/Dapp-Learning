@@ -1,5 +1,6 @@
+中文 / [English](./README.md)
+
 # Celer Bridge 跨链
-中文 / [English](./README.md)  
 
 ## 概览 
 cBridge 引入了最佳的跨链代币桥接体验，为用户提供了深度流动性，为 cBridge 节点运营商和不想运营 cBridge 节点的流动性提供者提供了高效且易于使用的流动性管理，以及新的令人兴奋的面向开发者的功能，如用于跨链 DEX 和 NFT 等场景的通用消息桥接。
@@ -26,7 +27,7 @@ cp .env.example .env
 ```
 
 ## 执行跨链   
-- 以流动性池方式进行跨链   
+- 以流动性池方式进行跨链    
 ```
 npx hardhat run scripts/1-poolBasedTransfer.js --network optim
 ```

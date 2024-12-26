@@ -8,18 +8,24 @@ curve v1 核心公式
 
 将恒定和等式与恒定乘积等式合并，给予系数 $\chi$ (希腊字母)
 
-<!-- $\chi D^{n-1}\sum x_i+\prod x_i=\chi D^n + (\frac{D}{n})^n$ -->
-<img src="https://render.githubusercontent.com/render/math?math=\chi D^{n-1}\sum x_i%2B\prod x_i=\chi D^n %2B (\frac{D}{n})^n" />
+$$
+\chi D^{n-1}\sum x_i+\prod x_i=\chi D^n + (\frac{D}{n})^n
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=\chi D^{n-1}\sum x_i%2B\prod x_i=\chi D^n %2B (\frac{D}{n})^n" /> -->
 
 令 $\chi$ 为如下表达
 
-<!-- $\chi=\frac{A\prod x_i}{(D/n)^n}$ -->
-<img src="https://render.githubusercontent.com/render/math?math=\chi=\frac{A\prod x_i}{(D/n)^n}" />
+$$
+\chi=\frac{A\prod x_i}{(D/n)^n}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=\chi=\frac{A\prod x_i}{(D/n)^n}" /> -->
 
 代入可得最终的核心公式
 
-<!-- $An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}$ -->
-<img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" />
+$$
+An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" /> -->
 
 ### curve v1 flow
 
@@ -663,9 +669,11 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
 
 由于 curve 的平衡方程，无法直接写出 D 的解析式，curve 在合约中使用了[牛顿法](https://en.wikipedia.org/wiki/Newton%27s_method)迭代求近似解。
 
-<!-- $x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$ -->
+$$
+x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}
+$$
 
-<img src="https://render.githubusercontent.com/render/math?math=x_{n%2B1}=x_n-\frac{f(x_n)}{f'(x_n)}" />
+<!-- <img src="https://render.githubusercontent.com/render/math?math=x_{n%2B1}=x_n-\frac{f(x_n)}{f'(x_n)}" /> -->
 
 简单理解牛顿法就是利用上述公式，不断迭代 `x_n+1` 的值，使其越来越逼近真实的解
 
@@ -675,22 +683,28 @@ def remove_liquidity_imbalance(_amounts: uint256[N_COINS], _max_burn_amount: uin
 
 1. 首先将核心公式变形成 `f(D) = 0` 的形式
 
-   <!-- $f(D)=An^n\sum x_i + D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}$ -->
-   <img src="https://render.githubusercontent.com/render/math?math=f(D)=An^n\sum x_i%2BD-ADn^n-\frac{D^{n%2B1}}{n^n\prod x_i}" />
+$$
+  f(D)=An^n\sum x_i+D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}
+$$
+   <!-- <img src="https://render.githubusercontent.com/render/math?math=f(D)=An^n\sum x_i%2BD-ADn^n-\frac{D^{n%2B1}}{n^n\prod x_i}" /> -->
 
-2. `D_new = D - f(D)/f'(D)`
+3. `D_new = D - f(D)/f'(D)`
 
-   <!-- $D_{new}=D-\frac{An^n\sum x_i + D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}}{1-An^n-(n+1)\frac{D^n}{n^n\prod x_i}}$ -->
-   <img src="https://render.githubusercontent.com/render/math?math=D_{new}=D-\frac{An^n\sum x_i%2BD-ADn^n-\frac{D^{n%2B1}}{n^n\prod x_i}}{1-An^n-(n%2B1)\frac{D^n}{n^n\prod x_i}}" />
+$$
+  D_{new}=D-\frac{An^n\sum x_i + D-ADn^n-\frac{D^{n+1}}{n^n\prod x_i}}{1-An^n-(n+1)\frac{D^n}{n^n\prod x_i}}
+$$ 
+   <!-- <img src="https://render.githubusercontent.com/render/math?math=D_{new}=D-\frac{An^n\sum x_i%2BD-ADn^n-\frac{D^{n%2B1}}{n^n\prod x_i}}{1-An^n-(n%2B1)\frac{D^n}{n^n\prod x_i}}" /> -->
 
-3. 最终变成代码中的形态
+4. 最终变成代码中的形态
 
-   <!-- $D_{new}=\frac{An^n\sum x_i-\frac{D^{n+1}}{n^n\prod x_i}}{An^n+(n+1)\frac{D^n}{n^n\prod x_i}-1}$ -->
-   <img src="https://render.githubusercontent.com/render/math?math=D_{new}=\frac{An^n\sum x_i-\frac{D^{n%2B1}}{n^n\prod x_i}}{An^n%2B(n%2B1)\frac{D^n}{n^n\prod x_i}-1}" />
+$$
+  D_{new}=\frac{An^n\sum x_i-\frac{D^{n+1}}{n^n\prod x_i}}{An^n+(n+1)\frac{D^n}{n^n\prod x_i}-1}
+$$
+   <!-- <img src="https://render.githubusercontent.com/render/math?math=D_{new}=\frac{An^n\sum x_i-\frac{D^{n%2B1}}{n^n\prod x_i}}{An^n%2B(n%2B1)\frac{D^n}{n^n\prod x_i}-1}" /> -->
 
-4. for 循环迭代求 D 的解，当迭代到 D 与上一次的差值 <= 1 时，停止迭代；
+6. for 循环迭代求 D 的解，当迭代到 D 与上一次的差值 <= 1 时，停止迭代；
 
-5. 通常轮迭代不超过 4 轮就会找到最优解；但如果迭代 255 次仍然没有找到合适的解，程序终止，交易回滚 (revert)；用户可以通过 `remove_liquidity` 方法回收资产；
+7. 通常轮迭代不超过 4 轮就会找到最优解；但如果迭代 255 次仍然没有找到合适的解，程序终止，交易回滚 (revert)；用户可以通过 `remove_liquidity` 方法回收资产；
 
 > **注意**：<mark>注释中的牛顿法公式写漏了一项，而代码写的是正确的化简后的公式</mark>。
 
@@ -760,27 +774,36 @@ def _get_D_mem(_balances: uint256[N_COINS], _amp: uint256) -> uint256:
 
 与计算 D 一样，这里也使用了牛顿法计算 y, 即 `x_j`，其 `f(x_j)` 推导过程如下：
 
-<!-- $An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}$ -->
+$$
+  An^n\sum x_i + D = ADn^n + \frac{D^{n+1}}{n^n\prod x_i}
+$$
 
-<img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" />
+<!-- <img src="https://render.githubusercontent.com/render/math?math=An^n\sum x_i%2BD = ADn^n%2B\frac{D^{n%2B1}}{n^n\prod x_i}" /> -->
 
 1. 设 `sum'`, `prod'` 分别为排除输出资产数量的累加和累乘结果
    - `sum' = sum(x) - x_j`
    - `prod' = prod(x) / x_j`
+
 2. 核心公式除以 `A*n**n`
 
-   <!-- $\sum{x_i}+\frac{D}{An^n}-D=\frac{D^{n+1}}{An^nn^n\prod x_i}$ -->
-    <img src="https://render.githubusercontent.com/render/math?math=\sum x_i%2B\frac{D}{An^n}-D=\frac{D^{n%2B1}}{An^nn^n\prod x_i}" />
+$$
+  \sum{x_i}+\frac{D}{An^n}-D=\frac{D^{n+1}}{An^nn^n\prod x_i}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=\sum x_i%2B\frac{D}{An^n}-D=\frac{D^{n%2B1}}{An^nn^n\prod x_i}" /> -->
 
 3. 乘以 `x_j`，并代入 `sum'` 和 `prod'`
 
-   <!-- $x_j(x_j+sum')-x_j(An^n-1)\frac{D}{An^n}=\frac{D^{n+1}x_j}{An^{2n}(prod'*x_j)}$ -->
-   <img src="https://render.githubusercontent.com/render/math?math=x_j(x_j%2Bsum')-x_j(An^n-1)\frac{D}{An^n}=\frac{D^{n%2B1}x_j}{An^{2n}(prod'*x_j)}" />
+$$
+  x_j(x_j+sum')-x_j(An^n-1)\frac{D}{An^n}=\frac{D^{n+1}x_j}{An^{2n}(prod'*x_j)}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=x_j(x_j%2Bsum')-x_j(An^n-1)\frac{D}{An^n}=\frac{D^{n%2B1}x_j}{An^{2n}(prod'*x_j)}" /> -->
 
 4. 展开多项式，即为牛顿法使用的 `f(x_j)`
 
-   <!-- $x_j^2+x_j(sum'-(An^n-1)\frac{D}{An^n})=\frac{D^{n+1}}{An^{2n}prod'}$ -->
-   <img src="https://render.githubusercontent.com/render/math?math=x_j^2%2Bx_j(sum'-(An^n-1)\frac{D}{An^n})=\frac{D^{n%2B1}}{An^{2n}prod'}" />
+$$
+  x_j^2+x_j(sum'-(An^n-1)\frac{D}{An^n})=\frac{D^{n+1}}{An^{2n}prod'}
+$$
+<!-- <img src="https://render.githubusercontent.com/render/math?math=x_j^2%2Bx_j(sum'-(An^n-1)\frac{D}{An^n})=\frac{D^{n%2B1}}{An^{2n}prod'}" /> -->
 
 5. 将其写为 `x_j**2 + b*x_j = c` 形式，代入牛顿法公式 `x = x - f(x) / f'(x)`
 

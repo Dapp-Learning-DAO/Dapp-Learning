@@ -43,7 +43,7 @@ $$
 LR^{asset}_t=R_tU_t
 $$
 
-$LI_t$​累计流动性指数，也可理解为汇率：再时间段$\Delta T$​范围内，由贷款利率累计产生的单位本金利息，任何操作都会更新该参数
+$LI_t$​累计流动性指数，也可理解为汇率：再时间段 $\Delta T$ ​范围内，由贷款利率累计产生的单位本金利息，任何操作都会更新该参数
 
 $$
 LI_t=(LR_t \times \Delta T_{year} + 1) \times LI_{t-1}
@@ -85,7 +85,7 @@ $$
 
 此时需要结合代码看到：
 
-aToken的balanceOf函数的定义为：一个用户的aToken的数量为该用户的本金与该本金产生的利息之和。而在AAVE内部，统一使用$ScB_t$作为用户的实际本金。即$ScB_t=super.balanceOf(user)$
+aToken的balanceOf函数的定义为：一个用户的aToken的数量为该用户的本金与该本金产生的利息之和。而在AAVE内部，统一使用 $ScB_t$ 作为用户的实际本金。即 $ScB_t=super.balanceOf(user)$
 
 ```js
 function balanceOf(address user)
@@ -100,12 +100,12 @@ function balanceOf(address user)
 
 这里的一个难点即在于如何理解ScBt(x),
 
-当t=0时刻，此时用户还没有向AAVE中存钱，$ScB_0$​​​​​​ = 0， $NI_0$​​​​​​=1 ray
-当t=1时刻，此时用户向AAVE中存入抵押token，数量为m, 此时AAVE给用户记账存入数量为 $ScB_1=\frac{m}{NI_1}$​​​​​​ ,用户自己查自己的账户余额为$aB_1=\frac{m}{NI_1}\times NI_1=m$​​​​​​
-当t=2时刻，此时用户没有继续向AAVE中存钱，即数量为0，此时AAVE给用户记账存入数量为$ScB_2=ScB_1$​​​​​​，用户自己查自己的账户余额为$aB2=\frac{m}{NI_1}\times {NI_2}=m\times \frac{NI_2}{NI_1}> m$​​​​​​
-当t=3时刻，此时用户再次向AAVE中存入抵押token，数量为n，此时AAVE给用户记账存入数量为$ScB_3=\frac{m}{1\ ray}+ \frac{n}{NI_3}$​​​​，此时用户自己查自己的账户余额为$aB_3=(\frac{m}{NI_1}+\frac{n}{NI_3})\times NI_3=m\times \frac{NI_3}{NI_1}+n$​
+当 t=0 时刻，此时用户还没有向 AAVE 中存钱， $ScB_0$​​​​​​ = 0， $NI_0$​​​​​​=1 ray
+当 t=1 时刻，此时用户向 AAVE 中存入抵押 token，数量为m, 此时AAVE给用户记账存入数量为 $ScB_1=\frac{m}{NI_1}$​​​​​​ ,用户自己查自己的账户余额为 $aB_1=\frac{m}{NI_1}\times NI_1=m$​​​​​​
+当 t=2 时刻，此时用户没有继续向 AAVE 中存钱，即数量为 0，此时 AAVE 给用户记账存入数量为 $ScB_2=ScB_1$​​​​​​，用户自己查自己的账户余额为 $aB2=\frac{m}{NI_1}\times {NI_2}=m\times \frac{NI_2}{NI_1}> m$​​​​​​
+当 t=3 时刻，此时用户再次向 AAVE 中存入抵押 token，数量为 n，此时 AAVE 给用户记账存入数量为 $ScB_3=\frac{m}{1\ ray}+ \frac{n}{NI_3}$​​​​，此时用户自己查自己的账户余额为 $aB_3=(\frac{m}{NI_1}+\frac{n}{NI_3})\times NI_3=m\times \frac{NI_3}{NI_1}+n$​
 
-故用户会发现自己的账户余额每查一次自己的balanceOf都会慢慢变大，这就是原因。但是再AAVE内部，其使用的是$ScB$这一概念，即实际记账数量。​​​​​​​
+故用户会发现自己的账户余额每查一次自己的 balanceOf 都会慢慢变大，这就是原因。但是再 AAVE 内部，其使用的是 $ScB$ 这一概念，即实际记账数量。​​​​​​​
 
 ### 债务Token
 
@@ -137,7 +137,7 @@ function transfer(address recipient, uint256 amount) public virtual override ret
 
 ## 可变债务
 
-$VI_t^{asset}$ 累计可变债务借贷利率指数：即由可变债务总额V B在时间段$\Delta T$范围内，以可变债务利率 V R，产生的累计可变债务指数
+$VI_t^{asset}$ 累计可变债务借贷利率指数：即由可变债务总额V B在时间段 $\Delta T$ 范围内，以可变债务利率 V R，产生的累计可变债务指数
 
 $$
 V I_t=(1+\frac{V R_t}{T_{year}})^{\Delta T}\times VI_{t-1}
@@ -167,13 +167,13 @@ $$
 
 债务Token的数量跟aToken的逻辑类似，也是会变化的。也是有一个Scaled Balance概念，即借贷总额缩放因子
 
-当用户借钱时，可变借款总额的缩放因子为借款前的缩放因子加上这次借款数量m与平均化后的总的借款数量$VN_t$之比的和
+当用户借钱时，可变借款总额的缩放因子为借款前的缩放因子加上这次借款数量 m 与平均化后的总的借款数量 $VN_t$ 之比的和
 
 $$
 ScVB_t(x)=ScVB_{t-1}(x)+\frac{m}{VN_t}
 $$
 
-当用户还钱时，可变借款总额的缩放因子为借款前的缩放因子加上这次借款数量m与平均化后的总的借款数量$VN_t$之比的差
+当用户还钱时，可变借款总额的缩放因子为借款前的缩放因子加上这次借款数量 m 与平均化后的总的借款数量 $VN_t$之 比的差
 
 $$
 ScVB_t(x)=ScVB_{t-1}(x)-\frac{m}{VN_t}
@@ -191,19 +191,19 @@ $$
 VD(x)=ScVB(x)\times VN_t
 $$
 
-如果对比上面存款的aToken，你会发现这里的逻辑基本上是类似的，即AAVE里面实际记录用户债务的记账数量是$ScVB$，而用户查询到的自己的债务数量是$VD_t$​.
+如果对比上面存款的 aToken，你会发现这里的逻辑基本上是类似的，即AAVE里面实际记录用户债务的记账数量是 $ScVB$，而用户查询到的自己的债务数量是 $VD_t$​.
 
 ## 稳定利率债务
 
 $SR_t^{asset}$: 总的稳定平均贷款利率 - AAVE中的稳定利率贷款是什么意思？贷款利率不随着资金利用率变化吗？那要怎么去结算利息呢？
 
-如果以稳定利率$SR_t$发行一笔稳定利率贷款$SBnew$, 那么稳定平均利率$SR_t$:
+如果以稳定利率 $SR_t$ 发行一笔稳定利率贷款 $SBnew$, 那么稳定平均利率 $SR_t$:
 
 $$
 SR_t=\frac{SD_t\times SR_{t-1}+SBnew\times SR_t}{SD_t+SBnew}
 $$
 
-如果用户x以稳定贷款利率$SR_t$偿还一笔稳定利率贷款SB,则稳定平均利率为：
+如果用户x以稳定贷款利率 $SR_t$ 偿还一笔稳定利率贷款 SB,则稳定平均利率为：
 
 $$
 SR_t= 
