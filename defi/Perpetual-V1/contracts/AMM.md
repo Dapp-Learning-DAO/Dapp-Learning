@@ -62,7 +62,7 @@ function swapOutput(
     Dir _dir,
     Decimal.decimal memory _baseAssetAmount,
     Decimal.decimal memory _quoteAssetPoolAmount,
-    Decimal.decima l memory _baseAssetPoolAmount
+    Decimal.decimal memory _baseAssetPoolAmount
   ) external pure returns (Decimal.decimal memory);
   ```
 
