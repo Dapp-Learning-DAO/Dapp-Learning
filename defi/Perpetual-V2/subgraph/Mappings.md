@@ -82,7 +82,7 @@ CollateralAdded 事件触发
 FundingUpdated 事件触发，每当 funding payment 更新时
 
 - `daily funding rate = (markTwap - indexTwap) / indexTwap`
-  - ?? TWAP interal = 15 minutes, 这里直接认为是 daily ??
+  - ?? TWAP interval = 15 minutes, 这里直接认为是 daily ??
 
 ## MarketRgistry
 
@@ -126,5 +126,5 @@ CollateralLiquidated 事件触发
 
 1. 新建 CollateralLiquidated 对象
 2. 更新 Trader 对象
-   - trader‘s token balance 分为 non settlement 和 setlement 两部分
+   - trader‘s token balance 分为 non settlement 和 settlement 两部分
 3. 更新 Protocol 对象，其 balance 同样分为两部分
