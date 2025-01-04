@@ -52,7 +52,7 @@ Please refer to the code: contracts/redpacket
 - ERC721LazyMintWith712  
   In the above example, we create signature with a parameter maybe friendly to machine but not that friendly to humans. Moreover, when Metamask pops up for signing we do not know what is being signed. We prefer a more structured, more readable scheme for us to see what data will be signed. EIP-712 address this point; It can display the data to be signed to user, and the generated signature will be verified by smart contract. The whole process is similiar to that in ERC721LazyMint. 
 
-  Here is a example for creating signature by EIP-712:
+  Here is an example for creating signature by EIP-712:
 
   ```js
   // Domain
