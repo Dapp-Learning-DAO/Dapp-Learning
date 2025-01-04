@@ -132,14 +132,14 @@ library VaultWithIndirection {
     return _self.indirectWithdraw(_recipient, _withdrawAmount);
   }
 
-  /// @dev Adds a element to the list.
+  /// @dev Adds an element to the list.
   ///
   /// @param _element the element to add.
   function push(List storage _self, Data memory _element) internal {
     _self.elements.push(_element);
   }
 
-  /// @dev Gets a element from the list.
+  /// @dev Gets an element from the list.
   ///
   /// @param _index the index in the list.
   ///
