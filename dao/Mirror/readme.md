@@ -2,7 +2,7 @@
 + It is little step of the production on ability of Bloging, but it is a great step of Web3.
 + Cause of we can write without permission or controls and we can use NFT to get the benefit of high quality content writing but not to using hot topic to get traffic and make money from advertising.
 + So, it is a great idea.
-+ Build by a16z crypto pre partner, Denis Nazarov, he is a Developer, not only a investor, with my great respective.
++ Build by a16z crypto pre partner, Denis Nazarov, he is a Developer, not only an investor, with my great respective.
 + Mirror.xyz
 + github :[Mirror](https://github.com/mirror-xyz)
 
