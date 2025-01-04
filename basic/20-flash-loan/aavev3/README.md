@@ -112,7 +112,7 @@ And all of this will be saved in the POOL variable, which needs to be wrapped in
 
 When we triggered valid flashloan with `flashLoan` function, the all paramaters in `executeOperation` will be passed automatically
 
-Then, we can insert any logical we want to excute. In this step, we had have all usable fund from flashloan, and we can use it to have a arbitrage.
+Then, we can insert any logical we want to excute. In this step, we had have all usable fund from flashloan, and we can use it to have an arbitrage.
 
 After we used flashloan, it's repay time.
 
