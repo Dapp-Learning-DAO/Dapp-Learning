@@ -17,7 +17,7 @@ contract Flashloan is FlashLoanReceiverBase {
 }
 ```  
 
-We import the required dependence in abouve codes, the contract `Flashloan` is inherit from `FlashLoanReceiverBase` which is a abostract contract, supply several convinience functions, such as the way to repay the flash loan. The constraction function (constructor) of Flashloan.sol accept a loan pool supplier address on Aave. We will explain this later.
+We import the required dependence in abouve codes, the contract `Flashloan` is inherit from `FlashLoanReceiverBase` which is an abostract contract, supply several convinience functions, such as the way to repay the flash loan. The constraction function (constructor) of Flashloan.sol accept a loan pool supplier address on Aave. We will explain this later.
 
 ### The flashloan function  
 Well, let's take a look of flashloan function
@@ -65,7 +65,7 @@ The `executeOperation` function will be called after contract `LendingPool` get 
 
 When we triggered valid flashloan with `flashLoan` function, the all paramaters in `executeOperation` will be passed automatically, and we use `require` to make sure whether we had get the right amount of assets from flashloan.
 
-Then, we can insert any logical we want to excute. In this step, we had have all usable fund from flashloan, and we can use it to have a arbitrage.
+Then, we can insert any logical we want to excute. In this step, we had have all usable fund from flashloan, and we can use it to have an arbitrage.
 
 After we used flashloan, it's repay time.
 
