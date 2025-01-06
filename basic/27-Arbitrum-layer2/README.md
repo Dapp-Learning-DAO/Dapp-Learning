@@ -67,7 +67,7 @@ Retryable tickets are the Arbitrum protocol’s canonical method for passing gen
 
 - switch network to arbitrum testnet (arbitrum rinkeby)
 
-  Because the testnet is arbitrum rinkeby, so we need get some test token from ethereum rinkeby network [rinkeby 测试网](https://faucet.rinkeby.io/).
+  Because the testnet is arbitrum rinkeby, so we need get some test token from ethereum rinkeby network [rinkeby 测试网](https://www.alchemy.com/faucets/ethereum-sepolia).
 
   Then transfer ethereum rinkeby test token to arbitrum testnet through [arbitrum bridge](https://bridge.arbitrum.io/) , it will take 10mins.
 
