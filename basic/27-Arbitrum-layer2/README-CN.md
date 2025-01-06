@@ -60,7 +60,7 @@ https://developer.offchainlabs.com/docs/useful_addresses
   复制 .env.example 文件为 .env 文件, 然后配置其中的 PRIVATE_KEY,INFURA_ID
 
 - 转 eth 到 arbitrum 测试网络  
-  因为 arbitrum 测试网络对应的是 rinkeby, 所以需要在 rinkeby 测试网络上有测试币 , 可以通过 [rinkeby 测试网](https://faucet.rinkeby.io/) 获取测试币.  
+  因为 arbitrum 测试网络对应的是 rinkeby, 所以需要在 rinkeby 测试网络上有测试币 , 可以通过 [rinkeby 测试网](https://www.alchemy.com/faucets/ethereum-sepolia) 获取测试币.  
   之后需要把 rinkeby 测试币转移到 arbitrum 二层网络上, 可以通过 [arbitrum bridge](https://bridge.arbitrum.io/) 进行操作, 测试币转移需要等待 10 mins 左右
 
   测试币转移成功后, 通过 metaMask 可以看到在 arbitrum 上面的余额
