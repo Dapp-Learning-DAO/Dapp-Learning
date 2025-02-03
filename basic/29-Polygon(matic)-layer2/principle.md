@@ -1,6 +1,6 @@
 # Polygon
 
-[matic官方文档](https://docs.matic.network/docs/develop/getting-started)
+[matic官方文档](https://docs.polygon.technology/tools/matic-js/get-started/)
 
 ## 原理
 Currently, developers can use Plasma for specific state transitions for which Plasma predicates have been written such as ERC20, ERC721, asset swaps or other custom predicates. For arbitrary state transitions, they can use PoS. Or both! This is made possible by Matic's hybrid construction.
@@ -31,6 +31,6 @@ https://www.yuque.com/docs/share/8e737364-c380-418e-af21-0f07095fe900
 
 使用教程: https://cloud.tencent.com/developer/article/1828250
 
-hardhat: https://docs.matic.network/docs/develop/hardhat/
+hardhat: https://docs.polygon.technology/tools/dApp-development/common-tools/hardhat/?h=hardhat
 
 https://medium.com/pinata/how-to-create-layer-2-nfts-with-polygon-and-ipfs-aef998ff8ef2
