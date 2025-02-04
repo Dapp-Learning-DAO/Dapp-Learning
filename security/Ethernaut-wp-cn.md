@@ -257,6 +257,39 @@ contract KingAttack {
 - 防御建议：避免使用低级调用（如 call）进行转账，可以使用 transfer 或 send，它们在转账失败时会自动回滚。
 - 在合约设计中，避免依赖外部合约的行为来完成核心逻辑。
 - 使用现代的合约框架（如 OpenZeppelin 的 ReentrancyGuard）来实现安全重入控制
+ReentrancyGuard的使用示例：
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract SecureVault is ReentrancyGuard {
+    mapping(address => uint256) private balances;
+
+    // 存款函数
+    function deposit() external payable {
+        require(msg.value > 0, "Deposit must be greater than 0");
+        balances[msg.sender] += msg.value;
+    }
+
+    // 提现函数，使用 `nonReentrant` 修饰符防止重入攻击
+    function withdraw(uint256 amount) external nonReentrant {
+        require(amount > 0, "Withdraw must be greater than 0");
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+
+        // 先减少余额，再转账
+        balances[msg.sender] -= amount;
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "Transfer failed");
+    }
+
+    // 查看账户余额
+    function getBalance() external view returns (uint256) {
+        return balances[msg.sender];
+    }
+}
+```
 
 ## 10. Re-entrancy ✅ [Medium]
 
@@ -505,6 +538,15 @@ contract GatekeeperTwoAttack {
 学习要点：
 - 避免使用 extcodesize 判断调用者
 extcodesize 的行为在合约构造期间容易被绕过。
+- 在以太坊智能合约中，extcodesize(address) 是一个 EVM 操作码，它返回指定地址上存储的代码大小。通常用于检测目标地址是否为合约地址。
+但是，由于智能合约的代码只有在部署完成后才会存储到区块链上，在部署合约的构造函数中调用 extcodesize 始终返回 0，这为某些攻击者提供了绕过检测的机会。
+- 绕过原理：部署合约时，EVM 会先执行构造函数，直到构造函数完成后，才将合约字节码写入区块链。
+在构造函数中查询合约自身的代码大小 extcodesize(address(this))，由于代码尚未存储，返回值永远为 0。
+某些合约希望通过 extcodesize 检查调用者是否为外部账户（EOA）而非合约地址，通常这样写：
+```solidity
+require(extcodesize(msg.sender) == 0, "Contracts not allowed");
+```
+如果攻击者通过部署合约并在其构造函数中进行调用，由于构造阶段 extcodesize 返回 0，这种检测将被绕过。
 - 改用更可靠的身份验证方式，比如签名验证。
 - 限制调用者范围
 验证调用者是否是预定义地址或经过授权的地址。
@@ -546,6 +588,37 @@ contract MaliciousLibrary {
 
 学习要点：
 - 理解 delegatecall 的工作原理
+- 在以太坊智能合约中，delegatecall 是一种低级调用方式，用来将一个合约中的逻辑执行权限委托给另一个合约。被委托的合约代码执行时：
+使用调用者的上下文（包括 msg.sender 和 msg.value）
+共享调用者的存储空间
+这种机制虽然非常强大，但也伴随存储槽（Storage Slots）覆盖风险。
+- 当使用 delegatecall 调用另一个合约时：
+被调用合约 B 会使用调用合约 A 的存储槽来读写数据。
+由于存储槽位置是按变量声明顺序分配的，若 A 和 B 的变量布局不一致，delegatecall 可能会错误覆盖调用合约的存储槽。
+- eg. 
+```solidity
+pragma solidity ^0.8.0;
+
+contract A {
+    uint256 public x = 1; // slot 0
+    uint256 public y = 2; // slot 1
+
+    function delegateTo(address _target, uint256 _value) public {
+        (bool success, ) = _target.delegatecall(
+            abi.encodeWithSignature("setX(uint256)", _value)
+        );
+        require(success, "Delegatecall failed");
+    }
+}
+
+contract B {
+    uint256 public z = 0; // slot 0 (不同的布局)
+    
+    function setX(uint256 _value) public {
+        z = _value; // 写入 slot 0，但 A 会将其映射到 x
+    }
+}
+```
 - 存储布局一致性在使用 delegatecall 时至关重要。
 - 避免外部调用未受信任的合约地址。
 
