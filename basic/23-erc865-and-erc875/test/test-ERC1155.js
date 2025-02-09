@@ -80,7 +80,7 @@ describe('ERC1155 compatible logic', async () => {
     // Approve for other account
     await gameItemsContract.setApprovalForAll(alice.address,true);
 
-    // Batch Tranfer from owner to alice
+    // Batch Transfer from owner to alice
     let ids = [0,1];
     let amounts = [10,20];
     const additionalData = ethers.utils.formatBytes32String("777TestData")
