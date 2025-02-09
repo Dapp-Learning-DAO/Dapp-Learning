@@ -1,3 +1,23 @@
+Aragon (https://www.aragon.org/)是一个基于区块链的开源平台，旨在帮助用户创建和管理去中心化自治组织（DAO，Decentralized Autonomous Organization）。它通过智能合约提供工具和框架，使组织能够以透明、去中心化的方式运作，无需传统的中介机构或层级结构。
+
+#核心功能与特点
+
+##DAO 创建与管理
+用户可通过Aragon的界面快速创建DAO，自定义治理规则（如投票机制、成员权限、资金管理等）。支持去中心化决策，例如提案提交、投票表决和自动执行结果。
+
+##去中心化治理工具
+Aragon提供投票系统、财务管理、角色分配等功能，适用于项目协作、社区治理或企业运营。成员通过持有代币或股权参与决策，规则由智能合约自动执行。
+
+#Aragon Court
+Aragon Court是一个链上争议解决系统，通过陪审员（代币持有者）裁决组织内部的纠纷，确保规则执行公平性。
+
+#跨链兼容性
+最初基于以太坊，现已扩展到其他区块链（如Polygon），以降低交易成本并提升效率。
+
+
+#代币经济（ANT）
+ANT（Aragon Network Token） 是Aragon生态的治理代币，持有者可参与平台升级、资金分配等关键决策。通过质押ANT，用户可成为Aragon Court的陪审员，参与争议仲裁并赚取奖励。
+
 # Aragon
 
 Video version for this article: https://www.bilibili.com/video/BV1gL4y1i7zG/
