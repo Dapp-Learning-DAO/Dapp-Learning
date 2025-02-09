@@ -53,7 +53,7 @@ describe('ERC1820 logic', async () => {
     let demoImplementer = await DemoImplementer.deploy();
     await demoImplementer.deployed();
     console.log('demo implementer deployed ')
-    //2. Bind funciton dynamiclly to user
+    //2. Bind function dynamiclly to user
     await erc1820.connect(user).setInterfaceImplementer(
       user.address, funcSig, demoImplementer.address, {gasLimit:80000});
     let implementer = await erc1820.getInterfaceImplementer(user.address, funcSig);
