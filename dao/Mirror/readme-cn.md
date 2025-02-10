@@ -54,3 +54,10 @@ Mirror.xyz 是一个基于区块链技术的去中心化内容创作与出版平
 
 ### 五、总结
 Mirror.xyz 通过区块链技术重新定义了内容创作的价值链，将所有权、收益权和治理权归还给用户。其工具化的设计（如 NFT、众筹、分账）不仅服务于个体创作者，更为 DAO 和分布式协作提供了基础设施。尽管处于 Web2 向 Web3 过渡的阶段，Mirror 已展现出颠覆传统出版和媒体行业的潜力，成为探索去中心化经济模式的重要试验场。
+
+
+References：
+-https://www.panewslab.com/topic/articledetails/N3868715.html
+-https://cloud.tencent.com/developer/news/914868
+-https://www.wwsww.cn/NFT/10290.html
+-
