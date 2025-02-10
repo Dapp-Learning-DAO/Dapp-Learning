@@ -112,4 +112,7 @@ Colony计划整合AI代理，用于自动化提案分析与资本分配，并增
 - [Colony 官网](https://xdai.colony.io/)
 - [Github](https://github.com/joinColony)
 - [Whitepaper](https://colony.io/whitepaper.pdf)
-
+- https://blog.colony.io/understanding-dao-voting-mechanisms-a-focus-on-colony-2/
+- https://daotimes.com/a-deep-dive-into-colony-dao-understanding-its-features-and-applications/
+-https://www.theblockbeats.info/news/28836
+-https://blog.csdn.net/weixin_43458715/article/details/141568870
