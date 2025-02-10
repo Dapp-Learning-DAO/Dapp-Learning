@@ -22,8 +22,7 @@ Nansen 的用户群体非常广泛，包括：
 
 总的来说，Nansen 是一个强大的区块链分析平台，凭借其丰富的数据和分析工具，帮助用户在复杂的加密货币市场中导航。无论是投资决策还是市场研究，Nansen 都是一个不可或缺的工具，助力用户更好地理解和利用区块链技术带来的机遇。
 
-nansen科普：https://mp.weixin.qq.com/s/NjKdX4KtVLYI47EY6HBzwA
-中文说明书：https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/papers/7-tool/nansen中文说明书.pdf  
+  
 ## 参考链接
 
 - 视频：https://www.bilibili.com/video/BV1ZK4y137Ce
@@ -40,3 +39,7 @@ nansen科普：https://mp.weixin.qq.com/s/NjKdX4KtVLYI47EY6HBzwA
 - https://app.flipsidecrypto.com/velocity
 
 - https://glassnode.com/
+
+-https://mp.weixin.qq.com/s/NjKdX4KtVLYI47EY6HBzwA
+
+-中文说明书：https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/papers/7-tool/nansen中文说明书.pdf
