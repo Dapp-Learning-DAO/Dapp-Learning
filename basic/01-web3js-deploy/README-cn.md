@@ -23,6 +23,7 @@ getNumber:   查询函数, 用于查询公共变量 number 当前的数值
 ```js
 npm install
 // 本教程使用的 node 版本为 v20.11.0
+// 某些检查工具可能会在Incrementer.sol中提示 Linter: Compiler version ^0.8.0 does not satisfy the ^0.8.20 semver requirement [compiler-version]等校验问题, 可忽略,请勿升级到0.8.20版本,否则会提示找不到sol文件
 ```
 
 2) 配置 .env
