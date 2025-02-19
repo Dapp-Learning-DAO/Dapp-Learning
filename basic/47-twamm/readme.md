@@ -1,6 +1,6 @@
 ## TWAMM介绍
 
-TWAMM（Time-Weighted Average Market Maker）是一种新兴的去中心化交易机制，旨在解决传统市场中流动性不足和价格波动带来的问题。TWAMM主要应用于去中心化金融（DeFi）领域，作为一种创新的做市策略，能够在保持市场公平性的同时，提供更好的流动性和价格发现机制。
+TWAMM（Time-Weighted Average Market Maker）源于paradiam的论文： https://www.paradigm.xyz/2021/07/twamm. 是一种新兴的去中心化交易机制，旨在解决传统市场中流动性不足和价格波动带来的问题。TWAMM主要应用于去中心化金融（DeFi）领域，作为一种创新的做市策略，能够在保持市场公平性的同时，提供更好的流动性和价格发现机制。
 
 1. 背景与发展
 随着区块链技术的迅速发展，去中心化交易所（DEX）逐渐成为加密货币交易的重要场所。尽管DEX提供了更高的透明度和用户控制权，但它们也面临流动性不足和价格波动大的挑战。这些问题使得用户在交易时常常面临较高的滑点和不理想的交易体验。TWAMM的出现正是为了应对这些挑战，通过创新的算法和机制来优化交易过程。
@@ -27,17 +27,6 @@ TWAMM的应用场景非常广泛，尤其是在需要高流动性和价格稳定
 TWAMM作为一种新兴的交易机制，展现出了极大的潜力。随着DeFi生态系统的不断发展，引入更多的创新机制将是必然趋势。TWAMM不仅能够优化交易体验，还可能推动去中心化金融的进一步普及与发展。
 
 总之，TWAMM通过其独特的时间加权策略，解决了传统市场中流动性和价格波动的问题，为去中心化金融的未来发展提供了有力的支持。随着技术的不断进步和市场的不断成熟，TWAMM有望在更广泛的金融场景中发挥重要作用。
-
-源于paradiam的论文： https://www.paradigm.xyz/2021/07/twamm
-目前市面上有两个项目方实现： FRAX & Pulsar
-
-Frax技术方案： https://docs.frax.finance/fraxswap/technical-specifications 
-合约地址：https://docs.frax.finance/smart-contracts/fraxswap
-
-pular技术方案： https://pulsarswap.com/  
-数学推导：https://hackmd.io/@luffy/SJxSsOH1Y?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NTg0NTk0MDQsImZpbGVHVUlEIjoiR2VYSGc0TVJzU3c1SFFVbyIsImlhdCI6MTY1ODQ1OTEwNCwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNjgyMDA2MTkyMH0.Dmo2Lu-fva3LKJoyO8nACJ20cDJ8PpOGP2D6WzC5klA 
- 
-v3: https://hackmd.io/@luffy/rJf4OUeWq?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NTg0NTk0NzMsImZpbGVHVUlEIjoiR2VYSGc0TVJzU3c1SFFVbyIsImlhdCI6MTY1ODQ1OTE3MywiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNjgyMDA2MTkyMH0.K140eySZKKzx9CUzJzS2TtyZh4GVsf0_C4hpUtQ9u_w  
 
 
 ## 操作流程
@@ -118,6 +107,15 @@ TWAMM通过数学算法将长期订单分解为**无限多个无限小的虚拟�
 分析交易表现：用户可以对交易进行回顾分析，比如比较实际成交价格与市场价格的差异，评估TWAMM在交易中带来的优势。
 
 
+目前市面上有两个项目方实现： FRAX & Pulsar
+
+Frax技术方案： https://docs.frax.finance/fraxswap/technical-specifications 
+合约地址：https://docs.frax.finance/smart-contracts/fraxswap
+
+pular技术方案： https://pulsarswap.com/  
+数学推导：https://hackmd.io/@luffy/SJxSsOH1Y?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NTg0NTk0MDQsImZpbGVHVUlEIjoiR2VYSGc0TVJzU3c1SFFVbyIsImlhdCI6MTY1ODQ1OTEwNCwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNjgyMDA2MTkyMH0.Dmo2Lu-fva3LKJoyO8nACJ20cDJ8PpOGP2D6WzC5klA 
+ 
+v3: https://hackmd.io/@luffy/rJf4OUeWq?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NTg0NTk0NzMsImZpbGVHVUlEIjoiR2VYSGc0TVJzU3c1SFFVbyIsImlhdCI6MTY1ODQ1OTE3MywiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNjgyMDA2MTkyMH0.K140eySZKKzx9CUzJzS2TtyZh4GVsf0_C4hpUtQ9u_w  
 
 ## 参考文档
 
