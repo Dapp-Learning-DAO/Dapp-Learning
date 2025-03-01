@@ -420,8 +420,8 @@ feeGrowthInside = feeGrowthGlobal - feeGrowthOutside_below - feeGrowthOutside_ab
 
 每当有流动性注入的时候，在价格的边界对应的 tick 上有如下初始化规则：
 
-- 当 `i_current < i` 则 `feeGrowthOutside = fee_global`
-- 当 `i_current >= i` 则 `feeGrowthOutside = 0`
+- 当 `i_current < i` 则 `feeGrowthOutside = 0`
+- 当 `i_current >= i` 则 `feeGrowthOutside = fee_global`
 
 在交易过程中，`feeGrowthOutside` 有如下更新规则：
 
