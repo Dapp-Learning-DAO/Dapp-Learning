@@ -188,7 +188,7 @@ function supportsInterface(address account, bytes4 interfaceId) internal view re
     }
 ```
 
-With the help of ERC165Checker, it is far more easier to check interface. Take a scenerio where a NFT market wants to move NFT it stored to some buyer, it must know what of kind of NFT it is transfering before the tranfer:
+With the help of ERC165Checker, it is far more easier to check interface. Take a scenerio where a NFT market wants to move NFT it stored to some buyer, it must know what of kind of NFT it is transfering before the transfer:
 
 ```solidity
 import "@openzeppelin/contracts/utils/introspection/ERC165Checker.sol";
