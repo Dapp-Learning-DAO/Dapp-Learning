@@ -1,125 +1,127 @@
-# Bitcoin (BTC)
+# 比特币 (BTC)
 
-This knowledge base aims to provide comprehensive information about Bitcoin (BTC) technology, covering basic functions, advanced applications, and various protocols and tools in the ecosystem. Whether you're a beginner or an experienced developer, this guide will help you better understand and use Bitcoin technology.
+本知识库旨在提供有关比特币（BTC）技术的全面信息，涵盖基本功能、进阶应用以及生态系统中的各类协议和工具。无论您是初学者还是有经验的开发者，本指南都将帮助您更好地理解和使用比特币技术。
 
-## Introduction
+## 简介
 
-Bitcoin is the first decentralized digital currency based on blockchain technology, proposed by a person or team under the pseudonym "Satoshi Nakamoto" in 2008 and officially launched in 2009. It revolutionizes the traditional financial system by enabling trustless value transfer through cryptography and distributed networks. It serves as both a payment tool and investment vehicle, and is viewed as a social experiment redefining the boundaries of money and trust.
+比特币是首个基于区块链技术的去中心化数字货币，由化名“中本聪”的个人或团队于2008年提出，2009年正式运行。它颠覆传统金融体系，通过密码学与分布式网络实现无需信任第三方的价值转移，既是支付工具，也是投资标的，更被视为一场社会实验，重塑货币与信任的边界。
 
-Bitcoin combines cryptography, economics, and distributed systems, pioneering decentralized digital assets. Its value stems from technical reliability (censorship resistance, scarcity), social consensus (the "digital gold" narrative), and macro environment (fiat currency inflation, geopolitical conflicts). Despite facing scaling bottlenecks, energy controversies, and regulatory uncertainties, Bitcoin continues to drive financial system reform, becoming a core symbol of the blockchain revolution and redefining the future of money, trust, and value.
+比特币融合密码学、经济学与分布式系统，开创了去中心化数字资产的先河。其价值源于技术可靠性（抗审查、稀缺性）、社会共识（“数字黄金”叙事）及宏观环境（法币超发、地缘冲突）。尽管面临扩容瓶颈、能源争议与监管不确定性，比特币仍持续推动金融体系变革，成为区块链革命的核心象征，重新定义货币、信任与价值的未来形态。
 
-## Core Technical Mechanisms
 
--Blockchain and Decentralization 
-Transaction data is stored in a transparent distributed ledger (blockchain) maintained by global nodes without central control. Chain structure (blocks linked by hash values) and timestamp technology ensure data immutability.
+##核心技术机制
 
--Cryptography and Security
-Uses SHA-256 hash algorithm and asymmetric encryption (public key addresses and private key signatures) to ensure transaction ownership and security. Proof of Work (PoW): Miners compete with computing power to verify transactions and generate new blocks, exchanging energy consumption for network security while receiving new coins as rewards.
+-区块链与去中心化
+交易数据存储在公开透明的分布式账本（区块链）中，由全球节点共同维护，无中央机构控制。链式结构（区块通过哈希值串联）与时间戳技术确保数据不可篡改。
 
--Deflationary Model
-Total supply capped at 21 million coins, with new coin issuance "halving" every four years, complete mining by 2140, scarcity comparable to gold.
+-密码学与安全
+使用SHA-256哈希算法和非对称加密（公钥地址与私钥签名），保障交易所有权和安全性。工作量证明（PoW）：矿工通过算力竞争验证交易并生成新区块，消耗能源换取网络安全，同时新币作为奖励发行。
 
-## Core Features and Innovations
+-通缩模型
+总量上限2100万枚，每四年“减半”新币发行量，2140年全部挖完，稀缺性类比黄金。
 
--Trustless
-No need for bank or government endorsement, code rules drive system operation, users independently control assets (private key equals ownership).
+##核心特点与创新
 
--Censorship Resistance and Globalization 
-Transactions unrestricted by borders, node network resistant to blocking, particularly suitable for cross-border payments and inflation hedging (e.g., El Salvador adopting as legal tender).
+-去信任化
+无需银行或政府背书，代码规则驱动系统运行，用户自主掌控资产（私钥即所有权）。
 
--Pseudonymity
-Users transact via encrypted addresses without direct identity binding, but on-chain records are publicly traceable, requiring mixing tools for enhanced privacy.
+-抗审查与全球化
+交易不受国界限制，节点网络抗屏蔽，尤其适用于跨境支付与通胀国家避险（如萨尔瓦多定为法币）。
 
--Irreversibility
-Transactions once confirmed on blockchain cannot be reversed, reducing fraud risk but requiring careful operation (e.g., mistaken transfers cannot be recovered).
+-伪匿名性
+用户通过加密地址交易，不直接绑定身份，但链上记录公开可追溯，需借助混币器等工具增强隐私。
 
--High Volatility
-Market supply/demand, policy regulation and speculative sentiment cause dramatic price fluctuations, reaching $60,000 in 2021 and dropping to $16,000 in 2022.
+-不可逆性
+交易一经区块链确认无法撤销，降低欺诈风险，但也要求用户谨慎操作（如误转账无法追回）。
 
-## Historical Evolution and Social Impact
+-高波动性
+市场供需、政策监管与投机情绪导致价格剧烈波动，2021年曾突破6万美元，2022年跌至1.6万美元。
 
--Milestone Events
+##历史演进与社会影响
 
-2008 Whitepaper: Satoshi Nakamoto published "Bitcoin: A Peer-to-Peer Electronic Cash System", proposing decentralized currency vision.
+-里程碑事件
 
-2010 First Physical Transaction: Programmer purchased 2 pizzas with 10,000 BTC (now worth hundreds of millions), initiating cryptocurrency practicality.
+2008年白皮书：中本聪发布《比特币：一种点对点的电子现金系统》，提出去中心化货币愿景。
 
-2017 Fork and Scaling Controversy: Community disagreement led to Bitcoin fork into BTC (main chain) and BCH (Bitcoin Cash), exposing decentralized governance challenges.
+2010年首笔实物交易：程序员用1万BTC购买2个披萨（现价值数亿美元），开启加密货币实用化。
 
-2021 Institutionalization: Tesla, MicroStrategy etc. included in balance sheets, Bitcoin futures ETF approved, promoting mainstream financial acceptance.
+2017年分叉与扩容争议：社区分歧导致比特币分叉为BTC（主链）与BCH（比特币现金），暴露去中心化治理难题。
 
--Application Scenario Expansion
+2021年机构化：特斯拉、MicroStrategy等公司纳入资产负债表，比特币期货ETF获批，推动主流金融接纳。
 
-Payment Network: Lightning Network (Layer 2) enables small fast transactions, solving main chain low throughput (about 7 TPS) issue.
+-应用场景扩展
 
-Store of Value: Citizens in some countries (e.g., Argentina, Nigeria) use it as anti-inflation asset to hedge against fiat currency depreciation risk.
+支付网络：闪电网络（Layer 2）实现小额快速交易，解决主链吞吐量低（约7笔/秒）问题。
 
-Technical Derivative Ecosystem: Catalyzed innovations like smart contracts, DeFi (Decentralized Finance), NFTs, but Bitcoin itself remains focused on "digital gold" positioning.
+价值存储：部分国家民众（如阿根廷、尼日利亚）将其作为抗通胀资产，对冲法币贬值风险。
 
-Through this knowledge base, you will learn Bitcoin's core functions, advanced features and ecosystem applications, helping you stay ahead in this rapidly developing field.
+技术衍生生态：催生智能合约、DeFi（去中心化金融）、NFT等创新，但比特币自身仍聚焦“数字黄金”定位。
+通过本知识库，您将学习比特币的核心功能、进阶特性以及生态系统应用，助您在这一快速发展的领域中保持领先。
 
-## Task Status Legend:
-⬜ Not Started ⌛ In Progress ✅ Completed
+## 任务状态图例：
+⬜ 未开始 ⌛ 进行中 ✅ 已完成
 
-## 1. Basic Functions
+## 1. 基本功能
 
-### 1.1 Payment Addresses
-Bitcoin address types and encoding methods:
-- **P2PKH** (Pay to Public Key Hash) ✅
-- **P2SH-P2PKH** (Pay to Script Hash - Pay to Public Key Hash) ✅
-- **P2WPKH** (Pay to Witness Public Key Hash) ✅
-- **P2TR** (Pay to Taproot) ✅
-- **Base58 Encoding** ✅
-- **Bech32 Encoding** ✅
-- **Bech32m Encoding** ✅
+### 1.1 支付地址
+比特币地址类型及编码方式：
+- **P2PKH** (支付到公钥哈希) ✅
+- **P2SH-P2PKH** (支付到脚本哈希 - 支付到公钥哈希) ✅
+- **P2WPKH** (支付到见证公钥哈希) ✅
+- **P2TR** (支付到 Taproot) ✅
+- **Base58 编码** ✅
+- **Bech32 编码** ✅
+- **Bech32m 编码** ✅
 
-### 1.2 Wallets
-Bitcoin wallet types and characteristics:
-- **Standard Wallets** ⌛
-- **Hierarchical Deterministic Wallets (HD Wallets)** ✅
+### 1.2 钱包
+比特币钱包类型及其特性：
+- **标准钱包** ⌛
+- **分层确定性钱包（HD 钱包）** ✅
 
-### 1.3 Transactions
-Bitcoin transaction knowledge:
-- **UTXO Analysis** ⌛
-- **Coinbase Transactions** ⬜
-- **Transaction Construction** ⌛
-- **Fee Estimation** ⌛
-- **Signature Algorithms** ✅
+### 1.3 交易
+比特币交易的相关知识：
+- **UTXO解析** ⌛
+- **Coinbase交易** ⬜
+- **交易构建** ⌛
+- **费用估算** ⌛
+- **签名算法** ✅
 
-### 1.4 Tools
-Common tools in Bitcoin ecosystem:
-- **Blockchain Explorers** ⌛
-- **Network Hashrate** ⬜
-- **API Services** ⬜
-- **Data Analysis Tools** ⬜
 
-## 2. Advanced Functions
+### 1.4 工具
+比特币生态系统中的常用工具：
+- **区块链浏览器** ⌛
+- **全网算力** ⬜
+- **API 服务** ⬜
+- **数据分析工具** ⬜
 
-### 2.1 PSBT (Partially Signed Bitcoin Transactions)
-Introduction and usage of PSBT:
-- **PSBT Protocol Introduction** ✅
-- **Creating and Parsing PSBT** ✅
+## 2. 进阶功能
+
+### 2.1 PSBT (部分签名比特币交易)
+PSBT 的介绍和使用：
+- **PSBT 协议简介** ✅
+- **创建和解析 PSBT** ✅
 - **PSBT V2** ⬜
 
 ### 2.2 Taproot
-Introduction and advantages of Taproot technology:
-- **Schnorr Signatures** ✅
-- **MAST** (Merkelized Abstract Syntax Tree) ✅
-- **Privacy and Efficiency Improvements** ⬜
-- **Differences between Key Path and Script Path** ⬜
+Taproot 技术的介绍及其优势：
+- **施诺尔签名** ✅
+- **MAST** (Merkelized 抽象语法树) ✅
+- **隐私和效率改进** ⬜
+- **Key Path和Script Path的区别** ⬜
 
-### 2.3 Multisignature Addresses
-Usage and advantages of multisignature addresses:
-- **Multisignature Introduction** ✅
+### 2.3 多重签名地址
+多重签名地址的使用及优势：
+- **多重签名简介** ✅
 - **OP_CHECKMULTISIG** ✅
 - **OP_CHECKMULTISIGVERIFY** ✅
 - **OP_CHECKSIGADD** ✅
 
-## 3. Ecosystem Applications
-- **BRC20 Protocol Introduction** ✅
-- **ARC20 Protocol Introduction** ✅
-- **Runes Protocol Introduction** ✅
-- **Lightning Network Introduction** ⌛
-- **Lightning Network Core Logic** ⌛
-- **OP_CAT** ✅
+## 3. 生态系统应用
+- **BRC20 协议介绍** ✅
+- **ARC20 协议介绍** ✅
+- **Runes 协议介绍** ✅
+- **闪电网络简介** ⌛
+- **闪电网络核心逻辑** ⌛
+- **OP_CAT**  ✅
 - **Babylon | BTC Staking** ⬜
+
