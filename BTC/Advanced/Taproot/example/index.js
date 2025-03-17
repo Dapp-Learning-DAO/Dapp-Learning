@@ -53,6 +53,12 @@ async function createTaprootAddress() {
   }
 }
 
+function addOpReturnOutput(psbt, message) {
+  const data = Buffer.from(message, 'utf8');
+  const embed = bitcoin.payments.embed({ data: [data] });
+  psbt.addOutput({ script: embed.output, value: 0 });
+}
+
 // Create and sign Taproot transaction
 async function createTaprootTransaction(taprootData, recipient, satoshis) {
   try {
@@ -77,6 +83,9 @@ async function createTaprootTransaction(taprootData, recipient, satoshis) {
       address: recipient,
       value: satoshis - 1000 // Subtract fee
     });
+
+    // Add OP_RETURN output
+    addOpReturnOutput(psbt, "Created with Bitcoin Taproot Demo");
 
     // Sign transaction with Schnorr signer
     await psbt.signInput(0, taprootData.signer);
