@@ -3,24 +3,35 @@ const { ECPairFactory } = require('ecpair');
 const secp256k1 = require('@bitcoinerlab/secp256k1');
 const ECPair = ECPairFactory(secp256k1);
 
+// Initialize the elliptic curve library for Bitcoin operations
 bitcoin.initEccLib(secp256k1);
 
+// Set network to testnet for development purposes
 const network = bitcoin.networks.testnet;
 
-// Convert to x-only public key
+/**
+ * Convert a public key to x-only format required for Taproot
+ * @param {Buffer} pubKey - The full public key
+ * @returns {Buffer} The x-only public key (32 bytes)
+ */
 function toXOnly(pubKey) {
   return Buffer.from(pubKey).slice(1, 33);
 }
 
-// Schnorr signer class
+/**
+ * SchnorrSigner class for handling Taproot signatures
+ * Implements the Schnorr signature scheme required for Taproot
+ */
 class SchnorrSigner {
   constructor(keyPair) {
     this.keyPair = keyPair;
+    // Convert to x-only public key format required for Taproot
     this.publicKey = toXOnly(keyPair.publicKey);
   }
 
+  // Sign transaction with Schnorr signature
   sign(hash) {
-    return this.keyPair.sign(hash, true); // true enables Schnorr signing
+    return this.keyPair.sign(hash, true); // Enable Schnorr signing
   }
 
   signSchnorr(hash) {
@@ -28,38 +39,52 @@ class SchnorrSigner {
   }
 }
 
-// Create Taproot address
+/**
+ * Creates a Taproot address and associated data
+ * @returns {Object} Contains signer, address and output script
+ */
 function createTaprootAddress() {
+  // Generate random keypair for Taproot
   const keyPair = ECPair.makeRandom({ network });
   const schnorrSigner = new SchnorrSigner(keyPair);
   
+  // Create P2TR (Pay-to-Taproot) payment object
   const { address, output } = bitcoin.payments.p2tr({
     pubkey: schnorrSigner.publicKey,
     network,
   });
 
-  return {
-    signer: schnorrSigner,
-    address,
-    output
-  };
+  return { signer: schnorrSigner, address, output };
 }
 
+/**
+ * Adds OP_RETURN output to transaction
+ * @param {Psbt} psbt - The Partially Signed Bitcoin Transaction
+ * @param {string} message - Message to embed in OP_RETURN
+ */
 function addOpReturnOutput(psbt, message) {
   const data = Buffer.from(message, 'utf8');
   const embed = bitcoin.payments.embed({ data: [data] });
   psbt.addOutput({ script: embed.output, value: 0 });
 }
 
-// Create and sign Taproot transaction
+/**
+ * Creates and signs a Taproot transaction
+ * @param {Object} taprootData - Contains signer and output information
+ * @param {string} recipient - Recipient's address
+ * @param {number} satoshis - Amount to send
+ * @param {string} message - Optional OP_RETURN message
+ * @returns {string} Signed transaction in hex format
+ */
 async function createTaprootTransaction(taprootData, recipient, satoshis, message = "Created with Bitcoin Taproot Demo") {
   try {
+    // Initialize PSBT (Partially Signed Bitcoin Transaction)
     const psbt = new bitcoin.Psbt({ network });
 
-    // Use valid transaction ID (example ID here)
+    // Example transaction ID (replace with actual UTXO in production)
     const txid = Buffer.from('a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2', 'hex');
 
-    // Add input
+    // Add input with Taproot specific fields
     psbt.addInput({
       hash: txid,
       index: 0,
@@ -70,22 +95,19 @@ async function createTaprootTransaction(taprootData, recipient, satoshis, messag
       tapInternalKey: taprootData.signer.publicKey,
     });
 
-    // Add output
+    // Add recipient output (with fee deduction)
     psbt.addOutput({
       address: recipient,
-      value: satoshis - 1000 // Subtract fee
+      value: satoshis - 1000 // Deduct transaction fee
     });
 
-    // Add OP_RETURN output
+    // Add optional OP_RETURN message
     addOpReturnOutput(psbt, message);
 
-    // Sign transaction with Schnorr signer
+    // Sign and finalize the transaction
     await psbt.signInput(0, taprootData.signer);
-    
-    // Finalize transaction
     psbt.finalizeAllInputs();
 
-    // Extract transaction
     return psbt.extractTransaction().toHex();
   } catch (error) {
     console.error('Error in createTaprootTransaction:', error);
