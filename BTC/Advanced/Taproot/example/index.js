@@ -29,28 +29,20 @@ class SchnorrSigner {
 }
 
 // Create Taproot address
-async function createTaprootAddress() {
-  try {
-    // Generate key pair
-    const keyPair = ECPair.makeRandom({ network });
-    
-    // Create Schnorr signer
-    const schnorrSigner = new SchnorrSigner(keyPair);
-    
-    const { address, output } = bitcoin.payments.p2tr({
-      pubkey: schnorrSigner.publicKey,
-      network,
-    });
+function createTaprootAddress() {
+  const keyPair = ECPair.makeRandom({ network });
+  const schnorrSigner = new SchnorrSigner(keyPair);
+  
+  const { address, output } = bitcoin.payments.p2tr({
+    pubkey: schnorrSigner.publicKey,
+    network,
+  });
 
-    return {
-      signer: schnorrSigner,
-      address,
-      output
-    };
-  } catch (error) {
-    console.error('Error in createTaprootAddress:', error);
-    throw error;
-  }
+  return {
+    signer: schnorrSigner,
+    address,
+    output
+  };
 }
 
 function addOpReturnOutput(psbt, message) {
@@ -60,7 +52,7 @@ function addOpReturnOutput(psbt, message) {
 }
 
 // Create and sign Taproot transaction
-async function createTaprootTransaction(taprootData, recipient, satoshis) {
+async function createTaprootTransaction(taprootData, recipient, satoshis, message = "Created with Bitcoin Taproot Demo") {
   try {
     const psbt = new bitcoin.Psbt({ network });
 
@@ -85,7 +77,7 @@ async function createTaprootTransaction(taprootData, recipient, satoshis) {
     });
 
     // Add OP_RETURN output
-    addOpReturnOutput(psbt, "Created with Bitcoin Taproot Demo");
+    addOpReturnOutput(psbt, message);
 
     // Sign transaction with Schnorr signer
     await psbt.signInput(0, taprootData.signer);
@@ -118,7 +110,7 @@ function printDebugInfo(data) {
 async function main() {
   try {
     // Create Taproot address
-    const taprootData = await createTaprootAddress();
+    const taprootData = createTaprootAddress();
     
     console.log('Taproot Details:');
     console.log('Taproot Address:', taprootData.address);
