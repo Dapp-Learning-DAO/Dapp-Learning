@@ -8,7 +8,7 @@ how-to-add-proposal-to-etereum-community
 + 除了炒币，支持或者参与创造到社区的规划和建设中来，是非常有价值的。
 + EIP是以太坊提升提案，用来讨论任何有意思的建议，EIP721也就是NFT是之EIP一，来自于Lara Labs。
 
-### Resource
+### 资源
 
 + URL：https://github.com/ethereum/EIPs/issues/new
 + 模板：https://github.com/ethereum/EIPs/blob/master/eip-template.md
@@ -19,17 +19,17 @@ how-to-add-proposal-to-etereum-community
 
 + 要点下面会列出。
 
-+ ATTENTION! If you would like to submit an EIP and it has already been written as a draft (see the [template](https://github.com/ethereum/EIPs/blob/master/eip-template.md) for an example), please submit it as a [Pull Request](https://github.com/ethereum/EIPs/pulls).
++ 注意！如果您想提交一个EIP，并且已经将其写成草稿（参见[模板](https://github.com/ethereum/EIPs/blob/master/eip-template.md)作为示例），请将其作为[Pull Request](https://github.com/ethereum/EIPs/pulls)提交。
 
-+ If you are considering a proposal but would like to get some feedback on the idea before submitting a draft, then continue opening an Issue as a thread for discussion.  Note that the more clearly and completely you state your idea the higher the quality of the feedback you are likely to receive.
++ 如果您正在考虑一个提案，但希望在提交草稿之前获得关于这个想法的一些反馈，那么请继续开一个Issue作为讨论的线程。请注意，您陈述想法的越清晰和完整，您可能收到的反馈质量就越高。
 
-  Keep in mind the following guidelines from [EIP-1](./eip-1.md):
+  请记住[EIP-1](./eip-1.md)中的以下指导原则：
 
-  > Each EIP must have a champion - someone who writes the EIP using the style and format described below, shepherds the discussions in the appropriate forums, and attempts to build community consensus around the idea. The EIP champion (a.k.a. Author) should first attempt to ascertain whether the idea is EIP-able. Posting to the  Protocol Discussion forum or opening an Issue is the best way to go about this.
+  > 每个EIP必须有一个倡导者 - 即使用下面描述的风格和格式撰写EIP，在适当的论坛中引导讨论，并尝试围绕这个想法建立社区共识的人。EIP倡导者（也称为作者）首先应该确定这个想法是否适合成为EIP。在协议讨论论坛上发帖或开一个Issue是最好的方式。
 
-  > Vetting an idea publicly before going as far as writing a EIP is meant to save the potential author time. Asking the Ethereum community first if an idea is original helps prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions (searching the Internet does not always do the trick). It also helps to make sure the idea is applicable to the entire community and not just the author. Just because an idea sounds good to the author does not mean it will work for most people in most areas where Ethereum is used.
+  > 在写EIP之前公开审查一个想法是为了节省潜在作者的时间。首先询问以太坊社区一个想法是否原创，有助于防止在保证会被拒绝的事情上花费太多时间（搜索互联网并不总是能解决问题）。这也有助于确保这个想法适用于整个社区，而不仅仅是作者。仅仅因为一个想法对作者来说听起来不错，并不意味着它对大多数使用以太坊的人在大多数领域都有效。
 
-  > Once the champion has asked the Ethereum community as to whether an idea has any chance of acceptance, a draft EIP should be presented as a Pull Request. This gives the author a chance to flesh out the draft EIP to make properly formatted, of high quality, and to address initial concerns about the proposal.
+  > 一旦倡导者已经询问了以太坊社区关于一个想法是否有被接受的可能性，就应该以Pull Request的形式提交一个EIP草稿。这给了作者一个机会来充实EIP草稿，使其格式正确，质量高，并解决关于提案的初步担忧。
 
 ### 解释
 
