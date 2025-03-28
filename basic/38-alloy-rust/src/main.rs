@@ -25,6 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let signer: PrivateKeySigner = private_key.parse().expect("Failed to parse private key");
     let address = signer.address();
+    info!("Using address: {}", address);
     let wallet = EthereumWallet::from(signer);
     let provider =
         ProviderBuilder::new().with_recommended_fillers().wallet(wallet).on_http(rpc_url);
