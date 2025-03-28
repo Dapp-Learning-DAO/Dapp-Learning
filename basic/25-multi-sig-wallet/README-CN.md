@@ -113,6 +113,10 @@ INFURA_ID = yyyyyyyy; // 替换为infura节点
 
 - New Version Gnosis Safe Contracts: <https://github.com/safe-global/safe-contracts>
 
+gnosis safe - 4337
+gnosis safe - 7702
+
+
 ## 参考链接
 
 - [Now open source: friendly multi-signatures for Ethereum 🔑](https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c)
