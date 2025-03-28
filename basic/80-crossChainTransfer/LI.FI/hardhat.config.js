@@ -1,11 +1,10 @@
-require("@nomicfoundation/hardhat-toolbox");
+require('@nomicfoundation/hardhat-toolbox');
 require('dotenv').config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 // module.exports = {
 //   solidity: "0.8.24",
 // };
-
 
 const settings = {
   optimizer: {
@@ -24,8 +23,8 @@ function mnemonic() {
 module.exports = {
   solidity: {
     compilers: [
-      { version: '0.8.4',  settings },
-      { version: '0.4.21',  settings },
+      { version: '0.8.4', settings },
+      { version: '0.4.21', settings },
       { version: '0.8.24', settings },
     ],
   },
@@ -44,34 +43,33 @@ module.exports = {
     },
     matic: {
       url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: mnemonic()
+      accounts: mnemonic(),
     },
     optim: {
-      url: "https://optimism-mainnet.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://optimism-mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
     sepolia: {
-      url: "https://sepolia.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://sepolia.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
     arbitrum: {
-      url: "https://arbitrum-mainnet.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://arbitrum-mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
     scroll: {
-      url: "https://rpc.scroll.io",
-      accounts: mnemonic()
+      url: 'https://rpc.scroll.io',
+      accounts: mnemonic(),
     },
     optim_sepolia: {
-      url: "https://optimism-sepolia.infura.io/v3/" + process.env.INFURA_ID,
-      accounts: mnemonic()
+      url: 'https://optimism-sepolia.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: mnemonic(),
     },
-    
   },
   mocha: {
-    timeout: 200000
+    timeout: 200000,
   },
   sourcify: {
-    enabled: true
+    enabled: true,
   },
 };

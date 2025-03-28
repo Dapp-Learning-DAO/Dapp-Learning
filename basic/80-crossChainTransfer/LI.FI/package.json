@@ -5,5 +5,8 @@
     "dotenv": "^16.4.5",
     "hardhat": "^2.21.0",
     "node-fetch": "^2.7.0"
+  },
+  "dependencies": {
+    "@lifi/sdk": "^3.2.3"
   }
 }
