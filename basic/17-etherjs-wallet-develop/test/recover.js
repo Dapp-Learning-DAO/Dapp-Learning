@@ -3,9 +3,6 @@ const bip39 = require('bip39');
 
 //  通过助记词创建钱包
 //squirrel refuse ozone miracle hollow renew sail clever fruit chaos merit brown
-//const mnemonic = "squirrel mirror fruit merit chaos sail hollow ozone clever brown renew refuse";
-const mnemonic = "squirrel refuse ozone miracle hollow renew  sail clever fruit chaos merit brown";
-
 function* permutations(arr, n = arr.length) {
     if (n <= 1) yield arr.slice();
     else for (let i = 0; i < n; i++) {
