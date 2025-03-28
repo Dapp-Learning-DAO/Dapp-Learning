@@ -1,24 +1,33 @@
-## Development Tool Recommendation    
-- Cookbook (free smart contracts): <https://www.cookbook.dev>
-- Ethereum Development Tools Collection: <https://learnblockchain.cn/article/2006>
-- metamask (Wallet plug-in for browser): <https://www.jianshu.com/p/b5b2c05e9090>
-- Hardhat(Ethereum development environment for professionals): https://hardhat.org/
-- solidity-framework  is a scaffold for quickly installing and configuring Hardhat and Foundry, with built-in basic scripts and more: <https://github.com/VegieDoggie/solidity-framework>
-- Waffle(smart contracts testing tool): https://getwaffle.io/
-- Foundry(toolkit for Ethereum application development written in Rust): https://book.getfoundry.sh/
-- scaffold-eth (ETH + Hardhat + React): https://github.com/scaffold-eth/scaffold-eth
-- infura (node service): <https://infura.io/>
-- alchemy (node service): <https://dashboard.alchemyapi.io/>
-- Ethernet node service list：<https://ethereumnodes.com/>
-- All tests are connected to the Kovan test network，Kovan tests ETH application: <https://faucet.kovan.network>, other test networks are also freely available.
-- Ethereum blockchain browser: <https://kovan.etherscan.io>
-- JSON-PRC's interface: <https://eth.wiki/json-rpc/API>
-- ethtx Transaction analysis tools: <https://ethtx.info>
-- tenderly Contract verification: <https://dashboard.tenderly.co/explorer>
-- remix Local environment: <https://zhuanlan.zhihu.com/p/38309494>
-- remix online IDE <https://remix.ethereum.org/>  remix CN <http://remix.zhiguxingtu.com/>
-- Code beautification tool: <https://www.cnblogs.com/kuronekonano/p/11794302.html>
-- Ethernet compatible chain network list(Easy to add to Metamask)：<https://chainlist.org/>
-- Layer2Ecological project development status tracking：<https://l2beat.com/>
-- Ethernet Virtual Machine Instruction Manual:<https://ethervm.io/>
+## Recommended Developer Tools
 
+- **Cookbook (free smart contracts)**: <https://www.cookbook.dev>  
+- **Ethereum Development Tools Summary**: <https://learnblockchain.cn/article/2006>  
+- **MetaMask (Browser Wallet Extension)**: <https://www.jianshu.com/p/b5b2c05e9090>  
+- **Hardhat**: A development environment for professionals building on Ethereum <https://hardhat.org/>  
+- **solidity-framework**: A scaffold for quickly installing and configuring Hardhat and Foundry with built-in basic scripts <https://github.com/VegieDoggie/solidity-framework>  
+- **Waffle**: One of the most advanced testing frameworks for smart contracts <https://getwaffle.io/>  
+- **Foundry**: A blazing-fast, portable, and modular toolkit for Ethereum development written in Rust <https://book.getfoundry.sh/>  
+- **Scaffold-eth (ETH + Hardhat + React)**: A commonly used framework for building decentralized applications powered by smart contracts <https://github.com/scaffold-eth/scaffold-eth>  
+- **Infura (Node Service)**: <https://infura.io/>  
+- **Alchemy (Node Service)**: <https://dashboard.alchemyapi.io/>  
+- **Ethereum Node Service List**: <https://ethereumnodes.com/>  
+- **Ethereum Blockchain Explorer**: <https://kovan.etherscan.io>  
+- **JSON-RPC Interface**: <https://eth.wiki/json-rpc/API>  
+- **Tenderly Contract Verification**: <https://dashboard.tenderly.co/explorer>  
+- **EthTx (Transaction Analysis Tool)**: <https://ethtx.info>  
+- **Remix (Local Environment)**: <https://zhuanlan.zhihu.com/p/38309494>  
+- **Remix Online IDE**: <https://remix.ethereum.org/> Remix Chinese Mirror: <http://remix.zhiguxingtu.com/>  
+- **Code Beautification Tool**: <https://www.cnblogs.com/kuronekonano/p/11794302.html>  
+- **Ethereum-Compatible Chain Networks (easily add to MetaMask)**: <https://chainlist.org/>  
+- **Layer 2 Ecosystem Project Tracker**: <https://l2beat.com/>  
+- **Ethereum Virtual Machine (EVM) Instruction Handbook**: <https://ethervm.io/>  
+- **Web3.js**: A JavaScript library for interacting with Ethereum, a core tool for DApp development <https://github.com/web3/web3.js>  
+- **ethers.js**: A lightweight and modular JavaScript library for interacting with Ethereum <https://docs.ethers.org/>  
+- **Truffle Suite**: A complete Ethereum development framework that supports compilation, deployment, and testing <https://trufflesuite.com/>  
+- **Ganache**: A tool for quickly setting up a local Ethereum development environment, ideal for debugging and testing <https://trufflesuite.com/ganache/>  
+- **OpenZeppelin**: A library and toolkit for smart contract development with built-in secure contract templates <https://openzeppelin.com/>  
+- **MyCrypto**: An open-source wallet management tool for handling Ethereum addresses <https://mycrypto.com/>  
+- **Blocknative**: Provides transaction notifications, wallet SDKs, and gas optimization tools <https://www.blocknative.com/>  
+- **Flashbots**: A tool to enhance transaction transparency and reduce MEV (Miner Extractable Value) impact <https://flashbots.net/>  
+- **Dune Analytics**: A platform for visualizing and analyzing blockchain data <https://dune.com/>  
+- **The Graph**: A decentralized data indexing protocol for quickly querying on-chain data for DApps <https://thegraph.com/>  
