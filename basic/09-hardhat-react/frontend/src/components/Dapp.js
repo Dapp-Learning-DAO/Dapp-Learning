@@ -145,7 +145,7 @@ export class Dapp extends React.Component {
         <div className="row">
           <div className="col-12">
             {/*
-              If the user has no tokens, we don't show the Tranfer form
+              If the user has no tokens, we don't show the Transfer form
             */}
             {this.state.balance === 0 && (
               <NoTokensMessage deployContract={() => this._deployContract()} />
