@@ -8,8 +8,10 @@
   "license": "ISC",
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "bip39": "^3.1.0",
     "chai": "^5.1.0",
     "hardhat": "^2.22.2",
+    "keccak": "^3.0.4",
     "mocha": "^10.4.0"
   }
 }

@@ -1,4 +1,4 @@
-require("@nomicfoundation/hardhat-toolbox");
+require('@nomicfoundation/hardhat-toolbox');
 require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -42,12 +42,12 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      sepolia: process.env.APIKEY
-    } ,
+      sepolia: process.env.APIKEY,
+    },
   },
   sourcify: {
     // Disabled by default
     // Doesn't need an API key
-    enabled: true
-  }
+    enabled: true,
+  },
 };

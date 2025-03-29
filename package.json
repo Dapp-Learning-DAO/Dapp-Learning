@@ -15,7 +15,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "create-next-app": "^12.3.1"
+    "create-next-app": "^12.3.1",
+    "elliptic": "^3.0.4"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
