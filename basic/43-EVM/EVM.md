@@ -1,5 +1,11 @@
 # Ethereum Virtual Machine 
+
+重点阅读本篇文章：
+- [EVM Deep Dives](https://noxx.substack.com/p/evm-deep-dives-the-path-to-shadowy?s=r) 
+
 opcode码：https://www.ethervm.io/
+
+
 ![EVM](./img/evm.jpg)
 EVM是无寄存器、基于栈的虚拟机，是合约的执行环境, 解释器中需要操作五大组件：
 - PC：类似于 CPU 中的 PC 寄存器，指向当前执行的指令

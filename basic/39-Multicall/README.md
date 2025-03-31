@@ -107,3 +107,4 @@ https://github.com/Vectorized/multicaller/blob/main/src/MulticallerWithSender.so
 - index finance github 地址: https://github.com/indexed-finance/dividends/tree/master/contracts
 - Solidity Call 函数: https://www.jianshu.com/p/a5c97d0d7cae
 - call/delegatecall/staticcall 介绍: https://zhuanlan.zhihu.com/p/35292014
+- https://destiner.io/blog/post/multicall-how-to-make-multiple-ethereum-calls-in-a-single-request/

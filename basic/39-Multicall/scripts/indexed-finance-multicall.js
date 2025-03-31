@@ -11,9 +11,13 @@ async function main() {
     '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', // weth
     '0x0000000000000000000000000000000000000000', // eth
   ];
-  const account = '0x0000000000000000000000000000000000000000';
+  const account = '0x89f2ab029dcd11bd5a00ed6a77ccbe46315212e8';
+
+  console.log(`Checking balances for ${account}`);
   const [blockNumber, balances] = await getBalances(provider, tokens, account).catch((err) => {});
 
+  console.log(`BlockNumber: ${blockNumber}`);
+  console.log(`Balances: ${JSON.stringify(balances)}`);
   const daiBalance = balances['0x6b175474e89094c44da98b954eedeac495271d0f'];
   const wethBalance = balances['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'];
   const ethBalance = balances['0x0000000000000000000000000000000000000000'];

@@ -39,6 +39,10 @@ yarn
 yarn hardhat run scripts/paymaster.js 
 ```
 
+## TODO
+ 4337 
+ 7702
+
 ## 文档
 - eip-4337文档：4337的规范。https://eips.ethereum.org/EIPS/eip-4337
 - sdk：提供了构建UserOperation，推送UserOperation的能力。源码位于https://github.com/eth-infinitism/bundler/tree/main/packages/sdk。 
