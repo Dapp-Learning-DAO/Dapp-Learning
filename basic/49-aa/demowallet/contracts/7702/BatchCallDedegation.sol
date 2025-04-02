@@ -4,9 +4,10 @@ contract BatchCallDelegation {
     event CallExecuted(address indexed to, uint256 indexed value, bytes data, bool success);
 
     struct Call {
-        bytes data;
+       
         address to;
         uint256 value;
+        bytes data;
     }
 
     function execute(Call[] calldata calls) external payable {

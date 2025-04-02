@@ -14,24 +14,26 @@ const main = async () => {
   const deploymentInfo = JSON.parse(fs.readFileSync(deploymentPath, 'utf8'));
   const BATCH_CALL_DELEGATION_ADDRESS = deploymentInfo.contractAddress;
   
-  console.log(`Using BatchCallDelegation at: ${BATCH_CALL_DELEGATION_ADDRESS}`);
+  console.log(`Using BatchCallAndSponsorat: ${BATCH_CALL_DELEGATION_ADDRESS}`);
 
   // Define contract interface with execute function signature
   const batchInterface = new ethers.Interface([
-    "function execute(tuple(bytes data, address to, uint256 value)[] calls)"
+    "function execute(tuple(address to, uint256 value, bytes data)[] calls)"
   ]);
     
   // Define sample transaction parameters for batch execution
   const calls = [
     {
-      data: "0x",
       to: "0x84286648B8252bee9BB4F56A1025913C12537E86",
-      value: ethers.parseEther("0.001")
+      value: ethers.parseEther("0.001"),
+      data: "0x",
     },
     {
-      data: "0xa9059cbb000000000000000000000000ec22b01a5b7f05a4ffae86a1864176f86b05aa3c000000000000000000000000000000000000000000000000000000e8d4a51000",
       to: "0xE9e4e7ee5187f8B6EDeB96c31De32A8594A97A53",
-      value: 0
+      value: 0,
+      data: "0xa9059cbb000000000000000000000000ec22b01a5b7f05a4ffae86a1864176f86b05aa3c000000000000000000000000000000000000000000000000000000e8d4a51000",
+     
+
     }
   ];
 

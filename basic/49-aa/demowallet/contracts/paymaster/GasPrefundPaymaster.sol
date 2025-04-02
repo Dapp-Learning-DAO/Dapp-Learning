@@ -7,7 +7,7 @@ contract GasPrefundPaymaster is IPaymaster, Ownable, EntryPointManager{
 
     address public sender;
 
-    constructor(address _sender, address _entryPoint) EntryPointManager(_entryPoint){
+    constructor(address _sender, address _entryPoint) EntryPointManager(_entryPoint) Ownable(msg.sender){
         sender = _sender;
     }
 

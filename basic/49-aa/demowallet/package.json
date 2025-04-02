@@ -7,7 +7,7 @@
     "@account-abstraction/contracts": "^0.4.0",
     "@account-abstraction/sdk": "^0.4.0",
     "@chainlink/contracts": "^0.6.0",
-    "@openzeppelin/contracts": "^4.0.0",
+    "@openzeppelin/contracts": "5.2.0",
     "circomlib": "^2.0.5",
     "hardhat": "^2.12.2"
   },

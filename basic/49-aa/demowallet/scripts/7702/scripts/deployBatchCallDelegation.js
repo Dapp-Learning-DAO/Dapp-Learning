@@ -10,7 +10,7 @@ const main = async () => {
   console.log('Deploying contracts with the account:', deployer.address);
 
   // Get contract factory for BatchCallDelegation smart contract
-  const BatchCallDelegation = await ethers.getContractFactory("BatchCallDelegation", deployer);
+  const BatchCallDelegation = await ethers.getContractFactory("BatchCallAndSponsor", deployer);
   
   // Deploy BatchCallDelegation contract
   console.log("Deploying BatchCallDelegation contract...");
