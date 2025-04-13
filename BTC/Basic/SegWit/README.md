@@ -68,46 +68,35 @@ SegWit解决了交易延展性问题，这是实现闪电网络等二层解决�
 
 ## 代码示例：创建SegWit地址和交易
 
-以下是使用JavaScript和bitcoinjs-lib库创建SegWit地址和交易的简单示例：
+代码示例文件：[examples.js](./example.js)
 
-```javascript
-const bitcoin = require('bitcoinjs-lib');
-const network = bitcoin.networks.bitcoin; // 主网
+该示例文件包含以下功能：
 
-// 创建密钥对
-const keyPair = bitcoin.ECPair.makeRandom({ network });
+1. **创建不同类型的SegWit地址**：
+   - P2WPKH（原生SegWit）地址 - 以bc1q开头
+   - P2SH-P2WPKH（兼容SegWit）地址 - 以3开头
+   - P2WSH（原生SegWit脚本哈希）地址
 
-// 创建P2WPKH（原生SegWit）地址
-const { address } = bitcoin.payments.p2wpkh({
-  pubkey: keyPair.publicKey,
-  network 
-});
+2. **构建SegWit交易**：
+   - 支持原生SegWit和兼容SegWit交易
+   - 处理输入、输出和找零
 
-console.log('SegWit地址:', address); // 输出以bc1q开头的地址
+3. **计算SegWit交易ID**：
+   - 计算传统txid（不包含见证数据）
+   - 计算wtxid（包含见证数据）
 
-// 构建SegWit交易（简化示例）
-async function createSegWitTransaction(utxo, toAddress, amount, fee) {
-  const txb = new bitcoin.TransactionBuilder(network);
-  
-  // 添加输入（来自SegWit地址的UTXO）
-  txb.addInput(utxo.txid, utxo.vout);
-  
-  // 添加输出
-  txb.addOutput(toAddress, amount);
-  
-  // 如果有找零，添加找零输出
-  const change = utxo.value - amount - fee;
-  if (change > 0) {
-    txb.addOutput(address, change);
-  }
-  
-  // 签名交易（SegWit特有的签名方式）
-  txb.sign(0, keyPair, null, null, utxo.value);
-  
-  // 构建并返回交易
-  const tx = txb.build();
-  return tx.toHex();
-}
+4. **估算SegWit交易的大小和费用**：
+   - 根据输入输出数量和地址类型估算交易大小
+   - 计算建议的交易费用
+
+5. **验证SegWit地址**：
+   - 检查地址是否为有效的SegWit地址
+   - 识别地址类型（原生SegWit、兼容SegWit或传统地址）
+
+要使用这些示例，您需要安装bitcoinjs-lib库：
+
+```bash
+npm install bitcoinjs-lib
 ```
 
 ## 结论
