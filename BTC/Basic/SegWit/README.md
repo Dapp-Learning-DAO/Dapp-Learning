@@ -174,9 +174,9 @@ SegWit引入了"区块权重
 
 ## 代码示例：创建SegWit地址和交易
 
-代码示例文件：[examples.js](./example.js)
+代码示例文件：[example.js](./example.js) 和 [example-extended.js](./example-extended.js)
 
-该示例文件包含以下功能：
+这些示例文件包含以下功能：
 
 ### 基础功能
 
