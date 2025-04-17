@@ -1,6 +1,6 @@
 use std::env;
 use alloy::{providers::ProviderBuilder, sol};
-use alloy::network::{EthereumWallet, NetworkWallet};
+use alloy::network::EthereumWallet;
 use alloy::primitives::{U256};
 use alloy::providers::Provider;
 use alloy::signers::local::{PrivateKeySigner};
@@ -25,6 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let signer: PrivateKeySigner = private_key.parse().expect("Failed to parse private key");
     let address = signer.address();
+    info!("Using address: {}", address);
     let wallet = EthereumWallet::from(signer);
     let provider =
         ProviderBuilder::new().with_recommended_fillers().wallet(wallet).on_http(rpc_url);
@@ -38,7 +39,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let amount = U256::from(100u64);
     let receipt = erc20_contract.transfer(address, amount).send().await?.get_receipt().await?;
 
-    assert_eq!(receipt.status(), true);
+    assert!(receipt.status());
     info!("Transfer successful");
 
     Ok(())

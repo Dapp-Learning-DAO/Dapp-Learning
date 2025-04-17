@@ -83,3 +83,14 @@
    assert_eq!(receipt.status(), true);
    info!("Transfer successful");
    ```
+
+8. 启动本地节点
+```shell
+   anvil
+```
+
+9. 运行项目
+
+```rust
+cargo run  src/main.rs
+```

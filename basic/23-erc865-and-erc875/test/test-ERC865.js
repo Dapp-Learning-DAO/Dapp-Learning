@@ -145,7 +145,7 @@ describe('ERC865 compatible logic', async () => {
     expect(bobAllowance).to.equal(allowance);
   });
 
-  it('Bob tranfer allowed balance from Alice to Charlie (fee=1)', async () => {
+  it('Bob transfer allowed balance from Alice to Charlie (fee=1)', async () => {
     // Transfer 100 tokens from owner to addr1
     await dTokenOwner.transfer(bob.address, 100);
 
