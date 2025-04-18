@@ -50,52 +50,48 @@ Element Protocol 的核心架构包括以下几个部分：
 
 ### 交互示例
 
-以下是与 Element Protocol 交互的基本流程：
+以下是与 Element Protocol 交互的基本流程，完整的JavaScript实现可以在[element-interaction.js](./element-interaction.js)文件中找到：
 
 1. **存入资产获取 PT 和 YT**
-```solidity
+```javascript
+// 从element-interaction.js中导入函数
+const { depositToElement } = require('./element-interaction.js');
+
 // 假设我们要存入 1000 DAI 到 Element
-function depositToElement(uint256 amount) external {
-    // 批准 Element Tranche 合约使用 DAI
-    dai.approve(address(tranche), amount);
-    
-    // 存入 DAI 并获取 PT 和 YT
-    tranche.deposit(amount, msg.sender);
-    
-    // 现在用户持有等量的 PT 和 YT
+async function deposit() {
+  const depositAmount = ethers.utils.parseEther('1000');
+  await depositToElement(depositAmount);
+  // 现在用户持有等量的 PT 和 YT
 }
 ```
 
 2. **在 AMM 中交易 PT 获取固定收益**
-```solidity
-function tradePTForBaseAsset(uint256 ptAmount) external {
-    // 批准 AMM 使用 PT
-    principalToken.approve(address(amm), ptAmount);
-    
-    // 计算预期获得的基础资产数量
-    uint256 baseAssetAmount = amm.getAmountOut(ptAmount, address(principalToken), address(baseAsset));
-    
-    // 执行交易
-    amm.swap(
-        address(principalToken),
-        address(baseAsset),
-        ptAmount,
-        baseAssetAmount * 0.99, // 设置滑点容忍度
-        msg.sender
-    );
+```javascript
+// 从element-interaction.js中导入函数
+const { tradePTForBaseAsset } = require('./element-interaction.js');
+
+// 交易PT获取固定收益
+async function trade() {
+  const ptAmount = ethers.utils.parseEther('1000'); // 假设我们有1000个PT
+  const result = await tradePTForBaseAsset(ptAmount, 0.01); // 1%滑点容忍度
+  console.log(`固定收益率: ${result.fixedRate.toFixed(2)}%`);
 }
 ```
 
 3. **到期后赎回 PT**
-```solidity
-function redeemPT(uint256 ptAmount) external {
-    // 确保已经到期
-    require(block.timestamp >= tranche.unlockTimestamp(), "Not yet matured");
-    
-    // 赎回基础资产
-    tranche.redeemPrincipal(ptAmount, msg.sender);
+```javascript
+// 从element-interaction.js中导入函数
+const { redeemPT } = require('./element-interaction.js');
+
+// 到期后赎回PT
+async function redeem() {
+  const ptAmount = ethers.utils.parseEther('1000');
+  await redeemPT(ptAmount);
+  // 成功赎回基础资产
 }
 ```
+
+更多详细实现和使用方法请参考[element-interaction.js](./element-interaction.js)文件。
 
 ## 零息债券专用AMM
 零息债券的价格可由利率大小和到期时间来決定，他是以面额折价计算，也就是考量到未來現金流复利，折现到现在的价值为多少，公式如下：
