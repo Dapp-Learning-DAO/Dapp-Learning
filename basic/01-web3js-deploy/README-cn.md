@@ -147,7 +147,7 @@ const tx = await deployTx.send({
 - Web3js中文文档(1.2.6):
   https://learnblockchain.cn/docs/web3.js/web3-eth-contract.html
 - 样例代码参考如下链接 
-  https://docs.moonbeam.network/getting-started/local-node/deploy-contract/  
+  https://docs.moonbeam.network/builders/ethereum/dev-env/  
 - Web3js使用参考文档:  
   https://www.dappuniversity.com/articles/web3-js-intro
 - nodejs参考文档：
