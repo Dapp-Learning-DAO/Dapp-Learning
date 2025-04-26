@@ -43,34 +43,56 @@ const accounts = web3.eth.accounts.wallet.add(privatekey);
 /*
    -- Deploy Contract --
 */
+// 添加错误处理和日志
 const Deploy = async () => {
-  // Create contract instance
-  const deployContract = new web3.eth.Contract(abi);
-
-  // Create Tx
-  const deployTx = deployContract.deploy({
-    data: '0x' + bytecode,
-    arguments: [0], // Pass arguments to the contract constructor on deployment(_initialNumber in Incremental.sol)
-  });
-
-  // optionally, estimate the gas that will be used for development and log it
-  const gas = await deployTx.estimateGas({
-    from: accounts,
-  });
-  console.log('estimated gas:', gas);
-
   try {
-    // Deploy the contract to the Ganache network
-    // Your deployed contrac can be viewed at: https://sepolia.etherscan.io/address/${tx.options.address}
-    // You can change sepolia in above url to your selected testnet.
+    // 添加部署前的检查
+    if (!process.env.INFURA_ID) {
+      throw new Error('Missing INFURA_ID environment variable');
+    }
+    if (!process.env.PRIVATE_KEY) {
+      throw new Error('Missing PRIVATE_KEY environment variable');
+    }
+
+    // Create contract instance
+    const deployContract = new web3.eth.Contract(abi);
+    
+    // Create Tx
+    const deployTx = deployContract.deploy({
+      data: '0x' + bytecode,
+      arguments: [0], // Pass arguments to the contract constructor on deployment(_initialNumber in Incremental.sol)
+    });
+    
+    // optionally, estimate the gas that will be used for development and log it
+    const gas = await deployTx.estimateGas({
+      from: accounts,
+    });
+    console.log('estimated gas:', gas);
+    
+    // 添加更详细的日志
+    console.log('Contract deployment started...');
+    console.log('Network:', await web3.eth.net.getNetworkType());
+    console.log('Account:', accounts[0].address);
+    
     const tx = await deployTx.send({
       from: accounts[0].address,
       gas,
-      // gasPrice: 10000000000,
     });
-    console.log('Contract deployed at address: ' + tx.options.address);
+    
+    console.log('Contract deployed successfully!');
+    console.log('Contract address:', tx.options.address);
+    console.log('Transaction hash:', tx.transactionHash);
+    
+    // 添加部署后的验证
+    const code = await web3.eth.getCode(tx.options.address);
+    if (code === '0x') {
+      throw new Error('Contract deployment failed - no code at address');
+    }
+    
+    return tx.options.address;
   } catch (error) {
-    console.error(error);
+    console.error('Deployment failed:', error.message);
+    // throw error;
   }
 };
 

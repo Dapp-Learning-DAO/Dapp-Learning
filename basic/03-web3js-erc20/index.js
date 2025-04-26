@@ -1,102 +1,74 @@
 const Web3 = require('web3');
-const fs = require('fs');
 const contractFile = require('./compile');
+const config = require('./config');
+const ContractDeployer = require('./modules/deployer');
+const ContractInteractor = require('./modules/interactor');
+const EventListener = require('./modules/eventListener');
+const { ErrorHandler } = require('./modules/errorHandler');
 
 require('dotenv').config();
-const privatekey = process.env.PRIVATE_KEY;
-/*
-   -- Define Provider & Variables --
-*/
 
+// Receiver address
 const receiver = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 
-// Provider
+// Create Web3 instance
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(
-    'https://sepolia.infura.io/v3/' + process.env.INFURA_ID
-  )
+  new Web3.providers.HttpProvider(config.networks.development.provider)
 );
 
-//account
-const account = web3.eth.accounts.privateKeyToAccount(privatekey);
+// Create account
+const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
 const account_from = {
   privateKey: account.privateKey,
   accountaddress: account.address,
 };
 
-// sol ---> abi + bin
+// Get contract bytecode and ABI
 const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
-/*
-   -- Deploy Contract --
-*/
-const Trans = async () => {
-  console.log(
-    `Attempting to deploy from account ${account_from.accountaddress}`
-  );
-  web3.eth.getBlockNumber(function (error, result) {
-    console.log(result);
-  });
-  // Create deploy Contract Instance
-  const deployContract = new web3.eth.Contract(abi);
+const main = async () => {
+  try {
+    // 1. Deploy contract
+    const deployer = new ContractDeployer(web3, account_from);
+    const contract = await deployer.deploy(abi, bytecode);
 
-  // method 1
-  // Create Constructor Tx
-  const deployTx = deployContract.deploy({
-    data: bytecode,
-    arguments: ['DAPPLEARNING', 'DAPP', 0, 10000000],
-  });
+    // 2. Create contract interaction instance
+    const interactor = new ContractInteractor(web3, contract);
 
-  // Sign Transacation and Send
-  const deployTransaction = await web3.eth.accounts.signTransaction(
-    {
-      data: deployTx.encodeABI(),
-      gas: '8000000',
-    },
-    account_from.privateKey
-  );
+    // 3. Transfer tokens
+    await interactor.transfer(account_from, receiver, 100000);
 
-  // Send Tx and Wait for Receipt
-  const deployReceipt = await web3.eth.sendSignedTransaction(
-    deployTransaction.rawTransaction
-  );
-  console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+    // 4. Query receiver balance
+    await interactor.balanceOf(receiver);
 
-  const erc20Contract = new web3.eth.Contract(
-    abi,
-    deployReceipt.contractAddress
-  );
+    // 5. Create WebSocket connection for event listening
+    const web3Socket = new Web3(
+      `wss://sepolia.infura.io/ws/v3/${process.env.INFURA_ID}`
+    );
+    const socketContract = new web3Socket.eth.Contract(abi, contract.options.address);
 
-  //build the Tx
-  const transferTx = erc20Contract.methods
-    .transfer(receiver, 100000)
-    .encodeABI();
+    // 6. Setup event listener
+    const eventListener = new EventListener(web3Socket, socketContract);
+    await eventListener.subscribeToTransfers();
 
-  // Sign Tx with PK
-  const transferTransaction = await web3.eth.accounts.signTransaction(
-    {
-      to: deployReceipt.contractAddress,
-      data: transferTx,
-      gas: 8000000,
-    },
-    account_from.privateKey
-  );
+    // Wait for a while to receive events
+    console.log('Waiting for events...');
+    await new Promise(resolve => setTimeout(resolve, 10000));
 
-  // Send Tx and Wait for Receipt
-  await web3.eth.sendSignedTransaction(
-    transferTransaction.rawTransaction
-  );
+    // 7. Get historical transfer events
+    const deployBlock = await web3.eth.getBlockNumber();
+    await eventListener.getPastTransfers(deployBlock);
 
-  await erc20Contract.methods
-    .balanceOf(receiver)
-    .call()
-    .then((result) => {
-      console.log(`The balance of receiver is ${result}`);
-    });
+    // 8. Cleanup event subscriptions
+    eventListener.unsubscribeAll();
+
+  } catch (error) {
+    await ErrorHandler.handle(error, web3);
+  }
 };
 
-Trans()
+main()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);
