@@ -161,6 +161,6 @@ const tx = await deployTx.send({
 # References
 
 - Web3js Official Documents: https://web3js.readthedocs.io/en/v1.2.11/getting-started.html
-- Code and Examples: https://docs.moonbeam.network/getting-started/local-node/deploy-contract/
+- Code and Examples: https://docs.moonbeam.network/builders/ethereum/dev-env/
 - How to use web3js: https://www.dappuniversity.com/articles/web3-js-intro
 - Nodejs APIs Documents: http://nodejs.cn/api/fs.html
