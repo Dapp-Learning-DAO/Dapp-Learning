@@ -451,7 +451,7 @@ Relevant smart contracts:
 
 - SingleSpotDebtCeilingSetter - 这个合约通过查看 SAFEEngine 中的当前 globalDebt 来重新计算特定抵押品类型的债务上限
 
-- ESMThresholdSSetter - 这个合约通过使用 ESM 重新计算燃烧和触发结算所需的阈值
+- ESMThresholdSetter - 这个合约通过使用 ESM 重新计算燃烧和触发结算所需的阈值
 
 ## Governance Module
 

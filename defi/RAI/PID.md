@@ -161,7 +161,7 @@ contract PIRawPerSecondCalculator is SafeMath, SignedSafeMath {
         // newRedemptionRate cannot be lower than 10^0 (1) because of the way rpower is designed
         bool negativeOutputExceedsHundred = (boundedPIOutput < 0 && -boundedPIOutput >= int(defaultRedemptionRate));
 
-        // If it is smaller than 1, set it to the nagative rate limit
+        // If it is smaller than 1, set it to the negative rate limit
         if (negativeOutputExceedsHundred) {
           newRedemptionRate = NEGATIVE_RATE_LIMIT;
         } else {
