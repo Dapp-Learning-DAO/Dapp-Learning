@@ -2,6 +2,8 @@
 
 本文旨在介绍如何使用 Rust SDK([alloy-rs](https://github.com/alloy-rs/alloy)) 与链上合约进行交互，进而开发 DApp。
 
+参考文档：https://alloy.rs/examples/advanced/README
+
 ## 1. 配置`.env`文件
 
 在`.env`文件中添加必要的配置，包括且不限于：
