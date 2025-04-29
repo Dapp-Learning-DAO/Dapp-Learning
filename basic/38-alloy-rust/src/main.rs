@@ -34,7 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv().ok();
     env_logger::init();
 
-    let rpc_url = env::var("RPC_LOCAL").unwrap();
+    let rpc_url = env::var("RPC_LOCAL")?;
     let private_key = env::var("DEV_PRIVATE_KEY")?;
 
     let signer: PrivateKeySigner = private_key.parse().expect("Failed to parse private key");
@@ -51,7 +51,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let erc20_contract = SimpleToken::deploy(provider.clone()).await?;
 
 
-
+    // transfer token 
     let amount = U256::from(100u64);
     let receipt = erc20_contract.transfer(address, amount).send().await?.get_receipt().await?;
 

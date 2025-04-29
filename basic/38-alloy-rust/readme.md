@@ -4,6 +4,8 @@
 
 参考文档：https://alloy.rs/examples/advanced/README
 
+更多demo: https://github.com/alloy-rs/examples/tree/main/examples
+
 ## 1. 配置`.env`文件
 
 在`.env`文件中添加必要的配置，包括且不限于：
@@ -87,6 +89,7 @@
    ```
 
 8. 启动本地节点
+
 ```shell
    anvil
 ```
@@ -94,5 +97,6 @@
 9. 运行项目
 
 ```rust
-cargo run  src/main.rs
+cargo run --bin alloy-rust
+cargo run --bin main
 ```
