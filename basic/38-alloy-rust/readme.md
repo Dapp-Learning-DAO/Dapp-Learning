@@ -100,3 +100,8 @@
 cargo run --bin alloy-rust
 cargo run --bin main
 ```
+
+## 3. Build a fast MEV bot with Alloy's Primitive Types
+
+todo
+https://alloy.rs/guides/speed-up-using-u256
