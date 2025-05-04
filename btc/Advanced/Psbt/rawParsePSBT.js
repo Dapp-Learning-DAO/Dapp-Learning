@@ -5,18 +5,20 @@ const parsePSBT = (psbtBase64) => {
   // 魔术字节和分隔符
   const magicBytes = psbtBuffer.slice(index, index + 5);
   index += 5;
-  if (magicBytes.toString('hex') !== '70736274ff') {
+  if (magicBytes.toString('hex') !== '70736274ff') { // Check for valid PSBT magic bytes
     throw new Error('Not a valid PSBT');
   }
 
   // 解析全局部分
   console.log('Global Data:');
   while (psbtBuffer[index] !== 0x00 && index < psbtBuffer.length) {
+    // Parse key
     if (index + 2 > psbtBuffer.length) break; // Prevent reading beyond buffer
     const keyLen = psbtBuffer[index];
     const key = psbtBuffer.slice(index + 1, index + 1 + keyLen);
     index += 1 + keyLen;
 
+    // Parse value
     if (index + 1 > psbtBuffer.length) break; // Prevent reading beyond buffer
     const valueLen = psbtBuffer.readIntLE(index, 1);
     const value = psbtBuffer.slice(index + 1, index + 1 + valueLen);
@@ -24,11 +26,12 @@ const parsePSBT = (psbtBase64) => {
 
     console.log(`Key: ${key.toString('hex')}, Value: ${value.toString('hex')}`);
   }
-  index++; // Skip separator
+  index++; // Move past separator byte
 
   // 解析输入部分
   console.log('Inputs:');
   while (index < psbtBuffer.length && psbtBuffer[index] !== 0x00) {
+    // Process each input's key-value pairs
     while (psbtBuffer[index] !== 0x00 && index < psbtBuffer.length) {
       if (index + 2 > psbtBuffer.length) break;
       const keyLen = psbtBuffer[index];
@@ -41,14 +44,15 @@ const parsePSBT = (psbtBase64) => {
       index += 1 + valueLen;
       console.log(`Key: ${key.toString('hex')}, Value: ${value.toString('hex')}`);
     }
-    index++; // Skip separator
+    index++; // Move to next input or separator
   }
-  index++; // Skip separator
+  index++; // Move past input separator
 
-  // 解析输出部分
+  // 解析输出部分 
   console.log('Outputs:');
   while (index < psbtBuffer.length && psbtBuffer[index] !== 0x00) {
     console.log(`Output at index ${index}:`);
+    // Process each output's key-value pairs
     while (psbtBuffer[index] !== 0x00 && index < psbtBuffer.length) {
       if (index + 2 > psbtBuffer.length) break;
       const keyLen = psbtBuffer[index];
@@ -62,7 +66,7 @@ const parsePSBT = (psbtBase64) => {
 
       console.log(`Key: ${key.toString('hex')}, Value: ${value.toString('hex')}`);
     }
-    index++; // Skip separator
+    index++; // Move to next output or end
   }
 };
 
