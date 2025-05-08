@@ -7,7 +7,7 @@ The demo code provides developers with an overview of how to sign, send, and rec
 ## Understanding The Functions of the [Smart Contract](Incrementer.sol)
 - `Constructor`: The constructor function of the smart contract, which is called when the contract is deploying, at the same time it will initialize the `number` to `_initialNumber`;
 - `increment`: The function of incrementing the `number` by given `_value`;
-- `rest`: The function of resetting the `number` to 0;
+- `reset`: The function of resetting the `number` to 0;
 - `getNumber`: The function of getting the `number`.
 
 ## How to run it
