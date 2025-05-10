@@ -167,7 +167,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 46. [NFT Floor Perps](https://www.paradigm.xyz/2021/08/floor-perps/) ⬜
 47. [TWAMM: Time-Weighted Average Market Maker](https://www.paradigm.xyz/2021/07/twamm/) ⬜
 48. [ZK Voting](basic/48-ZK-Voting) ⌛
-49. [Account Abstraction](basic/49-aa)  ✅
+49. [Account Abstraction](basic/49-Account-Abstraction)  ✅
 50. [solidity security](basic/50-solidity-security)  ✅
 51. [sniper](https://github.com/Supercycled/cake_sniper.git) ⬜
 52. [Governace](https://github.com/withtally/safeguard)  ⬜

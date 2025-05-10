@@ -13,7 +13,7 @@ contract USDCPaymaster is IPaymaster, Ownable, EntryPointManager {
     AggregatorV3Interface internal priceFeed;
     IERC20 internal usdc;
 
-    constructor(address _entryPoint) EntryPointManager(_entryPoint){
+    constructor(address _entryPoint) EntryPointManager(_entryPoint) Ownable(msg.sender){
         //USDC to eth, it returns how many wei one usdc worths
         priceFeed = AggregatorV3Interface(0x986b5E1e1755e3C2440e960477f25201B0a8bbD4);
         usdc = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);

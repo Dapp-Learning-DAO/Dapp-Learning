@@ -4,6 +4,7 @@ import "@account-abstraction/contracts/interfaces/IAccount.sol";
 import "@account-abstraction/contracts/interfaces/UserOperation.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 contract DemoAccount is Ownable, IAccount{
 
@@ -17,8 +18,7 @@ contract DemoAccount is Ownable, IAccount{
     
     mapping(address=>bool) public signers;
 
-    constructor(address payable _entryPoint, uint8 _threshold, address _owner, address[] memory _signers) {
-        _transferOwnership(_owner);
+    constructor(address payable _entryPoint, uint8 _threshold, address _owner, address[] memory _signers) Ownable(_owner) {
         entryPoint = _entryPoint;
         threshold = _threshold;
         for (uint256 i=0; i<_signers.length;i++){
@@ -42,7 +42,7 @@ contract DemoAccount is Ownable, IAccount{
         if (signatures.length < 85*uint256(threshold)) {
             return SIG_VALIDATION_FAILED;
         }
-        bytes32 ethHash = requestId.toEthSignedMessageHash();
+        bytes32 ethHash = MessageHashUtils.toEthSignedMessageHash(requestId);
         for (uint256 i=0;i<threshold;i++) {
             (bytes memory signature, address signer) = _slash(signatures, i);
             if (!signers[signer]) {

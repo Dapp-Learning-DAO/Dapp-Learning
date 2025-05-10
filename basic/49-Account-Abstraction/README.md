@@ -42,6 +42,8 @@ yarn hardhat run scripts/paymaster.js
 ## TODO
  4337 
  7702
+ https://github.com/quiknode-labs/qn-guide-examples/blob/main/ethereum/eip-7702/src/BatchCallAndSponsor.sol
+ 7579
 
 ## 文档
 - eip-4337文档：4337的规范。https://eips.ethereum.org/EIPS/eip-4337
