@@ -96,6 +96,34 @@ Openzeppelin blog 的系列文章，非常棒的科普文。学习笔记参见 :
 https://ethereum.org/zh/developers/tutorials/downsizing-contracts-to-fight-the-contract-size-limit 
 
 
+## EOF(EVM OBJECT FORMAT)
+
+EOF通过EIPs引入了新的验证和操作码，旨在构建更友好的EVM。EOF的特性包括改进的代码结构、静态分析、更大的堆栈空间、代码验证、JUMPDEST分析、新的合约创建方式和改进的CALL指令，从而提高了开发者的体验和合约性能。
+
+EOF 由一系列 EIP 组成：
+
+EIP-3540: EOF — EVM Object Format v1（EOF — EVM 对象格式 v1）
+EIP-3670: EOF — Code Validation（EOF — 代码验证）
+EIP-4200: EOF — Static relative jumps（EOF — 静态相对跳转）
+EIP-4750: EOF — Functions（EOF — 函数）
+EIP-5450: EOF — Stack Validation（EOF — 堆栈验证）
+EIP-663: SWAPN, DUPN and EXCHANGE instructions（SWAPN、DUPN 和 EXCHANGE 指令）
+EIP-6206: EOF — JUMPF and non-returning functions（EOF — JUMPF 和非返回函数）
+EIP-7069: Revamped CALL instructions（改进的 CALL 指令）
+EIP-7480: EOF — Data section access instructions（EOF — 数据段访问指令）
+EIP-7620: EOF Contract Creation（EOF 合约创建）
+EIP-7698: EOF — Creation transaction（EOF — 创建交易）
+
+这 11 个 EIP 背后的想法是构建一个对开发者更友好的 EVM，具有新的验证和操作码，所有这些 EIP 都计划包含在 Pectra 升级中，我们已经可以在 Ethereum Sepolia、Holesky 和最新的 Hoodi 测试网（3 月 19 日发布）中测试其中的一些功能。
+
+
+### Legacy EVM vs EOF EVM
+当前的 EVM 或 Legacy EVM 没有结构，部署在其中的智能合约只是一组按顺序运行的操作码
+EOF EIP 3540: EOF — EVM Object Format v1，为 EVM 字节码引入了一种容器格式
+包含Header + Code + Data
+
+![EOF](image.png)
+
 ## 参考链接
 - [evm_illustrated-EVM图解](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)
 - EVM 详解: https://learnblockchain.cn/2019/04/09/easy-evm
