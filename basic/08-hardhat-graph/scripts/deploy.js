@@ -15,6 +15,7 @@ async function main() {
   const Token = await ethers.getContractFactory('SimpleToken');
   const token = await Token.deploy('HHToken', 'HHT', 1, 100000000);
   
+  await token.waitForDeployment();
 
   console.log('Contract address:', token.target);
 
