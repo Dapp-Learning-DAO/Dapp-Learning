@@ -1,4 +1,3 @@
-const fs = require("fs");
 const SimpleToken = require("./build/SimpleToken.json");
 
 const { ethers } = require("ethers");
@@ -27,7 +26,7 @@ let bal;
 
 // support eip1559
 async function getGasPrice () {
-  return await web3Provider.getFeeData().then(async function (res) {
+  return await web3Provider.getFeeData().then(function (res) {
     let maxFeePerGas = res.maxFeePerGas;
     let maxPriorityFeePerGas = res.maxPriorityFeePerGas;
     console.log("maxFeePerGas: ", maxFeePerGas.toString());
@@ -52,6 +51,7 @@ async function checkBalance () {
 checkBalance();
 
 let token;
+
 async function deploy () {
   let option = await getGasPrice();
   // 常见合约工厂实例
@@ -60,19 +60,24 @@ async function deploy () {
     SimpleToken.bytecode,
     wallet
   );
+
   console.log('start deploy')
+
   token = await simpletoken.deploy("HEHE", "HH", 1, 100000000);
 
   console.log(token.target);
 
   await token.waitForDeployment();
   console.log('deployed')
+  
   tx = await token.transfer(
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     ethers.parseEther("0.00000000001"),
     option
   );
+  await tx.wait();
   console.log('hash', tx.hash);
+
   let bal = await token.balanceOf(wallet.address);
   console.log(bal.toString());
 }
