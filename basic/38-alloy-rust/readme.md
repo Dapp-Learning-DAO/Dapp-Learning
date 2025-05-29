@@ -1,6 +1,7 @@
 ## Outline
 
 本文旨在介绍如何使用 Rust SDK([alloy-rs](https://github.com/alloy-rs/alloy)) 与链上合约进行交互，进而开发 DApp。
+它的前身是ether-rs。
 
 参考文档：https://alloy.rs/examples/advanced/README
 
@@ -105,3 +106,15 @@ cargo run --bin main
 
 todo
 https://alloy.rs/guides/speed-up-using-u256
+
+Uniswap V2 Arbitrage Optimal Amount In： youtube
+https://www.youtube.com/watch?v=9EKksG-fF1k
+
+https://github.com/flashbots/simple-blind-arbitrage
+https://github.com/paco0x/amm-arbitrageur/blob/master/bot/index.ts
+
+## univ3 arbitrage：
+
+https://pawelurbanek.com/revm-alloy-anvil-arbitrage
+
+## 参考链接：
