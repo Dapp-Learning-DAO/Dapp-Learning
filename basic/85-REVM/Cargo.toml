@@ -1,0 +1,32 @@
+[package]
+name = "revm-is-all-you-need"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8.5"
+bytes = "1.2.1"
+dotenv = "0.15.0"
+futures = "0.3.5"
+anyhow = "1.0.70"
+tokio = { version = "1.29.0", features = ["full"] }
+tokio-stream = { version = "0.1", features = ['sync'] }
+
+ethers-core = "2.0"
+ethers-providers = "2.0"
+ethers-contract = "2.0"
+ethers = { version = "2.0", features = ["abigen", "ws"]}
+
+revm = { version = "14.0.1", features = ["ethersdb"] }
+
+wasm-bindgen = "0.2.88"
+
+eth-encode-packed = "0.1.0"
+
+colored = "2.0.0"
+log = "0.4.17"
+fern = {version = "0.6.2", features = ["colored"]}
+chrono = "0.4.23"
+
+
+
