@@ -136,7 +136,7 @@ contract Transmuter is Context {
         uint256 _toDistribute = 0;
         uint256 _buffer = buffer;
 
-        // check if there is something in bufffer
+        // check if there is something in buffer
         if (_buffer > 0) {
             // NOTE: if last deposit was updated in the same block as the current call
             // then the below logic gates will fail
@@ -236,7 +236,7 @@ contract Transmuter is Context {
     }
     /// @dev Converts the staked alTokens to the base tokens in amount of the sum of pendingdivs and tokensInBucket
     ///
-    /// once the alToken has been converted, it is burned, and the base token becomes realisedTokens which can be recieved using claim()    
+    /// once the alToken has been converted, it is burned, and the base token becomes realisedTokens which can be received using claim()    
     ///
     /// reverts if there are no pendingdivs or tokensInBucket
     function transmute() public runPhasedDistribution() updateAccount(msg.sender) {
