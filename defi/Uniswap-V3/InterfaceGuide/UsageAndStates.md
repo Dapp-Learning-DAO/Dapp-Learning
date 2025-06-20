@@ -157,7 +157,7 @@ mintV3: {
 #### 已有流动性池子
 
 - 如果已经有流动性，此时 `LiquidityChartRangeInput` 组件会渲染出当前处于激活状态的头寸分步图
-  - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出 Pool 中所有处于激活状态的 poistion
+  - `usePoolActiveLiquidity` 首先根据当前交易价格筛选出 Pool 中所有处于激活状态的 position
   - 遍历计算每个 tick 上的处于激活状态的流动性总和 `liquidityActive`
   - 生成每个 tick 上的活跃流动性的数量，计算逻辑 [参见下方 :point_down:](#computeLiquidityActive)
 - 此时如果有流动性数据，会自动计算出一个合适的价格区间
