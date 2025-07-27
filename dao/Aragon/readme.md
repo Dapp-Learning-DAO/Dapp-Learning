@@ -29,7 +29,7 @@ Currently Aragon is running on：
 
 * Ethereum
 * Rinkeby
-* Ploygon（only v1）
+* Polygon（only v1）
 
 The Aragon project is stewarded by the Aragon Association, a non-profit entity based in Zug, Switzerland, and governed by Aragon Network Token (ANT) holders.
 

@@ -17,7 +17,7 @@ ExchangeV4 maintains three kind of fills:
 - fillBuyOrder
 - fillDutchAuction
 
-Take fillSellOrder as example. Seller creates, sign and publish her sell order into quixotic servers. When a buyer wanna a deal, her calls fillSellOrder with the signed sell order and her wallet address as input. The quixotic contract would verify and complete the trade, where the NFT is moved from seller to buyer whereas ERC20 tokens are transfered from buyer to seller as payment.
+Take fillSellOrder as example. Seller creates, sign and publish her sell order into quixotic servers. When a buyer wanna a deal, her calls fillSellOrder with the signed sell order and her wallet address as input. The quixotic contract would verify and complete the trade, where the NFT is moved from seller to buyer whereas ERC20 tokens are transferred from buyer to seller as payment.
 
 # Vulnerabilities
 
@@ -59,7 +59,7 @@ Here are the steps:
 Please refer to SampleQuixotic and test for more detail.
 
 # How to run
-In this demo, we create a simplifed version of Quixotic naming SampleQuixotic.
+In this demo, we create a simplified version of Quixotic naming SampleQuixotic.
 
 ```
 yarn
