@@ -112,7 +112,7 @@ Pow ->pos -> zk
 
 ZKEVM 可能因兼容编译器和工具链而被优先选择，但现在，**ZKVM**的潜力被更广泛地认可。
 
-RISC V 指令集 。**risc0  sp1**  - > state transistion funciton
+RISC V 指令集 。**risc0  sp1**  - > state transition function
 
 ![16.png](https://github.com/Dapp-Learning-DAO/Dapp-Learning-Arsenal/blob/main/images/dao/devcon/16.png?raw=true)
 
