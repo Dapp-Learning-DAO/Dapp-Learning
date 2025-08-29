@@ -190,11 +190,11 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 69. [Decentralized OTC](https://github.com/DOTCPro)
 70. [Arweave file upload with Bundlr Client](basic/70-arweave-file-upload-with-bundlr/README.md)
 71. [NYM](https://myz1237.substack.com/p/nymwhitepaper?r=uaq4w&utm_campaign=post&utm_medium=web&utm_source=) ⬜
-72. [Unlock protocol](https://docs.unlock-protocol.com/unlock/developers/unlock-platform)
+72. [Unlock protocol](https://unlock-protocol.com/developers)
 73. [onchainNFT](https://github.com/Park-City-Utah/onChainNFT)
 74. [erc20-meta-token](https://github.com/0xsequence/erc20-meta-token)
 75. [golang-dapp](basic/75-golang-dapp) ✅
-76. [Push Protocol](https://docs.epns.io/developers)
+76. [Push Protocol](https://push.org/docs)
 
 ## 项目任务
 
@@ -238,7 +238,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 16. [RAI](defi/RAI/)⌛
 17. [DYDX](https://dydx.exchange/)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 18. [INDEX](https://mp.weixin.qq.com/s/PXOY3G6AIbhzRUptjYoWIw)[👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
-19. [DODO](https://dodoex.github.io/docs/zh/docs/tradeApi) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
+19. [DODO](https://docs.dodoex.io/zh/home/what-is-dodo) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 20. [MakerDao](https://zhuanlan.zhihu.com/p/41889079)⌛
 21. [0x-protocol](defi/0x-protocol/README.md) [👉 认领这个 Task](https://github.com/rebase-network/Dapp-Learning/issues/new)
 22. [Bancor](https://bancor.network/)⌛
@@ -253,7 +253,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - 1. [OpenSea](nft/opensea/readme.md) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 2. [aavegotchi](https://aavegotchi.com/) [👉 认领这个 Task](https://github.com/Dapp-Learning-DAO/Dapp-Learning/issues/new)
 - 3. [Loot NFT Distribute](nft/loot-nft/README.md)
-- 4. [Rarible](https://docs.rarible.org/overview/union/)
+- 4. [Rarible](https://docs.rarible.org/docs/introduction)
 - 5. [Zora](https://docs.zora.co/)
 - 6. [Alchemy](https://www.alchemy.com/nft-api)
 
@@ -439,7 +439,7 @@ gitcoin grant地址： [Dapp-Learning gitcoin grant](https://gitcoin.co/grants/3
   <a href="https://drklab.net/">
     <img align="top" src="./docs/imgs/sponsor-partners/DRK-lab-logo.png" />
   </a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://capital.hashkey.com/en/">
+  <a href="https://hashkey.capital/">
     <img align="top" src="./docs/imgs/sponsor-partners/Hashkey-logo.png" />
   </a>
 </div>
