@@ -1,0 +1,47 @@
+{
+    "name": {
+        "name": "name",
+        "type_string": "string",
+        "slot": 0,
+        "size": 256,
+        "offset": 0,
+        "value": null,
+        "elems": {}
+    },
+    "symbol": {
+        "name": "symbol",
+        "type_string": "string",
+        "slot": 1,
+        "size": 256,
+        "offset": 0,
+        "value": null,
+        "elems": {}
+    },
+    "decimals": {
+        "name": "decimals",
+        "type_string": "uint8",
+        "slot": 2,
+        "size": 8,
+        "offset": 0,
+        "value": null,
+        "elems": {}
+    },
+    "balanceOf": {
+        "name": "balanceOf",
+        "type_string": "mapping(address => uint256)",
+        "slot": 3,
+        "size": 256,
+        "offset": 0,
+        "value": null,
+        "elems": {}
+    },
+    "allowance": {
+        "name": "allowance",
+        "type_string": "mapping(address => mapping(address => uint256))",
+        "slot": 4,
+        "size": 256,
+        "offset": 0,
+        "value": null,
+        "elems": {}
+    }
+}
