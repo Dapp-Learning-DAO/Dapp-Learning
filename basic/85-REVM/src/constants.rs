@@ -1,26 +1,26 @@
-use ethers::{
-  prelude::Lazy,
-  types::{Address, Bytes},
-};
+use ethers::types::Address;
+use once_cell::sync::Lazy;
 use std::str::FromStr;
 
+use revm::primitives::Bytes;
+
 pub fn get_env(key: &str) -> String {
-  std::env::var(key).unwrap()
+    std::env::var(key).unwrap()
 }
 
 #[derive(Debug, Clone)]
 pub struct Env {
-  pub https_url: String,
-  pub wss_url: String,
+    pub https_url: String,
+    pub wss_url: String,
 }
 
 impl Env {
-  pub fn new() -> Self {
-      Env {
-          https_url: get_env("HTTPS_URL"),
-          wss_url: get_env("WSS_URL"),
-      }
-  }
+    pub fn new() -> Self {
+        Env {
+            https_url: get_env("HTTPS_URL"),
+            wss_url: get_env("WSS_URL"),
+        }
+    }
 }
 
 pub static ZERO_ADDRESS: Lazy<Address> =

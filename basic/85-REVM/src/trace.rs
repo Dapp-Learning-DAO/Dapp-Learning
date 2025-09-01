@@ -3,26 +3,34 @@ use ethers::prelude::*;
 use ethers_providers::Middleware;
 use std::sync::Arc;
 
-pub async fn get_state_diff<M: Middleware + 'static>(
-    provider: Arc<M>,
-    tx: Eip1559TransactionRequest,
-    block_number: U64,
+use alloy::providers::ext::DebugApi;
+use alloy::rpc::types::trace::geth::{
+    GethDebugBuiltInTracerType, GethDebugTracerType, GethDebugTracingCallOptions,
+    GethDebugTracingOptions, GethTrace,
+};
+use alloy::rpc::types::TransactionRequest;
+use alloy::{
+    eips::BlockId,
+    network::Ethereum,
+    providers::{DynProvider, Provider, ProviderBuilder},
+};
+
+pub async fn get_state_diff(
+    provider: DynProvider,
+    tx: TransactionRequest,
+    block_number: BlockId,
 ) -> Result<GethTrace> {
     let trace = provider
         .debug_trace_call(
             tx,
-            Some(block_number.into()),
+            block_number,
             GethDebugTracingCallOptions {
                 tracing_options: GethDebugTracingOptions {
-                    disable_storage: None,
-                    disable_stack: None,
-                    enable_memory: None,
-                    enable_return_data: None,
                     tracer: Some(GethDebugTracerType::BuiltInTracer(
                         GethDebugBuiltInTracerType::PreStateTracer,
                     )),
-                    tracer_config: None,
                     timeout: None,
+                    ..Default::default()
                 },
                 state_overrides: None,
                 block_overrides: None,
