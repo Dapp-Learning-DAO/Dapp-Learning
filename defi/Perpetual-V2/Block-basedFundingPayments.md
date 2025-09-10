@@ -199,7 +199,7 @@ base token amount 跟随 `Mark price` 的变化规律：
 
 > 上述公式由来参考 Uniswap v3 white paper 6.2.3
 
-当 maker 添加流动性之后，价格区间 lower and uppper 不再改变，除非他们直接修改流动性头寸，或者移除再添加其他区间，所以可以认为在不考虑流动性操作的前提下，影响 maker 头寸规模的因素就是 `Mark price`。
+当 maker 添加流动性之后，价格区间 lower and upper 不再改变，除非他们直接修改流动性头寸，或者移除再添加其他区间，所以可以认为在不考虑流动性操作的前提下，影响 maker 头寸规模的因素就是 `Mark price`。
 
 假设 Alice 于 t0 时刻在 range(lower, upper) 注入流动性，此时 mark price 仍小于 lower 价格边界 `m0 < lower`
 
