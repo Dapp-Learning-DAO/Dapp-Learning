@@ -69,7 +69,7 @@ To calculate correct historically archived deposit rates you should use index ba
 
 **TIPS**
 - All rates queried on chain or subgraph, are expressed in RAY units i.e. 10^27.
-All emmissions are expressed in WAD unists i.e. 10^18.
+All emissions are expressed in WAD unists i.e. 10^18.
 - APY: Compounding interest accrued by deposit or borrow on LendingPool
 - APR: Non Compounding rewards earned as part of LiquidityMinig
 
