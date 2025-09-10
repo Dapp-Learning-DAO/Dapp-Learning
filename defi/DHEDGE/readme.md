@@ -1,5 +1,5 @@
 # DHEDGE
-## priciple
+## principle
 Non-custodial, decentralized asset management for synthetic assets on Ethereum
 - Non-custodial: users retain ownership over their funds, investment managers cannot run away with investor funds
 - decentralized asset management: dHEDGE aims to create a permissionsless, unstoppable protocol for asset management
