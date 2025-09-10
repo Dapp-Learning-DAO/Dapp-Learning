@@ -2261,7 +2261,7 @@ const serializedSession = await prover.notarize(commit);
 const notarizedSession = await new NotarizedSession(serializedSession);
 
 
-// Create proof for commited ranges
+// Create proof for committed ranges
 // note: this will reveal the selected ranges
 const serializedProof = await notarizedSession.proof(commit);
 
