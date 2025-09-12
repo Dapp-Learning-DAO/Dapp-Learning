@@ -14,17 +14,12 @@ tokio-stream = { version = "0.1", features = ['sync'] }
 once_cell = "1.17.2"
 
 alloy = { version = "1.0.9", features = ["full"] }
-
-# # REVM 25.0.0 with separate crates
 revm = { version = "26.0.1", features = ["alloydb"] }
-# revm-primitives = "19.2.0"
 
 ethers-core = "2.0"
 ethers-providers = "2.0"
 ethers-contract = "2.0"
 ethers = { version = "2.0", features = ["abigen", "ws"]}
-
-# revm = { version = "14.0.1", features = ["ethersdb"] }
 
 wasm-bindgen = "0.2.88"
 

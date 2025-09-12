@@ -3,28 +3,24 @@ use ethers::types::H160;
 use log::info;
 use revm::context::ContextTr;
 use revm::Database;
-use std::{str::FromStr, sync::Arc};
+use std::str::FromStr;
 
-use alloy::rpc::types::{TransactionInput, TransactionRequest};
 use alloy::{
     eips::BlockId,
-    network::{Ethereum, TransactionBuilder},
-    providers::{ext::AnvilApi, DynProvider, Provider, ProviderBuilder},
+    providers::{DynProvider, Provider},
     sol,
-    sol_types::{SolCall, SolStruct, SolValue},
+    sol_types::{SolCall, SolValue},
 };
 
 use crate::constants::SIMULATOR_CODE;
-use crate::{AlloyCacheDB, NewEvm};
+use crate::NewEvm;
 use revm::{
     bytecode::Bytecode,
-    context::{result::ExecutionResult, tx::TxEnvBuilder, BlockEnv, CfgEnv, Evm, TxEnv},
-    primitives::{address, keccak256, Address, Bytes, Log, TxKind, U128, U256},
+    context::{result::ExecutionResult, tx::TxEnvBuilder},
+    primitives::{keccak256, Address, U128, U256},
     state::AccountInfo,
-    ExecuteEvm, MainContext, MainnetEvm,
+    ExecuteEvm,
 };
-
-use std::ops::DerefMut;
 
 sol! {
   function v2SimulateSwap(
@@ -46,28 +42,11 @@ pub async fn eth_call_v2_simulate_swap(
 ) -> Result<(U256, U256)> {
     // Shows how you can spoof multiple storage slots
     // but also shows that you can only test one transaction at a time
-    let block = provider
-        .get_block(BlockId::latest())
-        .await?
-        .ok_or(anyhow!("failed to retrieve block"))?;
-
     let ten_eth = U256::from(10)
         .checked_mul(U256::from(10).pow(U256::from(18)))
         .unwrap();
 
     // Spoof user balance with 10 ETH (for gas fees)
-    // let mut state = spoof::state();
-    // let mut state = evm.ctx.journaled_state;
-    // state
-    //     .account(Address::from_slice(&account.0))
-    //     .balance(ten_eth)
-    //     .nonce(0.into());
-    // let evm_account = evm
-    //     .ctx
-    //     .journaled_state
-    //     .account(Address::from_slice(&account.0));
-    // evm_account.info.balance = ten_eth;
-
     let db = &mut evm.ctx.journal_mut().database;
     let mut call_account = (*db)
         .basic(Address::from_slice(&account.0))
@@ -75,12 +54,6 @@ pub async fn eth_call_v2_simulate_swap(
         .unwrap();
     call_account.set_balance(ten_eth);
     db.insert_account_info(Address::from_slice(&account.0), call_account);
-
-    // provider
-    //     .anvil_set_balance(Address::from_slice(&account.0), ten_eth)
-    //     .await?;
-    // .database
-    // .insert_account_info(Address::from_slice(&account.0), user_acc_info);
 
     // Create Simulator contract with bytecode injection
     let simulator_address = H160::from_str("0xF2d01Ee818509a9540d8324a5bA52329af27D19E").unwrap();
@@ -92,10 +65,6 @@ pub async fn eth_call_v2_simulate_swap(
         code: Some(Bytecode::new_raw((*SIMULATOR_CODE).clone())),
     };
     db.insert_account_info(Address::from_slice(&simulator_address.0), info);
-
-    // state
-    //     .account(simulator_address)
-    //     .code((*SIMULATOR_CODE).clone());
 
     // Spoof simulator input token balance
     let input_balance_slot = keccak256(SolValue::abi_encode(&[
@@ -109,21 +78,7 @@ pub async fn eth_call_v2_simulate_swap(
         ten_eth,
     )?;
 
-    // state.account(input_token).store(
-    //     input_balance_slot.into(),
-    //     H256::from_low_u64_be(ten_eth.as_u64()),
-    // );
-
     let one_eth = ten_eth.checked_div(U256::from(10)).unwrap();
-    // let simulator_abi = BaseContract::from(
-    //     parse_abi(&[
-    //         "function v2SimulateSwap(uint256,address,address,address) external returns (uint256, uint256)",
-    //     ])?
-    // );
-    // let calldata = simulator_abi.encode(
-    //     "v2SimulateSwap",
-    //     (one_eth, target_pair, input_token, output_token),
-    // )?;
 
     let calldata = v2SimulateSwapCall {
         amountIn: one_eth,
@@ -132,7 +87,6 @@ pub async fn eth_call_v2_simulate_swap(
         tokenOut: Address::from_slice(&output_token.0),
     };
 
-    // info!("calldata: {:?}", calldata.abi_encode().into());
     info!("target_pair: {:?}", Address::from_slice(&target_pair.0));
     info!("input_token: {:?}", Address::from_slice(&input_token.0));
     info!("output_token: {:?}", Address::from_slice(&output_token.0));
@@ -154,23 +108,6 @@ pub async fn eth_call_v2_simulate_swap(
         .build()
         .unwrap();
 
-    // tx.set_chain_id(1.into());
-
-    // let tx = TxEnv {
-    //   caller: Address::from_slice(&account.0),
-    //   gas_limit: 5_000_000,
-    //   gas_price,
-    //   gas_priority_fee: None,
-    //   transact_to: Address::from_slice(&simulator_address.0),
-    //   value: U256::ZERO,
-    //   data: calldata,
-    //   chain_id: None,    // 可选: 有需要可以填 Some(chain_id.into())
-    //   nonce: Some(0),    // REVM 支持 Option<u64>
-    //   ..Default::default()
-    // }
-
-    // let result = provider.call(&tx).block(block.number().into()).await?;
-    // let out: (U256, U256) = simulator_abi.decode_output("v2SimulateSwap", result)?;
     let result = evm.transact(tx).unwrap();
     let output = match &result.result {
         ExecutionResult::Success { output, .. } => output,

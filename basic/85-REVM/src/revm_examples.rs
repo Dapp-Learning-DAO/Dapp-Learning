@@ -6,21 +6,21 @@ use bytes::Bytes;
 use ethers::{
     abi::parse_abi,
     prelude::*,
-    types::{transaction::eip2930::AccessList, H160, U256},
+    types::{H160, U256},
 };
 use log::info;
 use revm::context::ContextTr;
 use revm::{
     bytecode::Bytecode,
-    context::{BlockEnv, CfgEnv, Evm, TxEnv},
+    context::TxEnv,
     context_interface::result::{ExecutionResult, Output},
-    database::{AlloyDB, CacheDB, EmptyDB, InMemoryDB},
+    database::AlloyDB,
     database_interface::WrapDatabaseAsync,
     primitives::{keccak256, Address, Bytes as rBytes, Log, TxKind, U256 as rU256},
     state::AccountInfo,
-    Context, Database, ExecuteCommitEvm, ExecuteEvm, MainBuilder, MainContext, MainnetEvm,
+    Context, Database, ExecuteCommitEvm, ExecuteEvm, MainBuilder, MainContext,
 };
-use std::{str::FromStr, sync::Arc};
+use std::str::FromStr;
 
 use alloy::{
     eips::BlockId,
@@ -28,27 +28,14 @@ use alloy::{
 };
 
 use alloy::consensus::TxEip1559;
-use alloy::rpc::types::trace::geth::{
-    GethDebugBuiltInTracerType, GethDebugTracerType, GethDebugTracingCallOptions,
-    GethDebugTracingOptions, GethTrace, PreStateFrame,
-};
+use alloy::rpc::types::trace::geth::{GethTrace, PreStateFrame};
 use alloy::rpc::types::{TransactionInput, TransactionRequest};
 
 use crate::{AlloyCacheDB, NewEvm};
 
-// use alloy_eips::BlockId;
-// use alloy_provider::{network::Ethereum, DynProvider, Provider, ProviderBuilder};
-
-// type AlloyCacheDB = CacheDB<WrapDatabaseAsync<AlloyDB<Ethereum, DynProvider>>>;
-// type AlloyEvm = InMemoryDB;
-// type NewEvm = MainnetEvm<revm::Context<BlockEnv, TxEnv, CfgEnv, AlloyCacheDB>, ()>;
-
 // This will create a clean slate EVM environment that doesn't have any storage values in it.
 // So no accounts or contracts exist yet. We'll have to deal with everything on our own.
 pub async fn create_evm_instance(rpc_url: &str) -> Result<NewEvm> {
-    // let db = CacheDB::new(EmptyDB::default());
-    // let evm = Evm::builder().with_db(db).build();
-
     let provider = ProviderBuilder::new().connect(rpc_url).await?.erased();
     let alloy_db = WrapDatabaseAsync::new(AlloyDB::new(provider, BlockId::latest())).unwrap();
     let cache_db = AlloyCacheDB::new(alloy_db);
@@ -79,7 +66,6 @@ pub fn get_token_balance(evm: &mut NewEvm, token: H160, account: H160) -> Result
     let calldata = erc20_abi.encode("balanceOf", account)?;
 
     evm.tx.caller = Address::from_slice(&account.0);
-    // evm.context.evm.env.tx.transact_to = TransactTo::Call(Address::from_slice(&token.0));
     evm.tx.kind = TxKind::Call(Address::from_slice(&token.0));
     evm.tx.data = rBytes::from(calldata.0);
 
@@ -383,7 +369,6 @@ pub async fn revm_v2_simulate_swap(
         .db_mut()
         .load_account(Address::from_slice(&account.0))
         .unwrap();
-    // .account(Address::from_slice(&account.0));
 
     let nonce = call_account.info.nonce;
 
@@ -409,12 +394,8 @@ pub async fn revm_v2_simulate_swap(
         Ok(result) => result,
         Err(e) => return Err(anyhow!("EVM call failed: {:?}", e)),
     };
-    // let result = get_tx_result(result)?;
-    // let pair_address: H160 = factory_abi.decode_output("createPair", result.output)?;
-    // info!("Pair created: {:?}", pair_address);
 
-    // // parse PairCreated event to get token0 / token1
-    // let _pair_created_log = &result.logs.unwrap()[0];
+    // parse PairCreated event to get token0 / token1
     let pair_address = target_pair;
     // 简化处理：直接使用输入的 token 顺序
     let token0 = Address::from_slice(&input_token.0);
@@ -551,11 +532,7 @@ pub async fn revm_v2_simulate_swap(
         "v2SimulateSwap",
         (amount_in, target_pair, input_token, output_token),
     )?;
-    // let nonce = provider
-    //     .get_transaction_count(Address::from_slice(&account.0))
-    //     .await?;
 
-    // info!("nonce: {:?}", nonce);
     let call_account = new_evm
         .db_mut()
         .load_account(Address::from_slice(&account.0))

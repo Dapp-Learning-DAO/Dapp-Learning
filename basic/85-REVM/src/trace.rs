@@ -1,7 +1,4 @@
 use anyhow::Result;
-use ethers::prelude::*;
-use ethers_providers::Middleware;
-use std::sync::Arc;
 
 use alloy::providers::ext::DebugApi;
 use alloy::rpc::types::trace::geth::{
@@ -9,11 +6,7 @@ use alloy::rpc::types::trace::geth::{
     GethDebugTracingOptions, GethTrace,
 };
 use alloy::rpc::types::TransactionRequest;
-use alloy::{
-    eips::BlockId,
-    network::Ethereum,
-    providers::{DynProvider, Provider, ProviderBuilder},
-};
+use alloy::{eips::BlockId, providers::DynProvider};
 
 pub async fn get_state_diff(
     provider: DynProvider,
