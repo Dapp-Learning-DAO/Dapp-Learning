@@ -1,3 +1,5 @@
+// ETH call examples demonstrating direct contract interaction with REVM
+
 use anyhow::{anyhow, Result};
 use ethers::types::H160;
 use log::info;
@@ -6,8 +8,7 @@ use revm::Database;
 use std::str::FromStr;
 
 use alloy::{
-    eips::BlockId,
-    providers::{DynProvider, Provider},
+    providers::{DynProvider},
     sol,
     sol_types::{SolCall, SolValue},
 };
@@ -22,6 +23,7 @@ use revm::{
     ExecuteEvm,
 };
 
+// Solidity interface for Uniswap V2 swap simulation
 sol! {
   function v2SimulateSwap(
       uint256 amountIn,
@@ -31,22 +33,24 @@ sol! {
   ) external returns (uint256 amountOut, uint256 gasUsed);
 }
 
+/// Simulate Uniswap V2 swap using direct eth_call with state spoofing
+/// Demonstrates how to inject custom state for testing specific scenarios
 pub async fn eth_call_v2_simulate_swap(
     evm: &mut NewEvm,
-    provider: DynProvider,
+    _provider: DynProvider,
     account: H160,
     target_pair: H160,
     input_token: H160,
     output_token: H160,
     input_balance_slot: i32,
 ) -> Result<(U256, U256)> {
-    // Shows how you can spoof multiple storage slots
-    // but also shows that you can only test one transaction at a time
+    // Demonstrates state spoofing for testing specific scenarios
+    // Note: Only one transaction can be tested at a time with this approach
     let ten_eth = U256::from(10)
         .checked_mul(U256::from(10).pow(U256::from(18)))
         .unwrap();
 
-    // Spoof user balance with 10 ETH (for gas fees)
+    // Spoof user balance with 10 ETH for gas fees
     let db = &mut evm.ctx.journal_mut().database;
     let mut call_account = (*db)
         .basic(Address::from_slice(&account.0))
@@ -55,21 +59,21 @@ pub async fn eth_call_v2_simulate_swap(
     call_account.set_balance(ten_eth);
     db.insert_account_info(Address::from_slice(&account.0), call_account);
 
-    // Create Simulator contract with bytecode injection
+    // Deploy Simulator contract with bytecode injection
     let simulator_address = H160::from_str("0xF2d01Ee818509a9540d8324a5bA52329af27D19E").unwrap();
     let code_hash = keccak256("");
     let info = AccountInfo {
         balance: U256::from(input_balance_slot),
-        nonce: 1, // nonzero nonce so EOA vs contract heuristics are fine
+        nonce: 1, // Nonzero nonce to distinguish EOA from contract
         code_hash,
         code: Some(Bytecode::new_raw((*SIMULATOR_CODE).clone())),
     };
     db.insert_account_info(Address::from_slice(&simulator_address.0), info);
 
-    // Spoof simulator input token balance
+    // Spoof simulator input token balance using storage slot calculation
     let input_balance_slot = keccak256(SolValue::abi_encode(&[
         Address::from_slice(&simulator_address.0),
-        Address::from_slice(&H160::from_low_u64_be(input_balance_slot as u64).0), // H160::from_low_u64_be(input_balance_slot as u64),
+        Address::from_slice(&H160::from_low_u64_be(input_balance_slot as u64).0),
     ]));
 
     db.insert_account_storage(

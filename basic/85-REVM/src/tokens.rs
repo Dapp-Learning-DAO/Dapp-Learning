@@ -1,3 +1,5 @@
+// Token-related utilities for proxy detection and implementation discovery
+
 use alloy::{
     primitives::{Address, U256},
     providers::{DynProvider, Provider},
@@ -9,12 +11,14 @@ use tokio::task::JoinSet;
 
 use crate::constants::ZERO_ADDRESS;
 
+/// Detect proxy implementation address by checking multiple proxy patterns
+/// Supports EIP-1967, EIP-1822, and OpenZeppelin proxy standards
 pub async fn get_implementation(
     provider: DynProvider,
     token: H160,
-    // block_number: U64,
 ) -> Result<Option<H160>> {
-    // adapted from: https://github.com/gnosis/evm-proxy-detection/blob/main/src/index.ts
+    // Storage slots for different proxy patterns
+    // Adapted from: https://github.com/gnosis/evm-proxy-detection/blob/main/src/index.ts
     let eip_1967_logic_slot: U256 =
         "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc"
             .parse()
@@ -39,6 +43,7 @@ pub async fn get_implementation(
         eip_1822_logic_slot,
     ];
 
+    // Concurrently check all storage slots for implementation address
     let mut set = JoinSet::new();
 
     for slot in implementation_slots {
@@ -51,6 +56,7 @@ pub async fn get_implementation(
         set.spawn(fut);
     }
 
+    // Return first non-zero implementation address found
     while let Some(res) = set.join_next().await {
         let out = res???;
         let implementation = H160::from_slice(&out.to_be_bytes::<32>()[12..]);

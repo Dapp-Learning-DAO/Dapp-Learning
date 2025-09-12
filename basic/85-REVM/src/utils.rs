@@ -1,7 +1,10 @@
+// Utility functions for logging and common operations
+
 use anyhow::{self, Result};
 use fern::colors::{Color, ColoredLevelConfig};
 use log::LevelFilter;
 
+/// Setup colored logger with custom formatting
 pub fn setup_logger() -> Result<()> {
     let colors = ColoredLevelConfig {
         trace: Color::Cyan,

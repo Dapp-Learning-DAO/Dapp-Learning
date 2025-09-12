@@ -1,4 +1,5 @@
-// add all the necessary imports 👇
+// REVM core examples demonstrating EVM operations and transaction simulation
+
 use crate::constants::SIMULATOR_CODE;
 use crate::trace::get_state_diff;
 use anyhow::{anyhow, Result};
@@ -33,8 +34,8 @@ use alloy::rpc::types::{TransactionInput, TransactionRequest};
 
 use crate::{AlloyCacheDB, NewEvm};
 
-// This will create a clean slate EVM environment that doesn't have any storage values in it.
-// So no accounts or contracts exist yet. We'll have to deal with everything on our own.
+/// Create a clean EVM instance with Alloy database integration
+/// This creates an empty EVM environment without any pre-existing state
 pub async fn create_evm_instance(rpc_url: &str) -> Result<NewEvm> {
     let provider = ProviderBuilder::new().connect(rpc_url).await?.erased();
     let alloy_db = WrapDatabaseAsync::new(AlloyDB::new(provider, BlockId::latest())).unwrap();
@@ -43,13 +44,14 @@ pub async fn create_evm_instance(rpc_url: &str) -> Result<NewEvm> {
     Ok(evm)
 }
 
-// evm_env_setup is a function that overrides some default env values to make it more efficient for testing
+/// Configure EVM environment for efficient testing
+/// Overrides default values to optimize for simulation scenarios
 pub fn evm_env_setup(evm: &mut NewEvm) {
-    // overriding some default env values to make it more efficient for testing
+    // Increase contract code size limit for testing
     evm.cfg.limit_contract_code_size = Some(0x100000);
 }
 
-// add this 👇
+/// Transaction execution result containing output, logs, and gas information
 #[derive(Debug, Clone)]
 pub struct TxResult {
     pub output: Bytes,
@@ -58,7 +60,8 @@ pub struct TxResult {
     pub gas_refunded: u64,
 }
 
-// get_token_balance
+/// Query ERC20 token balance for a given account
+/// This will fail if the token contract is not deployed in the EVM state
 pub fn get_token_balance(evm: &mut NewEvm, token: H160, account: H160) -> Result<U256> {
     let erc20_abi = BaseContract::from(parse_abi(&[
         "function balanceOf(address) external view returns (uint256)",
@@ -110,6 +113,8 @@ pub fn get_token_balance(evm: &mut NewEvm, token: H160, account: H160) -> Result
     Ok(decoded_output)
 }
 
+/// Compare Geth tracing with REVM execution to find storage slot patterns
+/// Uses Geth's PreStateTracer to identify which storage slots are accessed
 pub async fn geth_and_revm_tracing(
     evm: &mut NewEvm,
     provider: DynProvider,
@@ -183,7 +188,8 @@ pub async fn geth_and_revm_tracing(
     Ok(0)
 }
 
-// add this 👇
+/// Deploy contract to EVM and trace storage access patterns
+/// Creates a new EVM instance with AlloyDB for contract deployment and analysis
 pub async fn revm_contract_deploy_and_tracing(
     _evm: &mut NewEvm,
     provider: DynProvider,
@@ -191,14 +197,14 @@ pub async fn revm_contract_deploy_and_tracing(
     account: H160,
 ) -> Result<i32> {
     // deploy contract to EVM
-    let block = provider
+    let _block = provider
         .get_block(BlockId::latest())
         .await?
         .ok_or(anyhow!("failed to retrieve block"))?;
 
     let token_address = Address::from_slice(&token.0);
 
-    // 我们将创建一个新的 EVM 实例与 AlloyDB
+    // Create a new EVM instance with AlloyDB for contract deployment
     let alloy_db =
         WrapDatabaseAsync::new(AlloyDB::new(provider.clone(), BlockId::latest())).unwrap();
     let cache_db = AlloyCacheDB::new(alloy_db);
@@ -218,7 +224,7 @@ pub async fn revm_contract_deploy_and_tracing(
         Err(e) => return Err(anyhow!("EVM call failed: {e:?}")),
     };
 
-    // 从结果中获取状态变化
+    // Extract state changes from execution result
     let state_changes = match result.result {
         ExecutionResult::Success { logs, .. } => {
             info!("Transaction successful, logs: {:?}", logs);
@@ -234,12 +240,12 @@ pub async fn revm_contract_deploy_and_tracing(
         }
     };
 
-    // 检查 token 合约的存储变化
+    // Check token contract storage changes
     if let Some(account_state) = state_changes.get(&token_address) {
         info!("Found token account state changes");
         let storage = &account_state.storage;
 
-        // 尝试查找存储槽 - 与 geth_and_revm_tracing 使用相同的逻辑
+        // Search for storage slots using the same logic as geth_and_revm_tracing
         for i in 0..20 {
             let slot = keccak256(&abi::encode(&[
                 abi::Token::Address(account.into()),
@@ -248,7 +254,7 @@ pub async fn revm_contract_deploy_and_tracing(
             let slot_u256 = rU256::from_be_bytes(slot.0);
             info!("Checking storage slot {}: 0x{:x}", i, H256::from(slot.0));
 
-            // 检查这个存储槽是否被访问/修改
+            // Check if this storage slot was accessed/modified
             if storage.contains_key(&slot_u256) {
                 info!(
                     "Balance storage slot found: {:?} (0x{:x})",
@@ -268,7 +274,18 @@ pub async fn revm_contract_deploy_and_tracing(
     Ok(0)
 }
 
-// add this 👇
+/// Simulate Uniswap V2 swap using REVM with state injection
+/// Deploys necessary contracts and simulates a complete swap transaction
+/// 
+/// IMPORTANT: This function supports two modes:
+/// 1. Create new pair: If the pair doesn't exist, uncomment the pair creation code
+/// 2. Use existing pair: If the pair already exists, comment out pair creation and use target_pair
+/// 
+/// Error handling: 
+/// - If you try to create an existing pair, you'll get this error:
+///   "EVM REVERT: 0x08c379a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000016556e697377617056323a20504149525f45584953545300000000000000000000"
+///   This decodes to: "UniswapV2: PAIR_EXISTS"
+/// - To avoid this error, use the appropriate mode based on whether the pair exists
 pub async fn revm_v2_simulate_swap(
     _evm: &mut NewEvm,
     provider: DynProvider,
@@ -282,8 +299,8 @@ pub async fn revm_v2_simulate_swap(
     input_token_implementation: Option<H160>,
     output_token_implementation: Option<H160>,
 ) -> Result<(U256, U256)> {
-    // add this 👇
-    let block = provider
+    // Get latest block for state reference
+    let _block = provider
         .get_block(BlockId::latest())
         .await?
         .ok_or(anyhow!("failed to retrieve block"))?;
@@ -292,20 +309,20 @@ pub async fn revm_v2_simulate_swap(
         .checked_mul(rU256::from(10).pow(rU256::from(18)))
         .unwrap();
 
-    // 创建新的 EVM 实例与 AlloyDB
+    // Create new EVM instance with AlloyDB for simulation
     let alloy_db =
         WrapDatabaseAsync::new(AlloyDB::new(provider.clone(), BlockId::latest())).unwrap();
-    let mut cache_db = AlloyCacheDB::new(alloy_db);
+    let cache_db = AlloyCacheDB::new(alloy_db);
     let mut new_evm = Context::mainnet().with_db(cache_db).build_mainnet();
 
-    // Set user: give the user enough ETH to pay for gas
+    // Set user account with sufficient ETH for gas fees
     let user_acc_info = AccountInfo::new(ten_eth, 0, keccak256(&[]), Bytecode::default());
     new_evm
         .journal_mut()
         .database
         .insert_account_info(Address::from_slice(&account.0), user_acc_info);
 
-    // Deploy Simulator contract
+    // Deploy Simulator contract with Uniswap V2 logic
     let simulator_address = H160::from_str("0xF2d01Ee818509a9540d8324a5bA52329af27D19E").unwrap();
     let simulator_acc_info = AccountInfo::new(
         rU256::ZERO,
@@ -328,7 +345,7 @@ pub async fn revm_v2_simulate_swap(
         None => output_token,
     };
 
-    // 获取账户信息
+    // Get account information for token contracts
     let input_token_acc_info = new_evm
         .journal_mut()
         .database
@@ -361,7 +378,7 @@ pub async fn revm_v2_simulate_swap(
     ])?);
     let calldata = factory_abi.encode("createPair", (input_token, output_token))?;
 
-    let gas_price = rU256::from(100)
+    let _gas_price = rU256::from(100)
         .checked_mul(rU256::from(10).pow(rU256::from(9)))
         .unwrap();
 
@@ -375,6 +392,8 @@ pub async fn revm_v2_simulate_swap(
     info!("nonce: {:?}", nonce);
 
     // Create a pair contract using the factory contract
+    // WARNING: This will fail with "PAIR_EXISTS" error if the pair already exists
+    // Use Option 2 below if the pair already exists
     let create_pair_tx = TxEnv {
         caller: Address::from_slice(&account.0),
         gas_limit: 5000000,
@@ -392,21 +411,46 @@ pub async fn revm_v2_simulate_swap(
 
     let result = match new_evm.transact_commit(new_evm.tx.clone()) {
         Ok(result) => result,
-        Err(e) => return Err(anyhow!("EVM call failed: {:?}", e)),
+        Err(e) => {
+            // This error typically occurs when trying to create an existing pair
+            // Error message: "UniswapV2: PAIR_EXISTS"
+            // Solution: Use Option 2 (existing pair) instead of creating new pair
+            return Err(anyhow!("EVM call failed: {:?}", e));
+        }
     };
+    
+    // ===== OPTION 1: Create new pair (uncomment if pair doesn't exist) =====
+    // Uncomment the following lines if you want to create a new pair that doesn't exist
+    // This will create a new Uniswap V2 pair for the given token combination
+    
+    // let result = get_tx_result(result)?;
+    // let pair_address: H160 = factory_abi.decode_output("createPair", result.output)?;
+    // info!("Pair created: {:?}", pair_address);
 
-    // parse PairCreated event to get token0 / token1
+    // Parse PairCreated event to get token0 / token1 from the newly created pair
+    // let _pair_created_log = &result.logs.unwrap()[0];
+
+    // ===== OPTION 2: Use existing pair (comment out above if pair already exists) =====
+    // If the pair already exists, comment out the above lines and uncomment the line below
+    // This prevents the "PAIR_EXISTS" error when trying to create an existing pair
+    // 
+    // ERROR: If you try to create an existing pair, you'll get:
+    // "EVM REVERT: 0x08c379a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000016556e697377617056323a20504149525f45584953545300000000000000000000"
+    // Decoded: "UniswapV2: PAIR_EXISTS"
     let pair_address = target_pair;
-    // 简化处理：直接使用输入的 token 顺序
+    
+    // Simplified handling: directly use input token order
+    // In a real implementation, you would parse the PairCreated event logs
     let token0 = Address::from_slice(&input_token.0);
     let token1 = Address::from_slice(&output_token.0);
     info!("Token 0: {:?} / Token 1: {:?}", token0, token1);
 
-    // Check if the target_pair is equal to the pair created address
+    // Verify that the target pair matches the created pair address
+    // Note: If using Option 2 (existing pair), comment out this assertion
     assert_eq!(target_pair, pair_address);
 
-    // There're no reserves in the pool, so we inject the reserves that we retrieve with AlloyDB
-    // The storage slot of reserves is: 8
+    // Inject reserves into the pool since there are no reserves initially
+    // Uniswap V2 stores reserves at storage slot 8
     let reserves_slot = rU256::from(8);
     let original_reserves = new_evm
         .db_mut()
@@ -429,7 +473,7 @@ pub async fn revm_v2_simulate_swap(
 
     let nonce = call_account.info.nonce;
 
-    info!("nonce1: {:?}", nonce);
+    info!("nonce: {:?}", nonce);
     let get_reserves_tx = TxEnv {
         caller: Address::from_slice(&account.0),
         gas_limit: 5000000,
@@ -453,7 +497,8 @@ pub async fn revm_v2_simulate_swap(
     let reserves: (U256, U256, U256) = pair_abi.decode_output("getReserves", result.output)?;
     info!("Pair reserves: {:?}", reserves);
 
-    // We actually have to feed the input/output token balance to pair contract (to perform real swaps)
+    // Set up token balances for the pair contract to enable real swaps
+    // Determine which token corresponds to which balance slot
     let (balance_slot_0, balance_slot_1) = if token0 == Address::from_slice(&input_token.0) {
         (input_balance_slot, output_balance_slot)
     } else {
@@ -468,7 +513,7 @@ pub async fn revm_v2_simulate_swap(
         abi::Token::Address(target_pair.into()),
         abi::Token::Uint(U256::from(balance_slot_0)),
     ]));
-    // 转换 ethers::U256 到 revm::U256
+    // Convert ethers::U256 to revm::U256
     let reserve0_str = reserves.0.to_string();
     let reserve0_revm = rU256::from_str_radix(&reserve0_str, 10).unwrap_or(rU256::ZERO);
     new_evm.db_mut().insert_account_storage(
@@ -481,7 +526,7 @@ pub async fn revm_v2_simulate_swap(
         abi::Token::Address(target_pair.into()),
         abi::Token::Uint(U256::from(balance_slot_1)),
     ]));
-    // 转换 ethers::U256 到 revm::U256
+    // Convert ethers::U256 to revm::U256
     let reserve1_str = reserves.1.to_string();
     let reserve1_revm = rU256::from_str_radix(&reserve1_str, 10).unwrap_or(rU256::ZERO);
     new_evm.db_mut().insert_account_storage(
@@ -508,7 +553,7 @@ pub async fn revm_v2_simulate_swap(
         info!("{:?}: {:?}", token, balance);
     }
 
-    // feed simulator with input_token balance
+    // Set up simulator's input token balance for swap simulation
     let slot_in = keccak256(&abi::encode(&[
         abi::Token::Address(simulator_address.into()),
         abi::Token::Uint(U256::from(input_balance_slot)),
@@ -519,7 +564,7 @@ pub async fn revm_v2_simulate_swap(
         ten_eth,
     )?;
 
-    // run v2SimulateSwap
+    // Execute the Uniswap V2 swap simulation
     let amount_in = U256::from(1)
         .checked_mul(U256::from(10).pow(U256::from(18)))
         .unwrap();
@@ -562,9 +607,11 @@ pub async fn revm_v2_simulate_swap(
     let out: (U256, U256) = simulator_abi.decode_output("v2SimulateSwap", result.output)?;
     info!("Amount out: {:?}", out);
 
-    Ok(out) // 返回实际结果
+    Ok(out) // Return actual swap results
 }
 
+/// Extract transaction result from execution result
+/// Handles different execution outcomes (Success, Revert, Halt)
 pub fn get_tx_result(result: ExecutionResult) -> Result<TxResult> {
     let output = match result {
         ExecutionResult::Success {

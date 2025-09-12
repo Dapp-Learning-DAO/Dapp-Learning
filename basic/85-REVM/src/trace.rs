@@ -1,3 +1,5 @@
+// Transaction tracing utilities using Geth debug API
+
 use anyhow::Result;
 
 use alloy::providers::ext::DebugApi;
@@ -8,6 +10,8 @@ use alloy::rpc::types::trace::geth::{
 use alloy::rpc::types::TransactionRequest;
 use alloy::{eips::BlockId, providers::DynProvider};
 
+/// Get state difference trace using Geth's PreStateTracer
+/// This helps identify which storage slots are accessed during transaction execution
 pub async fn get_state_diff(
     provider: DynProvider,
     tx: TransactionRequest,
