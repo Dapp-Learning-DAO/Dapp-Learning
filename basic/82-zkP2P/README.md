@@ -1495,7 +1495,7 @@ graph TD
 ```
 
 
-正则表达式部分组件生成 [ZK Regex](https://prove.email/blog/zkregex)
+正则表达式部分组件生成 [ZK Regex](https://zk.email/blog/zkregex)
 
 #### Send Circuit
 
