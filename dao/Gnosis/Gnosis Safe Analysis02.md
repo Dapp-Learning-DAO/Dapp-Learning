@@ -13,7 +13,7 @@
 
 `ModuleManager`合约里比较有意思的一点是它使用了一个`map(address=>address)`形成的链表将所有的Modules串起来，并设置了一个哨兵模块`address(1)`作为链表头部。
 
-在网站上添加Module的步骤可以参考如下链接：https://help.gnosis-safe.io/en/articles/4934427-add-a-module
+在网站上添加Module的步骤可以参考如下链接：https://help.safe.global/
 
 ### 模块管理合约-`ModuleManager`
 

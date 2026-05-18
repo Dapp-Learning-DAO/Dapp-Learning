@@ -2,5 +2,5 @@
 
 
 ## 参考链接
-gnosis文档： https://docs.gnosis-safe.io/clients/third-party-frontends
+gnosis文档： https://docs.safe.global/getting-started/clients
 gnosis github: https://github.com/gnosis
