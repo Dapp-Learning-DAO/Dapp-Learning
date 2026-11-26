@@ -303,6 +303,7 @@ Feel like a career in the crypto industry? The following websites fyi:
  - https://www.paradigm.xyz/opportunities/
  - https://web3.career/
  - https://portfoliojobs.a16z.com/jobs?markets=Crypto
+ - https://dapp.ing/jobs
 
 ## Hackathons
 
