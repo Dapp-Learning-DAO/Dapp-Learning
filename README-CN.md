@@ -313,6 +313,7 @@ DAPP架构请参考文章--[从架构维度看Web2.0与Web3.0应用之别](https
 - https://www.paradigm.xyz/opportunities/
 - https://web3.career/
 - https://portfoliojobs.a16z.com/jobs?markets=Crypto
+- https://dapp.ing/jobs
 
 ## Hackathons
 
